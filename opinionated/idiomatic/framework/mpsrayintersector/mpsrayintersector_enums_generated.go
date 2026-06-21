@@ -9,57 +9,57 @@ import (
 	"strings"
 )
 
-// @brief Possible values of the acceleration structure status property
-type MPSAccelerationStructureStatus uint64
+// Possible values of the acceleration structure status property
+type AccelerationStructureStatus uint64
 
 const (
-	// @brief The acceleration structure has not been built yet
-	MPSAccelerationStructureStatusUnbuilt MPSAccelerationStructureStatus = 0
-	// @brief The acceleration structure has finished building
-	MPSAccelerationStructureStatusBuilt MPSAccelerationStructureStatus = 1
+	// The acceleration structure has not been built yet
+	AccelerationStructureStatusUnbuilt AccelerationStructureStatus = 0
+	// The acceleration structure has finished building
+	AccelerationStructureStatusBuilt AccelerationStructureStatus = 1
 )
 
-func (e MPSAccelerationStructureStatus) String() string {
+func (e AccelerationStructureStatus) String() string {
 	switch e {
-	case MPSAccelerationStructureStatusUnbuilt:
-		return "MPSAccelerationStructureStatusUnbuilt"
-	case MPSAccelerationStructureStatusBuilt:
-		return "MPSAccelerationStructureStatusBuilt"
+	case AccelerationStructureStatusUnbuilt:
+		return "AccelerationStructureStatusUnbuilt"
+	case AccelerationStructureStatusBuilt:
+		return "AccelerationStructureStatusBuilt"
 	default:
-		return fmt.Sprintf("MPSAccelerationStructureStatus(%d)", int64(e))
+		return fmt.Sprintf("AccelerationStructureStatus(%d)", int64(e))
 	}
 }
 
-// @brief Options describing how an acceleration structure will be used
+// Options describing how an acceleration structure will be used
 // Bitmask — values may be combined with |.
-type MPSAccelerationStructureUsage uint64
+type AccelerationStructureUsage uint64
 
 const (
-	// @brief No usage options specified
-	MPSAccelerationStructureUsageNone MPSAccelerationStructureUsage = 0
-	// @brief Enable support for refitting the acceleration structure after it has been built. This option may reduce raytracing performance so do not use it unless the acceleration structure will be refit.
-	MPSAccelerationStructureUsageRefit MPSAccelerationStructureUsage = 1
-	// @brief Option indicating that the acceleration structure will be rebuilt frequently. In this case, the acceleration structure may choose a higher performance but lower quality acceleration structure construction algorithm. This option may reduce raytracing performance performance so do not use it unless reduced acceleration structure build time is worth reduced raytracing performance. This option may be useful if, for example, the user is interactively editing a live view of the scene.
-	MPSAccelerationStructureUsageFrequentRebuild MPSAccelerationStructureUsage = 2
-	// @brief Prefer building the acceleration structure on the GPU. By default, the acceleration structure will be built on the GPU when possible. However, in some cases such as very small triangle counts, the acceleration structure may be built on the CPU. This option will force the acceleration structure to be always be built on the GPU whenever possible.
-	MPSAccelerationStructureUsagePreferGPUBuild MPSAccelerationStructureUsage = 4
-	// @brief Prefer building the acceleration structure on the CPU. By default, the acceleration structure will be built on the GPU when possible, which is typically much faster than building on the CPU. However, in some cases it may be preferable to build on the CPU such as to avoid framerate hitches when the GPU is rendering the user interface.
-	MPSAccelerationStructureUsagePreferCPUBuild MPSAccelerationStructureUsage = 8
+	// No usage options specified
+	AccelerationStructureUsageNone AccelerationStructureUsage = 0
+	// Enable support for refitting the acceleration structure after it has been built. This option may reduce raytracing performance so do not use it unless the acceleration structure will be refit.
+	AccelerationStructureUsageRefit AccelerationStructureUsage = 1
+	// Option indicating that the acceleration structure will be rebuilt frequently. In this case, the acceleration structure may choose a higher performance but lower quality acceleration structure construction algorithm. This option may reduce raytracing performance performance so do not use it unless reduced acceleration structure build time is worth reduced raytracing performance. This option may be useful if, for example, the user is interactively editing a live view of the scene.
+	AccelerationStructureUsageFrequentRebuild AccelerationStructureUsage = 2
+	// Prefer building the acceleration structure on the GPU. By default, the acceleration structure will be built on the GPU when possible. However, in some cases such as very small triangle counts, the acceleration structure may be built on the CPU. This option will force the acceleration structure to be always be built on the GPU whenever possible.
+	AccelerationStructureUsagePreferGPUBuild AccelerationStructureUsage = 4
+	// Prefer building the acceleration structure on the CPU. By default, the acceleration structure will be built on the GPU when possible, which is typically much faster than building on the CPU. However, in some cases it may be preferable to build on the CPU such as to avoid framerate hitches when the GPU is rendering the user interface.
+	AccelerationStructureUsagePreferCPUBuild AccelerationStructureUsage = 8
 )
 
-func (e MPSAccelerationStructureUsage) String() string {
+func (e AccelerationStructureUsage) String() string {
 	var parts []string
-	if e&MPSAccelerationStructureUsageRefit != 0 {
-		parts = append(parts, "MPSAccelerationStructureUsageRefit")
+	if e&AccelerationStructureUsageRefit != 0 {
+		parts = append(parts, "AccelerationStructureUsageRefit")
 	}
-	if e&MPSAccelerationStructureUsageFrequentRebuild != 0 {
-		parts = append(parts, "MPSAccelerationStructureUsageFrequentRebuild")
+	if e&AccelerationStructureUsageFrequentRebuild != 0 {
+		parts = append(parts, "AccelerationStructureUsageFrequentRebuild")
 	}
-	if e&MPSAccelerationStructureUsagePreferGPUBuild != 0 {
-		parts = append(parts, "MPSAccelerationStructureUsagePreferGPUBuild")
+	if e&AccelerationStructureUsagePreferGPUBuild != 0 {
+		parts = append(parts, "AccelerationStructureUsagePreferGPUBuild")
 	}
-	if e&MPSAccelerationStructureUsagePreferCPUBuild != 0 {
-		parts = append(parts, "MPSAccelerationStructureUsagePreferCPUBuild")
+	if e&AccelerationStructureUsagePreferCPUBuild != 0 {
+		parts = append(parts, "AccelerationStructureUsagePreferCPUBuild")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -67,231 +67,210 @@ func (e MPSAccelerationStructureUsage) String() string {
 	return strings.Join(parts, "|")
 }
 
-// @brief Options for the MPSRayIntersector bounding box intersection test type property
-type MPSBoundingBoxIntersectionTestType uint64
+// Options for the MPSRayIntersector bounding box intersection test type property
+type BoundingBoxIntersectionTestType uint64
 
 const (
-	// @brief Use the default MPSBoundingBoxIntersectionTestTypeAxisAligned ray/bounding box intersection test. Note: this option was equivalent to MPSBoundingBoxIntersectionTestTypeFast in macOS 10.14/iOS 12.0. This option was changed in macOS 10.15/iOS 13.0 to handle axis-aligned rays correctly by default. The old behavior can be restored by explicitly setting the intersection test type to MPSBoundingBoxIntersectionTestTypeFast on macOS 10.15/iOS 13.0 and above.
-	MPSBoundingBoxIntersectionTestTypeDefault MPSBoundingBoxIntersectionTestType = 0
-	// @brief This intersection test is potentially slower than MPSBoundingBoxIntersectionTestTypeFast but does not generate false negatives for axis aligned rays (i.e. rays which have one or more components of their direction set to zero). These rays often do not come up in practice due to perspective projections and randomized ray distributions. However, synthetic ray distributions or orthographic projections can generate these rays. It may be faster to slightly perturb the ray direction and use the fast intersection test type.
-	MPSBoundingBoxIntersectionTestTypeAxisAligned MPSBoundingBoxIntersectionTestType = 1
-	// @brief This intersection test is potentially faster than MPSBoundingBoxIntersectionTestTypeAxisAligned but can generate false negatives for axis aligned rays (i.e. rays which have one or more components of their direction set to zero). These rays often do not come up in practice due to perspective projections and randomized ray distributions. However, synthetic ray distributions or orthographic projections can generate these rays.
-	MPSBoundingBoxIntersectionTestTypeFast MPSBoundingBoxIntersectionTestType = 2
+	// Use the default MPSBoundingBoxIntersectionTestTypeAxisAligned ray/bounding box intersection test. Note: this option was equivalent to MPSBoundingBoxIntersectionTestTypeFast in macOS 10.14/iOS 12.0. This option was changed in macOS 10.15/iOS 13.0 to handle axis-aligned rays correctly by default. The old behavior can be restored by explicitly setting the intersection test type to MPSBoundingBoxIntersectionTestTypeFast on macOS 10.15/iOS 13.0 and above.
+	BoundingBoxIntersectionTestTypeDefault BoundingBoxIntersectionTestType = 0
+	// This intersection test is potentially slower than MPSBoundingBoxIntersectionTestTypeFast but does not generate false negatives for axis aligned rays (i.e. rays which have one or more components of their direction set to zero). These rays often do not come up in practice due to perspective projections and randomized ray distributions. However, synthetic ray distributions or orthographic projections can generate these rays. It may be faster to slightly perturb the ray direction and use the fast intersection test type.
+	BoundingBoxIntersectionTestTypeAxisAligned BoundingBoxIntersectionTestType = 1
+	// This intersection test is potentially faster than MPSBoundingBoxIntersectionTestTypeAxisAligned but can generate false negatives for axis aligned rays (i.e. rays which have one or more components of their direction set to zero). These rays often do not come up in practice due to perspective projections and randomized ray distributions. However, synthetic ray distributions or orthographic projections can generate these rays.
+	BoundingBoxIntersectionTestTypeFast BoundingBoxIntersectionTestType = 2
 )
 
-func (e MPSBoundingBoxIntersectionTestType) String() string {
+func (e BoundingBoxIntersectionTestType) String() string {
 	switch e {
-	case MPSBoundingBoxIntersectionTestTypeDefault:
-		return "MPSBoundingBoxIntersectionTestTypeDefault"
-	case MPSBoundingBoxIntersectionTestTypeAxisAligned:
-		return "MPSBoundingBoxIntersectionTestTypeAxisAligned"
-	case MPSBoundingBoxIntersectionTestTypeFast:
-		return "MPSBoundingBoxIntersectionTestTypeFast"
+	case BoundingBoxIntersectionTestTypeDefault:
+		return "BoundingBoxIntersectionTestTypeDefault"
+	case BoundingBoxIntersectionTestTypeAxisAligned:
+		return "BoundingBoxIntersectionTestTypeAxisAligned"
+	case BoundingBoxIntersectionTestTypeFast:
+		return "BoundingBoxIntersectionTestTypeFast"
 	default:
-		return fmt.Sprintf("MPSBoundingBoxIntersectionTestType(%d)", int64(e))
+		return fmt.Sprintf("BoundingBoxIntersectionTestType(%d)", int64(e))
 	}
 }
 
-// @brief Intersection data type options
-type MPSIntersectionDataType uint64
+// Intersection data type options
+type IntersectionDataType uint64
 
 const (
-	// @brief Use the MPSIntersectionDistance struct type
-	MPSIntersectionDataTypeDistance MPSIntersectionDataType = 0
-	// @brief Use the MPSIntersectionDistancePrimitiveIndex struct type
-	MPSIntersectionDataTypeDistancePrimitiveIndex MPSIntersectionDataType = 1
-	// @brief Use the MPSIntersectionDistancePrimitiveIndexCoordinates struct type
-	MPSIntersectionDataTypeDistancePrimitiveIndexCoordinates MPSIntersectionDataType = 2
-	// @brief Use the DistancePrimitiveIndexInstanceIndex struct type
-	MPSIntersectionDataTypeDistancePrimitiveIndexInstanceIndex MPSIntersectionDataType = 3
-	// @brief Use the DistancePrimitiveIndexInstanceIndexCoordinates struct type
-	MPSIntersectionDataTypeDistancePrimitiveIndexInstanceIndexCoordinates MPSIntersectionDataType = 4
-	// @brief Use the MPSIntersectionDistancePrimitiveIndexBufferIndex struct type
-	MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndex MPSIntersectionDataType = 5
-	// @brief Use the MPSIntersectionDistancePrimitiveIndexBufferIndexCoordinates struct type
-	MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndexCoordinates MPSIntersectionDataType = 6
-	// @brief Use the DistancePrimitiveIndexBufferIndexInstanceIndex struct type
-	MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndex MPSIntersectionDataType = 7
-	// @brief Use the DistancePrimitiveIndexBufferIndexInstanceIndexCoordinates struct type
-	MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates MPSIntersectionDataType = 8
+	// Use the MPSIntersectionDistance struct type
+	IntersectionDataTypeDistance IntersectionDataType = 0
+	// Use the MPSIntersectionDistancePrimitiveIndex struct type
+	IntersectionDataTypeDistancePrimitiveIndex IntersectionDataType = 1
+	// Use the MPSIntersectionDistancePrimitiveIndexCoordinates struct type
+	IntersectionDataTypeDistancePrimitiveIndexCoordinates IntersectionDataType = 2
+	// Use the DistancePrimitiveIndexInstanceIndex struct type
+	IntersectionDataTypeDistancePrimitiveIndexInstanceIndex IntersectionDataType = 3
+	// Use the DistancePrimitiveIndexInstanceIndexCoordinates struct type
+	IntersectionDataTypeDistancePrimitiveIndexInstanceIndexCoordinates IntersectionDataType = 4
+	// Use the MPSIntersectionDistancePrimitiveIndexBufferIndex struct type
+	IntersectionDataTypeDistancePrimitiveIndexBufferIndex IntersectionDataType = 5
+	// Use the MPSIntersectionDistancePrimitiveIndexBufferIndexCoordinates struct type
+	IntersectionDataTypeDistancePrimitiveIndexBufferIndexCoordinates IntersectionDataType = 6
+	// Use the DistancePrimitiveIndexBufferIndexInstanceIndex struct type
+	IntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndex IntersectionDataType = 7
+	// Use the DistancePrimitiveIndexBufferIndexInstanceIndexCoordinates struct type
+	IntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates IntersectionDataType = 8
 )
 
-func (e MPSIntersectionDataType) String() string {
+func (e IntersectionDataType) String() string {
 	switch e {
-	case MPSIntersectionDataTypeDistance:
-		return "MPSIntersectionDataTypeDistance"
-	case MPSIntersectionDataTypeDistancePrimitiveIndex:
-		return "MPSIntersectionDataTypeDistancePrimitiveIndex"
-	case MPSIntersectionDataTypeDistancePrimitiveIndexCoordinates:
-		return "MPSIntersectionDataTypeDistancePrimitiveIndexCoordinates"
-	case MPSIntersectionDataTypeDistancePrimitiveIndexInstanceIndex:
-		return "MPSIntersectionDataTypeDistancePrimitiveIndexInstanceIndex"
-	case MPSIntersectionDataTypeDistancePrimitiveIndexInstanceIndexCoordinates:
-		return "MPSIntersectionDataTypeDistancePrimitiveIndexInstanceIndexCoordinates"
-	case MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndex:
-		return "MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndex"
-	case MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndexCoordinates:
-		return "MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndexCoordinates"
-	case MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndex:
-		return "MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndex"
-	case MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates:
-		return "MPSIntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates"
+	case IntersectionDataTypeDistance:
+		return "IntersectionDataTypeDistance"
+	case IntersectionDataTypeDistancePrimitiveIndex:
+		return "IntersectionDataTypeDistancePrimitiveIndex"
+	case IntersectionDataTypeDistancePrimitiveIndexCoordinates:
+		return "IntersectionDataTypeDistancePrimitiveIndexCoordinates"
+	case IntersectionDataTypeDistancePrimitiveIndexInstanceIndex:
+		return "IntersectionDataTypeDistancePrimitiveIndexInstanceIndex"
+	case IntersectionDataTypeDistancePrimitiveIndexInstanceIndexCoordinates:
+		return "IntersectionDataTypeDistancePrimitiveIndexInstanceIndexCoordinates"
+	case IntersectionDataTypeDistancePrimitiveIndexBufferIndex:
+		return "IntersectionDataTypeDistancePrimitiveIndexBufferIndex"
+	case IntersectionDataTypeDistancePrimitiveIndexBufferIndexCoordinates:
+		return "IntersectionDataTypeDistancePrimitiveIndexBufferIndexCoordinates"
+	case IntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndex:
+		return "IntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndex"
+	case IntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates:
+		return "IntersectionDataTypeDistancePrimitiveIndexBufferIndexInstanceIndexCoordinates"
 	default:
-		return fmt.Sprintf("MPSIntersectionDataType(%d)", int64(e))
+		return fmt.Sprintf("IntersectionDataType(%d)", int64(e))
 	}
 }
 
-// @brief Options for the MPSRayIntersector intersection type property
-type MPSIntersectionType uint64
+type PolygonType uint64
 
 const (
-	// @brief Find the closest intersection to the ray's origin along the ray direction. This is potentially slower than MPSIntersectionTypeAny but is well suited to primary visibility rays.
-	MPSIntersectionTypeNearest MPSIntersectionType = 0
-	// @brief Find any intersection along the ray direction. This is potentially faster than MPSIntersectionTypeNearest and is well suited to shadow and occlusion rays.
-	MPSIntersectionTypeAny MPSIntersectionType = 1
+	// Triangles with three vertices
+	PolygonTypeTriangle PolygonType = 0
+	// Quadrilaterals with four vertices
+	PolygonTypeQuadrilateral PolygonType = 1
 )
 
-func (e MPSIntersectionType) String() string {
+func (e PolygonType) String() string {
 	switch e {
-	case MPSIntersectionTypeNearest:
-		return "MPSIntersectionTypeNearest"
-	case MPSIntersectionTypeAny:
-		return "MPSIntersectionTypeAny"
+	case PolygonTypeTriangle:
+		return "PolygonTypeTriangle"
+	case PolygonTypeQuadrilateral:
+		return "PolygonTypeQuadrilateral"
 	default:
-		return fmt.Sprintf("MPSIntersectionType(%d)", int64(e))
+		return fmt.Sprintf("PolygonType(%d)", int64(e))
 	}
 }
 
-type MPSPolygonType uint64
+// Options for the MPSRayIntersector ray data type property
+type RayDataType uint64
 
 const (
-	// @brief Triangles with three vertices
-	MPSPolygonTypeTriangle MPSPolygonType = 0
-	// @brief Quadrilaterals with four vertices
-	MPSPolygonTypeQuadrilateral MPSPolygonType = 1
+	// Use the MPSRayOriginDirection struct type
+	RayDataTypeOriginDirection RayDataType = 0
+	// Use the MPSRayOriginMinDistanceDirectionMaxDistance struct type
+	RayDataTypeOriginMinDistanceDirectionMaxDistance RayDataType = 1
+	// Use the MPSRayOriginMaxDistanceDirectionMask struct type
+	RayDataTypeOriginMaskDirectionMaxDistance RayDataType = 2
+	// Use the MPSPackedRayOriginDirection struct type
+	RayDataTypePackedOriginDirection RayDataType = 3
 )
 
-func (e MPSPolygonType) String() string {
+func (e RayDataType) String() string {
 	switch e {
-	case MPSPolygonTypeTriangle:
-		return "MPSPolygonTypeTriangle"
-	case MPSPolygonTypeQuadrilateral:
-		return "MPSPolygonTypeQuadrilateral"
+	case RayDataTypeOriginDirection:
+		return "RayDataTypeOriginDirection"
+	case RayDataTypeOriginMinDistanceDirectionMaxDistance:
+		return "RayDataTypeOriginMinDistanceDirectionMaxDistance"
+	case RayDataTypeOriginMaskDirectionMaxDistance:
+		return "RayDataTypeOriginMaskDirectionMaxDistance"
+	case RayDataTypePackedOriginDirection:
+		return "RayDataTypePackedOriginDirection"
 	default:
-		return fmt.Sprintf("MPSPolygonType(%d)", int64(e))
+		return fmt.Sprintf("RayDataType(%d)", int64(e))
 	}
 }
 
-// @brief Options for the MPSRayIntersector ray data type property
-type MPSRayDataType uint64
+// Options for the MPSRayIntersector ray mask operator property
+type RayMaskOperator uint64
 
 const (
-	// @brief Use the MPSRayOriginDirection struct type
-	MPSRayDataTypeOriginDirection MPSRayDataType = 0
-	// @brief Use the MPSRayOriginMinDistanceDirectionMaxDistance struct type
-	MPSRayDataTypeOriginMinDistanceDirectionMaxDistance MPSRayDataType = 1
-	// @brief Use the MPSRayOriginMaxDistanceDirectionMask struct type
-	MPSRayDataTypeOriginMaskDirectionMaxDistance MPSRayDataType = 2
-	// @brief Use the MPSPackedRayOriginDirection struct type
-	MPSRayDataTypePackedOriginDirection MPSRayDataType = 3
+	// Accept the intersection if (primitive mask & ray mask) != 0.
+	RayMaskOperatorAnd RayMaskOperator = 0
+	// Accept the intersection if ~(primitive mask & ray mask) != 0.
+	RayMaskOperatorNotAnd RayMaskOperator = 1
+	// Accept the intersection if (primitive mask | ray mask) != 0.
+	RayMaskOperatorOr RayMaskOperator = 2
+	// Accept the intersection if ~(primitive mask | ray mask) != 0.
+	RayMaskOperatorNotOr RayMaskOperator = 3
+	// Accept the intersection if (primitive mask ^ ray mask) != 0.
+	RayMaskOperatorXor RayMaskOperator = 4
+	// Accept the intersection if ~(primitive mask ^ ray mask) != 0.
+	RayMaskOperatorNotXor RayMaskOperator = 5
+	// Accept the intersection if primitive mask < ray mask.
+	RayMaskOperatorLessThan RayMaskOperator = 6
+	// Accept the intersection if primitive mask <= ray mask.
+	RayMaskOperatorLessThanOrEqualTo RayMaskOperator = 7
+	// Accept the intersection if primitive mask > ray mask.
+	RayMaskOperatorGreaterThan RayMaskOperator = 8
+	// Accept the intersection if primitive mask >= ray mask.
+	RayMaskOperatorGreaterThanOrEqualTo RayMaskOperator = 9
+	// Accept the intersection if primitive mask == ray mask.
+	RayMaskOperatorEqual RayMaskOperator = 10
+	// Accept the intersection if primitive mask != ray mask.
+	RayMaskOperatorNotEqual RayMaskOperator = 11
 )
 
-func (e MPSRayDataType) String() string {
+func (e RayMaskOperator) String() string {
 	switch e {
-	case MPSRayDataTypeOriginDirection:
-		return "MPSRayDataTypeOriginDirection"
-	case MPSRayDataTypeOriginMinDistanceDirectionMaxDistance:
-		return "MPSRayDataTypeOriginMinDistanceDirectionMaxDistance"
-	case MPSRayDataTypeOriginMaskDirectionMaxDistance:
-		return "MPSRayDataTypeOriginMaskDirectionMaxDistance"
-	case MPSRayDataTypePackedOriginDirection:
-		return "MPSRayDataTypePackedOriginDirection"
+	case RayMaskOperatorAnd:
+		return "RayMaskOperatorAnd"
+	case RayMaskOperatorNotAnd:
+		return "RayMaskOperatorNotAnd"
+	case RayMaskOperatorOr:
+		return "RayMaskOperatorOr"
+	case RayMaskOperatorNotOr:
+		return "RayMaskOperatorNotOr"
+	case RayMaskOperatorXor:
+		return "RayMaskOperatorXor"
+	case RayMaskOperatorNotXor:
+		return "RayMaskOperatorNotXor"
+	case RayMaskOperatorLessThan:
+		return "RayMaskOperatorLessThan"
+	case RayMaskOperatorLessThanOrEqualTo:
+		return "RayMaskOperatorLessThanOrEqualTo"
+	case RayMaskOperatorGreaterThan:
+		return "RayMaskOperatorGreaterThan"
+	case RayMaskOperatorGreaterThanOrEqualTo:
+		return "RayMaskOperatorGreaterThanOrEqualTo"
+	case RayMaskOperatorEqual:
+		return "RayMaskOperatorEqual"
+	case RayMaskOperatorNotEqual:
+		return "RayMaskOperatorNotEqual"
 	default:
-		return fmt.Sprintf("MPSRayDataType(%d)", int64(e))
+		return fmt.Sprintf("RayMaskOperator(%d)", int64(e))
 	}
 }
 
-// @brief Options for the MPSRayIntersector ray mask operator property
-type MPSRayMaskOperator uint64
-
-const (
-	// @brief Accept the intersection if (primitive mask & ray mask) != 0.
-	MPSRayMaskOperatorAnd MPSRayMaskOperator = 0
-	// @brief Accept the intersection if ~(primitive mask & ray mask) != 0.
-	MPSRayMaskOperatorNotAnd MPSRayMaskOperator = 1
-	// @brief Accept the intersection if (primitive mask | ray mask) != 0.
-	MPSRayMaskOperatorOr MPSRayMaskOperator = 2
-	// @brief Accept the intersection if ~(primitive mask | ray mask) != 0.
-	MPSRayMaskOperatorNotOr MPSRayMaskOperator = 3
-	// @brief Accept the intersection if (primitive mask ^ ray mask) != 0.
-	MPSRayMaskOperatorXor MPSRayMaskOperator = 4
-	// @brief Accept the intersection if ~(primitive mask ^ ray mask) != 0.
-	MPSRayMaskOperatorNotXor MPSRayMaskOperator = 5
-	// @brief Accept the intersection if primitive mask < ray mask.
-	MPSRayMaskOperatorLessThan MPSRayMaskOperator = 6
-	// @brief Accept the intersection if primitive mask <= ray mask.
-	MPSRayMaskOperatorLessThanOrEqualTo MPSRayMaskOperator = 7
-	// @brief Accept the intersection if primitive mask > ray mask.
-	MPSRayMaskOperatorGreaterThan MPSRayMaskOperator = 8
-	// @brief Accept the intersection if primitive mask >= ray mask.
-	MPSRayMaskOperatorGreaterThanOrEqualTo MPSRayMaskOperator = 9
-	// @brief Accept the intersection if primitive mask == ray mask.
-	MPSRayMaskOperatorEqual MPSRayMaskOperator = 10
-	// @brief Accept the intersection if primitive mask != ray mask.
-	MPSRayMaskOperatorNotEqual MPSRayMaskOperator = 11
-)
-
-func (e MPSRayMaskOperator) String() string {
-	switch e {
-	case MPSRayMaskOperatorAnd:
-		return "MPSRayMaskOperatorAnd"
-	case MPSRayMaskOperatorNotAnd:
-		return "MPSRayMaskOperatorNotAnd"
-	case MPSRayMaskOperatorOr:
-		return "MPSRayMaskOperatorOr"
-	case MPSRayMaskOperatorNotOr:
-		return "MPSRayMaskOperatorNotOr"
-	case MPSRayMaskOperatorXor:
-		return "MPSRayMaskOperatorXor"
-	case MPSRayMaskOperatorNotXor:
-		return "MPSRayMaskOperatorNotXor"
-	case MPSRayMaskOperatorLessThan:
-		return "MPSRayMaskOperatorLessThan"
-	case MPSRayMaskOperatorLessThanOrEqualTo:
-		return "MPSRayMaskOperatorLessThanOrEqualTo"
-	case MPSRayMaskOperatorGreaterThan:
-		return "MPSRayMaskOperatorGreaterThan"
-	case MPSRayMaskOperatorGreaterThanOrEqualTo:
-		return "MPSRayMaskOperatorGreaterThanOrEqualTo"
-	case MPSRayMaskOperatorEqual:
-		return "MPSRayMaskOperatorEqual"
-	case MPSRayMaskOperatorNotEqual:
-		return "MPSRayMaskOperatorNotEqual"
-	default:
-		return fmt.Sprintf("MPSRayMaskOperator(%d)", int64(e))
-	}
-}
-
-// @brief Options for the MPSRayIntersector ray mask options property
+// Options for the MPSRayIntersector ray mask options property
 // Bitmask — values may be combined with |.
-type MPSRayMaskOptions uint64
+type RayMaskOptions uint64
 
 const (
-	// @brief Disable primitive and instance masks
-	MPSRayMaskOptionNone MPSRayMaskOptions = 0
-	// @brief Enable primitive masks
-	MPSRayMaskOptionPrimitive MPSRayMaskOptions = 1
-	// @brief Enable instance masks
-	MPSRayMaskOptionInstance MPSRayMaskOptions = 2
+	// Disable primitive and instance masks
+	RayMaskOptionNone RayMaskOptions = 0
+	// Enable primitive masks
+	RayMaskOptionPrimitive RayMaskOptions = 1
+	// Enable instance masks
+	RayMaskOptionInstance RayMaskOptions = 2
 )
 
-func (e MPSRayMaskOptions) String() string {
+func (e RayMaskOptions) String() string {
 	var parts []string
-	if e&MPSRayMaskOptionPrimitive != 0 {
-		parts = append(parts, "MPSRayMaskOptionPrimitive")
+	if e&RayMaskOptionPrimitive != 0 {
+		parts = append(parts, "RayMaskOptionPrimitive")
 	}
-	if e&MPSRayMaskOptionInstance != 0 {
-		parts = append(parts, "MPSRayMaskOptionInstance")
+	if e&RayMaskOptionInstance != 0 {
+		parts = append(parts, "RayMaskOptionInstance")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -299,65 +278,65 @@ func (e MPSRayMaskOptions) String() string {
 	return strings.Join(parts, "|")
 }
 
-// @brief Controls how samples are weighted over time
-type MPSTemporalWeighting uint64
+// Controls how samples are weighted over time
+type TemporalWeighting uint64
 
 const (
-	// @brief Compute an average of all samples. This will fully utilize all samples but may lead to excessive ghosting artifacts under motion. Therefore, this is best for static images.
-	MPSTemporalWeightingAverage MPSTemporalWeighting = 0
-	// @brief Compute an exponential moving average by blending linearly between the previous accumulated samples and the current sample according to the temporalReprojectionBlendFactor property. This will cause older samples to lose their contribution over time, which will prevent ghosting artifacts but will also never converge to a stable value. Therefore, this is best for images with motion.
-	MPSTemporalWeightingExponentialMovingAverage MPSTemporalWeighting = 1
+	// Compute an average of all samples. This will fully utilize all samples but may lead to excessive ghosting artifacts under motion. Therefore, this is best for static images.
+	TemporalWeightingAverage TemporalWeighting = 0
+	// Compute an exponential moving average by blending linearly between the previous accumulated samples and the current sample according to the temporalReprojectionBlendFactor property. This will cause older samples to lose their contribution over time, which will prevent ghosting artifacts but will also never converge to a stable value. Therefore, this is best for images with motion.
+	TemporalWeightingExponentialMovingAverage TemporalWeighting = 1
 )
 
-func (e MPSTemporalWeighting) String() string {
+func (e TemporalWeighting) String() string {
 	switch e {
-	case MPSTemporalWeightingAverage:
-		return "MPSTemporalWeightingAverage"
-	case MPSTemporalWeightingExponentialMovingAverage:
-		return "MPSTemporalWeightingExponentialMovingAverage"
+	case TemporalWeightingAverage:
+		return "TemporalWeightingAverage"
+	case TemporalWeightingExponentialMovingAverage:
+		return "TemporalWeightingExponentialMovingAverage"
 	default:
-		return fmt.Sprintf("MPSTemporalWeighting(%d)", int64(e))
+		return fmt.Sprintf("TemporalWeighting(%d)", int64(e))
 	}
 }
 
-// @brief Instance transformation type options
-type MPSTransformType uint64
+// Instance transformation type options
+type TransformType uint64
 
 const (
-	// @brief Instance transformations are represented by a 4x4 column major matrix of 32 bit floats
-	MPSTransformTypeFloat4x4 MPSTransformType = 0
-	// @brief All instances have the identity transformation (no transformation). This can be used to compose multiple polygon acceleration structures in an instance acceleration structure without the cost of transforming instances. For example, geometry can be divided into static and dynamic polygon acceleration structures which can be rebuilt and refit independently.
-	MPSTransformTypeIdentity MPSTransformType = 1
+	// Instance transformations are represented by a 4x4 column major matrix of 32 bit floats
+	TransformTypeFloat4x4 TransformType = 0
+	// All instances have the identity transformation (no transformation). This can be used to compose multiple polygon acceleration structures in an instance acceleration structure without the cost of transforming instances. For example, geometry can be divided into static and dynamic polygon acceleration structures which can be rebuilt and refit independently.
+	TransformTypeIdentity TransformType = 1
 )
 
-func (e MPSTransformType) String() string {
+func (e TransformType) String() string {
 	switch e {
-	case MPSTransformTypeFloat4x4:
-		return "MPSTransformTypeFloat4x4"
-	case MPSTransformTypeIdentity:
-		return "MPSTransformTypeIdentity"
+	case TransformTypeFloat4x4:
+		return "TransformTypeFloat4x4"
+	case TransformTypeIdentity:
+		return "TransformTypeIdentity"
 	default:
-		return fmt.Sprintf("MPSTransformType(%d)", int64(e))
+		return fmt.Sprintf("TransformType(%d)", int64(e))
 	}
 }
 
-// @brief Options for the MPSRayIntersector triangle intersection test type property
-type MPSTriangleIntersectionTestType uint64
+// Options for the MPSRayIntersector triangle intersection test type property
+type TriangleIntersectionTestType uint64
 
 const (
-	// @brief Use the default ray/triangle intersection test
-	MPSTriangleIntersectionTestTypeDefault MPSTriangleIntersectionTestType = 0
-	// @brief Use a watertight ray/triangle intersection test which avoids gaps along shared triangle edges. Shared vertices may still have gaps. This intersection test may be slower than MPSTriangleIntersectionTestTypeDefault.
-	MPSTriangleIntersectionTestTypeWatertight MPSTriangleIntersectionTestType = 1
+	// Use the default ray/triangle intersection test
+	TriangleIntersectionTestTypeDefault TriangleIntersectionTestType = 0
+	// Use a watertight ray/triangle intersection test which avoids gaps along shared triangle edges. Shared vertices may still have gaps. This intersection test may be slower than MPSTriangleIntersectionTestTypeDefault.
+	TriangleIntersectionTestTypeWatertight TriangleIntersectionTestType = 1
 )
 
-func (e MPSTriangleIntersectionTestType) String() string {
+func (e TriangleIntersectionTestType) String() string {
 	switch e {
-	case MPSTriangleIntersectionTestTypeDefault:
-		return "MPSTriangleIntersectionTestTypeDefault"
-	case MPSTriangleIntersectionTestTypeWatertight:
-		return "MPSTriangleIntersectionTestTypeWatertight"
+	case TriangleIntersectionTestTypeDefault:
+		return "TriangleIntersectionTestTypeDefault"
+	case TriangleIntersectionTestTypeWatertight:
+		return "TriangleIntersectionTestTypeWatertight"
 	default:
-		return fmt.Sprintf("MPSTriangleIntersectionTestType(%d)", int64(e))
+		return fmt.Sprintf("TriangleIntersectionTestType(%d)", int64(e))
 	}
 }

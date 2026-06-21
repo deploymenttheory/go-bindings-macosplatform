@@ -5,41 +5,68 @@
 package safariservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/safariservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A proxy for the Safari app.
 //
-// SafariApplication wraps [raw.SFSafariApplication] with a fluent Go API.
+// SafariApplication is an idiomatic wrapper over the Objective-C class SFSafariApplication.
 type SafariApplication struct {
-	inner *raw.SFSafariApplication
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFSafariApplication].
-func (x *SafariApplication) Unwrap() *raw.SFSafariApplication { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SafariApplication) ID() objc.ID { return x.inner.Ptr() }
-
-// SafariApplicationFromID adopts an existing object pointer as a SafariApplication (nil for 0).
+// SafariApplicationFromID adopts an existing Objective-C object as a SafariApplication
+// (nil for 0), retaining it and registering a release finalizer.
 func SafariApplicationFromID(id objc.ID) *SafariApplication {
 	if id == 0 {
 		return nil
 	}
-	return &SafariApplication{inner: raw.SFSafariApplicationFromID(id)}
+	x := &SafariApplication{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSafariApplication creates a new [SafariApplication].
+// safariApplicationAdopt wraps an Objective-C object that this code just created as a
+// SafariApplication (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func safariApplicationAdopt(id objc.ID) *SafariApplication {
+	if id == 0 {
+		return nil
+	}
+	x := &SafariApplication{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SafariApplication) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SafariApplication) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SafariApplication) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSafariApplication creates a new SafariApplication.
 func NewSafariApplication() *SafariApplication {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSafariApplication")), objc.RegisterName("new"))
-	return &SafariApplication{inner: raw.SFSafariApplicationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFSafariApplication")), objc.RegisterName("new"))
+	return safariApplicationAdopt(_id)
 }
 
 // SafariApplicationable is the interface implemented by [SafariApplication], for mocking and DI.
 type SafariApplicationable interface {
-	Unwrap() *raw.SFSafariApplication
+	obj.Object
 }
 
 var _ SafariApplicationable = (*SafariApplication)(nil)

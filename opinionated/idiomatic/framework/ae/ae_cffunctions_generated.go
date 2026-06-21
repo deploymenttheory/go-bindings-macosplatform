@@ -5,61 +5,158 @@
 package ae
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ae"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// AECompareDesc wraps [raw.AECompareDesc], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AECompareDesc(desc1 *raw.AEDesc, desc2 *raw.AEDesc, resultP *uint8) error {
-	if _err := purego.NewOSStatus(raw.AECompareDesc(desc1, desc2, resultP)).Err(); _err != nil {
+var _fnAEStreamCloseDesc func(objc.ID) int32
+
+// AEStreamCloseDesc reports an error if the AE framework function AEStreamCloseDesc fails.
+func AEStreamCloseDesc(ref obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamCloseDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamCloseDesc, _lib, "AEStreamCloseDesc")
+	}
+	_rc := _fnAEStreamCloseDesc(objref.IDOf(ref))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AEDeterminePermissionToAutomateTarget wraps [raw.AEDeterminePermissionToAutomateTarget], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AEDeterminePermissionToAutomateTarget(target *raw.AEDesc, theAEEventClass uint, theAEEventID uint, askUserIfNeeded uint8) error {
-	if _err := purego.NewOSStatus(raw.AEDeterminePermissionToAutomateTarget(target, theAEEventClass, theAEEventID, askUserIfNeeded)).Err(); _err != nil {
+var _fnAEStreamCloseList func(objc.ID) int32
+
+// AEStreamCloseList reports an error if the AE framework function AEStreamCloseList fails.
+func AEStreamCloseList(ref obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamCloseList == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamCloseList, _lib, "AEStreamCloseList")
+	}
+	_rc := _fnAEStreamCloseList(objref.IDOf(ref))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AEFlattenDesc wraps [raw.AEFlattenDesc], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AEFlattenDesc(theAEDesc *raw.AEDesc, buffer string, bufferSize int, actualSize *int) error {
-	if _err := purego.NewOSStatus(raw.AEFlattenDesc(theAEDesc, buffer, bufferSize, actualSize)).Err(); _err != nil {
+var _fnAEStreamCloseRecord func(objc.ID) int32
+
+// AEStreamCloseRecord reports an error if the AE framework function AEStreamCloseRecord fails.
+func AEStreamCloseRecord(ref obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamCloseRecord == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamCloseRecord, _lib, "AEStreamCloseRecord")
+	}
+	_rc := _fnAEStreamCloseRecord(objref.IDOf(ref))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AEPrintDescToHandle wraps [raw.AEPrintDescToHandle], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AEPrintDescToHandle(desc *raw.AEDesc, result **string) error {
-	if _err := purego.NewOSStatus(raw.AEPrintDescToHandle(desc, result)).Err(); _err != nil {
+var _fnAEStreamOpenDesc func(objc.ID, int) int32
+
+// AEStreamOpenDesc reports an error if the AE framework function AEStreamOpenDesc fails.
+func AEStreamOpenDesc(ref obj.Object, newType int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamOpenDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamOpenDesc, _lib, "AEStreamOpenDesc")
+	}
+	_rc := _fnAEStreamOpenDesc(objref.IDOf(ref), newType)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AESendMessage wraps [raw.AESendMessage], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AESendMessage(event *raw.AEDesc, reply *raw.AEDesc, sendMode int, timeOutInTicks int) error {
-	if _err := purego.NewOSStatus(raw.AESendMessage(event, reply, sendMode, timeOutInTicks)).Err(); _err != nil {
+var _fnAEStreamOpenKeyDesc func(objc.ID, int, int) int32
+
+// AEStreamOpenKeyDesc reports an error if the AE framework function AEStreamOpenKeyDesc fails.
+func AEStreamOpenKeyDesc(ref obj.Object, key int, newType int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamOpenKeyDesc == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamOpenKeyDesc, _lib, "AEStreamOpenKeyDesc")
+	}
+	_rc := _fnAEStreamOpenKeyDesc(objref.IDOf(ref), key, newType)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// VAEBuildDesc wraps [raw.VAEBuildDesc], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func VAEBuildDesc(dst *raw.AEDesc, error_ *raw.AEBuildError, src string, args string) error {
-	if _err := purego.NewOSStatus(raw.VAEBuildDesc(dst, error_, src, args)).Err(); _err != nil {
+var _fnAEStreamOpenList func(objc.ID) int32
+
+// AEStreamOpenList reports an error if the AE framework function AEStreamOpenList fails.
+func AEStreamOpenList(ref obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamOpenList == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamOpenList, _lib, "AEStreamOpenList")
+	}
+	_rc := _fnAEStreamOpenList(objref.IDOf(ref))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// VAEBuildParameters wraps [raw.VAEBuildParameters], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func VAEBuildParameters(event *raw.AEDesc, error_ *raw.AEBuildError, format string, args string) error {
-	if _err := purego.NewOSStatus(raw.VAEBuildParameters(event, error_, format, args)).Err(); _err != nil {
+var _fnAEStreamOpenRecord func(objc.ID, int) int32
+
+// AEStreamOpenRecord reports an error if the AE framework function AEStreamOpenRecord fails.
+func AEStreamOpenRecord(ref obj.Object, newType int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamOpenRecord == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamOpenRecord, _lib, "AEStreamOpenRecord")
+	}
+	_rc := _fnAEStreamOpenRecord(objref.IDOf(ref), newType)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAEStreamOptionalParam func(objc.ID, int) int32
+
+// AEStreamOptionalParam reports an error if the AE framework function AEStreamOptionalParam fails.
+func AEStreamOptionalParam(ref obj.Object, key int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamOptionalParam == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamOptionalParam, _lib, "AEStreamOptionalParam")
+	}
+	_rc := _fnAEStreamOptionalParam(objref.IDOf(ref), key)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAEStreamSetRecordType func(objc.ID, int) int32
+
+// AEStreamSetRecordType reports an error if the AE framework function AEStreamSetRecordType fails.
+func AEStreamSetRecordType(ref obj.Object, newType int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamSetRecordType == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamSetRecordType, _lib, "AEStreamSetRecordType")
+	}
+	_rc := _fnAEStreamSetRecordType(objref.IDOf(ref), newType)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return _err
+	}
+	return nil
+}
+
+var _fnAEStreamWriteKey func(objc.ID, int) int32
+
+// AEStreamWriteKey reports an error if the AE framework function AEStreamWriteKey fails.
+func AEStreamWriteKey(ref obj.Object, key int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAEStreamWriteKey == nil {
+		ebipurego.RegisterLibFunc(&_fnAEStreamWriteKey, _lib, "AEStreamWriteKey")
+	}
+	_rc := _fnAEStreamWriteKey(objref.IDOf(ref), key)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

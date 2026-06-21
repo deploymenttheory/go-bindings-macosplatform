@@ -5,67 +5,89 @@
 package sharedwithyou
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents mention activity for a highlight.
 //
-// HighlightMentionEvent wraps [raw.SWHighlightMentionEvent] with a fluent Go API.
+// HighlightMentionEvent is an idiomatic wrapper over the Objective-C class SWHighlightMentionEvent.
 type HighlightMentionEvent struct {
-	inner *raw.SWHighlightMentionEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWHighlightMentionEvent].
-func (x *HighlightMentionEvent) Unwrap() *raw.SWHighlightMentionEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HighlightMentionEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// HighlightMentionEventFromID adopts an existing object pointer as a HighlightMentionEvent (nil for 0).
+// HighlightMentionEventFromID adopts an existing Objective-C object as a HighlightMentionEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func HighlightMentionEventFromID(id objc.ID) *HighlightMentionEvent {
 	if id == 0 {
 		return nil
 	}
-	return &HighlightMentionEvent{inner: raw.SWHighlightMentionEventFromID(id)}
+	x := &HighlightMentionEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// highlightMentionEventAdopt wraps an Objective-C object that this code just created as a
+// HighlightMentionEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func highlightMentionEventAdopt(id objc.ID) *HighlightMentionEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &HighlightMentionEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HighlightMentionEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HighlightMentionEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HighlightMentionEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and initializes a mention event.
 //
-// NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle creates a new [HighlightMentionEvent].
-func NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle(highlight *raw.SWHighlight, handle string) *HighlightMentionEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightMentionEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:mentionedPersonCloudKitShareHandle:"), highlight.Ptr(), foundation.NSStringStringWithUTF8String(handle).Ptr())
-	return &HighlightMentionEvent{inner: raw.SWHighlightMentionEventFromID(_id)}
+// NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle creates a new HighlightMentionEvent.
+func NewHighlightMentionEventWithHighlightMentionedPersonCloudKitShareHandle(highlight *Highlight, handle string) *HighlightMentionEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightMentionEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:mentionedPersonCloudKitShareHandle:"), objref.IDOf(highlight), purego.NSString(handle))
+	return highlightMentionEventAdopt(_id)
 }
 
 // Creates and initializes a mention event.
 //
-// NewHighlightMentionEventWithHighlightMentionedPersonIdentity creates a new [HighlightMentionEvent].
-func NewHighlightMentionEventWithHighlightMentionedPersonIdentity(highlight *raw.SWHighlight, identity *sharedwithyoucore.SWPersonIdentity) *HighlightMentionEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWHighlightMentionEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:mentionedPersonIdentity:"), highlight.Ptr(), identity.Ptr())
-	return &HighlightMentionEvent{inner: raw.SWHighlightMentionEventFromID(_id)}
+// NewHighlightMentionEventWithHighlightMentionedPersonIdentity creates a new HighlightMentionEvent.
+func NewHighlightMentionEventWithHighlightMentionedPersonIdentity(highlight *Highlight, identity obj.Object) *HighlightMentionEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWHighlightMentionEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithHighlight:mentionedPersonIdentity:"), objref.IDOf(highlight), objref.IDOf(identity))
+	return highlightMentionEventAdopt(_id)
 }
 
 // The person being mentioned by the sender.
-//
-// MentionedPersonHandle calls the underlying MentionedPersonHandle.
 func (x *HighlightMentionEvent) MentionedPersonHandle() string {
-	_r := x.inner.MentionedPersonHandle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mentionedPersonHandle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // HighlightMentionEventable is the interface implemented by [HighlightMentionEvent], for mocking and DI.
 type HighlightMentionEventable interface {
-	Unwrap() *raw.SWHighlightMentionEvent
+	obj.Object
 	MentionedPersonHandle() string
 }
 

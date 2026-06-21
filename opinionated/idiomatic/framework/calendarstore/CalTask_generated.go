@@ -5,146 +5,166 @@
 package calendarstore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CalTask wraps [raw.CalTask] with a fluent Go API.
+// CalTask is an idiomatic wrapper over the Objective-C class CalTask.
 type CalTask struct {
-	inner *raw.CalTask
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CalTask].
-func (x *CalTask) Unwrap() *raw.CalTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CalTask) ID() objc.ID { return x.inner.Ptr() }
-
-// CalTaskFromID adopts an existing object pointer as a CalTask (nil for 0).
+// CalTaskFromID adopts an existing Objective-C object as a CalTask
+// (nil for 0), retaining it and registering a release finalizer.
 func CalTaskFromID(id objc.ID) *CalTask {
 	if id == 0 {
 		return nil
 	}
-	return &CalTask{inner: raw.CalTaskFromID(id)}
+	x := &CalTask{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCalTask creates a new [CalTask].
+// calTaskAdopt wraps an Objective-C object that this code just created as a
+// CalTask (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func calTaskAdopt(id objc.ID) *CalTask {
+	if id == 0 {
+		return nil
+	}
+	x := &CalTask{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CalTask) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CalTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CalTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCalTask creates a new CalTask.
 func NewCalTask() *CalTask {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CalTask")), objc.RegisterName("new"))
-	return &CalTask{inner: raw.CalTaskFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CalTask")), objc.RegisterName("new"))
+	return calTaskAdopt(_id)
 }
 
-// WithDueDate sets the dueDate property and returns the receiver for chaining.
-func (x *CalTask) WithDueDate(dueDate *foundation.NSDate) *CalTask {
-	x.inner.SetDueDate(dueDate)
+// WithDueDate sets dueDate and returns the receiver so calls can be chained.
+func (x *CalTask) WithDueDate(dueDate obj.Object) *CalTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDueDate:"), objref.IDOf(dueDate))
 	return x
 }
 
-// WithPriority sets the priority property and returns the receiver for chaining.
-func (x *CalTask) WithPriority(priority uint) *CalTask {
-	x.inner.SetPriority(priority)
+// WithPriority sets priority and returns the receiver so calls can be chained.
+func (x *CalTask) WithPriority(priority int) *CalTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 	return x
 }
 
-// WithIsCompleted sets the isCompleted property and returns the receiver for chaining.
+// WithIsCompleted sets isCompleted and returns the receiver so calls can be chained.
 func (x *CalTask) WithIsCompleted(isCompleted bool) *CalTask {
-	x.inner.SetIsCompleted(isCompleted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCompleted:"), isCompleted)
 	return x
 }
 
-// WithCompletedDate sets the completedDate property and returns the receiver for chaining.
-func (x *CalTask) WithCompletedDate(completedDate *foundation.NSDate) *CalTask {
-	x.inner.SetCompletedDate(completedDate)
+// WithCompletedDate sets completedDate and returns the receiver so calls can be chained.
+func (x *CalTask) WithCompletedDate(completedDate obj.Object) *CalTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletedDate:"), objref.IDOf(completedDate))
 	return x
 }
 
-// WithCalendar sets the calendar property and returns the receiver for chaining.
+// WithCalendar sets calendar and returns the receiver so calls can be chained.
 func (x *CalTask) WithCalendar(calendar *CalCalendar) *CalTask {
-	x.inner.CalCalendarItem.SetCalendar(calendar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCalendar:"), objref.IDOf(calendar))
 	return x
 }
 
-// WithNotes sets the notes property and returns the receiver for chaining.
+// WithNotes sets notes and returns the receiver so calls can be chained.
 func (x *CalTask) WithNotes(notes string) *CalTask {
-	x.inner.CalCalendarItem.SetNotes(foundation.NSStringStringWithUTF8String(notes))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotes:"), purego.NSString(notes))
 	return x
 }
 
-// WithUrl sets the url property and returns the receiver for chaining.
+// WithUrl sets url and returns the receiver so calls can be chained.
 func (x *CalTask) WithUrl(url string) *CalTask {
-	x.inner.CalCalendarItem.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 	return x
 }
 
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *CalTask) WithTitle(title string) *CalTask {
-	x.inner.CalCalendarItem.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// DueDate calls the underlying DueDate.
-func (x *CalTask) DueDate() *foundation.NSDate {
-	return x.inner.DueDate()
+func (x *CalTask) DueDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dueDate"))
+	return obj.Wrap(_r)
 }
 
-// SetDueDate calls the underlying SetDueDate.
-func (x *CalTask) SetDueDate(dueDate *foundation.NSDate) {
-	x.inner.SetDueDate(dueDate)
+func (x *CalTask) SetDueDate(dueDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDueDate:"), objref.IDOf(dueDate))
 }
 
-// Priority calls the underlying Priority.
-func (x *CalTask) Priority() uint {
-	return x.inner.Priority()
+func (x *CalTask) Priority() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("priority"))
+	return _r
 }
 
-// SetPriority calls the underlying SetPriority.
-func (x *CalTask) SetPriority(priority uint) {
-	x.inner.SetPriority(priority)
+func (x *CalTask) SetPriority(priority int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 }
 
-// IsCompleted calls the underlying IsCompleted.
 func (x *CalTask) IsCompleted() bool {
-	return x.inner.IsCompleted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompleted"))
+	return _r
 }
 
-// SetIsCompleted calls the underlying SetIsCompleted.
 func (x *CalTask) SetIsCompleted(isCompleted bool) {
-	x.inner.SetIsCompleted(isCompleted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCompleted:"), isCompleted)
 }
 
-// CompletedDate calls the underlying CompletedDate.
-func (x *CalTask) CompletedDate() *foundation.NSDate {
-	return x.inner.CompletedDate()
+func (x *CalTask) CompletedDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completedDate"))
+	return obj.Wrap(_r)
 }
 
-// SetCompletedDate calls the underlying SetCompletedDate.
-func (x *CalTask) SetCompletedDate(completedDate *foundation.NSDate) {
-	x.inner.SetCompletedDate(completedDate)
+func (x *CalTask) SetCompletedDate(completedDate obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompletedDate:"), objref.IDOf(completedDate))
 }
-
-func (x *CalTask) asCalCalendarItem() *raw.CalCalendarItem { return &x.inner.CalCalendarItem }
 
 // CalTaskable is the interface implemented by [CalTask], for mocking and DI.
 type CalTaskable interface {
-	Unwrap() *raw.CalTask
-	WithDueDate(dueDate *foundation.NSDate) *CalTask
-	WithPriority(priority uint) *CalTask
+	obj.Object
+	WithDueDate(dueDate obj.Object) *CalTask
+	WithPriority(priority int) *CalTask
 	WithIsCompleted(isCompleted bool) *CalTask
-	WithCompletedDate(completedDate *foundation.NSDate) *CalTask
+	WithCompletedDate(completedDate obj.Object) *CalTask
 	WithCalendar(calendar *CalCalendar) *CalTask
 	WithNotes(notes string) *CalTask
 	WithUrl(url string) *CalTask
 	WithTitle(title string) *CalTask
-	DueDate() *foundation.NSDate
-	SetDueDate(dueDate *foundation.NSDate)
-	Priority() uint
-	SetPriority(priority uint)
+	DueDate() obj.Object
+	SetDueDate(dueDate obj.Object)
+	Priority() int
+	SetPriority(priority int)
 	IsCompleted() bool
 	SetIsCompleted(isCompleted bool)
-	CompletedDate() *foundation.NSDate
-	SetCompletedDate(completedDate *foundation.NSDate)
+	CompletedDate() obj.Object
+	SetCompletedDate(completedDate obj.Object)
 }
 
 var _ CalTaskable = (*CalTask)(nil)

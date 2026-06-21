@@ -5,41 +5,66 @@
 package mpsndarray
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayGradientState wraps [raw.MPSNDArrayGradientState] with a fluent Go API.
+// ArrayGradientState is an idiomatic wrapper over the Objective-C class MPSNDArrayGradientState.
 type ArrayGradientState struct {
-	inner *raw.MPSNDArrayGradientState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayGradientState].
-func (x *ArrayGradientState) Unwrap() *raw.MPSNDArrayGradientState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayGradientState) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayGradientStateFromID adopts an existing object pointer as a ArrayGradientState (nil for 0).
+// ArrayGradientStateFromID adopts an existing Objective-C object as a ArrayGradientState
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayGradientStateFromID(id objc.ID) *ArrayGradientState {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayGradientState{inner: raw.MPSNDArrayGradientStateFromID(id)}
+	x := &ArrayGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewArrayGradientState creates a new [ArrayGradientState].
+// arrayGradientStateAdopt wraps an Objective-C object that this code just created as a
+// ArrayGradientState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayGradientStateAdopt(id objc.ID) *ArrayGradientState {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayGradientState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ArrayGradientState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ArrayGradientState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ArrayGradientState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewArrayGradientState creates a new ArrayGradientState.
 func NewArrayGradientState() *ArrayGradientState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayGradientState")), objc.RegisterName("new"))
-	return &ArrayGradientState{inner: raw.MPSNDArrayGradientStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayGradientState")), objc.RegisterName("new"))
+	return arrayGradientStateAdopt(_id)
 }
-
-func (x *ArrayGradientState) asArrayGradientState() *raw.MPSNDArrayGradientState { return x.inner }
 
 // ArrayGradientStateable is the interface implemented by [ArrayGradientState], for mocking and DI.
 type ArrayGradientStateable interface {
-	Unwrap() *raw.MPSNDArrayGradientState
+	obj.Object
 }
 
 var _ ArrayGradientStateable = (*ArrayGradientState)(nil)

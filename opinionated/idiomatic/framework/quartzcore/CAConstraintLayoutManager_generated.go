@@ -5,41 +5,68 @@
 package quartzcore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides a constraint-based layout manager.
 //
-// ConstraintLayoutManager wraps [raw.CAConstraintLayoutManager] with a fluent Go API.
+// ConstraintLayoutManager is an idiomatic wrapper over the Objective-C class CAConstraintLayoutManager.
 type ConstraintLayoutManager struct {
-	inner *raw.CAConstraintLayoutManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CAConstraintLayoutManager].
-func (x *ConstraintLayoutManager) Unwrap() *raw.CAConstraintLayoutManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ConstraintLayoutManager) ID() objc.ID { return x.inner.Ptr() }
-
-// ConstraintLayoutManagerFromID adopts an existing object pointer as a ConstraintLayoutManager (nil for 0).
+// ConstraintLayoutManagerFromID adopts an existing Objective-C object as a ConstraintLayoutManager
+// (nil for 0), retaining it and registering a release finalizer.
 func ConstraintLayoutManagerFromID(id objc.ID) *ConstraintLayoutManager {
 	if id == 0 {
 		return nil
 	}
-	return &ConstraintLayoutManager{inner: raw.CAConstraintLayoutManagerFromID(id)}
+	x := &ConstraintLayoutManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewConstraintLayoutManager creates a new [ConstraintLayoutManager].
+// constraintLayoutManagerAdopt wraps an Objective-C object that this code just created as a
+// ConstraintLayoutManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func constraintLayoutManagerAdopt(id objc.ID) *ConstraintLayoutManager {
+	if id == 0 {
+		return nil
+	}
+	x := &ConstraintLayoutManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ConstraintLayoutManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ConstraintLayoutManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ConstraintLayoutManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewConstraintLayoutManager creates a new ConstraintLayoutManager.
 func NewConstraintLayoutManager() *ConstraintLayoutManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CAConstraintLayoutManager")), objc.RegisterName("new"))
-	return &ConstraintLayoutManager{inner: raw.CAConstraintLayoutManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CAConstraintLayoutManager")), objc.RegisterName("new"))
+	return constraintLayoutManagerAdopt(_id)
 }
 
 // ConstraintLayoutManagerable is the interface implemented by [ConstraintLayoutManager], for mocking and DI.
 type ConstraintLayoutManagerable interface {
-	Unwrap() *raw.CAConstraintLayoutManager
+	obj.Object
 }
 
 var _ ConstraintLayoutManagerable = (*ConstraintLayoutManager)(nil)

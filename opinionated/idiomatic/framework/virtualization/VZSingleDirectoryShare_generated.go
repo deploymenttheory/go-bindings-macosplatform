@@ -5,57 +5,76 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that defines the directory share for a single directory.
 //
-// SingleDirectoryShare wraps [raw.VZSingleDirectoryShare] with a fluent Go API.
+// SingleDirectoryShare is an idiomatic wrapper over the Objective-C class VZSingleDirectoryShare.
 type SingleDirectoryShare struct {
-	inner *raw.VZSingleDirectoryShare
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZSingleDirectoryShare].
-func (x *SingleDirectoryShare) Unwrap() *raw.VZSingleDirectoryShare { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SingleDirectoryShare) ID() objc.ID { return x.inner.Ptr() }
-
-// SingleDirectoryShareFromID adopts an existing object pointer as a SingleDirectoryShare (nil for 0).
+// SingleDirectoryShareFromID adopts an existing Objective-C object as a SingleDirectoryShare
+// (nil for 0), retaining it and registering a release finalizer.
 func SingleDirectoryShareFromID(id objc.ID) *SingleDirectoryShare {
 	if id == 0 {
 		return nil
 	}
-	return &SingleDirectoryShare{inner: raw.VZSingleDirectoryShareFromID(id)}
+	x := &SingleDirectoryShare{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// singleDirectoryShareAdopt wraps an Objective-C object that this code just created as a
+// SingleDirectoryShare (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func singleDirectoryShareAdopt(id objc.ID) *SingleDirectoryShare {
+	if id == 0 {
+		return nil
+	}
+	x := &SingleDirectoryShare{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SingleDirectoryShare) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SingleDirectoryShare) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SingleDirectoryShare) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a directory share with a directory that you specify on the host.
 //
-// NewSingleDirectoryShareWithDirectory creates a new [SingleDirectoryShare].
-func NewSingleDirectoryShareWithDirectory(directory *raw.VZSharedDirectory) *SingleDirectoryShare {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZSingleDirectoryShare")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDirectory:"), directory.Ptr())
-	return &SingleDirectoryShare{inner: raw.VZSingleDirectoryShareFromID(_id)}
+// NewSingleDirectoryShareWithDirectory creates a new SingleDirectoryShare.
+func NewSingleDirectoryShareWithDirectory(directory *SharedDirectory) *SingleDirectoryShare {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZSingleDirectoryShare")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDirectory:"), objref.IDOf(directory))
+	return singleDirectoryShareAdopt(_id)
 }
 
-// Directory calls the underlying Directory.
 func (x *SingleDirectoryShare) Directory() *SharedDirectory {
-	_r := x.inner.Directory()
-	if _r == nil {
-		return nil
-	}
-	return &SharedDirectory{inner: _r}
-}
-
-func (x *SingleDirectoryShare) asDirectoryShare() *raw.VZDirectoryShare {
-	return &x.inner.VZDirectoryShare
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("directory"))
+	return SharedDirectoryFromID(_r)
 }
 
 // SingleDirectoryShareable is the interface implemented by [SingleDirectoryShare], for mocking and DI.
 type SingleDirectoryShareable interface {
-	Unwrap() *raw.VZSingleDirectoryShare
+	obj.Object
 	Directory() *SharedDirectory
 }
 

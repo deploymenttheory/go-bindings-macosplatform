@@ -5,156 +5,157 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterBooleanStateConfiguration wraps [raw.MTRClusterBooleanStateConfiguration] with a fluent Go API.
+// MTRClusterBooleanStateConfiguration is an idiomatic wrapper over the Objective-C class MTRClusterBooleanStateConfiguration.
 type MTRClusterBooleanStateConfiguration struct {
-	inner *raw.MTRClusterBooleanStateConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterBooleanStateConfiguration].
-func (x *MTRClusterBooleanStateConfiguration) Unwrap() *raw.MTRClusterBooleanStateConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterBooleanStateConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterBooleanStateConfigurationFromID adopts an existing object pointer as a MTRClusterBooleanStateConfiguration (nil for 0).
+// MTRClusterBooleanStateConfigurationFromID adopts an existing Objective-C object as a MTRClusterBooleanStateConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterBooleanStateConfigurationFromID(id objc.ID) *MTRClusterBooleanStateConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterBooleanStateConfiguration{inner: raw.MTRClusterBooleanStateConfigurationFromID(id)}
+	x := &MTRClusterBooleanStateConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterBooleanStateConfigurationAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterBooleanStateConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterBooleanStateConfigurationAdopt(id objc.ID) *MTRClusterBooleanStateConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterBooleanStateConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterBooleanStateConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterBooleanStateConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterBooleanStateConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterBooleanStateConfigurationWithDeviceEndpointIDQueue creates a new [MTRClusterBooleanStateConfiguration].
-func NewMTRClusterBooleanStateConfigurationWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterBooleanStateConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterBooleanStateConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterBooleanStateConfiguration{inner: raw.MTRClusterBooleanStateConfigurationFromID(_id)}
+// NewMTRClusterBooleanStateConfigurationWithDeviceEndpointIDQueue creates a new MTRClusterBooleanStateConfiguration.
+func NewMTRClusterBooleanStateConfigurationWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterBooleanStateConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterBooleanStateConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterBooleanStateConfigurationAdopt(_id)
 }
 
-// SuppressAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying SuppressAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterBooleanStateConfiguration) SuppressAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRBooleanStateConfigurationClusterSuppressAlarmParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.SuppressAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeCurrentSensitivityLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentSensitivityLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// EnableDisableAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying EnableDisableAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterBooleanStateConfiguration) EnableDisableAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRBooleanStateConfigurationClusterEnableDisableAlarmParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.EnableDisableAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterBooleanStateConfiguration) WriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeCurrentSensitivityLevelWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// ReadAttributeCurrentSensitivityLevelWithParams calls the underlying ReadAttributeCurrentSensitivityLevelWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeCurrentSensitivityLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentSensitivityLevelWithParams(params)
+func (x *MTRClusterBooleanStateConfiguration) WriteAttributeCurrentSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributeCurrentSensitivityLevelWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// WriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval calls the underlying WriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval.
-func (x *MTRClusterBooleanStateConfiguration) WriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeSupportedSensitivityLevelsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSupportedSensitivityLevelsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributeCurrentSensitivityLevelWithValueExpectedValueIntervalParams calls the underlying WriteAttributeCurrentSensitivityLevelWithValueExpectedValueIntervalParams.
-func (x *MTRClusterBooleanStateConfiguration) WriteAttributeCurrentSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributeCurrentSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeDefaultSensitivityLevelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDefaultSensitivityLevelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSupportedSensitivityLevelsWithParams calls the underlying ReadAttributeSupportedSensitivityLevelsWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeSupportedSensitivityLevelsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSupportedSensitivityLevelsWithParams(params)
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsActiveWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAlarmsActiveWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeDefaultSensitivityLevelWithParams calls the underlying ReadAttributeDefaultSensitivityLevelWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeDefaultSensitivityLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDefaultSensitivityLevelWithParams(params)
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsSuppressedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAlarmsSuppressedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAlarmsActiveWithParams calls the underlying ReadAttributeAlarmsActiveWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsActiveWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAlarmsActiveWithParams(params)
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsEnabledWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAlarmsEnabledWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAlarmsSuppressedWithParams calls the underlying ReadAttributeAlarmsSuppressedWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsSuppressedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAlarmsSuppressedWithParams(params)
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsSupportedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAlarmsSupportedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAlarmsEnabledWithParams calls the underlying ReadAttributeAlarmsEnabledWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsEnabledWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAlarmsEnabledWithParams(params)
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeSensorFaultWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSensorFaultWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAlarmsSupportedWithParams calls the underlying ReadAttributeAlarmsSupportedWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAlarmsSupportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAlarmsSupportedWithParams(params)
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSensorFaultWithParams calls the underlying ReadAttributeSensorFaultWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeSensorFaultWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSensorFaultWithParams(params)
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterBooleanStateConfiguration) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterBooleanStateConfiguration) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterBooleanStateConfiguration) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterBooleanStateConfiguration) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterBooleanStateConfigurationable is the interface implemented by [MTRClusterBooleanStateConfiguration], for mocking and DI.
 type MTRClusterBooleanStateConfigurationable interface {
-	Unwrap() *raw.MTRClusterBooleanStateConfiguration
-	SuppressAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRBooleanStateConfigurationClusterSuppressAlarmParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	EnableDisableAlarmWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRBooleanStateConfigurationClusterEnableDisableAlarmParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeCurrentSensitivityLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributeCurrentSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeSupportedSensitivityLevelsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeDefaultSensitivityLevelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAlarmsActiveWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAlarmsSuppressedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAlarmsEnabledWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAlarmsSupportedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSensorFaultWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeCurrentSensitivityLevelWithParams(params *MTRReadParams) obj.Object
+	WriteAttributeCurrentSensitivityLevelWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributeCurrentSensitivityLevelWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeSupportedSensitivityLevelsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeDefaultSensitivityLevelWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAlarmsActiveWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAlarmsSuppressedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAlarmsEnabledWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAlarmsSupportedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSensorFaultWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterBooleanStateConfigurationable = (*MTRClusterBooleanStateConfiguration)(nil)

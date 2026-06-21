@@ -5,116 +5,112 @@
 package corelocation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corelocation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A base class representing an area that can be monitored.
 //
-// Region wraps [raw.CLRegion] with a fluent Go API.
+// Region is an idiomatic wrapper over the Objective-C class CLRegion.
 type Region struct {
-	inner *raw.CLRegion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CLRegion].
-func (x *Region) Unwrap() *raw.CLRegion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Region) ID() objc.ID { return x.inner.Ptr() }
-
-// RegionFromID adopts an existing object pointer as a Region (nil for 0).
+// RegionFromID adopts an existing Objective-C object as a Region
+// (nil for 0), retaining it and registering a release finalizer.
 func RegionFromID(id objc.ID) *Region {
 	if id == 0 {
 		return nil
 	}
-	return &Region{inner: raw.CLRegionFromID(id)}
+	x := &Region{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes and returns a region object defining a circular area.
-//
-// NewRegionCircularRegionWithCenterRadiusIdentifier creates a new [Region].
-func NewRegionCircularRegionWithCenterRadiusIdentifier(center unsafe.Pointer, radius unsafe.Pointer, identifier string) *Region {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CLRegion")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initCircularRegionWithCenter:radius:identifier:"), center, radius, foundation.NSStringStringWithUTF8String(identifier).Ptr())
-	return &Region{inner: raw.CLRegionFromID(_id)}
+// regionAdopt wraps an Objective-C object that this code just created as a
+// Region (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func regionAdopt(id objc.ID) *Region {
+	if id == 0 {
+		return nil
+	}
+	x := &Region{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Region) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Region) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Region) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRegion creates a new Region.
+func NewRegion() *Region {
+	_id := objc.Send[objc.ID](objc.ID(_class("CLRegion")), objc.RegisterName("new"))
+	return regionAdopt(_id)
 }
 
 // A Boolean indicating that notifications are generated upon entry into the region.
 //
-// WithNotifyOnEntry sets the notifyOnEntry property and returns the receiver for chaining.
+// WithNotifyOnEntry sets notifyOnEntry and returns the receiver so calls can be chained.
 func (x *Region) WithNotifyOnEntry(notifyOnEntry bool) *Region {
-	x.inner.SetNotifyOnEntry(notifyOnEntry)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
 	return x
 }
 
 // A Boolean indicating that notifications are generated upon exit from the region.
 //
-// WithNotifyOnExit sets the notifyOnExit property and returns the receiver for chaining.
+// WithNotifyOnExit sets notifyOnExit and returns the receiver so calls can be chained.
 func (x *Region) WithNotifyOnExit(notifyOnExit bool) *Region {
-	x.inner.SetNotifyOnExit(notifyOnExit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
 	return x
 }
 
-// Returns a Boolean value indicating whether the region contains the specified coordinate.
-//
-// ContainsCoordinate calls the underlying ContainsCoordinate.
-func (x *Region) ContainsCoordinate(coordinate unsafe.Pointer) bool {
-	return x.inner.ContainsCoordinate(coordinate)
-}
-
-// Center calls the underlying Center.
-func (x *Region) Center() unsafe.Pointer {
-	return x.inner.Center()
-}
-
-// Radius calls the underlying Radius.
-func (x *Region) Radius() unsafe.Pointer {
-	return x.inner.Radius()
-}
-
-// Identifier calls the underlying Identifier.
 func (x *Region) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// NotifyOnEntry calls the underlying NotifyOnEntry.
 func (x *Region) NotifyOnEntry() bool {
-	return x.inner.NotifyOnEntry()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notifyOnEntry"))
+	return _r
 }
 
-// SetNotifyOnEntry calls the underlying SetNotifyOnEntry.
 func (x *Region) SetNotifyOnEntry(notifyOnEntry bool) {
-	x.inner.SetNotifyOnEntry(notifyOnEntry)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnEntry:"), notifyOnEntry)
 }
 
-// NotifyOnExit calls the underlying NotifyOnExit.
 func (x *Region) NotifyOnExit() bool {
-	return x.inner.NotifyOnExit()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("notifyOnExit"))
+	return _r
 }
 
-// SetNotifyOnExit calls the underlying SetNotifyOnExit.
 func (x *Region) SetNotifyOnExit(notifyOnExit bool) {
-	x.inner.SetNotifyOnExit(notifyOnExit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyOnExit:"), notifyOnExit)
 }
-
-func (x *Region) asRegion() *raw.CLRegion { return x.inner }
 
 // Regionable is the interface implemented by [Region], for mocking and DI.
 type Regionable interface {
-	Unwrap() *raw.CLRegion
+	obj.Object
 	WithNotifyOnEntry(notifyOnEntry bool) *Region
 	WithNotifyOnExit(notifyOnExit bool) *Region
-	ContainsCoordinate(coordinate unsafe.Pointer) bool
-	Center() unsafe.Pointer
-	Radius() unsafe.Pointer
 	Identifier() string
 	NotifyOnEntry() bool
 	SetNotifyOnEntry(notifyOnEntry bool)

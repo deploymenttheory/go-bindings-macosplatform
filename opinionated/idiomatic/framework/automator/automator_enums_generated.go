@@ -8,145 +8,145 @@ import (
 	"fmt"
 )
 
-type AMErrorCode int64
+type ErrorCode int64
 
 const (
-	AMWorkflowNewerVersionError              AMErrorCode = -100
-	AMWorkflowPropertyListInvalidError       AMErrorCode = -101
-	AMWorkflowNewerActionVersionError        AMErrorCode = -111
-	AMWorkflowOlderActionVersionError        AMErrorCode = -112
-	AMWorkflowActionsNotLoadedError          AMErrorCode = -113
-	AMWorkflowNoEnabledActionsError          AMErrorCode = -114
-	AMUserCanceledError                      AMErrorCode = -128
-	AMNoSuchActionError                      AMErrorCode = -200
-	AMActionNotLoadableError                 AMErrorCode = -201
-	AMActionArchitectureMismatchError        AMErrorCode = -202
-	AMActionRuntimeMismatchError             AMErrorCode = -203
-	AMActionLoadError                        AMErrorCode = -204
-	AMActionLinkError                        AMErrorCode = -205
-	AMActionApplicationResourceError         AMErrorCode = -206
-	AMActionApplicationVersionResourceError  AMErrorCode = -207
-	AMActionFileResourceError                AMErrorCode = -208
-	AMActionLicenseResourceError             AMErrorCode = -209
-	AMActionRequiredActionResourceError      AMErrorCode = -210
-	AMActionInitializationError              AMErrorCode = -211
-	AMActionExecutionError                   AMErrorCode = -212
-	AMActionExceptionError                   AMErrorCode = -213
-	AMActionPropertyListInvalidError         AMErrorCode = -214
-	AMActionInsufficientDataError            AMErrorCode = -215
-	AMActionIsDeprecatedError                AMErrorCode = -216
-	AMActionFailedGatekeeperError            AMErrorCode = -217
-	AMActionSignatureCorruptError            AMErrorCode = -218
-	AMActionQuarantineError                  AMErrorCode = -219
-	AMActionXProtectError                    AMErrorCode = -220
-	AMActionMalwareError                     AMErrorCode = -221
-	AMActionThirdPartyActionsNotAllowedError AMErrorCode = -222
-	AMActionXPCError                         AMErrorCode = -223
-	AMConversionNotPossibleError             AMErrorCode = -300
-	AMConversionNoDataError                  AMErrorCode = -301
-	AMConversionFailedError                  AMErrorCode = -302
+	WorkflowNewerVersionError              ErrorCode = -100
+	WorkflowPropertyListInvalidError       ErrorCode = -101
+	WorkflowNewerActionVersionError        ErrorCode = -111
+	WorkflowOlderActionVersionError        ErrorCode = -112
+	WorkflowActionsNotLoadedError          ErrorCode = -113
+	WorkflowNoEnabledActionsError          ErrorCode = -114
+	UserCanceledError                      ErrorCode = -128
+	NoSuchActionError                      ErrorCode = -200
+	ActionNotLoadableError                 ErrorCode = -201
+	ActionArchitectureMismatchError        ErrorCode = -202
+	ActionRuntimeMismatchError             ErrorCode = -203
+	ActionLoadError                        ErrorCode = -204
+	ActionLinkError                        ErrorCode = -205
+	ActionApplicationResourceError         ErrorCode = -206
+	ActionApplicationVersionResourceError  ErrorCode = -207
+	ActionFileResourceError                ErrorCode = -208
+	ActionLicenseResourceError             ErrorCode = -209
+	ActionRequiredActionResourceError      ErrorCode = -210
+	ActionInitializationError              ErrorCode = -211
+	ActionExecutionError                   ErrorCode = -212
+	ActionExceptionError                   ErrorCode = -213
+	ActionPropertyListInvalidError         ErrorCode = -214
+	ActionInsufficientDataError            ErrorCode = -215
+	ActionIsDeprecatedError                ErrorCode = -216
+	ActionFailedGatekeeperError            ErrorCode = -217
+	ActionSignatureCorruptError            ErrorCode = -218
+	ActionQuarantineError                  ErrorCode = -219
+	ActionXProtectError                    ErrorCode = -220
+	ActionMalwareError                     ErrorCode = -221
+	ActionThirdPartyActionsNotAllowedError ErrorCode = -222
+	ActionXPCError                         ErrorCode = -223
+	ConversionNotPossibleError             ErrorCode = -300
+	ConversionNoDataError                  ErrorCode = -301
+	ConversionFailedError                  ErrorCode = -302
 )
 
-func (e AMErrorCode) String() string {
+func (e ErrorCode) String() string {
 	switch e {
-	case AMWorkflowNewerVersionError:
-		return "AMWorkflowNewerVersionError"
-	case AMWorkflowPropertyListInvalidError:
-		return "AMWorkflowPropertyListInvalidError"
-	case AMWorkflowNewerActionVersionError:
-		return "AMWorkflowNewerActionVersionError"
-	case AMWorkflowOlderActionVersionError:
-		return "AMWorkflowOlderActionVersionError"
-	case AMWorkflowActionsNotLoadedError:
-		return "AMWorkflowActionsNotLoadedError"
-	case AMWorkflowNoEnabledActionsError:
-		return "AMWorkflowNoEnabledActionsError"
-	case AMUserCanceledError:
-		return "AMUserCanceledError"
-	case AMNoSuchActionError:
-		return "AMNoSuchActionError"
-	case AMActionNotLoadableError:
-		return "AMActionNotLoadableError"
-	case AMActionArchitectureMismatchError:
-		return "AMActionArchitectureMismatchError"
-	case AMActionRuntimeMismatchError:
-		return "AMActionRuntimeMismatchError"
-	case AMActionLoadError:
-		return "AMActionLoadError"
-	case AMActionLinkError:
-		return "AMActionLinkError"
-	case AMActionApplicationResourceError:
-		return "AMActionApplicationResourceError"
-	case AMActionApplicationVersionResourceError:
-		return "AMActionApplicationVersionResourceError"
-	case AMActionFileResourceError:
-		return "AMActionFileResourceError"
-	case AMActionLicenseResourceError:
-		return "AMActionLicenseResourceError"
-	case AMActionRequiredActionResourceError:
-		return "AMActionRequiredActionResourceError"
-	case AMActionInitializationError:
-		return "AMActionInitializationError"
-	case AMActionExecutionError:
-		return "AMActionExecutionError"
-	case AMActionExceptionError:
-		return "AMActionExceptionError"
-	case AMActionPropertyListInvalidError:
-		return "AMActionPropertyListInvalidError"
-	case AMActionInsufficientDataError:
-		return "AMActionInsufficientDataError"
-	case AMActionIsDeprecatedError:
-		return "AMActionIsDeprecatedError"
-	case AMActionFailedGatekeeperError:
-		return "AMActionFailedGatekeeperError"
-	case AMActionSignatureCorruptError:
-		return "AMActionSignatureCorruptError"
-	case AMActionQuarantineError:
-		return "AMActionQuarantineError"
-	case AMActionXProtectError:
-		return "AMActionXProtectError"
-	case AMActionMalwareError:
-		return "AMActionMalwareError"
-	case AMActionThirdPartyActionsNotAllowedError:
-		return "AMActionThirdPartyActionsNotAllowedError"
-	case AMActionXPCError:
-		return "AMActionXPCError"
-	case AMConversionNotPossibleError:
-		return "AMConversionNotPossibleError"
-	case AMConversionNoDataError:
-		return "AMConversionNoDataError"
-	case AMConversionFailedError:
-		return "AMConversionFailedError"
+	case WorkflowNewerVersionError:
+		return "WorkflowNewerVersionError"
+	case WorkflowPropertyListInvalidError:
+		return "WorkflowPropertyListInvalidError"
+	case WorkflowNewerActionVersionError:
+		return "WorkflowNewerActionVersionError"
+	case WorkflowOlderActionVersionError:
+		return "WorkflowOlderActionVersionError"
+	case WorkflowActionsNotLoadedError:
+		return "WorkflowActionsNotLoadedError"
+	case WorkflowNoEnabledActionsError:
+		return "WorkflowNoEnabledActionsError"
+	case UserCanceledError:
+		return "UserCanceledError"
+	case NoSuchActionError:
+		return "NoSuchActionError"
+	case ActionNotLoadableError:
+		return "ActionNotLoadableError"
+	case ActionArchitectureMismatchError:
+		return "ActionArchitectureMismatchError"
+	case ActionRuntimeMismatchError:
+		return "ActionRuntimeMismatchError"
+	case ActionLoadError:
+		return "ActionLoadError"
+	case ActionLinkError:
+		return "ActionLinkError"
+	case ActionApplicationResourceError:
+		return "ActionApplicationResourceError"
+	case ActionApplicationVersionResourceError:
+		return "ActionApplicationVersionResourceError"
+	case ActionFileResourceError:
+		return "ActionFileResourceError"
+	case ActionLicenseResourceError:
+		return "ActionLicenseResourceError"
+	case ActionRequiredActionResourceError:
+		return "ActionRequiredActionResourceError"
+	case ActionInitializationError:
+		return "ActionInitializationError"
+	case ActionExecutionError:
+		return "ActionExecutionError"
+	case ActionExceptionError:
+		return "ActionExceptionError"
+	case ActionPropertyListInvalidError:
+		return "ActionPropertyListInvalidError"
+	case ActionInsufficientDataError:
+		return "ActionInsufficientDataError"
+	case ActionIsDeprecatedError:
+		return "ActionIsDeprecatedError"
+	case ActionFailedGatekeeperError:
+		return "ActionFailedGatekeeperError"
+	case ActionSignatureCorruptError:
+		return "ActionSignatureCorruptError"
+	case ActionQuarantineError:
+		return "ActionQuarantineError"
+	case ActionXProtectError:
+		return "ActionXProtectError"
+	case ActionMalwareError:
+		return "ActionMalwareError"
+	case ActionThirdPartyActionsNotAllowedError:
+		return "ActionThirdPartyActionsNotAllowedError"
+	case ActionXPCError:
+		return "ActionXPCError"
+	case ConversionNotPossibleError:
+		return "ConversionNotPossibleError"
+	case ConversionNoDataError:
+		return "ConversionNoDataError"
+	case ConversionFailedError:
+		return "ConversionFailedError"
 	default:
-		return fmt.Sprintf("AMErrorCode(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // Logging levels that Automator supports.
-type AMLogLevel uint64
+type LogLevel uint64
 
 const (
 	// The debug log level.
-	AMLogLevelDebug AMLogLevel = 0
+	LogLevelDebug LogLevel = 0
 	// The informational log level.
-	AMLogLevelInfo AMLogLevel = 1
+	LogLevelInfo LogLevel = 1
 	// The warning log level.
-	AMLogLevelWarn AMLogLevel = 2
+	LogLevelWarn LogLevel = 2
 	// The error log level.
-	AMLogLevelError AMLogLevel = 3
+	LogLevelError LogLevel = 3
 )
 
-func (e AMLogLevel) String() string {
+func (e LogLevel) String() string {
 	switch e {
-	case AMLogLevelDebug:
-		return "AMLogLevelDebug"
-	case AMLogLevelInfo:
-		return "AMLogLevelInfo"
-	case AMLogLevelWarn:
-		return "AMLogLevelWarn"
-	case AMLogLevelError:
-		return "AMLogLevelError"
+	case LogLevelDebug:
+		return "LogLevelDebug"
+	case LogLevelInfo:
+		return "LogLevelInfo"
+	case LogLevelWarn:
+		return "LogLevelWarn"
+	case LogLevelError:
+		return "LogLevelError"
 	default:
-		return fmt.Sprintf("AMLogLevel(%d)", int64(e))
+		return fmt.Sprintf("LogLevel(%d)", int64(e))
 	}
 }

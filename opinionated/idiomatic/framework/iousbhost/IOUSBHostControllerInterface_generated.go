@@ -5,186 +5,125 @@
 package iousbhost
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iousbhost"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// HostControllerInterface wraps [raw.IOUSBHostControllerInterface] with a fluent Go API.
+// HostControllerInterface is an idiomatic wrapper over the Objective-C class IOUSBHostControllerInterface.
 type HostControllerInterface struct {
-	inner *raw.IOUSBHostControllerInterface
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOUSBHostControllerInterface].
-func (x *HostControllerInterface) Unwrap() *raw.IOUSBHostControllerInterface { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HostControllerInterface) ID() objc.ID { return x.inner.Ptr() }
-
-// HostControllerInterfaceFromID adopts an existing object pointer as a HostControllerInterface (nil for 0).
+// HostControllerInterfaceFromID adopts an existing Objective-C object as a HostControllerInterface
+// (nil for 0), retaining it and registering a release finalizer.
 func HostControllerInterfaceFromID(id objc.ID) *HostControllerInterface {
 	if id == 0 {
 		return nil
 	}
-	return &HostControllerInterface{inner: raw.IOUSBHostControllerInterfaceFromID(id)}
-}
-
-// @brief       Initializes IOUSBHostControllerInterface object along with a user client @discussion  If the user client cannot be created, nil will be returned. When done using the object, destroy must be called on the object. @param       capabilities NSData containing an array of IOUSBHostCIMessage structures.  The first must have an IOUSBHostCIMessageControlType of IOUSBHostCIMessageTypeControllerCapabilities, followed by at least one message with an IOUSBHostCIMessageControlType of IOUSBHostCIMessageTypePortCapabilities. @param       queue A serial queue to service asynchronous operations. If nil, a serial queue will be created on behalf of the client. @param       interruptRateHz NSUInteger representing the rate in Hz at which interrupts will be delivered to the kernel driver. A value ot 0 will send all interrupts to the kernel immediately. @param       commandHandler IOUSBHostControllerInterfaceCommandHandler used to process IOUSBHostCIMessage messages sent by the kernel driver. @param       doorbellHandler IOUSBHostControllerInterfaceDoorbellHandler used to process IOUSBHostCIDoorbell values sent by the kernel driver. @param       interestHandler IOServiceInterestCallback used to process service state changes such as termination. See IOServiceAddInterestNotification in IOKitLib for more details. All notifications will be serviced on an internal serial queue separate from command and doorbell handlers. @return      An IOUSBHostControllerInterface. The object is to be released by the caller.
-//
-// NewHostControllerInterfaceWithCapabilitiesQueueInterruptRateHzErrorCommandHandlerDoorbellHandlerInterestHandler creates a new [HostControllerInterface].
-func NewHostControllerInterfaceWithCapabilitiesQueueInterruptRateHzErrorCommandHandlerDoorbellHandlerInterestHandler(capabilities *foundation.NSData, queue *foundation.NSObject, interruptRateHz uint, error_ unsafe.Pointer, commandHandler objc.Block, doorbellHandler func(*raw.IOUSBHostControllerInterface, *uint32, uint32), interestHandler unsafe.Pointer) *HostControllerInterface {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOUSBHostControllerInterface")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCapabilities:queue:interruptRateHz:error:commandHandler:doorbellHandler:interestHandler:"), capabilities.Ptr(), queue.Ptr(), interruptRateHz, error_, commandHandler, doorbellHandler, interestHandler)
-	return &HostControllerInterface{inner: raw.IOUSBHostControllerInterfaceFromID(_id)}
-}
-
-// @brief       The interrupt moderation rate for sending interrupt messages to the kernel driver @discussion  interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
-//
-// WithInterruptRateHz sets the interruptRateHz property and returns the receiver for chaining.
-func (x *HostControllerInterface) WithInterruptRateHz(interruptRateHz uint) *HostControllerInterface {
-	x.inner.SetInterruptRateHz(interruptRateHz)
+	x := &HostControllerInterface{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @brief       Removes underlying allocations of the IOUSBHostControllerInterface object along with user client @discussion  When the IOUSBHostControllerInterface is no longer needed, destroy must be called. This will destroy the connection with the user client and de-register interest on the service. If the object is freed, destroy will be called automatically. Calling destroy multiple times has no effect.
-//
-// Destroy calls the underlying Destroy.
-func (x *HostControllerInterface) Destroy() {
-	x.inner.Destroy()
-}
-
-// @brief       Enqueue an interrupt for delivery to the kernel service @discussion  This method enqueues one interrupt message for delivery to the kernel service.  interruptRateHz is used to determine when the interrupt message is delivered to the kernel service. @param       interrupt An IOUSBHostCIMessage structure representing an interrupt message
-//
-// EnqueueInterruptError calls the underlying EnqueueInterruptError.
-func (x *HostControllerInterface) EnqueueInterruptError(interrupt *raw.IOUSBHostCIMessage) (bool, error) {
-	return x.inner.EnqueueInterruptError(interrupt)
-}
-
-// @brief       Enqueue an interrupt for delivery to the kernel service @discussion  This method enqueues one interrupt message for delivery to the kernel service. @param       interrupt An IOUSBHostCIMessage structure representing an interrupt message @param       expedite Bool NO to use interruptRateHz to determine when the interrupt message is delivered to the kernel service. Bool YES if interruptRateHz should be ignored, sending the message to the kernel driver at the next opportunity while maintaining in-order delivery of all interrupt messages.
-//
-// EnqueueInterruptExpediteError calls the underlying EnqueueInterruptExpediteError.
-func (x *HostControllerInterface) EnqueueInterruptExpediteError(interrupt *raw.IOUSBHostCIMessage, expedite bool) (bool, error) {
-	return x.inner.EnqueueInterruptExpediteError(interrupt, expedite)
-}
-
-// @brief       Enqueue interrupts for delivery to the kernel service @discussion  This method enqueues one or more interrupt messages for delivery to the kernel service.   interruptRateHz is used to determine when the interrupt message is delivered to the kernel service. @param       interrupts An IOUSBHostCIMessage structure representing one or more interrupt messages @param       count The number of interrupt messages represented by the interrupts parameter
-//
-// EnqueueInterruptsCountError calls the underlying EnqueueInterruptsCountError.
-func (x *HostControllerInterface) EnqueueInterruptsCountError(interrupts *raw.IOUSBHostCIMessage, count uint) (bool, error) {
-	return x.inner.EnqueueInterruptsCountError(interrupts, count)
-}
-
-// @brief       Enqueue interrupts for delivery to the kernel service @discussion  This method enqueues one or more interrupt messages for delivery to the kernel service.   interruptRateHz is used to determine when the interrupt message is delivered to the kernel service. @param       interrupts An IOUSBHostCIMessage structure representing one or more interrupt messages @param       count The number of interrupt messages represented by the interrupts parameter @param       expedite Bool NO to use interruptRateHz to determine when the interrupt message is delivered to the kernel service. Bool YES if interruptRateHz should be ignored, sending the message to the kernel driver at the next opportunity while maintaining in-order delivery of all interrupt messages.
-//
-// EnqueueInterruptsCountExpediteError calls the underlying EnqueueInterruptsCountExpediteError.
-func (x *HostControllerInterface) EnqueueInterruptsCountExpediteError(interrupts *raw.IOUSBHostCIMessage, count uint, expedite bool) (bool, error) {
-	return x.inner.EnqueueInterruptsCountExpediteError(interrupts, count, expedite)
-}
-
-// DescriptionForMessage calls the underlying DescriptionForMessage.
-func (x *HostControllerInterface) DescriptionForMessage(message *raw.IOUSBHostCIMessage) string {
-	_r := x.inner.DescriptionForMessage(message)
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// GetPortStateMachineForCommandError calls the underlying GetPortStateMachineForCommandError.
-func (x *HostControllerInterface) GetPortStateMachineForCommandError(command *raw.IOUSBHostCIMessage) (*HostCIPortStateMachine, error) {
-	_r, _err := x.inner.GetPortStateMachineForCommandError(command)
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &HostCIPortStateMachine{inner: _r}, nil
-}
-
-// GetPortStateMachineForPortError calls the underlying GetPortStateMachineForPortError.
-func (x *HostControllerInterface) GetPortStateMachineForPortError(port uint) (*HostCIPortStateMachine, error) {
-	_r, _err := x.inner.GetPortStateMachineForPortError(port)
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &HostCIPortStateMachine{inner: _r}, nil
-}
-
-// @brief       Retrieve a port capabilities structure passed in during initialization
-//
-// CapabilitiesForPort calls the underlying CapabilitiesForPort.
-func (x *HostControllerInterface) CapabilitiesForPort(port uint) *raw.IOUSBHostCIMessage {
-	return x.inner.CapabilitiesForPort(port)
-}
-
-// @brief       The dispatch queue for asynchronous operations.
-//
-// Queue calls the underlying Queue.
-func (x *HostControllerInterface) Queue() *foundation.NSObject {
-	return x.inner.Queue()
-}
-
-// @brief       The interrupt moderation rate for sending interrupt messages to the kernel driver @discussion  interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
-//
-// InterruptRateHz calls the underlying InterruptRateHz.
-func (x *HostControllerInterface) InterruptRateHz() uint {
-	return x.inner.InterruptRateHz()
-}
-
-// SetInterruptRateHz calls the underlying SetInterruptRateHz.
-func (x *HostControllerInterface) SetInterruptRateHz(interruptRateHz uint) {
-	x.inner.SetInterruptRateHz(interruptRateHz)
-}
-
-// ControllerStateMachine calls the underlying ControllerStateMachine.
-func (x *HostControllerInterface) ControllerStateMachine() *HostCIControllerStateMachine {
-	_r := x.inner.ControllerStateMachine()
-	if _r == nil {
+// hostControllerInterfaceAdopt wraps an Objective-C object that this code just created as a
+// HostControllerInterface (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hostControllerInterfaceAdopt(id objc.ID) *HostControllerInterface {
+	if id == 0 {
 		return nil
 	}
-	return &HostCIControllerStateMachine{inner: _r}
+	x := &HostControllerInterface{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @brief       The capabilities structure passed in during initialization @discussion  The capabilities passed into the initializer can be retrieved for reference.
-//
-// Capabilities calls the underlying Capabilities.
-func (x *HostControllerInterface) Capabilities() *raw.IOUSBHostCIMessage {
-	return x.inner.Capabilities()
+// Description returns the object's -description text.
+func (x *HostControllerInterface) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @brief       A UUID used to identify the host controller interface in this process and the kernel
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HostControllerInterface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HostControllerInterface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHostControllerInterface creates a new HostControllerInterface.
+func NewHostControllerInterface() *HostControllerInterface {
+	_id := objc.Send[objc.ID](objc.ID(_class("IOUSBHostControllerInterface")), objc.RegisterName("new"))
+	return hostControllerInterfaceAdopt(_id)
+}
+
+// The interrupt moderation rate for sending interrupt messages to the kernel driver interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
 //
-// Uuid calls the underlying Uuid.
-func (x *HostControllerInterface) Uuid() *foundation.NSUUID {
-	return x.inner.Uuid()
+// WithInterruptRateHz sets interruptRateHz and returns the receiver so calls can be chained.
+func (x *HostControllerInterface) WithInterruptRateHz(interruptRateHz int) *HostControllerInterface {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterruptRateHz:"), interruptRateHz)
+	return x
+}
+
+// Removes underlying allocations of the IOUSBHostControllerInterface object along with user client When the IOUSBHostControllerInterface is no longer needed, destroy must be called. This will destroy the connection with the user client and de-register interest on the service. If the object is freed, destroy will be called automatically. Calling destroy multiple times has no effect.
+func (x *HostControllerInterface) Destroy() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destroy"))
+}
+
+func (x *HostControllerInterface) GetPortStateMachineForPortError(port int) (*HostCIPortStateMachine, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getPortStateMachineForPort:error:"), port, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return HostCIPortStateMachineFromID(_r), nil
+}
+
+// The dispatch queue for asynchronous operations.
+func (x *HostControllerInterface) Queue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queue"))
+	return obj.Wrap(_r)
+}
+
+// The interrupt moderation rate for sending interrupt messages to the kernel driver interruptRateHz will cause submitted interrupt messages to be batched together and submitted to the kernel at the specified rate.  A value ot 0 will deliver all interrupts to the kernel driver as soon as possible.
+func (x *HostControllerInterface) InterruptRateHz() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("interruptRateHz"))
+	return _r
+}
+
+func (x *HostControllerInterface) SetInterruptRateHz(interruptRateHz int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterruptRateHz:"), interruptRateHz)
+}
+
+func (x *HostControllerInterface) ControllerStateMachine() *HostCIControllerStateMachine {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controllerStateMachine"))
+	return HostCIControllerStateMachineFromID(_r)
+}
+
+// A UUID used to identify the host controller interface in this process and the kernel
+func (x *HostControllerInterface) Uuid() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uuid"))
+	return obj.Wrap(_r)
 }
 
 // HostControllerInterfaceable is the interface implemented by [HostControllerInterface], for mocking and DI.
 type HostControllerInterfaceable interface {
-	Unwrap() *raw.IOUSBHostControllerInterface
-	WithInterruptRateHz(interruptRateHz uint) *HostControllerInterface
+	obj.Object
+	WithInterruptRateHz(interruptRateHz int) *HostControllerInterface
 	Destroy()
-	EnqueueInterruptError(interrupt *raw.IOUSBHostCIMessage) (bool, error)
-	EnqueueInterruptExpediteError(interrupt *raw.IOUSBHostCIMessage, expedite bool) (bool, error)
-	EnqueueInterruptsCountError(interrupts *raw.IOUSBHostCIMessage, count uint) (bool, error)
-	EnqueueInterruptsCountExpediteError(interrupts *raw.IOUSBHostCIMessage, count uint, expedite bool) (bool, error)
-	DescriptionForMessage(message *raw.IOUSBHostCIMessage) string
-	GetPortStateMachineForCommandError(command *raw.IOUSBHostCIMessage) (*HostCIPortStateMachine, error)
-	GetPortStateMachineForPortError(port uint) (*HostCIPortStateMachine, error)
-	CapabilitiesForPort(port uint) *raw.IOUSBHostCIMessage
-	Queue() *foundation.NSObject
-	InterruptRateHz() uint
-	SetInterruptRateHz(interruptRateHz uint)
+	GetPortStateMachineForPortError(port int) (*HostCIPortStateMachine, error)
+	Queue() obj.Object
+	InterruptRateHz() int
+	SetInterruptRateHz(interruptRateHz int)
 	ControllerStateMachine() *HostCIControllerStateMachine
-	Capabilities() *raw.IOUSBHostCIMessage
-	Uuid() *foundation.NSUUID
+	Uuid() obj.Object
 }
 
 var _ HostControllerInterfaceable = (*HostControllerInterface)(nil)

@@ -5,420 +5,152 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsrayintersector"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A kernel that performs intersection tests between rays and geometry.
 //
-// RayIntersector wraps [raw.MPSRayIntersector] with a fluent Go API.
+// RayIntersector is an idiomatic wrapper over the Objective-C class MPSRayIntersector.
 type RayIntersector struct {
-	inner *raw.MPSRayIntersector
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSRayIntersector].
-func (x *RayIntersector) Unwrap() *raw.MPSRayIntersector { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RayIntersector) ID() objc.ID { return x.inner.Ptr() }
-
-// RayIntersectorFromID adopts an existing object pointer as a RayIntersector (nil for 0).
+// RayIntersectorFromID adopts an existing Objective-C object as a RayIntersector
+// (nil for 0), retaining it and registering a release finalizer.
 func RayIntersectorFromID(id objc.ID) *RayIntersector {
 	if id == 0 {
 		return nil
 	}
-	return &RayIntersector{inner: raw.MPSRayIntersectorFromID(id)}
-}
-
-// @brief Initialize the raytracer with a Metal device
-//
-// NewRayIntersectorWithDevice creates a new [RayIntersector].
-func NewRayIntersectorWithDevice(device metal.MTLDevice) *RayIntersector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRayIntersector")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &RayIntersector{inner: raw.MPSRayIntersectorFromID(_id)}
-}
-
-// @brief Initialize the raytracer with an NSCoder and a Metal device
-//
-// NewRayIntersectorWithCoderDevice creates a new [RayIntersector].
-func NewRayIntersectorWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *RayIntersector {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRayIntersector")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &RayIntersector{inner: raw.MPSRayIntersectorFromID(_id)}
-}
-
-// @brief Whether to ignore intersections between rays and back-facing or front-facing triangles or quadrilaterals. Defaults to MTLCullModeNone. @discussion A triangle or quadrilateral is back-facing if its normal points in the same direction as a ray and front-facing if its normal points in the opposite direction as a ray. If the cull mode is set to MTLCullModeBack, then back-facing triangles and quadrilaterals will be ignored. If the cull mode is set to MTLCullModeFront, then front-facing triangles and quadrilaterals will be ignored. Otherwise, if the cull mode is set to MTLCullModeNone, no triangles or quadrilaterals will be ignored. The front and back faces can be swapped using the frontFacingWinding property. Backface culling is necessary for some scenes but can reduce raytracing performance.
-//
-// WithCullMode sets the cullMode property and returns the receiver for chaining.
-func (x *RayIntersector) WithCullMode(cullMode metal.MTLCullMode) *RayIntersector {
-	x.inner.SetCullMode(cullMode)
+	x := &RayIntersector{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @brief Winding order used to determine which direction a triangle or quadrilateral's normal points when back face or front face culling is enabled. Defaults to MTLWindingClockwise. @discussion If the front face winding is set to MTLWindingClockwise, the triangle or quadrilateral normal is considered to point towards the direction where the vertices are in clockwise order when viewed from that direction. Otherwise, if the front facing winding is set to MTLWindingCounterClockwise, the triangle or quadrilateral normal is considered to point in the opposite direction.
-//
-// WithFrontFacingWinding sets the frontFacingWinding property and returns the receiver for chaining.
-func (x *RayIntersector) WithFrontFacingWinding(frontFacingWinding metal.MTLWinding) *RayIntersector {
-	x.inner.SetFrontFacingWinding(frontFacingWinding)
+// rayIntersectorAdopt wraps an Objective-C object that this code just created as a
+// RayIntersector (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rayIntersectorAdopt(id objc.ID) *RayIntersector {
+	if id == 0 {
+		return nil
+	}
+	x := &RayIntersector{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @brief Ray/triangle intersection test type. Defaults to MPSTriangleIntersectionTestTypeDefault. Quads are broken into two triangles for intersection testing, so this property also applies to quadrilateral intersections.
+// Description returns the object's -description text.
+func (x *RayIntersector) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RayIntersector) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RayIntersector) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRayIntersector creates a new RayIntersector.
+func NewRayIntersector() *RayIntersector {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSRayIntersector")), objc.RegisterName("new"))
+	return rayIntersectorAdopt(_id)
+}
+
+// Offset, in bytes, between consecutive rays in the ray buffer. Defaults to 0, indicating that the rays are packed according to their natural aligned size. This can be used to skip past any additional per-ray data that may be stored alongside the MPSRay struct such as the current radiance along the ray or the source pixel coordinates. Must be aligned to the alignment of the ray data type.
 //
-// WithTriangleIntersectionTestType sets the triangleIntersectionTestType property and returns the receiver for chaining.
-func (x *RayIntersector) WithTriangleIntersectionTestType(triangleIntersectionTestType mpsrayintersector.MPSTriangleIntersectionTestType) *RayIntersector {
-	x.inner.SetTriangleIntersectionTestType(triangleIntersectionTestType)
+// WithRayStride sets rayStride and returns the receiver so calls can be chained.
+func (x *RayIntersector) WithRayStride(rayStride int) *RayIntersector {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRayStride:"), rayStride)
 	return x
 }
 
-// @brief Ray/bounding box intersection test type. Defaults to MPSBoundingBoxIntersectionTestTypeDefault.
+// Offset, in bytes, between consecutive intersections in the intersection buffer. Defaults to 0, indicating that the intersections are packed according to their natural aligned size. This can be used to skip past any additional per-intersection that which may be stored alongside the MPSRayIntersection struct such as the surface normal at the point of intersection. Must be aligned to the alignment of the intersection data type.
 //
-// WithBoundingBoxIntersectionTestType sets the boundingBoxIntersectionTestType property and returns the receiver for chaining.
-func (x *RayIntersector) WithBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType mpsrayintersector.MPSBoundingBoxIntersectionTestType) *RayIntersector {
-	x.inner.SetBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType)
+// WithIntersectionStride sets intersectionStride and returns the receiver so calls can be chained.
+func (x *RayIntersector) WithIntersectionStride(intersectionStride int) *RayIntersector {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionStride:"), intersectionStride)
 	return x
 }
 
-// @brief Whether to enable primitive and instance masks. Defaults to MPSRayMaskOptionNone. @discussion If MPSRayMaskOptionPrimitive or MPSRayMaskOptionInstance is enabled, each ray and primitive and/or instance is associated with a 32 bit unsigned integer mask. Before checking for intersection between a ray and a primitive or instance, the corresponding masks are compared using the ray mask operator defined by the rayMaskOperator property. If the result is zero, the intersection is skipped. This can be used to make certain primitives or instances invisible to certain rays. For example, objects can be grouped into layers and their visibility can be toggled by modifying the ray masks rather than removing the objects from the scene and rebuilding the acceleration structure. Alternatively, certain objects can be prevented from casting shadows by making them invisible to shadow rays. Enabling this option may reduce raytracing performance.
+// Global ray mask. Defaults to 0xFFFFFFFF. This value will be logically AND-ed with the per-ray mask if the ray data type contains a mask.
 //
-// WithRayMaskOptions sets the rayMaskOptions property and returns the receiver for chaining.
-func (x *RayIntersector) WithRayMaskOptions(rayMaskOptions mpsrayintersector.MPSRayMaskOptions) *RayIntersector {
-	x.inner.SetRayMaskOptions(rayMaskOptions)
-	return x
-}
-
-// @brief The operator to apply to determine whether to accept an intersection between a ray and a primitive or instance. Defaults to MPSRayMaskOperatorAnd.
-//
-// WithRayMaskOperator sets the rayMaskOperator property and returns the receiver for chaining.
-func (x *RayIntersector) WithRayMaskOperator(rayMaskOperator mpsrayintersector.MPSRayMaskOperator) *RayIntersector {
-	x.inner.SetRayMaskOperator(rayMaskOperator)
-	return x
-}
-
-// @brief Offset, in bytes, between consecutive rays in the ray buffer. Defaults to 0, indicating that the rays are packed according to their natural aligned size. @discussion This can be used to skip past any additional per-ray data that may be stored alongside the MPSRay struct such as the current radiance along the ray or the source pixel coordinates. Must be aligned to the alignment of the ray data type.
-//
-// WithRayStride sets the rayStride property and returns the receiver for chaining.
-func (x *RayIntersector) WithRayStride(rayStride uint) *RayIntersector {
-	x.inner.SetRayStride(rayStride)
-	return x
-}
-
-// @brief Offset, in bytes, between consecutive intersections in the intersection buffer. Defaults to 0, indicating that the intersections are packed according to their natural aligned size. @discussion This can be used to skip past any additional per-intersection that which may be stored alongside the MPSRayIntersection struct such as the surface normal at the point of intersection. Must be aligned to the alignment of the intersection data type.
-//
-// WithIntersectionStride sets the intersectionStride property and returns the receiver for chaining.
-func (x *RayIntersector) WithIntersectionStride(intersectionStride uint) *RayIntersector {
-	x.inner.SetIntersectionStride(intersectionStride)
-	return x
-}
-
-// @brief Ray data type. Defaults to MPSRayDataTypeOriginDirection.
-//
-// WithRayDataType sets the rayDataType property and returns the receiver for chaining.
-func (x *RayIntersector) WithRayDataType(rayDataType mpsrayintersector.MPSRayDataType) *RayIntersector {
-	x.inner.SetRayDataType(rayDataType)
-	return x
-}
-
-// @brief Intersection data type. Defaults to MPSIntersectionDataTypeDistancePrimitiveIndexCoordinates.
-//
-// WithIntersectionDataType sets the intersectionDataType property and returns the receiver for chaining.
-func (x *RayIntersector) WithIntersectionDataType(intersectionDataType mpsrayintersector.MPSIntersectionDataType) *RayIntersector {
-	x.inner.SetIntersectionDataType(intersectionDataType)
-	return x
-}
-
-// @brief Ray index data type. Defaults to MPSDataTypeUInt32. Only MPSDataTypeUInt16 and MPSDataTypeUInt32 are supported.
-//
-// WithRayIndexDataType sets the rayIndexDataType property and returns the receiver for chaining.
-func (x *RayIntersector) WithRayIndexDataType(rayIndexDataType mpscore.MPSDataType) *RayIntersector {
-	x.inner.SetRayIndexDataType(rayIndexDataType)
-	return x
-}
-
-// @brief Global ray mask. Defaults to 0xFFFFFFFF. This value will be logically AND-ed with the per-ray mask if the ray data type contains a mask.
-//
-// WithRayMask sets the rayMask property and returns the receiver for chaining.
-func (x *RayIntersector) WithRayMask(rayMask uint) *RayIntersector {
-	x.inner.SetRayMask(rayMask)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *RayIntersector) WithOptions(options mpscore.MPSKernelOptions) *RayIntersector {
-	x.inner.MPSKernel.SetOptions(options)
+// WithRayMask sets rayMask and returns the receiver so calls can be chained.
+func (x *RayIntersector) WithRayMask(rayMask int) *RayIntersector {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRayMask:"), rayMask)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *RayIntersector) WithLabel(label string) *RayIntersector {
-	x.inner.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @brief Copy the raytracer with a Metal device @param zone   The NSZone in which to allocate the object @param device The Metal device for the new MPSRayIntersector @return A pointer to a copy of this MPSRayIntersector
-//
-// CopyWithZoneDevice calls the underlying CopyWithZoneDevice.
-func (x *RayIntersector) CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *RayIntersector {
-	_r := x.inner.CopyWithZoneDevice(zone, device)
-	if _r == nil {
-		return nil
-	}
-	return &RayIntersector{inner: _r}
+// Get the recommended minimum number of rays to submit for intersection in one batch In order to keep the system responsive, and to limit the amount of memory allocated to ray and intersection buffers, it may be desirable to divide the rays to be intersected against an acceleration structure into smaller batches. However, submitting too few rays in a batch reduces GPU utilization and performance. This method provides a recommended minimum number of rays to submit in any given batch. For example, for a 1920x1080 image, this method may recommend that the image be divided into 512x512 tiles. The actual recommendation varies per device and total ray count.
+func (x *RayIntersector) RecommendedMinimumRayBatchSizeForRayCount(rayCount int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("recommendedMinimumRayBatchSizeForRayCount:"), rayCount)
+	return _r
 }
 
-// @brief Get the recommended minimum number of rays to submit for intersection in one batch @discussion In order to keep the system responsive, and to limit the amount of memory allocated to ray and intersection buffers, it may be desirable to divide the rays to be intersected against an acceleration structure into smaller batches. However, submitting too few rays in a batch reduces GPU utilization and performance. This method provides a recommended minimum number of rays to submit in any given batch. For example, for a 1920x1080 image, this method may recommend that the image be divided into 512x512 tiles. The actual recommendation varies per device and total ray count. @param rayCount The total number of rays to be submitted @return The recommended minimum ray batch size
-//
-// RecommendedMinimumRayBatchSizeForRayCount calls the underlying RecommendedMinimumRayBatchSizeForRayCount.
-func (x *RayIntersector) RecommendedMinimumRayBatchSizeForRayCount(rayCount uint) uint {
-	return x.inner.RecommendedMinimumRayBatchSizeForRayCount(rayCount)
+func (x *RayIntersector) EncodeWithCoder(coder obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodeWithCoder:"), objref.IDOf(coder))
 }
 
-// EncodeWithCoder calls the underlying EncodeWithCoder.
-func (x *RayIntersector) EncodeWithCoder(coder *foundation.NSCoder) {
-	x.inner.EncodeWithCoder(coder)
+// Offset, in bytes, between consecutive rays in the ray buffer. Defaults to 0, indicating that the rays are packed according to their natural aligned size. This can be used to skip past any additional per-ray data that may be stored alongside the MPSRay struct such as the current radiance along the ray or the source pixel coordinates. Must be aligned to the alignment of the ray data type.
+func (x *RayIntersector) RayStride() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rayStride"))
+	return _r
 }
 
-// @brief Schedule intersection tests between rays and an acceleration structure @param commandBuffer            Command buffer to schedule intersection testing in @param intersectionType         Which type of intersection to test for @param rayBuffer                Buffer containing rays to intersect against the acceleration structure. The ray data type is defined by the rayDataType and rayStride properties. @param rayBufferOffset          Offset, in bytes, into the ray buffer. Must be a multiple of the ray stride. @param intersectionBuffer       Buffer to store intersection in. Intersections are stored in the same order as the ray buffer, one intersection per ray. The intersection data type is defined by the intersectionDataType and intersectionStride properties. @param intersectionBufferOffset Offset, in bytes, into the intersection buffer. Must be a multiple of the intersection stride. @param rayCount                 Number of rays @param accelerationStructure    Acceleration structure to test against
-//
-// EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure calls the underlying EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure.
-func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType mpsrayintersector.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayCount uint, accelerationStructure *mpsrayintersector.MPSAccelerationStructure) {
-	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure(commandBuffer, intersectionType, rayBuffer, rayBufferOffset, intersectionBuffer, intersectionBufferOffset, rayCount, accelerationStructure)
+func (x *RayIntersector) SetRayStride(rayStride int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRayStride:"), rayStride)
 }
 
-// @brief Schedule intersection tests between rays and an acceleration structure with a ray count provided in a buffer @param commandBuffer            Command buffer to schedule intersection testing in @param intersectionType         Which type of intersection to test for @param rayBuffer                Buffer containing rays to intersect against the acceleration structure. The ray data type is defined by the rayDataType and rayStride properties. @param rayBufferOffset          Offset, in bytes, into the ray buffer. Must be a multiple of the ray stride. @param intersectionBuffer       Buffer to store intersection in. Intersections are stored in the same order as the ray buffer, one intersection per ray. The intersection data type is defined by the intersectionDataType and intersectionStride properties. @param intersectionBufferOffset Offset, in bytes, into the intersection buffer. Must be a multiple of the intersection stride. @param rayCountBuffer           Buffer containing number of rays as a 32 bit unsigned integer @param rayCountBufferOffset     Offset, in bytes, into the ray count buffer. Must be a multiple of 4 bytes. @param accelerationStructure    Acceleration structure to test against
-//
-// EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure calls the underlying EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure.
-func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType mpsrayintersector.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayCountBuffer metal.MTLBuffer, rayCountBufferOffset uint, accelerationStructure *mpsrayintersector.MPSAccelerationStructure) {
-	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure(commandBuffer, intersectionType, rayBuffer, rayBufferOffset, intersectionBuffer, intersectionBufferOffset, rayCountBuffer, rayCountBufferOffset, accelerationStructure)
+// Offset, in bytes, between consecutive intersections in the intersection buffer. Defaults to 0, indicating that the intersections are packed according to their natural aligned size. This can be used to skip past any additional per-intersection that which may be stored alongside the MPSRayIntersection struct such as the surface normal at the point of intersection. Must be aligned to the alignment of the intersection data type.
+func (x *RayIntersector) IntersectionStride() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("intersectionStride"))
+	return _r
 }
 
-// @brief Schedule intersection tests between rays and an acceleration structure @param commandBuffer            Command buffer to schedule intersection testing in @param intersectionType         Which type of intersection to test for @param rayBuffer                Buffer containing rays to intersect against the acceleration structure. The ray data type is defined by the rayDataType and rayStride properties. @param rayBufferOffset          Offset, in bytes, into the ray buffer. Must be a multiple of the ray stride. @param rayIndexBuffer           Buffer containing ray indices. Each index references a ray in the ray buffer. The ray index data type is controlled by the rayIndexDataType property. @param rayIndexBufferOffset     Offset, in bytes, into the ray index buffer. Must be a multiple of the stride of the ray index type. @param intersectionBuffer       Buffer to store intersection in. Intersections are stored in the same order as the ray buffer, one intersection per ray. The intersection data type is defined by the intersectionDataType and intersectionStride properties. @param intersectionBufferOffset Offset, in bytes, into the intersection buffer. Must be a multiple of the intersection stride. @param rayIndexCount            Number of ray indices @param accelerationStructure    Acceleration structure to test against
-//
-// EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure calls the underlying EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure.
-func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType mpsrayintersector.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, rayIndexBuffer metal.MTLBuffer, rayIndexBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayIndexCount uint, accelerationStructure *mpsrayintersector.MPSAccelerationStructure) {
-	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure(commandBuffer, intersectionType, rayBuffer, rayBufferOffset, rayIndexBuffer, rayIndexBufferOffset, intersectionBuffer, intersectionBufferOffset, rayIndexCount, accelerationStructure)
+func (x *RayIntersector) SetIntersectionStride(intersectionStride int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntersectionStride:"), intersectionStride)
 }
 
-// @brief Schedule intersection tests between rays and an acceleration structure with a ray count provided in a buffer @param commandBuffer             Command buffer to schedule intersection testing in @param intersectionType          Which type of intersection to test for @param rayBuffer                 Buffer containing rays to intersect against the acceleration structure. The ray data type is defined by the rayDataType and rayStride properties. @param rayBufferOffset           Offset, in bytes, into the ray buffer. Must be a multiple of the ray stride. @param rayIndexBuffer            Buffer containing ray indices. Each index references a ray in the ray buffer. The ray index data type is controlled by the rayIndexDataType property. @param rayIndexBufferOffset      Offset, in bytes, into the ray index buffer. Must be a multiple of the stride of the ray index type. @param intersectionBuffer        Buffer to store intersection in. Intersections are stored in the same order as the ray buffer, one intersection per ray. The intersection data type is defined by the intersectionDataType and intersectionStride properties. @param intersectionBufferOffset  Offset, in bytes, into the intersection buffer. Must be a multiple of the intersection stride. @param rayIndexCountBuffer       Buffer containing number of rays as a 32 bit unsigned integer @param rayIndexCountBufferOffset Offset, in bytes, into the ray count buffer. Must be a multiple of 4 bytes. @param accelerationStructure     Acceleration structure to test against
-//
-// EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure calls the underlying EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure.
-func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType mpsrayintersector.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, rayIndexBuffer metal.MTLBuffer, rayIndexBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayIndexCountBuffer metal.MTLBuffer, rayIndexCountBufferOffset uint, accelerationStructure *mpsrayintersector.MPSAccelerationStructure) {
-	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure(commandBuffer, intersectionType, rayBuffer, rayBufferOffset, rayIndexBuffer, rayIndexBufferOffset, intersectionBuffer, intersectionBufferOffset, rayIndexCountBuffer, rayIndexCountBufferOffset, accelerationStructure)
+// Global ray mask. Defaults to 0xFFFFFFFF. This value will be logically AND-ed with the per-ray mask if the ray data type contains a mask.
+func (x *RayIntersector) RayMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rayMask"))
+	return _r
 }
 
-// @brief Schedule intersection tests between rays and an acceleration structure, where rays and loaded from a texture and intersections are stored into a texture. This is convenient for hybrid rendering applications which produce ray data from a fragment shader. The ray and intersection texture must be 2D array textures. Ray data must be packed into consecutive channels and slices of the ray texture. Intersection data will be packed the same way. The ray and intersection data types are defined by the rayDataType and intersectionDataType properties. The rayStride and intersectionStride properties are ignored. Channels and slices beyond the required number are ignored when reading from the ray texture. Channels and slices beyond the required number are undefined when writing to the intersection texture. For example, if the ray data type is MPSRayDataTypeOriginMaskDirectionMaxDistance, the ray texture must have pixel format MTLPixelFormatRGBA32Float and at least two array slices, packed as follows: @code tex.write(float4(ray.position, as_type<float>(ray.mask)), pixel, 0); // slice 0 tex.write(float4(ray.direction, ray.maxDistance), pixel, 1);         // slice 1 @end If the intersection data type is MPSIntersectionDataTypeDistance, the intersection texture may have pixel format MTLPixelFormatR32Float with just a single channel and one array slice, and should be unpacked as follows: @code float distance = tex.read(pixel, 0).x; @end On the other hand, if the intersection data type is MPSIntersectionDistancePrimitiveIndexInstanceIndexCoordinates, the intersection texture must have pixel format MTLPixelFormatRGBA32Float and at least two slices: @code float3 f0 = tex.read(pixel, 0); float distance = f0.x; unsigned int primitiveIndex = as_type<unsigned int>(f0.y); unsigned int instanceIndex = as_type<unsigned int>(f0.z); // w component is padding for this intersection data type float2 coordinates = tex.read(pixel, 1).xy; @end @param commandBuffer            Command buffer to schedule intersection testing in @param intersectionType         Which type of intersection to test for @param rayTexture               A 2D array texture containing rays to intersect against the acceleration structure. The ray data type is defined by the rayDataType property. @param intersectionTexture      Texture to store intersection in. Intersections are stored in the same position as the ray texture, one intersection per ray. The intersection data type is defined by the intersectionDataType property. @param accelerationStructure    Acceleration structure to test against
-//
-// EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure calls the underlying EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure.
-func (x *RayIntersector) EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType mpsrayintersector.MPSIntersectionType, rayTexture metal.MTLTexture, intersectionTexture metal.MTLTexture, accelerationStructure *mpsrayintersector.MPSAccelerationStructure) {
-	x.inner.EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure(commandBuffer, intersectionType, rayTexture, intersectionTexture, accelerationStructure)
+func (x *RayIntersector) SetRayMask(rayMask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRayMask:"), rayMask)
 }
-
-// @brief Whether to ignore intersections between rays and back-facing or front-facing triangles or quadrilaterals. Defaults to MTLCullModeNone. @discussion A triangle or quadrilateral is back-facing if its normal points in the same direction as a ray and front-facing if its normal points in the opposite direction as a ray. If the cull mode is set to MTLCullModeBack, then back-facing triangles and quadrilaterals will be ignored. If the cull mode is set to MTLCullModeFront, then front-facing triangles and quadrilaterals will be ignored. Otherwise, if the cull mode is set to MTLCullModeNone, no triangles or quadrilaterals will be ignored. The front and back faces can be swapped using the frontFacingWinding property. Backface culling is necessary for some scenes but can reduce raytracing performance.
-//
-// CullMode calls the underlying CullMode.
-func (x *RayIntersector) CullMode() metal.MTLCullMode {
-	return x.inner.CullMode()
-}
-
-// SetCullMode calls the underlying SetCullMode.
-func (x *RayIntersector) SetCullMode(cullMode metal.MTLCullMode) {
-	x.inner.SetCullMode(cullMode)
-}
-
-// @brief Winding order used to determine which direction a triangle or quadrilateral's normal points when back face or front face culling is enabled. Defaults to MTLWindingClockwise. @discussion If the front face winding is set to MTLWindingClockwise, the triangle or quadrilateral normal is considered to point towards the direction where the vertices are in clockwise order when viewed from that direction. Otherwise, if the front facing winding is set to MTLWindingCounterClockwise, the triangle or quadrilateral normal is considered to point in the opposite direction.
-//
-// FrontFacingWinding calls the underlying FrontFacingWinding.
-func (x *RayIntersector) FrontFacingWinding() metal.MTLWinding {
-	return x.inner.FrontFacingWinding()
-}
-
-// SetFrontFacingWinding calls the underlying SetFrontFacingWinding.
-func (x *RayIntersector) SetFrontFacingWinding(frontFacingWinding metal.MTLWinding) {
-	x.inner.SetFrontFacingWinding(frontFacingWinding)
-}
-
-// @brief Ray/triangle intersection test type. Defaults to MPSTriangleIntersectionTestTypeDefault. Quads are broken into two triangles for intersection testing, so this property also applies to quadrilateral intersections.
-//
-// TriangleIntersectionTestType calls the underlying TriangleIntersectionTestType.
-func (x *RayIntersector) TriangleIntersectionTestType() mpsrayintersector.MPSTriangleIntersectionTestType {
-	return x.inner.TriangleIntersectionTestType()
-}
-
-// SetTriangleIntersectionTestType calls the underlying SetTriangleIntersectionTestType.
-func (x *RayIntersector) SetTriangleIntersectionTestType(triangleIntersectionTestType mpsrayintersector.MPSTriangleIntersectionTestType) {
-	x.inner.SetTriangleIntersectionTestType(triangleIntersectionTestType)
-}
-
-// @brief Ray/bounding box intersection test type. Defaults to MPSBoundingBoxIntersectionTestTypeDefault.
-//
-// BoundingBoxIntersectionTestType calls the underlying BoundingBoxIntersectionTestType.
-func (x *RayIntersector) BoundingBoxIntersectionTestType() mpsrayintersector.MPSBoundingBoxIntersectionTestType {
-	return x.inner.BoundingBoxIntersectionTestType()
-}
-
-// SetBoundingBoxIntersectionTestType calls the underlying SetBoundingBoxIntersectionTestType.
-func (x *RayIntersector) SetBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType mpsrayintersector.MPSBoundingBoxIntersectionTestType) {
-	x.inner.SetBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType)
-}
-
-// @brief Whether to enable primitive and instance masks. Defaults to MPSRayMaskOptionNone. @discussion If MPSRayMaskOptionPrimitive or MPSRayMaskOptionInstance is enabled, each ray and primitive and/or instance is associated with a 32 bit unsigned integer mask. Before checking for intersection between a ray and a primitive or instance, the corresponding masks are compared using the ray mask operator defined by the rayMaskOperator property. If the result is zero, the intersection is skipped. This can be used to make certain primitives or instances invisible to certain rays. For example, objects can be grouped into layers and their visibility can be toggled by modifying the ray masks rather than removing the objects from the scene and rebuilding the acceleration structure. Alternatively, certain objects can be prevented from casting shadows by making them invisible to shadow rays. Enabling this option may reduce raytracing performance.
-//
-// RayMaskOptions calls the underlying RayMaskOptions.
-func (x *RayIntersector) RayMaskOptions() mpsrayintersector.MPSRayMaskOptions {
-	return x.inner.RayMaskOptions()
-}
-
-// SetRayMaskOptions calls the underlying SetRayMaskOptions.
-func (x *RayIntersector) SetRayMaskOptions(rayMaskOptions mpsrayintersector.MPSRayMaskOptions) {
-	x.inner.SetRayMaskOptions(rayMaskOptions)
-}
-
-// @brief The operator to apply to determine whether to accept an intersection between a ray and a primitive or instance. Defaults to MPSRayMaskOperatorAnd.
-//
-// RayMaskOperator calls the underlying RayMaskOperator.
-func (x *RayIntersector) RayMaskOperator() mpsrayintersector.MPSRayMaskOperator {
-	return x.inner.RayMaskOperator()
-}
-
-// SetRayMaskOperator calls the underlying SetRayMaskOperator.
-func (x *RayIntersector) SetRayMaskOperator(rayMaskOperator mpsrayintersector.MPSRayMaskOperator) {
-	x.inner.SetRayMaskOperator(rayMaskOperator)
-}
-
-// @brief Offset, in bytes, between consecutive rays in the ray buffer. Defaults to 0, indicating that the rays are packed according to their natural aligned size. @discussion This can be used to skip past any additional per-ray data that may be stored alongside the MPSRay struct such as the current radiance along the ray or the source pixel coordinates. Must be aligned to the alignment of the ray data type.
-//
-// RayStride calls the underlying RayStride.
-func (x *RayIntersector) RayStride() uint {
-	return x.inner.RayStride()
-}
-
-// SetRayStride calls the underlying SetRayStride.
-func (x *RayIntersector) SetRayStride(rayStride uint) {
-	x.inner.SetRayStride(rayStride)
-}
-
-// @brief Offset, in bytes, between consecutive intersections in the intersection buffer. Defaults to 0, indicating that the intersections are packed according to their natural aligned size. @discussion This can be used to skip past any additional per-intersection that which may be stored alongside the MPSRayIntersection struct such as the surface normal at the point of intersection. Must be aligned to the alignment of the intersection data type.
-//
-// IntersectionStride calls the underlying IntersectionStride.
-func (x *RayIntersector) IntersectionStride() uint {
-	return x.inner.IntersectionStride()
-}
-
-// SetIntersectionStride calls the underlying SetIntersectionStride.
-func (x *RayIntersector) SetIntersectionStride(intersectionStride uint) {
-	x.inner.SetIntersectionStride(intersectionStride)
-}
-
-// @brief Ray data type. Defaults to MPSRayDataTypeOriginDirection.
-//
-// RayDataType calls the underlying RayDataType.
-func (x *RayIntersector) RayDataType() mpsrayintersector.MPSRayDataType {
-	return x.inner.RayDataType()
-}
-
-// SetRayDataType calls the underlying SetRayDataType.
-func (x *RayIntersector) SetRayDataType(rayDataType mpsrayintersector.MPSRayDataType) {
-	x.inner.SetRayDataType(rayDataType)
-}
-
-// @brief Intersection data type. Defaults to MPSIntersectionDataTypeDistancePrimitiveIndexCoordinates.
-//
-// IntersectionDataType calls the underlying IntersectionDataType.
-func (x *RayIntersector) IntersectionDataType() mpsrayintersector.MPSIntersectionDataType {
-	return x.inner.IntersectionDataType()
-}
-
-// SetIntersectionDataType calls the underlying SetIntersectionDataType.
-func (x *RayIntersector) SetIntersectionDataType(intersectionDataType mpsrayintersector.MPSIntersectionDataType) {
-	x.inner.SetIntersectionDataType(intersectionDataType)
-}
-
-// @brief Ray index data type. Defaults to MPSDataTypeUInt32. Only MPSDataTypeUInt16 and MPSDataTypeUInt32 are supported.
-//
-// RayIndexDataType calls the underlying RayIndexDataType.
-func (x *RayIntersector) RayIndexDataType() mpscore.MPSDataType {
-	return x.inner.RayIndexDataType()
-}
-
-// SetRayIndexDataType calls the underlying SetRayIndexDataType.
-func (x *RayIntersector) SetRayIndexDataType(rayIndexDataType mpscore.MPSDataType) {
-	x.inner.SetRayIndexDataType(rayIndexDataType)
-}
-
-// @brief Global ray mask. Defaults to 0xFFFFFFFF. This value will be logically AND-ed with the per-ray mask if the ray data type contains a mask.
-//
-// RayMask calls the underlying RayMask.
-func (x *RayIntersector) RayMask() uint {
-	return x.inner.RayMask()
-}
-
-// SetRayMask calls the underlying SetRayMask.
-func (x *RayIntersector) SetRayMask(rayMask uint) {
-	x.inner.SetRayMask(rayMask)
-}
-
-func (x *RayIntersector) asKernel() *mpscore.MPSKernel { return &x.inner.MPSKernel }
 
 // RayIntersectorable is the interface implemented by [RayIntersector], for mocking and DI.
 type RayIntersectorable interface {
-	Unwrap() *raw.MPSRayIntersector
-	WithCullMode(cullMode metal.MTLCullMode) *RayIntersector
-	WithFrontFacingWinding(frontFacingWinding metal.MTLWinding) *RayIntersector
-	WithTriangleIntersectionTestType(triangleIntersectionTestType mpsrayintersector.MPSTriangleIntersectionTestType) *RayIntersector
-	WithBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType mpsrayintersector.MPSBoundingBoxIntersectionTestType) *RayIntersector
-	WithRayMaskOptions(rayMaskOptions mpsrayintersector.MPSRayMaskOptions) *RayIntersector
-	WithRayMaskOperator(rayMaskOperator mpsrayintersector.MPSRayMaskOperator) *RayIntersector
-	WithRayStride(rayStride uint) *RayIntersector
-	WithIntersectionStride(intersectionStride uint) *RayIntersector
-	WithRayDataType(rayDataType mpsrayintersector.MPSRayDataType) *RayIntersector
-	WithIntersectionDataType(intersectionDataType mpsrayintersector.MPSIntersectionDataType) *RayIntersector
-	WithRayIndexDataType(rayIndexDataType mpscore.MPSDataType) *RayIntersector
-	WithRayMask(rayMask uint) *RayIntersector
-	WithOptions(options mpscore.MPSKernelOptions) *RayIntersector
+	obj.Object
+	WithRayStride(rayStride int) *RayIntersector
+	WithIntersectionStride(intersectionStride int) *RayIntersector
+	WithRayMask(rayMask int) *RayIntersector
 	WithLabel(label string) *RayIntersector
-	CopyWithZoneDevice(zone unsafe.Pointer, device metal.MTLDevice) *RayIntersector
-	RecommendedMinimumRayBatchSizeForRayCount(rayCount uint) uint
-	EncodeWithCoder(coder *foundation.NSCoder)
-	EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType mpsrayintersector.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayCount uint, accelerationStructure *mpsrayintersector.MPSAccelerationStructure)
-	EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetIntersectionBufferIntersectionBufferOffsetRayCountBufferRayCountBufferOffsetAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType mpsrayintersector.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayCountBuffer metal.MTLBuffer, rayCountBufferOffset uint, accelerationStructure *mpsrayintersector.MPSAccelerationStructure)
-	EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType mpsrayintersector.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, rayIndexBuffer metal.MTLBuffer, rayIndexBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayIndexCount uint, accelerationStructure *mpsrayintersector.MPSAccelerationStructure)
-	EncodeIntersectionToCommandBufferIntersectionTypeRayBufferRayBufferOffsetRayIndexBufferRayIndexBufferOffsetIntersectionBufferIntersectionBufferOffsetRayIndexCountBufferRayIndexCountBufferOffsetAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType mpsrayintersector.MPSIntersectionType, rayBuffer metal.MTLBuffer, rayBufferOffset uint, rayIndexBuffer metal.MTLBuffer, rayIndexBufferOffset uint, intersectionBuffer metal.MTLBuffer, intersectionBufferOffset uint, rayIndexCountBuffer metal.MTLBuffer, rayIndexCountBufferOffset uint, accelerationStructure *mpsrayintersector.MPSAccelerationStructure)
-	EncodeIntersectionToCommandBufferIntersectionTypeRayTextureIntersectionTextureAccelerationStructure(commandBuffer metal.MTLCommandBuffer, intersectionType mpsrayintersector.MPSIntersectionType, rayTexture metal.MTLTexture, intersectionTexture metal.MTLTexture, accelerationStructure *mpsrayintersector.MPSAccelerationStructure)
-	CullMode() metal.MTLCullMode
-	SetCullMode(cullMode metal.MTLCullMode)
-	FrontFacingWinding() metal.MTLWinding
-	SetFrontFacingWinding(frontFacingWinding metal.MTLWinding)
-	TriangleIntersectionTestType() mpsrayintersector.MPSTriangleIntersectionTestType
-	SetTriangleIntersectionTestType(triangleIntersectionTestType mpsrayintersector.MPSTriangleIntersectionTestType)
-	BoundingBoxIntersectionTestType() mpsrayintersector.MPSBoundingBoxIntersectionTestType
-	SetBoundingBoxIntersectionTestType(boundingBoxIntersectionTestType mpsrayintersector.MPSBoundingBoxIntersectionTestType)
-	RayMaskOptions() mpsrayintersector.MPSRayMaskOptions
-	SetRayMaskOptions(rayMaskOptions mpsrayintersector.MPSRayMaskOptions)
-	RayMaskOperator() mpsrayintersector.MPSRayMaskOperator
-	SetRayMaskOperator(rayMaskOperator mpsrayintersector.MPSRayMaskOperator)
-	RayStride() uint
-	SetRayStride(rayStride uint)
-	IntersectionStride() uint
-	SetIntersectionStride(intersectionStride uint)
-	RayDataType() mpsrayintersector.MPSRayDataType
-	SetRayDataType(rayDataType mpsrayintersector.MPSRayDataType)
-	IntersectionDataType() mpsrayintersector.MPSIntersectionDataType
-	SetIntersectionDataType(intersectionDataType mpsrayintersector.MPSIntersectionDataType)
-	RayIndexDataType() mpscore.MPSDataType
-	SetRayIndexDataType(rayIndexDataType mpscore.MPSDataType)
-	RayMask() uint
-	SetRayMask(rayMask uint)
+	RecommendedMinimumRayBatchSizeForRayCount(rayCount int) int
+	EncodeWithCoder(coder obj.Object)
+	RayStride() int
+	SetRayStride(rayStride int)
+	IntersectionStride() int
+	SetIntersectionStride(intersectionStride int)
+	RayMask() int
+	SetRayMask(rayMask int)
 }
 
 var _ RayIntersectorable = (*RayIntersector)(nil)

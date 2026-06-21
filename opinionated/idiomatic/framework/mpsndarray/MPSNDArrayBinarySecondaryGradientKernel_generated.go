@@ -5,74 +5,66 @@
 package mpsndarray
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsndarray"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ArrayBinarySecondaryGradientKernel wraps [raw.MPSNDArrayBinarySecondaryGradientKernel] with a fluent Go API.
+// ArrayBinarySecondaryGradientKernel is an idiomatic wrapper over the Objective-C class MPSNDArrayBinarySecondaryGradientKernel.
 type ArrayBinarySecondaryGradientKernel struct {
-	inner *raw.MPSNDArrayBinarySecondaryGradientKernel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArrayBinarySecondaryGradientKernel].
-func (x *ArrayBinarySecondaryGradientKernel) Unwrap() *raw.MPSNDArrayBinarySecondaryGradientKernel {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ArrayBinarySecondaryGradientKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// ArrayBinarySecondaryGradientKernelFromID adopts an existing object pointer as a ArrayBinarySecondaryGradientKernel (nil for 0).
+// ArrayBinarySecondaryGradientKernelFromID adopts an existing Objective-C object as a ArrayBinarySecondaryGradientKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func ArrayBinarySecondaryGradientKernelFromID(id objc.ID) *ArrayBinarySecondaryGradientKernel {
 	if id == 0 {
 		return nil
 	}
-	return &ArrayBinarySecondaryGradientKernel{inner: raw.MPSNDArrayBinarySecondaryGradientKernelFromID(id)}
-}
-
-// NewArrayBinarySecondaryGradientKernelWithCoderDevice creates a new [ArrayBinarySecondaryGradientKernel].
-func NewArrayBinarySecondaryGradientKernelWithCoderDevice(coder *foundation.NSCoder, device metal.MTLDevice) *ArrayBinarySecondaryGradientKernel {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArrayBinarySecondaryGradientKernel")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), coder.Ptr(), device)
-	return &ArrayBinarySecondaryGradientKernel{inner: raw.MPSNDArrayBinarySecondaryGradientKernelFromID(_id)}
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationArrayAllocator sets the destinationArrayAllocator property and returns the receiver for chaining.
-func (x *ArrayBinarySecondaryGradientKernel) WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayBinarySecondaryGradientKernel {
-	x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase.SetDestinationArrayAllocator(destinationArrayAllocator)
+	x := &ArrayBinarySecondaryGradientKernel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState.
-func (x *ArrayBinarySecondaryGradientKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray {
-	return x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf, primarySourceArray, secondarySourceArray, gradient, state)
+// arrayBinarySecondaryGradientKernelAdopt wraps an Objective-C object that this code just created as a
+// ArrayBinarySecondaryGradientKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func arrayBinarySecondaryGradientKernelAdopt(id objc.ID) *ArrayBinarySecondaryGradientKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &ArrayBinarySecondaryGradientKernel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray calls the underlying EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray.
-func (x *ArrayBinarySecondaryGradientKernel) EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray) {
-	x.inner.EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray(cmdBuf, primarySourceArray, secondarySourceArray, gradient, state, destination)
+// Description returns the object's -description text.
+func (x *ArrayBinarySecondaryGradientKernel) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *ArrayBinarySecondaryGradientKernel) asArrayMultiaryGradientKernel() *raw.MPSNDArrayMultiaryGradientKernel {
-	return &x.inner.MPSNDArrayMultiaryGradientKernel
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ArrayBinarySecondaryGradientKernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *ArrayBinarySecondaryGradientKernel) asArrayMultiaryBase() *raw.MPSNDArrayMultiaryBase {
-	return &x.inner.MPSNDArrayMultiaryGradientKernel.MPSNDArrayMultiaryBase
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ArrayBinarySecondaryGradientKernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewArrayBinarySecondaryGradientKernel creates a new ArrayBinarySecondaryGradientKernel.
+func NewArrayBinarySecondaryGradientKernel() *ArrayBinarySecondaryGradientKernel {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArrayBinarySecondaryGradientKernel")), objc.RegisterName("new"))
+	return arrayBinarySecondaryGradientKernelAdopt(_id)
 }
 
 // ArrayBinarySecondaryGradientKernelable is the interface implemented by [ArrayBinarySecondaryGradientKernel], for mocking and DI.
 type ArrayBinarySecondaryGradientKernelable interface {
-	Unwrap() *raw.MPSNDArrayBinarySecondaryGradientKernel
-	WithDestinationArrayAllocator(destinationArrayAllocator mpscore.MPSNDArrayAllocator) *ArrayBinarySecondaryGradientKernel
-	EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientState(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState) *mpscore.MPSNDArray
-	EncodeToCommandBufferPrimarySourceArraySecondarySourceArraySourceGradientGradientStateDestinationArray(cmdBuf metal.MTLCommandBuffer, primarySourceArray *mpscore.MPSNDArray, secondarySourceArray *mpscore.MPSNDArray, gradient *mpscore.MPSNDArray, state *mpscore.MPSState, destination *mpscore.MPSNDArray)
+	obj.Object
 }
 
 var _ ArrayBinarySecondaryGradientKernelable = (*ArrayBinarySecondaryGradientKernel)(nil)

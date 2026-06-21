@@ -5,598 +5,509 @@
 package addressbook
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KABUIDProperty returns the string constant kABUIDProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABUIDProperty() objc.ID {
-	return purego.CFConstant(raw.KABUIDProperty())
-}
+// KABUIDProperty returns the string constant kABUIDProperty, for use as a dictionary key or argument.
+func KABUIDProperty() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABUIDProperty"))) }
 
-// KABCreationDateProperty returns the string constant kABCreationDateProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABCreationDateProperty() objc.ID {
-	return purego.CFConstant(raw.KABCreationDateProperty())
+// KABCreationDateProperty returns the string constant kABCreationDateProperty, for use as a dictionary key or argument.
+func KABCreationDateProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABCreationDateProperty")))
 }
 
-// KABModificationDateProperty returns the string constant kABModificationDateProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABModificationDateProperty() objc.ID {
-	return purego.CFConstant(raw.KABModificationDateProperty())
+// KABModificationDateProperty returns the string constant kABModificationDateProperty, for use as a dictionary key or argument.
+func KABModificationDateProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABModificationDateProperty")))
 }
 
-// KABFirstNameProperty returns the string constant kABFirstNameProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABFirstNameProperty() objc.ID {
-	return purego.CFConstant(raw.KABFirstNameProperty())
+// KABFirstNameProperty returns the string constant kABFirstNameProperty, for use as a dictionary key or argument.
+func KABFirstNameProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABFirstNameProperty")))
 }
 
-// KABLastNameProperty returns the string constant kABLastNameProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABLastNameProperty() objc.ID {
-	return purego.CFConstant(raw.KABLastNameProperty())
+// KABLastNameProperty returns the string constant kABLastNameProperty, for use as a dictionary key or argument.
+func KABLastNameProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABLastNameProperty")))
 }
 
-// KABFirstNamePhoneticProperty returns the string constant kABFirstNamePhoneticProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABFirstNamePhoneticProperty() objc.ID {
-	return purego.CFConstant(raw.KABFirstNamePhoneticProperty())
+// KABFirstNamePhoneticProperty returns the string constant kABFirstNamePhoneticProperty, for use as a dictionary key or argument.
+func KABFirstNamePhoneticProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABFirstNamePhoneticProperty")))
 }
 
-// KABLastNamePhoneticProperty returns the string constant kABLastNamePhoneticProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABLastNamePhoneticProperty() objc.ID {
-	return purego.CFConstant(raw.KABLastNamePhoneticProperty())
+// KABLastNamePhoneticProperty returns the string constant kABLastNamePhoneticProperty, for use as a dictionary key or argument.
+func KABLastNamePhoneticProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABLastNamePhoneticProperty")))
 }
 
-// KABNicknameProperty returns the string constant kABNicknameProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABNicknameProperty() objc.ID {
-	return purego.CFConstant(raw.KABNicknameProperty())
+// KABNicknameProperty returns the string constant kABNicknameProperty, for use as a dictionary key or argument.
+func KABNicknameProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABNicknameProperty")))
 }
 
-// KABMaidenNameProperty returns the string constant kABMaidenNameProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABMaidenNameProperty() objc.ID {
-	return purego.CFConstant(raw.KABMaidenNameProperty())
+// KABMaidenNameProperty returns the string constant kABMaidenNameProperty, for use as a dictionary key or argument.
+func KABMaidenNameProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABMaidenNameProperty")))
 }
 
-// KABBirthdayProperty returns the string constant kABBirthdayProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABBirthdayProperty() objc.ID {
-	return purego.CFConstant(raw.KABBirthdayProperty())
+// KABBirthdayProperty returns the string constant kABBirthdayProperty, for use as a dictionary key or argument.
+func KABBirthdayProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABBirthdayProperty")))
 }
 
-// KABBirthdayComponentsProperty returns the string constant kABBirthdayComponentsProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABBirthdayComponentsProperty() objc.ID {
-	return purego.CFConstant(raw.KABBirthdayComponentsProperty())
+// KABBirthdayComponentsProperty returns the string constant kABBirthdayComponentsProperty, for use as a dictionary key or argument.
+func KABBirthdayComponentsProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABBirthdayComponentsProperty")))
 }
 
-// KABAlternateBirthdayComponentsProperty returns the string constant kABAlternateBirthdayComponentsProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABAlternateBirthdayComponentsProperty() objc.ID {
-	return purego.CFConstant(raw.KABAlternateBirthdayComponentsProperty())
+// KABAlternateBirthdayComponentsProperty returns the string constant kABAlternateBirthdayComponentsProperty, for use as a dictionary key or argument.
+func KABAlternateBirthdayComponentsProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABAlternateBirthdayComponentsProperty")))
 }
 
-// KABOrganizationProperty returns the string constant kABOrganizationProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABOrganizationProperty() objc.ID {
-	return purego.CFConstant(raw.KABOrganizationProperty())
+// KABOrganizationProperty returns the string constant kABOrganizationProperty, for use as a dictionary key or argument.
+func KABOrganizationProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABOrganizationProperty")))
 }
 
-// KABOrganizationPhoneticProperty returns the string constant kABOrganizationPhoneticProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABOrganizationPhoneticProperty() objc.ID {
-	return purego.CFConstant(raw.KABOrganizationPhoneticProperty())
+// KABOrganizationPhoneticProperty returns the string constant kABOrganizationPhoneticProperty, for use as a dictionary key or argument.
+func KABOrganizationPhoneticProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABOrganizationPhoneticProperty")))
 }
 
-// KABJobTitleProperty returns the string constant kABJobTitleProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABJobTitleProperty() objc.ID {
-	return purego.CFConstant(raw.KABJobTitleProperty())
+// KABJobTitleProperty returns the string constant kABJobTitleProperty, for use as a dictionary key or argument.
+func KABJobTitleProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABJobTitleProperty")))
 }
 
-// KABHomePageProperty returns the string constant kABHomePageProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABHomePageProperty() objc.ID {
-	return purego.CFConstant(raw.KABHomePageProperty())
+// KABHomePageProperty returns the string constant kABHomePageProperty, for use as a dictionary key or argument.
+func KABHomePageProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABHomePageProperty")))
 }
 
-// KABURLsProperty returns the string constant kABURLsProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABURLsProperty() objc.ID {
-	return purego.CFConstant(raw.KABURLsProperty())
-}
+// KABURLsProperty returns the string constant kABURLsProperty, for use as a dictionary key or argument.
+func KABURLsProperty() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABURLsProperty"))) }
 
-// KABHomePageLabel returns the string constant kABHomePageLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABHomePageLabel() objc.ID {
-	return purego.CFConstant(raw.KABHomePageLabel())
-}
+// KABHomePageLabel returns the string constant kABHomePageLabel, for use as a dictionary key or argument.
+func KABHomePageLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABHomePageLabel"))) }
 
-// KABCalendarURIsProperty returns the string constant kABCalendarURIsProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABCalendarURIsProperty() objc.ID {
-	return purego.CFConstant(raw.KABCalendarURIsProperty())
+// KABCalendarURIsProperty returns the string constant kABCalendarURIsProperty, for use as a dictionary key or argument.
+func KABCalendarURIsProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABCalendarURIsProperty")))
 }
 
-// KABEmailProperty returns the string constant kABEmailProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABEmailProperty() objc.ID {
-	return purego.CFConstant(raw.KABEmailProperty())
-}
+// KABEmailProperty returns the string constant kABEmailProperty, for use as a dictionary key or argument.
+func KABEmailProperty() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABEmailProperty"))) }
 
-// KABEmailWorkLabel returns the string constant kABEmailWorkLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABEmailWorkLabel() objc.ID {
-	return purego.CFConstant(raw.KABEmailWorkLabel())
-}
+// KABEmailWorkLabel returns the string constant kABEmailWorkLabel, for use as a dictionary key or argument.
+func KABEmailWorkLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABEmailWorkLabel"))) }
 
-// KABEmailHomeLabel returns the string constant kABEmailHomeLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABEmailHomeLabel() objc.ID {
-	return purego.CFConstant(raw.KABEmailHomeLabel())
-}
+// KABEmailHomeLabel returns the string constant kABEmailHomeLabel, for use as a dictionary key or argument.
+func KABEmailHomeLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABEmailHomeLabel"))) }
 
-// KABEmailMobileMeLabel returns the string constant kABEmailMobileMeLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABEmailMobileMeLabel() objc.ID {
-	return purego.CFConstant(raw.KABEmailMobileMeLabel())
+// KABEmailMobileMeLabel returns the string constant kABEmailMobileMeLabel, for use as a dictionary key or argument.
+func KABEmailMobileMeLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABEmailMobileMeLabel")))
 }
 
-// KABAddressProperty returns the string constant kABAddressProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABAddressProperty() objc.ID {
-	return purego.CFConstant(raw.KABAddressProperty())
+// KABAddressProperty returns the string constant kABAddressProperty, for use as a dictionary key or argument.
+func KABAddressProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABAddressProperty")))
 }
 
-// KABAddressStreetKey returns the string constant kABAddressStreetKey as an objc.ID, for use as a dictionary key or selector argument.
-func KABAddressStreetKey() objc.ID {
-	return purego.CFConstant(raw.KABAddressStreetKey())
+// KABAddressStreetKey returns the string constant kABAddressStreetKey, for use as a dictionary key or argument.
+func KABAddressStreetKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABAddressStreetKey")))
 }
 
-// KABAddressCityKey returns the string constant kABAddressCityKey as an objc.ID, for use as a dictionary key or selector argument.
-func KABAddressCityKey() objc.ID {
-	return purego.CFConstant(raw.KABAddressCityKey())
-}
+// KABAddressCityKey returns the string constant kABAddressCityKey, for use as a dictionary key or argument.
+func KABAddressCityKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABAddressCityKey"))) }
 
-// KABAddressStateKey returns the string constant kABAddressStateKey as an objc.ID, for use as a dictionary key or selector argument.
-func KABAddressStateKey() objc.ID {
-	return purego.CFConstant(raw.KABAddressStateKey())
+// KABAddressStateKey returns the string constant kABAddressStateKey, for use as a dictionary key or argument.
+func KABAddressStateKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABAddressStateKey")))
 }
 
-// KABAddressZIPKey returns the string constant kABAddressZIPKey as an objc.ID, for use as a dictionary key or selector argument.
-func KABAddressZIPKey() objc.ID {
-	return purego.CFConstant(raw.KABAddressZIPKey())
-}
+// KABAddressZIPKey returns the string constant kABAddressZIPKey, for use as a dictionary key or argument.
+func KABAddressZIPKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABAddressZIPKey"))) }
 
-// KABAddressCountryKey returns the string constant kABAddressCountryKey as an objc.ID, for use as a dictionary key or selector argument.
-func KABAddressCountryKey() objc.ID {
-	return purego.CFConstant(raw.KABAddressCountryKey())
+// KABAddressCountryKey returns the string constant kABAddressCountryKey, for use as a dictionary key or argument.
+func KABAddressCountryKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABAddressCountryKey")))
 }
 
-// KABAddressCountryCodeKey returns the string constant kABAddressCountryCodeKey as an objc.ID, for use as a dictionary key or selector argument.
-func KABAddressCountryCodeKey() objc.ID {
-	return purego.CFConstant(raw.KABAddressCountryCodeKey())
+// KABAddressCountryCodeKey returns the string constant kABAddressCountryCodeKey, for use as a dictionary key or argument.
+func KABAddressCountryCodeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABAddressCountryCodeKey")))
 }
 
-// KABAddressHomeLabel returns the string constant kABAddressHomeLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABAddressHomeLabel() objc.ID {
-	return purego.CFConstant(raw.KABAddressHomeLabel())
+// KABAddressHomeLabel returns the string constant kABAddressHomeLabel, for use as a dictionary key or argument.
+func KABAddressHomeLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABAddressHomeLabel")))
 }
 
-// KABAddressWorkLabel returns the string constant kABAddressWorkLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABAddressWorkLabel() objc.ID {
-	return purego.CFConstant(raw.KABAddressWorkLabel())
+// KABAddressWorkLabel returns the string constant kABAddressWorkLabel, for use as a dictionary key or argument.
+func KABAddressWorkLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABAddressWorkLabel")))
 }
 
-// KABOtherDatesProperty returns the string constant kABOtherDatesProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABOtherDatesProperty() objc.ID {
-	return purego.CFConstant(raw.KABOtherDatesProperty())
+// KABOtherDatesProperty returns the string constant kABOtherDatesProperty, for use as a dictionary key or argument.
+func KABOtherDatesProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABOtherDatesProperty")))
 }
 
-// KABOtherDateComponentsProperty returns the string constant kABOtherDateComponentsProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABOtherDateComponentsProperty() objc.ID {
-	return purego.CFConstant(raw.KABOtherDateComponentsProperty())
+// KABOtherDateComponentsProperty returns the string constant kABOtherDateComponentsProperty, for use as a dictionary key or argument.
+func KABOtherDateComponentsProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABOtherDateComponentsProperty")))
 }
 
-// KABAnniversaryLabel returns the string constant kABAnniversaryLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABAnniversaryLabel() objc.ID {
-	return purego.CFConstant(raw.KABAnniversaryLabel())
+// KABAnniversaryLabel returns the string constant kABAnniversaryLabel, for use as a dictionary key or argument.
+func KABAnniversaryLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABAnniversaryLabel")))
 }
 
-// KABRelatedNamesProperty returns the string constant kABRelatedNamesProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABRelatedNamesProperty() objc.ID {
-	return purego.CFConstant(raw.KABRelatedNamesProperty())
+// KABRelatedNamesProperty returns the string constant kABRelatedNamesProperty, for use as a dictionary key or argument.
+func KABRelatedNamesProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABRelatedNamesProperty")))
 }
 
-// KABFatherLabel returns the string constant kABFatherLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABFatherLabel() objc.ID {
-	return purego.CFConstant(raw.KABFatherLabel())
-}
+// KABFatherLabel returns the string constant kABFatherLabel, for use as a dictionary key or argument.
+func KABFatherLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABFatherLabel"))) }
 
-// KABMotherLabel returns the string constant kABMotherLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABMotherLabel() objc.ID {
-	return purego.CFConstant(raw.KABMotherLabel())
-}
+// KABMotherLabel returns the string constant kABMotherLabel, for use as a dictionary key or argument.
+func KABMotherLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABMotherLabel"))) }
 
-// KABParentLabel returns the string constant kABParentLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABParentLabel() objc.ID {
-	return purego.CFConstant(raw.KABParentLabel())
-}
+// KABParentLabel returns the string constant kABParentLabel, for use as a dictionary key or argument.
+func KABParentLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABParentLabel"))) }
 
-// KABBrotherLabel returns the string constant kABBrotherLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABBrotherLabel() objc.ID {
-	return purego.CFConstant(raw.KABBrotherLabel())
-}
+// KABBrotherLabel returns the string constant kABBrotherLabel, for use as a dictionary key or argument.
+func KABBrotherLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABBrotherLabel"))) }
 
-// KABSisterLabel returns the string constant kABSisterLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABSisterLabel() objc.ID {
-	return purego.CFConstant(raw.KABSisterLabel())
-}
+// KABSisterLabel returns the string constant kABSisterLabel, for use as a dictionary key or argument.
+func KABSisterLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABSisterLabel"))) }
 
-// KABChildLabel returns the string constant kABChildLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABChildLabel() objc.ID {
-	return purego.CFConstant(raw.KABChildLabel())
-}
+// KABChildLabel returns the string constant kABChildLabel, for use as a dictionary key or argument.
+func KABChildLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABChildLabel"))) }
 
-// KABFriendLabel returns the string constant kABFriendLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABFriendLabel() objc.ID {
-	return purego.CFConstant(raw.KABFriendLabel())
-}
+// KABFriendLabel returns the string constant kABFriendLabel, for use as a dictionary key or argument.
+func KABFriendLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABFriendLabel"))) }
 
-// KABSpouseLabel returns the string constant kABSpouseLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABSpouseLabel() objc.ID {
-	return purego.CFConstant(raw.KABSpouseLabel())
-}
+// KABSpouseLabel returns the string constant kABSpouseLabel, for use as a dictionary key or argument.
+func KABSpouseLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABSpouseLabel"))) }
 
-// KABPartnerLabel returns the string constant kABPartnerLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABPartnerLabel() objc.ID {
-	return purego.CFConstant(raw.KABPartnerLabel())
-}
+// KABPartnerLabel returns the string constant kABPartnerLabel, for use as a dictionary key or argument.
+func KABPartnerLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABPartnerLabel"))) }
 
-// KABAssistantLabel returns the string constant kABAssistantLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABAssistantLabel() objc.ID {
-	return purego.CFConstant(raw.KABAssistantLabel())
-}
+// KABAssistantLabel returns the string constant kABAssistantLabel, for use as a dictionary key or argument.
+func KABAssistantLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABAssistantLabel"))) }
 
-// KABManagerLabel returns the string constant kABManagerLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABManagerLabel() objc.ID {
-	return purego.CFConstant(raw.KABManagerLabel())
-}
+// KABManagerLabel returns the string constant kABManagerLabel, for use as a dictionary key or argument.
+func KABManagerLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABManagerLabel"))) }
 
-// KABDepartmentProperty returns the string constant kABDepartmentProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABDepartmentProperty() objc.ID {
-	return purego.CFConstant(raw.KABDepartmentProperty())
+// KABDepartmentProperty returns the string constant kABDepartmentProperty, for use as a dictionary key or argument.
+func KABDepartmentProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABDepartmentProperty")))
 }
 
-// KABPersonFlags returns the string constant kABPersonFlags as an objc.ID, for use as a dictionary key or selector argument.
-func KABPersonFlags() objc.ID {
-	return purego.CFConstant(raw.KABPersonFlags())
-}
+// KABPersonFlags returns the string constant kABPersonFlags, for use as a dictionary key or argument.
+func KABPersonFlags() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABPersonFlags"))) }
 
-// KABPhoneProperty returns the string constant kABPhoneProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABPhoneProperty() objc.ID {
-	return purego.CFConstant(raw.KABPhoneProperty())
-}
+// KABPhoneProperty returns the string constant kABPhoneProperty, for use as a dictionary key or argument.
+func KABPhoneProperty() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABPhoneProperty"))) }
 
-// KABPhoneWorkLabel returns the string constant kABPhoneWorkLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABPhoneWorkLabel() objc.ID {
-	return purego.CFConstant(raw.KABPhoneWorkLabel())
-}
+// KABPhoneWorkLabel returns the string constant kABPhoneWorkLabel, for use as a dictionary key or argument.
+func KABPhoneWorkLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABPhoneWorkLabel"))) }
 
-// KABPhoneHomeLabel returns the string constant kABPhoneHomeLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABPhoneHomeLabel() objc.ID {
-	return purego.CFConstant(raw.KABPhoneHomeLabel())
-}
+// KABPhoneHomeLabel returns the string constant kABPhoneHomeLabel, for use as a dictionary key or argument.
+func KABPhoneHomeLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABPhoneHomeLabel"))) }
 
-// KABPhoneiPhoneLabel returns the string constant kABPhoneiPhoneLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABPhoneiPhoneLabel() objc.ID {
-	return purego.CFConstant(raw.KABPhoneiPhoneLabel())
+// KABPhoneiPhoneLabel returns the string constant kABPhoneiPhoneLabel, for use as a dictionary key or argument.
+func KABPhoneiPhoneLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABPhoneiPhoneLabel")))
 }
 
-// KABPhoneMobileLabel returns the string constant kABPhoneMobileLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABPhoneMobileLabel() objc.ID {
-	return purego.CFConstant(raw.KABPhoneMobileLabel())
+// KABPhoneMobileLabel returns the string constant kABPhoneMobileLabel, for use as a dictionary key or argument.
+func KABPhoneMobileLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABPhoneMobileLabel")))
 }
 
-// KABPhoneMainLabel returns the string constant kABPhoneMainLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABPhoneMainLabel() objc.ID {
-	return purego.CFConstant(raw.KABPhoneMainLabel())
-}
+// KABPhoneMainLabel returns the string constant kABPhoneMainLabel, for use as a dictionary key or argument.
+func KABPhoneMainLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABPhoneMainLabel"))) }
 
-// KABPhoneHomeFAXLabel returns the string constant kABPhoneHomeFAXLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABPhoneHomeFAXLabel() objc.ID {
-	return purego.CFConstant(raw.KABPhoneHomeFAXLabel())
+// KABPhoneHomeFAXLabel returns the string constant kABPhoneHomeFAXLabel, for use as a dictionary key or argument.
+func KABPhoneHomeFAXLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABPhoneHomeFAXLabel")))
 }
 
-// KABPhoneWorkFAXLabel returns the string constant kABPhoneWorkFAXLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABPhoneWorkFAXLabel() objc.ID {
-	return purego.CFConstant(raw.KABPhoneWorkFAXLabel())
+// KABPhoneWorkFAXLabel returns the string constant kABPhoneWorkFAXLabel, for use as a dictionary key or argument.
+func KABPhoneWorkFAXLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABPhoneWorkFAXLabel")))
 }
 
-// KABPhonePagerLabel returns the string constant kABPhonePagerLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABPhonePagerLabel() objc.ID {
-	return purego.CFConstant(raw.KABPhonePagerLabel())
+// KABPhonePagerLabel returns the string constant kABPhonePagerLabel, for use as a dictionary key or argument.
+func KABPhonePagerLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABPhonePagerLabel")))
 }
 
-// KABAIMInstantProperty returns the string constant kABAIMInstantProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABAIMInstantProperty() objc.ID {
-	return purego.CFConstant(raw.KABAIMInstantProperty())
+// KABAIMInstantProperty returns the string constant kABAIMInstantProperty, for use as a dictionary key or argument.
+func KABAIMInstantProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABAIMInstantProperty")))
 }
 
-// KABAIMWorkLabel returns the string constant kABAIMWorkLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABAIMWorkLabel() objc.ID {
-	return purego.CFConstant(raw.KABAIMWorkLabel())
-}
+// KABAIMWorkLabel returns the string constant kABAIMWorkLabel, for use as a dictionary key or argument.
+func KABAIMWorkLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABAIMWorkLabel"))) }
 
-// KABAIMHomeLabel returns the string constant kABAIMHomeLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABAIMHomeLabel() objc.ID {
-	return purego.CFConstant(raw.KABAIMHomeLabel())
-}
+// KABAIMHomeLabel returns the string constant kABAIMHomeLabel, for use as a dictionary key or argument.
+func KABAIMHomeLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABAIMHomeLabel"))) }
 
-// KABAIMMobileMeLabel returns the string constant kABAIMMobileMeLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABAIMMobileMeLabel() objc.ID {
-	return purego.CFConstant(raw.KABAIMMobileMeLabel())
+// KABAIMMobileMeLabel returns the string constant kABAIMMobileMeLabel, for use as a dictionary key or argument.
+func KABAIMMobileMeLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABAIMMobileMeLabel")))
 }
 
-// KABJabberInstantProperty returns the string constant kABJabberInstantProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABJabberInstantProperty() objc.ID {
-	return purego.CFConstant(raw.KABJabberInstantProperty())
+// KABJabberInstantProperty returns the string constant kABJabberInstantProperty, for use as a dictionary key or argument.
+func KABJabberInstantProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABJabberInstantProperty")))
 }
 
-// KABJabberWorkLabel returns the string constant kABJabberWorkLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABJabberWorkLabel() objc.ID {
-	return purego.CFConstant(raw.KABJabberWorkLabel())
+// KABJabberWorkLabel returns the string constant kABJabberWorkLabel, for use as a dictionary key or argument.
+func KABJabberWorkLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABJabberWorkLabel")))
 }
 
-// KABJabberHomeLabel returns the string constant kABJabberHomeLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABJabberHomeLabel() objc.ID {
-	return purego.CFConstant(raw.KABJabberHomeLabel())
+// KABJabberHomeLabel returns the string constant kABJabberHomeLabel, for use as a dictionary key or argument.
+func KABJabberHomeLabel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABJabberHomeLabel")))
 }
 
-// KABMSNInstantProperty returns the string constant kABMSNInstantProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABMSNInstantProperty() objc.ID {
-	return purego.CFConstant(raw.KABMSNInstantProperty())
+// KABMSNInstantProperty returns the string constant kABMSNInstantProperty, for use as a dictionary key or argument.
+func KABMSNInstantProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABMSNInstantProperty")))
 }
 
-// KABMSNWorkLabel returns the string constant kABMSNWorkLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABMSNWorkLabel() objc.ID {
-	return purego.CFConstant(raw.KABMSNWorkLabel())
-}
+// KABMSNWorkLabel returns the string constant kABMSNWorkLabel, for use as a dictionary key or argument.
+func KABMSNWorkLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABMSNWorkLabel"))) }
 
-// KABMSNHomeLabel returns the string constant kABMSNHomeLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABMSNHomeLabel() objc.ID {
-	return purego.CFConstant(raw.KABMSNHomeLabel())
-}
+// KABMSNHomeLabel returns the string constant kABMSNHomeLabel, for use as a dictionary key or argument.
+func KABMSNHomeLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABMSNHomeLabel"))) }
 
-// KABYahooInstantProperty returns the string constant kABYahooInstantProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABYahooInstantProperty() objc.ID {
-	return purego.CFConstant(raw.KABYahooInstantProperty())
+// KABYahooInstantProperty returns the string constant kABYahooInstantProperty, for use as a dictionary key or argument.
+func KABYahooInstantProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABYahooInstantProperty")))
 }
 
-// KABYahooWorkLabel returns the string constant kABYahooWorkLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABYahooWorkLabel() objc.ID {
-	return purego.CFConstant(raw.KABYahooWorkLabel())
-}
+// KABYahooWorkLabel returns the string constant kABYahooWorkLabel, for use as a dictionary key or argument.
+func KABYahooWorkLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABYahooWorkLabel"))) }
 
-// KABYahooHomeLabel returns the string constant kABYahooHomeLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABYahooHomeLabel() objc.ID {
-	return purego.CFConstant(raw.KABYahooHomeLabel())
-}
+// KABYahooHomeLabel returns the string constant kABYahooHomeLabel, for use as a dictionary key or argument.
+func KABYahooHomeLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABYahooHomeLabel"))) }
 
-// KABICQInstantProperty returns the string constant kABICQInstantProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABICQInstantProperty() objc.ID {
-	return purego.CFConstant(raw.KABICQInstantProperty())
+// KABICQInstantProperty returns the string constant kABICQInstantProperty, for use as a dictionary key or argument.
+func KABICQInstantProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABICQInstantProperty")))
 }
 
-// KABICQWorkLabel returns the string constant kABICQWorkLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABICQWorkLabel() objc.ID {
-	return purego.CFConstant(raw.KABICQWorkLabel())
-}
+// KABICQWorkLabel returns the string constant kABICQWorkLabel, for use as a dictionary key or argument.
+func KABICQWorkLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABICQWorkLabel"))) }
 
-// KABICQHomeLabel returns the string constant kABICQHomeLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABICQHomeLabel() objc.ID {
-	return purego.CFConstant(raw.KABICQHomeLabel())
-}
+// KABICQHomeLabel returns the string constant kABICQHomeLabel, for use as a dictionary key or argument.
+func KABICQHomeLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABICQHomeLabel"))) }
 
-// KABInstantMessageProperty returns the string constant kABInstantMessageProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageProperty() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageProperty())
+// KABInstantMessageProperty returns the string constant kABInstantMessageProperty, for use as a dictionary key or argument.
+func KABInstantMessageProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageProperty")))
 }
 
-// KABInstantMessageUsernameKey returns the string constant kABInstantMessageUsernameKey as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageUsernameKey() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageUsernameKey())
+// KABInstantMessageUsernameKey returns the string constant kABInstantMessageUsernameKey, for use as a dictionary key or argument.
+func KABInstantMessageUsernameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageUsernameKey")))
 }
 
-// KABInstantMessageServiceKey returns the string constant kABInstantMessageServiceKey as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageServiceKey() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageServiceKey())
+// KABInstantMessageServiceKey returns the string constant kABInstantMessageServiceKey, for use as a dictionary key or argument.
+func KABInstantMessageServiceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageServiceKey")))
 }
 
-// KABInstantMessageServiceAIM returns the string constant kABInstantMessageServiceAIM as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageServiceAIM() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageServiceAIM())
+// KABInstantMessageServiceAIM returns the string constant kABInstantMessageServiceAIM, for use as a dictionary key or argument.
+func KABInstantMessageServiceAIM() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageServiceAIM")))
 }
 
-// KABInstantMessageServiceFacebook returns the string constant kABInstantMessageServiceFacebook as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageServiceFacebook() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageServiceFacebook())
+// KABInstantMessageServiceFacebook returns the string constant kABInstantMessageServiceFacebook, for use as a dictionary key or argument.
+func KABInstantMessageServiceFacebook() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageServiceFacebook")))
 }
 
-// KABInstantMessageServiceGaduGadu returns the string constant kABInstantMessageServiceGaduGadu as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageServiceGaduGadu() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageServiceGaduGadu())
+// KABInstantMessageServiceGaduGadu returns the string constant kABInstantMessageServiceGaduGadu, for use as a dictionary key or argument.
+func KABInstantMessageServiceGaduGadu() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageServiceGaduGadu")))
 }
 
-// KABInstantMessageServiceGoogleTalk returns the string constant kABInstantMessageServiceGoogleTalk as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageServiceGoogleTalk() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageServiceGoogleTalk())
+// KABInstantMessageServiceGoogleTalk returns the string constant kABInstantMessageServiceGoogleTalk, for use as a dictionary key or argument.
+func KABInstantMessageServiceGoogleTalk() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageServiceGoogleTalk")))
 }
 
-// KABInstantMessageServiceICQ returns the string constant kABInstantMessageServiceICQ as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageServiceICQ() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageServiceICQ())
+// KABInstantMessageServiceICQ returns the string constant kABInstantMessageServiceICQ, for use as a dictionary key or argument.
+func KABInstantMessageServiceICQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageServiceICQ")))
 }
 
-// KABInstantMessageServiceJabber returns the string constant kABInstantMessageServiceJabber as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageServiceJabber() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageServiceJabber())
+// KABInstantMessageServiceJabber returns the string constant kABInstantMessageServiceJabber, for use as a dictionary key or argument.
+func KABInstantMessageServiceJabber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageServiceJabber")))
 }
 
-// KABInstantMessageServiceMSN returns the string constant kABInstantMessageServiceMSN as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageServiceMSN() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageServiceMSN())
+// KABInstantMessageServiceMSN returns the string constant kABInstantMessageServiceMSN, for use as a dictionary key or argument.
+func KABInstantMessageServiceMSN() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageServiceMSN")))
 }
 
-// KABInstantMessageServiceQQ returns the string constant kABInstantMessageServiceQQ as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageServiceQQ() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageServiceQQ())
+// KABInstantMessageServiceQQ returns the string constant kABInstantMessageServiceQQ, for use as a dictionary key or argument.
+func KABInstantMessageServiceQQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageServiceQQ")))
 }
 
-// KABInstantMessageServiceSkype returns the string constant kABInstantMessageServiceSkype as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageServiceSkype() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageServiceSkype())
+// KABInstantMessageServiceSkype returns the string constant kABInstantMessageServiceSkype, for use as a dictionary key or argument.
+func KABInstantMessageServiceSkype() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageServiceSkype")))
 }
 
-// KABInstantMessageServiceYahoo returns the string constant kABInstantMessageServiceYahoo as an objc.ID, for use as a dictionary key or selector argument.
-func KABInstantMessageServiceYahoo() objc.ID {
-	return purego.CFConstant(raw.KABInstantMessageServiceYahoo())
+// KABInstantMessageServiceYahoo returns the string constant kABInstantMessageServiceYahoo, for use as a dictionary key or argument.
+func KABInstantMessageServiceYahoo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInstantMessageServiceYahoo")))
 }
 
-// KABSocialProfileProperty returns the string constant kABSocialProfileProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileProperty() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileProperty())
+// KABSocialProfileProperty returns the string constant kABSocialProfileProperty, for use as a dictionary key or argument.
+func KABSocialProfileProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileProperty")))
 }
 
-// KABSocialProfileURLKey returns the string constant kABSocialProfileURLKey as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileURLKey() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileURLKey())
+// KABSocialProfileURLKey returns the string constant kABSocialProfileURLKey, for use as a dictionary key or argument.
+func KABSocialProfileURLKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileURLKey")))
 }
 
-// KABSocialProfileUsernameKey returns the string constant kABSocialProfileUsernameKey as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileUsernameKey() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileUsernameKey())
+// KABSocialProfileUsernameKey returns the string constant kABSocialProfileUsernameKey, for use as a dictionary key or argument.
+func KABSocialProfileUsernameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileUsernameKey")))
 }
 
-// KABSocialProfileUserIdentifierKey returns the string constant kABSocialProfileUserIdentifierKey as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileUserIdentifierKey() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileUserIdentifierKey())
+// KABSocialProfileUserIdentifierKey returns the string constant kABSocialProfileUserIdentifierKey, for use as a dictionary key or argument.
+func KABSocialProfileUserIdentifierKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileUserIdentifierKey")))
 }
 
-// KABSocialProfileServiceKey returns the string constant kABSocialProfileServiceKey as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileServiceKey() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileServiceKey())
+// KABSocialProfileServiceKey returns the string constant kABSocialProfileServiceKey, for use as a dictionary key or argument.
+func KABSocialProfileServiceKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileServiceKey")))
 }
 
-// KABSocialProfileServiceTwitter returns the string constant kABSocialProfileServiceTwitter as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileServiceTwitter() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileServiceTwitter())
+// KABSocialProfileServiceTwitter returns the string constant kABSocialProfileServiceTwitter, for use as a dictionary key or argument.
+func KABSocialProfileServiceTwitter() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileServiceTwitter")))
 }
 
-// KABSocialProfileServiceFacebook returns the string constant kABSocialProfileServiceFacebook as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileServiceFacebook() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileServiceFacebook())
+// KABSocialProfileServiceFacebook returns the string constant kABSocialProfileServiceFacebook, for use as a dictionary key or argument.
+func KABSocialProfileServiceFacebook() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileServiceFacebook")))
 }
 
-// KABSocialProfileServiceLinkedIn returns the string constant kABSocialProfileServiceLinkedIn as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileServiceLinkedIn() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileServiceLinkedIn())
+// KABSocialProfileServiceLinkedIn returns the string constant kABSocialProfileServiceLinkedIn, for use as a dictionary key or argument.
+func KABSocialProfileServiceLinkedIn() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileServiceLinkedIn")))
 }
 
-// KABSocialProfileServiceFlickr returns the string constant kABSocialProfileServiceFlickr as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileServiceFlickr() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileServiceFlickr())
+// KABSocialProfileServiceFlickr returns the string constant kABSocialProfileServiceFlickr, for use as a dictionary key or argument.
+func KABSocialProfileServiceFlickr() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileServiceFlickr")))
 }
 
-// KABSocialProfileServiceMySpace returns the string constant kABSocialProfileServiceMySpace as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileServiceMySpace() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileServiceMySpace())
+// KABSocialProfileServiceMySpace returns the string constant kABSocialProfileServiceMySpace, for use as a dictionary key or argument.
+func KABSocialProfileServiceMySpace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileServiceMySpace")))
 }
 
-// KABSocialProfileServiceSinaWeibo returns the string constant kABSocialProfileServiceSinaWeibo as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileServiceSinaWeibo() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileServiceSinaWeibo())
+// KABSocialProfileServiceSinaWeibo returns the string constant kABSocialProfileServiceSinaWeibo, for use as a dictionary key or argument.
+func KABSocialProfileServiceSinaWeibo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileServiceSinaWeibo")))
 }
 
-// KABSocialProfileServiceTencentWeibo returns the string constant kABSocialProfileServiceTencentWeibo as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileServiceTencentWeibo() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileServiceTencentWeibo())
+// KABSocialProfileServiceTencentWeibo returns the string constant kABSocialProfileServiceTencentWeibo, for use as a dictionary key or argument.
+func KABSocialProfileServiceTencentWeibo() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileServiceTencentWeibo")))
 }
 
-// KABSocialProfileServiceYelp returns the string constant kABSocialProfileServiceYelp as an objc.ID, for use as a dictionary key or selector argument.
-func KABSocialProfileServiceYelp() objc.ID {
-	return purego.CFConstant(raw.KABSocialProfileServiceYelp())
+// KABSocialProfileServiceYelp returns the string constant kABSocialProfileServiceYelp, for use as a dictionary key or argument.
+func KABSocialProfileServiceYelp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABSocialProfileServiceYelp")))
 }
 
-// KABNoteProperty returns the string constant kABNoteProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABNoteProperty() objc.ID {
-	return purego.CFConstant(raw.KABNoteProperty())
-}
+// KABNoteProperty returns the string constant kABNoteProperty, for use as a dictionary key or argument.
+func KABNoteProperty() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABNoteProperty"))) }
 
-// KABMiddleNameProperty returns the string constant kABMiddleNameProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABMiddleNameProperty() objc.ID {
-	return purego.CFConstant(raw.KABMiddleNameProperty())
+// KABMiddleNameProperty returns the string constant kABMiddleNameProperty, for use as a dictionary key or argument.
+func KABMiddleNameProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABMiddleNameProperty")))
 }
 
-// KABMiddleNamePhoneticProperty returns the string constant kABMiddleNamePhoneticProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABMiddleNamePhoneticProperty() objc.ID {
-	return purego.CFConstant(raw.KABMiddleNamePhoneticProperty())
+// KABMiddleNamePhoneticProperty returns the string constant kABMiddleNamePhoneticProperty, for use as a dictionary key or argument.
+func KABMiddleNamePhoneticProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABMiddleNamePhoneticProperty")))
 }
 
-// KABTitleProperty returns the string constant kABTitleProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABTitleProperty() objc.ID {
-	return purego.CFConstant(raw.KABTitleProperty())
-}
+// KABTitleProperty returns the string constant kABTitleProperty, for use as a dictionary key or argument.
+func KABTitleProperty() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABTitleProperty"))) }
 
-// KABSuffixProperty returns the string constant kABSuffixProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABSuffixProperty() objc.ID {
-	return purego.CFConstant(raw.KABSuffixProperty())
-}
+// KABSuffixProperty returns the string constant kABSuffixProperty, for use as a dictionary key or argument.
+func KABSuffixProperty() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABSuffixProperty"))) }
 
-// KABGroupNameProperty returns the string constant kABGroupNameProperty as an objc.ID, for use as a dictionary key or selector argument.
-func KABGroupNameProperty() objc.ID {
-	return purego.CFConstant(raw.KABGroupNameProperty())
+// KABGroupNameProperty returns the string constant kABGroupNameProperty, for use as a dictionary key or argument.
+func KABGroupNameProperty() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABGroupNameProperty")))
 }
 
-// KABWorkLabel returns the string constant kABWorkLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABWorkLabel() objc.ID {
-	return purego.CFConstant(raw.KABWorkLabel())
-}
+// KABWorkLabel returns the string constant kABWorkLabel, for use as a dictionary key or argument.
+func KABWorkLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABWorkLabel"))) }
 
-// KABHomeLabel returns the string constant kABHomeLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABHomeLabel() objc.ID {
-	return purego.CFConstant(raw.KABHomeLabel())
-}
+// KABHomeLabel returns the string constant kABHomeLabel, for use as a dictionary key or argument.
+func KABHomeLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABHomeLabel"))) }
 
-// KABOtherLabel returns the string constant kABOtherLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABOtherLabel() objc.ID {
-	return purego.CFConstant(raw.KABOtherLabel())
-}
+// KABOtherLabel returns the string constant kABOtherLabel, for use as a dictionary key or argument.
+func KABOtherLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABOtherLabel"))) }
 
-// KABMobileMeLabel returns the string constant kABMobileMeLabel as an objc.ID, for use as a dictionary key or selector argument.
-func KABMobileMeLabel() objc.ID {
-	return purego.CFConstant(raw.KABMobileMeLabel())
-}
+// KABMobileMeLabel returns the string constant kABMobileMeLabel, for use as a dictionary key or argument.
+func KABMobileMeLabel() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABMobileMeLabel"))) }
 
-// KABDatabaseChangedNotification returns the string constant kABDatabaseChangedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func KABDatabaseChangedNotification() objc.ID {
-	return purego.CFConstant(raw.KABDatabaseChangedNotification())
+// KABDatabaseChangedNotification returns the string constant kABDatabaseChangedNotification, for use as a dictionary key or argument.
+func KABDatabaseChangedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABDatabaseChangedNotification")))
 }
 
-// KABDatabaseChangedExternallyNotification returns the string constant kABDatabaseChangedExternallyNotification as an objc.ID, for use as a dictionary key or selector argument.
-func KABDatabaseChangedExternallyNotification() objc.ID {
-	return purego.CFConstant(raw.KABDatabaseChangedExternallyNotification())
+// KABDatabaseChangedExternallyNotification returns the string constant kABDatabaseChangedExternallyNotification, for use as a dictionary key or argument.
+func KABDatabaseChangedExternallyNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABDatabaseChangedExternallyNotification")))
 }
 
-// KABInsertedRecords returns the string constant kABInsertedRecords as an objc.ID, for use as a dictionary key or selector argument.
-func KABInsertedRecords() objc.ID {
-	return purego.CFConstant(raw.KABInsertedRecords())
+// KABInsertedRecords returns the string constant kABInsertedRecords, for use as a dictionary key or argument.
+func KABInsertedRecords() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kABInsertedRecords")))
 }
 
-// KABUpdatedRecords returns the string constant kABUpdatedRecords as an objc.ID, for use as a dictionary key or selector argument.
-func KABUpdatedRecords() objc.ID {
-	return purego.CFConstant(raw.KABUpdatedRecords())
-}
+// KABUpdatedRecords returns the string constant kABUpdatedRecords, for use as a dictionary key or argument.
+func KABUpdatedRecords() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABUpdatedRecords"))) }
 
-// KABDeletedRecords returns the string constant kABDeletedRecords as an objc.ID, for use as a dictionary key or selector argument.
-func KABDeletedRecords() objc.ID {
-	return purego.CFConstant(raw.KABDeletedRecords())
-}
+// KABDeletedRecords returns the string constant kABDeletedRecords, for use as a dictionary key or argument.
+func KABDeletedRecords() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kABDeletedRecords"))) }
 
-// ABAddressBookErrorDomain returns the string constant ABAddressBookErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func ABAddressBookErrorDomain() objc.ID {
-	if _r := raw.ABAddressBookErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ABAddressBookErrorDomain returns the string constant ABAddressBookErrorDomain, for use as a dictionary key or argument.
+func ABAddressBookErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ABAddressBookErrorDomain")))
 }
 
-// ABMultiValueIdentifiersErrorKey returns the string constant ABMultiValueIdentifiersErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func ABMultiValueIdentifiersErrorKey() objc.ID {
-	if _r := raw.ABMultiValueIdentifiersErrorKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// ABMultiValueIdentifiersErrorKey returns the string constant ABMultiValueIdentifiersErrorKey, for use as a dictionary key or argument.
+func ABMultiValueIdentifiersErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("ABMultiValueIdentifiersErrorKey")))
 }

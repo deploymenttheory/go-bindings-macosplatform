@@ -5,70 +5,87 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class representing an Operation in a Program.
 //
-// ModelStructureProgramOperation wraps [raw.MLModelStructureProgramOperation] with a fluent Go API.
+// ModelStructureProgramOperation is an idiomatic wrapper over the Objective-C class MLModelStructureProgramOperation.
 type ModelStructureProgramOperation struct {
-	inner *raw.MLModelStructureProgramOperation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLModelStructureProgramOperation].
-func (x *ModelStructureProgramOperation) Unwrap() *raw.MLModelStructureProgramOperation {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModelStructureProgramOperation) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelStructureProgramOperationFromID adopts an existing object pointer as a ModelStructureProgramOperation (nil for 0).
+// ModelStructureProgramOperationFromID adopts an existing Objective-C object as a ModelStructureProgramOperation
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelStructureProgramOperationFromID(id objc.ID) *ModelStructureProgramOperation {
 	if id == 0 {
 		return nil
 	}
-	return &ModelStructureProgramOperation{inner: raw.MLModelStructureProgramOperationFromID(id)}
+	x := &ModelStructureProgramOperation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewModelStructureProgramOperation creates a new [ModelStructureProgramOperation].
+// modelStructureProgramOperationAdopt wraps an Objective-C object that this code just created as a
+// ModelStructureProgramOperation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelStructureProgramOperationAdopt(id objc.ID) *ModelStructureProgramOperation {
+	if id == 0 {
+		return nil
+	}
+	x := &ModelStructureProgramOperation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModelStructureProgramOperation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModelStructureProgramOperation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModelStructureProgramOperation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewModelStructureProgramOperation creates a new ModelStructureProgramOperation.
 func NewModelStructureProgramOperation() *ModelStructureProgramOperation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelStructureProgramOperation")), objc.RegisterName("new"))
-	return &ModelStructureProgramOperation{inner: raw.MLModelStructureProgramOperationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructureProgramOperation")), objc.RegisterName("new"))
+	return modelStructureProgramOperationAdopt(_id)
 }
 
 // The name of the operator, e.g., "conv", "pool", "softmax", etc.
-//
-// OperatorName calls the underlying OperatorName.
 func (x *ModelStructureProgramOperation) OperatorName() string {
-	_r := x.inner.OperatorName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operatorName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The arguments to the Operation.
-//
-// Inputs calls the underlying Inputs.
-func (x *ModelStructureProgramOperation) Inputs() *foundation.NSDictionary[*foundation.NSString, *raw.MLModelStructureProgramArgument] {
-	return x.inner.Inputs()
+func (x *ModelStructureProgramOperation) Inputs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputs"))
+	return obj.Wrap(_r)
 }
 
 // The outputs of the Operation.
 //
 // Outputs returns the collection as a Go slice.
 func (x *ModelStructureProgramOperation) Outputs() []*ModelStructureProgramNamedValueType {
-	arr := x.inner.Outputs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructureProgramNamedValueType {
-		return &ModelStructureProgramNamedValueType{inner: raw.MLModelStructureProgramNamedValueTypeFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramNamedValueType {
+		return ModelStructureProgramNamedValueTypeFromID(_id)
 	})
 }
 
@@ -76,20 +93,15 @@ func (x *ModelStructureProgramOperation) Outputs() []*ModelStructureProgramNamed
 //
 // Blocks returns the collection as a Go slice.
 func (x *ModelStructureProgramOperation) Blocks() []*ModelStructureProgramBlock {
-	arr := x.inner.Blocks()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructureProgramBlock {
-		return &ModelStructureProgramBlock{inner: raw.MLModelStructureProgramBlockFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blocks"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructureProgramBlock { return ModelStructureProgramBlockFromID(_id) })
 }
 
 // ModelStructureProgramOperationable is the interface implemented by [ModelStructureProgramOperation], for mocking and DI.
 type ModelStructureProgramOperationable interface {
-	Unwrap() *raw.MLModelStructureProgramOperation
+	obj.Object
 	OperatorName() string
-	Inputs() *foundation.NSDictionary[*foundation.NSString, *raw.MLModelStructureProgramArgument]
+	Inputs() obj.Object
 	Outputs() []*ModelStructureProgramNamedValueType
 	Blocks() []*ModelStructureProgramBlock
 }

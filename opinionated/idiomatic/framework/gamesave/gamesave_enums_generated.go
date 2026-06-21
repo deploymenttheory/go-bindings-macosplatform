@@ -8,42 +8,42 @@ import (
 	"fmt"
 )
 
-type GSSyncState int64
+type SyncState int64
 
 const (
 	// The directory is fully synced and ready to use.
-	GSSyncStateReady GSSyncState = 0
+	SyncStateReady SyncState = 0
 	// The directory is available locally, but not fully synced because the device is offline.
-	GSSyncStateOffline GSSyncState = 1
+	SyncStateOffline SyncState = 1
 	// The directory is local-only and not synced to iCloud.
-	GSSyncStateLocal GSSyncState = 2
+	SyncStateLocal SyncState = 2
 	// The directory is currently syncing and is not ready yet.
-	GSSyncStateSyncing GSSyncState = 3
+	SyncStateSyncing SyncState = 3
 	// The directory has conflicts with the cloud, which the game needs to resolve.
-	GSSyncStateConflicted GSSyncState = 4
+	SyncStateConflicted SyncState = 4
 	// The directory is in error state and can’t be used.
-	GSSyncStateError GSSyncState = 5
+	SyncStateError SyncState = 5
 	// The directory is closed.
-	GSSyncStateClosed GSSyncState = 6
+	SyncStateClosed SyncState = 6
 )
 
-func (e GSSyncState) String() string {
+func (e SyncState) String() string {
 	switch e {
-	case GSSyncStateReady:
-		return "GSSyncStateReady"
-	case GSSyncStateOffline:
-		return "GSSyncStateOffline"
-	case GSSyncStateLocal:
-		return "GSSyncStateLocal"
-	case GSSyncStateSyncing:
-		return "GSSyncStateSyncing"
-	case GSSyncStateConflicted:
-		return "GSSyncStateConflicted"
-	case GSSyncStateError:
-		return "GSSyncStateError"
-	case GSSyncStateClosed:
-		return "GSSyncStateClosed"
+	case SyncStateReady:
+		return "SyncStateReady"
+	case SyncStateOffline:
+		return "SyncStateOffline"
+	case SyncStateLocal:
+		return "SyncStateLocal"
+	case SyncStateSyncing:
+		return "SyncStateSyncing"
+	case SyncStateConflicted:
+		return "SyncStateConflicted"
+	case SyncStateError:
+		return "SyncStateError"
+	case SyncStateClosed:
+		return "SyncStateClosed"
 	default:
-		return fmt.Sprintf("GSSyncState(%d)", int64(e))
+		return fmt.Sprintf("SyncState(%d)", int64(e))
 	}
 }

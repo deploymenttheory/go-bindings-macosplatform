@@ -5,68 +5,89 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A sound resource stored in the asset registry.
 //
-// SoundAsset wraps [raw.PHASESoundAsset] with a fluent Go API.
+// SoundAsset is an idiomatic wrapper over the Objective-C class PHASESoundAsset.
 type SoundAsset struct {
-	inner *raw.PHASESoundAsset
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASESoundAsset].
-func (x *SoundAsset) Unwrap() *raw.PHASESoundAsset { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SoundAsset) ID() objc.ID { return x.inner.Ptr() }
-
-// SoundAssetFromID adopts an existing object pointer as a SoundAsset (nil for 0).
+// SoundAssetFromID adopts an existing Objective-C object as a SoundAsset
+// (nil for 0), retaining it and registering a release finalizer.
 func SoundAssetFromID(id objc.ID) *SoundAsset {
 	if id == 0 {
 		return nil
 	}
-	return &SoundAsset{inner: raw.PHASESoundAssetFromID(id)}
+	x := &SoundAsset{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSoundAsset creates a new [SoundAsset].
+// soundAssetAdopt wraps an Objective-C object that this code just created as a
+// SoundAsset (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func soundAssetAdopt(id objc.ID) *SoundAsset {
+	if id == 0 {
+		return nil
+	}
+	x := &SoundAsset{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SoundAsset) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SoundAsset) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SoundAsset) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSoundAsset creates a new SoundAsset.
 func NewSoundAsset() *SoundAsset {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESoundAsset")), objc.RegisterName("new"))
-	return &SoundAsset{inner: raw.PHASESoundAssetFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHASESoundAsset")), objc.RegisterName("new"))
+	return soundAssetAdopt(_id)
 }
 
-// @property url @abstract The URL of the sound asset, if applicable.
-//
-// Url calls the underlying Url.
-func (x *SoundAsset) Url() *foundation.NSURL {
-	return x.inner.Url()
+// The URL of the sound asset, if applicable.
+func (x *SoundAsset) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
-// @property data @abstract The buffer for the sound asset, if applicable.
-//
-// Data calls the underlying Data.
-func (x *SoundAsset) Data() *foundation.NSData {
-	return x.inner.Data()
+// The buffer for the sound asset, if applicable.
+func (x *SoundAsset) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
-// @property type @abstract The sound asset type.
-//
-// Type calls the underlying Type.
-func (x *SoundAsset) Type() PHASEAssetType {
-	return PHASEAssetType(x.inner.Type())
+// The sound asset type.
+func (x *SoundAsset) Type() AssetType {
+	_r := objc.Send[AssetType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
-
-func (x *SoundAsset) asAsset() *raw.PHASEAsset { return &x.inner.PHASEAsset }
 
 // SoundAssetable is the interface implemented by [SoundAsset], for mocking and DI.
 type SoundAssetable interface {
-	Unwrap() *raw.PHASESoundAsset
-	Url() *foundation.NSURL
-	Data() *foundation.NSData
-	Type() PHASEAssetType
+	obj.Object
+	Url() obj.Object
+	Data() obj.Object
+	Type() AssetType
 }
 
 var _ SoundAssetable = (*SoundAsset)(nil)

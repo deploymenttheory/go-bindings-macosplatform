@@ -5,90 +5,96 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A collection of data and associated behaviors that accomplish a function or feature of a device.
 //
-// Service wraps [raw.CBService] with a fluent Go API.
+// Service is an idiomatic wrapper over the Objective-C class CBService.
 type Service struct {
-	inner *raw.CBService
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBService].
-func (x *Service) Unwrap() *raw.CBService { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Service) ID() objc.ID { return x.inner.Ptr() }
-
-// ServiceFromID adopts an existing object pointer as a Service (nil for 0).
+// ServiceFromID adopts an existing Objective-C object as a Service
+// (nil for 0), retaining it and registering a release finalizer.
 func ServiceFromID(id objc.ID) *Service {
 	if id == 0 {
 		return nil
 	}
-	return &Service{inner: raw.CBServiceFromID(id)}
+	x := &Service{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewService creates a new [Service].
-func NewService() *Service {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBService")), objc.RegisterName("new"))
-	return &Service{inner: raw.CBServiceFromID(_id)}
-}
-
-// @property peripheral @discussion A back-pointer to the peripheral this service belongs to.
-//
-// Peripheral calls the underlying Peripheral.
-func (x *Service) Peripheral() *Peripheral {
-	_r := x.inner.Peripheral()
-	if _r == nil {
+// serviceAdopt wraps an Objective-C object that this code just created as a
+// Service (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func serviceAdopt(id objc.ID) *Service {
+	if id == 0 {
 		return nil
 	}
-	return &Peripheral{inner: _r}
+	x := &Service{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property isPrimary @discussion The type of the service (primary or secondary).
-//
-// IsPrimary calls the underlying IsPrimary.
+// Description returns the object's -description text.
+func (x *Service) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Service) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Service) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewService creates a new Service.
+func NewService() *Service {
+	_id := objc.Send[objc.ID](objc.ID(_class("CBService")), objc.RegisterName("new"))
+	return serviceAdopt(_id)
+}
+
+// A back-pointer to the peripheral this service belongs to.
+func (x *Service) Peripheral() *Peripheral {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("peripheral"))
+	return PeripheralFromID(_r)
+}
+
+// The type of the service (primary or secondary).
 func (x *Service) IsPrimary() bool {
-	return x.inner.IsPrimary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPrimary"))
+	return _r
 }
 
-// @property includedServices @discussion A list of included CBServices that have so far been discovered in this service.
+// A list of included CBServices that have so far been discovered in this service.
 //
 // IncludedServices returns the collection as a Go slice.
 func (x *Service) IncludedServices() []*Service {
-	arr := x.inner.IncludedServices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Service {
-		return &Service{inner: raw.CBServiceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("includedServices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Service { return ServiceFromID(_id) })
 }
 
-// @property characteristics @discussion A list of CBCharacteristics that have so far been discovered in this service.
+// A list of CBCharacteristics that have so far been discovered in this service.
 //
 // Characteristics returns the collection as a Go slice.
 func (x *Service) Characteristics() []*Characteristic {
-	arr := x.inner.Characteristics()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Characteristic {
-		return &Characteristic{inner: raw.CBCharacteristicFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("characteristics"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Characteristic { return CharacteristicFromID(_id) })
 }
-
-func (x *Service) asService() *raw.CBService { return x.inner }
-
-func (x *Service) asAttribute() *raw.CBAttribute { return &x.inner.CBAttribute }
 
 // Serviceable is the interface implemented by [Service], for mocking and DI.
 type Serviceable interface {
-	Unwrap() *raw.CBService
+	obj.Object
 	Peripheral() *Peripheral
 	IsPrimary() bool
 	IncludedServices() []*Service

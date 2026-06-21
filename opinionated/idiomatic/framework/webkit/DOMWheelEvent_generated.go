@@ -5,86 +5,99 @@
 package webkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMWheelEvent wraps [raw.DOMWheelEvent] with a fluent Go API.
+// DOMWheelEvent is an idiomatic wrapper over the Objective-C class DOMWheelEvent.
 type DOMWheelEvent struct {
-	inner *raw.DOMWheelEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMWheelEvent].
-func (x *DOMWheelEvent) Unwrap() *raw.DOMWheelEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMWheelEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMWheelEventFromID adopts an existing object pointer as a DOMWheelEvent (nil for 0).
+// DOMWheelEventFromID adopts an existing Objective-C object as a DOMWheelEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMWheelEventFromID(id objc.ID) *DOMWheelEvent {
 	if id == 0 {
 		return nil
 	}
-	return &DOMWheelEvent{inner: raw.DOMWheelEventFromID(id)}
+	x := &DOMWheelEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMWheelEventWheelEventWheelDeltaYViewScreenXScreenYClientXClientYCtrlKeyAltKeyShiftKeyMetaKey creates a new [DOMWheelEvent].
-func NewDOMWheelEventWheelEventWheelDeltaYViewScreenXScreenYClientXClientYCtrlKeyAltKeyShiftKeyMetaKey(wheelDeltaX int, wheelDeltaY int, view *raw.DOMAbstractView, screenX int, screenY int, clientX int, clientY int, ctrlKey bool, altKey bool, shiftKey bool, metaKey bool) *DOMWheelEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMWheelEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWheelEvent:wheelDeltaY:view:screenX:screenY:clientX:clientY:ctrlKey:altKey:shiftKey:metaKey:"), wheelDeltaX, wheelDeltaY, view.Ptr(), screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey)
-	return &DOMWheelEvent{inner: raw.DOMWheelEventFromID(_id)}
+// dOMWheelEventAdopt wraps an Objective-C object that this code just created as a
+// DOMWheelEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMWheelEventAdopt(id objc.ID) *DOMWheelEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMWheelEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// WithReturnValue sets the returnValue property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *DOMWheelEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMWheelEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMWheelEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMWheelEventWheelEventWheelDeltaYViewScreenXScreenYClientXClientYCtrlKeyAltKeyShiftKeyMetaKey creates a new DOMWheelEvent.
+func NewDOMWheelEventWheelEventWheelDeltaYViewScreenXScreenYClientXClientYCtrlKeyAltKeyShiftKeyMetaKey(wheelDeltaX int, wheelDeltaY int, view *DOMAbstractView, screenX int, screenY int, clientX int, clientY int, ctrlKey bool, altKey bool, shiftKey bool, metaKey bool) *DOMWheelEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DOMWheelEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWheelEvent:wheelDeltaY:view:screenX:screenY:clientX:clientY:ctrlKey:altKey:shiftKey:metaKey:"), wheelDeltaX, wheelDeltaY, objref.IDOf(view), screenX, screenY, clientX, clientY, ctrlKey, altKey, shiftKey, metaKey)
+	return dOMWheelEventAdopt(_id)
+}
+
+// WithReturnValue sets returnValue and returns the receiver so calls can be chained.
 func (x *DOMWheelEvent) WithReturnValue(returnValue bool) *DOMWheelEvent {
-	x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent.SetReturnValue(returnValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnValue:"), returnValue)
 	return x
 }
 
-// WithCancelBubble sets the cancelBubble property and returns the receiver for chaining.
+// WithCancelBubble sets cancelBubble and returns the receiver so calls can be chained.
 func (x *DOMWheelEvent) WithCancelBubble(cancelBubble bool) *DOMWheelEvent {
-	x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent.SetCancelBubble(cancelBubble)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCancelBubble:"), cancelBubble)
 	return x
 }
 
-// WheelDeltaX calls the underlying WheelDeltaX.
 func (x *DOMWheelEvent) WheelDeltaX() int {
-	return x.inner.WheelDeltaX()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("wheelDeltaX"))
+	return _r
 }
 
-// WheelDeltaY calls the underlying WheelDeltaY.
 func (x *DOMWheelEvent) WheelDeltaY() int {
-	return x.inner.WheelDeltaY()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("wheelDeltaY"))
+	return _r
 }
 
-// WheelDelta calls the underlying WheelDelta.
 func (x *DOMWheelEvent) WheelDelta() int {
-	return x.inner.WheelDelta()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("wheelDelta"))
+	return _r
 }
 
-// IsHorizontal calls the underlying IsHorizontal.
 func (x *DOMWheelEvent) IsHorizontal() bool {
-	return x.inner.IsHorizontal()
-}
-
-func (x *DOMWheelEvent) asDOMMouseEvent() *raw.DOMMouseEvent { return &x.inner.DOMMouseEvent }
-
-func (x *DOMWheelEvent) asDOMUIEvent() *raw.DOMUIEvent { return &x.inner.DOMMouseEvent.DOMUIEvent }
-
-func (x *DOMWheelEvent) asDOMEvent() *raw.DOMEvent { return &x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent }
-
-func (x *DOMWheelEvent) asDOMObject() *raw.DOMObject {
-	return &x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent.DOMObject
-}
-
-func (x *DOMWheelEvent) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMMouseEvent.DOMUIEvent.DOMEvent.DOMObject.WebScriptObject
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHorizontal"))
+	return _r
 }
 
 // DOMWheelEventable is the interface implemented by [DOMWheelEvent], for mocking and DI.
 type DOMWheelEventable interface {
-	Unwrap() *raw.DOMWheelEvent
+	obj.Object
 	WithReturnValue(returnValue bool) *DOMWheelEvent
 	WithCancelBubble(cancelBubble bool) *DOMWheelEvent
 	WheelDeltaX() int

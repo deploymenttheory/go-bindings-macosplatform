@@ -5,97 +5,105 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// StateOfMind wraps [raw.HKStateOfMind] with a fluent Go API.
+// StateOfMind is an idiomatic wrapper over the Objective-C class HKStateOfMind.
 type StateOfMind struct {
-	inner *raw.HKStateOfMind
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKStateOfMind].
-func (x *StateOfMind) Unwrap() *raw.HKStateOfMind { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StateOfMind) ID() objc.ID { return x.inner.Ptr() }
-
-// StateOfMindFromID adopts an existing object pointer as a StateOfMind (nil for 0).
+// StateOfMindFromID adopts an existing Objective-C object as a StateOfMind
+// (nil for 0), retaining it and registering a release finalizer.
 func StateOfMindFromID(id objc.ID) *StateOfMind {
 	if id == 0 {
 		return nil
 	}
-	return &StateOfMind{inner: raw.HKStateOfMindFromID(id)}
+	x := &StateOfMind{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStateOfMind creates a new [StateOfMind].
+// stateOfMindAdopt wraps an Objective-C object that this code just created as a
+// StateOfMind (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func stateOfMindAdopt(id objc.ID) *StateOfMind {
+	if id == 0 {
+		return nil
+	}
+	x := &StateOfMind{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StateOfMind) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StateOfMind) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StateOfMind) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStateOfMind creates a new StateOfMind.
 func NewStateOfMind() *StateOfMind {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKStateOfMind")), objc.RegisterName("new"))
-	return &StateOfMind{inner: raw.HKStateOfMindFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKStateOfMind")), objc.RegisterName("new"))
+	return stateOfMindAdopt(_id)
 }
 
 // A description of the kind of feeling type captured by this state of mind. Feeling types can be understood by the timeframe considered to create this log, possibly indicated by the context used to create it. For example, a `momentary emotion` log might be in response to 'how are you feeling right now?' while a `daily mood` log might be in response to 'how have you been feeling today?'.
-//
-// Kind calls the underlying Kind.
-func (x *StateOfMind) Kind() HKStateOfMindKind {
-	return HKStateOfMindKind(x.inner.Kind())
+func (x *StateOfMind) Kind() StateOfMindKind {
+	_r := objc.Send[StateOfMindKind](objref.IDOf(x), objc.RegisterName("kind"))
+	return _r
 }
 
 // A signed, self-reported measure of how positive or negative one is feeling, on a continuous scale from -1 to +1.
-//
-// Valence calls the underlying Valence.
 func (x *StateOfMind) Valence() float64 {
-	return x.inner.Valence()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valence"))
+	return _r
 }
 
 // A general region of pleasantness based on this sample's valence value.
-//
-// ValenceClassification calls the underlying ValenceClassification.
-func (x *StateOfMind) ValenceClassification() HKStateOfMindValenceClassification {
-	return HKStateOfMindValenceClassification(x.inner.ValenceClassification())
+func (x *StateOfMind) ValenceClassification() StateOfMindValenceClassification {
+	_r := objc.Send[StateOfMindValenceClassification](objref.IDOf(x), objc.RegisterName("valenceClassification"))
+	return _r
 }
 
 // Zero or more specific sentiments selected to represent a felt experience.
 //
 // Labels returns the collection as a Go slice.
-func (x *StateOfMind) Labels() []*foundation.NSNumber {
-	arr := x.inner.Labels()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *StateOfMind) Labels() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("labels"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Zero or more facets of life with which this felt experience is associated.
 //
 // Associations returns the collection as a Go slice.
-func (x *StateOfMind) Associations() []*foundation.NSNumber {
-	arr := x.inner.Associations()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *StateOfMind) Associations() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("associations"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-func (x *StateOfMind) asSample() *raw.HKSample { return &x.inner.HKSample }
-
-func (x *StateOfMind) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
 
 // StateOfMindable is the interface implemented by [StateOfMind], for mocking and DI.
 type StateOfMindable interface {
-	Unwrap() *raw.HKStateOfMind
-	Kind() HKStateOfMindKind
+	obj.Object
+	Kind() StateOfMindKind
 	Valence() float64
-	ValenceClassification() HKStateOfMindValenceClassification
-	Labels() []*foundation.NSNumber
-	Associations() []*foundation.NSNumber
+	ValenceClassification() StateOfMindValenceClassification
+	Labels() []obj.Object
+	Associations() []obj.Object
 }
 
 var _ StateOfMindable = (*StateOfMind)(nil)

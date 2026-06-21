@@ -5,95 +5,103 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The identity of a user.
 //
-// UserIdentity wraps [raw.CKUserIdentity] with a fluent Go API.
+// UserIdentity is an idiomatic wrapper over the Objective-C class CKUserIdentity.
 type UserIdentity struct {
-	inner *raw.CKUserIdentity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKUserIdentity].
-func (x *UserIdentity) Unwrap() *raw.CKUserIdentity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UserIdentity) ID() objc.ID { return x.inner.Ptr() }
-
-// UserIdentityFromID adopts an existing object pointer as a UserIdentity (nil for 0).
+// UserIdentityFromID adopts an existing Objective-C object as a UserIdentity
+// (nil for 0), retaining it and registering a release finalizer.
 func UserIdentityFromID(id objc.ID) *UserIdentity {
 	if id == 0 {
 		return nil
 	}
-	return &UserIdentity{inner: raw.CKUserIdentityFromID(id)}
+	x := &UserIdentity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUserIdentity creates a new [UserIdentity].
+// userIdentityAdopt wraps an Objective-C object that this code just created as a
+// UserIdentity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func userIdentityAdopt(id objc.ID) *UserIdentity {
+	if id == 0 {
+		return nil
+	}
+	x := &UserIdentity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UserIdentity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UserIdentity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UserIdentity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUserIdentity creates a new UserIdentity.
 func NewUserIdentity() *UserIdentity {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKUserIdentity")), objc.RegisterName("new"))
-	return &UserIdentity{inner: raw.CKUserIdentityFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKUserIdentity")), objc.RegisterName("new"))
+	return userIdentityAdopt(_id)
 }
 
 // The user record ID for the corresponding user record.
-//
-// UserRecordID calls the underlying UserRecordID.
 func (x *UserIdentity) UserRecordID() *RecordID {
-	_r := x.inner.UserRecordID()
-	if _r == nil {
-		return nil
-	}
-	return &RecordID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userRecordID"))
+	return RecordIDFromID(_r)
 }
 
 // The lookup info for retrieving the user identity. Use this property's value to retrieve the user identity when using the “CKDiscoverUserIdentitiesOperation“ and “CKFetchShareParticipantsOperation“ operations.
-//
-// LookupInfo calls the underlying LookupInfo.
 func (x *UserIdentity) LookupInfo() *UserIdentityLookupInfo {
-	_r := x.inner.LookupInfo()
-	if _r == nil {
-		return nil
-	}
-	return &UserIdentityLookupInfo{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lookupInfo"))
+	return UserIdentityLookupInfoFromID(_r)
 }
 
 // The user's name. You can use this property to construct the user's name for display. Use the components with an instance of <doc://com.apple.documentation/documentation/foundation/personnamecomponentsformatter> to create a string representation for the current locale.
-//
-// NameComponents calls the underlying NameComponents.
-func (x *UserIdentity) NameComponents() *foundation.NSPersonNameComponents {
-	return x.inner.NameComponents()
+func (x *UserIdentity) NameComponents() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nameComponents"))
+	return obj.Wrap(_r)
 }
 
 // A Boolean value that indicates whether the user has an iCloud account. `true` if the user identity has an iCloud account; otherwise, `false`.
-//
-// HasiCloudAccount calls the underlying HasiCloudAccount.
 func (x *UserIdentity) HasiCloudAccount() bool {
-	return x.inner.HasiCloudAccount()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasiCloudAccount"))
+	return _r
 }
 
 // Identifiers that match contacts in the local Contacts database. Identities that CloudKit discovers using “CKDiscoverAllUserIdentitiesOperation“ correspond to entries in the local Contacts database, matching the identifier on <doc://com.apple.documentation/documentation/contacts/cncontact>.  Use these identifiers with the Contacts database to get additional information about the contacts. Multiple identifiers can exist for a single discovered user because multiple contacts can contain the same email addresses or phone numbers. To transform these identifiers into an array of unified contact identifiers, create a predicate by calling the <doc://com.apple.documentation/documentation/contacts/cncontact/predicateforcontacts(withidentifiers:)> method, and then pass that predicate to the <doc://com.apple.documentation/documentation/contacts/cncontactstore/unifiedcontacts(matching:keystofetch:)> method.
 //
 // ContactIdentifiers returns the collection as a Go slice.
 func (x *UserIdentity) ContactIdentifiers() []string {
-	arr := x.inner.ContactIdentifiers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contactIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // UserIdentityable is the interface implemented by [UserIdentity], for mocking and DI.
 type UserIdentityable interface {
-	Unwrap() *raw.CKUserIdentity
+	obj.Object
 	UserRecordID() *RecordID
 	LookupInfo() *UserIdentityLookupInfo
-	NameComponents() *foundation.NSPersonNameComponents
+	NameComponents() obj.Object
 	HasiCloudAccount() bool
 	ContactIdentifiers() []string
 }

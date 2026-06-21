@@ -5,10 +5,10 @@
 package datadetection
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/datadetection"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// MatchProvider is implemented by Match and any idiomatic type wrapping a DDMatch subclass.
+// MatchProvider is accepted wherever a DDMatch (or one of its subclasses) is expected.
 type MatchProvider interface {
-	asMatch() *raw.DDMatch
+	objref.Object
 }

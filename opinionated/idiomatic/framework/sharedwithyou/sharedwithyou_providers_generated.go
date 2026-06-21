@@ -5,10 +5,10 @@
 package sharedwithyou
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// HighlightProvider is implemented by Highlight and any idiomatic type wrapping a SWHighlight subclass.
+// HighlightProvider is accepted wherever a SWHighlight (or one of its subclasses) is expected.
 type HighlightProvider interface {
-	asHighlight() *raw.SWHighlight
+	objref.Object
 }

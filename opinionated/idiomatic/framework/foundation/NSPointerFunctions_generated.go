@@ -5,164 +5,114 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An instance of NSPointerFunctions defines callout functions appropriate for managing a pointer reference held somewhere else.
 //
-// PointerFunctions wraps [raw.NSPointerFunctions] with a fluent Go API.
+// PointerFunctions is an idiomatic wrapper over the Objective-C class NSPointerFunctions.
 type PointerFunctions struct {
-	inner *raw.NSPointerFunctions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPointerFunctions].
-func (x *PointerFunctions) Unwrap() *raw.NSPointerFunctions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PointerFunctions) ID() objc.ID { return x.inner.Ptr() }
-
-// PointerFunctionsFromID adopts an existing object pointer as a PointerFunctions (nil for 0).
+// PointerFunctionsFromID adopts an existing Objective-C object as a PointerFunctions
+// (nil for 0), retaining it and registering a release finalizer.
 func PointerFunctionsFromID(id objc.ID) *PointerFunctions {
 	if id == 0 {
 		return nil
 	}
-	return &PointerFunctions{inner: raw.NSPointerFunctionsFromID(id)}
+	x := &PointerFunctions{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// pointerFunctionsAdopt wraps an Objective-C object that this code just created as a
+// PointerFunctions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pointerFunctionsAdopt(id objc.ID) *PointerFunctions {
+	if id == 0 {
+		return nil
+	}
+	x := &PointerFunctions{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PointerFunctions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PointerFunctions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PointerFunctions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an NSPointerFunctions object initialized with the given options.
 //
-// NewPointerFunctionsWithOptions creates a new [PointerFunctions].
-func NewPointerFunctionsWithOptions(options NSPointerFunctionsOptions) *PointerFunctions {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPointerFunctions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), raw.NSPointerFunctionsOptions(options))
-	return &PointerFunctions{inner: raw.NSPointerFunctionsFromID(_id)}
+// NewPointerFunctionsWithOptions creates a new PointerFunctions.
+func NewPointerFunctionsWithOptions(options PointerFunctionsOptions) *PointerFunctions {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSPointerFunctions")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptions:"), options)
+	return pointerFunctionsAdopt(_id)
 }
 
 // Specifies whether, in a garbage collected environment, pointers should be assigned using a strong write barrier.
 //
-// WithUsesStrongWriteBarrier sets the usesStrongWriteBarrier property and returns the receiver for chaining.
+// WithUsesStrongWriteBarrier sets usesStrongWriteBarrier and returns the receiver so calls can be chained.
 func (x *PointerFunctions) WithUsesStrongWriteBarrier(usesStrongWriteBarrier bool) *PointerFunctions {
-	x.inner.SetUsesStrongWriteBarrier(usesStrongWriteBarrier)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesStrongWriteBarrier:"), usesStrongWriteBarrier)
 	return x
 }
 
 // Specifies whether, in a garbage collected environment, pointers should use weak read and write barriers.
 //
-// WithUsesWeakReadAndWriteBarriers sets the usesWeakReadAndWriteBarriers property and returns the receiver for chaining.
+// WithUsesWeakReadAndWriteBarriers sets usesWeakReadAndWriteBarriers and returns the receiver so calls can be chained.
 func (x *PointerFunctions) WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) *PointerFunctions {
-	x.inner.SetUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesWeakReadAndWriteBarriers:"), usesWeakReadAndWriteBarriers)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *PointerFunctions) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PointerFunctions {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *PointerFunctions) WithScriptingProperties(scriptingProperties obj.Object) *PointerFunctions {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// HashFunction calls the underlying HashFunction.
-func (x *PointerFunctions) HashFunction() unsafe.Pointer {
-	return x.inner.HashFunction()
-}
-
-// SetHashFunction calls the underlying SetHashFunction.
-func (x *PointerFunctions) SetHashFunction(hashFunction unsafe.Pointer) {
-	x.inner.SetHashFunction(hashFunction)
-}
-
-// IsEqualFunction calls the underlying IsEqualFunction.
-func (x *PointerFunctions) IsEqualFunction() unsafe.Pointer {
-	return x.inner.IsEqualFunction()
-}
-
-// SetIsEqualFunction calls the underlying SetIsEqualFunction.
-func (x *PointerFunctions) SetIsEqualFunction(isEqualFunction unsafe.Pointer) {
-	x.inner.SetIsEqualFunction(isEqualFunction)
-}
-
-// SizeFunction calls the underlying SizeFunction.
-func (x *PointerFunctions) SizeFunction() unsafe.Pointer {
-	return x.inner.SizeFunction()
-}
-
-// SetSizeFunction calls the underlying SetSizeFunction.
-func (x *PointerFunctions) SetSizeFunction(sizeFunction unsafe.Pointer) {
-	x.inner.SetSizeFunction(sizeFunction)
-}
-
-// DescriptionFunction calls the underlying DescriptionFunction.
-func (x *PointerFunctions) DescriptionFunction() unsafe.Pointer {
-	return x.inner.DescriptionFunction()
-}
-
-// SetDescriptionFunction calls the underlying SetDescriptionFunction.
-func (x *PointerFunctions) SetDescriptionFunction(descriptionFunction unsafe.Pointer) {
-	x.inner.SetDescriptionFunction(descriptionFunction)
-}
-
-// RelinquishFunction calls the underlying RelinquishFunction.
-func (x *PointerFunctions) RelinquishFunction() unsafe.Pointer {
-	return x.inner.RelinquishFunction()
-}
-
-// SetRelinquishFunction calls the underlying SetRelinquishFunction.
-func (x *PointerFunctions) SetRelinquishFunction(relinquishFunction unsafe.Pointer) {
-	x.inner.SetRelinquishFunction(relinquishFunction)
-}
-
-// AcquireFunction calls the underlying AcquireFunction.
-func (x *PointerFunctions) AcquireFunction() unsafe.Pointer {
-	return x.inner.AcquireFunction()
-}
-
-// SetAcquireFunction calls the underlying SetAcquireFunction.
-func (x *PointerFunctions) SetAcquireFunction(acquireFunction unsafe.Pointer) {
-	x.inner.SetAcquireFunction(acquireFunction)
-}
-
-// UsesStrongWriteBarrier calls the underlying UsesStrongWriteBarrier.
 func (x *PointerFunctions) UsesStrongWriteBarrier() bool {
-	return x.inner.UsesStrongWriteBarrier()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesStrongWriteBarrier"))
+	return _r
 }
 
-// SetUsesStrongWriteBarrier calls the underlying SetUsesStrongWriteBarrier.
 func (x *PointerFunctions) SetUsesStrongWriteBarrier(usesStrongWriteBarrier bool) {
-	x.inner.SetUsesStrongWriteBarrier(usesStrongWriteBarrier)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesStrongWriteBarrier:"), usesStrongWriteBarrier)
 }
 
-// UsesWeakReadAndWriteBarriers calls the underlying UsesWeakReadAndWriteBarriers.
 func (x *PointerFunctions) UsesWeakReadAndWriteBarriers() bool {
-	return x.inner.UsesWeakReadAndWriteBarriers()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesWeakReadAndWriteBarriers"))
+	return _r
 }
 
-// SetUsesWeakReadAndWriteBarriers calls the underlying SetUsesWeakReadAndWriteBarriers.
 func (x *PointerFunctions) SetUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) {
-	x.inner.SetUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesWeakReadAndWriteBarriers:"), usesWeakReadAndWriteBarriers)
 }
-
-func (x *PointerFunctions) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // PointerFunctionsable is the interface implemented by [PointerFunctions], for mocking and DI.
 type PointerFunctionsable interface {
-	Unwrap() *raw.NSPointerFunctions
+	obj.Object
 	WithUsesStrongWriteBarrier(usesStrongWriteBarrier bool) *PointerFunctions
 	WithUsesWeakReadAndWriteBarriers(usesWeakReadAndWriteBarriers bool) *PointerFunctions
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PointerFunctions
-	HashFunction() unsafe.Pointer
-	SetHashFunction(hashFunction unsafe.Pointer)
-	IsEqualFunction() unsafe.Pointer
-	SetIsEqualFunction(isEqualFunction unsafe.Pointer)
-	SizeFunction() unsafe.Pointer
-	SetSizeFunction(sizeFunction unsafe.Pointer)
-	DescriptionFunction() unsafe.Pointer
-	SetDescriptionFunction(descriptionFunction unsafe.Pointer)
-	RelinquishFunction() unsafe.Pointer
-	SetRelinquishFunction(relinquishFunction unsafe.Pointer)
-	AcquireFunction() unsafe.Pointer
-	SetAcquireFunction(acquireFunction unsafe.Pointer)
+	WithScriptingProperties(scriptingProperties obj.Object) *PointerFunctions
 	UsesStrongWriteBarrier() bool
 	SetUsesStrongWriteBarrier(usesStrongWriteBarrier bool)
 	UsesWeakReadAndWriteBarriers() bool

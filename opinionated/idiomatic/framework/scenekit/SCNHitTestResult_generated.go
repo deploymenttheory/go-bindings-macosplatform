@@ -5,162 +5,96 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Information about the result of a scene-space or view-space search for scene elements.
 //
-// HitTestResult wraps [raw.SCNHitTestResult] with a fluent Go API.
+// HitTestResult is an idiomatic wrapper over the Objective-C class SCNHitTestResult.
 type HitTestResult struct {
-	inner *raw.SCNHitTestResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNHitTestResult].
-func (x *HitTestResult) Unwrap() *raw.SCNHitTestResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HitTestResult) ID() objc.ID { return x.inner.Ptr() }
-
-// HitTestResultFromID adopts an existing object pointer as a HitTestResult (nil for 0).
+// HitTestResultFromID adopts an existing Objective-C object as a HitTestResult
+// (nil for 0), retaining it and registering a release finalizer.
 func HitTestResultFromID(id objc.ID) *HitTestResult {
 	if id == 0 {
 		return nil
 	}
-	return &HitTestResult{inner: raw.SCNHitTestResultFromID(id)}
+	x := &HitTestResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHitTestResult creates a new [HitTestResult].
+// hitTestResultAdopt wraps an Objective-C object that this code just created as a
+// HitTestResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hitTestResultAdopt(id objc.ID) *HitTestResult {
+	if id == 0 {
+		return nil
+	}
+	x := &HitTestResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HitTestResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HitTestResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HitTestResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHitTestResult creates a new HitTestResult.
 func NewHitTestResult() *HitTestResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNHitTestResult")), objc.RegisterName("new"))
-	return &HitTestResult{inner: raw.SCNHitTestResultFromID(_id)}
-}
-
-// Returns the texture coordinates at the point of intersection for the specified texture mapping channel.
-//
-// TextureCoordinatesWithMappingChannel calls the underlying TextureCoordinatesWithMappingChannel.
-func (x *HitTestResult) TextureCoordinatesWithMappingChannel(channel int) corefoundation.CGPoint {
-	return x.inner.TextureCoordinatesWithMappingChannel(channel)
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNHitTestResult")), objc.RegisterName("new"))
+	return hitTestResultAdopt(_id)
 }
 
 // The hit node.
-//
-// Node calls the underlying Node.
 func (x *HitTestResult) Node() *Node {
-	_r := x.inner.Node()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
+	return NodeFromID(_r)
 }
 
 // Index of the hit geometry element.
-//
-// GeometryIndex calls the underlying GeometryIndex.
 func (x *HitTestResult) GeometryIndex() int {
-	return x.inner.GeometryIndex()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("geometryIndex"))
+	return _r
 }
 
 // Index of the hit primitive of the geometry element.
-//
-// FaceIndex calls the underlying FaceIndex.
 func (x *HitTestResult) FaceIndex() int {
-	return x.inner.FaceIndex()
-}
-
-// Intersection point in the node's local coordinate system.
-//
-// LocalCoordinates calls the underlying LocalCoordinates.
-func (x *HitTestResult) LocalCoordinates() raw.SCNVector3 {
-	return x.inner.LocalCoordinates()
-}
-
-// Intersection point in the world coordinate system.
-//
-// WorldCoordinates calls the underlying WorldCoordinates.
-func (x *HitTestResult) WorldCoordinates() raw.SCNVector3 {
-	return x.inner.WorldCoordinates()
-}
-
-// Intersection normal in the node's local coordinate system.
-//
-// LocalNormal calls the underlying LocalNormal.
-func (x *HitTestResult) LocalNormal() raw.SCNVector3 {
-	return x.inner.LocalNormal()
-}
-
-// Intersection normal in the world coordinate system.
-//
-// WorldNormal calls the underlying WorldNormal.
-func (x *HitTestResult) WorldNormal() raw.SCNVector3 {
-	return x.inner.WorldNormal()
-}
-
-// World transform of the hit node.
-//
-// ModelTransform calls the underlying ModelTransform.
-func (x *HitTestResult) ModelTransform() quartzcore.CATransform3D {
-	return x.inner.ModelTransform()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("faceIndex"))
+	return _r
 }
 
 // The hit bone. Only available if the node hit has a SCNSkinner attached.
-//
-// BoneNode calls the underlying BoneNode.
 func (x *HitTestResult) BoneNode() *Node {
-	_r := x.inner.BoneNode()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
-}
-
-// SimdLocalCoordinates calls the underlying SimdLocalCoordinates.
-func (x *HitTestResult) SimdLocalCoordinates() unsafe.Pointer {
-	return x.inner.SimdLocalCoordinates()
-}
-
-// SimdWorldCoordinates calls the underlying SimdWorldCoordinates.
-func (x *HitTestResult) SimdWorldCoordinates() unsafe.Pointer {
-	return x.inner.SimdWorldCoordinates()
-}
-
-// SimdLocalNormal calls the underlying SimdLocalNormal.
-func (x *HitTestResult) SimdLocalNormal() unsafe.Pointer {
-	return x.inner.SimdLocalNormal()
-}
-
-// SimdWorldNormal calls the underlying SimdWorldNormal.
-func (x *HitTestResult) SimdWorldNormal() unsafe.Pointer {
-	return x.inner.SimdWorldNormal()
-}
-
-// SimdModelTransform calls the underlying SimdModelTransform.
-func (x *HitTestResult) SimdModelTransform() unsafe.Pointer {
-	return x.inner.SimdModelTransform()
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("boneNode"))
+	return NodeFromID(_r)
 }
 
 // HitTestResultable is the interface implemented by [HitTestResult], for mocking and DI.
 type HitTestResultable interface {
-	Unwrap() *raw.SCNHitTestResult
-	TextureCoordinatesWithMappingChannel(channel int) corefoundation.CGPoint
+	obj.Object
 	Node() *Node
 	GeometryIndex() int
 	FaceIndex() int
-	LocalCoordinates() raw.SCNVector3
-	WorldCoordinates() raw.SCNVector3
-	LocalNormal() raw.SCNVector3
-	WorldNormal() raw.SCNVector3
-	ModelTransform() quartzcore.CATransform3D
 	BoneNode() *Node
-	SimdLocalCoordinates() unsafe.Pointer
-	SimdWorldCoordinates() unsafe.Pointer
-	SimdLocalNormal() unsafe.Pointer
-	SimdWorldNormal() unsafe.Pointer
-	SimdModelTransform() unsafe.Pointer
 }
 
 var _ HitTestResultable = (*HitTestResult)(nil)

@@ -5,185 +5,134 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A constraint that orients a node to always point toward a specified other node.
 //
-// LookAtConstraint wraps [raw.SCNLookAtConstraint] with a fluent Go API.
+// LookAtConstraint is an idiomatic wrapper over the Objective-C class SCNLookAtConstraint.
 type LookAtConstraint struct {
-	inner *raw.SCNLookAtConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNLookAtConstraint].
-func (x *LookAtConstraint) Unwrap() *raw.SCNLookAtConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LookAtConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// LookAtConstraintFromID adopts an existing object pointer as a LookAtConstraint (nil for 0).
+// LookAtConstraintFromID adopts an existing Objective-C object as a LookAtConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func LookAtConstraintFromID(id objc.ID) *LookAtConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &LookAtConstraint{inner: raw.SCNLookAtConstraintFromID(id)}
+	x := &LookAtConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLookAtConstraint creates a new [LookAtConstraint].
+// lookAtConstraintAdopt wraps an Objective-C object that this code just created as a
+// LookAtConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lookAtConstraintAdopt(id objc.ID) *LookAtConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &LookAtConstraint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LookAtConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LookAtConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LookAtConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLookAtConstraint creates a new LookAtConstraint.
 func NewLookAtConstraint() *LookAtConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNLookAtConstraint")), objc.RegisterName("new"))
-	return &LookAtConstraint{inner: raw.SCNLookAtConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNLookAtConstraint")), objc.RegisterName("new"))
+	return lookAtConstraintAdopt(_id)
 }
 
 // The node toward which constrained nodes will point after being reoriented.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
+// WithTarget sets target and returns the receiver so calls can be chained.
 func (x *LookAtConstraint) WithTarget(target NodeProvider) *LookAtConstraint {
-	x.inner.SetTarget(target.asNode())
-	return x
-}
-
-// @property targetOffset @abstract Offset look at position in target space. Defaults to zero. Animatable
-//
-// WithTargetOffset sets the targetOffset property and returns the receiver for chaining.
-func (x *LookAtConstraint) WithTargetOffset(targetOffset raw.SCNVector3) *LookAtConstraint {
-	x.inner.SetTargetOffset(targetOffset)
-	return x
-}
-
-// @property targetOffset @abstract Front direction in the constraint owner local space. Defaults to -[SCNNode localFront]. Animatable
-//
-// WithLocalFront sets the localFront property and returns the receiver for chaining.
-func (x *LookAtConstraint) WithLocalFront(localFront raw.SCNVector3) *LookAtConstraint {
-	x.inner.SetLocalFront(localFront)
-	return x
-}
-
-// @property worldUp @abstract Up reference direction in world space. Defaults to -[SCNNode localUp]. Animatable
-//
-// WithWorldUp sets the worldUp property and returns the receiver for chaining.
-func (x *LookAtConstraint) WithWorldUp(worldUp raw.SCNVector3) *LookAtConstraint {
-	x.inner.SetWorldUp(worldUp)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // A Boolean value that specifies whether constrained nodes are allowed to rotate.
 //
-// WithGimbalLockEnabled sets the gimbalLockEnabled property and returns the receiver for chaining.
+// WithGimbalLockEnabled sets gimbalLockEnabled and returns the receiver so calls can be chained.
 func (x *LookAtConstraint) WithGimbalLockEnabled(gimbalLockEnabled bool) *LookAtConstraint {
-	x.inner.SetGimbalLockEnabled(gimbalLockEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGimbalLockEnabled:"), gimbalLockEnabled)
 	return x
 }
 
-// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+// Determines whether the constraint is enabled or not. Defaults to YES.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *LookAtConstraint) WithEnabled(enabled bool) *LookAtConstraint {
-	x.inner.SCNConstraint.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // The influence of the constraint on the node’s transformation.
 //
-// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
 func (x *LookAtConstraint) WithInfluenceFactor(influenceFactor float64) *LookAtConstraint {
-	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 //
-// WithIncremental sets the incremental property and returns the receiver for chaining.
+// WithIncremental sets incremental and returns the receiver so calls can be chained.
 func (x *LookAtConstraint) WithIncremental(incremental bool) *LookAtConstraint {
-	x.inner.SCNConstraint.SetIncremental(incremental)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// Target calls the underlying Target.
 func (x *LookAtConstraint) Target() *Node {
-	_r := x.inner.Target()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+	return NodeFromID(_r)
 }
 
-// SetTarget calls the underlying SetTarget.
-func (x *LookAtConstraint) SetTarget(target *raw.SCNNode) {
-	x.inner.SetTarget(target)
+func (x *LookAtConstraint) SetTarget(target *Node) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
-// @property targetOffset @abstract Offset look at position in target space. Defaults to zero. Animatable
-//
-// TargetOffset calls the underlying TargetOffset.
-func (x *LookAtConstraint) TargetOffset() raw.SCNVector3 {
-	return x.inner.TargetOffset()
-}
-
-// SetTargetOffset calls the underlying SetTargetOffset.
-func (x *LookAtConstraint) SetTargetOffset(targetOffset raw.SCNVector3) {
-	x.inner.SetTargetOffset(targetOffset)
-}
-
-// @property targetOffset @abstract Front direction in the constraint owner local space. Defaults to -[SCNNode localFront]. Animatable
-//
-// LocalFront calls the underlying LocalFront.
-func (x *LookAtConstraint) LocalFront() raw.SCNVector3 {
-	return x.inner.LocalFront()
-}
-
-// SetLocalFront calls the underlying SetLocalFront.
-func (x *LookAtConstraint) SetLocalFront(localFront raw.SCNVector3) {
-	x.inner.SetLocalFront(localFront)
-}
-
-// @property worldUp @abstract Up reference direction in world space. Defaults to -[SCNNode localUp]. Animatable
-//
-// WorldUp calls the underlying WorldUp.
-func (x *LookAtConstraint) WorldUp() raw.SCNVector3 {
-	return x.inner.WorldUp()
-}
-
-// SetWorldUp calls the underlying SetWorldUp.
-func (x *LookAtConstraint) SetWorldUp(worldUp raw.SCNVector3) {
-	x.inner.SetWorldUp(worldUp)
-}
-
-// @property gimbalLockEnabled @abstract Specifies whether the receiver enables the gimbal lock. Defaults to NO. @discussion Enabling the gimbal lock prevents the receiver from rotating the constrained node around to roll axis.
-//
-// GimbalLockEnabled calls the underlying GimbalLockEnabled.
+// Specifies whether the receiver enables the gimbal lock. Defaults to NO. Enabling the gimbal lock prevents the receiver from rotating the constrained node around to roll axis.
 func (x *LookAtConstraint) GimbalLockEnabled() bool {
-	return x.inner.GimbalLockEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("gimbalLockEnabled"))
+	return _r
 }
 
-// SetGimbalLockEnabled calls the underlying SetGimbalLockEnabled.
 func (x *LookAtConstraint) SetGimbalLockEnabled(gimbalLockEnabled bool) {
-	x.inner.SetGimbalLockEnabled(gimbalLockEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGimbalLockEnabled:"), gimbalLockEnabled)
 }
-
-func (x *LookAtConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
 
 // LookAtConstraintable is the interface implemented by [LookAtConstraint], for mocking and DI.
 type LookAtConstraintable interface {
-	Unwrap() *raw.SCNLookAtConstraint
+	obj.Object
 	WithTarget(target NodeProvider) *LookAtConstraint
-	WithTargetOffset(targetOffset raw.SCNVector3) *LookAtConstraint
-	WithLocalFront(localFront raw.SCNVector3) *LookAtConstraint
-	WithWorldUp(worldUp raw.SCNVector3) *LookAtConstraint
 	WithGimbalLockEnabled(gimbalLockEnabled bool) *LookAtConstraint
 	WithEnabled(enabled bool) *LookAtConstraint
 	WithInfluenceFactor(influenceFactor float64) *LookAtConstraint
 	WithIncremental(incremental bool) *LookAtConstraint
 	Target() *Node
-	SetTarget(target *raw.SCNNode)
-	TargetOffset() raw.SCNVector3
-	SetTargetOffset(targetOffset raw.SCNVector3)
-	LocalFront() raw.SCNVector3
-	SetLocalFront(localFront raw.SCNVector3)
-	WorldUp() raw.SCNVector3
-	SetWorldUp(worldUp raw.SCNVector3)
+	SetTarget(target *Node)
 	GimbalLockEnabled() bool
 	SetGimbalLockEnabled(gimbalLockEnabled bool)
 }

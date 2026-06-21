@@ -5,148 +5,135 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that schedules interstitial events for items played by the primary player.
 //
-// PlayerInterstitialEventController wraps [raw.AVPlayerInterstitialEventController] with a fluent Go API.
+// PlayerInterstitialEventController is an idiomatic wrapper over the Objective-C class AVPlayerInterstitialEventController.
 type PlayerInterstitialEventController struct {
-	inner *raw.AVPlayerInterstitialEventController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerInterstitialEventController].
-func (x *PlayerInterstitialEventController) Unwrap() *raw.AVPlayerInterstitialEventController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerInterstitialEventController) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerInterstitialEventControllerFromID adopts an existing object pointer as a PlayerInterstitialEventController (nil for 0).
+// PlayerInterstitialEventControllerFromID adopts an existing Objective-C object as a PlayerInterstitialEventController
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerInterstitialEventControllerFromID(id objc.ID) *PlayerInterstitialEventController {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerInterstitialEventController{inner: raw.AVPlayerInterstitialEventControllerFromID(id)}
+	x := &PlayerInterstitialEventController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// playerInterstitialEventControllerAdopt wraps an Objective-C object that this code just created as a
+// PlayerInterstitialEventController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerInterstitialEventControllerAdopt(id objc.ID) *PlayerInterstitialEventController {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerInterstitialEventController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlayerInterstitialEventController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerInterstitialEventController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerInterstitialEventController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an event controller with a player item.
 //
-// NewPlayerInterstitialEventControllerWithPrimaryPlayer creates a new [PlayerInterstitialEventController].
-func NewPlayerInterstitialEventControllerWithPrimaryPlayer(primaryPlayer *raw.AVPlayer) *PlayerInterstitialEventController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerInterstitialEventController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPrimaryPlayer:"), primaryPlayer.Ptr())
-	return &PlayerInterstitialEventController{inner: raw.AVPlayerInterstitialEventControllerFromID(_id)}
+// NewPlayerInterstitialEventControllerWithPrimaryPlayer creates a new PlayerInterstitialEventController.
+func NewPlayerInterstitialEventControllerWithPrimaryPlayer(primaryPlayer *Player) *PlayerInterstitialEventController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerInterstitialEventController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPrimaryPlayer:"), objref.IDOf(primaryPlayer))
+	return playerInterstitialEventControllerAdopt(_id)
 }
 
 // The current schedule of interstitial events.
 //
-// WithEvents sets the collection, converting the Go slice to an NSArray.
-func (x *PlayerInterstitialEventController) WithEvents(items ...*raw.AVPlayerInterstitialEvent) *PlayerInterstitialEventController {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetEvents(foundation.NSArrayFromID[*raw.AVPlayerInterstitialEvent](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVPlayerInterstitialEvent](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetEvents(_arr)
+// WithEvents sets the collection and returns the receiver so calls can be chained.
+func (x *PlayerInterstitialEventController) WithEvents(items ...*PlayerInterstitialEvent) *PlayerInterstitialEventController {
+	_arr := purego.SliceToNSArray(items, func(_v *PlayerInterstitialEvent) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvents:"), _arr)
 	return x
 }
 
 // The bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController.
 //
-// WithLocalizedStringsBundle sets the localizedStringsBundle property and returns the receiver for chaining.
-func (x *PlayerInterstitialEventController) WithLocalizedStringsBundle(localizedStringsBundle *foundation.NSBundle) *PlayerInterstitialEventController {
-	x.inner.SetLocalizedStringsBundle(localizedStringsBundle)
+// WithLocalizedStringsBundle sets localizedStringsBundle and returns the receiver so calls can be chained.
+func (x *PlayerInterstitialEventController) WithLocalizedStringsBundle(localizedStringsBundle obj.Object) *PlayerInterstitialEventController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedStringsBundle:"), objref.IDOf(localizedStringsBundle))
 	return x
 }
 
 // The name of the table in the bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController.
 //
-// WithLocalizedStringsTableName sets the localizedStringsTableName property and returns the receiver for chaining.
+// WithLocalizedStringsTableName sets localizedStringsTableName and returns the receiver so calls can be chained.
 func (x *PlayerInterstitialEventController) WithLocalizedStringsTableName(localizedStringsTableName string) *PlayerInterstitialEventController {
-	x.inner.SetLocalizedStringsTableName(foundation.NSStringStringWithUTF8String(localizedStringsTableName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedStringsTableName:"), purego.NSString(localizedStringsTableName))
 	return x
 }
 
-// Cancels the playback of all currently playing and scheduled interstitial events, and resumes playback of primary content.
-//
-// CancelCurrentEventWithResumptionOffset calls the underlying CancelCurrentEventWithResumptionOffset.
-func (x *PlayerInterstitialEventController) CancelCurrentEventWithResumptionOffset(resumptionOffset coremedia.CMTime) {
-	x.inner.CancelCurrentEventWithResumptionOffset(resumptionOffset)
-}
-
 // Causes the playback of the currently playing interstital event to be abandoned.
-//
-// SkipCurrentEvent calls the underlying SkipCurrentEvent.
 func (x *PlayerInterstitialEventController) SkipCurrentEvent() {
-	x.inner.SkipCurrentEvent()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("skipCurrentEvent"))
 }
 
-// SetEvents calls the underlying SetEvents.
-func (x *PlayerInterstitialEventController) SetEvents(events *foundation.NSArray[*raw.AVPlayerInterstitialEvent]) {
-	x.inner.SetEvents(events)
+func (x *PlayerInterstitialEventController) SetEvents(events []*PlayerInterstitialEvent) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvents:"), purego.SliceToNSArray(events, func(_v *PlayerInterstitialEvent) objc.ID { return objref.IDOf(_v) }))
 }
 
 // The bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController. If the value of the property is nil, any UI elements triggered by the AVPlayerInterstitialEventController, such as the skip button, may contain a generic label based on the implementation of the UI that's in use. To ensure the best available user experience in various playback configurations, including external playback, set a value for this property that provides localized translations of skip control labels.
-//
-// LocalizedStringsBundle calls the underlying LocalizedStringsBundle.
-func (x *PlayerInterstitialEventController) LocalizedStringsBundle() *foundation.NSBundle {
-	return x.inner.LocalizedStringsBundle()
+func (x *PlayerInterstitialEventController) LocalizedStringsBundle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringsBundle"))
+	return obj.Wrap(_r)
 }
 
-// SetLocalizedStringsBundle calls the underlying SetLocalizedStringsBundle.
-func (x *PlayerInterstitialEventController) SetLocalizedStringsBundle(localizedStringsBundle *foundation.NSBundle) {
-	x.inner.SetLocalizedStringsBundle(localizedStringsBundle)
+func (x *PlayerInterstitialEventController) SetLocalizedStringsBundle(localizedStringsBundle obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedStringsBundle:"), objref.IDOf(localizedStringsBundle))
 }
 
 // The name of the table in the bundle that contains the localized strings to be used by the AVPlayerInterstitialEventController. If the value of the property is nil, it will default to "Localizable"
-//
-// LocalizedStringsTableName calls the underlying LocalizedStringsTableName.
 func (x *PlayerInterstitialEventController) LocalizedStringsTableName() string {
-	_r := x.inner.LocalizedStringsTableName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedStringsTableName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLocalizedStringsTableName calls the underlying SetLocalizedStringsTableName.
 func (x *PlayerInterstitialEventController) SetLocalizedStringsTableName(localizedStringsTableName string) {
-	x.inner.SetLocalizedStringsTableName(foundation.NSStringStringWithUTF8String(localizedStringsTableName))
-}
-
-func (x *PlayerInterstitialEventController) asPlayerInterstitialEventMonitor() *raw.AVPlayerInterstitialEventMonitor {
-	return &x.inner.AVPlayerInterstitialEventMonitor
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedStringsTableName:"), purego.NSString(localizedStringsTableName))
 }
 
 // PlayerInterstitialEventControllerable is the interface implemented by [PlayerInterstitialEventController], for mocking and DI.
 type PlayerInterstitialEventControllerable interface {
-	Unwrap() *raw.AVPlayerInterstitialEventController
-	WithEvents(items ...*raw.AVPlayerInterstitialEvent) *PlayerInterstitialEventController
-	WithLocalizedStringsBundle(localizedStringsBundle *foundation.NSBundle) *PlayerInterstitialEventController
+	obj.Object
+	WithEvents(items ...*PlayerInterstitialEvent) *PlayerInterstitialEventController
+	WithLocalizedStringsBundle(localizedStringsBundle obj.Object) *PlayerInterstitialEventController
 	WithLocalizedStringsTableName(localizedStringsTableName string) *PlayerInterstitialEventController
-	CancelCurrentEventWithResumptionOffset(resumptionOffset coremedia.CMTime)
 	SkipCurrentEvent()
-	SetEvents(events *foundation.NSArray[*raw.AVPlayerInterstitialEvent])
-	LocalizedStringsBundle() *foundation.NSBundle
-	SetLocalizedStringsBundle(localizedStringsBundle *foundation.NSBundle)
+	SetEvents(events []*PlayerInterstitialEvent)
+	LocalizedStringsBundle() obj.Object
+	SetLocalizedStringsBundle(localizedStringsBundle obj.Object)
 	LocalizedStringsTableName() string
 	SetLocalizedStringsTableName(localizedStringsTableName string)
 }

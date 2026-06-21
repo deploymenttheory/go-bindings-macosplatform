@@ -5,104 +5,119 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRUnitTestingClusterTestListInt8UArgumentRequestParams wraps [raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams] with a fluent Go API.
+// MTRUnitTestingClusterTestListInt8UArgumentRequestParams is an idiomatic wrapper over the Objective-C class MTRUnitTestingClusterTestListInt8UArgumentRequestParams.
 type MTRUnitTestingClusterTestListInt8UArgumentRequestParams struct {
-	inner *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams].
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) Unwrap() *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRUnitTestingClusterTestListInt8UArgumentRequestParamsFromID adopts an existing object pointer as a MTRUnitTestingClusterTestListInt8UArgumentRequestParams (nil for 0).
+// MTRUnitTestingClusterTestListInt8UArgumentRequestParamsFromID adopts an existing Objective-C object as a MTRUnitTestingClusterTestListInt8UArgumentRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRUnitTestingClusterTestListInt8UArgumentRequestParamsFromID(id objc.ID) *MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRUnitTestingClusterTestListInt8UArgumentRequestParams{inner: raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParamsFromID(id)}
+	x := &MTRUnitTestingClusterTestListInt8UArgumentRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRUnitTestingClusterTestListInt8UArgumentRequestParams creates a new [MTRUnitTestingClusterTestListInt8UArgumentRequestParams].
+// mTRUnitTestingClusterTestListInt8UArgumentRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRUnitTestingClusterTestListInt8UArgumentRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRUnitTestingClusterTestListInt8UArgumentRequestParamsAdopt(id objc.ID) *MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRUnitTestingClusterTestListInt8UArgumentRequestParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRUnitTestingClusterTestListInt8UArgumentRequestParams creates a new MTRUnitTestingClusterTestListInt8UArgumentRequestParams.
 func NewMTRUnitTestingClusterTestListInt8UArgumentRequestParams() *MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRUnitTestingClusterTestListInt8UArgumentRequestParams")), objc.RegisterName("new"))
-	return &MTRUnitTestingClusterTestListInt8UArgumentRequestParams{inner: raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRUnitTestingClusterTestListInt8UArgumentRequestParams")), objc.RegisterName("new"))
+	return mTRUnitTestingClusterTestListInt8UArgumentRequestParamsAdopt(_id)
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// Arg1 calls the underlying Arg1.
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) Arg1() *foundation.NSArray[objc.ID] {
-	return x.inner.Arg1()
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) Arg1() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arg1"))
+	return obj.Wrap(_r)
 }
 
-// SetArg1 calls the underlying SetArg1.
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) SetArg1(arg1 *foundation.NSArray[objc.ID]) {
-	x.inner.SetArg1(arg1)
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) SetArg1(arg1 obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArg1:"), objref.IDOf(arg1))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
-}
-
-func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) asMTRUnitTestingClusterTestListInt8UArgumentRequestParams() *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams {
-	return x.inner
+func (x *MTRUnitTestingClusterTestListInt8UArgumentRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRUnitTestingClusterTestListInt8UArgumentRequestParamsable is the interface implemented by [MTRUnitTestingClusterTestListInt8UArgumentRequestParams], for mocking and DI.
 type MTRUnitTestingClusterTestListInt8UArgumentRequestParamsable interface {
-	Unwrap() *raw.MTRUnitTestingClusterTestListInt8UArgumentRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRUnitTestingClusterTestListInt8UArgumentRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRUnitTestingClusterTestListInt8UArgumentRequestParams
-	Arg1() *foundation.NSArray[objc.ID]
-	SetArg1(arg1 *foundation.NSArray[objc.ID])
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRUnitTestingClusterTestListInt8UArgumentRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRUnitTestingClusterTestListInt8UArgumentRequestParams
+	Arg1() obj.Object
+	SetArg1(arg1 obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRUnitTestingClusterTestListInt8UArgumentRequestParamsable = (*MTRUnitTestingClusterTestListInt8UArgumentRequestParams)(nil)

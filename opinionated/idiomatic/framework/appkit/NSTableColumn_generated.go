@@ -5,336 +5,328 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The display characteristics and identifier for a column in a table view.
 //
-// TableColumn wraps [raw.NSTableColumn] with a fluent Go API.
+// TableColumn is an idiomatic wrapper over the Objective-C class NSTableColumn.
 type TableColumn struct {
-	inner *raw.NSTableColumn
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTableColumn].
-func (x *TableColumn) Unwrap() *raw.NSTableColumn { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TableColumn) ID() objc.ID { return x.inner.Ptr() }
-
-// TableColumnFromID adopts an existing object pointer as a TableColumn (nil for 0).
+// TableColumnFromID adopts an existing Objective-C object as a TableColumn
+// (nil for 0), retaining it and registering a release finalizer.
 func TableColumnFromID(id objc.ID) *TableColumn {
 	if id == 0 {
 		return nil
 	}
-	return &TableColumn{inner: raw.NSTableColumnFromID(id)}
+	x := &TableColumn{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// tableColumnAdopt wraps an Objective-C object that this code just created as a
+// TableColumn (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tableColumnAdopt(id objc.ID) *TableColumn {
+	if id == 0 {
+		return nil
+	}
+	x := &TableColumn{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TableColumn) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TableColumn) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TableColumn) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a newly created table column with a string identifier.
 //
-// NewTableColumnWithIdentifier creates a new [TableColumn].
-func NewTableColumnWithIdentifier(identifier *foundation.NSString) *TableColumn {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTableColumn")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), identifier.Ptr())
-	return &TableColumn{inner: raw.NSTableColumnFromID(_id)}
+// NewTableColumnWithIdentifier creates a new TableColumn.
+func NewTableColumnWithIdentifier(identifier obj.Object) *TableColumn {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTableColumn")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifier:"), objref.IDOf(identifier))
+	return tableColumnAdopt(_id)
 }
 
-// NewTableColumnWithCoder creates a new [TableColumn].
-func NewTableColumnWithCoder(coder *foundation.NSCoder) *TableColumn {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTableColumn")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &TableColumn{inner: raw.NSTableColumnFromID(_id)}
+// NewTableColumnWithCoder creates a new TableColumn.
+func NewTableColumnWithCoder(coder obj.Object) *TableColumn {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSTableColumn")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return tableColumnAdopt(_id)
 }
 
 // The identifier string for the table column.
 //
-// WithIdentifier sets the identifier property and returns the receiver for chaining.
-func (x *TableColumn) WithIdentifier(identifier *foundation.NSString) *TableColumn {
-	x.inner.SetIdentifier(identifier)
+// WithIdentifier sets identifier and returns the receiver so calls can be chained.
+func (x *TableColumn) WithIdentifier(identifier obj.Object) *TableColumn {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 	return x
 }
 
 // The table view that contains the table column.
 //
-// WithTableView sets the tableView property and returns the receiver for chaining.
+// WithTableView sets tableView and returns the receiver so calls can be chained.
 func (x *TableColumn) WithTableView(tableView TableViewProvider) *TableColumn {
-	x.inner.SetTableView(tableView.asTableView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTableView:"), objref.IDOf(tableView))
 	return x
 }
 
 // The table column’s width, in points.
 //
-// WithWidth sets the width property and returns the receiver for chaining.
+// WithWidth sets width and returns the receiver so calls can be chained.
 func (x *TableColumn) WithWidth(width float64) *TableColumn {
-	x.inner.SetWidth(width)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 	return x
 }
 
 // The table column’s minimum width, in points.
 //
-// WithMinWidth sets the minWidth property and returns the receiver for chaining.
+// WithMinWidth sets minWidth and returns the receiver so calls can be chained.
 func (x *TableColumn) WithMinWidth(minWidth float64) *TableColumn {
-	x.inner.SetMinWidth(minWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinWidth:"), minWidth)
 	return x
 }
 
 // The table column’s maximum width, in points.
 //
-// WithMaxWidth sets the maxWidth property and returns the receiver for chaining.
+// WithMaxWidth sets maxWidth and returns the receiver so calls can be chained.
 func (x *TableColumn) WithMaxWidth(maxWidth float64) *TableColumn {
-	x.inner.SetMaxWidth(maxWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxWidth:"), maxWidth)
 	return x
 }
 
 // The title of the table column’s header.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *TableColumn) WithTitle(title string) *TableColumn {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The cell used to draw the table column’s header.
 //
-// WithHeaderCell sets the headerCell property and returns the receiver for chaining.
+// WithHeaderCell sets headerCell and returns the receiver so calls can be chained.
 func (x *TableColumn) WithHeaderCell(headerCell *TableHeaderCell) *TableColumn {
-	x.inner.SetHeaderCell(headerCell.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderCell:"), objref.IDOf(headerCell))
 	return x
 }
 
 // A Boolean that indicates whether a cell-based table’s column cells are user editable.
 //
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable sets editable and returns the receiver so calls can be chained.
 func (x *TableColumn) WithEditable(editable bool) *TableColumn {
-	x.inner.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
 // The table column’s sort descriptor prototype.
 //
-// WithSortDescriptorPrototype sets the sortDescriptorPrototype property and returns the receiver for chaining.
-func (x *TableColumn) WithSortDescriptorPrototype(sortDescriptorPrototype *foundation.NSSortDescriptor) *TableColumn {
-	x.inner.SetSortDescriptorPrototype(sortDescriptorPrototype)
+// WithSortDescriptorPrototype sets sortDescriptorPrototype and returns the receiver so calls can be chained.
+func (x *TableColumn) WithSortDescriptorPrototype(sortDescriptorPrototype obj.Object) *TableColumn {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptorPrototype:"), objref.IDOf(sortDescriptorPrototype))
 	return x
 }
 
 // The table column’s resizing mask.
 //
-// WithResizingMask sets the resizingMask property and returns the receiver for chaining.
-func (x *TableColumn) WithResizingMask(resizingMask NSTableColumnResizingOptions) *TableColumn {
-	x.inner.SetResizingMask(raw.NSTableColumnResizingOptions(resizingMask))
+// WithResizingMask sets resizingMask and returns the receiver so calls can be chained.
+func (x *TableColumn) WithResizingMask(resizingMask TableColumnResizingOptions) *TableColumn {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizingMask:"), resizingMask)
 	return x
 }
 
 // The string that’s displayed in a help tag over the table column header.
 //
-// WithHeaderToolTip sets the headerToolTip property and returns the receiver for chaining.
+// WithHeaderToolTip sets headerToolTip and returns the receiver so calls can be chained.
 func (x *TableColumn) WithHeaderToolTip(headerToolTip string) *TableColumn {
-	x.inner.SetHeaderToolTip(foundation.NSStringStringWithUTF8String(headerToolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderToolTip:"), purego.NSString(headerToolTip))
 	return x
 }
 
 // A Boolean that indicates whether the table column is hidden.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *TableColumn) WithHidden(hidden bool) *TableColumn {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
 // The cell prototype used by the table column to draw individual cells.
 //
-// WithDataCell sets the dataCell property and returns the receiver for chaining.
-func (x *TableColumn) WithDataCell(dataCell objc.ID) *TableColumn {
-	x.inner.SetDataCell(dataCell)
+// WithDataCell sets dataCell and returns the receiver so calls can be chained.
+func (x *TableColumn) WithDataCell(dataCell obj.Object) *TableColumn {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataCell:"), objref.IDOf(dataCell))
 	return x
 }
 
 // Resizes the table column to fit the width of its header cell.
-//
-// SizeToFit calls the underlying SizeToFit.
 func (x *TableColumn) SizeToFit() {
-	x.inner.SizeToFit()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sizeToFit"))
 }
 
-// Identifier calls the underlying Identifier.
-func (x *TableColumn) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *TableColumn) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
 }
 
-// SetIdentifier calls the underlying SetIdentifier.
-func (x *TableColumn) SetIdentifier(identifier *foundation.NSString) {
-	x.inner.SetIdentifier(identifier)
+func (x *TableColumn) SetIdentifier(identifier obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdentifier:"), objref.IDOf(identifier))
 }
 
-// TableView calls the underlying TableView.
 func (x *TableColumn) TableView() *TableView {
-	_r := x.inner.TableView()
-	if _r == nil {
-		return nil
-	}
-	return &TableView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tableView"))
+	return TableViewFromID(_r)
 }
 
-// SetTableView calls the underlying SetTableView.
-func (x *TableColumn) SetTableView(tableView *raw.NSTableView) {
-	x.inner.SetTableView(tableView)
+func (x *TableColumn) SetTableView(tableView *TableView) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTableView:"), objref.IDOf(tableView))
 }
 
-// Width calls the underlying Width.
 func (x *TableColumn) Width() float64 {
-	return x.inner.Width()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// SetWidth calls the underlying SetWidth.
 func (x *TableColumn) SetWidth(width float64) {
-	x.inner.SetWidth(width)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWidth:"), width)
 }
 
-// MinWidth calls the underlying MinWidth.
 func (x *TableColumn) MinWidth() float64 {
-	return x.inner.MinWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minWidth"))
+	return _r
 }
 
-// SetMinWidth calls the underlying SetMinWidth.
 func (x *TableColumn) SetMinWidth(minWidth float64) {
-	x.inner.SetMinWidth(minWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinWidth:"), minWidth)
 }
 
-// MaxWidth calls the underlying MaxWidth.
 func (x *TableColumn) MaxWidth() float64 {
-	return x.inner.MaxWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxWidth"))
+	return _r
 }
 
-// SetMaxWidth calls the underlying SetMaxWidth.
 func (x *TableColumn) SetMaxWidth(maxWidth float64) {
-	x.inner.SetMaxWidth(maxWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxWidth:"), maxWidth)
 }
 
-// Title calls the underlying Title.
 func (x *TableColumn) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
 func (x *TableColumn) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// HeaderCell calls the underlying HeaderCell.
 func (x *TableColumn) HeaderCell() *TableHeaderCell {
-	_r := x.inner.HeaderCell()
-	if _r == nil {
-		return nil
-	}
-	return &TableHeaderCell{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headerCell"))
+	return TableHeaderCellFromID(_r)
 }
 
-// SetHeaderCell calls the underlying SetHeaderCell.
-func (x *TableColumn) SetHeaderCell(headerCell *raw.NSTableHeaderCell) {
-	x.inner.SetHeaderCell(headerCell)
+func (x *TableColumn) SetHeaderCell(headerCell *TableHeaderCell) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderCell:"), objref.IDOf(headerCell))
 }
 
-// IsEditable calls the underlying IsEditable.
 func (x *TableColumn) IsEditable() bool {
-	return x.inner.IsEditable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEditable"))
+	return _r
 }
 
-// SetEditable calls the underlying SetEditable.
 func (x *TableColumn) SetEditable(editable bool) {
-	x.inner.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 }
 
-// SortDescriptorPrototype calls the underlying SortDescriptorPrototype.
-func (x *TableColumn) SortDescriptorPrototype() *foundation.NSSortDescriptor {
-	return x.inner.SortDescriptorPrototype()
+func (x *TableColumn) SortDescriptorPrototype() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptorPrototype"))
+	return obj.Wrap(_r)
 }
 
-// SetSortDescriptorPrototype calls the underlying SetSortDescriptorPrototype.
-func (x *TableColumn) SetSortDescriptorPrototype(sortDescriptorPrototype *foundation.NSSortDescriptor) {
-	x.inner.SetSortDescriptorPrototype(sortDescriptorPrototype)
+func (x *TableColumn) SetSortDescriptorPrototype(sortDescriptorPrototype obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSortDescriptorPrototype:"), objref.IDOf(sortDescriptorPrototype))
 }
 
-// ResizingMask calls the underlying ResizingMask.
-func (x *TableColumn) ResizingMask() NSTableColumnResizingOptions {
-	return NSTableColumnResizingOptions(x.inner.ResizingMask())
+func (x *TableColumn) ResizingMask() TableColumnResizingOptions {
+	_r := objc.Send[TableColumnResizingOptions](objref.IDOf(x), objc.RegisterName("resizingMask"))
+	return _r
 }
 
-// SetResizingMask calls the underlying SetResizingMask.
-func (x *TableColumn) SetResizingMask(resizingMask NSTableColumnResizingOptions) {
-	x.inner.SetResizingMask(raw.NSTableColumnResizingOptions(resizingMask))
+func (x *TableColumn) SetResizingMask(resizingMask TableColumnResizingOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizingMask:"), resizingMask)
 }
 
-// HeaderToolTip calls the underlying HeaderToolTip.
 func (x *TableColumn) HeaderToolTip() string {
-	_r := x.inner.HeaderToolTip()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("headerToolTip"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetHeaderToolTip calls the underlying SetHeaderToolTip.
 func (x *TableColumn) SetHeaderToolTip(headerToolTip string) {
-	x.inner.SetHeaderToolTip(foundation.NSStringStringWithUTF8String(headerToolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeaderToolTip:"), purego.NSString(headerToolTip))
 }
 
-// IsHidden calls the underlying IsHidden.
 func (x *TableColumn) IsHidden() bool {
-	return x.inner.IsHidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+	return _r
 }
 
-// SetHidden calls the underlying SetHidden.
 func (x *TableColumn) SetHidden(hidden bool) {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
 
 // Sets whether the user can resize the receiver in its NSTableView.
-//
-// SetResizable calls the underlying SetResizable.
 func (x *TableColumn) SetResizable(flag bool) {
-	x.inner.SetResizable(flag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResizable:"), flag)
 }
 
 // Returns whether the column is resizable.
-//
-// IsResizable calls the underlying IsResizable.
 func (x *TableColumn) IsResizable() bool {
-	return x.inner.IsResizable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isResizable"))
+	return _r
 }
 
 // Returns the cell object used to display values in the specified row of the table column.
-//
-// DataCellForRow calls the underlying DataCellForRow.
-func (x *TableColumn) DataCellForRow(row int) objc.ID {
-	return x.inner.DataCellForRow(row)
+func (x *TableColumn) DataCellForRow(row int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataCellForRow:"), row)
+	return obj.Wrap(_r)
 }
 
-// DataCell calls the underlying DataCell.
-func (x *TableColumn) DataCell() objc.ID {
-	return x.inner.DataCell()
+func (x *TableColumn) DataCell() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataCell"))
+	return obj.Wrap(_r)
 }
 
-// SetDataCell calls the underlying SetDataCell.
-func (x *TableColumn) SetDataCell(dataCell objc.ID) {
-	x.inner.SetDataCell(dataCell)
+func (x *TableColumn) SetDataCell(dataCell obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDataCell:"), objref.IDOf(dataCell))
 }
 
 // TableColumnable is the interface implemented by [TableColumn], for mocking and DI.
 type TableColumnable interface {
-	Unwrap() *raw.NSTableColumn
-	WithIdentifier(identifier *foundation.NSString) *TableColumn
+	obj.Object
+	WithIdentifier(identifier obj.Object) *TableColumn
 	WithTableView(tableView TableViewProvider) *TableColumn
 	WithWidth(width float64) *TableColumn
 	WithMinWidth(minWidth float64) *TableColumn
@@ -342,16 +334,16 @@ type TableColumnable interface {
 	WithTitle(title string) *TableColumn
 	WithHeaderCell(headerCell *TableHeaderCell) *TableColumn
 	WithEditable(editable bool) *TableColumn
-	WithSortDescriptorPrototype(sortDescriptorPrototype *foundation.NSSortDescriptor) *TableColumn
-	WithResizingMask(resizingMask NSTableColumnResizingOptions) *TableColumn
+	WithSortDescriptorPrototype(sortDescriptorPrototype obj.Object) *TableColumn
+	WithResizingMask(resizingMask TableColumnResizingOptions) *TableColumn
 	WithHeaderToolTip(headerToolTip string) *TableColumn
 	WithHidden(hidden bool) *TableColumn
-	WithDataCell(dataCell objc.ID) *TableColumn
+	WithDataCell(dataCell obj.Object) *TableColumn
 	SizeToFit()
-	Identifier() string
-	SetIdentifier(identifier *foundation.NSString)
+	Identifier() obj.Object
+	SetIdentifier(identifier obj.Object)
 	TableView() *TableView
-	SetTableView(tableView *raw.NSTableView)
+	SetTableView(tableView *TableView)
 	Width() float64
 	SetWidth(width float64)
 	MinWidth() float64
@@ -361,22 +353,22 @@ type TableColumnable interface {
 	Title() string
 	SetTitle(title string)
 	HeaderCell() *TableHeaderCell
-	SetHeaderCell(headerCell *raw.NSTableHeaderCell)
+	SetHeaderCell(headerCell *TableHeaderCell)
 	IsEditable() bool
 	SetEditable(editable bool)
-	SortDescriptorPrototype() *foundation.NSSortDescriptor
-	SetSortDescriptorPrototype(sortDescriptorPrototype *foundation.NSSortDescriptor)
-	ResizingMask() NSTableColumnResizingOptions
-	SetResizingMask(resizingMask NSTableColumnResizingOptions)
+	SortDescriptorPrototype() obj.Object
+	SetSortDescriptorPrototype(sortDescriptorPrototype obj.Object)
+	ResizingMask() TableColumnResizingOptions
+	SetResizingMask(resizingMask TableColumnResizingOptions)
 	HeaderToolTip() string
 	SetHeaderToolTip(headerToolTip string)
 	IsHidden() bool
 	SetHidden(hidden bool)
 	SetResizable(flag bool)
 	IsResizable() bool
-	DataCellForRow(row int) objc.ID
-	DataCell() objc.ID
-	SetDataCell(dataCell objc.ID)
+	DataCellForRow(row int) obj.Object
+	DataCell() obj.Object
+	SetDataCell(dataCell obj.Object)
 }
 
 var _ TableColumnable = (*TableColumn)(nil)

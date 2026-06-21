@@ -5,156 +5,135 @@
 package sharedwithyoucore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyoucore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents the state of the collaboration options for the document.
 //
-// CollaborationShareOptions wraps [raw.SWCollaborationShareOptions] with a fluent Go API.
+// CollaborationShareOptions is an idiomatic wrapper over the Objective-C class SWCollaborationShareOptions.
 type CollaborationShareOptions struct {
-	inner *raw.SWCollaborationShareOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SWCollaborationShareOptions].
-func (x *CollaborationShareOptions) Unwrap() *raw.SWCollaborationShareOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollaborationShareOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// CollaborationShareOptionsFromID adopts an existing object pointer as a CollaborationShareOptions (nil for 0).
+// CollaborationShareOptionsFromID adopts an existing Objective-C object as a CollaborationShareOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func CollaborationShareOptionsFromID(id objc.ID) *CollaborationShareOptions {
 	if id == 0 {
 		return nil
 	}
-	return &CollaborationShareOptions{inner: raw.SWCollaborationShareOptionsFromID(id)}
+	x := &CollaborationShareOptions{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// collaborationShareOptionsAdopt wraps an Objective-C object that this code just created as a
+// CollaborationShareOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collaborationShareOptionsAdopt(id objc.ID) *CollaborationShareOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &CollaborationShareOptions{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollaborationShareOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollaborationShareOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollaborationShareOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and initializes a collaboration share options object the array of groups and a summary string.
 //
-// NewCollaborationShareOptionsWithOptionsGroupsSummary creates a new [CollaborationShareOptions].
-func NewCollaborationShareOptionsWithOptionsGroupsSummary(optionsGroups *foundation.NSArray[*raw.SWCollaborationOptionsGroup], summary string) *CollaborationShareOptions {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptionsGroups:summary:"), optionsGroups.Ptr(), foundation.NSStringStringWithUTF8String(summary).Ptr())
-	return &CollaborationShareOptions{inner: raw.SWCollaborationShareOptionsFromID(_id)}
+// NewCollaborationShareOptionsWithOptionsGroupsSummary creates a new CollaborationShareOptions.
+func NewCollaborationShareOptionsWithOptionsGroupsSummary(optionsGroups []*CollaborationOptionsGroup, summary string) *CollaborationShareOptions {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptionsGroups:summary:"), purego.SliceToNSArray(optionsGroups, func(_v *CollaborationOptionsGroup) objc.ID { return objref.IDOf(_v) }), purego.NSString(summary))
+	return collaborationShareOptionsAdopt(_id)
 }
 
 // Creates and initializes a collaboration share options object with the array of groups.
 //
-// NewCollaborationShareOptionsWithOptionsGroups creates a new [CollaborationShareOptions].
-func NewCollaborationShareOptionsWithOptionsGroups(optionsGroups ...CollaborationOptionsGroupProvider) *CollaborationShareOptions {
-	_ptrs := make([]objc.ID, len(optionsGroups))
-	for _i, _v := range optionsGroups {
-		_ptrs[_i] = _v.asCollaborationOptionsGroup().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.SWCollaborationOptionsGroup]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptionsGroups:"), _arg0.Ptr())
-	return &CollaborationShareOptions{inner: raw.SWCollaborationShareOptionsFromID(_id)}
+// NewCollaborationShareOptionsWithOptionsGroups creates a new CollaborationShareOptions.
+func NewCollaborationShareOptionsWithOptionsGroups(optionsGroups []*CollaborationOptionsGroup) *CollaborationShareOptions {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithOptionsGroups:"), purego.SliceToNSArray(optionsGroups, func(_v *CollaborationOptionsGroup) objc.ID { return objref.IDOf(_v) }))
+	return collaborationShareOptionsAdopt(_id)
 }
 
 // Creates and initializes a collaboration share options object.
 //
-// NewCollaborationShareOptionsWithCoder creates a new [CollaborationShareOptions].
-func NewCollaborationShareOptionsWithCoder(coder *foundation.NSCoder) *CollaborationShareOptions {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &CollaborationShareOptions{inner: raw.SWCollaborationShareOptionsFromID(_id)}
+// NewCollaborationShareOptionsWithCoder creates a new CollaborationShareOptions.
+func NewCollaborationShareOptionsWithCoder(coder obj.Object) *CollaborationShareOptions {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SWCollaborationShareOptions")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return collaborationShareOptionsAdopt(_id)
 }
 
 // An array of options group objects to customize how the system shares the collaboration.
 //
-// WithOptionsGroups sets the collection, converting the Go slice to an NSArray.
+// WithOptionsGroups sets the collection and returns the receiver so calls can be chained.
 func (x *CollaborationShareOptions) WithOptionsGroups(items ...CollaborationOptionsGroupProvider) *CollaborationShareOptions {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetOptionsGroups(foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asCollaborationOptionsGroup().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetOptionsGroups(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v CollaborationOptionsGroupProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsGroups:"), _arr)
 	return x
 }
 
 // A localized string to summarize the collaboration options.
 //
-// WithSummary sets the summary property and returns the receiver for chaining.
+// WithSummary sets summary and returns the receiver so calls can be chained.
 func (x *CollaborationShareOptions) WithSummary(summary string) *CollaborationShareOptions {
-	x.inner.SetSummary(foundation.NSStringStringWithUTF8String(summary))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummary:"), purego.NSString(summary))
 	return x
 }
 
-// @abstract SWCollaborationOptionsGroups to customize how the collaboration will be shared
+// SWCollaborationOptionsGroups to customize how the collaboration will be shared
 //
 // OptionsGroups returns the collection as a Go slice.
 func (x *CollaborationShareOptions) OptionsGroups() []*CollaborationOptionsGroup {
-	arr := x.inner.OptionsGroups()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CollaborationOptionsGroup {
-		return &CollaborationOptionsGroup{inner: raw.SWCollaborationOptionsGroupFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("optionsGroups"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollaborationOptionsGroup { return CollaborationOptionsGroupFromID(_id) })
 }
 
-// SetOptionsGroups calls the underlying SetOptionsGroups.
-func (x *CollaborationShareOptions) SetOptionsGroups(optionsGroups ...CollaborationOptionsGroupProvider) {
-	_ptrs := make([]objc.ID, len(optionsGroups))
-	for _i, _v := range optionsGroups {
-		_ptrs[_i] = _v.asCollaborationOptionsGroup().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.SWCollaborationOptionsGroup]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.SWCollaborationOptionsGroup](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetOptionsGroups(_arg0)
+func (x *CollaborationShareOptions) SetOptionsGroups(optionsGroups []*CollaborationOptionsGroup) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOptionsGroups:"), purego.SliceToNSArray(optionsGroups, func(_v *CollaborationOptionsGroup) objc.ID { return objref.IDOf(_v) }))
 }
 
-// @abstract Localized string to summarize the selected collaboration options. If nil, "Share Options" will be displayed by default.
-//
-// Summary calls the underlying Summary.
+// Localized string to summarize the selected collaboration options. If nil, "Share Options" will be displayed by default.
 func (x *CollaborationShareOptions) Summary() string {
-	_r := x.inner.Summary()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("summary"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSummary calls the underlying SetSummary.
 func (x *CollaborationShareOptions) SetSummary(summary string) {
-	x.inner.SetSummary(foundation.NSStringStringWithUTF8String(summary))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSummary:"), purego.NSString(summary))
 }
 
 // CollaborationShareOptionsable is the interface implemented by [CollaborationShareOptions], for mocking and DI.
 type CollaborationShareOptionsable interface {
-	Unwrap() *raw.SWCollaborationShareOptions
+	obj.Object
 	WithOptionsGroups(items ...CollaborationOptionsGroupProvider) *CollaborationShareOptions
 	WithSummary(summary string) *CollaborationShareOptions
 	OptionsGroups() []*CollaborationOptionsGroup
-	SetOptionsGroups(optionsGroups ...CollaborationOptionsGroupProvider)
+	SetOptionsGroups(optionsGroups []*CollaborationOptionsGroup)
 	Summary() string
 	SetSummary(summary string)
 }

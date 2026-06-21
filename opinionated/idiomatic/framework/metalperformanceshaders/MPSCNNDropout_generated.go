@@ -5,200 +5,124 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A dropout filter.
 //
-// CNNDropout wraps [raw.MPSCNNDropout] with a fluent Go API.
+// CNNDropout is an idiomatic wrapper over the Objective-C class MPSCNNDropout.
 type CNNDropout struct {
-	inner *raw.MPSCNNDropout
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNDropout].
-func (x *CNNDropout) Unwrap() *raw.MPSCNNDropout { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNDropout) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNDropoutFromID adopts an existing object pointer as a CNNDropout (nil for 0).
+// CNNDropoutFromID adopts an existing Objective-C object as a CNNDropout
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNDropoutFromID(id objc.ID) *CNNDropout {
 	if id == 0 {
 		return nil
 	}
-	return &CNNDropout{inner: raw.MPSCNNDropoutFromID(id)}
-}
-
-// @abstract <NSSecureCoding> support
-//
-// NewCNNDropoutWithCoderDevice creates a new [CNNDropout].
-func NewCNNDropoutWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *CNNDropout {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDropout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &CNNDropout{inner: raw.MPSCNNDropoutFromID(_id)}
-}
-
-// @abstract   Standard init with default properties per filter type. @param      device              The device that the filter will be used on. @param      keepProbability     The probability that each element in the input is kept. The valid range is (0.0f, 1.0f). @param      seed                The seed used to generate random numbers. @param      maskStrideInPixels  The mask stride in the x, y, and z dimensions, which allows for the broadcasting of mask data. The only valid values are 0 and 1 for each dimension. For no broadcasting, set the values for each dimension to 1. For broadcasting, set desired values to 0. @result     A valid MPSCNNDropout object or nil, if failure.
-//
-// NewCNNDropoutWithDeviceKeepProbabilitySeedMaskStrideInPixels creates a new [CNNDropout].
-func NewCNNDropoutWithDeviceKeepProbabilitySeedMaskStrideInPixels(device metal.MTLDevice, keepProbability float32, seed uint, maskStrideInPixels metal.MTLSize) *CNNDropout {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNDropout")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:keepProbability:seed:maskStrideInPixels:"), device, keepProbability, seed, maskStrideInPixels)
-	return &CNNDropout{inner: raw.MPSCNNDropoutFromID(_id)}
-}
-
-// The position of the destination image’s clip rectangle origin, relative to the source image.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *CNNDropout) WithOffset(offset mpscore.MPSOffset) *CNNDropout {
-	x.inner.MPSCNNKernel.SetOffset(offset)
+	x := &CNNDropout{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the clip rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *CNNDropout) WithClipRect(clipRect metal.MTLRegion) *CNNDropout {
-	x.inner.MPSCNNKernel.SetClipRect(clipRect)
+// cNNDropoutAdopt wraps an Objective-C object that this code just created as a
+// CNNDropout (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNDropoutAdopt(id objc.ID) *CNNDropout {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNDropout{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
+}
+
+// Description returns the object's -description text.
+func (x *CNNDropout) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNDropout) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNDropout) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNDropout creates a new CNNDropout.
+func NewCNNDropout() *CNNDropout {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNDropout")), objc.RegisterName("new"))
+	return cNNDropoutAdopt(_id)
 }
 
 // The number of channels in the destination image to skip before writing output data.
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNDropout) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDropout {
-	x.inner.MPSCNNKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNDropout) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNDropout {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelOffset @abstract   The number of channels in the source MPSImage to skip before reading the input. @discussion This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
+// The number of channels in the source MPSImage to skip before reading the input. This is the starting offset into the source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set sourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least sourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set sourceFeatureChannelOffset > 32.
 //
-// WithSourceFeatureChannelOffset sets the sourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *CNNDropout) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNDropout {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelOffset(sourceFeatureChannelOffset)
+// WithSourceFeatureChannelOffset sets sourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *CNNDropout) WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNDropout {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelOffset:"), sourceFeatureChannelOffset)
 	return x
 }
 
-// @property   sourceFeatureChannelMaxCount @abstract   The maximum number of channels in the source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The maximum number of channels in the source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithSourceFeatureChannelMaxCount sets the sourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *CNNDropout) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNDropout {
-	x.inner.MPSCNNKernel.SetSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount)
-	return x
-}
-
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *CNNDropout) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNDropout {
-	x.inner.MPSCNNKernel.SetEdgeMode(edgeMode)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how the destination image is sized and how the offset into the source image is set.  It is used by the -encode methods that return a MPSImage from the left hand side.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *CNNDropout) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNDropout {
-	x.inner.MPSCNNKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *CNNDropout) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDropout {
-	x.inner.MPSCNNKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *CNNDropout) WithOptions(options mpscore.MPSKernelOptions) *CNNDropout {
-	x.inner.MPSCNNKernel.MPSKernel.SetOptions(options)
+// WithSourceFeatureChannelMaxCount sets sourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *CNNDropout) WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNDropout {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSourceFeatureChannelMaxCount:"), sourceFeatureChannelMaxCount)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CNNDropout) WithLabel(label string) *CNNDropout {
-	x.inner.MPSCNNKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// ResultStateForSourceImageSourceStatesDestinationImage calls the underlying ResultStateForSourceImageSourceStatesDestinationImage.
-func (x *CNNDropout) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState {
-	return x.inner.ResultStateForSourceImageSourceStatesDestinationImage(sourceImage, sourceStates, destinationImage)
+func (x *CNNDropout) ResultStateForSourceImageSourceStatesDestinationImage(sourceImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultStateForSourceImage:sourceStates:destinationImage:"), objref.IDOf(sourceImage), purego.SliceToNSArray(sourceStates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(destinationImage))
+	return obj.Wrap(_r)
 }
 
-// ResultStateBatchForSourceImageSourceStatesDestinationImage calls the underlying ResultStateBatchForSourceImageSourceStatesDestinationImage.
-func (x *CNNDropout) ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) *mpsneuralnetwork.MPSCNNDropoutGradientState {
-	return x.inner.ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage, sourceStates, destinationImage)
-}
-
-// TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage calls the underlying TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage.
-func (x *CNNDropout) TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState {
-	return x.inner.TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer, sourceImage, sourceStates, destinationImage)
-}
-
-// TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage calls the underlying TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage.
-func (x *CNNDropout) TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) unsafe.Pointer {
-	return x.inner.TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer, sourceImage, sourceStates, destinationImage)
-}
-
-// @property   keepProbability @abstract   The probability that each element in the input is kept. The valid range is (0.0f, 1.0f).
-//
-// KeepProbability calls the underlying KeepProbability.
+// The probability that each element in the input is kept. The valid range is (0.0f, 1.0f).
 func (x *CNNDropout) KeepProbability() float32 {
-	return x.inner.KeepProbability()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("keepProbability"))
+	return _r
 }
 
-// @property   seed @abstract   The seed used to generate random numbers.
-//
-// Seed calls the underlying Seed.
-func (x *CNNDropout) Seed() uint {
-	return x.inner.Seed()
+// The seed used to generate random numbers.
+func (x *CNNDropout) Seed() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("seed"))
+	return _r
 }
-
-// @property   maskStrideInPixels @abstract   The mask stride in the x, y, and x dimensions, which allows for the broadcasting the mask data. @discussion The only valid values are 0 and 1 for each dimension. For no broadcasting, set the values for each dimension to 1. For broadcasting, set desired values to 0.
-//
-// MaskStrideInPixels calls the underlying MaskStrideInPixels.
-func (x *CNNDropout) MaskStrideInPixels() metal.MTLSize {
-	return x.inner.MaskStrideInPixels()
-}
-
-func (x *CNNDropout) asCNNKernel() *mpsneuralnetwork.MPSCNNKernel { return &x.inner.MPSCNNKernel }
-
-func (x *CNNDropout) asKernel() *mpscore.MPSKernel { return &x.inner.MPSCNNKernel.MPSKernel }
 
 // CNNDropoutable is the interface implemented by [CNNDropout], for mocking and DI.
 type CNNDropoutable interface {
-	Unwrap() *raw.MPSCNNDropout
-	WithOffset(offset mpscore.MPSOffset) *CNNDropout
-	WithClipRect(clipRect metal.MTLRegion) *CNNDropout
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *CNNDropout
-	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset uint) *CNNDropout
-	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount uint) *CNNDropout
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *CNNDropout
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *CNNDropout
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *CNNDropout
-	WithOptions(options mpscore.MPSKernelOptions) *CNNDropout
+	obj.Object
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *CNNDropout
+	WithSourceFeatureChannelOffset(sourceFeatureChannelOffset int) *CNNDropout
+	WithSourceFeatureChannelMaxCount(sourceFeatureChannelMaxCount int) *CNNDropout
 	WithLabel(label string) *CNNDropout
-	ResultStateForSourceImageSourceStatesDestinationImage(sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState
-	ResultStateBatchForSourceImageSourceStatesDestinationImage(sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) *mpsneuralnetwork.MPSCNNDropoutGradientState
-	TemporaryResultStateForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage *mpscore.MPSImage, sourceStates *foundation.NSArray[*mpscore.MPSState], destinationImage *mpscore.MPSImage) *mpsneuralnetwork.MPSCNNDropoutGradientState
-	TemporaryResultStateBatchForCommandBufferSourceImageSourceStatesDestinationImage(commandBuffer metal.MTLCommandBuffer, sourceImage unsafe.Pointer, sourceStates *foundation.NSArray[objc.ID], destinationImage unsafe.Pointer) unsafe.Pointer
+	ResultStateForSourceImageSourceStatesDestinationImage(sourceImage obj.Object, sourceStates []obj.Object, destinationImage obj.Object) obj.Object
 	KeepProbability() float32
-	Seed() uint
-	MaskStrideInPixels() metal.MTLSize
+	Seed() int
 }
 
 var _ CNNDropoutable = (*CNNDropout)(nil)

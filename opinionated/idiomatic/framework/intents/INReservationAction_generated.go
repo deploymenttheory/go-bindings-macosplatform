@@ -5,67 +5,89 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An action a user can perform that’s relevant to a reservation.
 //
-// ReservationAction wraps [raw.INReservationAction] with a fluent Go API.
+// ReservationAction is an idiomatic wrapper over the Objective-C class INReservationAction.
 type ReservationAction struct {
-	inner *raw.INReservationAction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INReservationAction].
-func (x *ReservationAction) Unwrap() *raw.INReservationAction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ReservationAction) ID() objc.ID { return x.inner.Ptr() }
-
-// ReservationActionFromID adopts an existing object pointer as a ReservationAction (nil for 0).
+// ReservationActionFromID adopts an existing Objective-C object as a ReservationAction
+// (nil for 0), retaining it and registering a release finalizer.
 func ReservationActionFromID(id objc.ID) *ReservationAction {
 	if id == 0 {
 		return nil
 	}
-	return &ReservationAction{inner: raw.INReservationActionFromID(id)}
+	x := &ReservationAction{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// reservationActionAdopt wraps an Objective-C object that this code just created as a
+// ReservationAction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func reservationActionAdopt(id objc.ID) *ReservationAction {
+	if id == 0 {
+		return nil
+	}
+	x := &ReservationAction{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ReservationAction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ReservationAction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ReservationAction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new reservation action.
 //
-// NewReservationActionWithTypeValidDurationUserActivity creates a new [ReservationAction].
-func NewReservationActionWithTypeValidDurationUserActivity(type_ INReservationActionType, validDuration *raw.INDateComponentsRange, userActivity *foundation.NSUserActivity) *ReservationAction {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INReservationAction")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:validDuration:userActivity:"), raw.INReservationActionType(type_), validDuration.Ptr(), userActivity.Ptr())
-	return &ReservationAction{inner: raw.INReservationActionFromID(_id)}
+// NewReservationActionWithTypeValidDurationUserActivity creates a new ReservationAction.
+func NewReservationActionWithTypeValidDurationUserActivity(type_ ReservationActionType, validDuration *DateComponentsRange, userActivity obj.Object) *ReservationAction {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INReservationAction")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:validDuration:userActivity:"), type_, objref.IDOf(validDuration), objref.IDOf(userActivity))
+	return reservationActionAdopt(_id)
 }
 
-// Type calls the underlying Type.
-func (x *ReservationAction) Type() INReservationActionType {
-	return INReservationActionType(x.inner.Type())
+func (x *ReservationAction) Type() ReservationActionType {
+	_r := objc.Send[ReservationActionType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// ValidDuration calls the underlying ValidDuration.
 func (x *ReservationAction) ValidDuration() *DateComponentsRange {
-	_r := x.inner.ValidDuration()
-	if _r == nil {
-		return nil
-	}
-	return &DateComponentsRange{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("validDuration"))
+	return DateComponentsRangeFromID(_r)
 }
 
-// UserActivity calls the underlying UserActivity.
-func (x *ReservationAction) UserActivity() *foundation.NSUserActivity {
-	return x.inner.UserActivity()
+func (x *ReservationAction) UserActivity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userActivity"))
+	return obj.Wrap(_r)
 }
 
 // ReservationActionable is the interface implemented by [ReservationAction], for mocking and DI.
 type ReservationActionable interface {
-	Unwrap() *raw.INReservationAction
-	Type() INReservationActionType
+	obj.Object
+	Type() ReservationActionType
 	ValidDuration() *DateComponentsRange
-	UserActivity() *foundation.NSUserActivity
+	UserActivity() obj.Object
 }
 
 var _ ReservationActionable = (*ReservationAction)(nil)

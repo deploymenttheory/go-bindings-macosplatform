@@ -5,85 +5,103 @@
 package networkextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The report of the data provider’s action on a flow.
 //
-// NEFilterReport wraps [raw.NEFilterReport] with a fluent Go API.
+// NEFilterReport is an idiomatic wrapper over the Objective-C class NEFilterReport.
 type NEFilterReport struct {
-	inner *raw.NEFilterReport
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEFilterReport].
-func (x *NEFilterReport) Unwrap() *raw.NEFilterReport { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEFilterReport) ID() objc.ID { return x.inner.Ptr() }
-
-// NEFilterReportFromID adopts an existing object pointer as a NEFilterReport (nil for 0).
+// NEFilterReportFromID adopts an existing Objective-C object as a NEFilterReport
+// (nil for 0), retaining it and registering a release finalizer.
 func NEFilterReportFromID(id objc.ID) *NEFilterReport {
 	if id == 0 {
 		return nil
 	}
-	return &NEFilterReport{inner: raw.NEFilterReportFromID(id)}
+	x := &NEFilterReport{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNEFilterReport creates a new [NEFilterReport].
-func NewNEFilterReport() *NEFilterReport {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEFilterReport")), objc.RegisterName("new"))
-	return &NEFilterReport{inner: raw.NEFilterReportFromID(_id)}
-}
-
-// @property flow @discussion The flow on which the described action was taken.
-//
-// Flow calls the underlying Flow.
-func (x *NEFilterReport) Flow() *NEFilterFlow {
-	_r := x.inner.Flow()
-	if _r == nil {
+// nEFilterReportAdopt wraps an Objective-C object that this code just created as a
+// NEFilterReport (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEFilterReportAdopt(id objc.ID) *NEFilterReport {
+	if id == 0 {
 		return nil
 	}
-	return &NEFilterFlow{inner: _r}
+	x := &NEFilterReport{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property action @discussion The action taken upon the reported flow.
-//
-// Action calls the underlying Action.
+// Description returns the object's -description text.
+func (x *NEFilterReport) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEFilterReport) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEFilterReport) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNEFilterReport creates a new NEFilterReport.
+func NewNEFilterReport() *NEFilterReport {
+	_id := objc.Send[objc.ID](objc.ID(_class("NEFilterReport")), objc.RegisterName("new"))
+	return nEFilterReportAdopt(_id)
+}
+
+// The flow on which the described action was taken.
+func (x *NEFilterReport) Flow() *NEFilterFlow {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flow"))
+	return NEFilterFlowFromID(_r)
+}
+
+// The action taken upon the reported flow.
 func (x *NEFilterReport) Action() NEFilterAction {
-	return NEFilterAction(x.inner.Action())
+	_r := objc.Send[NEFilterAction](objref.IDOf(x), objc.RegisterName("action"))
+	return _r
 }
 
-// @property event @discussion The type of event that the report is reporting.
-//
-// Event calls the underlying Event.
+// The type of event that the report is reporting.
 func (x *NEFilterReport) Event() NEFilterReportEvent {
-	return NEFilterReportEvent(x.inner.Event())
+	_r := objc.Send[NEFilterReportEvent](objref.IDOf(x), objc.RegisterName("event"))
+	return _r
 }
 
-// @property bytesInboundCount @discussion The number of inbound bytes received from the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed or NEFilterReportEventFlowStatistics.
-//
-// BytesInboundCount calls the underlying BytesInboundCount.
-func (x *NEFilterReport) BytesInboundCount() uint {
-	return x.inner.BytesInboundCount()
+// The number of inbound bytes received from the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed or NEFilterReportEventFlowStatistics.
+func (x *NEFilterReport) BytesInboundCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesInboundCount"))
+	return _r
 }
 
-// @property bytesOutboundCount @discussion The number of outbound bytes sent on the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed or NEFilterReportEventFlowStatistics.
-//
-// BytesOutboundCount calls the underlying BytesOutboundCount.
-func (x *NEFilterReport) BytesOutboundCount() uint {
-	return x.inner.BytesOutboundCount()
+// The number of outbound bytes sent on the flow. This property is only non-zero when the report event is NEFilterReportEventFlowClosed or NEFilterReportEventFlowStatistics.
+func (x *NEFilterReport) BytesOutboundCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bytesOutboundCount"))
+	return _r
 }
 
 // NEFilterReportable is the interface implemented by [NEFilterReport], for mocking and DI.
 type NEFilterReportable interface {
-	Unwrap() *raw.NEFilterReport
+	obj.Object
 	Flow() *NEFilterFlow
 	Action() NEFilterAction
 	Event() NEFilterReportEvent
-	BytesInboundCount() uint
-	BytesOutboundCount() uint
+	BytesInboundCount() int
+	BytesOutboundCount() int
 }
 
 var _ NEFilterReportable = (*NEFilterReport)(nil)

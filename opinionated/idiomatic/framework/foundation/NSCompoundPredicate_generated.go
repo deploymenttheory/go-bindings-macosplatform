@@ -5,88 +5,99 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A specialized predicate that evaluates logical combinations of other predicates.
 //
-// CompoundPredicate wraps [raw.NSCompoundPredicate] with a fluent Go API.
+// CompoundPredicate is an idiomatic wrapper over the Objective-C class NSCompoundPredicate.
 type CompoundPredicate struct {
-	inner *raw.NSCompoundPredicate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCompoundPredicate].
-func (x *CompoundPredicate) Unwrap() *raw.NSCompoundPredicate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CompoundPredicate) ID() objc.ID { return x.inner.Ptr() }
-
-// CompoundPredicateFromID adopts an existing object pointer as a CompoundPredicate (nil for 0).
+// CompoundPredicateFromID adopts an existing Objective-C object as a CompoundPredicate
+// (nil for 0), retaining it and registering a release finalizer.
 func CompoundPredicateFromID(id objc.ID) *CompoundPredicate {
 	if id == 0 {
 		return nil
 	}
-	return &CompoundPredicate{inner: raw.NSCompoundPredicateFromID(id)}
+	x := &CompoundPredicate{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// compoundPredicateAdopt wraps an Objective-C object that this code just created as a
+// CompoundPredicate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func compoundPredicateAdopt(id objc.ID) *CompoundPredicate {
+	if id == 0 {
+		return nil
+	}
+	x := &CompoundPredicate{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CompoundPredicate) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CompoundPredicate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CompoundPredicate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns the receiver that a specified type initializes using predicates from a specified array.
 //
-// NewCompoundPredicateWithTypeSubpredicates creates a new [CompoundPredicate].
-func NewCompoundPredicateWithTypeSubpredicates(type_ NSCompoundPredicateType, subpredicates ...PredicateProvider) *CompoundPredicate {
-	_ptrs := make([]objc.ID, len(subpredicates))
-	for _i, _v := range subpredicates {
-		_ptrs[_i] = _v.asPredicate().Ptr()
-	}
-	var _arg1 *raw.NSArray[*raw.NSPredicate]
-	if len(_ptrs) > 0 {
-		_arg1 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg1 = raw.NSArrayFromID[*raw.NSPredicate](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCompoundPredicate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:subpredicates:"), raw.NSCompoundPredicateType(type_), _arg1.Ptr())
-	return &CompoundPredicate{inner: raw.NSCompoundPredicateFromID(_id)}
+// NewCompoundPredicateWithTypeSubpredicates creates a new CompoundPredicate.
+func NewCompoundPredicateWithTypeSubpredicates(type_ CompoundPredicateType, subpredicates []*Predicate) *CompoundPredicate {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCompoundPredicate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:subpredicates:"), type_, purego.SliceToNSArray(subpredicates, func(_v *Predicate) objc.ID { return objref.IDOf(_v) }))
+	return compoundPredicateAdopt(_id)
 }
 
 // Creates a predicate by decoding from the coder you specify.
 //
-// NewCompoundPredicateWithCoder creates a new [CompoundPredicate].
-func NewCompoundPredicateWithCoder(coder *raw.NSCoder) *CompoundPredicate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCompoundPredicate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &CompoundPredicate{inner: raw.NSCompoundPredicateFromID(_id)}
+// NewCompoundPredicateWithCoder creates a new CompoundPredicate.
+func NewCompoundPredicateWithCoder(coder *Coder) *CompoundPredicate {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCompoundPredicate")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return compoundPredicateAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *CompoundPredicate) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CompoundPredicate {
-	x.inner.NSPredicate.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *CompoundPredicate) WithScriptingProperties(scriptingProperties obj.Object) *CompoundPredicate {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// CompoundPredicateType calls the underlying CompoundPredicateType.
-func (x *CompoundPredicate) CompoundPredicateType() NSCompoundPredicateType {
-	return NSCompoundPredicateType(x.inner.CompoundPredicateType())
+func (x *CompoundPredicate) CompoundPredicateType() CompoundPredicateType {
+	_r := objc.Send[CompoundPredicateType](objref.IDOf(x), objc.RegisterName("compoundPredicateType"))
+	return _r
 }
 
-// Subpredicates calls the underlying Subpredicates.
-func (x *CompoundPredicate) Subpredicates() *raw.NSArray[objc.ID] {
-	return x.inner.Subpredicates()
+func (x *CompoundPredicate) Subpredicates() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subpredicates"))
+	return obj.Wrap(_r)
 }
-
-func (x *CompoundPredicate) asPredicate() *raw.NSPredicate { return &x.inner.NSPredicate }
-
-func (x *CompoundPredicate) asObject() *raw.NSObject { return &x.inner.NSPredicate.NSObject }
 
 // CompoundPredicateable is the interface implemented by [CompoundPredicate], for mocking and DI.
 type CompoundPredicateable interface {
-	Unwrap() *raw.NSCompoundPredicate
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CompoundPredicate
-	CompoundPredicateType() NSCompoundPredicateType
-	Subpredicates() *raw.NSArray[objc.ID]
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *CompoundPredicate
+	CompoundPredicateType() CompoundPredicateType
+	Subpredicates() obj.Object
 }
 
 var _ CompoundPredicateable = (*CompoundPredicate)(nil)

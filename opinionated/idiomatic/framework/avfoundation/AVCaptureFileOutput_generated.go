@@ -5,216 +5,161 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract superclass for capture outputs that can record captured data to a file.
 //
-// CaptureFileOutput wraps [raw.AVCaptureFileOutput] with a fluent Go API.
+// CaptureFileOutput is an idiomatic wrapper over the Objective-C class AVCaptureFileOutput.
 type CaptureFileOutput struct {
-	inner *raw.AVCaptureFileOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCaptureFileOutput].
-func (x *CaptureFileOutput) Unwrap() *raw.AVCaptureFileOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureFileOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureFileOutputFromID adopts an existing object pointer as a CaptureFileOutput (nil for 0).
+// CaptureFileOutputFromID adopts an existing Objective-C object as a CaptureFileOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureFileOutputFromID(id objc.ID) *CaptureFileOutput {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureFileOutput{inner: raw.AVCaptureFileOutputFromID(id)}
+	x := &CaptureFileOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureFileOutput creates a new [CaptureFileOutput].
+// captureFileOutputAdopt wraps an Objective-C object that this code just created as a
+// CaptureFileOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureFileOutputAdopt(id objc.ID) *CaptureFileOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureFileOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureFileOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureFileOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureFileOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureFileOutput creates a new CaptureFileOutput.
 func NewCaptureFileOutput() *CaptureFileOutput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCaptureFileOutput")), objc.RegisterName("new"))
-	return &CaptureFileOutput{inner: raw.AVCaptureFileOutputFromID(_id)}
-}
-
-// The delegate object for the capture file output.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *CaptureFileOutput) WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureFileOutput {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// The longest duration allowed for the recording.
-//
-// WithMaxRecordedDuration sets the maxRecordedDuration property and returns the receiver for chaining.
-func (x *CaptureFileOutput) WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureFileOutput {
-	x.inner.SetMaxRecordedDuration(maxRecordedDuration)
-	return x
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCaptureFileOutput")), objc.RegisterName("new"))
+	return captureFileOutputAdopt(_id)
 }
 
 // The maximum size, in bytes, of the data that should be recorded by the receiver.
 //
-// WithMaxRecordedFileSize sets the maxRecordedFileSize property and returns the receiver for chaining.
+// WithMaxRecordedFileSize sets maxRecordedFileSize and returns the receiver so calls can be chained.
 func (x *CaptureFileOutput) WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureFileOutput {
-	x.inner.SetMaxRecordedFileSize(maxRecordedFileSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRecordedFileSize:"), maxRecordedFileSize)
 	return x
 }
 
 // The minimum amount of free space, in bytes, required for recording to continue on a given volume.
 //
-// WithMinFreeDiskSpaceLimit sets the minFreeDiskSpaceLimit property and returns the receiver for chaining.
+// WithMinFreeDiskSpaceLimit sets minFreeDiskSpaceLimit and returns the receiver so calls can be chained.
 func (x *CaptureFileOutput) WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureFileOutput {
-	x.inner.SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFreeDiskSpaceLimit:"), minFreeDiskSpaceLimit)
 	return x
 }
 
 // A Boolean value that indicates whether to defer starting this capture output.
 //
-// WithDeferredStartEnabled sets the deferredStartEnabled property and returns the receiver for chaining.
+// WithDeferredStartEnabled sets deferredStartEnabled and returns the receiver so calls can be chained.
 func (x *CaptureFileOutput) WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureFileOutput {
-	x.inner.AVCaptureOutput.SetDeferredStartEnabled(deferredStartEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDeferredStartEnabled:"), deferredStartEnabled)
 	return x
 }
 
-// Starts recording media to the specified output URL.
-//
-// StartRecordingToOutputFileURLRecordingDelegate calls the underlying StartRecordingToOutputFileURLRecordingDelegate.
-func (x *CaptureFileOutput) StartRecordingToOutputFileURLRecordingDelegate(outputFileURL string, delegate raw.AVCaptureFileOutputRecordingDelegate) {
-	x.inner.StartRecordingToOutputFileURLRecordingDelegate(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputFileURL)), delegate)
-}
-
 // Tells the receiver to stop recording to the current file.
-//
-// StopRecording calls the underlying StopRecording.
 func (x *CaptureFileOutput) StopRecording() {
-	x.inner.StopRecording()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopRecording"))
 }
 
 // Pauses recording to the current output file.
-//
-// PauseRecording calls the underlying PauseRecording.
 func (x *CaptureFileOutput) PauseRecording() {
-	x.inner.PauseRecording()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pauseRecording"))
 }
 
 // Resumes recording to the current output file after it was previously paused using pauseRecording.
-//
-// ResumeRecording calls the underlying ResumeRecording.
 func (x *CaptureFileOutput) ResumeRecording() {
-	x.inner.ResumeRecording()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resumeRecording"))
 }
 
-// @property delegate @abstract The receiver's delegate. @discussion The value of this property is an object conforming to the AVCaptureFileOutputDelegate protocol that will be able to monitor and control recording along exact sample boundaries.
-//
-// Delegate calls the underlying Delegate.
-func (x *CaptureFileOutput) Delegate() raw.AVCaptureFileOutputDelegate {
-	return x.inner.Delegate()
+// The file URL of the file to which the receiver is currently recording incoming buffers. The value of this property is an NSURL object containing the file URL of the file currently being written by the receiver. Returns nil if the receiver is not recording to any file.
+func (x *CaptureFileOutput) OutputFileURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFileURL"))
+	return obj.Wrap(_r)
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *CaptureFileOutput) SetDelegate(delegate raw.AVCaptureFileOutputDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @property outputFileURL @abstract The file URL of the file to which the receiver is currently recording incoming buffers. @discussion The value of this property is an NSURL object containing the file URL of the file currently being written by the receiver. Returns nil if the receiver is not recording to any file.
-//
-// OutputFileURL calls the underlying OutputFileURL.
-func (x *CaptureFileOutput) OutputFileURL() *foundation.NSURL {
-	return x.inner.OutputFileURL()
-}
-
-// @property recording @abstract Indicates whether the receiver is currently recording. @discussion The value of this property is YES when the receiver currently has a file to which it is writing new samples, NO otherwise.
-//
-// IsRecording calls the underlying IsRecording.
+// Indicates whether the receiver is currently recording. The value of this property is YES when the receiver currently has a file to which it is writing new samples, NO otherwise.
 func (x *CaptureFileOutput) IsRecording() bool {
-	return x.inner.IsRecording()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRecording"))
+	return _r
 }
 
-// @property recordingPaused @abstract Indicates whether recording to the current output file is paused. @discussion This property indicates recording to the file returned by outputFileURL has been previously paused using the pauseRecording method. When a recording is paused, captured samples are not written to the output file, but new samples can be written to the same file in the future by calling resumeRecording.
-//
-// IsRecordingPaused calls the underlying IsRecordingPaused.
+// Indicates whether recording to the current output file is paused. This property indicates recording to the file returned by outputFileURL has been previously paused using the pauseRecording method. When a recording is paused, captured samples are not written to the output file, but new samples can be written to the same file in the future by calling resumeRecording.
 func (x *CaptureFileOutput) IsRecordingPaused() bool {
-	return x.inner.IsRecordingPaused()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRecordingPaused"))
+	return _r
 }
 
-// @property recordedDuration @abstract Indicates the duration of the media recorded to the current output file. @discussion If recording is in progress, this property returns the total time recorded so far.
-//
-// RecordedDuration calls the underlying RecordedDuration.
-func (x *CaptureFileOutput) RecordedDuration() coremedia.CMTime {
-	return x.inner.RecordedDuration()
-}
-
-// @property recordedFileSize @abstract Indicates the size, in bytes, of the data recorded to the current output file. @discussion If a recording is in progress, this property returns the size in bytes of the data recorded so far.
-//
-// RecordedFileSize calls the underlying RecordedFileSize.
+// Indicates the size, in bytes, of the data recorded to the current output file. If a recording is in progress, this property returns the size in bytes of the data recorded so far.
 func (x *CaptureFileOutput) RecordedFileSize() int64 {
-	return x.inner.RecordedFileSize()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("recordedFileSize"))
+	return _r
 }
 
-// @property maxRecordedDuration @abstract Specifies the maximum duration of the media that should be recorded by the receiver. @discussion This property specifies a hard limit on the duration of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is kCMTimeInvalid, which indicates no limit.
-//
-// MaxRecordedDuration calls the underlying MaxRecordedDuration.
-func (x *CaptureFileOutput) MaxRecordedDuration() coremedia.CMTime {
-	return x.inner.MaxRecordedDuration()
-}
-
-// SetMaxRecordedDuration calls the underlying SetMaxRecordedDuration.
-func (x *CaptureFileOutput) SetMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) {
-	x.inner.SetMaxRecordedDuration(maxRecordedDuration)
-}
-
-// @property maxRecordedFileSize @abstract Specifies the maximum size, in bytes, of the data that should be recorded by the receiver. @discussion This property specifies a hard limit on the data size of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is 0, which indicates no limit.
-//
-// MaxRecordedFileSize calls the underlying MaxRecordedFileSize.
+// Specifies the maximum size, in bytes, of the data that should be recorded by the receiver. This property specifies a hard limit on the data size of recorded files. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error. The default value of this property is 0, which indicates no limit.
 func (x *CaptureFileOutput) MaxRecordedFileSize() int64 {
-	return x.inner.MaxRecordedFileSize()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("maxRecordedFileSize"))
+	return _r
 }
 
-// SetMaxRecordedFileSize calls the underlying SetMaxRecordedFileSize.
 func (x *CaptureFileOutput) SetMaxRecordedFileSize(maxRecordedFileSize int64) {
-	x.inner.SetMaxRecordedFileSize(maxRecordedFileSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxRecordedFileSize:"), maxRecordedFileSize)
 }
 
-// @property minFreeDiskSpaceLimit @abstract Specifies the minimum amount of free space, in bytes, required for recording to continue on a given volume. @discussion This property specifies a hard lower limit on the amount of free space that must remain on a target volume for recording to continue. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error.
-//
-// MinFreeDiskSpaceLimit calls the underlying MinFreeDiskSpaceLimit.
+// Specifies the minimum amount of free space, in bytes, required for recording to continue on a given volume. This property specifies a hard lower limit on the amount of free space that must remain on a target volume for recording to continue. Recording is stopped when the limit is reached and the captureOutput:didFinishRecordingToOutputFileAtURL:fromConnections:error: delegate method is invoked with an appropriate error.
 func (x *CaptureFileOutput) MinFreeDiskSpaceLimit() int64 {
-	return x.inner.MinFreeDiskSpaceLimit()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("minFreeDiskSpaceLimit"))
+	return _r
 }
 
-// SetMinFreeDiskSpaceLimit calls the underlying SetMinFreeDiskSpaceLimit.
 func (x *CaptureFileOutput) SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) {
-	x.inner.SetMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinFreeDiskSpaceLimit:"), minFreeDiskSpaceLimit)
 }
-
-func (x *CaptureFileOutput) asCaptureFileOutput() *raw.AVCaptureFileOutput { return x.inner }
-
-func (x *CaptureFileOutput) asCaptureOutput() *raw.AVCaptureOutput { return &x.inner.AVCaptureOutput }
 
 // CaptureFileOutputable is the interface implemented by [CaptureFileOutput], for mocking and DI.
 type CaptureFileOutputable interface {
-	Unwrap() *raw.AVCaptureFileOutput
-	WithDelegate(delegate raw.AVCaptureFileOutputDelegate) *CaptureFileOutput
-	WithMaxRecordedDuration(maxRecordedDuration coremedia.CMTime) *CaptureFileOutput
+	obj.Object
 	WithMaxRecordedFileSize(maxRecordedFileSize int64) *CaptureFileOutput
 	WithMinFreeDiskSpaceLimit(minFreeDiskSpaceLimit int64) *CaptureFileOutput
 	WithDeferredStartEnabled(deferredStartEnabled bool) *CaptureFileOutput
-	StartRecordingToOutputFileURLRecordingDelegate(outputFileURL string, delegate raw.AVCaptureFileOutputRecordingDelegate)
 	StopRecording()
 	PauseRecording()
 	ResumeRecording()
-	Delegate() raw.AVCaptureFileOutputDelegate
-	SetDelegate(delegate raw.AVCaptureFileOutputDelegate)
-	OutputFileURL() *foundation.NSURL
+	OutputFileURL() obj.Object
 	IsRecording() bool
 	IsRecordingPaused() bool
-	RecordedDuration() coremedia.CMTime
 	RecordedFileSize() int64
-	MaxRecordedDuration() coremedia.CMTime
-	SetMaxRecordedDuration(maxRecordedDuration coremedia.CMTime)
 	MaxRecordedFileSize() int64
 	SetMaxRecordedFileSize(maxRecordedFileSize int64)
 	MinFreeDiskSpaceLimit() int64

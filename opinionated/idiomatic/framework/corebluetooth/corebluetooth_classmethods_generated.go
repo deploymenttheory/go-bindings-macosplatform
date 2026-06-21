@@ -5,53 +5,44 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// AuthorizationClass calls the underlying CBManagerAuthorizationClass.
-func AuthorizationClass() CBManagerAuthorization {
-	return CBManagerAuthorization(raw.CBManagerAuthorizationClass())
+// The current authorization of the manager, initially set to <code>CBManagerAuthorizationNotDetermined</code>. You can check this in your implementation of required delegate method {
+func AuthorizationClass() ManagerAuthorization {
+	_r := objc.Send[ManagerAuthorization](objc.ID(_class("CBManager")), objc.RegisterName("authorization"))
+	return _r
 }
 
-// AuthorizationStatusClass calls the underlying CBPeripheralManagerAuthorizationStatusClass.
-func AuthorizationStatusClass() CBPeripheralManagerAuthorizationStatus {
-	return CBPeripheralManagerAuthorizationStatus(raw.CBPeripheralManagerAuthorizationStatusClass())
+// Returns the app’s authorization status for sharing data while in the background.
+func AuthorizationStatusClass() PeripheralManagerAuthorizationStatus {
+	_r := objc.Send[PeripheralManagerAuthorizationStatus](objc.ID(_class("CBPeripheralManager")), objc.RegisterName("authorizationStatus"))
+	return _r
 }
 
-// UUIDWithString calls the underlying CBUUIDUUIDWithString.
+// Creates a Core Bluetooth UUID object from a 16-, 32-, or 128-bit UUID string.
 func UUIDWithString(theString string) *UUID {
-	_r := raw.CBUUIDUUIDWithString(foundation.NSStringStringWithUTF8String(theString))
-	if _r == nil {
-		return nil
-	}
-	return &UUID{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithString:"), purego.NSString(theString))
+	return UUIDFromID(_r)
 }
 
-// UUIDWithData calls the underlying CBUUIDUUIDWithData.
-func UUIDWithData(theData *foundation.NSData) *UUID {
-	_r := raw.CBUUIDUUIDWithData(theData)
-	if _r == nil {
-		return nil
-	}
-	return &UUID{inner: _r}
+// Creates a Core Bluetooth UUID object from a 16-, 32-, or 128-bit UUID data container.
+func UUIDWithData(theData obj.Object) *UUID {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithData:"), objref.IDOf(theData))
+	return UUIDFromID(_r)
 }
 
-// UUIDWithCFUUID calls the underlying CBUUIDUUIDWithCFUUID.
-func UUIDWithCFUUID(theUUID unsafe.Pointer) *UUID {
-	_r := raw.CBUUIDUUIDWithCFUUID(theUUID)
-	if _r == nil {
-		return nil
-	}
-	return &UUID{inner: _r}
+// Creates a Core Bluetooth UUID object from a Core Foundation UUID object.
+func UUIDWithCFUUID(theUUID obj.Object) *UUID {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithCFUUID:"), objref.IDOf(theUUID))
+	return UUIDFromID(_r)
 }
 
-// UUIDWithNSUUID calls the underlying CBUUIDUUIDWithNSUUID.
-func UUIDWithNSUUID(theUUID *foundation.NSUUID) *UUID {
-	_r := raw.CBUUIDUUIDWithNSUUID(theUUID)
-	if _r == nil {
-		return nil
-	}
-	return &UUID{inner: _r}
+// Creates a Core Bluetooth UUID object from a Foundation UUID object.
+func UUIDWithNSUUID(theUUID obj.Object) *UUID {
+	_r := objc.Send[objc.ID](objc.ID(_class("CBUUID")), objc.RegisterName("UUIDWithNSUUID:"), objref.IDOf(theUUID))
+	return UUIDFromID(_r)
 }

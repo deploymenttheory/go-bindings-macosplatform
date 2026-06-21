@@ -5,402 +5,527 @@
 package coregraphics
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KCGColorSpaceGenericGray returns the value of the CoreFoundation reference constant kCGColorSpaceGenericGray as an objc.ID.
-func KCGColorSpaceGenericGray() objc.ID { return purego.CFConstant(raw.KCGColorSpaceGenericGray()) }
-
-// KCGColorSpaceGenericRGB returns the value of the CoreFoundation reference constant kCGColorSpaceGenericRGB as an objc.ID.
-func KCGColorSpaceGenericRGB() objc.ID { return purego.CFConstant(raw.KCGColorSpaceGenericRGB()) }
-
-// KCGColorSpaceGenericCMYK returns the value of the CoreFoundation reference constant kCGColorSpaceGenericCMYK as an objc.ID.
-func KCGColorSpaceGenericCMYK() objc.ID { return purego.CFConstant(raw.KCGColorSpaceGenericCMYK()) }
-
-// KCGColorSpaceDisplayP3 returns the value of the CoreFoundation reference constant kCGColorSpaceDisplayP3 as an objc.ID.
-func KCGColorSpaceDisplayP3() objc.ID { return purego.CFConstant(raw.KCGColorSpaceDisplayP3()) }
-
-// KCGColorSpaceGenericRGBLinear returns the value of the CoreFoundation reference constant kCGColorSpaceGenericRGBLinear as an objc.ID.
-func KCGColorSpaceGenericRGBLinear() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceGenericRGBLinear())
+// KCGColorSpaceGenericGray returns the value of the constant kCGColorSpaceGenericGray.
+func KCGColorSpaceGenericGray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceGenericGray")))
 }
 
-// KCGColorSpaceAdobeRGB1998 returns the value of the CoreFoundation reference constant kCGColorSpaceAdobeRGB1998 as an objc.ID.
-func KCGColorSpaceAdobeRGB1998() objc.ID { return purego.CFConstant(raw.KCGColorSpaceAdobeRGB1998()) }
-
-// KCGColorSpaceSRGB returns the value of the CoreFoundation reference constant kCGColorSpaceSRGB as an objc.ID.
-func KCGColorSpaceSRGB() objc.ID { return purego.CFConstant(raw.KCGColorSpaceSRGB()) }
-
-// KCGColorSpaceGenericGrayGamma2_2 returns the value of the CoreFoundation reference constant kCGColorSpaceGenericGrayGamma2_2 as an objc.ID.
-func KCGColorSpaceGenericGrayGamma2_2() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceGenericGrayGamma2_2())
+// KCGColorSpaceGenericRGB returns the value of the constant kCGColorSpaceGenericRGB.
+func KCGColorSpaceGenericRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceGenericRGB")))
 }
 
-// KCGColorSpaceGenericXYZ returns the value of the CoreFoundation reference constant kCGColorSpaceGenericXYZ as an objc.ID.
-func KCGColorSpaceGenericXYZ() objc.ID { return purego.CFConstant(raw.KCGColorSpaceGenericXYZ()) }
-
-// KCGColorSpaceGenericLab returns the value of the CoreFoundation reference constant kCGColorSpaceGenericLab as an objc.ID.
-func KCGColorSpaceGenericLab() objc.ID { return purego.CFConstant(raw.KCGColorSpaceGenericLab()) }
-
-// KCGColorSpaceACESCGLinear returns the value of the CoreFoundation reference constant kCGColorSpaceACESCGLinear as an objc.ID.
-func KCGColorSpaceACESCGLinear() objc.ID { return purego.CFConstant(raw.KCGColorSpaceACESCGLinear()) }
-
-// KCGColorSpaceITUR_709 returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_709 as an objc.ID.
-func KCGColorSpaceITUR_709() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_709()) }
-
-// KCGColorSpaceITUR_709_PQ returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_709_PQ as an objc.ID.
-func KCGColorSpaceITUR_709_PQ() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_709_PQ()) }
-
-// KCGColorSpaceITUR_709_HLG returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_709_HLG as an objc.ID.
-func KCGColorSpaceITUR_709_HLG() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_709_HLG()) }
-
-// KCGColorSpaceITUR_2020 returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2020 as an objc.ID.
-func KCGColorSpaceITUR_2020() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_2020()) }
-
-// KCGColorSpaceITUR_2020_sRGBGamma returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2020_sRGBGamma as an objc.ID.
-func KCGColorSpaceITUR_2020_sRGBGamma() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceITUR_2020_sRGBGamma())
+// KCGColorSpaceGenericCMYK returns the value of the constant kCGColorSpaceGenericCMYK.
+func KCGColorSpaceGenericCMYK() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceGenericCMYK")))
 }
 
-// KCGColorSpaceROMMRGB returns the value of the CoreFoundation reference constant kCGColorSpaceROMMRGB as an objc.ID.
-func KCGColorSpaceROMMRGB() objc.ID { return purego.CFConstant(raw.KCGColorSpaceROMMRGB()) }
-
-// KCGColorSpaceDCIP3 returns the value of the CoreFoundation reference constant kCGColorSpaceDCIP3 as an objc.ID.
-func KCGColorSpaceDCIP3() objc.ID { return purego.CFConstant(raw.KCGColorSpaceDCIP3()) }
-
-// KCGColorSpaceLinearITUR_2020 returns the value of the CoreFoundation reference constant kCGColorSpaceLinearITUR_2020 as an objc.ID.
-func KCGColorSpaceLinearITUR_2020() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceLinearITUR_2020())
+// KCGColorSpaceDisplayP3 returns the value of the constant kCGColorSpaceDisplayP3.
+func KCGColorSpaceDisplayP3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceDisplayP3")))
 }
 
-// KCGColorSpaceExtendedITUR_2020 returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedITUR_2020 as an objc.ID.
-func KCGColorSpaceExtendedITUR_2020() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceExtendedITUR_2020())
+// KCGColorSpaceGenericRGBLinear returns the value of the constant kCGColorSpaceGenericRGBLinear.
+func KCGColorSpaceGenericRGBLinear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceGenericRGBLinear")))
 }
 
-// KCGColorSpaceExtendedLinearITUR_2020 returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedLinearITUR_2020 as an objc.ID.
-func KCGColorSpaceExtendedLinearITUR_2020() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceExtendedLinearITUR_2020())
+// KCGColorSpaceAdobeRGB1998 returns the value of the constant kCGColorSpaceAdobeRGB1998.
+func KCGColorSpaceAdobeRGB1998() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceAdobeRGB1998")))
 }
 
-// KCGColorSpaceLinearDisplayP3 returns the value of the CoreFoundation reference constant kCGColorSpaceLinearDisplayP3 as an objc.ID.
-func KCGColorSpaceLinearDisplayP3() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceLinearDisplayP3())
+// KCGColorSpaceSRGB returns the value of the constant kCGColorSpaceSRGB.
+func KCGColorSpaceSRGB() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceSRGB"))) }
+
+// KCGColorSpaceGenericGrayGamma2_2 returns the value of the constant kCGColorSpaceGenericGrayGamma2_2.
+func KCGColorSpaceGenericGrayGamma2_2() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceGenericGrayGamma2_2")))
 }
 
-// KCGColorSpaceExtendedDisplayP3 returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedDisplayP3 as an objc.ID.
-func KCGColorSpaceExtendedDisplayP3() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceExtendedDisplayP3())
+// KCGColorSpaceGenericXYZ returns the value of the constant kCGColorSpaceGenericXYZ.
+func KCGColorSpaceGenericXYZ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceGenericXYZ")))
 }
 
-// KCGColorSpaceExtendedLinearDisplayP3 returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedLinearDisplayP3 as an objc.ID.
-func KCGColorSpaceExtendedLinearDisplayP3() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceExtendedLinearDisplayP3())
+// KCGColorSpaceGenericLab returns the value of the constant kCGColorSpaceGenericLab.
+func KCGColorSpaceGenericLab() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceGenericLab")))
 }
 
-// KCGColorSpaceITUR_2100_PQ returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2100_PQ as an objc.ID.
-func KCGColorSpaceITUR_2100_PQ() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_2100_PQ()) }
-
-// KCGColorSpaceITUR_2100_HLG returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2100_HLG as an objc.ID.
-func KCGColorSpaceITUR_2100_HLG() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_2100_HLG()) }
-
-// KCGColorSpaceDisplayP3_PQ returns the value of the CoreFoundation reference constant kCGColorSpaceDisplayP3_PQ as an objc.ID.
-func KCGColorSpaceDisplayP3_PQ() objc.ID { return purego.CFConstant(raw.KCGColorSpaceDisplayP3_PQ()) }
-
-// KCGColorSpaceDisplayP3_HLG returns the value of the CoreFoundation reference constant kCGColorSpaceDisplayP3_HLG as an objc.ID.
-func KCGColorSpaceDisplayP3_HLG() objc.ID { return purego.CFConstant(raw.KCGColorSpaceDisplayP3_HLG()) }
-
-// KCGColorSpaceITUR_2020_PQ returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2020_PQ as an objc.ID.
-func KCGColorSpaceITUR_2020_PQ() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_2020_PQ()) }
-
-// KCGColorSpaceITUR_2020_HLG returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2020_HLG as an objc.ID.
-func KCGColorSpaceITUR_2020_HLG() objc.ID { return purego.CFConstant(raw.KCGColorSpaceITUR_2020_HLG()) }
-
-// KCGColorSpaceDisplayP3_PQ_EOTF returns the value of the CoreFoundation reference constant kCGColorSpaceDisplayP3_PQ_EOTF as an objc.ID.
-func KCGColorSpaceDisplayP3_PQ_EOTF() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceDisplayP3_PQ_EOTF())
+// KCGColorSpaceACESCGLinear returns the value of the constant kCGColorSpaceACESCGLinear.
+func KCGColorSpaceACESCGLinear() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceACESCGLinear")))
 }
 
-// KCGColorSpaceITUR_2020_PQ_EOTF returns the value of the CoreFoundation reference constant kCGColorSpaceITUR_2020_PQ_EOTF as an objc.ID.
-func KCGColorSpaceITUR_2020_PQ_EOTF() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceITUR_2020_PQ_EOTF())
+// KCGColorSpaceITUR_709 returns the value of the constant kCGColorSpaceITUR_709.
+func KCGColorSpaceITUR_709() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceITUR_709")))
 }
 
-// KCGColorSpaceExtendedSRGB returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedSRGB as an objc.ID.
-func KCGColorSpaceExtendedSRGB() objc.ID { return purego.CFConstant(raw.KCGColorSpaceExtendedSRGB()) }
-
-// KCGColorSpaceLinearSRGB returns the value of the CoreFoundation reference constant kCGColorSpaceLinearSRGB as an objc.ID.
-func KCGColorSpaceLinearSRGB() objc.ID { return purego.CFConstant(raw.KCGColorSpaceLinearSRGB()) }
-
-// KCGColorSpaceExtendedLinearSRGB returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedLinearSRGB as an objc.ID.
-func KCGColorSpaceExtendedLinearSRGB() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceExtendedLinearSRGB())
+// KCGColorSpaceITUR_709_PQ returns the value of the constant kCGColorSpaceITUR_709_PQ.
+func KCGColorSpaceITUR_709_PQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceITUR_709_PQ")))
 }
 
-// KCGColorSpaceExtendedGray returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedGray as an objc.ID.
-func KCGColorSpaceExtendedGray() objc.ID { return purego.CFConstant(raw.KCGColorSpaceExtendedGray()) }
-
-// KCGColorSpaceLinearGray returns the value of the CoreFoundation reference constant kCGColorSpaceLinearGray as an objc.ID.
-func KCGColorSpaceLinearGray() objc.ID { return purego.CFConstant(raw.KCGColorSpaceLinearGray()) }
-
-// KCGColorSpaceExtendedLinearGray returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedLinearGray as an objc.ID.
-func KCGColorSpaceExtendedLinearGray() objc.ID {
-	return purego.CFConstant(raw.KCGColorSpaceExtendedLinearGray())
+// KCGColorSpaceITUR_709_HLG returns the value of the constant kCGColorSpaceITUR_709_HLG.
+func KCGColorSpaceITUR_709_HLG() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceITUR_709_HLG")))
 }
 
-// KCGColorSpaceCoreMedia709 returns the value of the CoreFoundation reference constant kCGColorSpaceCoreMedia709 as an objc.ID.
-func KCGColorSpaceCoreMedia709() objc.ID { return purego.CFConstant(raw.KCGColorSpaceCoreMedia709()) }
-
-// KCGColorSpaceExtendedRange returns the value of the CoreFoundation reference constant kCGColorSpaceExtendedRange as an objc.ID.
-func KCGColorSpaceExtendedRange() objc.ID { return purego.CFConstant(raw.KCGColorSpaceExtendedRange()) }
-
-// KCGColorWhite returns the value of the CoreFoundation reference constant kCGColorWhite as an objc.ID.
-func KCGColorWhite() objc.ID { return purego.CFConstant(raw.KCGColorWhite()) }
-
-// KCGColorBlack returns the value of the CoreFoundation reference constant kCGColorBlack as an objc.ID.
-func KCGColorBlack() objc.ID { return purego.CFConstant(raw.KCGColorBlack()) }
-
-// KCGColorClear returns the value of the CoreFoundation reference constant kCGColorClear as an objc.ID.
-func KCGColorClear() objc.ID { return purego.CFConstant(raw.KCGColorClear()) }
-
-// KCGFontVariationAxisName returns the value of the CoreFoundation reference constant kCGFontVariationAxisName as an objc.ID.
-func KCGFontVariationAxisName() objc.ID { return purego.CFConstant(raw.KCGFontVariationAxisName()) }
-
-// KCGFontVariationAxisMinValue returns the value of the CoreFoundation reference constant kCGFontVariationAxisMinValue as an objc.ID.
-func KCGFontVariationAxisMinValue() objc.ID {
-	return purego.CFConstant(raw.KCGFontVariationAxisMinValue())
+// KCGColorSpaceITUR_2020 returns the value of the constant kCGColorSpaceITUR_2020.
+func KCGColorSpaceITUR_2020() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceITUR_2020")))
 }
 
-// KCGFontVariationAxisMaxValue returns the value of the CoreFoundation reference constant kCGFontVariationAxisMaxValue as an objc.ID.
-func KCGFontVariationAxisMaxValue() objc.ID {
-	return purego.CFConstant(raw.KCGFontVariationAxisMaxValue())
+// KCGColorSpaceITUR_2020_sRGBGamma returns the value of the constant kCGColorSpaceITUR_2020_sRGBGamma.
+func KCGColorSpaceITUR_2020_sRGBGamma() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceITUR_2020_sRGBGamma")))
 }
 
-// KCGFontVariationAxisDefaultValue returns the value of the CoreFoundation reference constant kCGFontVariationAxisDefaultValue as an objc.ID.
-func KCGFontVariationAxisDefaultValue() objc.ID {
-	return purego.CFConstant(raw.KCGFontVariationAxisDefaultValue())
+// KCGColorSpaceROMMRGB returns the value of the constant kCGColorSpaceROMMRGB.
+func KCGColorSpaceROMMRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceROMMRGB")))
 }
 
-// KCGPDFOutlineTitle returns the value of the CoreFoundation reference constant kCGPDFOutlineTitle as an objc.ID.
-func KCGPDFOutlineTitle() objc.ID { return purego.CFConstant(raw.KCGPDFOutlineTitle()) }
-
-// KCGPDFOutlineChildren returns the value of the CoreFoundation reference constant kCGPDFOutlineChildren as an objc.ID.
-func KCGPDFOutlineChildren() objc.ID { return purego.CFConstant(raw.KCGPDFOutlineChildren()) }
-
-// KCGPDFOutlineDestination returns the value of the CoreFoundation reference constant kCGPDFOutlineDestination as an objc.ID.
-func KCGPDFOutlineDestination() objc.ID { return purego.CFConstant(raw.KCGPDFOutlineDestination()) }
-
-// KCGPDFOutlineDestinationRect returns the value of the CoreFoundation reference constant kCGPDFOutlineDestinationRect as an objc.ID.
-func KCGPDFOutlineDestinationRect() objc.ID {
-	return purego.CFConstant(raw.KCGPDFOutlineDestinationRect())
+// KCGColorSpaceDCIP3 returns the value of the constant kCGColorSpaceDCIP3.
+func KCGColorSpaceDCIP3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceDCIP3")))
 }
 
-// KCGEXRToneMappingGammaDefog returns the value of the CoreFoundation reference constant kCGEXRToneMappingGammaDefog as an objc.ID.
-func KCGEXRToneMappingGammaDefog() objc.ID {
-	return purego.CFConstant(raw.KCGEXRToneMappingGammaDefog())
+// KCGColorSpaceLinearITUR_2020 returns the value of the constant kCGColorSpaceLinearITUR_2020.
+func KCGColorSpaceLinearITUR_2020() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceLinearITUR_2020")))
 }
 
-// KCGEXRToneMappingGammaExposure returns the value of the CoreFoundation reference constant kCGEXRToneMappingGammaExposure as an objc.ID.
-func KCGEXRToneMappingGammaExposure() objc.ID {
-	return purego.CFConstant(raw.KCGEXRToneMappingGammaExposure())
+// KCGColorSpaceExtendedITUR_2020 returns the value of the constant kCGColorSpaceExtendedITUR_2020.
+func KCGColorSpaceExtendedITUR_2020() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceExtendedITUR_2020")))
 }
 
-// KCGEXRToneMappingGammaKneeLow returns the value of the CoreFoundation reference constant kCGEXRToneMappingGammaKneeLow as an objc.ID.
-func KCGEXRToneMappingGammaKneeLow() objc.ID {
-	return purego.CFConstant(raw.KCGEXRToneMappingGammaKneeLow())
+// KCGColorSpaceExtendedLinearITUR_2020 returns the value of the constant kCGColorSpaceExtendedLinearITUR_2020.
+func KCGColorSpaceExtendedLinearITUR_2020() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceExtendedLinearITUR_2020")))
 }
 
-// KCGEXRToneMappingGammaKneeHigh returns the value of the CoreFoundation reference constant kCGEXRToneMappingGammaKneeHigh as an objc.ID.
-func KCGEXRToneMappingGammaKneeHigh() objc.ID {
-	return purego.CFConstant(raw.KCGEXRToneMappingGammaKneeHigh())
+// KCGColorSpaceLinearDisplayP3 returns the value of the constant kCGColorSpaceLinearDisplayP3.
+func KCGColorSpaceLinearDisplayP3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceLinearDisplayP3")))
 }
 
-// KCGUse100nitsHLGOOTF returns the value of the CoreFoundation reference constant kCGUse100nitsHLGOOTF as an objc.ID.
-func KCGUse100nitsHLGOOTF() objc.ID { return purego.CFConstant(raw.KCGUse100nitsHLGOOTF()) }
-
-// KCGUseBT1886ForCoreVideoGamma returns the value of the CoreFoundation reference constant kCGUseBT1886ForCoreVideoGamma as an objc.ID.
-func KCGUseBT1886ForCoreVideoGamma() objc.ID {
-	return purego.CFConstant(raw.KCGUseBT1886ForCoreVideoGamma())
+// KCGColorSpaceExtendedDisplayP3 returns the value of the constant kCGColorSpaceExtendedDisplayP3.
+func KCGColorSpaceExtendedDisplayP3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceExtendedDisplayP3")))
 }
 
-// KCGSkipBoostToHDR returns the value of the CoreFoundation reference constant kCGSkipBoostToHDR as an objc.ID.
-func KCGSkipBoostToHDR() objc.ID { return purego.CFConstant(raw.KCGSkipBoostToHDR()) }
-
-// KCGUseLegacyHDREcosystem returns the value of the CoreFoundation reference constant kCGUseLegacyHDREcosystem as an objc.ID.
-func KCGUseLegacyHDREcosystem() objc.ID { return purego.CFConstant(raw.KCGUseLegacyHDREcosystem()) }
-
-// KCGPreferredDynamicRange returns the value of the CoreFoundation reference constant kCGPreferredDynamicRange as an objc.ID.
-func KCGPreferredDynamicRange() objc.ID { return purego.CFConstant(raw.KCGPreferredDynamicRange()) }
-
-// KCGDynamicRangeHigh returns the value of the CoreFoundation reference constant kCGDynamicRangeHigh as an objc.ID.
-func KCGDynamicRangeHigh() objc.ID { return purego.CFConstant(raw.KCGDynamicRangeHigh()) }
-
-// KCGDynamicRangeConstrained returns the value of the CoreFoundation reference constant kCGDynamicRangeConstrained as an objc.ID.
-func KCGDynamicRangeConstrained() objc.ID { return purego.CFConstant(raw.KCGDynamicRangeConstrained()) }
-
-// KCGDynamicRangeStandard returns the value of the CoreFoundation reference constant kCGDynamicRangeStandard as an objc.ID.
-func KCGDynamicRangeStandard() objc.ID { return purego.CFConstant(raw.KCGDynamicRangeStandard()) }
-
-// KCGContentAverageLightLevel returns the value of the CoreFoundation reference constant kCGContentAverageLightLevel as an objc.ID.
-func KCGContentAverageLightLevel() objc.ID {
-	return purego.CFConstant(raw.KCGContentAverageLightLevel())
+// KCGColorSpaceExtendedLinearDisplayP3 returns the value of the constant kCGColorSpaceExtendedLinearDisplayP3.
+func KCGColorSpaceExtendedLinearDisplayP3() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceExtendedLinearDisplayP3")))
 }
 
-// KCGContentAverageLightLevelNits returns the value of the CoreFoundation reference constant kCGContentAverageLightLevelNits as an objc.ID.
-func KCGContentAverageLightLevelNits() objc.ID {
-	return purego.CFConstant(raw.KCGContentAverageLightLevelNits())
+// KCGColorSpaceITUR_2100_PQ returns the value of the constant kCGColorSpaceITUR_2100_PQ.
+func KCGColorSpaceITUR_2100_PQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceITUR_2100_PQ")))
 }
 
-// KCGAdaptiveMaximumBitDepth returns the value of the CoreFoundation reference constant kCGAdaptiveMaximumBitDepth as an objc.ID.
-func KCGAdaptiveMaximumBitDepth() objc.ID { return purego.CFConstant(raw.KCGAdaptiveMaximumBitDepth()) }
-
-// KCGColorConversionBlackPointCompensation returns the value of the CoreFoundation reference constant kCGColorConversionBlackPointCompensation as an objc.ID.
-func KCGColorConversionBlackPointCompensation() objc.ID {
-	return purego.CFConstant(raw.KCGColorConversionBlackPointCompensation())
+// KCGColorSpaceITUR_2100_HLG returns the value of the constant kCGColorSpaceITUR_2100_HLG.
+func KCGColorSpaceITUR_2100_HLG() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceITUR_2100_HLG")))
 }
 
-// KCGColorConversionTRCSize returns the value of the CoreFoundation reference constant kCGColorConversionTRCSize as an objc.ID.
-func KCGColorConversionTRCSize() objc.ID { return purego.CFConstant(raw.KCGColorConversionTRCSize()) }
-
-// KCGPDFContextMediaBox returns the value of the CoreFoundation reference constant kCGPDFContextMediaBox as an objc.ID.
-func KCGPDFContextMediaBox() objc.ID { return purego.CFConstant(raw.KCGPDFContextMediaBox()) }
-
-// KCGPDFContextCropBox returns the value of the CoreFoundation reference constant kCGPDFContextCropBox as an objc.ID.
-func KCGPDFContextCropBox() objc.ID { return purego.CFConstant(raw.KCGPDFContextCropBox()) }
-
-// KCGPDFContextBleedBox returns the value of the CoreFoundation reference constant kCGPDFContextBleedBox as an objc.ID.
-func KCGPDFContextBleedBox() objc.ID { return purego.CFConstant(raw.KCGPDFContextBleedBox()) }
-
-// KCGPDFContextTrimBox returns the value of the CoreFoundation reference constant kCGPDFContextTrimBox as an objc.ID.
-func KCGPDFContextTrimBox() objc.ID { return purego.CFConstant(raw.KCGPDFContextTrimBox()) }
-
-// KCGPDFContextArtBox returns the value of the CoreFoundation reference constant kCGPDFContextArtBox as an objc.ID.
-func KCGPDFContextArtBox() objc.ID { return purego.CFConstant(raw.KCGPDFContextArtBox()) }
-
-// KCGPDFContextTitle returns the value of the CoreFoundation reference constant kCGPDFContextTitle as an objc.ID.
-func KCGPDFContextTitle() objc.ID { return purego.CFConstant(raw.KCGPDFContextTitle()) }
-
-// KCGPDFContextAuthor returns the value of the CoreFoundation reference constant kCGPDFContextAuthor as an objc.ID.
-func KCGPDFContextAuthor() objc.ID { return purego.CFConstant(raw.KCGPDFContextAuthor()) }
-
-// KCGPDFContextSubject returns the value of the CoreFoundation reference constant kCGPDFContextSubject as an objc.ID.
-func KCGPDFContextSubject() objc.ID { return purego.CFConstant(raw.KCGPDFContextSubject()) }
-
-// KCGPDFContextKeywords returns the value of the CoreFoundation reference constant kCGPDFContextKeywords as an objc.ID.
-func KCGPDFContextKeywords() objc.ID { return purego.CFConstant(raw.KCGPDFContextKeywords()) }
-
-// KCGPDFContextCreator returns the value of the CoreFoundation reference constant kCGPDFContextCreator as an objc.ID.
-func KCGPDFContextCreator() objc.ID { return purego.CFConstant(raw.KCGPDFContextCreator()) }
-
-// KCGPDFContextOwnerPassword returns the value of the CoreFoundation reference constant kCGPDFContextOwnerPassword as an objc.ID.
-func KCGPDFContextOwnerPassword() objc.ID { return purego.CFConstant(raw.KCGPDFContextOwnerPassword()) }
-
-// KCGPDFContextUserPassword returns the value of the CoreFoundation reference constant kCGPDFContextUserPassword as an objc.ID.
-func KCGPDFContextUserPassword() objc.ID { return purego.CFConstant(raw.KCGPDFContextUserPassword()) }
-
-// KCGPDFContextEncryptionKeyLength returns the value of the CoreFoundation reference constant kCGPDFContextEncryptionKeyLength as an objc.ID.
-func KCGPDFContextEncryptionKeyLength() objc.ID {
-	return purego.CFConstant(raw.KCGPDFContextEncryptionKeyLength())
+// KCGColorSpaceDisplayP3_PQ returns the value of the constant kCGColorSpaceDisplayP3_PQ.
+func KCGColorSpaceDisplayP3_PQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceDisplayP3_PQ")))
 }
 
-// KCGPDFContextAllowsPrinting returns the value of the CoreFoundation reference constant kCGPDFContextAllowsPrinting as an objc.ID.
-func KCGPDFContextAllowsPrinting() objc.ID {
-	return purego.CFConstant(raw.KCGPDFContextAllowsPrinting())
+// KCGColorSpaceDisplayP3_HLG returns the value of the constant kCGColorSpaceDisplayP3_HLG.
+func KCGColorSpaceDisplayP3_HLG() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceDisplayP3_HLG")))
 }
 
-// KCGPDFContextAllowsCopying returns the value of the CoreFoundation reference constant kCGPDFContextAllowsCopying as an objc.ID.
-func KCGPDFContextAllowsCopying() objc.ID { return purego.CFConstant(raw.KCGPDFContextAllowsCopying()) }
-
-// KCGPDFContextOutputIntent returns the value of the CoreFoundation reference constant kCGPDFContextOutputIntent as an objc.ID.
-func KCGPDFContextOutputIntent() objc.ID { return purego.CFConstant(raw.KCGPDFContextOutputIntent()) }
-
-// KCGPDFXOutputIntentSubtype returns the value of the CoreFoundation reference constant kCGPDFXOutputIntentSubtype as an objc.ID.
-func KCGPDFXOutputIntentSubtype() objc.ID { return purego.CFConstant(raw.KCGPDFXOutputIntentSubtype()) }
-
-// KCGPDFXOutputConditionIdentifier returns the value of the CoreFoundation reference constant kCGPDFXOutputConditionIdentifier as an objc.ID.
-func KCGPDFXOutputConditionIdentifier() objc.ID {
-	return purego.CFConstant(raw.KCGPDFXOutputConditionIdentifier())
+// KCGColorSpaceITUR_2020_PQ returns the value of the constant kCGColorSpaceITUR_2020_PQ.
+func KCGColorSpaceITUR_2020_PQ() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceITUR_2020_PQ")))
 }
 
-// KCGPDFXOutputCondition returns the value of the CoreFoundation reference constant kCGPDFXOutputCondition as an objc.ID.
-func KCGPDFXOutputCondition() objc.ID { return purego.CFConstant(raw.KCGPDFXOutputCondition()) }
-
-// KCGPDFXRegistryName returns the value of the CoreFoundation reference constant kCGPDFXRegistryName as an objc.ID.
-func KCGPDFXRegistryName() objc.ID { return purego.CFConstant(raw.KCGPDFXRegistryName()) }
-
-// KCGPDFXInfo returns the value of the CoreFoundation reference constant kCGPDFXInfo as an objc.ID.
-func KCGPDFXInfo() objc.ID { return purego.CFConstant(raw.KCGPDFXInfo()) }
-
-// KCGPDFXDestinationOutputProfile returns the value of the CoreFoundation reference constant kCGPDFXDestinationOutputProfile as an objc.ID.
-func KCGPDFXDestinationOutputProfile() objc.ID {
-	return purego.CFConstant(raw.KCGPDFXDestinationOutputProfile())
+// KCGColorSpaceITUR_2020_HLG returns the value of the constant kCGColorSpaceITUR_2020_HLG.
+func KCGColorSpaceITUR_2020_HLG() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceITUR_2020_HLG")))
 }
 
-// KCGPDFContextOutputIntents returns the value of the CoreFoundation reference constant kCGPDFContextOutputIntents as an objc.ID.
-func KCGPDFContextOutputIntents() objc.ID { return purego.CFConstant(raw.KCGPDFContextOutputIntents()) }
-
-// KCGPDFContextAccessPermissions returns the value of the CoreFoundation reference constant kCGPDFContextAccessPermissions as an objc.ID.
-func KCGPDFContextAccessPermissions() objc.ID {
-	return purego.CFConstant(raw.KCGPDFContextAccessPermissions())
+// KCGColorSpaceDisplayP3_PQ_EOTF returns the value of the constant kCGColorSpaceDisplayP3_PQ_EOTF.
+func KCGColorSpaceDisplayP3_PQ_EOTF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceDisplayP3_PQ_EOTF")))
 }
 
-// KCGPDFContextCreateLinearizedPDF returns the value of the CoreFoundation reference constant kCGPDFContextCreateLinearizedPDF as an objc.ID.
-func KCGPDFContextCreateLinearizedPDF() objc.ID {
-	return purego.CFConstant(raw.KCGPDFContextCreateLinearizedPDF())
+// KCGColorSpaceITUR_2020_PQ_EOTF returns the value of the constant kCGColorSpaceITUR_2020_PQ_EOTF.
+func KCGColorSpaceITUR_2020_PQ_EOTF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceITUR_2020_PQ_EOTF")))
 }
 
-// KCGPDFContextCreatePDFA returns the value of the CoreFoundation reference constant kCGPDFContextCreatePDFA as an objc.ID.
-func KCGPDFContextCreatePDFA() objc.ID { return purego.CFConstant(raw.KCGPDFContextCreatePDFA()) }
-
-// KCGWindowNumber returns the value of the CoreFoundation reference constant kCGWindowNumber as an objc.ID.
-func KCGWindowNumber() objc.ID { return purego.CFConstant(raw.KCGWindowNumber()) }
-
-// KCGWindowStoreType returns the value of the CoreFoundation reference constant kCGWindowStoreType as an objc.ID.
-func KCGWindowStoreType() objc.ID { return purego.CFConstant(raw.KCGWindowStoreType()) }
-
-// KCGWindowLayer returns the value of the CoreFoundation reference constant kCGWindowLayer as an objc.ID.
-func KCGWindowLayer() objc.ID { return purego.CFConstant(raw.KCGWindowLayer()) }
-
-// KCGWindowBounds returns the value of the CoreFoundation reference constant kCGWindowBounds as an objc.ID.
-func KCGWindowBounds() objc.ID { return purego.CFConstant(raw.KCGWindowBounds()) }
-
-// KCGWindowSharingState returns the value of the CoreFoundation reference constant kCGWindowSharingState as an objc.ID.
-func KCGWindowSharingState() objc.ID { return purego.CFConstant(raw.KCGWindowSharingState()) }
-
-// KCGWindowAlpha returns the value of the CoreFoundation reference constant kCGWindowAlpha as an objc.ID.
-func KCGWindowAlpha() objc.ID { return purego.CFConstant(raw.KCGWindowAlpha()) }
-
-// KCGWindowOwnerPID returns the value of the CoreFoundation reference constant kCGWindowOwnerPID as an objc.ID.
-func KCGWindowOwnerPID() objc.ID { return purego.CFConstant(raw.KCGWindowOwnerPID()) }
-
-// KCGWindowMemoryUsage returns the value of the CoreFoundation reference constant kCGWindowMemoryUsage as an objc.ID.
-func KCGWindowMemoryUsage() objc.ID { return purego.CFConstant(raw.KCGWindowMemoryUsage()) }
-
-// KCGWindowWorkspace returns the value of the CoreFoundation reference constant kCGWindowWorkspace as an objc.ID.
-func KCGWindowWorkspace() objc.ID { return purego.CFConstant(raw.KCGWindowWorkspace()) }
-
-// KCGWindowOwnerName returns the value of the CoreFoundation reference constant kCGWindowOwnerName as an objc.ID.
-func KCGWindowOwnerName() objc.ID { return purego.CFConstant(raw.KCGWindowOwnerName()) }
-
-// KCGWindowName returns the value of the CoreFoundation reference constant kCGWindowName as an objc.ID.
-func KCGWindowName() objc.ID { return purego.CFConstant(raw.KCGWindowName()) }
-
-// KCGWindowIsOnscreen returns the value of the CoreFoundation reference constant kCGWindowIsOnscreen as an objc.ID.
-func KCGWindowIsOnscreen() objc.ID { return purego.CFConstant(raw.KCGWindowIsOnscreen()) }
-
-// KCGWindowBackingLocationVideoMemory returns the value of the CoreFoundation reference constant kCGWindowBackingLocationVideoMemory as an objc.ID.
-func KCGWindowBackingLocationVideoMemory() objc.ID {
-	return purego.CFConstant(raw.KCGWindowBackingLocationVideoMemory())
+// KCGColorSpaceExtendedSRGB returns the value of the constant kCGColorSpaceExtendedSRGB.
+func KCGColorSpaceExtendedSRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceExtendedSRGB")))
 }
 
-// KCGDisplayShowDuplicateLowResolutionModes returns the value of the CoreFoundation reference constant kCGDisplayShowDuplicateLowResolutionModes as an objc.ID.
-func KCGDisplayShowDuplicateLowResolutionModes() objc.ID {
-	return purego.CFConstant(raw.KCGDisplayShowDuplicateLowResolutionModes())
+// KCGColorSpaceLinearSRGB returns the value of the constant kCGColorSpaceLinearSRGB.
+func KCGColorSpaceLinearSRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceLinearSRGB")))
 }
 
-// KCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995 returns the value of the CoreFoundation reference constant kCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995 as an objc.ID.
-func KCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995() objc.ID {
-	return purego.CFConstant(raw.KCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995())
+// KCGColorSpaceExtendedLinearSRGB returns the value of the constant kCGColorSpaceExtendedLinearSRGB.
+func KCGColorSpaceExtendedLinearSRGB() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceExtendedLinearSRGB")))
+}
+
+// KCGColorSpaceExtendedGray returns the value of the constant kCGColorSpaceExtendedGray.
+func KCGColorSpaceExtendedGray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceExtendedGray")))
+}
+
+// KCGColorSpaceLinearGray returns the value of the constant kCGColorSpaceLinearGray.
+func KCGColorSpaceLinearGray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceLinearGray")))
+}
+
+// KCGColorSpaceExtendedLinearGray returns the value of the constant kCGColorSpaceExtendedLinearGray.
+func KCGColorSpaceExtendedLinearGray() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceExtendedLinearGray")))
+}
+
+// KCGColorSpaceCoreMedia709 returns the value of the constant kCGColorSpaceCoreMedia709.
+func KCGColorSpaceCoreMedia709() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceCoreMedia709")))
+}
+
+// KCGColorSpaceExtendedRange returns the value of the constant kCGColorSpaceExtendedRange.
+func KCGColorSpaceExtendedRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorSpaceExtendedRange")))
+}
+
+// KCGColorWhite returns the value of the constant kCGColorWhite.
+func KCGColorWhite() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCGColorWhite"))) }
+
+// KCGColorBlack returns the value of the constant kCGColorBlack.
+func KCGColorBlack() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCGColorBlack"))) }
+
+// KCGColorClear returns the value of the constant kCGColorClear.
+func KCGColorClear() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCGColorClear"))) }
+
+// KCGFontVariationAxisName returns the value of the constant kCGFontVariationAxisName.
+func KCGFontVariationAxisName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGFontVariationAxisName")))
+}
+
+// KCGFontVariationAxisMinValue returns the value of the constant kCGFontVariationAxisMinValue.
+func KCGFontVariationAxisMinValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGFontVariationAxisMinValue")))
+}
+
+// KCGFontVariationAxisMaxValue returns the value of the constant kCGFontVariationAxisMaxValue.
+func KCGFontVariationAxisMaxValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGFontVariationAxisMaxValue")))
+}
+
+// KCGFontVariationAxisDefaultValue returns the value of the constant kCGFontVariationAxisDefaultValue.
+func KCGFontVariationAxisDefaultValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGFontVariationAxisDefaultValue")))
+}
+
+// KCGPDFOutlineTitle returns the value of the constant kCGPDFOutlineTitle.
+func KCGPDFOutlineTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFOutlineTitle")))
+}
+
+// KCGPDFOutlineChildren returns the value of the constant kCGPDFOutlineChildren.
+func KCGPDFOutlineChildren() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFOutlineChildren")))
+}
+
+// KCGPDFOutlineDestination returns the value of the constant kCGPDFOutlineDestination.
+func KCGPDFOutlineDestination() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFOutlineDestination")))
+}
+
+// KCGPDFOutlineDestinationRect returns the value of the constant kCGPDFOutlineDestinationRect.
+func KCGPDFOutlineDestinationRect() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFOutlineDestinationRect")))
+}
+
+// KCGEXRToneMappingGammaDefog returns the value of the constant kCGEXRToneMappingGammaDefog.
+func KCGEXRToneMappingGammaDefog() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGEXRToneMappingGammaDefog")))
+}
+
+// KCGEXRToneMappingGammaExposure returns the value of the constant kCGEXRToneMappingGammaExposure.
+func KCGEXRToneMappingGammaExposure() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGEXRToneMappingGammaExposure")))
+}
+
+// KCGEXRToneMappingGammaKneeLow returns the value of the constant kCGEXRToneMappingGammaKneeLow.
+func KCGEXRToneMappingGammaKneeLow() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGEXRToneMappingGammaKneeLow")))
+}
+
+// KCGEXRToneMappingGammaKneeHigh returns the value of the constant kCGEXRToneMappingGammaKneeHigh.
+func KCGEXRToneMappingGammaKneeHigh() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGEXRToneMappingGammaKneeHigh")))
+}
+
+// KCGUse100nitsHLGOOTF returns the value of the constant kCGUse100nitsHLGOOTF.
+func KCGUse100nitsHLGOOTF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGUse100nitsHLGOOTF")))
+}
+
+// KCGUseBT1886ForCoreVideoGamma returns the value of the constant kCGUseBT1886ForCoreVideoGamma.
+func KCGUseBT1886ForCoreVideoGamma() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGUseBT1886ForCoreVideoGamma")))
+}
+
+// KCGSkipBoostToHDR returns the value of the constant kCGSkipBoostToHDR.
+func KCGSkipBoostToHDR() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCGSkipBoostToHDR"))) }
+
+// KCGUseLegacyHDREcosystem returns the value of the constant kCGUseLegacyHDREcosystem.
+func KCGUseLegacyHDREcosystem() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGUseLegacyHDREcosystem")))
+}
+
+// KCGPreferredDynamicRange returns the value of the constant kCGPreferredDynamicRange.
+func KCGPreferredDynamicRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPreferredDynamicRange")))
+}
+
+// KCGDynamicRangeHigh returns the value of the constant kCGDynamicRangeHigh.
+func KCGDynamicRangeHigh() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGDynamicRangeHigh")))
+}
+
+// KCGDynamicRangeConstrained returns the value of the constant kCGDynamicRangeConstrained.
+func KCGDynamicRangeConstrained() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGDynamicRangeConstrained")))
+}
+
+// KCGDynamicRangeStandard returns the value of the constant kCGDynamicRangeStandard.
+func KCGDynamicRangeStandard() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGDynamicRangeStandard")))
+}
+
+// KCGContentAverageLightLevel returns the value of the constant kCGContentAverageLightLevel.
+func KCGContentAverageLightLevel() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGContentAverageLightLevel")))
+}
+
+// KCGContentAverageLightLevelNits returns the value of the constant kCGContentAverageLightLevelNits.
+func KCGContentAverageLightLevelNits() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGContentAverageLightLevelNits")))
+}
+
+// KCGAdaptiveMaximumBitDepth returns the value of the constant kCGAdaptiveMaximumBitDepth.
+func KCGAdaptiveMaximumBitDepth() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGAdaptiveMaximumBitDepth")))
+}
+
+// KCGColorConversionBlackPointCompensation returns the value of the constant kCGColorConversionBlackPointCompensation.
+func KCGColorConversionBlackPointCompensation() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorConversionBlackPointCompensation")))
+}
+
+// KCGColorConversionTRCSize returns the value of the constant kCGColorConversionTRCSize.
+func KCGColorConversionTRCSize() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGColorConversionTRCSize")))
+}
+
+// KCGPDFContextMediaBox returns the value of the constant kCGPDFContextMediaBox.
+func KCGPDFContextMediaBox() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextMediaBox")))
+}
+
+// KCGPDFContextCropBox returns the value of the constant kCGPDFContextCropBox.
+func KCGPDFContextCropBox() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextCropBox")))
+}
+
+// KCGPDFContextBleedBox returns the value of the constant kCGPDFContextBleedBox.
+func KCGPDFContextBleedBox() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextBleedBox")))
+}
+
+// KCGPDFContextTrimBox returns the value of the constant kCGPDFContextTrimBox.
+func KCGPDFContextTrimBox() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextTrimBox")))
+}
+
+// KCGPDFContextArtBox returns the value of the constant kCGPDFContextArtBox.
+func KCGPDFContextArtBox() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextArtBox")))
+}
+
+// KCGPDFContextTitle returns the value of the constant kCGPDFContextTitle.
+func KCGPDFContextTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextTitle")))
+}
+
+// KCGPDFContextAuthor returns the value of the constant kCGPDFContextAuthor.
+func KCGPDFContextAuthor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextAuthor")))
+}
+
+// KCGPDFContextSubject returns the value of the constant kCGPDFContextSubject.
+func KCGPDFContextSubject() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextSubject")))
+}
+
+// KCGPDFContextKeywords returns the value of the constant kCGPDFContextKeywords.
+func KCGPDFContextKeywords() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextKeywords")))
+}
+
+// KCGPDFContextCreator returns the value of the constant kCGPDFContextCreator.
+func KCGPDFContextCreator() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextCreator")))
+}
+
+// KCGPDFContextOwnerPassword returns the value of the constant kCGPDFContextOwnerPassword.
+func KCGPDFContextOwnerPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextOwnerPassword")))
+}
+
+// KCGPDFContextUserPassword returns the value of the constant kCGPDFContextUserPassword.
+func KCGPDFContextUserPassword() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextUserPassword")))
+}
+
+// KCGPDFContextEncryptionKeyLength returns the value of the constant kCGPDFContextEncryptionKeyLength.
+func KCGPDFContextEncryptionKeyLength() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextEncryptionKeyLength")))
+}
+
+// KCGPDFContextAllowsPrinting returns the value of the constant kCGPDFContextAllowsPrinting.
+func KCGPDFContextAllowsPrinting() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextAllowsPrinting")))
+}
+
+// KCGPDFContextAllowsCopying returns the value of the constant kCGPDFContextAllowsCopying.
+func KCGPDFContextAllowsCopying() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextAllowsCopying")))
+}
+
+// KCGPDFContextOutputIntent returns the value of the constant kCGPDFContextOutputIntent.
+func KCGPDFContextOutputIntent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextOutputIntent")))
+}
+
+// KCGPDFXOutputIntentSubtype returns the value of the constant kCGPDFXOutputIntentSubtype.
+func KCGPDFXOutputIntentSubtype() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFXOutputIntentSubtype")))
+}
+
+// KCGPDFXOutputConditionIdentifier returns the value of the constant kCGPDFXOutputConditionIdentifier.
+func KCGPDFXOutputConditionIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFXOutputConditionIdentifier")))
+}
+
+// KCGPDFXOutputCondition returns the value of the constant kCGPDFXOutputCondition.
+func KCGPDFXOutputCondition() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFXOutputCondition")))
+}
+
+// KCGPDFXRegistryName returns the value of the constant kCGPDFXRegistryName.
+func KCGPDFXRegistryName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFXRegistryName")))
+}
+
+// KCGPDFXInfo returns the value of the constant kCGPDFXInfo.
+func KCGPDFXInfo() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCGPDFXInfo"))) }
+
+// KCGPDFXDestinationOutputProfile returns the value of the constant kCGPDFXDestinationOutputProfile.
+func KCGPDFXDestinationOutputProfile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFXDestinationOutputProfile")))
+}
+
+// KCGPDFContextOutputIntents returns the value of the constant kCGPDFContextOutputIntents.
+func KCGPDFContextOutputIntents() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextOutputIntents")))
+}
+
+// KCGPDFContextAccessPermissions returns the value of the constant kCGPDFContextAccessPermissions.
+func KCGPDFContextAccessPermissions() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextAccessPermissions")))
+}
+
+// KCGPDFContextCreateLinearizedPDF returns the value of the constant kCGPDFContextCreateLinearizedPDF.
+func KCGPDFContextCreateLinearizedPDF() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextCreateLinearizedPDF")))
+}
+
+// KCGPDFContextCreatePDFA returns the value of the constant kCGPDFContextCreatePDFA.
+func KCGPDFContextCreatePDFA() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGPDFContextCreatePDFA")))
+}
+
+// KCGWindowNumber returns the value of the constant kCGWindowNumber.
+func KCGWindowNumber() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCGWindowNumber"))) }
+
+// KCGWindowStoreType returns the value of the constant kCGWindowStoreType.
+func KCGWindowStoreType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGWindowStoreType")))
+}
+
+// KCGWindowLayer returns the value of the constant kCGWindowLayer.
+func KCGWindowLayer() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCGWindowLayer"))) }
+
+// KCGWindowBounds returns the value of the constant kCGWindowBounds.
+func KCGWindowBounds() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCGWindowBounds"))) }
+
+// KCGWindowSharingState returns the value of the constant kCGWindowSharingState.
+func KCGWindowSharingState() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGWindowSharingState")))
+}
+
+// KCGWindowAlpha returns the value of the constant kCGWindowAlpha.
+func KCGWindowAlpha() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCGWindowAlpha"))) }
+
+// KCGWindowOwnerPID returns the value of the constant kCGWindowOwnerPID.
+func KCGWindowOwnerPID() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCGWindowOwnerPID"))) }
+
+// KCGWindowMemoryUsage returns the value of the constant kCGWindowMemoryUsage.
+func KCGWindowMemoryUsage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGWindowMemoryUsage")))
+}
+
+// KCGWindowWorkspace returns the value of the constant kCGWindowWorkspace.
+func KCGWindowWorkspace() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGWindowWorkspace")))
+}
+
+// KCGWindowOwnerName returns the value of the constant kCGWindowOwnerName.
+func KCGWindowOwnerName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGWindowOwnerName")))
+}
+
+// KCGWindowName returns the value of the constant kCGWindowName.
+func KCGWindowName() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kCGWindowName"))) }
+
+// KCGWindowIsOnscreen returns the value of the constant kCGWindowIsOnscreen.
+func KCGWindowIsOnscreen() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGWindowIsOnscreen")))
+}
+
+// KCGWindowBackingLocationVideoMemory returns the value of the constant kCGWindowBackingLocationVideoMemory.
+func KCGWindowBackingLocationVideoMemory() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGWindowBackingLocationVideoMemory")))
+}
+
+// KCGDisplayShowDuplicateLowResolutionModes returns the value of the constant kCGDisplayShowDuplicateLowResolutionModes.
+func KCGDisplayShowDuplicateLowResolutionModes() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGDisplayShowDuplicateLowResolutionModes")))
+}
+
+// KCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995 returns the value of the constant kCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995.
+func KCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kCGDisplayStreamYCbCrMatrix_SMPTE_240M_1995")))
 }

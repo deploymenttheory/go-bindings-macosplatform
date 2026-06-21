@@ -9,23 +9,23 @@ import (
 )
 
 // An enumeration that describes if a media asset contains or supports fragments.
-type MEFileInfoFragmentsStatus int64
+type FileInfoFragmentsStatus int64
 
 const (
-	MEFileInfoCouldNotContainFragments               MEFileInfoFragmentsStatus = 0
-	MEFileInfoContainsFragments                      MEFileInfoFragmentsStatus = 1
-	MEFileInfoCouldContainButDoesNotContainFragments MEFileInfoFragmentsStatus = 2
+	FileInfoCouldNotContainFragments               FileInfoFragmentsStatus = 0
+	FileInfoContainsFragments                      FileInfoFragmentsStatus = 1
+	FileInfoCouldContainButDoesNotContainFragments FileInfoFragmentsStatus = 2
 )
 
-func (e MEFileInfoFragmentsStatus) String() string {
+func (e FileInfoFragmentsStatus) String() string {
 	switch e {
-	case MEFileInfoCouldNotContainFragments:
-		return "MEFileInfoCouldNotContainFragments"
-	case MEFileInfoContainsFragments:
-		return "MEFileInfoContainsFragments"
-	case MEFileInfoCouldContainButDoesNotContainFragments:
-		return "MEFileInfoCouldContainButDoesNotContainFragments"
+	case FileInfoCouldNotContainFragments:
+		return "FileInfoCouldNotContainFragments"
+	case FileInfoContainsFragments:
+		return "FileInfoContainsFragments"
+	case FileInfoCouldContainButDoesNotContainFragments:
+		return "FileInfoCouldContainButDoesNotContainFragments"
 	default:
-		return fmt.Sprintf("MEFileInfoFragmentsStatus(%d)", int64(e))
+		return fmt.Sprintf("FileInfoFragmentsStatus(%d)", int64(e))
 	}
 }

@@ -5,233 +5,177 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ReplicatorConstraint wraps [raw.SCNReplicatorConstraint] with a fluent Go API.
+// ReplicatorConstraint is an idiomatic wrapper over the Objective-C class SCNReplicatorConstraint.
 type ReplicatorConstraint struct {
-	inner *raw.SCNReplicatorConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNReplicatorConstraint].
-func (x *ReplicatorConstraint) Unwrap() *raw.SCNReplicatorConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ReplicatorConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// ReplicatorConstraintFromID adopts an existing object pointer as a ReplicatorConstraint (nil for 0).
+// ReplicatorConstraintFromID adopts an existing Objective-C object as a ReplicatorConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func ReplicatorConstraintFromID(id objc.ID) *ReplicatorConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &ReplicatorConstraint{inner: raw.SCNReplicatorConstraintFromID(id)}
+	x := &ReplicatorConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewReplicatorConstraint creates a new [ReplicatorConstraint].
+// replicatorConstraintAdopt wraps an Objective-C object that this code just created as a
+// ReplicatorConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func replicatorConstraintAdopt(id objc.ID) *ReplicatorConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &ReplicatorConstraint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ReplicatorConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ReplicatorConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ReplicatorConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewReplicatorConstraint creates a new ReplicatorConstraint.
 func NewReplicatorConstraint() *ReplicatorConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNReplicatorConstraint")), objc.RegisterName("new"))
-	return &ReplicatorConstraint{inner: raw.SCNReplicatorConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNReplicatorConstraint")), objc.RegisterName("new"))
+	return replicatorConstraintAdopt(_id)
 }
 
-// @property target @abstract Defines the target node to replicate
+// Defines the target node to replicate
 //
-// WithTarget sets the target property and returns the receiver for chaining.
+// WithTarget sets target and returns the receiver so calls can be chained.
 func (x *ReplicatorConstraint) WithTarget(target NodeProvider) *ReplicatorConstraint {
-	x.inner.SetTarget(target.asNode())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// @property replicatesOrientation @abstract Defines whether or not the constraint should replicate the target orientation. Defaults to YES.
+// Defines whether or not the constraint should replicate the target orientation. Defaults to YES.
 //
-// WithReplicatesOrientation sets the replicatesOrientation property and returns the receiver for chaining.
+// WithReplicatesOrientation sets replicatesOrientation and returns the receiver so calls can be chained.
 func (x *ReplicatorConstraint) WithReplicatesOrientation(replicatesOrientation bool) *ReplicatorConstraint {
-	x.inner.SetReplicatesOrientation(replicatesOrientation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplicatesOrientation:"), replicatesOrientation)
 	return x
 }
 
-// @property replicatesPosition @abstract Defines whether or not the constraint should replicate the target position. Defaults to YES.
+// Defines whether or not the constraint should replicate the target position. Defaults to YES.
 //
-// WithReplicatesPosition sets the replicatesPosition property and returns the receiver for chaining.
+// WithReplicatesPosition sets replicatesPosition and returns the receiver so calls can be chained.
 func (x *ReplicatorConstraint) WithReplicatesPosition(replicatesPosition bool) *ReplicatorConstraint {
-	x.inner.SetReplicatesPosition(replicatesPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplicatesPosition:"), replicatesPosition)
 	return x
 }
 
-// @property replicatesScale @abstract Defines whether or not the constraint should replicate the target scale. Defaults to YES.
+// Defines whether or not the constraint should replicate the target scale. Defaults to YES.
 //
-// WithReplicatesScale sets the replicatesScale property and returns the receiver for chaining.
+// WithReplicatesScale sets replicatesScale and returns the receiver so calls can be chained.
 func (x *ReplicatorConstraint) WithReplicatesScale(replicatesScale bool) *ReplicatorConstraint {
-	x.inner.SetReplicatesScale(replicatesScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplicatesScale:"), replicatesScale)
 	return x
 }
 
-// @property orientationOffset @abstract Defines an addition orientation offset. Defaults to no offset. Animatable.
+// Determines whether the constraint is enabled or not. Defaults to YES.
 //
-// WithOrientationOffset sets the orientationOffset property and returns the receiver for chaining.
-func (x *ReplicatorConstraint) WithOrientationOffset(orientationOffset raw.SCNVector4) *ReplicatorConstraint {
-	x.inner.SetOrientationOffset(orientationOffset)
-	return x
-}
-
-// @property positionOffset @abstract Defines an addition orientation offset. Defaults to no offset. Animatable.
-//
-// WithPositionOffset sets the positionOffset property and returns the receiver for chaining.
-func (x *ReplicatorConstraint) WithPositionOffset(positionOffset raw.SCNVector3) *ReplicatorConstraint {
-	x.inner.SetPositionOffset(positionOffset)
-	return x
-}
-
-// @property scaleOffset @abstract Defines an addition scale offset. Defaults to no offset. Animatable.
-//
-// WithScaleOffset sets the scaleOffset property and returns the receiver for chaining.
-func (x *ReplicatorConstraint) WithScaleOffset(scaleOffset raw.SCNVector3) *ReplicatorConstraint {
-	x.inner.SetScaleOffset(scaleOffset)
-	return x
-}
-
-// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
-//
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *ReplicatorConstraint) WithEnabled(enabled bool) *ReplicatorConstraint {
-	x.inner.SCNConstraint.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // The influence of the constraint on the node’s transformation.
 //
-// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
 func (x *ReplicatorConstraint) WithInfluenceFactor(influenceFactor float64) *ReplicatorConstraint {
-	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 //
-// WithIncremental sets the incremental property and returns the receiver for chaining.
+// WithIncremental sets incremental and returns the receiver so calls can be chained.
 func (x *ReplicatorConstraint) WithIncremental(incremental bool) *ReplicatorConstraint {
-	x.inner.SCNConstraint.SetIncremental(incremental)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// @property target @abstract Defines the target node to replicate
-//
-// Target calls the underlying Target.
+// Defines the target node to replicate
 func (x *ReplicatorConstraint) Target() *Node {
-	_r := x.inner.Target()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+	return NodeFromID(_r)
 }
 
-// SetTarget calls the underlying SetTarget.
-func (x *ReplicatorConstraint) SetTarget(target *raw.SCNNode) {
-	x.inner.SetTarget(target)
+func (x *ReplicatorConstraint) SetTarget(target *Node) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
-// @property replicatesOrientation @abstract Defines whether or not the constraint should replicate the target orientation. Defaults to YES.
-//
-// ReplicatesOrientation calls the underlying ReplicatesOrientation.
+// Defines whether or not the constraint should replicate the target orientation. Defaults to YES.
 func (x *ReplicatorConstraint) ReplicatesOrientation() bool {
-	return x.inner.ReplicatesOrientation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("replicatesOrientation"))
+	return _r
 }
 
-// SetReplicatesOrientation calls the underlying SetReplicatesOrientation.
 func (x *ReplicatorConstraint) SetReplicatesOrientation(replicatesOrientation bool) {
-	x.inner.SetReplicatesOrientation(replicatesOrientation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplicatesOrientation:"), replicatesOrientation)
 }
 
-// @property replicatesPosition @abstract Defines whether or not the constraint should replicate the target position. Defaults to YES.
-//
-// ReplicatesPosition calls the underlying ReplicatesPosition.
+// Defines whether or not the constraint should replicate the target position. Defaults to YES.
 func (x *ReplicatorConstraint) ReplicatesPosition() bool {
-	return x.inner.ReplicatesPosition()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("replicatesPosition"))
+	return _r
 }
 
-// SetReplicatesPosition calls the underlying SetReplicatesPosition.
 func (x *ReplicatorConstraint) SetReplicatesPosition(replicatesPosition bool) {
-	x.inner.SetReplicatesPosition(replicatesPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplicatesPosition:"), replicatesPosition)
 }
 
-// @property replicatesScale @abstract Defines whether or not the constraint should replicate the target scale. Defaults to YES.
-//
-// ReplicatesScale calls the underlying ReplicatesScale.
+// Defines whether or not the constraint should replicate the target scale. Defaults to YES.
 func (x *ReplicatorConstraint) ReplicatesScale() bool {
-	return x.inner.ReplicatesScale()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("replicatesScale"))
+	return _r
 }
 
-// SetReplicatesScale calls the underlying SetReplicatesScale.
 func (x *ReplicatorConstraint) SetReplicatesScale(replicatesScale bool) {
-	x.inner.SetReplicatesScale(replicatesScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReplicatesScale:"), replicatesScale)
 }
-
-// @property orientationOffset @abstract Defines an addition orientation offset. Defaults to no offset. Animatable.
-//
-// OrientationOffset calls the underlying OrientationOffset.
-func (x *ReplicatorConstraint) OrientationOffset() raw.SCNVector4 {
-	return x.inner.OrientationOffset()
-}
-
-// SetOrientationOffset calls the underlying SetOrientationOffset.
-func (x *ReplicatorConstraint) SetOrientationOffset(orientationOffset raw.SCNVector4) {
-	x.inner.SetOrientationOffset(orientationOffset)
-}
-
-// @property positionOffset @abstract Defines an addition orientation offset. Defaults to no offset. Animatable.
-//
-// PositionOffset calls the underlying PositionOffset.
-func (x *ReplicatorConstraint) PositionOffset() raw.SCNVector3 {
-	return x.inner.PositionOffset()
-}
-
-// SetPositionOffset calls the underlying SetPositionOffset.
-func (x *ReplicatorConstraint) SetPositionOffset(positionOffset raw.SCNVector3) {
-	x.inner.SetPositionOffset(positionOffset)
-}
-
-// @property scaleOffset @abstract Defines an addition scale offset. Defaults to no offset. Animatable.
-//
-// ScaleOffset calls the underlying ScaleOffset.
-func (x *ReplicatorConstraint) ScaleOffset() raw.SCNVector3 {
-	return x.inner.ScaleOffset()
-}
-
-// SetScaleOffset calls the underlying SetScaleOffset.
-func (x *ReplicatorConstraint) SetScaleOffset(scaleOffset raw.SCNVector3) {
-	x.inner.SetScaleOffset(scaleOffset)
-}
-
-func (x *ReplicatorConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
 
 // ReplicatorConstraintable is the interface implemented by [ReplicatorConstraint], for mocking and DI.
 type ReplicatorConstraintable interface {
-	Unwrap() *raw.SCNReplicatorConstraint
+	obj.Object
 	WithTarget(target NodeProvider) *ReplicatorConstraint
 	WithReplicatesOrientation(replicatesOrientation bool) *ReplicatorConstraint
 	WithReplicatesPosition(replicatesPosition bool) *ReplicatorConstraint
 	WithReplicatesScale(replicatesScale bool) *ReplicatorConstraint
-	WithOrientationOffset(orientationOffset raw.SCNVector4) *ReplicatorConstraint
-	WithPositionOffset(positionOffset raw.SCNVector3) *ReplicatorConstraint
-	WithScaleOffset(scaleOffset raw.SCNVector3) *ReplicatorConstraint
 	WithEnabled(enabled bool) *ReplicatorConstraint
 	WithInfluenceFactor(influenceFactor float64) *ReplicatorConstraint
 	WithIncremental(incremental bool) *ReplicatorConstraint
 	Target() *Node
-	SetTarget(target *raw.SCNNode)
+	SetTarget(target *Node)
 	ReplicatesOrientation() bool
 	SetReplicatesOrientation(replicatesOrientation bool)
 	ReplicatesPosition() bool
 	SetReplicatesPosition(replicatesPosition bool)
 	ReplicatesScale() bool
 	SetReplicatesScale(replicatesScale bool)
-	OrientationOffset() raw.SCNVector4
-	SetOrientationOffset(orientationOffset raw.SCNVector4)
-	PositionOffset() raw.SCNVector3
-	SetPositionOffset(positionOffset raw.SCNVector3)
-	ScaleOffset() raw.SCNVector3
-	SetScaleOffset(scaleOffset raw.SCNVector3)
 }
 
 var _ ReplicatorConstraintable = (*ReplicatorConstraint)(nil)

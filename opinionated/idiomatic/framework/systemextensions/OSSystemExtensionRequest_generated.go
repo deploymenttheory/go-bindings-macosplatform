@@ -5,76 +5,77 @@
 package systemextensions
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemextensions"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A request to activate or deactivate a system extension.
 //
-// SystemExtensionRequest wraps [raw.OSSystemExtensionRequest] with a fluent Go API.
+// SystemExtensionRequest is an idiomatic wrapper over the Objective-C class OSSystemExtensionRequest.
 type SystemExtensionRequest struct {
-	inner *raw.OSSystemExtensionRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSSystemExtensionRequest].
-func (x *SystemExtensionRequest) Unwrap() *raw.OSSystemExtensionRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SystemExtensionRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// SystemExtensionRequestFromID adopts an existing object pointer as a SystemExtensionRequest (nil for 0).
+// SystemExtensionRequestFromID adopts an existing Objective-C object as a SystemExtensionRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func SystemExtensionRequestFromID(id objc.ID) *SystemExtensionRequest {
 	if id == 0 {
 		return nil
 	}
-	return &SystemExtensionRequest{inner: raw.OSSystemExtensionRequestFromID(id)}
-}
-
-// NewSystemExtensionRequest creates a new [SystemExtensionRequest].
-func NewSystemExtensionRequest() *SystemExtensionRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSSystemExtensionRequest")), objc.RegisterName("new"))
-	return &SystemExtensionRequest{inner: raw.OSSystemExtensionRequestFromID(_id)}
-}
-
-// A delegate to receive updates about the progress of a request.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SystemExtensionRequest) WithDelegate(delegate raw.OSSystemExtensionRequestDelegate) *SystemExtensionRequest {
-	x.inner.SetDelegate(delegate)
+	x := &SystemExtensionRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @brief A delegate to receive updates about the progress of a request
-//
-// Delegate calls the underlying Delegate.
-func (x *SystemExtensionRequest) Delegate() raw.OSSystemExtensionRequestDelegate {
-	return x.inner.Delegate()
+// systemExtensionRequestAdopt wraps an Objective-C object that this code just created as a
+// SystemExtensionRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func systemExtensionRequestAdopt(id objc.ID) *SystemExtensionRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &SystemExtensionRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *SystemExtensionRequest) SetDelegate(delegate raw.OSSystemExtensionRequestDelegate) {
-	x.inner.SetDelegate(delegate)
+// Description returns the object's -description text.
+func (x *SystemExtensionRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @brief The bundle identifier of the target extension
-//
-// Identifier calls the underlying Identifier.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SystemExtensionRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SystemExtensionRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSystemExtensionRequest creates a new SystemExtensionRequest.
+func NewSystemExtensionRequest() *SystemExtensionRequest {
+	_id := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionRequest")), objc.RegisterName("new"))
+	return systemExtensionRequestAdopt(_id)
+}
+
+// The bundle identifier of the target extension
 func (x *SystemExtensionRequest) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // SystemExtensionRequestable is the interface implemented by [SystemExtensionRequest], for mocking and DI.
 type SystemExtensionRequestable interface {
-	Unwrap() *raw.OSSystemExtensionRequest
-	WithDelegate(delegate raw.OSSystemExtensionRequestDelegate) *SystemExtensionRequest
-	Delegate() raw.OSSystemExtensionRequestDelegate
-	SetDelegate(delegate raw.OSSystemExtensionRequestDelegate)
+	obj.Object
 	Identifier() string
 }
 

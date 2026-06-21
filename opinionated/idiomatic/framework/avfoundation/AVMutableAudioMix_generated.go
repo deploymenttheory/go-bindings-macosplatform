@@ -5,86 +5,83 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that manages the input parameters for mixing audio tracks.
 //
-// MutableAudioMix wraps [raw.AVMutableAudioMix] with a fluent Go API.
+// MutableAudioMix is an idiomatic wrapper over the Objective-C class AVMutableAudioMix.
 type MutableAudioMix struct {
-	inner *raw.AVMutableAudioMix
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMutableAudioMix].
-func (x *MutableAudioMix) Unwrap() *raw.AVMutableAudioMix { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MutableAudioMix) ID() objc.ID { return x.inner.Ptr() }
-
-// MutableAudioMixFromID adopts an existing object pointer as a MutableAudioMix (nil for 0).
+// MutableAudioMixFromID adopts an existing Objective-C object as a MutableAudioMix
+// (nil for 0), retaining it and registering a release finalizer.
 func MutableAudioMixFromID(id objc.ID) *MutableAudioMix {
 	if id == 0 {
 		return nil
 	}
-	return &MutableAudioMix{inner: raw.AVMutableAudioMixFromID(id)}
+	x := &MutableAudioMix{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMutableAudioMix creates a new [MutableAudioMix].
+// mutableAudioMixAdopt wraps an Objective-C object that this code just created as a
+// MutableAudioMix (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mutableAudioMixAdopt(id objc.ID) *MutableAudioMix {
+	if id == 0 {
+		return nil
+	}
+	x := &MutableAudioMix{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MutableAudioMix) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MutableAudioMix) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MutableAudioMix) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMutableAudioMix creates a new MutableAudioMix.
 func NewMutableAudioMix() *MutableAudioMix {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMutableAudioMix")), objc.RegisterName("new"))
-	return &MutableAudioMix{inner: raw.AVMutableAudioMixFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMutableAudioMix")), objc.RegisterName("new"))
+	return mutableAudioMixAdopt(_id)
 }
 
 // An array of input parameters for the mix.
 //
-// WithInputParameters sets the collection, converting the Go slice to an NSArray.
+// WithInputParameters sets the collection and returns the receiver so calls can be chained.
 func (x *MutableAudioMix) WithInputParameters(items ...AudioMixInputParametersProvider) *MutableAudioMix {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetInputParameters(foundation.NSArrayFromID[*raw.AVAudioMixInputParameters](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asAudioMixInputParameters().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.AVAudioMixInputParameters](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetInputParameters(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v AudioMixInputParametersProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputParameters:"), _arr)
 	return x
 }
 
-// SetInputParameters calls the underlying SetInputParameters.
-func (x *MutableAudioMix) SetInputParameters(inputParameters ...AudioMixInputParametersProvider) {
-	_ptrs := make([]objc.ID, len(inputParameters))
-	for _i, _v := range inputParameters {
-		_ptrs[_i] = _v.asAudioMixInputParameters().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.AVAudioMixInputParameters]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.AVAudioMixInputParameters](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.AVAudioMixInputParameters](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.SetInputParameters(_arg0)
+func (x *MutableAudioMix) SetInputParameters(inputParameters []*AudioMixInputParameters) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputParameters:"), purego.SliceToNSArray(inputParameters, func(_v *AudioMixInputParameters) objc.ID { return objref.IDOf(_v) }))
 }
-
-func (x *MutableAudioMix) asAudioMix() *raw.AVAudioMix { return &x.inner.AVAudioMix }
 
 // MutableAudioMixable is the interface implemented by [MutableAudioMix], for mocking and DI.
 type MutableAudioMixable interface {
-	Unwrap() *raw.AVMutableAudioMix
+	obj.Object
 	WithInputParameters(items ...AudioMixInputParametersProvider) *MutableAudioMix
-	SetInputParameters(inputParameters ...AudioMixInputParametersProvider)
+	SetInputParameters(inputParameters []*AudioMixInputParameters)
 }
 
 var _ MutableAudioMixable = (*MutableAudioMix)(nil)

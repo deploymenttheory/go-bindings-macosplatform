@@ -5,67 +5,86 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A collection of points that connect to form a 3D volume.
 //
-// Shape wraps [raw.PHASEShape] with a fluent Go API.
+// Shape is an idiomatic wrapper over the Objective-C class PHASEShape.
 type Shape struct {
-	inner *raw.PHASEShape
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEShape].
-func (x *Shape) Unwrap() *raw.PHASEShape { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Shape) ID() objc.ID { return x.inner.Ptr() }
-
-// ShapeFromID adopts an existing object pointer as a Shape (nil for 0).
+// ShapeFromID adopts an existing Objective-C object as a Shape
+// (nil for 0), retaining it and registering a release finalizer.
 func ShapeFromID(id objc.ID) *Shape {
 	if id == 0 {
 		return nil
 	}
-	return &Shape{inner: raw.PHASEShapeFromID(id)}
+	x := &Shape{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// shapeAdopt wraps an Objective-C object that this code just created as a
+// Shape (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shapeAdopt(id objc.ID) *Shape {
+	if id == 0 {
+		return nil
+	}
+	x := &Shape{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Shape) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Shape) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Shape) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an object that the given geometric data shapes.
 //
-// NewShapeWithEngineMesh creates a new [Shape].
-func NewShapeWithEngineMesh(engine *raw.PHASEEngine, mesh *modelio.MDLMesh) *Shape {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEShape")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:mesh:"), engine.Ptr(), mesh.Ptr())
-	return &Shape{inner: raw.PHASEShapeFromID(_id)}
+// NewShapeWithEngineMesh creates a new Shape.
+func NewShapeWithEngineMesh(engine *Engine, mesh obj.Object) *Shape {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEShape")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:mesh:"), objref.IDOf(engine), objref.IDOf(mesh))
+	return shapeAdopt(_id)
 }
 
 // Creates an object of a specific material that the given geometric data shapes.
 //
-// NewShapeWithEngineMeshMaterials creates a new [Shape].
-func NewShapeWithEngineMeshMaterials(engine *raw.PHASEEngine, mesh *modelio.MDLMesh, materials *foundation.NSArray[*raw.PHASEMaterial]) *Shape {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEShape")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:mesh:materials:"), engine.Ptr(), mesh.Ptr(), materials.Ptr())
-	return &Shape{inner: raw.PHASEShapeFromID(_id)}
+// NewShapeWithEngineMeshMaterials creates a new Shape.
+func NewShapeWithEngineMeshMaterials(engine *Engine, mesh obj.Object, materials []*Material) *Shape {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEShape")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:mesh:materials:"), objref.IDOf(engine), objref.IDOf(mesh), purego.SliceToNSArray(materials, func(_v *Material) objc.ID { return objref.IDOf(_v) }))
+	return shapeAdopt(_id)
 }
 
 // Elements returns the collection as a Go slice.
 func (x *Shape) Elements() []*ShapeElement {
-	arr := x.inner.Elements()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ShapeElement {
-		return &ShapeElement{inner: raw.PHASEShapeElementFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elements"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ShapeElement { return ShapeElementFromID(_id) })
 }
 
 // Shapeable is the interface implemented by [Shape], for mocking and DI.
 type Shapeable interface {
-	Unwrap() *raw.PHASEShape
+	obj.Object
 	Elements() []*ShapeElement
 }
 

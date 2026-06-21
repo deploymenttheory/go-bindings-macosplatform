@@ -5,124 +5,91 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A filter that finds the maximum pixel value in a rectangular region by applying a dilation function.
 //
-// ImageDilate wraps [raw.MPSImageDilate] with a fluent Go API.
+// ImageDilate is an idiomatic wrapper over the Objective-C class MPSImageDilate.
 type ImageDilate struct {
-	inner *raw.MPSImageDilate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageDilate].
-func (x *ImageDilate) Unwrap() *raw.MPSImageDilate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageDilate) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageDilateFromID adopts an existing object pointer as a ImageDilate (nil for 0).
+// ImageDilateFromID adopts an existing Objective-C object as a ImageDilate
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageDilateFromID(id objc.ID) *ImageDilate {
 	if id == 0 {
 		return nil
 	}
-	return &ImageDilate{inner: raw.MPSImageDilateFromID(id)}
-}
-
-// Initializes the kernel with a specified width, height, and weight values.
-//
-// NewImageDilateWithDeviceKernelWidthKernelHeightValues creates a new [ImageDilate].
-func NewImageDilateWithDeviceKernelWidthKernelHeightValues(device metal.MTLDevice, kernelWidth uint, kernelHeight uint, values *float32) *ImageDilate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageDilate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:kernelWidth:kernelHeight:values:"), device, kernelWidth, kernelHeight, values)
-	return &ImageDilate{inner: raw.MPSImageDilateFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageDilateWithCoderDevice creates a new [ImageDilate].
-func NewImageDilateWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageDilate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageDilate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageDilate{inner: raw.MPSImageDilateFromID(_id)}
-}
-
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageDilate) WithOffset(offset mpscore.MPSOffset) *ImageDilate {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	x := &ImageDilate{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageDilate) WithClipRect(clipRect metal.MTLRegion) *ImageDilate {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+// imageDilateAdopt wraps an Objective-C object that this code just created as a
+// ImageDilate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageDilateAdopt(id objc.ID) *ImageDilate {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageDilate{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageDilate) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageDilate {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// Description returns the object's -description text.
+func (x *ImageDilate) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageDilate) WithOptions(options mpscore.MPSKernelOptions) *ImageDilate {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageDilate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageDilate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageDilate creates a new ImageDilate.
+func NewImageDilate() *ImageDilate {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageDilate")), objc.RegisterName("new"))
+	return imageDilateAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageDilate) WithLabel(label string) *ImageDilate {
-	x.inner.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property kernelHeight @abstract  The height of the filter window. Must be an odd number.
-//
-// KernelHeight calls the underlying KernelHeight.
-func (x *ImageDilate) KernelHeight() uint {
-	return x.inner.KernelHeight()
+// The height of the filter window. Must be an odd number.
+func (x *ImageDilate) KernelHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelHeight"))
+	return _r
 }
 
-// @property kernelWidth @abstract  The width of the filter window. Must be an odd number.
-//
-// KernelWidth calls the underlying KernelWidth.
-func (x *ImageDilate) KernelWidth() uint {
-	return x.inner.KernelWidth()
+// The width of the filter window. Must be an odd number.
+func (x *ImageDilate) KernelWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("kernelWidth"))
+	return _r
 }
-
-func (x *ImageDilate) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
-}
-
-func (x *ImageDilate) asKernel() *mpscore.MPSKernel { return &x.inner.MPSUnaryImageKernel.MPSKernel }
 
 // ImageDilateable is the interface implemented by [ImageDilate], for mocking and DI.
 type ImageDilateable interface {
-	Unwrap() *raw.MPSImageDilate
-	WithOffset(offset mpscore.MPSOffset) *ImageDilate
-	WithClipRect(clipRect metal.MTLRegion) *ImageDilate
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageDilate
-	WithOptions(options mpscore.MPSKernelOptions) *ImageDilate
+	obj.Object
 	WithLabel(label string) *ImageDilate
-	KernelHeight() uint
-	KernelWidth() uint
+	KernelHeight() int
+	KernelWidth() int
 }
 
 var _ ImageDilateable = (*ImageDilate)(nil)

@@ -5,118 +5,138 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRActionsClusterActionFailedEvent wraps [raw.MTRActionsClusterActionFailedEvent] with a fluent Go API.
+// MTRActionsClusterActionFailedEvent is an idiomatic wrapper over the Objective-C class MTRActionsClusterActionFailedEvent.
 type MTRActionsClusterActionFailedEvent struct {
-	inner *raw.MTRActionsClusterActionFailedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRActionsClusterActionFailedEvent].
-func (x *MTRActionsClusterActionFailedEvent) Unwrap() *raw.MTRActionsClusterActionFailedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRActionsClusterActionFailedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRActionsClusterActionFailedEventFromID adopts an existing object pointer as a MTRActionsClusterActionFailedEvent (nil for 0).
+// MTRActionsClusterActionFailedEventFromID adopts an existing Objective-C object as a MTRActionsClusterActionFailedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRActionsClusterActionFailedEventFromID(id objc.ID) *MTRActionsClusterActionFailedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRActionsClusterActionFailedEvent{inner: raw.MTRActionsClusterActionFailedEventFromID(id)}
+	x := &MTRActionsClusterActionFailedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRActionsClusterActionFailedEvent creates a new [MTRActionsClusterActionFailedEvent].
+// mTRActionsClusterActionFailedEventAdopt wraps an Objective-C object that this code just created as a
+// MTRActionsClusterActionFailedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRActionsClusterActionFailedEventAdopt(id objc.ID) *MTRActionsClusterActionFailedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRActionsClusterActionFailedEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRActionsClusterActionFailedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRActionsClusterActionFailedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRActionsClusterActionFailedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRActionsClusterActionFailedEvent creates a new MTRActionsClusterActionFailedEvent.
 func NewMTRActionsClusterActionFailedEvent() *MTRActionsClusterActionFailedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRActionsClusterActionFailedEvent")), objc.RegisterName("new"))
-	return &MTRActionsClusterActionFailedEvent{inner: raw.MTRActionsClusterActionFailedEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRActionsClusterActionFailedEvent")), objc.RegisterName("new"))
+	return mTRActionsClusterActionFailedEventAdopt(_id)
 }
 
-// WithActionID sets the actionID property and returns the receiver for chaining.
-func (x *MTRActionsClusterActionFailedEvent) WithActionID(actionID *foundation.NSNumber) *MTRActionsClusterActionFailedEvent {
-	x.inner.SetActionID(actionID)
+// WithActionID sets actionID and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterActionFailedEvent) WithActionID(actionID obj.Object) *MTRActionsClusterActionFailedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return x
 }
 
-// WithInvokeID sets the invokeID property and returns the receiver for chaining.
-func (x *MTRActionsClusterActionFailedEvent) WithInvokeID(invokeID *foundation.NSNumber) *MTRActionsClusterActionFailedEvent {
-	x.inner.SetInvokeID(invokeID)
+// WithInvokeID sets invokeID and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterActionFailedEvent) WithInvokeID(invokeID obj.Object) *MTRActionsClusterActionFailedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return x
 }
 
-// WithNewState sets the newState property and returns the receiver for chaining.
-func (x *MTRActionsClusterActionFailedEvent) WithNewState(newState *foundation.NSNumber) *MTRActionsClusterActionFailedEvent {
-	x.inner.SetNewState(newState)
+// WithNewState sets newState and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterActionFailedEvent) WithNewState(newState obj.Object) *MTRActionsClusterActionFailedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 	return x
 }
 
-// WithError sets the error_ property and returns the receiver for chaining.
-func (x *MTRActionsClusterActionFailedEvent) WithError(error_ *foundation.NSNumber) *MTRActionsClusterActionFailedEvent {
-	x.inner.SetError(error_)
+// WithError sets error_ and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterActionFailedEvent) WithError(error_ obj.Object) *MTRActionsClusterActionFailedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setError:"), objref.IDOf(error_))
 	return x
 }
 
-// ActionID calls the underlying ActionID.
-func (x *MTRActionsClusterActionFailedEvent) ActionID() *foundation.NSNumber {
-	return x.inner.ActionID()
+func (x *MTRActionsClusterActionFailedEvent) ActionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionID"))
+	return obj.Wrap(_r)
 }
 
-// SetActionID calls the underlying SetActionID.
-func (x *MTRActionsClusterActionFailedEvent) SetActionID(actionID *foundation.NSNumber) {
-	x.inner.SetActionID(actionID)
+func (x *MTRActionsClusterActionFailedEvent) SetActionID(actionID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 }
 
-// InvokeID calls the underlying InvokeID.
-func (x *MTRActionsClusterActionFailedEvent) InvokeID() *foundation.NSNumber {
-	return x.inner.InvokeID()
+func (x *MTRActionsClusterActionFailedEvent) InvokeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invokeID"))
+	return obj.Wrap(_r)
 }
 
-// SetInvokeID calls the underlying SetInvokeID.
-func (x *MTRActionsClusterActionFailedEvent) SetInvokeID(invokeID *foundation.NSNumber) {
-	x.inner.SetInvokeID(invokeID)
+func (x *MTRActionsClusterActionFailedEvent) SetInvokeID(invokeID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 }
 
-// GetNewState calls the underlying GetNewState.
-func (x *MTRActionsClusterActionFailedEvent) GetNewState() *foundation.NSNumber {
-	return x.inner.GetNewState()
+func (x *MTRActionsClusterActionFailedEvent) GetNewState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewState"))
+	return obj.Wrap(_r)
 }
 
-// SetNewState calls the underlying SetNewState.
-func (x *MTRActionsClusterActionFailedEvent) SetNewState(newState *foundation.NSNumber) {
-	x.inner.SetNewState(newState)
+func (x *MTRActionsClusterActionFailedEvent) SetNewState(newState obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 }
 
-// Error calls the underlying Error.
-func (x *MTRActionsClusterActionFailedEvent) Error() *foundation.NSNumber {
-	return x.inner.Error()
+func (x *MTRActionsClusterActionFailedEvent) Error() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("error"))
+	return obj.Wrap(_r)
 }
 
-// SetError calls the underlying SetError.
-func (x *MTRActionsClusterActionFailedEvent) SetError(error_ *foundation.NSNumber) {
-	x.inner.SetError(error_)
+func (x *MTRActionsClusterActionFailedEvent) SetError(error_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setError:"), objref.IDOf(error_))
 }
 
 // MTRActionsClusterActionFailedEventable is the interface implemented by [MTRActionsClusterActionFailedEvent], for mocking and DI.
 type MTRActionsClusterActionFailedEventable interface {
-	Unwrap() *raw.MTRActionsClusterActionFailedEvent
-	WithActionID(actionID *foundation.NSNumber) *MTRActionsClusterActionFailedEvent
-	WithInvokeID(invokeID *foundation.NSNumber) *MTRActionsClusterActionFailedEvent
-	WithNewState(newState *foundation.NSNumber) *MTRActionsClusterActionFailedEvent
-	WithError(error_ *foundation.NSNumber) *MTRActionsClusterActionFailedEvent
-	ActionID() *foundation.NSNumber
-	SetActionID(actionID *foundation.NSNumber)
-	InvokeID() *foundation.NSNumber
-	SetInvokeID(invokeID *foundation.NSNumber)
-	GetNewState() *foundation.NSNumber
-	SetNewState(newState *foundation.NSNumber)
-	Error() *foundation.NSNumber
-	SetError(error_ *foundation.NSNumber)
+	obj.Object
+	WithActionID(actionID obj.Object) *MTRActionsClusterActionFailedEvent
+	WithInvokeID(invokeID obj.Object) *MTRActionsClusterActionFailedEvent
+	WithNewState(newState obj.Object) *MTRActionsClusterActionFailedEvent
+	WithError(error_ obj.Object) *MTRActionsClusterActionFailedEvent
+	ActionID() obj.Object
+	SetActionID(actionID obj.Object)
+	InvokeID() obj.Object
+	SetInvokeID(invokeID obj.Object)
+	GetNewState() obj.Object
+	SetNewState(newState obj.Object)
+	Error() obj.Object
+	SetError(error_ obj.Object)
 }
 
 var _ MTRActionsClusterActionFailedEventable = (*MTRActionsClusterActionFailedEvent)(nil)

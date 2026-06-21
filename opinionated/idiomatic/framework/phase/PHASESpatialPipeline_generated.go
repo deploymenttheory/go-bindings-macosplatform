@@ -5,61 +5,85 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that specifies the volume of optional environmental effects.
 //
-// SpatialPipeline wraps [raw.PHASESpatialPipeline] with a fluent Go API.
+// SpatialPipeline is an idiomatic wrapper over the Objective-C class PHASESpatialPipeline.
 type SpatialPipeline struct {
-	inner *raw.PHASESpatialPipeline
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASESpatialPipeline].
-func (x *SpatialPipeline) Unwrap() *raw.PHASESpatialPipeline { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpatialPipeline) ID() objc.ID { return x.inner.Ptr() }
-
-// SpatialPipelineFromID adopts an existing object pointer as a SpatialPipeline (nil for 0).
+// SpatialPipelineFromID adopts an existing Objective-C object as a SpatialPipeline
+// (nil for 0), retaining it and registering a release finalizer.
 func SpatialPipelineFromID(id objc.ID) *SpatialPipeline {
 	if id == 0 {
 		return nil
 	}
-	return &SpatialPipeline{inner: raw.PHASESpatialPipelineFromID(id)}
+	x := &SpatialPipeline{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// spatialPipelineAdopt wraps an Objective-C object that this code just created as a
+// SpatialPipeline (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func spatialPipelineAdopt(id objc.ID) *SpatialPipeline {
+	if id == 0 {
+		return nil
+	}
+	x := &SpatialPipeline{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpatialPipeline) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpatialPipeline) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpatialPipeline) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a spatial pipeline with the specified flags.
 //
-// NewSpatialPipelineWithFlags creates a new [SpatialPipeline].
-func NewSpatialPipelineWithFlags(flags PHASESpatialPipelineFlags) *SpatialPipeline {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASESpatialPipeline")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFlags:"), raw.PHASESpatialPipelineFlags(flags))
-	return &SpatialPipeline{inner: raw.PHASESpatialPipelineFromID(_id)}
+// NewSpatialPipelineWithFlags creates a new SpatialPipeline.
+func NewSpatialPipelineWithFlags(flags SpatialPipelineFlags) *SpatialPipeline {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASESpatialPipeline")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFlags:"), flags)
+	return spatialPipelineAdopt(_id)
 }
 
-// @property flags @abstract Spatial Pipeline Flags.
-//
-// Flags calls the underlying Flags.
-func (x *SpatialPipeline) Flags() PHASESpatialPipelineFlags {
-	return PHASESpatialPipelineFlags(x.inner.Flags())
+// Spatial Pipeline Flags.
+func (x *SpatialPipeline) Flags() SpatialPipelineFlags {
+	_r := objc.Send[SpatialPipelineFlags](objref.IDOf(x), objc.RegisterName("flags"))
+	return _r
 }
 
-// @property entries @abstract A dictionary of entries in the Spatial Pipeline. @discussion Upon initialization, an entry will be created for every flag in the PHASESpatialPipelineFlags passed to PHASESpatialPipeline:initWithFlags.
-//
-// Entries calls the underlying Entries.
-func (x *SpatialPipeline) Entries() *foundation.NSDictionary[*foundation.NSString, *raw.PHASESpatialPipelineEntry] {
-	return x.inner.Entries()
+// A dictionary of entries in the Spatial Pipeline. Upon initialization, an entry will be created for every flag in the PHASESpatialPipelineFlags passed to PHASESpatialPipeline:initWithFlags.
+func (x *SpatialPipeline) Entries() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entries"))
+	return obj.Wrap(_r)
 }
 
 // SpatialPipelineable is the interface implemented by [SpatialPipeline], for mocking and DI.
 type SpatialPipelineable interface {
-	Unwrap() *raw.PHASESpatialPipeline
-	Flags() PHASESpatialPipelineFlags
-	Entries() *foundation.NSDictionary[*foundation.NSString, *raw.PHASESpatialPipelineEntry]
+	obj.Object
+	Flags() SpatialPipelineFlags
+	Entries() obj.Object
 }
 
 var _ SpatialPipelineable = (*SpatialPipeline)(nil)

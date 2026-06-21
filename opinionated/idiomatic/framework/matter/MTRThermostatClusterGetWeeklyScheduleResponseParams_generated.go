@@ -5,143 +5,161 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRThermostatClusterGetWeeklyScheduleResponseParams wraps [raw.MTRThermostatClusterGetWeeklyScheduleResponseParams] with a fluent Go API.
+// MTRThermostatClusterGetWeeklyScheduleResponseParams is an idiomatic wrapper over the Objective-C class MTRThermostatClusterGetWeeklyScheduleResponseParams.
 type MTRThermostatClusterGetWeeklyScheduleResponseParams struct {
-	inner *raw.MTRThermostatClusterGetWeeklyScheduleResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThermostatClusterGetWeeklyScheduleResponseParams].
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) Unwrap() *raw.MTRThermostatClusterGetWeeklyScheduleResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRThermostatClusterGetWeeklyScheduleResponseParamsFromID adopts an existing object pointer as a MTRThermostatClusterGetWeeklyScheduleResponseParams (nil for 0).
+// MTRThermostatClusterGetWeeklyScheduleResponseParamsFromID adopts an existing Objective-C object as a MTRThermostatClusterGetWeeklyScheduleResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThermostatClusterGetWeeklyScheduleResponseParamsFromID(id objc.ID) *MTRThermostatClusterGetWeeklyScheduleResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThermostatClusterGetWeeklyScheduleResponseParams{inner: raw.MTRThermostatClusterGetWeeklyScheduleResponseParamsFromID(id)}
+	x := &MTRThermostatClusterGetWeeklyScheduleResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRThermostatClusterGetWeeklyScheduleResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRThermostatClusterGetWeeklyScheduleResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThermostatClusterGetWeeklyScheduleResponseParamsAdopt(id objc.ID) *MTRThermostatClusterGetWeeklyScheduleResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThermostatClusterGetWeeklyScheduleResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize an MTRThermostatClusterGetWeeklyScheduleResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
-// NewMTRThermostatClusterGetWeeklyScheduleResponseParamsWithResponseValueError creates a new [MTRThermostatClusterGetWeeklyScheduleResponseParams].
-func NewMTRThermostatClusterGetWeeklyScheduleResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRThermostatClusterGetWeeklyScheduleResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThermostatClusterGetWeeklyScheduleResponseParams")), objc.RegisterName("alloc"))
+// NewMTRThermostatClusterGetWeeklyScheduleResponseParamsWithResponseValueError creates a new MTRThermostatClusterGetWeeklyScheduleResponseParams.
+func NewMTRThermostatClusterGetWeeklyScheduleResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRThermostatClusterGetWeeklyScheduleResponseParams, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRThermostatClusterGetWeeklyScheduleResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &MTRThermostatClusterGetWeeklyScheduleResponseParams{inner: raw.MTRThermostatClusterGetWeeklyScheduleResponseParamsFromID(_id)}, nil
+	return mTRThermostatClusterGetWeeklyScheduleResponseParamsAdopt(_id), nil
 }
 
-// WithNumberOfTransitionsForSequence sets the numberOfTransitionsForSequence property and returns the receiver for chaining.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) WithNumberOfTransitionsForSequence(numberOfTransitionsForSequence *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleResponseParams {
-	x.inner.SetNumberOfTransitionsForSequence(numberOfTransitionsForSequence)
+// WithNumberOfTransitionsForSequence sets numberOfTransitionsForSequence and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) WithNumberOfTransitionsForSequence(numberOfTransitionsForSequence obj.Object) *MTRThermostatClusterGetWeeklyScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTransitionsForSequence:"), objref.IDOf(numberOfTransitionsForSequence))
 	return x
 }
 
-// WithDayOfWeekForSequence sets the dayOfWeekForSequence property and returns the receiver for chaining.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) WithDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleResponseParams {
-	x.inner.SetDayOfWeekForSequence(dayOfWeekForSequence)
+// WithDayOfWeekForSequence sets dayOfWeekForSequence and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) WithDayOfWeekForSequence(dayOfWeekForSequence obj.Object) *MTRThermostatClusterGetWeeklyScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDayOfWeekForSequence:"), objref.IDOf(dayOfWeekForSequence))
 	return x
 }
 
-// WithModeForSequence sets the modeForSequence property and returns the receiver for chaining.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) WithModeForSequence(modeForSequence *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleResponseParams {
-	x.inner.SetModeForSequence(modeForSequence)
+// WithModeForSequence sets modeForSequence and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) WithModeForSequence(modeForSequence obj.Object) *MTRThermostatClusterGetWeeklyScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeForSequence:"), objref.IDOf(modeForSequence))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterGetWeeklyScheduleResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// NumberOfTransitionsForSequence calls the underlying NumberOfTransitionsForSequence.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) NumberOfTransitionsForSequence() *foundation.NSNumber {
-	return x.inner.NumberOfTransitionsForSequence()
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) NumberOfTransitionsForSequence() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("numberOfTransitionsForSequence"))
+	return obj.Wrap(_r)
 }
 
-// SetNumberOfTransitionsForSequence calls the underlying SetNumberOfTransitionsForSequence.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetNumberOfTransitionsForSequence(numberOfTransitionsForSequence *foundation.NSNumber) {
-	x.inner.SetNumberOfTransitionsForSequence(numberOfTransitionsForSequence)
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetNumberOfTransitionsForSequence(numberOfTransitionsForSequence obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNumberOfTransitionsForSequence:"), objref.IDOf(numberOfTransitionsForSequence))
 }
 
-// DayOfWeekForSequence calls the underlying DayOfWeekForSequence.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) DayOfWeekForSequence() *foundation.NSNumber {
-	return x.inner.DayOfWeekForSequence()
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) DayOfWeekForSequence() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dayOfWeekForSequence"))
+	return obj.Wrap(_r)
 }
 
-// SetDayOfWeekForSequence calls the underlying SetDayOfWeekForSequence.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber) {
-	x.inner.SetDayOfWeekForSequence(dayOfWeekForSequence)
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetDayOfWeekForSequence(dayOfWeekForSequence obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDayOfWeekForSequence:"), objref.IDOf(dayOfWeekForSequence))
 }
 
-// ModeForSequence calls the underlying ModeForSequence.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) ModeForSequence() *foundation.NSNumber {
-	return x.inner.ModeForSequence()
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) ModeForSequence() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modeForSequence"))
+	return obj.Wrap(_r)
 }
 
-// SetModeForSequence calls the underlying SetModeForSequence.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetModeForSequence(modeForSequence *foundation.NSNumber) {
-	x.inner.SetModeForSequence(modeForSequence)
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetModeForSequence(modeForSequence obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setModeForSequence:"), objref.IDOf(modeForSequence))
 }
 
-// Transitions calls the underlying Transitions.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) Transitions() *foundation.NSArray[objc.ID] {
-	return x.inner.Transitions()
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) Transitions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitions"))
+	return obj.Wrap(_r)
 }
 
-// SetTransitions calls the underlying SetTransitions.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetTransitions(transitions *foundation.NSArray[objc.ID]) {
-	x.inner.SetTransitions(transitions)
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetTransitions(transitions obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransitions:"), objref.IDOf(transitions))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRThermostatClusterGetWeeklyScheduleResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTRThermostatClusterGetWeeklyScheduleResponseParamsable is the interface implemented by [MTRThermostatClusterGetWeeklyScheduleResponseParams], for mocking and DI.
 type MTRThermostatClusterGetWeeklyScheduleResponseParamsable interface {
-	Unwrap() *raw.MTRThermostatClusterGetWeeklyScheduleResponseParams
-	WithNumberOfTransitionsForSequence(numberOfTransitionsForSequence *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleResponseParams
-	WithDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleResponseParams
-	WithModeForSequence(modeForSequence *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterGetWeeklyScheduleResponseParams
-	NumberOfTransitionsForSequence() *foundation.NSNumber
-	SetNumberOfTransitionsForSequence(numberOfTransitionsForSequence *foundation.NSNumber)
-	DayOfWeekForSequence() *foundation.NSNumber
-	SetDayOfWeekForSequence(dayOfWeekForSequence *foundation.NSNumber)
-	ModeForSequence() *foundation.NSNumber
-	SetModeForSequence(modeForSequence *foundation.NSNumber)
-	Transitions() *foundation.NSArray[objc.ID]
-	SetTransitions(transitions *foundation.NSArray[objc.ID])
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	obj.Object
+	WithNumberOfTransitionsForSequence(numberOfTransitionsForSequence obj.Object) *MTRThermostatClusterGetWeeklyScheduleResponseParams
+	WithDayOfWeekForSequence(dayOfWeekForSequence obj.Object) *MTRThermostatClusterGetWeeklyScheduleResponseParams
+	WithModeForSequence(modeForSequence obj.Object) *MTRThermostatClusterGetWeeklyScheduleResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterGetWeeklyScheduleResponseParams
+	NumberOfTransitionsForSequence() obj.Object
+	SetNumberOfTransitionsForSequence(numberOfTransitionsForSequence obj.Object)
+	DayOfWeekForSequence() obj.Object
+	SetDayOfWeekForSequence(dayOfWeekForSequence obj.Object)
+	ModeForSequence() obj.Object
+	SetModeForSequence(modeForSequence obj.Object)
+	Transitions() obj.Object
+	SetTransitions(transitions obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTRThermostatClusterGetWeeklyScheduleResponseParamsable = (*MTRThermostatClusterGetWeeklyScheduleResponseParams)(nil)

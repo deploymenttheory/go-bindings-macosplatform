@@ -5,216 +5,52 @@
 package speechrecognition
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speechrecognition"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// DisposeSRCallBackUPP calls [raw.DisposeSRCallBackUPP] (C function DisposeSRCallBackUPP).
-func DisposeSRCallBackUPP(userUPP unsafe.Pointer) {
-	raw.DisposeSRCallBackUPP(userUPP)
-}
+var _fnSRIdle func() int16
 
-// InvokeSRCallBackUPP calls [raw.InvokeSRCallBackUPP] (C function InvokeSRCallBackUPP).
-func InvokeSRCallBackUPP(param *raw.SRCallBackStruct, userUPP unsafe.Pointer) {
-	raw.InvokeSRCallBackUPP(param, userUPP)
-}
-
-// NewSRCallBackUPP calls [raw.NewSRCallBackUPP] (C function NewSRCallBackUPP).
-func NewSRCallBackUPP(userRoutine unsafe.Pointer) unsafe.Pointer {
-	return raw.NewSRCallBackUPP(userRoutine)
-}
-
-// SRAddLanguageObject calls [raw.SRAddLanguageObject] (C function SRAddLanguageObject).
-func SRAddLanguageObject(base unsafe.Pointer, addon unsafe.Pointer) int16 {
-	return raw.SRAddLanguageObject(base, addon)
-}
-
-// SRAddText calls [raw.SRAddText] (C function SRAddText).
-func SRAddText(base unsafe.Pointer, text unsafe.Pointer, textLength int, refCon unsafe.Pointer) int16 {
-	return raw.SRAddText(base, text, textLength, refCon)
-}
-
-// SRCancelRecognition calls [raw.SRCancelRecognition] (C function SRCancelRecognition).
-func SRCancelRecognition(recognizer unsafe.Pointer) int16 {
-	return raw.SRCancelRecognition(recognizer)
-}
-
-// SRChangeLanguageObject calls [raw.SRChangeLanguageObject] (C function SRChangeLanguageObject).
-func SRChangeLanguageObject(languageObject unsafe.Pointer, text unsafe.Pointer, textLength int) int16 {
-	return raw.SRChangeLanguageObject(languageObject, text, textLength)
-}
-
-// SRCloseRecognitionSystem calls [raw.SRCloseRecognitionSystem] (C function SRCloseRecognitionSystem).
-func SRCloseRecognitionSystem(system unsafe.Pointer) int16 {
-	return raw.SRCloseRecognitionSystem(system)
-}
-
-// SRContinueRecognition calls [raw.SRContinueRecognition] (C function SRContinueRecognition).
-func SRContinueRecognition(recognizer unsafe.Pointer) int16 {
-	return raw.SRContinueRecognition(recognizer)
-}
-
-// SRCountItems calls [raw.SRCountItems] (C function SRCountItems).
-func SRCountItems(container unsafe.Pointer, count *int64) int16 {
-	return raw.SRCountItems(container, count)
-}
-
-// SRDrawRecognizedText calls [raw.SRDrawRecognizedText] (C function SRDrawRecognizedText).
-func SRDrawRecognizedText(recognizer unsafe.Pointer, dispText unsafe.Pointer, dispLength int) int16 {
-	return raw.SRDrawRecognizedText(recognizer, dispText, dispLength)
-}
-
-// SRDrawText calls [raw.SRDrawText] (C function SRDrawText).
-func SRDrawText(recognizer unsafe.Pointer, dispText unsafe.Pointer, dispLength int) int16 {
-	return raw.SRDrawText(recognizer, dispText, dispLength)
-}
-
-// SREmptyLanguageObject calls [raw.SREmptyLanguageObject] (C function SREmptyLanguageObject).
-func SREmptyLanguageObject(languageObject unsafe.Pointer) int16 {
-	return raw.SREmptyLanguageObject(languageObject)
-}
-
-// SRGetIndexedItem calls [raw.SRGetIndexedItem] (C function SRGetIndexedItem).
-func SRGetIndexedItem(container unsafe.Pointer, item unsafe.Pointer, index int) int16 {
-	return raw.SRGetIndexedItem(container, item, index)
-}
-
-// SRGetLanguageModel calls [raw.SRGetLanguageModel] (C function SRGetLanguageModel).
-func SRGetLanguageModel(recognizer unsafe.Pointer, languageModel unsafe.Pointer) int16 {
-	return raw.SRGetLanguageModel(recognizer, languageModel)
-}
-
-// SRGetProperty calls [raw.SRGetProperty] (C function SRGetProperty).
-func SRGetProperty(srObject unsafe.Pointer, selector uint, property unsafe.Pointer, propertyLen *int) int16 {
-	return raw.SRGetProperty(srObject, selector, property, propertyLen)
-}
-
-// SRGetReference calls [raw.SRGetReference] (C function SRGetReference).
-func SRGetReference(srObject unsafe.Pointer, newObjectRef unsafe.Pointer) int16 {
-	return raw.SRGetReference(srObject, newObjectRef)
-}
-
-// SRIdle calls [raw.SRIdle] (C function SRIdle).
+// SRIdle calls the SpeechRecognition framework function SRIdle.
 func SRIdle() int16 {
-	return raw.SRIdle()
+	_loadOnce.Do(_loadLibrary)
+	if _fnSRIdle == nil {
+		ebipurego.RegisterLibFunc(&_fnSRIdle, _lib, "SRIdle")
+	}
+	return _fnSRIdle()
 }
 
-// SRNewLanguageModel calls [raw.SRNewLanguageModel] (C function SRNewLanguageModel).
-func SRNewLanguageModel(system unsafe.Pointer, model unsafe.Pointer, name unsafe.Pointer, nameLength int) int16 {
-	return raw.SRNewLanguageModel(system, model, name, nameLength)
+var _fnSRReleaseObject func(objc.ID) int16
+
+// SRReleaseObject calls the SpeechRecognition framework function SRReleaseObject.
+func SRReleaseObject(srObject obj.Object) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSRReleaseObject == nil {
+		ebipurego.RegisterLibFunc(&_fnSRReleaseObject, _lib, "SRReleaseObject")
+	}
+	return _fnSRReleaseObject(objref.IDOf(srObject))
 }
 
-// SRNewLanguageObjectFromDataFile calls [raw.SRNewLanguageObjectFromDataFile] (C function SRNewLanguageObjectFromDataFile).
-func SRNewLanguageObjectFromDataFile(system unsafe.Pointer, languageObject unsafe.Pointer, fRefNum int16) int16 {
-	return raw.SRNewLanguageObjectFromDataFile(system, languageObject, fRefNum)
+var _fnSRRemoveIndexedItem func(objc.ID, int) int16
+
+// SRRemoveIndexedItem calls the SpeechRecognition framework function SRRemoveIndexedItem.
+func SRRemoveIndexedItem(container obj.Object, index int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSRRemoveIndexedItem == nil {
+		ebipurego.RegisterLibFunc(&_fnSRRemoveIndexedItem, _lib, "SRRemoveIndexedItem")
+	}
+	return _fnSRRemoveIndexedItem(objref.IDOf(container), index)
 }
 
-// SRNewLanguageObjectFromHandle calls [raw.SRNewLanguageObjectFromHandle] (C function SRNewLanguageObjectFromHandle).
-func SRNewLanguageObjectFromHandle(system unsafe.Pointer, languageObject unsafe.Pointer, lObjHandle *string) int16 {
-	return raw.SRNewLanguageObjectFromHandle(system, languageObject, lObjHandle)
-}
+var _fnSRSetIndexedItem func(objc.ID, objc.ID, int) int16
 
-// SRNewPath calls [raw.SRNewPath] (C function SRNewPath).
-func SRNewPath(system unsafe.Pointer, path unsafe.Pointer) int16 {
-	return raw.SRNewPath(system, path)
-}
-
-// SRNewPhrase calls [raw.SRNewPhrase] (C function SRNewPhrase).
-func SRNewPhrase(system unsafe.Pointer, phrase unsafe.Pointer, text unsafe.Pointer, textLength int) int16 {
-	return raw.SRNewPhrase(system, phrase, text, textLength)
-}
-
-// SRNewRecognizer calls [raw.SRNewRecognizer] (C function SRNewRecognizer).
-func SRNewRecognizer(system unsafe.Pointer, recognizer unsafe.Pointer, sourceID uint) int16 {
-	return raw.SRNewRecognizer(system, recognizer, sourceID)
-}
-
-// SRNewWord calls [raw.SRNewWord] (C function SRNewWord).
-func SRNewWord(system unsafe.Pointer, word unsafe.Pointer, text unsafe.Pointer, textLength int) int16 {
-	return raw.SRNewWord(system, word, text, textLength)
-}
-
-// SROpenRecognitionSystem calls [raw.SROpenRecognitionSystem] (C function SROpenRecognitionSystem).
-func SROpenRecognitionSystem(system unsafe.Pointer, systemID uint) int16 {
-	return raw.SROpenRecognitionSystem(system, systemID)
-}
-
-// SRProcessBegin calls [raw.SRProcessBegin] (C function SRProcessBegin).
-func SRProcessBegin(recognizer unsafe.Pointer, failed uint8) int16 {
-	return raw.SRProcessBegin(recognizer, failed)
-}
-
-// SRProcessEnd calls [raw.SRProcessEnd] (C function SRProcessEnd).
-func SRProcessEnd(recognizer unsafe.Pointer, failed uint8) int16 {
-	return raw.SRProcessEnd(recognizer, failed)
-}
-
-// SRPutLanguageObjectIntoDataFile calls [raw.SRPutLanguageObjectIntoDataFile] (C function SRPutLanguageObjectIntoDataFile).
-func SRPutLanguageObjectIntoDataFile(languageObject unsafe.Pointer, fRefNum int16) int16 {
-	return raw.SRPutLanguageObjectIntoDataFile(languageObject, fRefNum)
-}
-
-// SRPutLanguageObjectIntoHandle calls [raw.SRPutLanguageObjectIntoHandle] (C function SRPutLanguageObjectIntoHandle).
-func SRPutLanguageObjectIntoHandle(languageObject unsafe.Pointer, lobjHandle *string) int16 {
-	return raw.SRPutLanguageObjectIntoHandle(languageObject, lobjHandle)
-}
-
-// SRReleaseObject calls [raw.SRReleaseObject] (C function SRReleaseObject).
-func SRReleaseObject(srObject unsafe.Pointer) int16 {
-	return raw.SRReleaseObject(srObject)
-}
-
-// SRRemoveIndexedItem calls [raw.SRRemoveIndexedItem] (C function SRRemoveIndexedItem).
-func SRRemoveIndexedItem(container unsafe.Pointer, index int) int16 {
-	return raw.SRRemoveIndexedItem(container, index)
-}
-
-// SRRemoveLanguageObject calls [raw.SRRemoveLanguageObject] (C function SRRemoveLanguageObject).
-func SRRemoveLanguageObject(base unsafe.Pointer, toRemove unsafe.Pointer) int16 {
-	return raw.SRRemoveLanguageObject(base, toRemove)
-}
-
-// SRSetIndexedItem calls [raw.SRSetIndexedItem] (C function SRSetIndexedItem).
-func SRSetIndexedItem(container unsafe.Pointer, item unsafe.Pointer, index int) int16 {
-	return raw.SRSetIndexedItem(container, item, index)
-}
-
-// SRSetLanguageModel calls [raw.SRSetLanguageModel] (C function SRSetLanguageModel).
-func SRSetLanguageModel(recognizer unsafe.Pointer, languageModel unsafe.Pointer) int16 {
-	return raw.SRSetLanguageModel(recognizer, languageModel)
-}
-
-// SRSetProperty calls [raw.SRSetProperty] (C function SRSetProperty).
-func SRSetProperty(srObject unsafe.Pointer, selector uint, property unsafe.Pointer, propertyLen int) int16 {
-	return raw.SRSetProperty(srObject, selector, property, propertyLen)
-}
-
-// SRSpeakAndDrawText calls [raw.SRSpeakAndDrawText] (C function SRSpeakAndDrawText).
-func SRSpeakAndDrawText(recognizer unsafe.Pointer, text unsafe.Pointer, textLength int) int16 {
-	return raw.SRSpeakAndDrawText(recognizer, text, textLength)
-}
-
-// SRSpeakText calls [raw.SRSpeakText] (C function SRSpeakText).
-func SRSpeakText(recognizer unsafe.Pointer, speakText unsafe.Pointer, speakLength int) int16 {
-	return raw.SRSpeakText(recognizer, speakText, speakLength)
-}
-
-// SRSpeechBusy calls [raw.SRSpeechBusy] (C function SRSpeechBusy).
-func SRSpeechBusy(recognizer unsafe.Pointer) uint8 {
-	return raw.SRSpeechBusy(recognizer)
-}
-
-// SRStartListening calls [raw.SRStartListening] (C function SRStartListening).
-func SRStartListening(recognizer unsafe.Pointer) int16 {
-	return raw.SRStartListening(recognizer)
-}
-
-// SRStopListening calls [raw.SRStopListening] (C function SRStopListening).
-func SRStopListening(recognizer unsafe.Pointer) int16 {
-	return raw.SRStopListening(recognizer)
-}
-
-// SRStopSpeech calls [raw.SRStopSpeech] (C function SRStopSpeech).
-func SRStopSpeech(recognizer unsafe.Pointer) int16 {
-	return raw.SRStopSpeech(recognizer)
+// SRSetIndexedItem calls the SpeechRecognition framework function SRSetIndexedItem.
+func SRSetIndexedItem(container obj.Object, item obj.Object, index int) int16 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnSRSetIndexedItem == nil {
+		ebipurego.RegisterLibFunc(&_fnSRSetIndexedItem, _lib, "SRSetIndexedItem")
+	}
+	return _fnSRSetIndexedItem(objref.IDOf(container), objref.IDOf(item), index)
 }

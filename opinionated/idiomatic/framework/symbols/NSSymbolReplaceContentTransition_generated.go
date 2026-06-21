@@ -5,69 +5,80 @@
 package symbols
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/symbols"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that replaces the layers of one symbol-based image with those of another.
 //
-// SymbolReplaceContentTransition wraps [raw.NSSymbolReplaceContentTransition] with a fluent Go API.
+// SymbolReplaceContentTransition is an idiomatic wrapper over the Objective-C class NSSymbolReplaceContentTransition.
 type SymbolReplaceContentTransition struct {
-	inner *raw.NSSymbolReplaceContentTransition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSymbolReplaceContentTransition].
-func (x *SymbolReplaceContentTransition) Unwrap() *raw.NSSymbolReplaceContentTransition {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SymbolReplaceContentTransition) ID() objc.ID { return x.inner.Ptr() }
-
-// SymbolReplaceContentTransitionFromID adopts an existing object pointer as a SymbolReplaceContentTransition (nil for 0).
+// SymbolReplaceContentTransitionFromID adopts an existing Objective-C object as a SymbolReplaceContentTransition
+// (nil for 0), retaining it and registering a release finalizer.
 func SymbolReplaceContentTransitionFromID(id objc.ID) *SymbolReplaceContentTransition {
 	if id == 0 {
 		return nil
 	}
-	return &SymbolReplaceContentTransition{inner: raw.NSSymbolReplaceContentTransitionFromID(id)}
+	x := &SymbolReplaceContentTransition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSymbolReplaceContentTransition creates a new [SymbolReplaceContentTransition].
+// symbolReplaceContentTransitionAdopt wraps an Objective-C object that this code just created as a
+// SymbolReplaceContentTransition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func symbolReplaceContentTransitionAdopt(id objc.ID) *SymbolReplaceContentTransition {
+	if id == 0 {
+		return nil
+	}
+	x := &SymbolReplaceContentTransition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SymbolReplaceContentTransition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SymbolReplaceContentTransition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SymbolReplaceContentTransition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSymbolReplaceContentTransition creates a new SymbolReplaceContentTransition.
 func NewSymbolReplaceContentTransition() *SymbolReplaceContentTransition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSymbolReplaceContentTransition")), objc.RegisterName("new"))
-	return &SymbolReplaceContentTransition{inner: raw.NSSymbolReplaceContentTransitionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSymbolReplaceContentTransition")), objc.RegisterName("new"))
+	return symbolReplaceContentTransitionAdopt(_id)
 }
 
 // An effect that replaces each layer separately.
-//
-// TransitionWithByLayer calls the underlying TransitionWithByLayer.
 func (x *SymbolReplaceContentTransition) TransitionWithByLayer() *SymbolReplaceContentTransition {
-	_r := x.inner.TransitionWithByLayer()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolReplaceContentTransition{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionWithByLayer"))
+	return SymbolReplaceContentTransitionFromID(_r)
 }
 
 // An effect that replaces all layers simultaneously.
-//
-// TransitionWithWholeSymbol calls the underlying TransitionWithWholeSymbol.
 func (x *SymbolReplaceContentTransition) TransitionWithWholeSymbol() *SymbolReplaceContentTransition {
-	_r := x.inner.TransitionWithWholeSymbol()
-	if _r == nil {
-		return nil
-	}
-	return &SymbolReplaceContentTransition{inner: _r}
-}
-
-func (x *SymbolReplaceContentTransition) asSymbolContentTransition() *raw.NSSymbolContentTransition {
-	return &x.inner.NSSymbolContentTransition
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transitionWithWholeSymbol"))
+	return SymbolReplaceContentTransitionFromID(_r)
 }
 
 // SymbolReplaceContentTransitionable is the interface implemented by [SymbolReplaceContentTransition], for mocking and DI.
 type SymbolReplaceContentTransitionable interface {
-	Unwrap() *raw.NSSymbolReplaceContentTransition
+	obj.Object
 	TransitionWithByLayer() *SymbolReplaceContentTransition
 	TransitionWithWholeSymbol() *SymbolReplaceContentTransition
 }

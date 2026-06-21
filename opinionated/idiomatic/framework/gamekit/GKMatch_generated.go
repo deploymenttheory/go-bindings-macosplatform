@@ -6,68 +6,90 @@ package gamekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A peer-to-peer network between a group of players that sign into Game Center.
 //
-// Match wraps [raw.GKMatch] with a fluent Go API.
+// Match is an idiomatic wrapper over the Objective-C class GKMatch.
 type Match struct {
-	inner *raw.GKMatch
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKMatch].
-func (x *Match) Unwrap() *raw.GKMatch { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Match) ID() objc.ID { return x.inner.Ptr() }
-
-// MatchFromID adopts an existing object pointer as a Match (nil for 0).
+// MatchFromID adopts an existing Objective-C object as a Match
+// (nil for 0), retaining it and registering a release finalizer.
 func MatchFromID(id objc.ID) *Match {
 	if id == 0 {
 		return nil
 	}
-	return &Match{inner: raw.GKMatchFromID(id)}
-}
-
-// NewMatch creates a new [Match].
-func NewMatch() *Match {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMatch")), objc.RegisterName("new"))
-	return &Match{inner: raw.GKMatchFromID(_id)}
-}
-
-// The delegate that handles communication between players in a match.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Match) WithDelegate(delegate raw.GKMatchDelegate) *Match {
-	x.inner.SetDelegate(delegate)
+	x := &Match{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
+// matchAdopt wraps an Objective-C object that this code just created as a
+// Match (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func matchAdopt(id objc.ID) *Match {
+	if id == 0 {
+		return nil
+	}
+	x := &Match{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Match) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Match) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Match) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMatch creates a new Match.
+func NewMatch() *Match {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKMatch")), objc.RegisterName("new"))
+	return matchAdopt(_id)
+}
+
 // Transmits data to one or more players connected to the match.
-//
-// SendDataToPlayersDataModeError calls the underlying SendDataToPlayersDataModeError.
-func (x *Match) SendDataToPlayersDataModeError(data *foundation.NSData, players *foundation.NSArray[*raw.GKPlayer], mode GKMatchSendDataMode) (bool, error) {
-	return x.inner.SendDataToPlayersDataModeError(data, players, raw.GKMatchSendDataMode(mode))
+func (x *Match) SendDataToPlayersDataMode(data obj.Object, players []*Player, mode MatchSendDataMode) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendData:toPlayers:dataMode:error:"), objref.IDOf(data), purego.SliceToNSArray(players, func(_v *Player) objc.ID { return objref.IDOf(_v) }), mode, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Transmits data to all players connected to the match.
-//
-// SendDataToAllPlayersWithDataModeError calls the underlying SendDataToAllPlayersWithDataModeError.
-func (x *Match) SendDataToAllPlayersWithDataModeError(data *foundation.NSData, mode GKMatchSendDataMode) (bool, error) {
-	return x.inner.SendDataToAllPlayersWithDataModeError(data, raw.GKMatchSendDataMode(mode))
+func (x *Match) SendDataToAllPlayersWithDataMode(data obj.Object, mode MatchSendDataMode) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendDataToAllPlayers:withDataMode:error:"), objref.IDOf(data), mode, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Disconnects the local player from the match.
-//
-// Disconnect calls the underlying Disconnect.
 func (x *Match) Disconnect() {
-	x.inner.Disconnect()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("disconnect"))
 }
 
 // Determines the best player in the game to act as the server for a client-server topology.
@@ -79,13 +101,12 @@ func (x *Match) ChooseBestHostingPlayer(ctx context.Context) (*Player, error) {
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ChooseBestHostingPlayerWithCompletionHandler(func(_p0 *raw.GKPlayer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = &Player{inner: _p0}
-		}
+		_o.val = PlayerFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chooseBestHostingPlayerWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -104,16 +125,13 @@ func (x *Match) Rematch(ctx context.Context) (*Match, error) {
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RematchWithCompletionHandler(func(_p0 *raw.GKMatch, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &Match{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MatchFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rematchWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -124,50 +142,25 @@ func (x *Match) Rematch(ctx context.Context) (*Match, error) {
 }
 
 // Joins the local player to a voice channel.
-//
-// VoiceChatWithName calls the underlying VoiceChatWithName.
 func (x *Match) VoiceChatWithName(name string) *VoiceChat {
-	_r := x.inner.VoiceChatWithName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &VoiceChat{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("voiceChatWithName:"), purego.NSString(name))
+	return VoiceChatFromID(_r)
 }
 
 // Players returns the collection as a Go slice.
 func (x *Match) Players() []*Player {
-	arr := x.inner.Players()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Player {
-		return &Player{inner: raw.GKPlayerFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("players"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Player { return PlayerFromID(_id) })
 }
 
-// Delegate calls the underlying Delegate.
-func (x *Match) Delegate() raw.GKMatchDelegate {
-	return x.inner.Delegate()
+func (x *Match) ExpectedPlayerCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("expectedPlayerCount"))
+	return _r
 }
 
-// SetDelegate calls the underlying SetDelegate.
-func (x *Match) SetDelegate(delegate raw.GKMatchDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// ExpectedPlayerCount calls the underlying ExpectedPlayerCount.
-func (x *Match) ExpectedPlayerCount() uint {
-	return x.inner.ExpectedPlayerCount()
-}
-
-// Properties calls the underlying Properties.
-func (x *Match) Properties() unsafe.Pointer {
-	return x.inner.Properties()
-}
-
-// PlayerProperties calls the underlying PlayerProperties.
-func (x *Match) PlayerProperties() *foundation.NSDictionary[*raw.GKPlayer, objc.ID] {
-	return x.inner.PlayerProperties()
+func (x *Match) PlayerProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerProperties"))
+	return obj.Wrap(_r)
 }
 
 // Determines the best player in the game to act as the server for a client-server match.
@@ -179,13 +172,12 @@ func (x *Match) ChooseBestHostPlayer(ctx context.Context) (string, error) {
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.ChooseBestHostPlayerWithCompletionHandler(func(_p0 *foundation.NSString) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _o _result
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("chooseBestHostPlayerWithCompletionHandler:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -196,41 +188,35 @@ func (x *Match) ChooseBestHostPlayer(ctx context.Context) (string, error) {
 }
 
 // Transmits data to a list of connected players.
-//
-// SendDataToPlayersWithDataModeError calls the underlying SendDataToPlayersWithDataModeError.
-func (x *Match) SendDataToPlayersWithDataModeError(data *foundation.NSData, playerIDs *foundation.NSArray[*foundation.NSString], mode GKMatchSendDataMode) (bool, error) {
-	return x.inner.SendDataToPlayersWithDataModeError(data, playerIDs, raw.GKMatchSendDataMode(mode))
+func (x *Match) SendDataToPlayersWithDataMode(data obj.Object, playerIDs []string, mode MatchSendDataMode) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendData:toPlayers:withDataMode:error:"), objref.IDOf(data), purego.SliceToNSArray(playerIDs, func(_v string) objc.ID { return purego.NSString(_v) }), mode, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // PlayerIDs returns the collection as a Go slice.
 func (x *Match) PlayerIDs() []string {
-	arr := x.inner.PlayerIDs()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playerIDs"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // Matchable is the interface implemented by [Match], for mocking and DI.
 type Matchable interface {
-	Unwrap() *raw.GKMatch
-	WithDelegate(delegate raw.GKMatchDelegate) *Match
-	SendDataToPlayersDataModeError(data *foundation.NSData, players *foundation.NSArray[*raw.GKPlayer], mode GKMatchSendDataMode) (bool, error)
-	SendDataToAllPlayersWithDataModeError(data *foundation.NSData, mode GKMatchSendDataMode) (bool, error)
+	obj.Object
+	SendDataToPlayersDataMode(data obj.Object, players []*Player, mode MatchSendDataMode) error
+	SendDataToAllPlayersWithDataMode(data obj.Object, mode MatchSendDataMode) error
 	Disconnect()
 	ChooseBestHostingPlayer(ctx context.Context) (*Player, error)
 	Rematch(ctx context.Context) (*Match, error)
 	VoiceChatWithName(name string) *VoiceChat
 	Players() []*Player
-	Delegate() raw.GKMatchDelegate
-	SetDelegate(delegate raw.GKMatchDelegate)
-	ExpectedPlayerCount() uint
-	Properties() unsafe.Pointer
-	PlayerProperties() *foundation.NSDictionary[*raw.GKPlayer, objc.ID]
+	ExpectedPlayerCount() int
+	PlayerProperties() obj.Object
 	ChooseBestHostPlayer(ctx context.Context) (string, error)
-	SendDataToPlayersWithDataModeError(data *foundation.NSData, playerIDs *foundation.NSArray[*foundation.NSString], mode GKMatchSendDataMode) (bool, error)
+	SendDataToPlayersWithDataMode(data obj.Object, playerIDs []string, mode MatchSendDataMode) error
 	PlayerIDs() []string
 }
 

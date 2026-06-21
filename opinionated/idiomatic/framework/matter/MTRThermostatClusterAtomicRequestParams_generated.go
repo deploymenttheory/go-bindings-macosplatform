@@ -5,138 +5,155 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRThermostatClusterAtomicRequestParams wraps [raw.MTRThermostatClusterAtomicRequestParams] with a fluent Go API.
+// MTRThermostatClusterAtomicRequestParams is an idiomatic wrapper over the Objective-C class MTRThermostatClusterAtomicRequestParams.
 type MTRThermostatClusterAtomicRequestParams struct {
-	inner *raw.MTRThermostatClusterAtomicRequestParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThermostatClusterAtomicRequestParams].
-func (x *MTRThermostatClusterAtomicRequestParams) Unwrap() *raw.MTRThermostatClusterAtomicRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThermostatClusterAtomicRequestParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRThermostatClusterAtomicRequestParamsFromID adopts an existing object pointer as a MTRThermostatClusterAtomicRequestParams (nil for 0).
+// MTRThermostatClusterAtomicRequestParamsFromID adopts an existing Objective-C object as a MTRThermostatClusterAtomicRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThermostatClusterAtomicRequestParamsFromID(id objc.ID) *MTRThermostatClusterAtomicRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThermostatClusterAtomicRequestParams{inner: raw.MTRThermostatClusterAtomicRequestParamsFromID(id)}
-}
-
-// NewMTRThermostatClusterAtomicRequestParams creates a new [MTRThermostatClusterAtomicRequestParams].
-func NewMTRThermostatClusterAtomicRequestParams() *MTRThermostatClusterAtomicRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThermostatClusterAtomicRequestParams")), objc.RegisterName("new"))
-	return &MTRThermostatClusterAtomicRequestParams{inner: raw.MTRThermostatClusterAtomicRequestParamsFromID(_id)}
-}
-
-// WithRequestType sets the requestType property and returns the receiver for chaining.
-func (x *MTRThermostatClusterAtomicRequestParams) WithRequestType(requestType *foundation.NSNumber) *MTRThermostatClusterAtomicRequestParams {
-	x.inner.SetRequestType(requestType)
+	x := &MTRThermostatClusterAtomicRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithTimeout sets the timeout property and returns the receiver for chaining.
-func (x *MTRThermostatClusterAtomicRequestParams) WithTimeout(timeout *foundation.NSNumber) *MTRThermostatClusterAtomicRequestParams {
-	x.inner.SetTimeout(timeout)
+// mTRThermostatClusterAtomicRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRThermostatClusterAtomicRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThermostatClusterAtomicRequestParamsAdopt(id objc.ID) *MTRThermostatClusterAtomicRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThermostatClusterAtomicRequestParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRThermostatClusterAtomicRequestParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThermostatClusterAtomicRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThermostatClusterAtomicRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRThermostatClusterAtomicRequestParams creates a new MTRThermostatClusterAtomicRequestParams.
+func NewMTRThermostatClusterAtomicRequestParams() *MTRThermostatClusterAtomicRequestParams {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRThermostatClusterAtomicRequestParams")), objc.RegisterName("new"))
+	return mTRThermostatClusterAtomicRequestParamsAdopt(_id)
+}
+
+// WithRequestType sets requestType and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterAtomicRequestParams) WithRequestType(requestType obj.Object) *MTRThermostatClusterAtomicRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestType:"), objref.IDOf(requestType))
+	return x
+}
+
+// WithTimeout sets timeout and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterAtomicRequestParams) WithTimeout(timeout obj.Object) *MTRThermostatClusterAtomicRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRThermostatClusterAtomicRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterAtomicRequestParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterAtomicRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterAtomicRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRThermostatClusterAtomicRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterAtomicRequestParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterAtomicRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterAtomicRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// RequestType calls the underlying RequestType.
-func (x *MTRThermostatClusterAtomicRequestParams) RequestType() *foundation.NSNumber {
-	return x.inner.RequestType()
+func (x *MTRThermostatClusterAtomicRequestParams) RequestType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestType"))
+	return obj.Wrap(_r)
 }
 
-// SetRequestType calls the underlying SetRequestType.
-func (x *MTRThermostatClusterAtomicRequestParams) SetRequestType(requestType *foundation.NSNumber) {
-	x.inner.SetRequestType(requestType)
+func (x *MTRThermostatClusterAtomicRequestParams) SetRequestType(requestType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequestType:"), objref.IDOf(requestType))
 }
 
-// AttributeRequests calls the underlying AttributeRequests.
-func (x *MTRThermostatClusterAtomicRequestParams) AttributeRequests() *foundation.NSArray[objc.ID] {
-	return x.inner.AttributeRequests()
+func (x *MTRThermostatClusterAtomicRequestParams) AttributeRequests() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributeRequests"))
+	return obj.Wrap(_r)
 }
 
-// SetAttributeRequests calls the underlying SetAttributeRequests.
-func (x *MTRThermostatClusterAtomicRequestParams) SetAttributeRequests(attributeRequests *foundation.NSArray[objc.ID]) {
-	x.inner.SetAttributeRequests(attributeRequests)
+func (x *MTRThermostatClusterAtomicRequestParams) SetAttributeRequests(attributeRequests obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeRequests:"), objref.IDOf(attributeRequests))
 }
 
-// Timeout calls the underlying Timeout.
-func (x *MTRThermostatClusterAtomicRequestParams) Timeout() *foundation.NSNumber {
-	return x.inner.Timeout()
+func (x *MTRThermostatClusterAtomicRequestParams) Timeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeout"))
+	return obj.Wrap(_r)
 }
 
-// SetTimeout calls the underlying SetTimeout.
-func (x *MTRThermostatClusterAtomicRequestParams) SetTimeout(timeout *foundation.NSNumber) {
-	x.inner.SetTimeout(timeout)
+func (x *MTRThermostatClusterAtomicRequestParams) SetTimeout(timeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimeout:"), objref.IDOf(timeout))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRThermostatClusterAtomicRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRThermostatClusterAtomicRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRThermostatClusterAtomicRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRThermostatClusterAtomicRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRThermostatClusterAtomicRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRThermostatClusterAtomicRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRThermostatClusterAtomicRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRThermostatClusterAtomicRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRThermostatClusterAtomicRequestParamsable is the interface implemented by [MTRThermostatClusterAtomicRequestParams], for mocking and DI.
 type MTRThermostatClusterAtomicRequestParamsable interface {
-	Unwrap() *raw.MTRThermostatClusterAtomicRequestParams
-	WithRequestType(requestType *foundation.NSNumber) *MTRThermostatClusterAtomicRequestParams
-	WithTimeout(timeout *foundation.NSNumber) *MTRThermostatClusterAtomicRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterAtomicRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterAtomicRequestParams
-	RequestType() *foundation.NSNumber
-	SetRequestType(requestType *foundation.NSNumber)
-	AttributeRequests() *foundation.NSArray[objc.ID]
-	SetAttributeRequests(attributeRequests *foundation.NSArray[objc.ID])
-	Timeout() *foundation.NSNumber
-	SetTimeout(timeout *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithRequestType(requestType obj.Object) *MTRThermostatClusterAtomicRequestParams
+	WithTimeout(timeout obj.Object) *MTRThermostatClusterAtomicRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterAtomicRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterAtomicRequestParams
+	RequestType() obj.Object
+	SetRequestType(requestType obj.Object)
+	AttributeRequests() obj.Object
+	SetAttributeRequests(attributeRequests obj.Object)
+	Timeout() obj.Object
+	SetTimeout(timeout obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRThermostatClusterAtomicRequestParamsable = (*MTRThermostatClusterAtomicRequestParams)(nil)

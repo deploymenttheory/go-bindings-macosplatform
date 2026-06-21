@@ -6,76 +6,67 @@ package cloudkit
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object the system uses to monitor changes in sharing.
 //
-// SystemSharingUIObserver wraps [raw.CKSystemSharingUIObserver] with a fluent Go API.
+// SystemSharingUIObserver is an idiomatic wrapper over the Objective-C class CKSystemSharingUIObserver.
 type SystemSharingUIObserver struct {
-	inner *raw.CKSystemSharingUIObserver
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSystemSharingUIObserver].
-func (x *SystemSharingUIObserver) Unwrap() *raw.CKSystemSharingUIObserver { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SystemSharingUIObserver) ID() objc.ID { return x.inner.Ptr() }
-
-// SystemSharingUIObserverFromID adopts an existing object pointer as a SystemSharingUIObserver (nil for 0).
+// SystemSharingUIObserverFromID adopts an existing Objective-C object as a SystemSharingUIObserver
+// (nil for 0), retaining it and registering a release finalizer.
 func SystemSharingUIObserverFromID(id objc.ID) *SystemSharingUIObserver {
 	if id == 0 {
 		return nil
 	}
-	return &SystemSharingUIObserver{inner: raw.CKSystemSharingUIObserverFromID(id)}
+	x := &SystemSharingUIObserver{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// systemSharingUIObserverAdopt wraps an Objective-C object that this code just created as a
+// SystemSharingUIObserver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func systemSharingUIObserverAdopt(id objc.ID) *SystemSharingUIObserver {
+	if id == 0 {
+		return nil
+	}
+	x := &SystemSharingUIObserver{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SystemSharingUIObserver) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SystemSharingUIObserver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SystemSharingUIObserver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and initializes an observer using the provided container.
 //
-// NewSystemSharingUIObserverWithContainer creates a new [SystemSharingUIObserver].
-func NewSystemSharingUIObserverWithContainer(container *raw.CKContainer) *SystemSharingUIObserver {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSystemSharingUIObserver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainer:"), container.Ptr())
-	return &SystemSharingUIObserver{inner: raw.CKSystemSharingUIObserverFromID(_id)}
-}
-
-// A callback block the system invokes after the success or failure of a share save by the system sharing UI.
-//
-// WithSystemSharingUIDidSaveShareBlock sets the systemSharingUIDidSaveShareBlock property and returns the receiver for chaining.
-func (x *SystemSharingUIObserver) WithSystemSharingUIDidSaveShareBlock(systemSharingUIDidSaveShareBlock func(*raw.CKRecordID, *raw.CKShare, unsafe.Pointer)) *SystemSharingUIObserver {
-	x.inner.SetSystemSharingUIDidSaveShareBlock(systemSharingUIDidSaveShareBlock)
-	return x
-}
-
-// A callback block the system invokes after the success or failure of a share delete by the system sharing UI.
-//
-// WithSystemSharingUIDidStopSharingBlock sets the systemSharingUIDidStopSharingBlock property and returns the receiver for chaining.
-func (x *SystemSharingUIObserver) WithSystemSharingUIDidStopSharingBlock(systemSharingUIDidStopSharingBlock func(*raw.CKRecordID, unsafe.Pointer)) *SystemSharingUIObserver {
-	x.inner.SetSystemSharingUIDidStopSharingBlock(systemSharingUIDidStopSharingBlock)
-	return x
-}
-
-// A callback block the system invokes after the success or failure of a share save by the system sharing UI. Following a successful share save by the system sharing UI in the provided “CKContainer“, the system invokes this callback with a `nonnull` “CKRecord/ID“, a `nonnull` share, and a `nil` error. If a save failure occurs due to a per-item error like “CKError/Code/serverRecordChanged“, the system invokes this callback with a `nonnull` “CKRecord/ID“, a `nil` share, and a `nonnull` error. Each “CKSystemSharingUIObserver“ instance has a private serial queue. The system uses this queue for all callback block invocations.
-//
-// SystemSharingUIDidSaveShareBlock calls the underlying SystemSharingUIDidSaveShareBlock.
-func (x *SystemSharingUIObserver) SystemSharingUIDidSaveShareBlock() objc.Block {
-	return x.inner.SystemSharingUIDidSaveShareBlock()
-}
-
-// SetSystemSharingUIDidSaveShareBlock calls the underlying SetSystemSharingUIDidSaveShareBlock.
-func (x *SystemSharingUIObserver) SetSystemSharingUIDidSaveShareBlock(systemSharingUIDidSaveShareBlock func(*raw.CKRecordID, *raw.CKShare, unsafe.Pointer)) {
-	x.inner.SetSystemSharingUIDidSaveShareBlock(systemSharingUIDidSaveShareBlock)
-}
-
-// A callback block the system invokes after the success or failure of a share delete by the system sharing UI. The system invokes this block on the success or failure of a “CKShare“ delete when the user decides to stop sharing through the system sharing UI. Each “CKSystemSharingUIObserver“ instance has a private serial queue. The system uses this queue for all callback block invocations.
-//
-// SystemSharingUIDidStopSharingBlock calls the underlying SystemSharingUIDidStopSharingBlock.
-func (x *SystemSharingUIObserver) SystemSharingUIDidStopSharingBlock() objc.Block {
-	return x.inner.SystemSharingUIDidStopSharingBlock()
+// NewSystemSharingUIObserverWithContainer creates a new SystemSharingUIObserver.
+func NewSystemSharingUIObserverWithContainer(container *Container) *SystemSharingUIObserver {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSystemSharingUIObserver")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainer:"), objref.IDOf(container))
+	return systemSharingUIObserverAdopt(_id)
 }
 
 // SetSystemSharingUIDidStopSharingBlock blocks until the operation completes or ctx is cancelled.
@@ -85,16 +76,13 @@ func (x *SystemSharingUIObserver) SetSystemSharingUIDidStopSharingBlock(ctx cont
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.SetSystemSharingUIDidStopSharingBlock(func(_p0 *raw.CKRecordID, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &RecordID{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = RecordIDFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSystemSharingUIDidStopSharingBlock:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -106,12 +94,7 @@ func (x *SystemSharingUIObserver) SetSystemSharingUIDidStopSharingBlock(ctx cont
 
 // SystemSharingUIObserverable is the interface implemented by [SystemSharingUIObserver], for mocking and DI.
 type SystemSharingUIObserverable interface {
-	Unwrap() *raw.CKSystemSharingUIObserver
-	WithSystemSharingUIDidSaveShareBlock(systemSharingUIDidSaveShareBlock func(*raw.CKRecordID, *raw.CKShare, unsafe.Pointer)) *SystemSharingUIObserver
-	WithSystemSharingUIDidStopSharingBlock(systemSharingUIDidStopSharingBlock func(*raw.CKRecordID, unsafe.Pointer)) *SystemSharingUIObserver
-	SystemSharingUIDidSaveShareBlock() objc.Block
-	SetSystemSharingUIDidSaveShareBlock(systemSharingUIDidSaveShareBlock func(*raw.CKRecordID, *raw.CKShare, unsafe.Pointer))
-	SystemSharingUIDidStopSharingBlock() objc.Block
+	obj.Object
 	SetSystemSharingUIDidStopSharingBlock(ctx context.Context) (*RecordID, error)
 }
 

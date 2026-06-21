@@ -5,151 +5,97 @@
 package classkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// CLSErrorCodeDomain returns the string constant CLSErrorCodeDomain as an objc.ID, for use as a dictionary key or selector argument.
-func CLSErrorCodeDomain() objc.ID {
-	return purego.CFConstant(raw.CLSErrorCodeDomain())
+// CLSErrorCodeDomain returns the string constant CLSErrorCodeDomain, for use as a dictionary key or argument.
+func CLSErrorCodeDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSErrorCodeDomain")))
 }
 
-// @abstract   Any object that caused a failure will be available in - [NSError userInfo]; under this key.
-// CLSErrorObjectKey returns the string constant CLSErrorObjectKey as an objc.ID, for use as a dictionary key or selector argument.
-func CLSErrorObjectKey() objc.ID {
-	if _r := raw.CLSErrorObjectKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// Any object that caused a failure will be available in - [NSError userInfo]; under this key.
+// CLSErrorObjectKey returns the string constant CLSErrorObjectKey, for use as a dictionary key or argument.
+func CLSErrorObjectKey() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("CLSErrorObjectKey"))) }
+
+// If multiple objects cause errors we return an error with code `CLSErrorCodePartialFailure` which will contain an array of errors in - [NSError userInfo]; under this key.
+// CLSErrorUnderlyingErrorsKey returns the string constant CLSErrorUnderlyingErrorsKey, for use as a dictionary key or argument.
+func CLSErrorUnderlyingErrorsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSErrorUnderlyingErrorsKey")))
 }
 
-// @abstract   If multiple objects cause errors we return an error with code `CLSErrorCodePartialFailure` which will contain an array of errors in - [NSError userInfo]; under this key.
-// CLSErrorUnderlyingErrorsKey returns the string constant CLSErrorUnderlyingErrorsKey as an objc.ID, for use as a dictionary key or selector argument.
-func CLSErrorUnderlyingErrorsKey() objc.ID {
-	if _r := raw.CLSErrorUnderlyingErrorsKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// Errors with the code `CLSErrorCodePartialFailure` may contain an array of successful entities in - [NSError userInfo]; under this key.
+// CLSErrorSuccessfulObjectsKey returns the string constant CLSErrorSuccessfulObjectsKey, for use as a dictionary key or argument.
+func CLSErrorSuccessfulObjectsKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSErrorSuccessfulObjectsKey")))
 }
 
-// @abstract   Errors with the code `CLSErrorCodePartialFailure` may contain an array of successful entities in - [NSError userInfo]; under this key.
-// CLSErrorSuccessfulObjectsKey returns the string constant CLSErrorSuccessfulObjectsKey as an objc.ID, for use as a dictionary key or selector argument.
-func CLSErrorSuccessfulObjectsKey() objc.ID {
-	if _r := raw.CLSErrorSuccessfulObjectsKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSPredicateKeyPathDateCreated returns the string constant CLSPredicateKeyPathDateCreated, for use as a dictionary key or argument.
+func CLSPredicateKeyPathDateCreated() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSPredicateKeyPathDateCreated")))
 }
 
-// CLSPredicateKeyPathDateCreated returns the string constant CLSPredicateKeyPathDateCreated as an objc.ID, for use as a dictionary key or selector argument.
-func CLSPredicateKeyPathDateCreated() objc.ID {
-	if _r := raw.CLSPredicateKeyPathDateCreated(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSPredicateKeyPathIdentifier returns the string constant CLSPredicateKeyPathIdentifier, for use as a dictionary key or argument.
+func CLSPredicateKeyPathIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSPredicateKeyPathIdentifier")))
 }
 
-// CLSPredicateKeyPathIdentifier returns the string constant CLSPredicateKeyPathIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func CLSPredicateKeyPathIdentifier() objc.ID {
-	if _r := raw.CLSPredicateKeyPathIdentifier(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSPredicateKeyPathTitle returns the string constant CLSPredicateKeyPathTitle, for use as a dictionary key or argument.
+func CLSPredicateKeyPathTitle() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSPredicateKeyPathTitle")))
 }
 
-// CLSPredicateKeyPathTitle returns the string constant CLSPredicateKeyPathTitle as an objc.ID, for use as a dictionary key or selector argument.
-func CLSPredicateKeyPathTitle() objc.ID {
-	if _r := raw.CLSPredicateKeyPathTitle(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSPredicateKeyPathUniversalLinkURL returns the string constant CLSPredicateKeyPathUniversalLinkURL, for use as a dictionary key or argument.
+func CLSPredicateKeyPathUniversalLinkURL() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSPredicateKeyPathUniversalLinkURL")))
 }
 
-// CLSPredicateKeyPathUniversalLinkURL returns the string constant CLSPredicateKeyPathUniversalLinkURL as an objc.ID, for use as a dictionary key or selector argument.
-func CLSPredicateKeyPathUniversalLinkURL() objc.ID {
-	if _r := raw.CLSPredicateKeyPathUniversalLinkURL(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSPredicateKeyPathTopic returns the string constant CLSPredicateKeyPathTopic, for use as a dictionary key or argument.
+func CLSPredicateKeyPathTopic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSPredicateKeyPathTopic")))
 }
 
-// CLSPredicateKeyPathTopic returns the string constant CLSPredicateKeyPathTopic as an objc.ID, for use as a dictionary key or selector argument.
-func CLSPredicateKeyPathTopic() objc.ID {
-	if _r := raw.CLSPredicateKeyPathTopic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSPredicateKeyPathParent returns the string constant CLSPredicateKeyPathParent, for use as a dictionary key or argument.
+func CLSPredicateKeyPathParent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSPredicateKeyPathParent")))
 }
 
-// CLSPredicateKeyPathParent returns the string constant CLSPredicateKeyPathParent as an objc.ID, for use as a dictionary key or selector argument.
-func CLSPredicateKeyPathParent() objc.ID {
-	if _r := raw.CLSPredicateKeyPathParent(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSContextTopicMath returns the string constant CLSContextTopicMath, for use as a dictionary key or argument.
+func CLSContextTopicMath() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSContextTopicMath")))
 }
 
-// CLSContextTopicMath returns the string constant CLSContextTopicMath as an objc.ID, for use as a dictionary key or selector argument.
-func CLSContextTopicMath() objc.ID {
-	if _r := raw.CLSContextTopicMath(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSContextTopicScience returns the string constant CLSContextTopicScience, for use as a dictionary key or argument.
+func CLSContextTopicScience() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSContextTopicScience")))
 }
 
-// CLSContextTopicScience returns the string constant CLSContextTopicScience as an objc.ID, for use as a dictionary key or selector argument.
-func CLSContextTopicScience() objc.ID {
-	if _r := raw.CLSContextTopicScience(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSContextTopicLiteracyAndWriting returns the string constant CLSContextTopicLiteracyAndWriting, for use as a dictionary key or argument.
+func CLSContextTopicLiteracyAndWriting() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSContextTopicLiteracyAndWriting")))
 }
 
-// CLSContextTopicLiteracyAndWriting returns the string constant CLSContextTopicLiteracyAndWriting as an objc.ID, for use as a dictionary key or selector argument.
-func CLSContextTopicLiteracyAndWriting() objc.ID {
-	if _r := raw.CLSContextTopicLiteracyAndWriting(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSContextTopicWorldLanguage returns the string constant CLSContextTopicWorldLanguage, for use as a dictionary key or argument.
+func CLSContextTopicWorldLanguage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSContextTopicWorldLanguage")))
 }
 
-// CLSContextTopicWorldLanguage returns the string constant CLSContextTopicWorldLanguage as an objc.ID, for use as a dictionary key or selector argument.
-func CLSContextTopicWorldLanguage() objc.ID {
-	if _r := raw.CLSContextTopicWorldLanguage(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSContextTopicSocialScience returns the string constant CLSContextTopicSocialScience, for use as a dictionary key or argument.
+func CLSContextTopicSocialScience() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSContextTopicSocialScience")))
 }
 
-// CLSContextTopicSocialScience returns the string constant CLSContextTopicSocialScience as an objc.ID, for use as a dictionary key or selector argument.
-func CLSContextTopicSocialScience() objc.ID {
-	if _r := raw.CLSContextTopicSocialScience(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSContextTopicComputerScienceAndEngineering returns the string constant CLSContextTopicComputerScienceAndEngineering, for use as a dictionary key or argument.
+func CLSContextTopicComputerScienceAndEngineering() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSContextTopicComputerScienceAndEngineering")))
 }
 
-// CLSContextTopicComputerScienceAndEngineering returns the string constant CLSContextTopicComputerScienceAndEngineering as an objc.ID, for use as a dictionary key or selector argument.
-func CLSContextTopicComputerScienceAndEngineering() objc.ID {
-	if _r := raw.CLSContextTopicComputerScienceAndEngineering(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSContextTopicArtsAndMusic returns the string constant CLSContextTopicArtsAndMusic, for use as a dictionary key or argument.
+func CLSContextTopicArtsAndMusic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSContextTopicArtsAndMusic")))
 }
 
-// CLSContextTopicArtsAndMusic returns the string constant CLSContextTopicArtsAndMusic as an objc.ID, for use as a dictionary key or selector argument.
-func CLSContextTopicArtsAndMusic() objc.ID {
-	if _r := raw.CLSContextTopicArtsAndMusic(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// CLSContextTopicHealthAndFitness returns the string constant CLSContextTopicHealthAndFitness as an objc.ID, for use as a dictionary key or selector argument.
-func CLSContextTopicHealthAndFitness() objc.ID {
-	if _r := raw.CLSContextTopicHealthAndFitness(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// CLSContextTopicHealthAndFitness returns the string constant CLSContextTopicHealthAndFitness, for use as a dictionary key or argument.
+func CLSContextTopicHealthAndFitness() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("CLSContextTopicHealthAndFitness")))
 }

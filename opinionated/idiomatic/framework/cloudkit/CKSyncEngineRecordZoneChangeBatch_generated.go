@@ -5,59 +5,73 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains the record changes for a single send operation.
 //
-// SyncEngineRecordZoneChangeBatch wraps [raw.CKSyncEngineRecordZoneChangeBatch] with a fluent Go API.
+// SyncEngineRecordZoneChangeBatch is an idiomatic wrapper over the Objective-C class CKSyncEngineRecordZoneChangeBatch.
 type SyncEngineRecordZoneChangeBatch struct {
-	inner *raw.CKSyncEngineRecordZoneChangeBatch
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineRecordZoneChangeBatch].
-func (x *SyncEngineRecordZoneChangeBatch) Unwrap() *raw.CKSyncEngineRecordZoneChangeBatch {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineRecordZoneChangeBatch) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineRecordZoneChangeBatchFromID adopts an existing object pointer as a SyncEngineRecordZoneChangeBatch (nil for 0).
+// SyncEngineRecordZoneChangeBatchFromID adopts an existing Objective-C object as a SyncEngineRecordZoneChangeBatch
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineRecordZoneChangeBatchFromID(id objc.ID) *SyncEngineRecordZoneChangeBatch {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineRecordZoneChangeBatch{inner: raw.CKSyncEngineRecordZoneChangeBatchFromID(id)}
+	x := &SyncEngineRecordZoneChangeBatch{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a batch of records to modify using the provided record zone changes.
-//
-// NewSyncEngineRecordZoneChangeBatchWithPendingChangesRecordProvider creates a new [SyncEngineRecordZoneChangeBatch].
-func NewSyncEngineRecordZoneChangeBatchWithPendingChangesRecordProvider(pendingChanges *foundation.NSArray[*raw.CKSyncEnginePendingRecordZoneChange], recordProvider objc.Block) *SyncEngineRecordZoneChangeBatch {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineRecordZoneChangeBatch")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithPendingChanges:recordProvider:"), pendingChanges.Ptr(), recordProvider)
-	return &SyncEngineRecordZoneChangeBatch{inner: raw.CKSyncEngineRecordZoneChangeBatchFromID(_id)}
+// syncEngineRecordZoneChangeBatchAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineRecordZoneChangeBatch (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineRecordZoneChangeBatchAdopt(id objc.ID) *SyncEngineRecordZoneChangeBatch {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEngineRecordZoneChangeBatch{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncEngineRecordZoneChangeBatch) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineRecordZoneChangeBatch) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineRecordZoneChangeBatch) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a batch of records to modify.
 //
-// NewSyncEngineRecordZoneChangeBatchWithRecordsToSaveRecordIDsToDeleteAtomicByZone creates a new [SyncEngineRecordZoneChangeBatch].
-func NewSyncEngineRecordZoneChangeBatchWithRecordsToSaveRecordIDsToDeleteAtomicByZone(recordsToSave *foundation.NSArray[*raw.CKRecord], recordIDsToDelete *foundation.NSArray[*raw.CKRecordID], atomicByZone bool) *SyncEngineRecordZoneChangeBatch {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineRecordZoneChangeBatch")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordsToSave:recordIDsToDelete:atomicByZone:"), recordsToSave.Ptr(), recordIDsToDelete.Ptr(), atomicByZone)
-	return &SyncEngineRecordZoneChangeBatch{inner: raw.CKSyncEngineRecordZoneChangeBatchFromID(_id)}
+// NewSyncEngineRecordZoneChangeBatchWithRecordsToSaveRecordIDsToDeleteAtomicByZone creates a new SyncEngineRecordZoneChangeBatch.
+func NewSyncEngineRecordZoneChangeBatchWithRecordsToSaveRecordIDsToDeleteAtomicByZone(recordsToSave []*Record, recordIDsToDelete []*RecordID, atomicByZone bool) *SyncEngineRecordZoneChangeBatch {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineRecordZoneChangeBatch")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRecordsToSave:recordIDsToDelete:atomicByZone:"), purego.SliceToNSArray(recordsToSave, func(_v *Record) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(recordIDsToDelete, func(_v *RecordID) objc.ID { return objref.IDOf(_v) }), atomicByZone)
+	return syncEngineRecordZoneChangeBatchAdopt(_id)
 }
 
 // A Boolean value that determines whether CloudKit modifies records atomically by record zone.
 //
-// WithAtomicByZone sets the atomicByZone property and returns the receiver for chaining.
+// WithAtomicByZone sets atomicByZone and returns the receiver so calls can be chained.
 func (x *SyncEngineRecordZoneChangeBatch) WithAtomicByZone(atomicByZone bool) *SyncEngineRecordZoneChangeBatch {
-	x.inner.SetAtomicByZone(atomicByZone)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAtomicByZone:"), atomicByZone)
 	return x
 }
 
@@ -65,43 +79,31 @@ func (x *SyncEngineRecordZoneChangeBatch) WithAtomicByZone(atomicByZone bool) *S
 //
 // RecordsToSave returns the collection as a Go slice.
 func (x *SyncEngineRecordZoneChangeBatch) RecordsToSave() []*Record {
-	arr := x.inner.RecordsToSave()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Record {
-		return &Record{inner: raw.CKRecordFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordsToSave"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Record { return RecordFromID(_id) })
 }
 
 // The unique identifiers of the records to delete.
 //
 // RecordIDsToDelete returns the collection as a Go slice.
 func (x *SyncEngineRecordZoneChangeBatch) RecordIDsToDelete() []*RecordID {
-	arr := x.inner.RecordIDsToDelete()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RecordID {
-		return &RecordID{inner: raw.CKRecordIDFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordIDsToDelete"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RecordID { return RecordIDFromID(_id) })
 }
 
 // A Boolean value that determines whether CloudKit modifies records atomically by record zone. When <doc://com.apple.documentation/documentation/swift/true>, CloudKit processes record changes atomically by record zone, and if any individual change fails, all other changes in that record's record zone fail and return an error of type “CKError/Code/batchRequestFailed“. The default value is <doc://com.apple.documentation/documentation/swift/false>.
-//
-// AtomicByZone calls the underlying AtomicByZone.
 func (x *SyncEngineRecordZoneChangeBatch) AtomicByZone() bool {
-	return x.inner.AtomicByZone()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("atomicByZone"))
+	return _r
 }
 
-// SetAtomicByZone calls the underlying SetAtomicByZone.
 func (x *SyncEngineRecordZoneChangeBatch) SetAtomicByZone(atomicByZone bool) {
-	x.inner.SetAtomicByZone(atomicByZone)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAtomicByZone:"), atomicByZone)
 }
 
 // SyncEngineRecordZoneChangeBatchable is the interface implemented by [SyncEngineRecordZoneChangeBatch], for mocking and DI.
 type SyncEngineRecordZoneChangeBatchable interface {
-	Unwrap() *raw.CKSyncEngineRecordZoneChangeBatch
+	obj.Object
 	WithAtomicByZone(atomicByZone bool) *SyncEngineRecordZoneChangeBatch
 	RecordsToSave() []*Record
 	RecordIDsToDelete() []*RecordID

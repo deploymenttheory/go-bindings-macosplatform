@@ -5,84 +5,94 @@
 package speech
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains the partial or final results of a speech recognition request.
 //
-// SpeechRecognitionResult wraps [raw.SFSpeechRecognitionResult] with a fluent Go API.
+// SpeechRecognitionResult is an idiomatic wrapper over the Objective-C class SFSpeechRecognitionResult.
 type SpeechRecognitionResult struct {
-	inner *raw.SFSpeechRecognitionResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFSpeechRecognitionResult].
-func (x *SpeechRecognitionResult) Unwrap() *raw.SFSpeechRecognitionResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SpeechRecognitionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// SpeechRecognitionResultFromID adopts an existing object pointer as a SpeechRecognitionResult (nil for 0).
+// SpeechRecognitionResultFromID adopts an existing Objective-C object as a SpeechRecognitionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func SpeechRecognitionResultFromID(id objc.ID) *SpeechRecognitionResult {
 	if id == 0 {
 		return nil
 	}
-	return &SpeechRecognitionResult{inner: raw.SFSpeechRecognitionResultFromID(id)}
+	x := &SpeechRecognitionResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSpeechRecognitionResult creates a new [SpeechRecognitionResult].
+// speechRecognitionResultAdopt wraps an Objective-C object that this code just created as a
+// SpeechRecognitionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func speechRecognitionResultAdopt(id objc.ID) *SpeechRecognitionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &SpeechRecognitionResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SpeechRecognitionResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SpeechRecognitionResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SpeechRecognitionResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSpeechRecognitionResult creates a new SpeechRecognitionResult.
 func NewSpeechRecognitionResult() *SpeechRecognitionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFSpeechRecognitionResult")), objc.RegisterName("new"))
-	return &SpeechRecognitionResult{inner: raw.SFSpeechRecognitionResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SFSpeechRecognitionResult")), objc.RegisterName("new"))
+	return speechRecognitionResultAdopt(_id)
 }
 
 // The transcription with the highest confidence level.
-//
-// BestTranscription calls the underlying BestTranscription.
 func (x *SpeechRecognitionResult) BestTranscription() *Transcription {
-	_r := x.inner.BestTranscription()
-	if _r == nil {
-		return nil
-	}
-	return &Transcription{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bestTranscription"))
+	return TranscriptionFromID(_r)
 }
 
 // An array of potential transcriptions, sorted in descending order of confidence. All transcriptions correspond to the same utterance, which can be a partial or final result of the overall request. The first transcription in the array has the highest confidence rating, followed by transcriptions with decreasing confidence ratings.
 //
 // Transcriptions returns the collection as a Go slice.
 func (x *SpeechRecognitionResult) Transcriptions() []*Transcription {
-	arr := x.inner.Transcriptions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Transcription {
-		return &Transcription{inner: raw.SFTranscriptionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transcriptions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Transcription { return TranscriptionFromID(_id) })
 }
 
 // A Boolean value that indicates whether speech recognition is complete and whether the transcriptions are final. When a speech recognition request is final, its transcriptions don't change.
-//
-// IsFinal calls the underlying IsFinal.
 func (x *SpeechRecognitionResult) IsFinal() bool {
-	return x.inner.IsFinal()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFinal"))
+	return _r
 }
 
 // An object that contains the metadata results for a speech recognition request.
-//
-// SpeechRecognitionMetadata calls the underlying SpeechRecognitionMetadata.
 func (x *SpeechRecognitionResult) SpeechRecognitionMetadata() *SpeechRecognitionMetadata {
-	_r := x.inner.SpeechRecognitionMetadata()
-	if _r == nil {
-		return nil
-	}
-	return &SpeechRecognitionMetadata{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("speechRecognitionMetadata"))
+	return SpeechRecognitionMetadataFromID(_r)
 }
 
 // SpeechRecognitionResultable is the interface implemented by [SpeechRecognitionResult], for mocking and DI.
 type SpeechRecognitionResultable interface {
-	Unwrap() *raw.SFSpeechRecognitionResult
+	obj.Object
 	BestTranscription() *Transcription
 	Transcriptions() []*Transcription
 	IsFinal() bool

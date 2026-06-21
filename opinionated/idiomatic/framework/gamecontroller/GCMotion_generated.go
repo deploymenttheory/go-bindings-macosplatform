@@ -5,270 +5,137 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A controller profile that supports orientation and motion.
 //
-// Motion wraps [raw.GCMotion] with a fluent Go API.
+// Motion is an idiomatic wrapper over the Objective-C class GCMotion.
 type Motion struct {
-	inner *raw.GCMotion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCMotion].
-func (x *Motion) Unwrap() *raw.GCMotion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Motion) ID() objc.ID { return x.inner.Ptr() }
-
-// MotionFromID adopts an existing object pointer as a Motion (nil for 0).
+// MotionFromID adopts an existing Objective-C object as a Motion
+// (nil for 0), retaining it and registering a release finalizer.
 func MotionFromID(id objc.ID) *Motion {
 	if id == 0 {
 		return nil
 	}
-	return &Motion{inner: raw.GCMotionFromID(id)}
-}
-
-// NewMotion creates a new [Motion].
-func NewMotion() *Motion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCMotion")), objc.RegisterName("new"))
-	return &Motion{inner: raw.GCMotionFromID(_id)}
-}
-
-// The block that the profile calls when an element’s value changes.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *Motion) WithValueChangedHandler(valueChangedHandler func(*raw.GCMotion)) *Motion {
-	x.inner.SetValueChangedHandler(valueChangedHandler)
+	x := &Motion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// motionAdopt wraps an Objective-C object that this code just created as a
+// Motion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func motionAdopt(id objc.ID) *Motion {
+	if id == 0 {
+		return nil
+	}
+	x := &Motion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Motion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Motion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Motion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMotion creates a new Motion.
+func NewMotion() *Motion {
+	_id := objc.Send[objc.ID](objc.ID(_class("GCMotion")), objc.RegisterName("new"))
+	return motionAdopt(_id)
 }
 
 // A Boolean value that indicates whether the sensors that compute the motion data are active.
 //
-// WithSensorsActive sets the sensorsActive property and returns the receiver for chaining.
+// WithSensorsActive sets sensorsActive and returns the receiver so calls can be chained.
 func (x *Motion) WithSensorsActive(sensorsActive bool) *Motion {
-	x.inner.SetSensorsActive(sensorsActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorsActive:"), sensorsActive)
 	return x
-}
-
-// The gravity acceleration vector from the controller’s reference frame.
-//
-// WithGravity sets the gravity property and returns the receiver for chaining.
-func (x *Motion) WithGravity(gravity raw.GCAcceleration) *Motion {
-	x.inner.SetGravity(gravity)
-	return x
-}
-
-// The acceleration that the user applies to the controller.
-//
-// WithUserAcceleration sets the userAcceleration property and returns the receiver for chaining.
-func (x *Motion) WithUserAcceleration(userAcceleration raw.GCAcceleration) *Motion {
-	x.inner.SetUserAcceleration(userAcceleration)
-	return x
-}
-
-// The total acceleration of the controller that includes gravity and the acceleration the user applies to the controller.
-//
-// WithAcceleration sets the acceleration property and returns the receiver for chaining.
-func (x *Motion) WithAcceleration(acceleration raw.GCAcceleration) *Motion {
-	x.inner.SetAcceleration(acceleration)
-	return x
-}
-
-// The attitude of the controller.
-//
-// WithAttitude sets the attitude property and returns the receiver for chaining.
-func (x *Motion) WithAttitude(attitude raw.GCQuaternion) *Motion {
-	x.inner.SetAttitude(attitude)
-	return x
-}
-
-// The rotation rate of the controller.
-//
-// WithRotationRate sets the rotationRate property and returns the receiver for chaining.
-func (x *Motion) WithRotationRate(rotationRate raw.GCRotationRate) *Motion {
-	x.inner.SetRotationRate(rotationRate)
-	return x
-}
-
-// Sets the controller’s gravity data.
-//
-// SetGravity calls the underlying SetGravity.
-func (x *Motion) SetGravity(gravity raw.GCAcceleration) {
-	x.inner.SetGravity(gravity)
-}
-
-// Sets the acceleration the user applies to the controller.
-//
-// SetUserAcceleration calls the underlying SetUserAcceleration.
-func (x *Motion) SetUserAcceleration(userAcceleration raw.GCAcceleration) {
-	x.inner.SetUserAcceleration(userAcceleration)
-}
-
-// Sets the total acceleration of the controller that includes gravity and the user’s acceleration.
-//
-// SetAcceleration calls the underlying SetAcceleration.
-func (x *Motion) SetAcceleration(acceleration raw.GCAcceleration) {
-	x.inner.SetAcceleration(acceleration)
-}
-
-// Sets the controller’s attitude.
-//
-// SetAttitude calls the underlying SetAttitude.
-func (x *Motion) SetAttitude(attitude raw.GCQuaternion) {
-	x.inner.SetAttitude(attitude)
-}
-
-// Sets the controller’s rotation rate.
-//
-// SetRotationRate calls the underlying SetRotationRate.
-func (x *Motion) SetRotationRate(rotationRate raw.GCRotationRate) {
-	x.inner.SetRotationRate(rotationRate)
 }
 
 // Copies the input values from a specified motion profile to a snapshot of a motion profile.
-//
-// SetStateFromMotion calls the underlying SetStateFromMotion.
-func (x *Motion) SetStateFromMotion(motion *raw.GCMotion) {
-	x.inner.SetStateFromMotion(motion)
+func (x *Motion) SetStateFromMotion(motion *Motion) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStateFromMotion:"), objref.IDOf(motion))
 }
 
-// A profile keeps a reference to the controller that it is mapping input from. @see GCController
-//
-// Controller calls the underlying Controller.
+// A profile keeps a reference to the controller that it is mapping input from.
 func (x *Motion) Controller() *Controller {
-	_r := x.inner.Controller()
-	if _r == nil {
-		return nil
-	}
-	return &Controller{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("controller"))
+	return ControllerFromID(_r)
 }
 
-// ValueChangedHandler calls the underlying ValueChangedHandler.
-func (x *Motion) ValueChangedHandler() objc.Block {
-	return x.inner.ValueChangedHandler()
-}
-
-// SetValueChangedHandler calls the underlying SetValueChangedHandler.
-func (x *Motion) SetValueChangedHandler(valueChangedHandler func(*raw.GCMotion)) {
-	x.inner.SetValueChangedHandler(valueChangedHandler)
-}
-
-// If this property is returns YES, you are responsible for setting sensorsActive to YES when you need motion data from the controller. Some controllers, such as the Siri Remote, automatically activate and deactivate motion sensors. In such a case, this property will return NO. @see sensorsActive
-//
-// SensorsRequireManualActivation calls the underlying SensorsRequireManualActivation.
+// If this property is returns YES, you are responsible for setting sensorsActive to YES when you need motion data from the controller. Some controllers, such as the Siri Remote, automatically activate and deactivate motion sensors. In such a case, this property will return NO.
 func (x *Motion) SensorsRequireManualActivation() bool {
-	return x.inner.SensorsRequireManualActivation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sensorsRequireManualActivation"))
+	return _r
 }
 
-// Set this property to YES when you wish to receive motion data from the controller. When you set this property to NO, the motion sensors will be disabled and the GCMotion profile will not be updated. @note It is highly recommended that you only enable sensor during the period of time you directly need motion data. Motion sensors can drain controller battery, device battery, and needlessly consume Bluetooth bandwidth. @see sensorsRequireManualActivation
-//
-// SensorsActive calls the underlying SensorsActive.
+// Set this property to YES when you wish to receive motion data from the controller. When you set this property to NO, the motion sensors will be disabled and the GCMotion profile will not be updated.
 func (x *Motion) SensorsActive() bool {
-	return x.inner.SensorsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sensorsActive"))
+	return _r
 }
 
-// SetSensorsActive calls the underlying SetSensorsActive.
 func (x *Motion) SetSensorsActive(sensorsActive bool) {
-	x.inner.SetSensorsActive(sensorsActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSensorsActive:"), sensorsActive)
 }
 
-// Returns YES if the controller is capable of reporting gravity and user acceleration separately. @note Some controllers do not separate gravity from user acceleration, and only report the total acceleration of the controller. Query whether the connected controller has the ability to separate gravity and user acceleration, and it doesn’t, use acceleration instead. @see acceleration
-//
-// HasGravityAndUserAcceleration calls the underlying HasGravityAndUserAcceleration.
+// Returns YES if the controller is capable of reporting gravity and user acceleration separately.
 func (x *Motion) HasGravityAndUserAcceleration() bool {
-	return x.inner.HasGravityAndUserAcceleration()
-}
-
-// The gravity vector expressed in the controller's reference frame. Note that the total acceleration of the controller is equal to gravity plus userAcceleration. @see userAcceleration @see acceleration
-//
-// Gravity calls the underlying Gravity.
-func (x *Motion) Gravity() raw.GCAcceleration {
-	return x.inner.Gravity()
-}
-
-// The acceleration that the user is giving to the controller. Note that the total acceleration of the controller is equal to gravity plus userAcceleration. @see gravity @see acceleration
-//
-// UserAcceleration calls the underlying UserAcceleration.
-func (x *Motion) UserAcceleration() raw.GCAcceleration {
-	return x.inner.UserAcceleration()
-}
-
-// The total acceleration of the controller. @see gravity @see userAcceleration
-//
-// Acceleration calls the underlying Acceleration.
-func (x *Motion) Acceleration() raw.GCAcceleration {
-	return x.inner.Acceleration()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasGravityAndUserAcceleration"))
+	return _r
 }
 
 // The controller generating the motion data has sensors that can accurately determine the current attitude and rotation rate. If this is enabled the motion data for attitude and rotation rate are usable for inputs.
-//
-// HasAttitudeAndRotationRate calls the underlying HasAttitudeAndRotationRate.
 func (x *Motion) HasAttitudeAndRotationRate() bool {
-	return x.inner.HasAttitudeAndRotationRate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAttitudeAndRotationRate"))
+	return _r
 }
 
 // The controller generating the motion data has sensors that can accurately determine the current attitude. If this is enabled the motion data for attitude is usable for inputs.
-//
-// HasAttitude calls the underlying HasAttitude.
 func (x *Motion) HasAttitude() bool {
-	return x.inner.HasAttitude()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasAttitude"))
+	return _r
 }
 
 // The controller generating the motion data has sensors that can accurately determine the current rotation rate. If this is enabled the motion data for rotation rate is usable for inputs.
-//
-// HasRotationRate calls the underlying HasRotationRate.
 func (x *Motion) HasRotationRate() bool {
-	return x.inner.HasRotationRate()
-}
-
-// The current attitude of the controller. @note Remotes without accurate attitude and rotation rate can not determine a stable attitude so the values will be (0,0,0,1) at all times. @see hasAttitude @see GCMicroGamepad
-//
-// Attitude calls the underlying Attitude.
-func (x *Motion) Attitude() raw.GCQuaternion {
-	return x.inner.Attitude()
-}
-
-// The current rotation rate of the controller. @note Remotes without accurate attitude and rotation rate can not determine a stable rotation rate so the values will be (0,0,0) at all times. @see hasRotationRate @see GCMicroGamepad
-//
-// RotationRate calls the underlying RotationRate.
-func (x *Motion) RotationRate() raw.GCRotationRate {
-	return x.inner.RotationRate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasRotationRate"))
+	return _r
 }
 
 // Motionable is the interface implemented by [Motion], for mocking and DI.
 type Motionable interface {
-	Unwrap() *raw.GCMotion
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCMotion)) *Motion
+	obj.Object
 	WithSensorsActive(sensorsActive bool) *Motion
-	WithGravity(gravity raw.GCAcceleration) *Motion
-	WithUserAcceleration(userAcceleration raw.GCAcceleration) *Motion
-	WithAcceleration(acceleration raw.GCAcceleration) *Motion
-	WithAttitude(attitude raw.GCQuaternion) *Motion
-	WithRotationRate(rotationRate raw.GCRotationRate) *Motion
-	SetGravity(gravity raw.GCAcceleration)
-	SetUserAcceleration(userAcceleration raw.GCAcceleration)
-	SetAcceleration(acceleration raw.GCAcceleration)
-	SetAttitude(attitude raw.GCQuaternion)
-	SetRotationRate(rotationRate raw.GCRotationRate)
-	SetStateFromMotion(motion *raw.GCMotion)
+	SetStateFromMotion(motion *Motion)
 	Controller() *Controller
-	ValueChangedHandler() objc.Block
-	SetValueChangedHandler(valueChangedHandler func(*raw.GCMotion))
 	SensorsRequireManualActivation() bool
 	SensorsActive() bool
 	SetSensorsActive(sensorsActive bool)
 	HasGravityAndUserAcceleration() bool
-	Gravity() raw.GCAcceleration
-	UserAcceleration() raw.GCAcceleration
-	Acceleration() raw.GCAcceleration
 	HasAttitudeAndRotationRate() bool
 	HasAttitude() bool
 	HasRotationRate() bool
-	Attitude() raw.GCQuaternion
-	RotationRate() raw.GCRotationRate
 }
 
 var _ Motionable = (*Motion)(nil)

@@ -5,67 +5,84 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A newly created platform credential that results from a credential registration request.
 //
-// AuthorizationPlatformPublicKeyCredentialRegistration wraps [raw.ASAuthorizationPlatformPublicKeyCredentialRegistration] with a fluent Go API.
+// AuthorizationPlatformPublicKeyCredentialRegistration is an idiomatic wrapper over the Objective-C class ASAuthorizationPlatformPublicKeyCredentialRegistration.
 type AuthorizationPlatformPublicKeyCredentialRegistration struct {
-	inner *raw.ASAuthorizationPlatformPublicKeyCredentialRegistration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationPlatformPublicKeyCredentialRegistration].
-func (x *AuthorizationPlatformPublicKeyCredentialRegistration) Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialRegistration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistration) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationPlatformPublicKeyCredentialRegistrationFromID adopts an existing object pointer as a AuthorizationPlatformPublicKeyCredentialRegistration (nil for 0).
+// AuthorizationPlatformPublicKeyCredentialRegistrationFromID adopts an existing Objective-C object as a AuthorizationPlatformPublicKeyCredentialRegistration
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationPlatformPublicKeyCredentialRegistrationFromID(id objc.ID) *AuthorizationPlatformPublicKeyCredentialRegistration {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationPlatformPublicKeyCredentialRegistration{inner: raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationFromID(id)}
+	x := &AuthorizationPlatformPublicKeyCredentialRegistration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAuthorizationPlatformPublicKeyCredentialRegistration creates a new [AuthorizationPlatformPublicKeyCredentialRegistration].
+// authorizationPlatformPublicKeyCredentialRegistrationAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationPlatformPublicKeyCredentialRegistration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationPlatformPublicKeyCredentialRegistrationAdopt(id objc.ID) *AuthorizationPlatformPublicKeyCredentialRegistration {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationPlatformPublicKeyCredentialRegistration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationPlatformPublicKeyCredentialRegistration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationPlatformPublicKeyCredentialRegistration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationPlatformPublicKeyCredentialRegistration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAuthorizationPlatformPublicKeyCredentialRegistration creates a new AuthorizationPlatformPublicKeyCredentialRegistration.
 func NewAuthorizationPlatformPublicKeyCredentialRegistration() *AuthorizationPlatformPublicKeyCredentialRegistration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationPlatformPublicKeyCredentialRegistration")), objc.RegisterName("new"))
-	return &AuthorizationPlatformPublicKeyCredentialRegistration{inner: raw.ASAuthorizationPlatformPublicKeyCredentialRegistrationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationPlatformPublicKeyCredentialRegistration")), objc.RegisterName("new"))
+	return authorizationPlatformPublicKeyCredentialRegistrationAdopt(_id)
 }
 
-// Attachment calls the underlying Attachment.
-func (x *AuthorizationPlatformPublicKeyCredentialRegistration) Attachment() ASAuthorizationPublicKeyCredentialAttachment {
-	return ASAuthorizationPublicKeyCredentialAttachment(x.inner.Attachment())
+func (x *AuthorizationPlatformPublicKeyCredentialRegistration) Attachment() AuthorizationPublicKeyCredentialAttachment {
+	_r := objc.Send[AuthorizationPublicKeyCredentialAttachment](objref.IDOf(x), objc.RegisterName("attachment"))
+	return _r
 }
 
-// LargeBlob calls the underlying LargeBlob.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistration) LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput {
-	_r := x.inner.LargeBlob()
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeBlob"))
+	return AuthorizationPublicKeyCredentialLargeBlobRegistrationOutputFromID(_r)
 }
 
-// Prf calls the underlying Prf.
 func (x *AuthorizationPlatformPublicKeyCredentialRegistration) Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput {
-	_r := x.inner.Prf()
-	if _r == nil {
-		return nil
-	}
-	return &AuthorizationPublicKeyCredentialPRFRegistrationOutput{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prf"))
+	return AuthorizationPublicKeyCredentialPRFRegistrationOutputFromID(_r)
 }
 
 // AuthorizationPlatformPublicKeyCredentialRegistrationable is the interface implemented by [AuthorizationPlatformPublicKeyCredentialRegistration], for mocking and DI.
 type AuthorizationPlatformPublicKeyCredentialRegistrationable interface {
-	Unwrap() *raw.ASAuthorizationPlatformPublicKeyCredentialRegistration
-	Attachment() ASAuthorizationPublicKeyCredentialAttachment
+	obj.Object
+	Attachment() AuthorizationPublicKeyCredentialAttachment
 	LargeBlob() *AuthorizationPublicKeyCredentialLargeBlobRegistrationOutput
 	Prf() *AuthorizationPublicKeyCredentialPRFRegistrationOutput
 }

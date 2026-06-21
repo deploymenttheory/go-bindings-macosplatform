@@ -5,41 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRPumpConfigurationAndControlClusterAirDetectionEvent wraps [raw.MTRPumpConfigurationAndControlClusterAirDetectionEvent] with a fluent Go API.
+// MTRPumpConfigurationAndControlClusterAirDetectionEvent is an idiomatic wrapper over the Objective-C class MTRPumpConfigurationAndControlClusterAirDetectionEvent.
 type MTRPumpConfigurationAndControlClusterAirDetectionEvent struct {
-	inner *raw.MTRPumpConfigurationAndControlClusterAirDetectionEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRPumpConfigurationAndControlClusterAirDetectionEvent].
-func (x *MTRPumpConfigurationAndControlClusterAirDetectionEvent) Unwrap() *raw.MTRPumpConfigurationAndControlClusterAirDetectionEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRPumpConfigurationAndControlClusterAirDetectionEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRPumpConfigurationAndControlClusterAirDetectionEventFromID adopts an existing object pointer as a MTRPumpConfigurationAndControlClusterAirDetectionEvent (nil for 0).
+// MTRPumpConfigurationAndControlClusterAirDetectionEventFromID adopts an existing Objective-C object as a MTRPumpConfigurationAndControlClusterAirDetectionEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRPumpConfigurationAndControlClusterAirDetectionEventFromID(id objc.ID) *MTRPumpConfigurationAndControlClusterAirDetectionEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRPumpConfigurationAndControlClusterAirDetectionEvent{inner: raw.MTRPumpConfigurationAndControlClusterAirDetectionEventFromID(id)}
+	x := &MTRPumpConfigurationAndControlClusterAirDetectionEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRPumpConfigurationAndControlClusterAirDetectionEvent creates a new [MTRPumpConfigurationAndControlClusterAirDetectionEvent].
+// mTRPumpConfigurationAndControlClusterAirDetectionEventAdopt wraps an Objective-C object that this code just created as a
+// MTRPumpConfigurationAndControlClusterAirDetectionEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRPumpConfigurationAndControlClusterAirDetectionEventAdopt(id objc.ID) *MTRPumpConfigurationAndControlClusterAirDetectionEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRPumpConfigurationAndControlClusterAirDetectionEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRPumpConfigurationAndControlClusterAirDetectionEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRPumpConfigurationAndControlClusterAirDetectionEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRPumpConfigurationAndControlClusterAirDetectionEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRPumpConfigurationAndControlClusterAirDetectionEvent creates a new MTRPumpConfigurationAndControlClusterAirDetectionEvent.
 func NewMTRPumpConfigurationAndControlClusterAirDetectionEvent() *MTRPumpConfigurationAndControlClusterAirDetectionEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRPumpConfigurationAndControlClusterAirDetectionEvent")), objc.RegisterName("new"))
-	return &MTRPumpConfigurationAndControlClusterAirDetectionEvent{inner: raw.MTRPumpConfigurationAndControlClusterAirDetectionEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRPumpConfigurationAndControlClusterAirDetectionEvent")), objc.RegisterName("new"))
+	return mTRPumpConfigurationAndControlClusterAirDetectionEventAdopt(_id)
 }
 
 // MTRPumpConfigurationAndControlClusterAirDetectionEventable is the interface implemented by [MTRPumpConfigurationAndControlClusterAirDetectionEvent], for mocking and DI.
 type MTRPumpConfigurationAndControlClusterAirDetectionEventable interface {
-	Unwrap() *raw.MTRPumpConfigurationAndControlClusterAirDetectionEvent
+	obj.Object
 }
 
 var _ MTRPumpConfigurationAndControlClusterAirDetectionEventable = (*MTRPumpConfigurationAndControlClusterAirDetectionEvent)(nil)

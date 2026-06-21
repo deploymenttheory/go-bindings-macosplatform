@@ -5,81 +5,101 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The FHIR version.
 //
-// FHIRVersion wraps [raw.HKFHIRVersion] with a fluent Go API.
+// FHIRVersion is an idiomatic wrapper over the Objective-C class HKFHIRVersion.
 type FHIRVersion struct {
-	inner *raw.HKFHIRVersion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKFHIRVersion].
-func (x *FHIRVersion) Unwrap() *raw.HKFHIRVersion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FHIRVersion) ID() objc.ID { return x.inner.Ptr() }
-
-// FHIRVersionFromID adopts an existing object pointer as a FHIRVersion (nil for 0).
+// FHIRVersionFromID adopts an existing Objective-C object as a FHIRVersion
+// (nil for 0), retaining it and registering a release finalizer.
 func FHIRVersionFromID(id objc.ID) *FHIRVersion {
 	if id == 0 {
 		return nil
 	}
-	return &FHIRVersion{inner: raw.HKFHIRVersionFromID(id)}
+	x := &FHIRVersion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewFHIRVersion creates a new [FHIRVersion].
+// fHIRVersionAdopt wraps an Objective-C object that this code just created as a
+// FHIRVersion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fHIRVersionAdopt(id objc.ID) *FHIRVersion {
+	if id == 0 {
+		return nil
+	}
+	x := &FHIRVersion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FHIRVersion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FHIRVersion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FHIRVersion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFHIRVersion creates a new FHIRVersion.
 func NewFHIRVersion() *FHIRVersion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKFHIRVersion")), objc.RegisterName("new"))
-	return &FHIRVersion{inner: raw.HKFHIRVersionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKFHIRVersion")), objc.RegisterName("new"))
+	return fHIRVersionAdopt(_id)
 }
 
-// MajorVersion calls the underlying MajorVersion.
 func (x *FHIRVersion) MajorVersion() int {
-	return x.inner.MajorVersion()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("majorVersion"))
+	return _r
 }
 
-// MinorVersion calls the underlying MinorVersion.
 func (x *FHIRVersion) MinorVersion() int {
-	return x.inner.MinorVersion()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("minorVersion"))
+	return _r
 }
 
-// PatchVersion calls the underlying PatchVersion.
 func (x *FHIRVersion) PatchVersion() int {
-	return x.inner.PatchVersion()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("patchVersion"))
+	return _r
 }
 
-// FHIRRelease calls the underlying FHIRRelease.
-func (x *FHIRVersion) FHIRRelease() string {
-	_r := x.inner.FHIRRelease()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *FHIRVersion) FHIRRelease() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("FHIRRelease"))
+	return obj.Wrap(_r)
 }
 
-// @property      stringRepresentation @abstract      A string representation in the format "{major}.{minor}.{patch}".
-//
-// StringRepresentation calls the underlying StringRepresentation.
+// A string representation in the format "{major}.{minor}.{patch}".
 func (x *FHIRVersion) StringRepresentation() string {
-	_r := x.inner.StringRepresentation()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringRepresentation"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // FHIRVersionable is the interface implemented by [FHIRVersion], for mocking and DI.
 type FHIRVersionable interface {
-	Unwrap() *raw.HKFHIRVersion
+	obj.Object
 	MajorVersion() int
 	MinorVersion() int
 	PatchVersion() int
-	FHIRRelease() string
+	FHIRRelease() obj.Object
 	StringRepresentation() string
 }
 

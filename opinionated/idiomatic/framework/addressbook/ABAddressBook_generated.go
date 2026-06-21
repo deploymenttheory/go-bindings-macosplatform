@@ -5,194 +5,192 @@
 package addressbook
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/addressbook"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // The main object you use to access the Address Book database.
 //
-// AddressBook wraps [raw.ABAddressBook] with a fluent Go API.
+// AddressBook is an idiomatic wrapper over the Objective-C class ABAddressBook.
 type AddressBook struct {
-	inner *raw.ABAddressBook
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ABAddressBook].
-func (x *AddressBook) Unwrap() *raw.ABAddressBook { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AddressBook) ID() objc.ID { return x.inner.Ptr() }
-
-// AddressBookFromID adopts an existing object pointer as a AddressBook (nil for 0).
+// AddressBookFromID adopts an existing Objective-C object as a AddressBook
+// (nil for 0), retaining it and registering a release finalizer.
 func AddressBookFromID(id objc.ID) *AddressBook {
 	if id == 0 {
 		return nil
 	}
-	return &AddressBook{inner: raw.ABAddressBookFromID(id)}
+	x := &AddressBook{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAddressBook creates a new [AddressBook].
+// addressBookAdopt wraps an Objective-C object that this code just created as a
+// AddressBook (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func addressBookAdopt(id objc.ID) *AddressBook {
+	if id == 0 {
+		return nil
+	}
+	x := &AddressBook{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AddressBook) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AddressBook) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AddressBook) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAddressBook creates a new AddressBook.
 func NewAddressBook() *AddressBook {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ABAddressBook")), objc.RegisterName("new"))
-	return &AddressBook{inner: raw.ABAddressBookFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ABAddressBook")), objc.RegisterName("new"))
+	return addressBookAdopt(_id)
 }
 
 // Returns an array of records that match the given search element, or returns an empty array if no records match the search element.
-//
-// RecordsMatchingSearchElement calls the underlying RecordsMatchingSearchElement.
-func (x *AddressBook) RecordsMatchingSearchElement(search *raw.ABSearchElement) *foundation.NSArray[objc.ID] {
-	return x.inner.RecordsMatchingSearchElement(search)
+func (x *AddressBook) RecordsMatchingSearchElement(search *SearchElement) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordsMatchingSearchElement:"), objref.IDOf(search))
+	return obj.Wrap(_r)
 }
 
 // Saves all the changes made since the last save.
-//
-// Save calls the underlying Save.
 func (x *AddressBook) Save() bool {
-	return x.inner.Save()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("save"))
+	return _r
 }
 
 // Saves all the changes made since the last save.
 //
-// SaveAndReturnError returns any validation error.
+// SaveAndReturnError returns an error if the operation did not succeed.
 func (x *AddressBook) SaveAndReturnError() error {
-	_, err := x.inner.SaveAndReturnError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Indicates whether an address book has changes that have not been saved to the Address Book database.
-//
-// HasUnsavedChanges calls the underlying HasUnsavedChanges.
 func (x *AddressBook) HasUnsavedChanges() bool {
-	return x.inner.HasUnsavedChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasUnsavedChanges"))
+	return _r
 }
 
 // Returns the ABPerson record that represents the logged-in user.
-//
-// Me calls the underlying Me.
 func (x *AddressBook) Me() *Person {
-	_r := x.inner.Me()
-	if _r == nil {
-		return nil
-	}
-	return &Person{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("me"))
+	return PersonFromID(_r)
 }
 
 // Sets the record that represents the logged-in user.
-//
-// SetMe calls the underlying SetMe.
-func (x *AddressBook) SetMe(moi *raw.ABPerson) {
-	x.inner.SetMe(moi)
+func (x *AddressBook) SetMe(moi *Person) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMe:"), objref.IDOf(moi))
 }
 
 // Returns the person or group record that matches the given unique ID.
-//
-// RecordForUniqueId calls the underlying RecordForUniqueId.
 func (x *AddressBook) RecordForUniqueId(uniqueId string) *Record {
-	_r := x.inner.RecordForUniqueId(foundation.NSStringStringWithUTF8String(uniqueId))
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordForUniqueId:"), purego.NSString(uniqueId))
+	return RecordFromID(_r)
+}
+
+// Adds an ABPerson or ABGroup record to the Address Book database.
+func (x *AddressBook) AddRecord(record *Record) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addRecord:error:"), objref.IDOf(record), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Record{inner: _r}
-}
-
-// Adds an ABPerson or ABGroup record to the Address Book database.
-//
-// AddRecordError calls the underlying AddRecordError.
-func (x *AddressBook) AddRecordError(record *raw.ABRecord) (bool, error) {
-	return x.inner.AddRecordError(record)
-}
-
-// Adds an ABPerson or ABGroup record to the Address Book database.
-//
-// AddRecord calls the underlying AddRecord.
-func (x *AddressBook) AddRecord(record *raw.ABRecord) bool {
-	return x.inner.AddRecord(record)
+	return nil
 }
 
 // Removes an ABPerson or ABGroup record from the Address Book database.
-//
-// RemoveRecordError calls the underlying RemoveRecordError.
-func (x *AddressBook) RemoveRecordError(record *raw.ABRecord) (bool, error) {
-	return x.inner.RemoveRecordError(record)
-}
-
-// Removes an ABPerson or ABGroup record from the Address Book database.
-//
-// RemoveRecord calls the underlying RemoveRecord.
-func (x *AddressBook) RemoveRecord(record *raw.ABRecord) bool {
-	return x.inner.RemoveRecord(record)
+func (x *AddressBook) RemoveRecord(record *Record) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeRecord:error:"), objref.IDOf(record), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Returns an array of all the people in the Address Book database.
-//
-// People calls the underlying People.
-func (x *AddressBook) People() *foundation.NSArray[objc.ID] {
-	return x.inner.People()
+func (x *AddressBook) People() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("people"))
+	return obj.Wrap(_r)
 }
 
 // Returns an array of all the groups in the Address Book database.
-//
-// Groups calls the underlying Groups.
-func (x *AddressBook) Groups() *foundation.NSArray[objc.ID] {
-	return x.inner.Groups()
+func (x *AddressBook) Groups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groups"))
+	return obj.Wrap(_r)
 }
 
 // Returns the class name of the record that matches the given unique ID.
-//
-// RecordClassFromUniqueId calls the underlying RecordClassFromUniqueId.
 func (x *AddressBook) RecordClassFromUniqueId(uniqueId string) string {
-	_r := x.inner.RecordClassFromUniqueId(foundation.NSStringStringWithUTF8String(uniqueId))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordClassFromUniqueId:"), purego.NSString(uniqueId))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Returns an attributed string containing the formatted address.
-//
-// FormattedAddressFromDictionary calls the underlying FormattedAddressFromDictionary.
-func (x *AddressBook) FormattedAddressFromDictionary(address *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString {
-	return x.inner.FormattedAddressFromDictionary(address)
+func (x *AddressBook) FormattedAddressFromDictionary(address obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("formattedAddressFromDictionary:"), objref.IDOf(address))
+	return obj.Wrap(_r)
 }
 
 // Returns the default country code for records with unspecified country codes.
-//
-// DefaultCountryCode calls the underlying DefaultCountryCode.
 func (x *AddressBook) DefaultCountryCode() string {
-	_r := x.inner.DefaultCountryCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultCountryCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Returns the default name ordering defined by the user in the Address Book application’s preferences.
-//
-// DefaultNameOrdering calls the underlying DefaultNameOrdering.
 func (x *AddressBook) DefaultNameOrdering() int {
-	return x.inner.DefaultNameOrdering()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("defaultNameOrdering"))
+	return _r
 }
 
 // AddressBookable is the interface implemented by [AddressBook], for mocking and DI.
 type AddressBookable interface {
-	Unwrap() *raw.ABAddressBook
-	RecordsMatchingSearchElement(search *raw.ABSearchElement) *foundation.NSArray[objc.ID]
+	obj.Object
+	RecordsMatchingSearchElement(search *SearchElement) obj.Object
 	Save() bool
 	SaveAndReturnError() error
 	HasUnsavedChanges() bool
 	Me() *Person
-	SetMe(moi *raw.ABPerson)
+	SetMe(moi *Person)
 	RecordForUniqueId(uniqueId string) *Record
-	AddRecordError(record *raw.ABRecord) (bool, error)
-	AddRecord(record *raw.ABRecord) bool
-	RemoveRecordError(record *raw.ABRecord) (bool, error)
-	RemoveRecord(record *raw.ABRecord) bool
-	People() *foundation.NSArray[objc.ID]
-	Groups() *foundation.NSArray[objc.ID]
+	AddRecord(record *Record) error
+	RemoveRecord(record *Record) error
+	People() obj.Object
+	Groups() obj.Object
 	RecordClassFromUniqueId(uniqueId string) string
-	FormattedAddressFromDictionary(address *foundation.NSDictionary[objc.ID, objc.ID]) *foundation.NSAttributedString
+	FormattedAddressFromDictionary(address obj.Object) obj.Object
 	DefaultCountryCode() string
 	DefaultNameOrdering() int
 }

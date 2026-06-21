@@ -5,89 +5,84 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A general query that returns a snapshot of all the matching samples currently saved in the HealthKit store.
 //
-// SampleQuery wraps [raw.HKSampleQuery] with a fluent Go API.
+// SampleQuery is an idiomatic wrapper over the Objective-C class HKSampleQuery.
 type SampleQuery struct {
-	inner *raw.HKSampleQuery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKSampleQuery].
-func (x *SampleQuery) Unwrap() *raw.HKSampleQuery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SampleQuery) ID() objc.ID { return x.inner.Ptr() }
-
-// SampleQueryFromID adopts an existing object pointer as a SampleQuery (nil for 0).
+// SampleQueryFromID adopts an existing Objective-C object as a SampleQuery
+// (nil for 0), retaining it and registering a release finalizer.
 func SampleQueryFromID(id objc.ID) *SampleQuery {
 	if id == 0 {
 		return nil
 	}
-	return &SampleQuery{inner: raw.HKSampleQueryFromID(id)}
+	x := &SampleQuery{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Instantiates and returns a sample query.
-//
-// NewSampleQueryWithSampleTypePredicateLimitSortDescriptorsResultsHandler creates a new [SampleQuery].
-func NewSampleQueryWithSampleTypePredicateLimitSortDescriptorsResultsHandler(sampleType *raw.HKSampleType, predicate *foundation.NSPredicate, limit uint, sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor], resultsHandler func(*raw.HKSampleQuery, *foundation.NSArray[*raw.HKSample], unsafe.Pointer)) *SampleQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKSampleQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSampleType:predicate:limit:sortDescriptors:resultsHandler:"), sampleType.Ptr(), predicate.Ptr(), limit, sortDescriptors.Ptr(), resultsHandler)
-	return &SampleQuery{inner: raw.HKSampleQueryFromID(_id)}
-}
-
-// Creates a query for samples that match any of the descriptors you provided.
-//
-// NewSampleQueryWithQueryDescriptorsLimitResultsHandler creates a new [SampleQuery].
-func NewSampleQueryWithQueryDescriptorsLimitResultsHandler(queryDescriptors *foundation.NSArray[*raw.HKQueryDescriptor], limit int, resultsHandler func(*raw.HKSampleQuery, *foundation.NSArray[*raw.HKSample], unsafe.Pointer)) *SampleQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKSampleQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueryDescriptors:limit:resultsHandler:"), queryDescriptors.Ptr(), limit, resultsHandler)
-	return &SampleQuery{inner: raw.HKSampleQueryFromID(_id)}
-}
-
-// Creates a query for samples that match any of the query descriptors you provided, sorted by the sort descriptors you provided.
-//
-// NewSampleQueryWithQueryDescriptorsLimitSortDescriptorsResultsHandler creates a new [SampleQuery].
-func NewSampleQueryWithQueryDescriptorsLimitSortDescriptorsResultsHandler(queryDescriptors *foundation.NSArray[*raw.HKQueryDescriptor], limit int, sortDescriptors *foundation.NSArray[*foundation.NSSortDescriptor], resultsHandler func(*raw.HKSampleQuery, *foundation.NSArray[*raw.HKSample], unsafe.Pointer)) *SampleQuery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("HKSampleQuery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueryDescriptors:limit:sortDescriptors:resultsHandler:"), queryDescriptors.Ptr(), limit, sortDescriptors.Ptr(), resultsHandler)
-	return &SampleQuery{inner: raw.HKSampleQueryFromID(_id)}
-}
-
-// @property      limit @abstract      The maximum number of results the receiver will return upon completion.
-//
-// Limit calls the underlying Limit.
-func (x *SampleQuery) Limit() uint {
-	return x.inner.Limit()
-}
-
-// @property      sortDescriptors @abstract      An array of NSSortDescriptors.
-//
-// SortDescriptors returns the collection as a Go slice.
-func (x *SampleQuery) SortDescriptors() []*foundation.NSSortDescriptor {
-	arr := x.inner.SortDescriptors()
-	if arr == nil {
+// sampleQueryAdopt wraps an Objective-C object that this code just created as a
+// SampleQuery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sampleQueryAdopt(id objc.ID) *SampleQuery {
+	if id == 0 {
 		return nil
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSSortDescriptor {
-		return foundation.NSSortDescriptorFromID(purego.Retain(_id))
-	})
+	x := &SampleQuery{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-func (x *SampleQuery) asQuery() *raw.HKQuery { return &x.inner.HKQuery }
+// Description returns the object's -description text.
+func (x *SampleQuery) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SampleQuery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SampleQuery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSampleQuery creates a new SampleQuery.
+func NewSampleQuery() *SampleQuery {
+	_id := objc.Send[objc.ID](objc.ID(_class("HKSampleQuery")), objc.RegisterName("new"))
+	return sampleQueryAdopt(_id)
+}
+
+// The maximum number of results the receiver will return upon completion.
+func (x *SampleQuery) Limit() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("limit"))
+	return _r
+}
+
+// An array of NSSortDescriptors.
+//
+// SortDescriptors returns the collection as a Go slice.
+func (x *SampleQuery) SortDescriptors() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sortDescriptors"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
 
 // SampleQueryable is the interface implemented by [SampleQuery], for mocking and DI.
 type SampleQueryable interface {
-	Unwrap() *raw.HKSampleQuery
-	Limit() uint
-	SortDescriptors() []*foundation.NSSortDescriptor
+	obj.Object
+	Limit() int
+	SortDescriptors() []obj.Object
 }
 
 var _ SampleQueryable = (*SampleQuery)(nil)

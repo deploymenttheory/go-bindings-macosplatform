@@ -5,52 +5,68 @@
 package cinematic
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cinematic"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that enables you to add the appropriate number of tracks for a Cinematic asset.
 //
-// CompositionInfo wraps [raw.CNCompositionInfo] with a fluent Go API.
+// CompositionInfo is an idiomatic wrapper over the Objective-C class CNCompositionInfo.
 type CompositionInfo struct {
-	inner *raw.CNCompositionInfo
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNCompositionInfo].
-func (x *CompositionInfo) Unwrap() *raw.CNCompositionInfo { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CompositionInfo) ID() objc.ID { return x.inner.Ptr() }
-
-// CompositionInfoFromID adopts an existing object pointer as a CompositionInfo (nil for 0).
+// CompositionInfoFromID adopts an existing Objective-C object as a CompositionInfo
+// (nil for 0), retaining it and registering a release finalizer.
 func CompositionInfoFromID(id objc.ID) *CompositionInfo {
 	if id == 0 {
 		return nil
 	}
-	return &CompositionInfo{inner: raw.CNCompositionInfoFromID(id)}
+	x := &CompositionInfo{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCompositionInfo creates a new [CompositionInfo].
+// compositionInfoAdopt wraps an Objective-C object that this code just created as a
+// CompositionInfo (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func compositionInfoAdopt(id objc.ID) *CompositionInfo {
+	if id == 0 {
+		return nil
+	}
+	x := &CompositionInfo{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CompositionInfo) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CompositionInfo) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CompositionInfo) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCompositionInfo creates a new CompositionInfo.
 func NewCompositionInfo() *CompositionInfo {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNCompositionInfo")), objc.RegisterName("new"))
-	return &CompositionInfo{inner: raw.CNCompositionInfoFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNCompositionInfo")), objc.RegisterName("new"))
+	return compositionInfoAdopt(_id)
 }
-
-// Inserts a timeRange of a cinematic source asset into the corresponding tracks of a composition - Parameters: - timeRange: time range of the cinematic asset to be inserted - assetInfo: identifies the tracks of the cinematic asset to be inserted - atTime: the time at which the inserted tracks are to be presented by the composition; `kCMTimeInvalid` may be used to append at the end. - error: AVError if it fails, as with `-[AVMutableCompositionTrack insertTimeRange:ofTrack:atTime:error:]` - Returns: whether the insertion was successful
-//
-// InsertTimeRangeOfCinematicAssetInfoAtTimeError calls the underlying InsertTimeRangeOfCinematicAssetInfoAtTimeError.
-func (x *CompositionInfo) InsertTimeRangeOfCinematicAssetInfoAtTimeError(timeRange coremedia.CMTimeRange, assetInfo *raw.CNAssetInfo, startTime coremedia.CMTime) (bool, error) {
-	return x.inner.InsertTimeRangeOfCinematicAssetInfoAtTimeError(timeRange, assetInfo, startTime)
-}
-
-func (x *CompositionInfo) asAssetInfo() *raw.CNAssetInfo { return &x.inner.CNAssetInfo }
 
 // CompositionInfoable is the interface implemented by [CompositionInfo], for mocking and DI.
 type CompositionInfoable interface {
-	Unwrap() *raw.CNCompositionInfo
-	InsertTimeRangeOfCinematicAssetInfoAtTimeError(timeRange coremedia.CMTimeRange, assetInfo *raw.CNAssetInfo, startTime coremedia.CMTime) (bool, error)
+	obj.Object
 }
 
 var _ CompositionInfoable = (*CompositionInfo)(nil)

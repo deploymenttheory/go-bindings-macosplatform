@@ -5,51 +5,36 @@
 package systemextensions
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemextensions"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SharedManager calls the underlying OSSystemExtensionManagerSharedManager.
 func SharedManager() *SystemExtensionManager {
-	_r := raw.OSSystemExtensionManagerSharedManager()
-	if _r == nil {
-		return nil
-	}
-	return &SystemExtensionManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionManager")), objc.RegisterName("sharedManager"))
+	return SystemExtensionManagerFromID(_r)
 }
 
-// ActivationRequestForExtensionQueue calls the underlying OSSystemExtensionRequestActivationRequestForExtensionQueue.
-func ActivationRequestForExtensionQueue(identifier string, queue *foundation.NSObject) *SystemExtensionRequest {
-	_r := raw.OSSystemExtensionRequestActivationRequestForExtensionQueue(foundation.NSStringStringWithUTF8String(identifier), queue)
-	if _r == nil {
-		return nil
-	}
-	return &SystemExtensionRequest{inner: _r}
+// Creates a request to activate a System Extension.
+func ActivationRequestForExtensionQueue(identifier string, queue obj.Object) *SystemExtensionRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionRequest")), objc.RegisterName("activationRequestForExtension:queue:"), purego.NSString(identifier), objref.IDOf(queue))
+	return SystemExtensionRequestFromID(_r)
 }
 
-// DeactivationRequestForExtensionQueue calls the underlying OSSystemExtensionRequestDeactivationRequestForExtensionQueue.
-func DeactivationRequestForExtensionQueue(identifier string, queue *foundation.NSObject) *SystemExtensionRequest {
-	_r := raw.OSSystemExtensionRequestDeactivationRequestForExtensionQueue(foundation.NSStringStringWithUTF8String(identifier), queue)
-	if _r == nil {
-		return nil
-	}
-	return &SystemExtensionRequest{inner: _r}
+// Creates a request to deactivate a System Extension.
+func DeactivationRequestForExtensionQueue(identifier string, queue obj.Object) *SystemExtensionRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionRequest")), objc.RegisterName("deactivationRequestForExtension:queue:"), purego.NSString(identifier), objref.IDOf(queue))
+	return SystemExtensionRequestFromID(_r)
 }
 
-// PropertiesRequestForExtensionQueue calls the underlying OSSystemExtensionRequestPropertiesRequestForExtensionQueue.
-func PropertiesRequestForExtensionQueue(identifier string, queue *foundation.NSObject) *SystemExtensionRequest {
-	_r := raw.OSSystemExtensionRequestPropertiesRequestForExtensionQueue(foundation.NSStringStringWithUTF8String(identifier), queue)
-	if _r == nil {
-		return nil
-	}
-	return &SystemExtensionRequest{inner: _r}
+// Creates a request to get information about System Extensions. This method creates a new request to retrieve the properties of any System Extensions matching the given identifier.
+func PropertiesRequestForExtensionQueue(identifier string, queue obj.Object) *SystemExtensionRequest {
+	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionRequest")), objc.RegisterName("propertiesRequestForExtension:queue:"), purego.NSString(identifier), objref.IDOf(queue))
+	return SystemExtensionRequestFromID(_r)
 }
 
-// SharedWorkspace calls the underlying OSSystemExtensionsWorkspaceSharedWorkspace.
 func SharedWorkspace() *SystemExtensionsWorkspace {
-	_r := raw.OSSystemExtensionsWorkspaceSharedWorkspace()
-	if _r == nil {
-		return nil
-	}
-	return &SystemExtensionsWorkspace{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionsWorkspace")), objc.RegisterName("sharedWorkspace"))
+	return SystemExtensionsWorkspaceFromID(_r)
 }

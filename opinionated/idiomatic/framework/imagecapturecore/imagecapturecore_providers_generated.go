@@ -5,25 +5,25 @@
 package imagecapturecore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// CameraItemProvider is implemented by CameraItem and any idiomatic type wrapping a ICCameraItem subclass.
+// CameraItemProvider is accepted wherever a ICCameraItem (or one of its subclasses) is expected.
 type CameraItemProvider interface {
-	asCameraItem() *raw.ICCameraItem
+	objref.Object
 }
 
-// DeviceProvider is implemented by Device and any idiomatic type wrapping a ICDevice subclass.
+// DeviceProvider is accepted wherever a ICDevice (or one of its subclasses) is expected.
 type DeviceProvider interface {
-	asDevice() *raw.ICDevice
+	objref.Object
 }
 
-// ScannerFeatureProvider is implemented by ScannerFeature and any idiomatic type wrapping a ICScannerFeature subclass.
+// ScannerFeatureProvider is accepted wherever a ICScannerFeature (or one of its subclasses) is expected.
 type ScannerFeatureProvider interface {
-	asScannerFeature() *raw.ICScannerFeature
+	objref.Object
 }
 
-// ScannerFunctionalUnitProvider is implemented by ScannerFunctionalUnit and any idiomatic type wrapping a ICScannerFunctionalUnit subclass.
+// ScannerFunctionalUnitProvider is accepted wherever a ICScannerFunctionalUnit (or one of its subclasses) is expected.
 type ScannerFunctionalUnitProvider interface {
-	asScannerFunctionalUnit() *raw.ICScannerFunctionalUnit
+	objref.Object
 }

@@ -5,47 +5,74 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // This class acts as a wrapper for the HKBiologicalSex enumeration.
 //
-// BiologicalSexObject wraps [raw.HKBiologicalSexObject] with a fluent Go API.
+// BiologicalSexObject is an idiomatic wrapper over the Objective-C class HKBiologicalSexObject.
 type BiologicalSexObject struct {
-	inner *raw.HKBiologicalSexObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKBiologicalSexObject].
-func (x *BiologicalSexObject) Unwrap() *raw.HKBiologicalSexObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BiologicalSexObject) ID() objc.ID { return x.inner.Ptr() }
-
-// BiologicalSexObjectFromID adopts an existing object pointer as a BiologicalSexObject (nil for 0).
+// BiologicalSexObjectFromID adopts an existing Objective-C object as a BiologicalSexObject
+// (nil for 0), retaining it and registering a release finalizer.
 func BiologicalSexObjectFromID(id objc.ID) *BiologicalSexObject {
 	if id == 0 {
 		return nil
 	}
-	return &BiologicalSexObject{inner: raw.HKBiologicalSexObjectFromID(id)}
+	x := &BiologicalSexObject{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBiologicalSexObject creates a new [BiologicalSexObject].
+// biologicalSexObjectAdopt wraps an Objective-C object that this code just created as a
+// BiologicalSexObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func biologicalSexObjectAdopt(id objc.ID) *BiologicalSexObject {
+	if id == 0 {
+		return nil
+	}
+	x := &BiologicalSexObject{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BiologicalSexObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BiologicalSexObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BiologicalSexObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBiologicalSexObject creates a new BiologicalSexObject.
 func NewBiologicalSexObject() *BiologicalSexObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKBiologicalSexObject")), objc.RegisterName("new"))
-	return &BiologicalSexObject{inner: raw.HKBiologicalSexObjectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKBiologicalSexObject")), objc.RegisterName("new"))
+	return biologicalSexObjectAdopt(_id)
 }
 
-// BiologicalSex calls the underlying BiologicalSex.
-func (x *BiologicalSexObject) BiologicalSex() HKBiologicalSex {
-	return HKBiologicalSex(x.inner.BiologicalSex())
+func (x *BiologicalSexObject) BiologicalSex() BiologicalSex {
+	_r := objc.Send[BiologicalSex](objref.IDOf(x), objc.RegisterName("biologicalSex"))
+	return _r
 }
 
 // BiologicalSexObjectable is the interface implemented by [BiologicalSexObject], for mocking and DI.
 type BiologicalSexObjectable interface {
-	Unwrap() *raw.HKBiologicalSexObject
-	BiologicalSex() HKBiologicalSex
+	obj.Object
+	BiologicalSex() BiologicalSex
 }
 
 var _ BiologicalSexObjectable = (*BiologicalSexObject)(nil)

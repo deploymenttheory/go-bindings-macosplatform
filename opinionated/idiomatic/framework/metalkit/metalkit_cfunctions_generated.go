@@ -5,38 +5,32 @@
 package metalkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// MTKMetalVertexDescriptorFromModelIO calls [raw.MTKMetalVertexDescriptorFromModelIO] (C function MTKMetalVertexDescriptorFromModelIO).
-func MTKMetalVertexDescriptorFromModelIO(modelIODescriptor *modelio.MDLVertexDescriptor) *metal.MTLVertexDescriptor {
-	return raw.MTKMetalVertexDescriptorFromModelIO(modelIODescriptor)
+var _fnMTKMetalVertexDescriptorFromModelIO func(objc.ID) objc.ID
+
+// MTKMetalVertexDescriptorFromModelIO calls the MetalKit framework function MTKMetalVertexDescriptorFromModelIO.
+func MTKMetalVertexDescriptorFromModelIO(modelIODescriptor obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTKMetalVertexDescriptorFromModelIO == nil {
+		ebipurego.RegisterLibFunc(&_fnMTKMetalVertexDescriptorFromModelIO, _lib, "MTKMetalVertexDescriptorFromModelIO")
+	}
+	_ret := _fnMTKMetalVertexDescriptorFromModelIO(objref.IDOf(modelIODescriptor))
+	return obj.Wrap(_ret)
 }
 
-// MTKMetalVertexDescriptorFromModelIOWithError calls [raw.MTKMetalVertexDescriptorFromModelIOWithError] (C function MTKMetalVertexDescriptorFromModelIOWithError).
-func MTKMetalVertexDescriptorFromModelIOWithError(modelIODescriptor *modelio.MDLVertexDescriptor, error_ unsafe.Pointer) *metal.MTLVertexDescriptor {
-	return raw.MTKMetalVertexDescriptorFromModelIOWithError(modelIODescriptor, error_)
-}
+var _fnMTKModelIOVertexDescriptorFromMetal func(objc.ID) objc.ID
 
-// MTKMetalVertexFormatFromModelIO calls [raw.MTKMetalVertexFormatFromModelIO] (C function MTKMetalVertexFormatFromModelIO).
-func MTKMetalVertexFormatFromModelIO(vertexFormat modelio.MDLVertexFormat) metal.MTLVertexFormat {
-	return raw.MTKMetalVertexFormatFromModelIO(vertexFormat)
-}
-
-// MTKModelIOVertexDescriptorFromMetal calls [raw.MTKModelIOVertexDescriptorFromMetal] (C function MTKModelIOVertexDescriptorFromMetal).
-func MTKModelIOVertexDescriptorFromMetal(metalDescriptor *metal.MTLVertexDescriptor) *modelio.MDLVertexDescriptor {
-	return raw.MTKModelIOVertexDescriptorFromMetal(metalDescriptor)
-}
-
-// MTKModelIOVertexDescriptorFromMetalWithError calls [raw.MTKModelIOVertexDescriptorFromMetalWithError] (C function MTKModelIOVertexDescriptorFromMetalWithError).
-func MTKModelIOVertexDescriptorFromMetalWithError(metalDescriptor *metal.MTLVertexDescriptor, error_ unsafe.Pointer) *modelio.MDLVertexDescriptor {
-	return raw.MTKModelIOVertexDescriptorFromMetalWithError(metalDescriptor, error_)
-}
-
-// MTKModelIOVertexFormatFromMetal calls [raw.MTKModelIOVertexFormatFromMetal] (C function MTKModelIOVertexFormatFromMetal).
-func MTKModelIOVertexFormatFromMetal(vertexFormat metal.MTLVertexFormat) modelio.MDLVertexFormat {
-	return raw.MTKModelIOVertexFormatFromMetal(vertexFormat)
+// MTKModelIOVertexDescriptorFromMetal calls the MetalKit framework function MTKModelIOVertexDescriptorFromMetal.
+func MTKModelIOVertexDescriptorFromMetal(metalDescriptor obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMTKModelIOVertexDescriptorFromMetal == nil {
+		ebipurego.RegisterLibFunc(&_fnMTKModelIOVertexDescriptorFromMetal, _lib, "MTKModelIOVertexDescriptorFromMetal")
+	}
+	_ret := _fnMTKModelIOVertexDescriptorFromMetal(objref.IDOf(metalDescriptor))
+	return obj.Wrap(_ret)
 }

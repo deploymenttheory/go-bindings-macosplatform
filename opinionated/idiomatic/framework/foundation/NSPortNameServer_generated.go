@@ -5,92 +5,102 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object-oriented interface to the port registration service used by the distributed objects system.
 //
-// PortNameServer wraps [raw.NSPortNameServer] with a fluent Go API.
+// PortNameServer is an idiomatic wrapper over the Objective-C class NSPortNameServer.
 type PortNameServer struct {
-	inner *raw.NSPortNameServer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPortNameServer].
-func (x *PortNameServer) Unwrap() *raw.NSPortNameServer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PortNameServer) ID() objc.ID { return x.inner.Ptr() }
-
-// PortNameServerFromID adopts an existing object pointer as a PortNameServer (nil for 0).
+// PortNameServerFromID adopts an existing Objective-C object as a PortNameServer
+// (nil for 0), retaining it and registering a release finalizer.
 func PortNameServerFromID(id objc.ID) *PortNameServer {
 	if id == 0 {
 		return nil
 	}
-	return &PortNameServer{inner: raw.NSPortNameServerFromID(id)}
+	x := &PortNameServer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPortNameServer creates a new [PortNameServer].
+// portNameServerAdopt wraps an Objective-C object that this code just created as a
+// PortNameServer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func portNameServerAdopt(id objc.ID) *PortNameServer {
+	if id == 0 {
+		return nil
+	}
+	x := &PortNameServer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PortNameServer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PortNameServer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PortNameServer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPortNameServer creates a new PortNameServer.
 func NewPortNameServer() *PortNameServer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPortNameServer")), objc.RegisterName("new"))
-	return &PortNameServer{inner: raw.NSPortNameServerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPortNameServer")), objc.RegisterName("new"))
+	return portNameServerAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *PortNameServer) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PortNameServer {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *PortNameServer) WithScriptingProperties(scriptingProperties obj.Object) *PortNameServer {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Looks up and returns the port registered under the specified name on the local host.
-//
-// PortForName calls the underlying PortForName.
 func (x *PortNameServer) PortForName(name string) *Port {
-	_r := x.inner.PortForName(foundation.NSStringStringWithUTF8String(name))
-	if _r == nil {
-		return nil
-	}
-	return &Port{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("portForName:"), purego.NSString(name))
+	return PortFromID(_r)
 }
 
 // Looks up and returns the port registered under the specified name on a specified host.
-//
-// PortForNameHost calls the underlying PortForNameHost.
 func (x *PortNameServer) PortForNameHost(name string, host string) *Port {
-	_r := x.inner.PortForNameHost(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(host))
-	if _r == nil {
-		return nil
-	}
-	return &Port{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("portForName:host:"), purego.NSString(name), purego.NSString(host))
+	return PortFromID(_r)
 }
 
 // Makes a given port available on the network under a specified name.
-//
-// RegisterPortName calls the underlying RegisterPortName.
-func (x *PortNameServer) RegisterPortName(port *raw.NSPort, name string) bool {
-	return x.inner.RegisterPortName(port, foundation.NSStringStringWithUTF8String(name))
+func (x *PortNameServer) RegisterPortName(port *Port, name string) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerPort:name:"), objref.IDOf(port), purego.NSString(name))
+	return _r
 }
 
 // Unregisters the port for a given name on the local host.
-//
-// RemovePortForName calls the underlying RemovePortForName.
 func (x *PortNameServer) RemovePortForName(name string) bool {
-	return x.inner.RemovePortForName(foundation.NSStringStringWithUTF8String(name))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("removePortForName:"), purego.NSString(name))
+	return _r
 }
-
-func (x *PortNameServer) asPortNameServer() *raw.NSPortNameServer { return x.inner }
-
-func (x *PortNameServer) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // PortNameServerable is the interface implemented by [PortNameServer], for mocking and DI.
 type PortNameServerable interface {
-	Unwrap() *raw.NSPortNameServer
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PortNameServer
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *PortNameServer
 	PortForName(name string) *Port
 	PortForNameHost(name string, host string) *Port
-	RegisterPortName(port *raw.NSPort, name string) bool
+	RegisterPortName(port *Port, name string) bool
 	RemovePortForName(name string) bool
 }
 

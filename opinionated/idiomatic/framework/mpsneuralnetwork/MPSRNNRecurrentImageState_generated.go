@@ -5,56 +5,80 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// RNNRecurrentImageState wraps [raw.MPSRNNRecurrentImageState] with a fluent Go API.
+// RNNRecurrentImageState is an idiomatic wrapper over the Objective-C class MPSRNNRecurrentImageState.
 type RNNRecurrentImageState struct {
-	inner *raw.MPSRNNRecurrentImageState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSRNNRecurrentImageState].
-func (x *RNNRecurrentImageState) Unwrap() *raw.MPSRNNRecurrentImageState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RNNRecurrentImageState) ID() objc.ID { return x.inner.Ptr() }
-
-// RNNRecurrentImageStateFromID adopts an existing object pointer as a RNNRecurrentImageState (nil for 0).
+// RNNRecurrentImageStateFromID adopts an existing Objective-C object as a RNNRecurrentImageState
+// (nil for 0), retaining it and registering a release finalizer.
 func RNNRecurrentImageStateFromID(id objc.ID) *RNNRecurrentImageState {
 	if id == 0 {
 		return nil
 	}
-	return &RNNRecurrentImageState{inner: raw.MPSRNNRecurrentImageStateFromID(id)}
+	x := &RNNRecurrentImageState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRNNRecurrentImageState creates a new [RNNRecurrentImageState].
+// rNNRecurrentImageStateAdopt wraps an Objective-C object that this code just created as a
+// RNNRecurrentImageState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rNNRecurrentImageStateAdopt(id objc.ID) *RNNRecurrentImageState {
+	if id == 0 {
+		return nil
+	}
+	x := &RNNRecurrentImageState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RNNRecurrentImageState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RNNRecurrentImageState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RNNRecurrentImageState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRNNRecurrentImageState creates a new RNNRecurrentImageState.
 func NewRNNRecurrentImageState() *RNNRecurrentImageState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSRNNRecurrentImageState")), objc.RegisterName("new"))
-	return &RNNRecurrentImageState{inner: raw.MPSRNNRecurrentImageStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSRNNRecurrentImageState")), objc.RegisterName("new"))
+	return rNNRecurrentImageStateAdopt(_id)
 }
 
-// @abstract   Access the stored recurrent image data. @param      layerIndex      Index of the layer whose to get - belongs to { 0, 1,...,@see numberOfLayers - 1 } @return     For valid layerIndex the recurrent output image data, otherwise nil.
-//
-// GetRecurrentOutputImageForLayerIndex calls the underlying GetRecurrentOutputImageForLayerIndex.
-func (x *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex uint) *mpscore.MPSImage {
-	return x.inner.GetRecurrentOutputImageForLayerIndex(layerIndex)
+// Access the stored recurrent image data.
+func (x *RNNRecurrentImageState) GetRecurrentOutputImageForLayerIndex(layerIndex int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getRecurrentOutputImageForLayerIndex:"), layerIndex)
+	return obj.Wrap(_r)
 }
 
-// @abstract   Access the stored memory cell image data (if present). @param      layerIndex      Index of the layer whose to get - belongs to { 0, 1,...,@see numberOfLayers - 1 } @return     For valid layerIndex the memory cell image data, otherwise nil.
-//
-// GetMemoryCellImageForLayerIndex calls the underlying GetMemoryCellImageForLayerIndex.
-func (x *RNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex uint) *mpscore.MPSImage {
-	return x.inner.GetMemoryCellImageForLayerIndex(layerIndex)
+// Access the stored memory cell image data (if present).
+func (x *RNNRecurrentImageState) GetMemoryCellImageForLayerIndex(layerIndex int) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getMemoryCellImageForLayerIndex:"), layerIndex)
+	return obj.Wrap(_r)
 }
 
 // RNNRecurrentImageStateable is the interface implemented by [RNNRecurrentImageState], for mocking and DI.
 type RNNRecurrentImageStateable interface {
-	Unwrap() *raw.MPSRNNRecurrentImageState
-	GetRecurrentOutputImageForLayerIndex(layerIndex uint) *mpscore.MPSImage
-	GetMemoryCellImageForLayerIndex(layerIndex uint) *mpscore.MPSImage
+	obj.Object
+	GetRecurrentOutputImageForLayerIndex(layerIndex int) obj.Object
+	GetMemoryCellImageForLayerIndex(layerIndex int) obj.Object
 }
 
 var _ RNNRecurrentImageStateable = (*RNNRecurrentImageState)(nil)

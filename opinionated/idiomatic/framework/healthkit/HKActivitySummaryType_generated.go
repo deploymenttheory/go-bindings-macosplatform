@@ -5,43 +5,68 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that identifies activity summary objects.
 //
-// ActivitySummaryType wraps [raw.HKActivitySummaryType] with a fluent Go API.
+// ActivitySummaryType is an idiomatic wrapper over the Objective-C class HKActivitySummaryType.
 type ActivitySummaryType struct {
-	inner *raw.HKActivitySummaryType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKActivitySummaryType].
-func (x *ActivitySummaryType) Unwrap() *raw.HKActivitySummaryType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ActivitySummaryType) ID() objc.ID { return x.inner.Ptr() }
-
-// ActivitySummaryTypeFromID adopts an existing object pointer as a ActivitySummaryType (nil for 0).
+// ActivitySummaryTypeFromID adopts an existing Objective-C object as a ActivitySummaryType
+// (nil for 0), retaining it and registering a release finalizer.
 func ActivitySummaryTypeFromID(id objc.ID) *ActivitySummaryType {
 	if id == 0 {
 		return nil
 	}
-	return &ActivitySummaryType{inner: raw.HKActivitySummaryTypeFromID(id)}
+	x := &ActivitySummaryType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewActivitySummaryType creates a new [ActivitySummaryType].
+// activitySummaryTypeAdopt wraps an Objective-C object that this code just created as a
+// ActivitySummaryType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func activitySummaryTypeAdopt(id objc.ID) *ActivitySummaryType {
+	if id == 0 {
+		return nil
+	}
+	x := &ActivitySummaryType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ActivitySummaryType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ActivitySummaryType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ActivitySummaryType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewActivitySummaryType creates a new ActivitySummaryType.
 func NewActivitySummaryType() *ActivitySummaryType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKActivitySummaryType")), objc.RegisterName("new"))
-	return &ActivitySummaryType{inner: raw.HKActivitySummaryTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKActivitySummaryType")), objc.RegisterName("new"))
+	return activitySummaryTypeAdopt(_id)
 }
-
-func (x *ActivitySummaryType) asObjectType() *raw.HKObjectType { return &x.inner.HKObjectType }
 
 // ActivitySummaryTypeable is the interface implemented by [ActivitySummaryType], for mocking and DI.
 type ActivitySummaryTypeable interface {
-	Unwrap() *raw.HKActivitySummaryType
+	obj.Object
 }
 
 var _ ActivitySummaryTypeable = (*ActivitySummaryType)(nil)

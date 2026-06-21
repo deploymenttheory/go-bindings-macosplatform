@@ -5,134 +5,115 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A VPN On Demand rule that doesn’t change the status of the VPN.
 //
-// NEOnDemandRuleIgnore wraps [raw.NEOnDemandRuleIgnore] with a fluent Go API.
+// NEOnDemandRuleIgnore is an idiomatic wrapper over the Objective-C class NEOnDemandRuleIgnore.
 type NEOnDemandRuleIgnore struct {
-	inner *raw.NEOnDemandRuleIgnore
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NEOnDemandRuleIgnore].
-func (x *NEOnDemandRuleIgnore) Unwrap() *raw.NEOnDemandRuleIgnore { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NEOnDemandRuleIgnore) ID() objc.ID { return x.inner.Ptr() }
-
-// NEOnDemandRuleIgnoreFromID adopts an existing object pointer as a NEOnDemandRuleIgnore (nil for 0).
+// NEOnDemandRuleIgnoreFromID adopts an existing Objective-C object as a NEOnDemandRuleIgnore
+// (nil for 0), retaining it and registering a release finalizer.
 func NEOnDemandRuleIgnoreFromID(id objc.ID) *NEOnDemandRuleIgnore {
 	if id == 0 {
 		return nil
 	}
-	return &NEOnDemandRuleIgnore{inner: raw.NEOnDemandRuleIgnoreFromID(id)}
+	x := &NEOnDemandRuleIgnore{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNEOnDemandRuleIgnore creates a new [NEOnDemandRuleIgnore].
+// nEOnDemandRuleIgnoreAdopt wraps an Objective-C object that this code just created as a
+// NEOnDemandRuleIgnore (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nEOnDemandRuleIgnoreAdopt(id objc.ID) *NEOnDemandRuleIgnore {
+	if id == 0 {
+		return nil
+	}
+	x := &NEOnDemandRuleIgnore{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NEOnDemandRuleIgnore) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NEOnDemandRuleIgnore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NEOnDemandRuleIgnore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNEOnDemandRuleIgnore creates a new NEOnDemandRuleIgnore.
 func NewNEOnDemandRuleIgnore() *NEOnDemandRuleIgnore {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NEOnDemandRuleIgnore")), objc.RegisterName("new"))
-	return &NEOnDemandRuleIgnore{inner: raw.NEOnDemandRuleIgnoreFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NEOnDemandRuleIgnore")), objc.RegisterName("new"))
+	return nEOnDemandRuleIgnoreAdopt(_id)
 }
 
 // DNS search domains that identify a network.
 //
-// WithDNSSearchDomainMatch sets the collection, converting the Go slice to an NSArray.
-func (x *NEOnDemandRuleIgnore) WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRuleIgnore {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NEOnDemandRule.SetDNSSearchDomainMatch(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NEOnDemandRule.SetDNSSearchDomainMatch(_arr)
+// WithDNSSearchDomainMatch sets the collection and returns the receiver so calls can be chained.
+func (x *NEOnDemandRuleIgnore) WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleIgnore {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSSearchDomainMatch:"), _arr)
 	return x
 }
 
 // DNS server addresses that identify a network.
 //
-// WithDNSServerAddressMatch sets the collection, converting the Go slice to an NSArray.
-func (x *NEOnDemandRuleIgnore) WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRuleIgnore {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NEOnDemandRule.SetDNSServerAddressMatch(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NEOnDemandRule.SetDNSServerAddressMatch(_arr)
+// WithDNSServerAddressMatch sets the collection and returns the receiver so calls can be chained.
+func (x *NEOnDemandRuleIgnore) WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleIgnore {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDNSServerAddressMatch:"), _arr)
 	return x
 }
 
 // An interface type to identify a network.
 //
-// WithInterfaceTypeMatch sets the interfaceTypeMatch property and returns the receiver for chaining.
+// WithInterfaceTypeMatch sets interfaceTypeMatch and returns the receiver so calls can be chained.
 func (x *NEOnDemandRuleIgnore) WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleIgnore {
-	x.inner.NEOnDemandRule.SetInterfaceTypeMatch(raw.NEOnDemandRuleInterfaceType(interfaceTypeMatch))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceTypeMatch:"), interfaceTypeMatch)
 	return x
 }
 
 // SSIDs that identify a network.
 //
-// WithSSIDMatch sets the collection, converting the Go slice to an NSArray.
-func (x *NEOnDemandRuleIgnore) WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRuleIgnore {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NEOnDemandRule.SetSSIDMatch(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NEOnDemandRule.SetSSIDMatch(_arr)
+// WithSSIDMatch sets the collection and returns the receiver so calls can be chained.
+func (x *NEOnDemandRuleIgnore) WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleIgnore {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSSIDMatch:"), _arr)
 	return x
 }
 
 // A URL to probe when all other network identifiers match to validate that an expected resource is available.
 //
-// WithProbeURL sets the probeURL property and returns the receiver for chaining.
+// WithProbeURL sets probeURL and returns the receiver so calls can be chained.
 func (x *NEOnDemandRuleIgnore) WithProbeURL(probeURL string) *NEOnDemandRuleIgnore {
-	x.inner.NEOnDemandRule.SetProbeURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(probeURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProbeURL:"), rt.FileURL(probeURL))
 	return x
 }
 
-func (x *NEOnDemandRuleIgnore) asNEOnDemandRule() *raw.NEOnDemandRule { return &x.inner.NEOnDemandRule }
-
 // NEOnDemandRuleIgnoreable is the interface implemented by [NEOnDemandRuleIgnore], for mocking and DI.
 type NEOnDemandRuleIgnoreable interface {
-	Unwrap() *raw.NEOnDemandRuleIgnore
-	WithDNSSearchDomainMatch(items ...*foundation.NSString) *NEOnDemandRuleIgnore
-	WithDNSServerAddressMatch(items ...*foundation.NSString) *NEOnDemandRuleIgnore
+	obj.Object
+	WithDNSSearchDomainMatch(items ...obj.Object) *NEOnDemandRuleIgnore
+	WithDNSServerAddressMatch(items ...obj.Object) *NEOnDemandRuleIgnore
 	WithInterfaceTypeMatch(interfaceTypeMatch NEOnDemandRuleInterfaceType) *NEOnDemandRuleIgnore
-	WithSSIDMatch(items ...*foundation.NSString) *NEOnDemandRuleIgnore
+	WithSSIDMatch(items ...obj.Object) *NEOnDemandRuleIgnore
 	WithProbeURL(probeURL string) *NEOnDemandRuleIgnore
 }
 

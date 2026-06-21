@@ -5,201 +5,214 @@
 package calendarstore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/calendarstore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CalAlarm wraps [raw.CalAlarm] with a fluent Go API.
+// CalAlarm is an idiomatic wrapper over the Objective-C class CalAlarm.
 type CalAlarm struct {
-	inner *raw.CalAlarm
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CalAlarm].
-func (x *CalAlarm) Unwrap() *raw.CalAlarm { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CalAlarm) ID() objc.ID { return x.inner.Ptr() }
-
-// CalAlarmFromID adopts an existing object pointer as a CalAlarm (nil for 0).
+// CalAlarmFromID adopts an existing Objective-C object as a CalAlarm
+// (nil for 0), retaining it and registering a release finalizer.
 func CalAlarmFromID(id objc.ID) *CalAlarm {
 	if id == 0 {
 		return nil
 	}
-	return &CalAlarm{inner: raw.CalAlarmFromID(id)}
+	x := &CalAlarm{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCalAlarm creates a new [CalAlarm].
+// calAlarmAdopt wraps an Objective-C object that this code just created as a
+// CalAlarm (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func calAlarmAdopt(id objc.ID) *CalAlarm {
+	if id == 0 {
+		return nil
+	}
+	x := &CalAlarm{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CalAlarm) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CalAlarm) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CalAlarm) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCalAlarm creates a new CalAlarm.
 func NewCalAlarm() *CalAlarm {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CalAlarm")), objc.RegisterName("new"))
-	return &CalAlarm{inner: raw.CalAlarmFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CalAlarm")), objc.RegisterName("new"))
+	return calAlarmAdopt(_id)
 }
 
-// WithAction sets the action property and returns the receiver for chaining.
+// WithAction sets action and returns the receiver so calls can be chained.
 func (x *CalAlarm) WithAction(action string) *CalAlarm {
-	x.inner.SetAction(foundation.NSStringStringWithUTF8String(action))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAction:"), purego.NSString(action))
 	return x
 }
 
-// WithSound sets the sound property and returns the receiver for chaining.
+// WithSound sets sound and returns the receiver so calls can be chained.
 func (x *CalAlarm) WithSound(sound string) *CalAlarm {
-	x.inner.SetSound(foundation.NSStringStringWithUTF8String(sound))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSound:"), purego.NSString(sound))
 	return x
 }
 
-// WithEmailAddress sets the emailAddress property and returns the receiver for chaining.
+// WithEmailAddress sets emailAddress and returns the receiver so calls can be chained.
 func (x *CalAlarm) WithEmailAddress(emailAddress string) *CalAlarm {
-	x.inner.SetEmailAddress(foundation.NSStringStringWithUTF8String(emailAddress))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailAddress:"), purego.NSString(emailAddress))
 	return x
 }
 
-// WithUrl sets the url property and returns the receiver for chaining.
+// WithUrl sets url and returns the receiver so calls can be chained.
 func (x *CalAlarm) WithUrl(url string) *CalAlarm {
-	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 	return x
 }
 
-// WithRelativeTrigger sets the relativeTrigger property and returns the receiver for chaining.
+// WithRelativeTrigger sets relativeTrigger and returns the receiver so calls can be chained.
 func (x *CalAlarm) WithRelativeTrigger(relativeTrigger float64) *CalAlarm {
-	x.inner.SetRelativeTrigger(relativeTrigger)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTrigger:"), relativeTrigger)
 	return x
 }
 
-// WithAbsoluteTrigger sets the absoluteTrigger property and returns the receiver for chaining.
-func (x *CalAlarm) WithAbsoluteTrigger(absoluteTrigger *foundation.NSDate) *CalAlarm {
-	x.inner.SetAbsoluteTrigger(absoluteTrigger)
+// WithAbsoluteTrigger sets absoluteTrigger and returns the receiver so calls can be chained.
+func (x *CalAlarm) WithAbsoluteTrigger(absoluteTrigger obj.Object) *CalAlarm {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAbsoluteTrigger:"), objref.IDOf(absoluteTrigger))
 	return x
 }
 
-// SetAcknowledged calls the underlying SetAcknowledged.
-func (x *CalAlarm) SetAcknowledged(date *foundation.NSDate) {
-	x.inner.SetAcknowledged(date)
+func (x *CalAlarm) SetAcknowledged(date obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcknowledged:"), objref.IDOf(date))
 }
 
-// Acknowledged calls the underlying Acknowledged.
-func (x *CalAlarm) Acknowledged() *foundation.NSDate {
-	return x.inner.Acknowledged()
+func (x *CalAlarm) Acknowledged() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("acknowledged"))
+	return obj.Wrap(_r)
 }
 
-// SetRelatedTo calls the underlying SetRelatedTo.
 func (x *CalAlarm) SetRelatedTo(relatedTo string) {
-	x.inner.SetRelatedTo(foundation.NSStringStringWithUTF8String(relatedTo))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelatedTo:"), purego.NSString(relatedTo))
 }
 
-// RelatedTo calls the underlying RelatedTo.
 func (x *CalAlarm) RelatedTo() string {
-	_r := x.inner.RelatedTo()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relatedTo"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// TriggerDateRelativeTo calls the underlying TriggerDateRelativeTo.
-func (x *CalAlarm) TriggerDateRelativeTo(date *foundation.NSDate) *foundation.NSDate {
-	return x.inner.TriggerDateRelativeTo(date)
+func (x *CalAlarm) TriggerDateRelativeTo(date obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triggerDateRelativeTo:"), objref.IDOf(date))
+	return obj.Wrap(_r)
 }
 
-// Action calls the underlying Action.
 func (x *CalAlarm) Action() string {
-	_r := x.inner.Action()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("action"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetAction calls the underlying SetAction.
 func (x *CalAlarm) SetAction(action string) {
-	x.inner.SetAction(foundation.NSStringStringWithUTF8String(action))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAction:"), purego.NSString(action))
 }
 
-// Sound calls the underlying Sound.
 func (x *CalAlarm) Sound() string {
-	_r := x.inner.Sound()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sound"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetSound calls the underlying SetSound.
 func (x *CalAlarm) SetSound(sound string) {
-	x.inner.SetSound(foundation.NSStringStringWithUTF8String(sound))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSound:"), purego.NSString(sound))
 }
 
-// EmailAddress calls the underlying EmailAddress.
 func (x *CalAlarm) EmailAddress() string {
-	_r := x.inner.EmailAddress()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddress"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetEmailAddress calls the underlying SetEmailAddress.
 func (x *CalAlarm) SetEmailAddress(emailAddress string) {
-	x.inner.SetEmailAddress(foundation.NSStringStringWithUTF8String(emailAddress))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEmailAddress:"), purego.NSString(emailAddress))
 }
 
-// Url calls the underlying Url.
-func (x *CalAlarm) Url() *foundation.NSURL {
-	return x.inner.Url()
+func (x *CalAlarm) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
-// SetUrl calls the underlying SetUrl.
 func (x *CalAlarm) SetUrl(url string) {
-	x.inner.SetUrl(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUrl:"), rt.FileURL(url))
 }
 
-// RelativeTrigger calls the underlying RelativeTrigger.
 func (x *CalAlarm) RelativeTrigger() float64 {
-	return x.inner.RelativeTrigger()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("relativeTrigger"))
+	return _r
 }
 
-// SetRelativeTrigger calls the underlying SetRelativeTrigger.
 func (x *CalAlarm) SetRelativeTrigger(relativeTrigger float64) {
-	x.inner.SetRelativeTrigger(relativeTrigger)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRelativeTrigger:"), relativeTrigger)
 }
 
-// AbsoluteTrigger calls the underlying AbsoluteTrigger.
-func (x *CalAlarm) AbsoluteTrigger() *foundation.NSDate {
-	return x.inner.AbsoluteTrigger()
+func (x *CalAlarm) AbsoluteTrigger() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteTrigger"))
+	return obj.Wrap(_r)
 }
 
-// SetAbsoluteTrigger calls the underlying SetAbsoluteTrigger.
-func (x *CalAlarm) SetAbsoluteTrigger(absoluteTrigger *foundation.NSDate) {
-	x.inner.SetAbsoluteTrigger(absoluteTrigger)
+func (x *CalAlarm) SetAbsoluteTrigger(absoluteTrigger obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAbsoluteTrigger:"), objref.IDOf(absoluteTrigger))
 }
 
 // CalAlarmable is the interface implemented by [CalAlarm], for mocking and DI.
 type CalAlarmable interface {
-	Unwrap() *raw.CalAlarm
+	obj.Object
 	WithAction(action string) *CalAlarm
 	WithSound(sound string) *CalAlarm
 	WithEmailAddress(emailAddress string) *CalAlarm
 	WithUrl(url string) *CalAlarm
 	WithRelativeTrigger(relativeTrigger float64) *CalAlarm
-	WithAbsoluteTrigger(absoluteTrigger *foundation.NSDate) *CalAlarm
-	SetAcknowledged(date *foundation.NSDate)
-	Acknowledged() *foundation.NSDate
+	WithAbsoluteTrigger(absoluteTrigger obj.Object) *CalAlarm
+	SetAcknowledged(date obj.Object)
+	Acknowledged() obj.Object
 	SetRelatedTo(relatedTo string)
 	RelatedTo() string
-	TriggerDateRelativeTo(date *foundation.NSDate) *foundation.NSDate
+	TriggerDateRelativeTo(date obj.Object) obj.Object
 	Action() string
 	SetAction(action string)
 	Sound() string
 	SetSound(sound string)
 	EmailAddress() string
 	SetEmailAddress(emailAddress string)
-	Url() *foundation.NSURL
+	Url() obj.Object
 	SetUrl(url string)
 	RelativeTrigger() float64
 	SetRelativeTrigger(relativeTrigger float64)
-	AbsoluteTrigger() *foundation.NSDate
-	SetAbsoluteTrigger(absoluteTrigger *foundation.NSDate)
+	AbsoluteTrigger() obj.Object
+	SetAbsoluteTrigger(absoluteTrigger obj.Object)
 }
 
 var _ CalAlarmable = (*CalAlarm)(nil)

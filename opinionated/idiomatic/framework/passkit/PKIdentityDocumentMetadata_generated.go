@@ -5,133 +5,140 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A set of configured metadata that defines the required information to add the corresponding pass to Wallet.
 //
-// IdentityDocumentMetadata wraps [raw.PKIdentityDocumentMetadata] with a fluent Go API.
+// IdentityDocumentMetadata is an idiomatic wrapper over the Objective-C class PKIdentityDocumentMetadata.
 type IdentityDocumentMetadata struct {
-	inner *raw.PKIdentityDocumentMetadata
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKIdentityDocumentMetadata].
-func (x *IdentityDocumentMetadata) Unwrap() *raw.PKIdentityDocumentMetadata { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IdentityDocumentMetadata) ID() objc.ID { return x.inner.Ptr() }
-
-// IdentityDocumentMetadataFromID adopts an existing object pointer as a IdentityDocumentMetadata (nil for 0).
+// IdentityDocumentMetadataFromID adopts an existing Objective-C object as a IdentityDocumentMetadata
+// (nil for 0), retaining it and registering a release finalizer.
 func IdentityDocumentMetadataFromID(id objc.ID) *IdentityDocumentMetadata {
 	if id == 0 {
 		return nil
 	}
-	return &IdentityDocumentMetadata{inner: raw.PKIdentityDocumentMetadataFromID(id)}
+	x := &IdentityDocumentMetadata{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIdentityDocumentMetadata creates a new [IdentityDocumentMetadata].
+// identityDocumentMetadataAdopt wraps an Objective-C object that this code just created as a
+// IdentityDocumentMetadata (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func identityDocumentMetadataAdopt(id objc.ID) *IdentityDocumentMetadata {
+	if id == 0 {
+		return nil
+	}
+	x := &IdentityDocumentMetadata{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IdentityDocumentMetadata) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IdentityDocumentMetadata) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IdentityDocumentMetadata) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIdentityDocumentMetadata creates a new IdentityDocumentMetadata.
 func NewIdentityDocumentMetadata() *IdentityDocumentMetadata {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKIdentityDocumentMetadata")), objc.RegisterName("new"))
-	return &IdentityDocumentMetadata{inner: raw.PKIdentityDocumentMetadataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKIdentityDocumentMetadata")), objc.RegisterName("new"))
+	return identityDocumentMetadataAdopt(_id)
 }
 
 // An identifier that references the target server environment Apple Pay servers need to connect with to provision the pass.
 //
-// WithServerEnvironmentIdentifier sets the serverEnvironmentIdentifier property and returns the receiver for chaining.
+// WithServerEnvironmentIdentifier sets serverEnvironmentIdentifier and returns the receiver so calls can be chained.
 func (x *IdentityDocumentMetadata) WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *IdentityDocumentMetadata {
-	x.inner.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
 	return x
 }
 
 // credentialIdentifier: A unique identifier for provisioning credential data.
-//
-// CredentialIdentifier calls the underlying CredentialIdentifier.
 func (x *IdentityDocumentMetadata) CredentialIdentifier() string {
-	_r := x.inner.CredentialIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("credentialIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // sharingInstanceIdentifier: A unique identifier that refers to an instance of sharing of credentials to a user's device initiated from another user, device, or web.
-//
-// SharingInstanceIdentifier calls the underlying SharingInstanceIdentifier.
 func (x *IdentityDocumentMetadata) SharingInstanceIdentifier() string {
-	_r := x.inner.SharingInstanceIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sharingInstanceIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // cardTemplateIdentifier: Identifier referencing a card template registered by developers in web portal - identifies a combination of cardProfileIdentifier, cardConfigurationIdentifier, and cardArtBundleName. Returns empty string if no identifier is set.
-//
-// CardTemplateIdentifier calls the underlying CardTemplateIdentifier.
 func (x *IdentityDocumentMetadata) CardTemplateIdentifier() string {
-	_r := x.inner.CardTemplateIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cardTemplateIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // cardConfigurationIdentifier: Identifier referencing a card configuration registered by developers. Returns empty string if no identifier is set.
-//
-// CardConfigurationIdentifier calls the underlying CardConfigurationIdentifier.
 func (x *IdentityDocumentMetadata) CardConfigurationIdentifier() string {
-	_r := x.inner.CardConfigurationIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cardConfigurationIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // serverEnvironmentIdentifier: Identifier referencing the target server environment Apple Pay servers should reach out to to provision this pass. If not present, the default Apply Pay server environment will be used and an empty string will be returned.
-//
-// ServerEnvironmentIdentifier calls the underlying ServerEnvironmentIdentifier.
 func (x *IdentityDocumentMetadata) ServerEnvironmentIdentifier() string {
-	_r := x.inner.ServerEnvironmentIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverEnvironmentIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetServerEnvironmentIdentifier calls the underlying SetServerEnvironmentIdentifier.
 func (x *IdentityDocumentMetadata) SetServerEnvironmentIdentifier(serverEnvironmentIdentifier string) {
-	x.inner.SetServerEnvironmentIdentifier(foundation.NSStringStringWithUTF8String(serverEnvironmentIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerEnvironmentIdentifier:"), purego.NSString(serverEnvironmentIdentifier))
 }
 
 // issuingCountryCode: identifies the issuing country of the identity document
-//
-// IssuingCountryCode calls the underlying IssuingCountryCode.
 func (x *IdentityDocumentMetadata) IssuingCountryCode() string {
-	_r := x.inner.IssuingCountryCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuingCountryCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // identityDocumentType: identifies the type of the identity document
-//
-// DocumentType calls the underlying DocumentType.
-func (x *IdentityDocumentMetadata) DocumentType() PKAddIdentityDocumentType {
-	return PKAddIdentityDocumentType(x.inner.DocumentType())
-}
-
-func (x *IdentityDocumentMetadata) asIdentityDocumentMetadata() *raw.PKIdentityDocumentMetadata {
-	return x.inner
+func (x *IdentityDocumentMetadata) DocumentType() AddIdentityDocumentType {
+	_r := objc.Send[AddIdentityDocumentType](objref.IDOf(x), objc.RegisterName("documentType"))
+	return _r
 }
 
 // IdentityDocumentMetadataable is the interface implemented by [IdentityDocumentMetadata], for mocking and DI.
 type IdentityDocumentMetadataable interface {
-	Unwrap() *raw.PKIdentityDocumentMetadata
+	obj.Object
 	WithServerEnvironmentIdentifier(serverEnvironmentIdentifier string) *IdentityDocumentMetadata
 	CredentialIdentifier() string
 	SharingInstanceIdentifier() string
@@ -140,7 +147,7 @@ type IdentityDocumentMetadataable interface {
 	ServerEnvironmentIdentifier() string
 	SetServerEnvironmentIdentifier(serverEnvironmentIdentifier string)
 	IssuingCountryCode() string
-	DocumentType() PKAddIdentityDocumentType
+	DocumentType() AddIdentityDocumentType
 }
 
 var _ IdentityDocumentMetadataable = (*IdentityDocumentMetadata)(nil)

@@ -5,127 +5,135 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRContentLauncherClusterStyleInformationStruct wraps [raw.MTRContentLauncherClusterStyleInformationStruct] with a fluent Go API.
+// MTRContentLauncherClusterStyleInformationStruct is an idiomatic wrapper over the Objective-C class MTRContentLauncherClusterStyleInformationStruct.
 type MTRContentLauncherClusterStyleInformationStruct struct {
-	inner *raw.MTRContentLauncherClusterStyleInformationStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRContentLauncherClusterStyleInformationStruct].
-func (x *MTRContentLauncherClusterStyleInformationStruct) Unwrap() *raw.MTRContentLauncherClusterStyleInformationStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRContentLauncherClusterStyleInformationStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRContentLauncherClusterStyleInformationStructFromID adopts an existing object pointer as a MTRContentLauncherClusterStyleInformationStruct (nil for 0).
+// MTRContentLauncherClusterStyleInformationStructFromID adopts an existing Objective-C object as a MTRContentLauncherClusterStyleInformationStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRContentLauncherClusterStyleInformationStructFromID(id objc.ID) *MTRContentLauncherClusterStyleInformationStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRContentLauncherClusterStyleInformationStruct{inner: raw.MTRContentLauncherClusterStyleInformationStructFromID(id)}
-}
-
-// NewMTRContentLauncherClusterStyleInformationStruct creates a new [MTRContentLauncherClusterStyleInformationStruct].
-func NewMTRContentLauncherClusterStyleInformationStruct() *MTRContentLauncherClusterStyleInformationStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRContentLauncherClusterStyleInformationStruct")), objc.RegisterName("new"))
-	return &MTRContentLauncherClusterStyleInformationStruct{inner: raw.MTRContentLauncherClusterStyleInformationStructFromID(_id)}
-}
-
-// WithImageURL sets the imageURL property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterStyleInformationStruct) WithImageURL(imageURL string) *MTRContentLauncherClusterStyleInformationStruct {
-	x.inner.SetImageURL(foundation.NSStringStringWithUTF8String(imageURL))
+	x := &MTRContentLauncherClusterStyleInformationStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithImageUrl sets the imageUrl property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterStyleInformationStruct) WithImageUrl(imageUrl string) *MTRContentLauncherClusterStyleInformationStruct {
-	x.inner.SetImageUrl(foundation.NSStringStringWithUTF8String(imageUrl))
-	return x
-}
-
-// WithColor sets the color property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterStyleInformationStruct) WithColor(color string) *MTRContentLauncherClusterStyleInformationStruct {
-	x.inner.SetColor(foundation.NSStringStringWithUTF8String(color))
-	return x
-}
-
-// WithSize sets the size property and returns the receiver for chaining.
-func (x *MTRContentLauncherClusterStyleInformationStruct) WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformationStruct {
-	x.inner.SetSize(size.asMTRContentLauncherClusterDimensionStruct())
-	return x
-}
-
-// ImageURL calls the underlying ImageURL.
-func (x *MTRContentLauncherClusterStyleInformationStruct) ImageURL() string {
-	_r := x.inner.ImageURL()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetImageURL calls the underlying SetImageURL.
-func (x *MTRContentLauncherClusterStyleInformationStruct) SetImageURL(imageURL string) {
-	x.inner.SetImageURL(foundation.NSStringStringWithUTF8String(imageURL))
-}
-
-// ImageUrl calls the underlying ImageUrl.
-func (x *MTRContentLauncherClusterStyleInformationStruct) ImageUrl() string {
-	_r := x.inner.ImageUrl()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetImageUrl calls the underlying SetImageUrl.
-func (x *MTRContentLauncherClusterStyleInformationStruct) SetImageUrl(imageUrl string) {
-	x.inner.SetImageUrl(foundation.NSStringStringWithUTF8String(imageUrl))
-}
-
-// Color calls the underlying Color.
-func (x *MTRContentLauncherClusterStyleInformationStruct) Color() string {
-	_r := x.inner.Color()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetColor calls the underlying SetColor.
-func (x *MTRContentLauncherClusterStyleInformationStruct) SetColor(color string) {
-	x.inner.SetColor(foundation.NSStringStringWithUTF8String(color))
-}
-
-// Size calls the underlying Size.
-func (x *MTRContentLauncherClusterStyleInformationStruct) Size() *MTRContentLauncherClusterDimensionStruct {
-	_r := x.inner.Size()
-	if _r == nil {
+// mTRContentLauncherClusterStyleInformationStructAdopt wraps an Objective-C object that this code just created as a
+// MTRContentLauncherClusterStyleInformationStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRContentLauncherClusterStyleInformationStructAdopt(id objc.ID) *MTRContentLauncherClusterStyleInformationStruct {
+	if id == 0 {
 		return nil
 	}
-	return &MTRContentLauncherClusterDimensionStruct{inner: _r}
+	x := &MTRContentLauncherClusterStyleInformationStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetSize calls the underlying SetSize.
-func (x *MTRContentLauncherClusterStyleInformationStruct) SetSize(size *raw.MTRContentLauncherClusterDimensionStruct) {
-	x.inner.SetSize(size)
+// Description returns the object's -description text.
+func (x *MTRContentLauncherClusterStyleInformationStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *MTRContentLauncherClusterStyleInformationStruct) asMTRContentLauncherClusterStyleInformationStruct() *raw.MTRContentLauncherClusterStyleInformationStruct {
-	return x.inner
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRContentLauncherClusterStyleInformationStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRContentLauncherClusterStyleInformationStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRContentLauncherClusterStyleInformationStruct creates a new MTRContentLauncherClusterStyleInformationStruct.
+func NewMTRContentLauncherClusterStyleInformationStruct() *MTRContentLauncherClusterStyleInformationStruct {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRContentLauncherClusterStyleInformationStruct")), objc.RegisterName("new"))
+	return mTRContentLauncherClusterStyleInformationStructAdopt(_id)
+}
+
+// WithImageURL sets imageURL and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterStyleInformationStruct) WithImageURL(imageURL string) *MTRContentLauncherClusterStyleInformationStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageURL:"), purego.NSString(imageURL))
+	return x
+}
+
+// WithImageUrl sets imageUrl and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterStyleInformationStruct) WithImageUrl(imageUrl string) *MTRContentLauncherClusterStyleInformationStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageUrl:"), purego.NSString(imageUrl))
+	return x
+}
+
+// WithColor sets color and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterStyleInformationStruct) WithColor(color string) *MTRContentLauncherClusterStyleInformationStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), purego.NSString(color))
+	return x
+}
+
+// WithSize sets size and returns the receiver so calls can be chained.
+func (x *MTRContentLauncherClusterStyleInformationStruct) WithSize(size MTRContentLauncherClusterDimensionStructProvider) *MTRContentLauncherClusterStyleInformationStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), objref.IDOf(size))
+	return x
+}
+
+func (x *MTRContentLauncherClusterStyleInformationStruct) ImageURL() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageURL"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *MTRContentLauncherClusterStyleInformationStruct) SetImageURL(imageURL string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageURL:"), purego.NSString(imageURL))
+}
+
+func (x *MTRContentLauncherClusterStyleInformationStruct) ImageUrl() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageUrl"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *MTRContentLauncherClusterStyleInformationStruct) SetImageUrl(imageUrl string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageUrl:"), purego.NSString(imageUrl))
+}
+
+func (x *MTRContentLauncherClusterStyleInformationStruct) Color() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("color"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *MTRContentLauncherClusterStyleInformationStruct) SetColor(color string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColor:"), purego.NSString(color))
+}
+
+func (x *MTRContentLauncherClusterStyleInformationStruct) Size() *MTRContentLauncherClusterDimensionStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("size"))
+	return MTRContentLauncherClusterDimensionStructFromID(_r)
+}
+
+func (x *MTRContentLauncherClusterStyleInformationStruct) SetSize(size *MTRContentLauncherClusterDimensionStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSize:"), objref.IDOf(size))
 }
 
 // MTRContentLauncherClusterStyleInformationStructable is the interface implemented by [MTRContentLauncherClusterStyleInformationStruct], for mocking and DI.
 type MTRContentLauncherClusterStyleInformationStructable interface {
-	Unwrap() *raw.MTRContentLauncherClusterStyleInformationStruct
+	obj.Object
 	WithImageURL(imageURL string) *MTRContentLauncherClusterStyleInformationStruct
 	WithImageUrl(imageUrl string) *MTRContentLauncherClusterStyleInformationStruct
 	WithColor(color string) *MTRContentLauncherClusterStyleInformationStruct
@@ -137,7 +145,7 @@ type MTRContentLauncherClusterStyleInformationStructable interface {
 	Color() string
 	SetColor(color string)
 	Size() *MTRContentLauncherClusterDimensionStruct
-	SetSize(size *raw.MTRContentLauncherClusterDimensionStruct)
+	SetSize(size *MTRContentLauncherClusterDimensionStruct)
 }
 
 var _ MTRContentLauncherClusterStyleInformationStructable = (*MTRContentLauncherClusterStyleInformationStruct)(nil)

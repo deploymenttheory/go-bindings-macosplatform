@@ -5,344 +5,249 @@
 package metalperformanceshadersgraph
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshadersgraph"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The class that defines the parameters for a 4D pooling operation.
 //
-// GraphPooling4DOpDescriptor wraps [raw.MPSGraphPooling4DOpDescriptor] with a fluent Go API.
+// GraphPooling4DOpDescriptor is an idiomatic wrapper over the Objective-C class MPSGraphPooling4DOpDescriptor.
 type GraphPooling4DOpDescriptor struct {
-	inner *raw.MPSGraphPooling4DOpDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSGraphPooling4DOpDescriptor].
-func (x *GraphPooling4DOpDescriptor) Unwrap() *raw.MPSGraphPooling4DOpDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GraphPooling4DOpDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphPooling4DOpDescriptorFromID adopts an existing object pointer as a GraphPooling4DOpDescriptor (nil for 0).
+// GraphPooling4DOpDescriptorFromID adopts an existing Objective-C object as a GraphPooling4DOpDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphPooling4DOpDescriptorFromID(id objc.ID) *GraphPooling4DOpDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &GraphPooling4DOpDescriptor{inner: raw.MPSGraphPooling4DOpDescriptorFromID(id)}
+	x := &GraphPooling4DOpDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGraphPooling4DOpDescriptor creates a new [GraphPooling4DOpDescriptor].
+// graphPooling4DOpDescriptorAdopt wraps an Objective-C object that this code just created as a
+// GraphPooling4DOpDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphPooling4DOpDescriptorAdopt(id objc.ID) *GraphPooling4DOpDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &GraphPooling4DOpDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GraphPooling4DOpDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GraphPooling4DOpDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GraphPooling4DOpDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGraphPooling4DOpDescriptor creates a new GraphPooling4DOpDescriptor.
 func NewGraphPooling4DOpDescriptor() *GraphPooling4DOpDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSGraphPooling4DOpDescriptor")), objc.RegisterName("new"))
-	return &GraphPooling4DOpDescriptor{inner: raw.MPSGraphPooling4DOpDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSGraphPooling4DOpDescriptor")), objc.RegisterName("new"))
+	return graphPooling4DOpDescriptorAdopt(_id)
 }
 
 // Defines the pooling window size.
 //
-// WithKernelSizes sets the collection, converting the Go slice to an NSArray.
-func (x *GraphPooling4DOpDescriptor) WithKernelSizes(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetKernelSizes(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetKernelSizes(_arr)
+// WithKernelSizes sets the collection and returns the receiver so calls can be chained.
+func (x *GraphPooling4DOpDescriptor) WithKernelSizes(items ...obj.Object) *GraphPooling4DOpDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelSizes:"), _arr)
 	return x
 }
 
 // Defines strides for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last.
 //
-// WithStrides sets the collection, converting the Go slice to an NSArray.
-func (x *GraphPooling4DOpDescriptor) WithStrides(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetStrides(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetStrides(_arr)
+// WithStrides sets the collection and returns the receiver so calls can be chained.
+func (x *GraphPooling4DOpDescriptor) WithStrides(items ...obj.Object) *GraphPooling4DOpDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrides:"), _arr)
 	return x
 }
 
 // Defines dilation rates for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last.
 //
-// WithDilationRates sets the collection, converting the Go slice to an NSArray.
-func (x *GraphPooling4DOpDescriptor) WithDilationRates(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetDilationRates(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetDilationRates(_arr)
+// WithDilationRates sets the collection and returns the receiver so calls can be chained.
+func (x *GraphPooling4DOpDescriptor) WithDilationRates(items ...obj.Object) *GraphPooling4DOpDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRates:"), _arr)
 	return x
 }
 
 // Defines padding values for spatial dimensions which must be eight numbers, two for each spatial dimension.
 //
-// WithPaddingValues sets the collection, converting the Go slice to an NSArray.
-func (x *GraphPooling4DOpDescriptor) WithPaddingValues(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetPaddingValues(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetPaddingValues(_arr)
+// WithPaddingValues sets the collection and returns the receiver so calls can be chained.
+func (x *GraphPooling4DOpDescriptor) WithPaddingValues(items ...obj.Object) *GraphPooling4DOpDescriptor {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingValues:"), _arr)
 	return x
 }
 
 // Defines what kind of padding graph applies to the operation.
 //
-// WithPaddingStyle sets the paddingStyle property and returns the receiver for chaining.
-func (x *GraphPooling4DOpDescriptor) WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphPooling4DOpDescriptor {
-	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
+// WithPaddingStyle sets paddingStyle and returns the receiver so calls can be chained.
+func (x *GraphPooling4DOpDescriptor) WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphPooling4DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
 	return x
 }
 
 // Affects how MPSGraph computes the output size: if set to YES then output size is computed by rounding up instead of down when dividing input size by stride.
 //
-// WithCeilMode sets the ceilMode property and returns the receiver for chaining.
+// WithCeilMode sets ceilMode and returns the receiver so calls can be chained.
 func (x *GraphPooling4DOpDescriptor) WithCeilMode(ceilMode bool) *GraphPooling4DOpDescriptor {
-	x.inner.SetCeilMode(ceilMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCeilMode:"), ceilMode)
 	return x
 }
 
 // Defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation.
 //
-// WithIncludeZeroPadToAverage sets the includeZeroPadToAverage property and returns the receiver for chaining.
+// WithIncludeZeroPadToAverage sets includeZeroPadToAverage and returns the receiver so calls can be chained.
 func (x *GraphPooling4DOpDescriptor) WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling4DOpDescriptor {
-	x.inner.SetIncludeZeroPadToAverage(includeZeroPadToAverage)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeZeroPadToAverage:"), includeZeroPadToAverage)
 	return x
 }
 
 // Defines the mode for returned indices of maximum values within each pooling window.
 //
-// WithReturnIndicesMode sets the returnIndicesMode property and returns the receiver for chaining.
-func (x *GraphPooling4DOpDescriptor) WithReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor {
-	x.inner.SetReturnIndicesMode(raw.MPSGraphPoolingReturnIndicesMode(returnIndicesMode))
-	return x
-}
-
-// Defines the data type for returned indices.
-//
-// WithReturnIndicesDataType sets the returnIndicesDataType property and returns the receiver for chaining.
-func (x *GraphPooling4DOpDescriptor) WithReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) *GraphPooling4DOpDescriptor {
-	x.inner.SetReturnIndicesDataType(returnIndicesDataType)
+// WithReturnIndicesMode sets returnIndicesMode and returns the receiver so calls can be chained.
+func (x *GraphPooling4DOpDescriptor) WithReturnIndicesMode(returnIndicesMode GraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnIndicesMode:"), returnIndicesMode)
 	return x
 }
 
 // Defines the pooling window size. Must be four numbers, one for each spatial dimension, fastest running index last.
 //
 // KernelSizes returns the collection as a Go slice.
-func (x *GraphPooling4DOpDescriptor) KernelSizes() []*foundation.NSNumber {
-	arr := x.inner.KernelSizes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *GraphPooling4DOpDescriptor) KernelSizes() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("kernelSizes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetKernelSizes calls the underlying SetKernelSizes.
-func (x *GraphPooling4DOpDescriptor) SetKernelSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetKernelSizes(kernelSizes)
+func (x *GraphPooling4DOpDescriptor) SetKernelSizes(kernelSizes []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelSizes:"), purego.SliceToNSArray(kernelSizes, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Defines strides for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1, @1 ]`
+// Defines strides for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `
 //
 // Strides returns the collection as a Go slice.
-func (x *GraphPooling4DOpDescriptor) Strides() []*foundation.NSNumber {
-	arr := x.inner.Strides()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *GraphPooling4DOpDescriptor) Strides() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strides"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetStrides calls the underlying SetStrides.
-func (x *GraphPooling4DOpDescriptor) SetStrides(strides *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetStrides(strides)
+func (x *GraphPooling4DOpDescriptor) SetStrides(strides []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrides:"), purego.SliceToNSArray(strides, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Defines dilation rates for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `@[ @1, @1, @1, @1 ]`
+// Defines dilation rates for spatial dimensions. Must be four numbers, one for each spatial dimension, fastest running index last. Default value: `
 //
 // DilationRates returns the collection as a Go slice.
-func (x *GraphPooling4DOpDescriptor) DilationRates() []*foundation.NSNumber {
-	arr := x.inner.DilationRates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *GraphPooling4DOpDescriptor) DilationRates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dilationRates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetDilationRates calls the underlying SetDilationRates.
-func (x *GraphPooling4DOpDescriptor) SetDilationRates(dilationRates *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetDilationRates(dilationRates)
+func (x *GraphPooling4DOpDescriptor) SetDilationRates(dilationRates []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRates:"), purego.SliceToNSArray(dilationRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
-// Defines padding values for spatial dimensions which must be eight numbers, two for each spatial dimension. For example `paddingValues[0]` defines the explicit padding amount before the first spatial dimension (slowest running index of spatial dimensions), `paddingValues[1]` defines the padding amount after the first spatial dimension etc. Used only when `paddingStyle = MPSGraphPaddingStyleExplicit`. Default value: `@[ @0, @0, @0, @0, @0, @0, @0, @0 ]`
+// Defines padding values for spatial dimensions which must be eight numbers, two for each spatial dimension. For example `paddingValues[0]` defines the explicit padding amount before the first spatial dimension (slowest running index of spatial dimensions), `paddingValues[1]` defines the padding amount after the first spatial dimension etc. Used only when `paddingStyle = MPSGraphPaddingStyleExplicit`. Default value: `
 //
 // PaddingValues returns the collection as a Go slice.
-func (x *GraphPooling4DOpDescriptor) PaddingValues() []*foundation.NSNumber {
-	arr := x.inner.PaddingValues()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *GraphPooling4DOpDescriptor) PaddingValues() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("paddingValues"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetPaddingValues calls the underlying SetPaddingValues.
-func (x *GraphPooling4DOpDescriptor) SetPaddingValues(paddingValues *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetPaddingValues(paddingValues)
+func (x *GraphPooling4DOpDescriptor) SetPaddingValues(paddingValues []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingValues:"), purego.SliceToNSArray(paddingValues, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Defines what kind of padding graph applies to the operation. Default value: `MPSGraphPaddingStyleExplicit`.
-//
-// PaddingStyle calls the underlying PaddingStyle.
-func (x *GraphPooling4DOpDescriptor) PaddingStyle() MPSGraphPaddingStyle {
-	return MPSGraphPaddingStyle(x.inner.PaddingStyle())
+func (x *GraphPooling4DOpDescriptor) PaddingStyle() GraphPaddingStyle {
+	_r := objc.Send[GraphPaddingStyle](objref.IDOf(x), objc.RegisterName("paddingStyle"))
+	return _r
 }
 
-// SetPaddingStyle calls the underlying SetPaddingStyle.
-func (x *GraphPooling4DOpDescriptor) SetPaddingStyle(paddingStyle MPSGraphPaddingStyle) {
-	x.inner.SetPaddingStyle(raw.MPSGraphPaddingStyle(paddingStyle))
+func (x *GraphPooling4DOpDescriptor) SetPaddingStyle(paddingStyle GraphPaddingStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaddingStyle:"), paddingStyle)
 }
 
 // Affects how MPSGraph computes the output size: if set to `YES` then output size is computed by rounding up instead of down when dividing input size by stride. Default value: `NO`.
-//
-// CeilMode calls the underlying CeilMode.
 func (x *GraphPooling4DOpDescriptor) CeilMode() bool {
-	return x.inner.CeilMode()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ceilMode"))
+	return _r
 }
 
-// SetCeilMode calls the underlying SetCeilMode.
 func (x *GraphPooling4DOpDescriptor) SetCeilMode(ceilMode bool) {
-	x.inner.SetCeilMode(ceilMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCeilMode:"), ceilMode)
 }
 
 // Defines a mode for average pooling, where samples outside the input tensor count as zeroes in the average computation. Otherwise the result is sum over samples divided by number of samples that didn't come from padding. Default value: `NO`.
-//
-// IncludeZeroPadToAverage calls the underlying IncludeZeroPadToAverage.
 func (x *GraphPooling4DOpDescriptor) IncludeZeroPadToAverage() bool {
-	return x.inner.IncludeZeroPadToAverage()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("includeZeroPadToAverage"))
+	return _r
 }
 
-// SetIncludeZeroPadToAverage calls the underlying SetIncludeZeroPadToAverage.
 func (x *GraphPooling4DOpDescriptor) SetIncludeZeroPadToAverage(includeZeroPadToAverage bool) {
-	x.inner.SetIncludeZeroPadToAverage(includeZeroPadToAverage)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncludeZeroPadToAverage:"), includeZeroPadToAverage)
 }
 
 // Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
-//
-// ReturnIndicesMode calls the underlying ReturnIndicesMode.
-func (x *GraphPooling4DOpDescriptor) ReturnIndicesMode() MPSGraphPoolingReturnIndicesMode {
-	return MPSGraphPoolingReturnIndicesMode(x.inner.ReturnIndicesMode())
+func (x *GraphPooling4DOpDescriptor) ReturnIndicesMode() GraphPoolingReturnIndicesMode {
+	_r := objc.Send[GraphPoolingReturnIndicesMode](objref.IDOf(x), objc.RegisterName("returnIndicesMode"))
+	return _r
 }
 
 // Defines the mode for returned indices of maximum values within each pooling window. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. If `returnIndicesMode = MPSGraphPoolingReturnIndicesNone` then only the first result MPSGraph returns from “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ will be valid and using the second result will assert. Default value: `MPSGraphPoolingReturnIndicesNone`.
-//
-// SetReturnIndicesMode calls the underlying SetReturnIndicesMode.
-func (x *GraphPooling4DOpDescriptor) SetReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) {
-	x.inner.SetReturnIndicesMode(raw.MPSGraphPoolingReturnIndicesMode(returnIndicesMode))
-}
-
-// Defines the data type for returned indices. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
-//
-// ReturnIndicesDataType calls the underlying ReturnIndicesDataType.
-func (x *GraphPooling4DOpDescriptor) ReturnIndicesDataType() mpscore.MPSDataType {
-	return x.inner.ReturnIndicesDataType()
-}
-
-// Defines the data type for returned indices. Use this in conjunction with “MPSGraph/maxPooling4DReturnIndicesWithSourceTensor:descriptor:name:“ API. Currently MPSGraph supports the following datatypes: `MPSDataTypeInt32`. Default value: `MPSDataTypeInt32`.
-//
-// SetReturnIndicesDataType calls the underlying SetReturnIndicesDataType.
-func (x *GraphPooling4DOpDescriptor) SetReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) {
-	x.inner.SetReturnIndicesDataType(returnIndicesDataType)
-}
-
-func (x *GraphPooling4DOpDescriptor) asGraphObject() *raw.MPSGraphObject {
-	return &x.inner.MPSGraphObject
+func (x *GraphPooling4DOpDescriptor) SetReturnIndicesMode(returnIndicesMode GraphPoolingReturnIndicesMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReturnIndicesMode:"), returnIndicesMode)
 }
 
 // GraphPooling4DOpDescriptorable is the interface implemented by [GraphPooling4DOpDescriptor], for mocking and DI.
 type GraphPooling4DOpDescriptorable interface {
-	Unwrap() *raw.MPSGraphPooling4DOpDescriptor
-	WithKernelSizes(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor
-	WithStrides(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor
-	WithDilationRates(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor
-	WithPaddingValues(items ...*foundation.NSNumber) *GraphPooling4DOpDescriptor
-	WithPaddingStyle(paddingStyle MPSGraphPaddingStyle) *GraphPooling4DOpDescriptor
+	obj.Object
+	WithKernelSizes(items ...obj.Object) *GraphPooling4DOpDescriptor
+	WithStrides(items ...obj.Object) *GraphPooling4DOpDescriptor
+	WithDilationRates(items ...obj.Object) *GraphPooling4DOpDescriptor
+	WithPaddingValues(items ...obj.Object) *GraphPooling4DOpDescriptor
+	WithPaddingStyle(paddingStyle GraphPaddingStyle) *GraphPooling4DOpDescriptor
 	WithCeilMode(ceilMode bool) *GraphPooling4DOpDescriptor
 	WithIncludeZeroPadToAverage(includeZeroPadToAverage bool) *GraphPooling4DOpDescriptor
-	WithReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor
-	WithReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType) *GraphPooling4DOpDescriptor
-	KernelSizes() []*foundation.NSNumber
-	SetKernelSizes(kernelSizes *foundation.NSArray[*foundation.NSNumber])
-	Strides() []*foundation.NSNumber
-	SetStrides(strides *foundation.NSArray[*foundation.NSNumber])
-	DilationRates() []*foundation.NSNumber
-	SetDilationRates(dilationRates *foundation.NSArray[*foundation.NSNumber])
-	PaddingValues() []*foundation.NSNumber
-	SetPaddingValues(paddingValues *foundation.NSArray[*foundation.NSNumber])
-	PaddingStyle() MPSGraphPaddingStyle
-	SetPaddingStyle(paddingStyle MPSGraphPaddingStyle)
+	WithReturnIndicesMode(returnIndicesMode GraphPoolingReturnIndicesMode) *GraphPooling4DOpDescriptor
+	KernelSizes() []obj.Object
+	SetKernelSizes(kernelSizes []obj.Object)
+	Strides() []obj.Object
+	SetStrides(strides []obj.Object)
+	DilationRates() []obj.Object
+	SetDilationRates(dilationRates []obj.Object)
+	PaddingValues() []obj.Object
+	SetPaddingValues(paddingValues []obj.Object)
+	PaddingStyle() GraphPaddingStyle
+	SetPaddingStyle(paddingStyle GraphPaddingStyle)
 	CeilMode() bool
 	SetCeilMode(ceilMode bool)
 	IncludeZeroPadToAverage() bool
 	SetIncludeZeroPadToAverage(includeZeroPadToAverage bool)
-	ReturnIndicesMode() MPSGraphPoolingReturnIndicesMode
-	SetReturnIndicesMode(returnIndicesMode MPSGraphPoolingReturnIndicesMode)
-	ReturnIndicesDataType() mpscore.MPSDataType
-	SetReturnIndicesDataType(returnIndicesDataType mpscore.MPSDataType)
+	ReturnIndicesMode() GraphPoolingReturnIndicesMode
+	SetReturnIndicesMode(returnIndicesMode GraphPoolingReturnIndicesMode)
 }
 
 var _ GraphPooling4DOpDescriptorable = (*GraphPooling4DOpDescriptor)(nil)

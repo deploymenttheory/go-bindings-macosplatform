@@ -5,256 +5,241 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A tube or pipe geometry—a right circular cylinder with a circular hole along its central axis.
 //
-// Tube wraps [raw.SCNTube] with a fluent Go API.
+// Tube is an idiomatic wrapper over the Objective-C class SCNTube.
 type Tube struct {
-	inner *raw.SCNTube
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNTube].
-func (x *Tube) Unwrap() *raw.SCNTube { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Tube) ID() objc.ID { return x.inner.Ptr() }
-
-// TubeFromID adopts an existing object pointer as a Tube (nil for 0).
+// TubeFromID adopts an existing Objective-C object as a Tube
+// (nil for 0), retaining it and registering a release finalizer.
 func TubeFromID(id objc.ID) *Tube {
 	if id == 0 {
 		return nil
 	}
-	return &Tube{inner: raw.SCNTubeFromID(id)}
+	x := &Tube{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTube creates a new [Tube].
+// tubeAdopt wraps an Objective-C object that this code just created as a
+// Tube (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tubeAdopt(id objc.ID) *Tube {
+	if id == 0 {
+		return nil
+	}
+	x := &Tube{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Tube) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Tube) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Tube) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTube creates a new Tube.
 func NewTube() *Tube {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNTube")), objc.RegisterName("new"))
-	return &Tube{inner: raw.SCNTubeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNTube")), objc.RegisterName("new"))
+	return tubeAdopt(_id)
 }
 
 // The radius of the circular hole through the tube. Animatable.
 //
-// WithInnerRadius sets the innerRadius property and returns the receiver for chaining.
+// WithInnerRadius sets innerRadius and returns the receiver so calls can be chained.
 func (x *Tube) WithInnerRadius(innerRadius float64) *Tube {
-	x.inner.SetInnerRadius(innerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerRadius:"), innerRadius)
 	return x
 }
 
 // The radius of the tube’s outer circular cross section. Animatable.
 //
-// WithOuterRadius sets the outerRadius property and returns the receiver for chaining.
+// WithOuterRadius sets outerRadius and returns the receiver so calls can be chained.
 func (x *Tube) WithOuterRadius(outerRadius float64) *Tube {
-	x.inner.SetOuterRadius(outerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterRadius:"), outerRadius)
 	return x
 }
 
 // The extent of the tube along its y-axis. Animatable.
 //
-// WithHeight sets the height property and returns the receiver for chaining.
+// WithHeight sets height and returns the receiver so calls can be chained.
 func (x *Tube) WithHeight(height float64) *Tube {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
 // The number of subdivisions around the circumference of the tube. Animatable.
 //
-// WithRadialSegmentCount sets the radialSegmentCount property and returns the receiver for chaining.
+// WithRadialSegmentCount sets radialSegmentCount and returns the receiver so calls can be chained.
 func (x *Tube) WithRadialSegmentCount(radialSegmentCount int) *Tube {
-	x.inner.SetRadialSegmentCount(radialSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
 	return x
 }
 
 // The number of subdivisions in the inner and outer surfaces of the tube along its y-axis. Animatable.
 //
-// WithHeightSegmentCount sets the heightSegmentCount property and returns the receiver for chaining.
+// WithHeightSegmentCount sets heightSegmentCount and returns the receiver so calls can be chained.
 func (x *Tube) WithHeightSegmentCount(heightSegmentCount int) *Tube {
-	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 	return x
 }
 
 // A name associated with the geometry object.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *Tube) WithName(name string) *Tube {
-	x.inner.SCNGeometry.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // An array of SCNMaterial objects that determine the geometry’s appearance when rendered.
 //
-// WithMaterials sets the collection, converting the Go slice to an NSArray.
-func (x *Tube) WithMaterials(items ...*raw.SCNMaterial) *Tube {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetMaterials(foundation.NSArrayFromID[*raw.SCNMaterial](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNMaterial](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetMaterials(_arr)
+// WithMaterials sets the collection and returns the receiver so calls can be chained.
+func (x *Tube) WithMaterials(items ...*Material) *Tube {
+	_arr := purego.SliceToNSArray(items, func(_v *Material) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaterials:"), _arr)
 	return x
 }
 
 // The first material attached to the geometry.
 //
-// WithFirstMaterial sets the firstMaterial property and returns the receiver for chaining.
+// WithFirstMaterial sets firstMaterial and returns the receiver so calls can be chained.
 func (x *Tube) WithFirstMaterial(firstMaterial *Material) *Tube {
-	x.inner.SCNGeometry.SetFirstMaterial(firstMaterial.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFirstMaterial:"), objref.IDOf(firstMaterial))
 	return x
 }
 
 // An array of SCNLevelOfDetail objects for managing the geometry’s appearance when viewed from far away.
 //
-// WithLevelsOfDetail sets the collection, converting the Go slice to an NSArray.
-func (x *Tube) WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Tube {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SCNGeometry.SetLevelsOfDetail(foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SCNLevelOfDetail](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SCNGeometry.SetLevelsOfDetail(_arr)
+// WithLevelsOfDetail sets the collection and returns the receiver so calls can be chained.
+func (x *Tube) WithLevelsOfDetail(items ...*LevelOfDetail) *Tube {
+	_arr := purego.SliceToNSArray(items, func(_v *LevelOfDetail) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevelsOfDetail:"), _arr)
 	return x
 }
 
-// WithTessellator sets the tessellator property and returns the receiver for chaining.
+// WithTessellator sets tessellator and returns the receiver so calls can be chained.
 func (x *Tube) WithTessellator(tessellator *GeometryTessellator) *Tube {
-	x.inner.SCNGeometry.SetTessellator(tessellator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTessellator:"), objref.IDOf(tessellator))
 	return x
 }
 
 // The number of subdivisions SceneKit uses to smooth the geometry’s surface at render time.
 //
-// WithSubdivisionLevel sets the subdivisionLevel property and returns the receiver for chaining.
-func (x *Tube) WithSubdivisionLevel(subdivisionLevel uint) *Tube {
-	x.inner.SCNGeometry.SetSubdivisionLevel(subdivisionLevel)
+// WithSubdivisionLevel sets subdivisionLevel and returns the receiver so calls can be chained.
+func (x *Tube) WithSubdivisionLevel(subdivisionLevel int) *Tube {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubdivisionLevel:"), subdivisionLevel)
 	return x
 }
 
-// @property wantsAdaptiveSubdivision @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES. @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+// Specifies if the subdivision is adaptive or uniform. Defaults to YES. Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
 //
-// WithWantsAdaptiveSubdivision sets the wantsAdaptiveSubdivision property and returns the receiver for chaining.
+// WithWantsAdaptiveSubdivision sets wantsAdaptiveSubdivision and returns the receiver so calls can be chained.
 func (x *Tube) WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Tube {
-	x.inner.SCNGeometry.SetWantsAdaptiveSubdivision(wantsAdaptiveSubdivision)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsAdaptiveSubdivision:"), wantsAdaptiveSubdivision)
 	return x
 }
 
 // The geometry element identifying which edges of the geometry’s surface should remain sharp after subdivision.
 //
-// WithEdgeCreasesElement sets the edgeCreasesElement property and returns the receiver for chaining.
+// WithEdgeCreasesElement sets edgeCreasesElement and returns the receiver so calls can be chained.
 func (x *Tube) WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Tube {
-	x.inner.SCNGeometry.SetEdgeCreasesElement(edgeCreasesElement.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesElement:"), objref.IDOf(edgeCreasesElement))
 	return x
 }
 
 // The geometry source specifying the smoothness or sharpness of edges after surface subdivision.
 //
-// WithEdgeCreasesSource sets the edgeCreasesSource property and returns the receiver for chaining.
+// WithEdgeCreasesSource sets edgeCreasesSource and returns the receiver so calls can be chained.
 func (x *Tube) WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Tube {
-	x.inner.SCNGeometry.SetEdgeCreasesSource(edgeCreasesSource.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeCreasesSource:"), objref.IDOf(edgeCreasesSource))
 	return x
 }
 
-// @property innerRadius @abstract The inner radius of the tube. Animatable. @discussion If the value is less than or equal to 0, or if it is greater than or equal to the outer radius, then the geometry is empty. The default value is 0.25.
-//
-// InnerRadius calls the underlying InnerRadius.
+// The inner radius of the tube. Animatable. If the value is less than or equal to 0, or if it is greater than or equal to the outer radius, then the geometry is empty. The default value is 0.25.
 func (x *Tube) InnerRadius() float64 {
-	return x.inner.InnerRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("innerRadius"))
+	return _r
 }
 
-// SetInnerRadius calls the underlying SetInnerRadius.
 func (x *Tube) SetInnerRadius(innerRadius float64) {
-	x.inner.SetInnerRadius(innerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerRadius:"), innerRadius)
 }
 
-// @property outerRadius @abstract The outer radius of the tube. Animatable. @discussion If the value is less than or equal to 0, or if it is less than or equal to the inner radius, then the geometry is empty. The default value is 0.5.
-//
-// OuterRadius calls the underlying OuterRadius.
+// The outer radius of the tube. Animatable. If the value is less than or equal to 0, or if it is less than or equal to the inner radius, then the geometry is empty. The default value is 0.5.
 func (x *Tube) OuterRadius() float64 {
-	return x.inner.OuterRadius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("outerRadius"))
+	return _r
 }
 
-// SetOuterRadius calls the underlying SetOuterRadius.
 func (x *Tube) SetOuterRadius(outerRadius float64) {
-	x.inner.SetOuterRadius(outerRadius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterRadius:"), outerRadius)
 }
 
-// @property height @abstract The height of the tube. Animatable. @discussion If the value is less than or equal to 0, the geometry is empty. The default value is 1.
-//
-// Height calls the underlying Height.
+// The height of the tube. Animatable. If the value is less than or equal to 0, the geometry is empty. The default value is 1.
 func (x *Tube) Height() float64 {
-	return x.inner.Height()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// SetHeight calls the underlying SetHeight.
 func (x *Tube) SetHeight(height float64) {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
-// @property radialSegmentCount @abstract The number of subdivisions along the radial coordinate. Animatable. @discussion If the value is less than 3, the behavior is undefined. The default value is 48.
-//
-// RadialSegmentCount calls the underlying RadialSegmentCount.
+// The number of subdivisions along the radial coordinate. Animatable. If the value is less than 3, the behavior is undefined. The default value is 48.
 func (x *Tube) RadialSegmentCount() int {
-	return x.inner.RadialSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("radialSegmentCount"))
+	return _r
 }
 
-// SetRadialSegmentCount calls the underlying SetRadialSegmentCount.
 func (x *Tube) SetRadialSegmentCount(radialSegmentCount int) {
-	x.inner.SetRadialSegmentCount(radialSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadialSegmentCount:"), radialSegmentCount)
 }
 
-// @property heightSegmentCount @abstract The number of subdivisions along the Y axis. Animatable. @discussion If the value is less than 1, the behavior is undefined. The default value is 1.
-//
-// HeightSegmentCount calls the underlying HeightSegmentCount.
+// The number of subdivisions along the Y axis. Animatable. If the value is less than 1, the behavior is undefined. The default value is 1.
 func (x *Tube) HeightSegmentCount() int {
-	return x.inner.HeightSegmentCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("heightSegmentCount"))
+	return _r
 }
 
-// SetHeightSegmentCount calls the underlying SetHeightSegmentCount.
 func (x *Tube) SetHeightSegmentCount(heightSegmentCount int) {
-	x.inner.SetHeightSegmentCount(heightSegmentCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeightSegmentCount:"), heightSegmentCount)
 }
-
-func (x *Tube) asGeometry() *raw.SCNGeometry { return &x.inner.SCNGeometry }
 
 // Tubeable is the interface implemented by [Tube], for mocking and DI.
 type Tubeable interface {
-	Unwrap() *raw.SCNTube
+	obj.Object
 	WithInnerRadius(innerRadius float64) *Tube
 	WithOuterRadius(outerRadius float64) *Tube
 	WithHeight(height float64) *Tube
 	WithRadialSegmentCount(radialSegmentCount int) *Tube
 	WithHeightSegmentCount(heightSegmentCount int) *Tube
 	WithName(name string) *Tube
-	WithMaterials(items ...*raw.SCNMaterial) *Tube
+	WithMaterials(items ...*Material) *Tube
 	WithFirstMaterial(firstMaterial *Material) *Tube
-	WithLevelsOfDetail(items ...*raw.SCNLevelOfDetail) *Tube
+	WithLevelsOfDetail(items ...*LevelOfDetail) *Tube
 	WithTessellator(tessellator *GeometryTessellator) *Tube
-	WithSubdivisionLevel(subdivisionLevel uint) *Tube
+	WithSubdivisionLevel(subdivisionLevel int) *Tube
 	WithWantsAdaptiveSubdivision(wantsAdaptiveSubdivision bool) *Tube
 	WithEdgeCreasesElement(edgeCreasesElement *GeometryElement) *Tube
 	WithEdgeCreasesSource(edgeCreasesSource *GeometrySource) *Tube

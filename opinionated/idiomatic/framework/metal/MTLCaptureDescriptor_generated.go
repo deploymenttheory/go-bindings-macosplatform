@@ -5,110 +5,130 @@
 package metal
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A configuration for a Metal capture session.
 //
-// CaptureDescriptor wraps [raw.MTLCaptureDescriptor] with a fluent Go API.
+// CaptureDescriptor is an idiomatic wrapper over the Objective-C class MTLCaptureDescriptor.
 type CaptureDescriptor struct {
-	inner *raw.MTLCaptureDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLCaptureDescriptor].
-func (x *CaptureDescriptor) Unwrap() *raw.MTLCaptureDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CaptureDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// CaptureDescriptorFromID adopts an existing object pointer as a CaptureDescriptor (nil for 0).
+// CaptureDescriptorFromID adopts an existing Objective-C object as a CaptureDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func CaptureDescriptorFromID(id objc.ID) *CaptureDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &CaptureDescriptor{inner: raw.MTLCaptureDescriptorFromID(id)}
+	x := &CaptureDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCaptureDescriptor creates a new [CaptureDescriptor].
+// captureDescriptorAdopt wraps an Objective-C object that this code just created as a
+// CaptureDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func captureDescriptorAdopt(id objc.ID) *CaptureDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &CaptureDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CaptureDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CaptureDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CaptureDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCaptureDescriptor creates a new CaptureDescriptor.
 func NewCaptureDescriptor() *CaptureDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLCaptureDescriptor")), objc.RegisterName("new"))
-	return &CaptureDescriptor{inner: raw.MTLCaptureDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLCaptureDescriptor")), objc.RegisterName("new"))
+	return captureDescriptorAdopt(_id)
 }
 
 // The instance whose contents should be captured.
 //
-// WithCaptureObject sets the captureObject property and returns the receiver for chaining.
-func (x *CaptureDescriptor) WithCaptureObject(captureObject objc.ID) *CaptureDescriptor {
-	x.inner.SetCaptureObject(captureObject)
+// WithCaptureObject sets captureObject and returns the receiver so calls can be chained.
+func (x *CaptureDescriptor) WithCaptureObject(captureObject obj.Object) *CaptureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureObject:"), objref.IDOf(captureObject))
 	return x
 }
 
 // The destination for any captured command data.
 //
-// WithDestination sets the destination property and returns the receiver for chaining.
-func (x *CaptureDescriptor) WithDestination(destination MTLCaptureDestination) *CaptureDescriptor {
-	x.inner.SetDestination(raw.MTLCaptureDestination(destination))
+// WithDestination sets destination and returns the receiver so calls can be chained.
+func (x *CaptureDescriptor) WithDestination(destination CaptureDestination) *CaptureDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), destination)
 	return x
 }
 
 // A URL for a file to write the capture data into.
 //
-// WithOutputURL sets the outputURL property and returns the receiver for chaining.
+// WithOutputURL sets outputURL and returns the receiver so calls can be chained.
 func (x *CaptureDescriptor) WithOutputURL(outputURL string) *CaptureDescriptor {
-	x.inner.SetOutputURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
 	return x
 }
 
-// @brief The object that is captured. Must be one of the following: MTLDevice captures all command queues of the device. MTLCommandQueue captures a single command queue. MTLCaptureScope captures between the next begin and end of the scope.
-//
-// CaptureObject calls the underlying CaptureObject.
-func (x *CaptureDescriptor) CaptureObject() objc.ID {
-	return x.inner.CaptureObject()
+// The object that is captured. Must be one of the following: MTLDevice captures all command queues of the device. MTLCommandQueue captures a single command queue. MTLCaptureScope captures between the next begin and end of the scope.
+func (x *CaptureDescriptor) CaptureObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captureObject"))
+	return obj.Wrap(_r)
 }
 
-// SetCaptureObject calls the underlying SetCaptureObject.
-func (x *CaptureDescriptor) SetCaptureObject(captureObject objc.ID) {
-	x.inner.SetCaptureObject(captureObject)
+func (x *CaptureDescriptor) SetCaptureObject(captureObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCaptureObject:"), objref.IDOf(captureObject))
 }
 
 // The destination you want the GPU trace to be captured to.
-//
-// Destination calls the underlying Destination.
-func (x *CaptureDescriptor) Destination() MTLCaptureDestination {
-	return MTLCaptureDestination(x.inner.Destination())
+func (x *CaptureDescriptor) Destination() CaptureDestination {
+	_r := objc.Send[CaptureDestination](objref.IDOf(x), objc.RegisterName("destination"))
+	return _r
 }
 
-// SetDestination calls the underlying SetDestination.
-func (x *CaptureDescriptor) SetDestination(destination MTLCaptureDestination) {
-	x.inner.SetDestination(raw.MTLCaptureDestination(destination))
+func (x *CaptureDescriptor) SetDestination(destination CaptureDestination) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestination:"), destination)
 }
 
 // URL the GPU Trace document will be captured to. Must be specified when destiation is MTLCaptureDestinationGPUTraceDocument.
-//
-// OutputURL calls the underlying OutputURL.
-func (x *CaptureDescriptor) OutputURL() *foundation.NSURL {
-	return x.inner.OutputURL()
+func (x *CaptureDescriptor) OutputURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputURL"))
+	return obj.Wrap(_r)
 }
 
-// SetOutputURL calls the underlying SetOutputURL.
 func (x *CaptureDescriptor) SetOutputURL(outputURL string) {
-	x.inner.SetOutputURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(outputURL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputURL:"), rt.FileURL(outputURL))
 }
 
 // CaptureDescriptorable is the interface implemented by [CaptureDescriptor], for mocking and DI.
 type CaptureDescriptorable interface {
-	Unwrap() *raw.MTLCaptureDescriptor
-	WithCaptureObject(captureObject objc.ID) *CaptureDescriptor
-	WithDestination(destination MTLCaptureDestination) *CaptureDescriptor
+	obj.Object
+	WithCaptureObject(captureObject obj.Object) *CaptureDescriptor
+	WithDestination(destination CaptureDestination) *CaptureDescriptor
 	WithOutputURL(outputURL string) *CaptureDescriptor
-	CaptureObject() objc.ID
-	SetCaptureObject(captureObject objc.ID)
-	Destination() MTLCaptureDestination
-	SetDestination(destination MTLCaptureDestination)
-	OutputURL() *foundation.NSURL
+	CaptureObject() obj.Object
+	SetCaptureObject(captureObject obj.Object)
+	Destination() CaptureDestination
+	SetDestination(destination CaptureDestination)
+	OutputURL() obj.Object
 	SetOutputURL(outputURL string)
 }
 

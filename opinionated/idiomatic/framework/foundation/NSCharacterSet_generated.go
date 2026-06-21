@@ -5,102 +5,113 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing a fixed set of Unicode character values for use in search operations.
 //
-// CharacterSet wraps [raw.NSCharacterSet] with a fluent Go API.
+// CharacterSet is an idiomatic wrapper over the Objective-C class NSCharacterSet.
 type CharacterSet struct {
-	inner *raw.NSCharacterSet
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCharacterSet].
-func (x *CharacterSet) Unwrap() *raw.NSCharacterSet { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CharacterSet) ID() objc.ID { return x.inner.Ptr() }
-
-// CharacterSetFromID adopts an existing object pointer as a CharacterSet (nil for 0).
+// CharacterSetFromID adopts an existing Objective-C object as a CharacterSet
+// (nil for 0), retaining it and registering a release finalizer.
 func CharacterSetFromID(id objc.ID) *CharacterSet {
 	if id == 0 {
 		return nil
 	}
-	return &CharacterSet{inner: raw.NSCharacterSetFromID(id)}
+	x := &CharacterSet{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCharacterSetWithCoder creates a new [CharacterSet].
-func NewCharacterSetWithCoder(coder *raw.NSCoder) *CharacterSet {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCharacterSet")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &CharacterSet{inner: raw.NSCharacterSetFromID(_id)}
+// characterSetAdopt wraps an Objective-C object that this code just created as a
+// CharacterSet (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func characterSetAdopt(id objc.ID) *CharacterSet {
+	if id == 0 {
+		return nil
+	}
+	x := &CharacterSet{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *CharacterSet) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CharacterSet {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// Description returns the object's -description text.
+func (x *CharacterSet) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CharacterSet) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CharacterSet) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCharacterSetWithCoder creates a new CharacterSet.
+func NewCharacterSetWithCoder(coder *Coder) *CharacterSet {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSCharacterSet")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return characterSetAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *CharacterSet) WithScriptingProperties(scriptingProperties obj.Object) *CharacterSet {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Returns a Boolean value that indicates whether a given character is in the receiver.
-//
-// CharacterIsMember calls the underlying CharacterIsMember.
 func (x *CharacterSet) CharacterIsMember(aCharacter uint16) bool {
-	return x.inner.CharacterIsMember(aCharacter)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("characterIsMember:"), aCharacter)
+	return _r
 }
 
 // Returns a Boolean value that indicates whether a given long character is a member of the receiver.
-//
-// LongCharacterIsMember calls the underlying LongCharacterIsMember.
-func (x *CharacterSet) LongCharacterIsMember(theLongChar uint) bool {
-	return x.inner.LongCharacterIsMember(theLongChar)
+func (x *CharacterSet) LongCharacterIsMember(theLongChar int) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("longCharacterIsMember:"), theLongChar)
+	return _r
 }
 
 // Returns a Boolean value that indicates whether the receiver is a superset of another given character set.
-//
-// IsSupersetOfSet calls the underlying IsSupersetOfSet.
-func (x *CharacterSet) IsSupersetOfSet(theOtherSet *raw.NSCharacterSet) bool {
-	return x.inner.IsSupersetOfSet(theOtherSet)
+func (x *CharacterSet) IsSupersetOfSet(theOtherSet *CharacterSet) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSupersetOfSet:"), objref.IDOf(theOtherSet))
+	return _r
 }
 
 // Returns a Boolean value that indicates whether the receiver has at least one member in a given character plane.
-//
-// HasMemberInPlane calls the underlying HasMemberInPlane.
 func (x *CharacterSet) HasMemberInPlane(thePlane uint8) bool {
-	return x.inner.HasMemberInPlane(thePlane)
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasMemberInPlane:"), thePlane)
+	return _r
 }
 
-// BitmapRepresentation calls the underlying BitmapRepresentation.
 func (x *CharacterSet) BitmapRepresentation() *Data {
-	_r := x.inner.BitmapRepresentation()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bitmapRepresentation"))
+	return DataFromID(_r)
 }
 
-// InvertedSet calls the underlying InvertedSet.
 func (x *CharacterSet) InvertedSet() *CharacterSet {
-	_r := x.inner.InvertedSet()
-	if _r == nil {
-		return nil
-	}
-	return &CharacterSet{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invertedSet"))
+	return CharacterSetFromID(_r)
 }
-
-func (x *CharacterSet) asCharacterSet() *raw.NSCharacterSet { return x.inner }
-
-func (x *CharacterSet) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // CharacterSetable is the interface implemented by [CharacterSet], for mocking and DI.
 type CharacterSetable interface {
-	Unwrap() *raw.NSCharacterSet
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CharacterSet
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *CharacterSet
 	CharacterIsMember(aCharacter uint16) bool
-	LongCharacterIsMember(theLongChar uint) bool
-	IsSupersetOfSet(theOtherSet *raw.NSCharacterSet) bool
+	LongCharacterIsMember(theLongChar int) bool
+	IsSupersetOfSet(theOtherSet *CharacterSet) bool
 	HasMemberInPlane(thePlane uint8) bool
 	BitmapRepresentation() *Data
 	InvertedSet() *CharacterSet

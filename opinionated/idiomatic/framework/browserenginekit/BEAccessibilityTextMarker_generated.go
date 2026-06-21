@@ -5,41 +5,68 @@
 package browserenginekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/browserenginekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract class that represents a location in an element’s accessibility text.
 //
-// AccessibilityTextMarker wraps [raw.BEAccessibilityTextMarker] with a fluent Go API.
+// AccessibilityTextMarker is an idiomatic wrapper over the Objective-C class BEAccessibilityTextMarker.
 type AccessibilityTextMarker struct {
-	inner *raw.BEAccessibilityTextMarker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BEAccessibilityTextMarker].
-func (x *AccessibilityTextMarker) Unwrap() *raw.BEAccessibilityTextMarker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccessibilityTextMarker) ID() objc.ID { return x.inner.Ptr() }
-
-// AccessibilityTextMarkerFromID adopts an existing object pointer as a AccessibilityTextMarker (nil for 0).
+// AccessibilityTextMarkerFromID adopts an existing Objective-C object as a AccessibilityTextMarker
+// (nil for 0), retaining it and registering a release finalizer.
 func AccessibilityTextMarkerFromID(id objc.ID) *AccessibilityTextMarker {
 	if id == 0 {
 		return nil
 	}
-	return &AccessibilityTextMarker{inner: raw.BEAccessibilityTextMarkerFromID(id)}
+	x := &AccessibilityTextMarker{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAccessibilityTextMarker creates a new [AccessibilityTextMarker].
+// accessibilityTextMarkerAdopt wraps an Objective-C object that this code just created as a
+// AccessibilityTextMarker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accessibilityTextMarkerAdopt(id objc.ID) *AccessibilityTextMarker {
+	if id == 0 {
+		return nil
+	}
+	x := &AccessibilityTextMarker{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AccessibilityTextMarker) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccessibilityTextMarker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccessibilityTextMarker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAccessibilityTextMarker creates a new AccessibilityTextMarker.
 func NewAccessibilityTextMarker() *AccessibilityTextMarker {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BEAccessibilityTextMarker")), objc.RegisterName("new"))
-	return &AccessibilityTextMarker{inner: raw.BEAccessibilityTextMarkerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("BEAccessibilityTextMarker")), objc.RegisterName("new"))
+	return accessibilityTextMarkerAdopt(_id)
 }
 
 // AccessibilityTextMarkerable is the interface implemented by [AccessibilityTextMarker], for mocking and DI.
 type AccessibilityTextMarkerable interface {
-	Unwrap() *raw.BEAccessibilityTextMarker
+	obj.Object
 }
 
 var _ AccessibilityTextMarkerable = (*AccessibilityTextMarker)(nil)

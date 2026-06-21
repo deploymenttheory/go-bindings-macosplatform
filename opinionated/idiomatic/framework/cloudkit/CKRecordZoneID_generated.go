@@ -5,68 +5,89 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that uniquely identifies a record zone in a database.
 //
-// RecordZoneID wraps [raw.CKRecordZoneID] with a fluent Go API.
+// RecordZoneID is an idiomatic wrapper over the Objective-C class CKRecordZoneID.
 type RecordZoneID struct {
-	inner *raw.CKRecordZoneID
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKRecordZoneID].
-func (x *RecordZoneID) Unwrap() *raw.CKRecordZoneID { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RecordZoneID) ID() objc.ID { return x.inner.Ptr() }
-
-// RecordZoneIDFromID adopts an existing object pointer as a RecordZoneID (nil for 0).
+// RecordZoneIDFromID adopts an existing Objective-C object as a RecordZoneID
+// (nil for 0), retaining it and registering a release finalizer.
 func RecordZoneIDFromID(id objc.ID) *RecordZoneID {
 	if id == 0 {
 		return nil
 	}
-	return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(id)}
+	x := &RecordZoneID{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// recordZoneIDAdopt wraps an Objective-C object that this code just created as a
+// RecordZoneID (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func recordZoneIDAdopt(id objc.ID) *RecordZoneID {
+	if id == 0 {
+		return nil
+	}
+	x := &RecordZoneID{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RecordZoneID) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RecordZoneID) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RecordZoneID) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a record zone ID with the specified name and owner.
 //
-// NewRecordZoneIDWithZoneNameOwnerName creates a new [RecordZoneID].
+// NewRecordZoneIDWithZoneNameOwnerName creates a new RecordZoneID.
 func NewRecordZoneIDWithZoneNameOwnerName(zoneName string, ownerName string) *RecordZoneID {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKRecordZoneID")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneName:ownerName:"), foundation.NSStringStringWithUTF8String(zoneName).Ptr(), foundation.NSStringStringWithUTF8String(ownerName).Ptr())
-	return &RecordZoneID{inner: raw.CKRecordZoneIDFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKRecordZoneID")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneName:ownerName:"), purego.NSString(zoneName), purego.NSString(ownerName))
+	return recordZoneIDAdopt(_id)
 }
 
 // The unique name of the record zone.
-//
-// ZoneName calls the underlying ZoneName.
 func (x *RecordZoneID) ZoneName() string {
-	_r := x.inner.ZoneName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The ID of the user who owns the record zone.
-//
-// OwnerName calls the underlying OwnerName.
 func (x *RecordZoneID) OwnerName() string {
-	_r := x.inner.OwnerName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ownerName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // RecordZoneIDable is the interface implemented by [RecordZoneID], for mocking and DI.
 type RecordZoneIDable interface {
-	Unwrap() *raw.CKRecordZoneID
+	obj.Object
 	ZoneName() string
 	OwnerName() string
 }

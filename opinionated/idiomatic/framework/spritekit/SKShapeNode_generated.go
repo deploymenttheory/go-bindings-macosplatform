@@ -5,564 +5,483 @@
 package spritekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coregraphics"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A mathematical shape that can be stroked or filled.
 //
-// ShapeNode wraps [raw.SKShapeNode] with a fluent Go API.
+// ShapeNode is an idiomatic wrapper over the Objective-C class SKShapeNode.
 type ShapeNode struct {
-	inner *raw.SKShapeNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKShapeNode].
-func (x *ShapeNode) Unwrap() *raw.SKShapeNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShapeNode) ID() objc.ID { return x.inner.Ptr() }
-
-// ShapeNodeFromID adopts an existing object pointer as a ShapeNode (nil for 0).
+// ShapeNodeFromID adopts an existing Objective-C object as a ShapeNode
+// (nil for 0), retaining it and registering a release finalizer.
 func ShapeNodeFromID(id objc.ID) *ShapeNode {
 	if id == 0 {
 		return nil
 	}
-	return &ShapeNode{inner: raw.SKShapeNodeFromID(id)}
+	x := &ShapeNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewShapeNode creates a new [ShapeNode].
+// shapeNodeAdopt wraps an Objective-C object that this code just created as a
+// ShapeNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shapeNodeAdopt(id objc.ID) *ShapeNode {
+	if id == 0 {
+		return nil
+	}
+	x := &ShapeNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ShapeNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShapeNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShapeNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewShapeNode creates a new ShapeNode.
 func NewShapeNode() *ShapeNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKShapeNode")), objc.RegisterName("new"))
-	return &ShapeNode{inner: raw.SKShapeNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKShapeNode")), objc.RegisterName("new"))
+	return shapeNodeAdopt(_id)
+}
+
+// The path that defines the shape.
+//
+// WithPath sets path and returns the receiver so calls can be chained.
+func (x *ShapeNode) WithPath(path obj.Object) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
+	return x
 }
 
 // The color used to stroke the shape.
 //
-// WithStrokeColor sets the strokeColor property and returns the receiver for chaining.
-func (x *ShapeNode) WithStrokeColor(strokeColor *appkit.NSColor) *ShapeNode {
-	x.inner.SetStrokeColor(strokeColor)
+// WithStrokeColor sets strokeColor and returns the receiver so calls can be chained.
+func (x *ShapeNode) WithStrokeColor(strokeColor obj.Object) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 	return x
 }
 
 // The color used to fill the shape.
 //
-// WithFillColor sets the fillColor property and returns the receiver for chaining.
-func (x *ShapeNode) WithFillColor(fillColor *appkit.NSColor) *ShapeNode {
-	x.inner.SetFillColor(fillColor)
+// WithFillColor sets fillColor and returns the receiver so calls can be chained.
+func (x *ShapeNode) WithFillColor(fillColor obj.Object) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 	return x
 }
 
 // The blend mode used to blend the shape into the parent’s framebuffer.
 //
-// WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *ShapeNode) WithBlendMode(blendMode SKBlendMode) *ShapeNode {
-	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
+// WithBlendMode sets blendMode and returns the receiver so calls can be chained.
+func (x *ShapeNode) WithBlendMode(blendMode BlendMode) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
 	return x
 }
 
 // A Boolean value that determines whether the stroked path is smoothed when drawn.
 //
-// WithAntialiased sets the antialiased property and returns the receiver for chaining.
+// WithAntialiased sets antialiased and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithAntialiased(antialiased bool) *ShapeNode {
-	x.inner.SetAntialiased(antialiased)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAntialiased:"), antialiased)
 	return x
 }
 
 // The width used to stroke the path.
 //
-// WithLineWidth sets the lineWidth property and returns the receiver for chaining.
+// WithLineWidth sets lineWidth and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithLineWidth(lineWidth float64) *ShapeNode {
-	x.inner.SetLineWidth(lineWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 	return x
 }
 
 // A glow that extends outward from the stroked line.
 //
-// WithGlowWidth sets the glowWidth property and returns the receiver for chaining.
+// WithGlowWidth sets glowWidth and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithGlowWidth(glowWidth float64) *ShapeNode {
-	x.inner.SetGlowWidth(glowWidth)
-	return x
-}
-
-// The style used to render the endpoints of the stroked portion of the shape node.
-//
-// WithLineCap sets the lineCap property and returns the receiver for chaining.
-func (x *ShapeNode) WithLineCap(lineCap coregraphics.CGLineCap) *ShapeNode {
-	x.inner.SetLineCap(lineCap)
-	return x
-}
-
-// The junction type used when the stroked portion of the shape node is rendered.
-//
-// WithLineJoin sets the lineJoin property and returns the receiver for chaining.
-func (x *ShapeNode) WithLineJoin(lineJoin coregraphics.CGLineJoin) *ShapeNode {
-	x.inner.SetLineJoin(lineJoin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlowWidth:"), glowWidth)
 	return x
 }
 
 // The miter limit to use when the line is stroked using a miter join style.
 //
-// WithMiterLimit sets the miterLimit property and returns the receiver for chaining.
+// WithMiterLimit sets miterLimit and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithMiterLimit(miterLimit float64) *ShapeNode {
-	x.inner.SetMiterLimit(miterLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 	return x
 }
 
 // The texture used to fill the shape.
 //
-// WithFillTexture sets the fillTexture property and returns the receiver for chaining.
+// WithFillTexture sets fillTexture and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithFillTexture(fillTexture TextureProvider) *ShapeNode {
-	x.inner.SetFillTexture(fillTexture.asTexture())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillTexture:"), objref.IDOf(fillTexture))
 	return x
 }
 
 // A custom shader used to determine the color of the filled portion of the shape node.
 //
-// WithFillShader sets the fillShader property and returns the receiver for chaining.
+// WithFillShader sets fillShader and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithFillShader(fillShader *Shader) *ShapeNode {
-	x.inner.SetFillShader(fillShader.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillShader:"), objref.IDOf(fillShader))
 	return x
 }
 
 // The texture used to stroke the shape.
 //
-// WithStrokeTexture sets the strokeTexture property and returns the receiver for chaining.
+// WithStrokeTexture sets strokeTexture and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithStrokeTexture(strokeTexture TextureProvider) *ShapeNode {
-	x.inner.SetStrokeTexture(strokeTexture.asTexture())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeTexture:"), objref.IDOf(strokeTexture))
 	return x
 }
 
 // A custom shader used to determine the color of the stroked portion of the shape node.
 //
-// WithStrokeShader sets the strokeShader property and returns the receiver for chaining.
+// WithStrokeShader sets strokeShader and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithStrokeShader(strokeShader *Shader) *ShapeNode {
-	x.inner.SetStrokeShader(strokeShader.Unwrap())
-	return x
-}
-
-// The position of the node in its parent’s coordinate system.
-//
-// WithPosition sets the position property and returns the receiver for chaining.
-func (x *ShapeNode) WithPosition(position corefoundation.CGPoint) *ShapeNode {
-	x.inner.SKNode.SetPosition(position)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeShader:"), objref.IDOf(strokeShader))
 	return x
 }
 
 // The height of the node relative to its parent.
 //
-// WithZPosition sets the zPosition property and returns the receiver for chaining.
+// WithZPosition sets zPosition and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithZPosition(zPosition float64) *ShapeNode {
-	x.inner.SKNode.SetZPosition(zPosition)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZPosition:"), zPosition)
 	return x
 }
 
 // The Euler rotation about the z axis (in radians).
 //
-// WithZRotation sets the zRotation property and returns the receiver for chaining.
+// WithZRotation sets zRotation and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithZRotation(zRotation float64) *ShapeNode {
-	x.inner.SKNode.SetZRotation(zRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setZRotation:"), zRotation)
 	return x
 }
 
 // A scaling factor that multiplies the width of a node and its children.
 //
-// WithXScale sets the xScale property and returns the receiver for chaining.
+// WithXScale sets xScale and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithXScale(xScale float64) *ShapeNode {
-	x.inner.SKNode.SetXScale(xScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setXScale:"), xScale)
 	return x
 }
 
 // A scaling factor that multiplies the height of a node and its children.
 //
-// WithYScale sets the yScale property and returns the receiver for chaining.
+// WithYScale sets yScale and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithYScale(yScale float64) *ShapeNode {
-	x.inner.SKNode.SetYScale(yScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYScale:"), yScale)
 	return x
 }
 
 // A speed modifier applied to all actions executed by a node and its descendants.
 //
-// WithSpeed sets the speed property and returns the receiver for chaining.
+// WithSpeed sets speed and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithSpeed(speed float64) *ShapeNode {
-	x.inner.SKNode.SetSpeed(speed)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSpeed:"), speed)
 	return x
 }
 
 // The transparency value applied to the node’s contents.
 //
-// WithAlpha sets the alpha property and returns the receiver for chaining.
+// WithAlpha sets alpha and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithAlpha(alpha float64) *ShapeNode {
-	x.inner.SKNode.SetAlpha(alpha)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlpha:"), alpha)
 	return x
 }
 
 // A Boolean value that determines whether actions on the node and its descendants are processed.
 //
-// WithPaused sets the paused property and returns the receiver for chaining.
+// WithPaused sets paused and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithPaused(paused bool) *ShapeNode {
-	x.inner.SKNode.SetPaused(paused)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPaused:"), paused)
 	return x
 }
 
 // A Boolean value that determines whether a node and its descendants are rendered.
 //
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithHidden(hidden bool) *ShapeNode {
-	x.inner.SKNode.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
 // A Boolean value that indicates whether the node receives touch events.
 //
-// WithUserInteractionEnabled sets the userInteractionEnabled property and returns the receiver for chaining.
+// WithUserInteractionEnabled sets userInteractionEnabled and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithUserInteractionEnabled(userInteractionEnabled bool) *ShapeNode {
-	x.inner.SKNode.SetUserInteractionEnabled(userInteractionEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInteractionEnabled:"), userInteractionEnabled)
 	return x
 }
 
 // The node’s assignable name.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithName(name string) *ShapeNode {
-	x.inner.SKNode.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // The physics body associated with the node.
 //
-// WithPhysicsBody sets the physicsBody property and returns the receiver for chaining.
+// WithPhysicsBody sets physicsBody and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithPhysicsBody(physicsBody *PhysicsBody) *ShapeNode {
-	x.inner.SKNode.SetPhysicsBody(physicsBody.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhysicsBody:"), objref.IDOf(physicsBody))
 	return x
 }
 
 // A dictionary containing arbitrary data.
 //
-// WithUserData sets the userData property and returns the receiver for chaining.
-func (x *ShapeNode) WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *ShapeNode {
-	x.inner.SKNode.SetUserData(userData)
+// WithUserData sets userData and returns the receiver so calls can be chained.
+func (x *ShapeNode) WithUserData(userData obj.Object) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserData:"), objref.IDOf(userData))
 	return x
 }
 
 // The reach constraints to apply to the node when executing a reach action.
 //
-// WithReachConstraints sets the reachConstraints property and returns the receiver for chaining.
+// WithReachConstraints sets reachConstraints and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithReachConstraints(reachConstraints *ReachConstraints) *ShapeNode {
-	x.inner.SKNode.SetReachConstraints(reachConstraints.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReachConstraints:"), objref.IDOf(reachConstraints))
 	return x
 }
 
 // A list of constraints to apply to the node.
 //
-// WithConstraints sets the collection, converting the Go slice to an NSArray.
-func (x *ShapeNode) WithConstraints(items ...*raw.SKConstraint) *ShapeNode {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SKNode.SetConstraints(foundation.NSArrayFromID[*raw.SKConstraint](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.SKConstraint](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SKNode.SetConstraints(_arr)
+// WithConstraints sets the collection and returns the receiver so calls can be chained.
+func (x *ShapeNode) WithConstraints(items ...*Constraint) *ShapeNode {
+	_arr := purego.SliceToNSArray(items, func(_v *Constraint) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConstraints:"), _arr)
 	return x
 }
 
 // The values of each attribute associated with the node’s attached shader.
 //
-// WithAttributeValues sets the attributeValues property and returns the receiver for chaining.
-func (x *ShapeNode) WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *ShapeNode {
-	x.inner.SKNode.SetAttributeValues(attributeValues)
+// WithAttributeValues sets attributeValues and returns the receiver so calls can be chained.
+func (x *ShapeNode) WithAttributeValues(attributeValues obj.Object) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributeValues:"), objref.IDOf(attributeValues))
 	return x
 }
 
 // A toggle you implement to indicate to the system whether this user interface element should be exposed to the user.
 //
-// WithAccessibilityElement sets the accessibilityElement property and returns the receiver for chaining.
+// WithAccessibilityElement sets accessibilityElement and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithAccessibilityElement(accessibilityElement bool) *ShapeNode {
-	x.inner.SKNode.SetAccessibilityElement(accessibilityElement)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityElement:"), accessibilityElement)
 	return x
 }
 
 // A string value describing the user interface element type; for example, a button.
 //
-// WithAccessibilityRole sets the accessibilityRole property and returns the receiver for chaining.
+// WithAccessibilityRole sets accessibilityRole and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithAccessibilityRole(accessibilityRole string) *ShapeNode {
-	x.inner.SKNode.SetAccessibilityRole(foundation.NSStringStringWithUTF8String(accessibilityRole))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRole:"), purego.NSString(accessibilityRole))
 	return x
 }
 
 // A string value describing the user interface element name and type; for example, the Buy button.
 //
-// WithAccessibilityRoleDescription sets the accessibilityRoleDescription property and returns the receiver for chaining.
+// WithAccessibilityRoleDescription sets accessibilityRoleDescription and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ShapeNode {
-	x.inner.SKNode.SetAccessibilityRoleDescription(foundation.NSStringStringWithUTF8String(accessibilityRoleDescription))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityRoleDescription:"), purego.NSString(accessibilityRoleDescription))
 	return x
 }
 
 // A string that defines this user interface element’s subrole; for example, a full-screen button.
 //
-// WithAccessibilitySubrole sets the accessibilitySubrole property and returns the receiver for chaining.
+// WithAccessibilitySubrole sets accessibilitySubrole and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithAccessibilitySubrole(accessibilitySubrole string) *ShapeNode {
-	x.inner.SKNode.SetAccessibilitySubrole(foundation.NSStringStringWithUTF8String(accessibilitySubrole))
-	return x
-}
-
-// The size of this user interface element, in screen points.
-//
-// WithAccessibilityFrame sets the accessibilityFrame property and returns the receiver for chaining.
-func (x *ShapeNode) WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ShapeNode {
-	x.inner.SKNode.SetAccessibilityFrame(accessibilityFrame)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilitySubrole:"), purego.NSString(accessibilitySubrole))
 	return x
 }
 
 // The user interface element that contains this element.
 //
-// WithAccessibilityParent sets the accessibilityParent property and returns the receiver for chaining.
-func (x *ShapeNode) WithAccessibilityParent(accessibilityParent objc.ID) *ShapeNode {
-	x.inner.SKNode.SetAccessibilityParent(accessibilityParent)
+// WithAccessibilityParent sets accessibilityParent and returns the receiver so calls can be chained.
+func (x *ShapeNode) WithAccessibilityParent(accessibilityParent obj.Object) *ShapeNode {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityParent:"), objref.IDOf(accessibilityParent))
 	return x
 }
 
 // The help description of this user interface element; for example, the text shown in a tooltip.
 //
-// WithAccessibilityHelp sets the accessibilityHelp property and returns the receiver for chaining.
+// WithAccessibilityHelp sets accessibilityHelp and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithAccessibilityHelp(accessibilityHelp string) *ShapeNode {
-	x.inner.SKNode.SetAccessibilityHelp(foundation.NSStringStringWithUTF8String(accessibilityHelp))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityHelp:"), purego.NSString(accessibilityHelp))
 	return x
 }
 
 // A short description of this user interface element.
 //
-// WithAccessibilityLabel sets the accessibilityLabel property and returns the receiver for chaining.
+// WithAccessibilityLabel sets accessibilityLabel and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithAccessibilityLabel(accessibilityLabel string) *ShapeNode {
-	x.inner.SKNode.SetAccessibilityLabel(foundation.NSStringStringWithUTF8String(accessibilityLabel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityLabel:"), purego.NSString(accessibilityLabel))
 	return x
 }
 
 // A toggle you implement to indicate to the system whether this user interface element should respond to user input.
 //
-// WithAccessibilityEnabled sets the accessibilityEnabled property and returns the receiver for chaining.
+// WithAccessibilityEnabled sets accessibilityEnabled and returns the receiver so calls can be chained.
 func (x *ShapeNode) WithAccessibilityEnabled(accessibilityEnabled bool) *ShapeNode {
-	x.inner.SKNode.SetAccessibilityEnabled(accessibilityEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessibilityEnabled:"), accessibilityEnabled)
 	return x
 }
 
 // The CGPath to be drawn (in the Node's coordinate space)
-//
-// Path calls the underlying Path.
-func (x *ShapeNode) Path() unsafe.Pointer {
-	return x.inner.Path()
+func (x *ShapeNode) Path() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	return obj.Wrap(_r)
 }
 
-// SetPath calls the underlying SetPath.
-func (x *ShapeNode) SetPath(path unsafe.Pointer) {
-	x.inner.SetPath(path)
+func (x *ShapeNode) SetPath(path obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 }
 
 // The color to draw the path with. (for no stroke use [SKColor clearColor]). Defaults to [SKColor whiteColor].
-//
-// StrokeColor calls the underlying StrokeColor.
-func (x *ShapeNode) StrokeColor() *appkit.NSColor {
-	return x.inner.StrokeColor()
+func (x *ShapeNode) StrokeColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strokeColor"))
+	return obj.Wrap(_r)
 }
 
-// SetStrokeColor calls the underlying SetStrokeColor.
-func (x *ShapeNode) SetStrokeColor(strokeColor *appkit.NSColor) {
-	x.inner.SetStrokeColor(strokeColor)
+func (x *ShapeNode) SetStrokeColor(strokeColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeColor:"), objref.IDOf(strokeColor))
 }
 
 // The color to fill the path with. Defaults to [SKColor clearColor] (no fill).
-//
-// FillColor calls the underlying FillColor.
-func (x *ShapeNode) FillColor() *appkit.NSColor {
-	return x.inner.FillColor()
+func (x *ShapeNode) FillColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillColor"))
+	return obj.Wrap(_r)
 }
 
-// SetFillColor calls the underlying SetFillColor.
-func (x *ShapeNode) SetFillColor(fillColor *appkit.NSColor) {
-	x.inner.SetFillColor(fillColor)
+func (x *ShapeNode) SetFillColor(fillColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillColor:"), objref.IDOf(fillColor))
 }
 
-// Sets the blend mode to use when composing the shape with the final framebuffer. @see SKNode.SKBlendMode
-//
-// BlendMode calls the underlying BlendMode.
-func (x *ShapeNode) BlendMode() SKBlendMode {
-	return SKBlendMode(x.inner.BlendMode())
+// Sets the blend mode to use when composing the shape with the final framebuffer.
+func (x *ShapeNode) BlendMode() BlendMode {
+	_r := objc.Send[BlendMode](objref.IDOf(x), objc.RegisterName("blendMode"))
+	return _r
 }
 
-// SetBlendMode calls the underlying SetBlendMode.
-func (x *ShapeNode) SetBlendMode(blendMode SKBlendMode) {
-	x.inner.SetBlendMode(raw.SKBlendMode(blendMode))
+func (x *ShapeNode) SetBlendMode(blendMode BlendMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
 }
 
 // If set to YES, the path stroke edges and caps is smoothed (antialiased) when drawn.
-//
-// IsAntialiased calls the underlying IsAntialiased.
 func (x *ShapeNode) IsAntialiased() bool {
-	return x.inner.IsAntialiased()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAntialiased"))
+	return _r
 }
 
-// SetAntialiased calls the underlying SetAntialiased.
 func (x *ShapeNode) SetAntialiased(antialiased bool) {
-	x.inner.SetAntialiased(antialiased)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAntialiased:"), antialiased)
 }
 
 // The width used to stroke the path. Widths larger than 2.0 may result in artifacts. Defaults to 1.0.
-//
-// LineWidth calls the underlying LineWidth.
 func (x *ShapeNode) LineWidth() float64 {
-	return x.inner.LineWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineWidth"))
+	return _r
 }
 
-// SetLineWidth calls the underlying SetLineWidth.
 func (x *ShapeNode) SetLineWidth(lineWidth float64) {
-	x.inner.SetLineWidth(lineWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineWidth:"), lineWidth)
 }
 
 // Add a glow to the path stroke of the specified width. Defaults to 0.0 (no glow)
-//
-// GlowWidth calls the underlying GlowWidth.
 func (x *ShapeNode) GlowWidth() float64 {
-	return x.inner.GlowWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("glowWidth"))
+	return _r
 }
 
-// SetGlowWidth calls the underlying SetGlowWidth.
 func (x *ShapeNode) SetGlowWidth(glowWidth float64) {
-	x.inner.SetGlowWidth(glowWidth)
-}
-
-// The cap type that should be used when stroking a non-closed path
-//
-// LineCap calls the underlying LineCap.
-func (x *ShapeNode) LineCap() coregraphics.CGLineCap {
-	return x.inner.LineCap()
-}
-
-// SetLineCap calls the underlying SetLineCap.
-func (x *ShapeNode) SetLineCap(lineCap coregraphics.CGLineCap) {
-	x.inner.SetLineCap(lineCap)
-}
-
-// The join type that should be used when stroking a path
-//
-// LineJoin calls the underlying LineJoin.
-func (x *ShapeNode) LineJoin() coregraphics.CGLineJoin {
-	return x.inner.LineJoin()
-}
-
-// SetLineJoin calls the underlying SetLineJoin.
-func (x *ShapeNode) SetLineJoin(lineJoin coregraphics.CGLineJoin) {
-	x.inner.SetLineJoin(lineJoin)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGlowWidth:"), glowWidth)
 }
 
 // When a miter join is used, the maximum ratio of miter length to line with to be used
-//
-// MiterLimit calls the underlying MiterLimit.
 func (x *ShapeNode) MiterLimit() float64 {
-	return x.inner.MiterLimit()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("miterLimit"))
+	return _r
 }
 
-// SetMiterLimit calls the underlying SetMiterLimit.
 func (x *ShapeNode) SetMiterLimit(miterLimit float64) {
-	x.inner.SetMiterLimit(miterLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMiterLimit:"), miterLimit)
 }
 
 // The length of the node's path if it were to be stroked
-//
-// LineLength calls the underlying LineLength.
 func (x *ShapeNode) LineLength() float64 {
-	return x.inner.LineLength()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lineLength"))
+	return _r
 }
 
-// FillTexture calls the underlying FillTexture.
 func (x *ShapeNode) FillTexture() *Texture {
-	_r := x.inner.FillTexture()
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillTexture"))
+	return TextureFromID(_r)
 }
 
-// SetFillTexture calls the underlying SetFillTexture.
-func (x *ShapeNode) SetFillTexture(fillTexture *raw.SKTexture) {
-	x.inner.SetFillTexture(fillTexture)
+func (x *ShapeNode) SetFillTexture(fillTexture *Texture) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillTexture:"), objref.IDOf(fillTexture))
 }
 
-// FillShader calls the underlying FillShader.
 func (x *ShapeNode) FillShader() *Shader {
-	_r := x.inner.FillShader()
-	if _r == nil {
-		return nil
-	}
-	return &Shader{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fillShader"))
+	return ShaderFromID(_r)
 }
 
-// SetFillShader calls the underlying SetFillShader.
-func (x *ShapeNode) SetFillShader(fillShader *raw.SKShader) {
-	x.inner.SetFillShader(fillShader)
+func (x *ShapeNode) SetFillShader(fillShader *Shader) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillShader:"), objref.IDOf(fillShader))
 }
 
-// StrokeTexture calls the underlying StrokeTexture.
 func (x *ShapeNode) StrokeTexture() *Texture {
-	_r := x.inner.StrokeTexture()
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strokeTexture"))
+	return TextureFromID(_r)
 }
 
-// SetStrokeTexture calls the underlying SetStrokeTexture.
-func (x *ShapeNode) SetStrokeTexture(strokeTexture *raw.SKTexture) {
-	x.inner.SetStrokeTexture(strokeTexture)
+func (x *ShapeNode) SetStrokeTexture(strokeTexture *Texture) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeTexture:"), objref.IDOf(strokeTexture))
 }
 
-// StrokeShader calls the underlying StrokeShader.
 func (x *ShapeNode) StrokeShader() *Shader {
-	_r := x.inner.StrokeShader()
-	if _r == nil {
-		return nil
-	}
-	return &Shader{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("strokeShader"))
+	return ShaderFromID(_r)
 }
 
-// SetStrokeShader calls the underlying SetStrokeShader.
-func (x *ShapeNode) SetStrokeShader(strokeShader *raw.SKShader) {
-	x.inner.SetStrokeShader(strokeShader)
+func (x *ShapeNode) SetStrokeShader(strokeShader *Shader) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrokeShader:"), objref.IDOf(strokeShader))
 }
-
-func (x *ShapeNode) asNode() *raw.SKNode { return &x.inner.SKNode }
 
 // ShapeNodeable is the interface implemented by [ShapeNode], for mocking and DI.
 type ShapeNodeable interface {
-	Unwrap() *raw.SKShapeNode
-	WithStrokeColor(strokeColor *appkit.NSColor) *ShapeNode
-	WithFillColor(fillColor *appkit.NSColor) *ShapeNode
-	WithBlendMode(blendMode SKBlendMode) *ShapeNode
+	obj.Object
+	WithPath(path obj.Object) *ShapeNode
+	WithStrokeColor(strokeColor obj.Object) *ShapeNode
+	WithFillColor(fillColor obj.Object) *ShapeNode
+	WithBlendMode(blendMode BlendMode) *ShapeNode
 	WithAntialiased(antialiased bool) *ShapeNode
 	WithLineWidth(lineWidth float64) *ShapeNode
 	WithGlowWidth(glowWidth float64) *ShapeNode
-	WithLineCap(lineCap coregraphics.CGLineCap) *ShapeNode
-	WithLineJoin(lineJoin coregraphics.CGLineJoin) *ShapeNode
 	WithMiterLimit(miterLimit float64) *ShapeNode
 	WithFillTexture(fillTexture TextureProvider) *ShapeNode
 	WithFillShader(fillShader *Shader) *ShapeNode
 	WithStrokeTexture(strokeTexture TextureProvider) *ShapeNode
 	WithStrokeShader(strokeShader *Shader) *ShapeNode
-	WithPosition(position corefoundation.CGPoint) *ShapeNode
 	WithZPosition(zPosition float64) *ShapeNode
 	WithZRotation(zRotation float64) *ShapeNode
 	WithXScale(xScale float64) *ShapeNode
@@ -574,48 +493,43 @@ type ShapeNodeable interface {
 	WithUserInteractionEnabled(userInteractionEnabled bool) *ShapeNode
 	WithName(name string) *ShapeNode
 	WithPhysicsBody(physicsBody *PhysicsBody) *ShapeNode
-	WithUserData(userData *foundation.NSMutableDictionary[objc.ID, objc.ID]) *ShapeNode
+	WithUserData(userData obj.Object) *ShapeNode
 	WithReachConstraints(reachConstraints *ReachConstraints) *ShapeNode
-	WithConstraints(items ...*raw.SKConstraint) *ShapeNode
-	WithAttributeValues(attributeValues *foundation.NSDictionary[*foundation.NSString, *raw.SKAttributeValue]) *ShapeNode
+	WithConstraints(items ...*Constraint) *ShapeNode
+	WithAttributeValues(attributeValues obj.Object) *ShapeNode
 	WithAccessibilityElement(accessibilityElement bool) *ShapeNode
 	WithAccessibilityRole(accessibilityRole string) *ShapeNode
 	WithAccessibilityRoleDescription(accessibilityRoleDescription string) *ShapeNode
 	WithAccessibilitySubrole(accessibilitySubrole string) *ShapeNode
-	WithAccessibilityFrame(accessibilityFrame corefoundation.CGRect) *ShapeNode
-	WithAccessibilityParent(accessibilityParent objc.ID) *ShapeNode
+	WithAccessibilityParent(accessibilityParent obj.Object) *ShapeNode
 	WithAccessibilityHelp(accessibilityHelp string) *ShapeNode
 	WithAccessibilityLabel(accessibilityLabel string) *ShapeNode
 	WithAccessibilityEnabled(accessibilityEnabled bool) *ShapeNode
-	Path() unsafe.Pointer
-	SetPath(path unsafe.Pointer)
-	StrokeColor() *appkit.NSColor
-	SetStrokeColor(strokeColor *appkit.NSColor)
-	FillColor() *appkit.NSColor
-	SetFillColor(fillColor *appkit.NSColor)
-	BlendMode() SKBlendMode
-	SetBlendMode(blendMode SKBlendMode)
+	Path() obj.Object
+	SetPath(path obj.Object)
+	StrokeColor() obj.Object
+	SetStrokeColor(strokeColor obj.Object)
+	FillColor() obj.Object
+	SetFillColor(fillColor obj.Object)
+	BlendMode() BlendMode
+	SetBlendMode(blendMode BlendMode)
 	IsAntialiased() bool
 	SetAntialiased(antialiased bool)
 	LineWidth() float64
 	SetLineWidth(lineWidth float64)
 	GlowWidth() float64
 	SetGlowWidth(glowWidth float64)
-	LineCap() coregraphics.CGLineCap
-	SetLineCap(lineCap coregraphics.CGLineCap)
-	LineJoin() coregraphics.CGLineJoin
-	SetLineJoin(lineJoin coregraphics.CGLineJoin)
 	MiterLimit() float64
 	SetMiterLimit(miterLimit float64)
 	LineLength() float64
 	FillTexture() *Texture
-	SetFillTexture(fillTexture *raw.SKTexture)
+	SetFillTexture(fillTexture *Texture)
 	FillShader() *Shader
-	SetFillShader(fillShader *raw.SKShader)
+	SetFillShader(fillShader *Shader)
 	StrokeTexture() *Texture
-	SetStrokeTexture(strokeTexture *raw.SKTexture)
+	SetStrokeTexture(strokeTexture *Texture)
 	StrokeShader() *Shader
-	SetStrokeShader(strokeShader *raw.SKShader)
+	SetStrokeShader(strokeShader *Shader)
 }
 
 var _ ShapeNodeable = (*ShapeNode)(nil)

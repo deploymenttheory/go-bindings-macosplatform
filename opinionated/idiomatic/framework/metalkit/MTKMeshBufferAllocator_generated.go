@@ -5,51 +5,68 @@
 package metalkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An interface for allocating a MetalKit buffer that backs the vertex data of a Model I/O mesh, suitable for use in a Metal app.
 //
-// MeshBufferAllocator wraps [raw.MTKMeshBufferAllocator] with a fluent Go API.
+// MeshBufferAllocator is an idiomatic wrapper over the Objective-C class MTKMeshBufferAllocator.
 type MeshBufferAllocator struct {
-	inner *raw.MTKMeshBufferAllocator
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTKMeshBufferAllocator].
-func (x *MeshBufferAllocator) Unwrap() *raw.MTKMeshBufferAllocator { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MeshBufferAllocator) ID() objc.ID { return x.inner.Ptr() }
-
-// MeshBufferAllocatorFromID adopts an existing object pointer as a MeshBufferAllocator (nil for 0).
+// MeshBufferAllocatorFromID adopts an existing Objective-C object as a MeshBufferAllocator
+// (nil for 0), retaining it and registering a release finalizer.
 func MeshBufferAllocatorFromID(id objc.ID) *MeshBufferAllocator {
 	if id == 0 {
 		return nil
 	}
-	return &MeshBufferAllocator{inner: raw.MTKMeshBufferAllocatorFromID(id)}
+	x := &MeshBufferAllocator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a new allocator object.
-//
-// NewMeshBufferAllocatorWithDevice creates a new [MeshBufferAllocator].
-func NewMeshBufferAllocatorWithDevice(device metal.MTLDevice) *MeshBufferAllocator {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTKMeshBufferAllocator")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &MeshBufferAllocator{inner: raw.MTKMeshBufferAllocatorFromID(_id)}
+// meshBufferAllocatorAdopt wraps an Objective-C object that this code just created as a
+// MeshBufferAllocator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func meshBufferAllocatorAdopt(id objc.ID) *MeshBufferAllocator {
+	if id == 0 {
+		return nil
+	}
+	x := &MeshBufferAllocator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Device calls the underlying Device.
-func (x *MeshBufferAllocator) Device() metal.MTLDevice {
-	return x.inner.Device()
+// Description returns the object's -description text.
+func (x *MeshBufferAllocator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MeshBufferAllocator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MeshBufferAllocator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMeshBufferAllocator creates a new MeshBufferAllocator.
+func NewMeshBufferAllocator() *MeshBufferAllocator {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTKMeshBufferAllocator")), objc.RegisterName("new"))
+	return meshBufferAllocatorAdopt(_id)
 }
 
 // MeshBufferAllocatorable is the interface implemented by [MeshBufferAllocator], for mocking and DI.
 type MeshBufferAllocatorable interface {
-	Unwrap() *raw.MTKMeshBufferAllocator
-	Device() metal.MTLDevice
+	obj.Object
 }
 
 var _ MeshBufferAllocatorable = (*MeshBufferAllocator)(nil)

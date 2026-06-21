@@ -5,132 +5,132 @@
 package mediaextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaextension"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// RAWProcessingListParameter wraps [raw.MERAWProcessingListParameter] with a fluent Go API.
+// RAWProcessingListParameter is an idiomatic wrapper over the Objective-C class MERAWProcessingListParameter.
 type RAWProcessingListParameter struct {
-	inner *raw.MERAWProcessingListParameter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MERAWProcessingListParameter].
-func (x *RAWProcessingListParameter) Unwrap() *raw.MERAWProcessingListParameter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RAWProcessingListParameter) ID() objc.ID { return x.inner.Ptr() }
-
-// RAWProcessingListParameterFromID adopts an existing object pointer as a RAWProcessingListParameter (nil for 0).
+// RAWProcessingListParameterFromID adopts an existing Objective-C object as a RAWProcessingListParameter
+// (nil for 0), retaining it and registering a release finalizer.
 func RAWProcessingListParameterFromID(id objc.ID) *RAWProcessingListParameter {
 	if id == 0 {
 		return nil
 	}
-	return &RAWProcessingListParameter{inner: raw.MERAWProcessingListParameterFromID(id)}
+	x := &RAWProcessingListParameter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRAWProcessingListParameter creates a new [RAWProcessingListParameter].
+// rAWProcessingListParameterAdopt wraps an Objective-C object that this code just created as a
+// RAWProcessingListParameter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rAWProcessingListParameterAdopt(id objc.ID) *RAWProcessingListParameter {
+	if id == 0 {
+		return nil
+	}
+	x := &RAWProcessingListParameter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RAWProcessingListParameter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RAWProcessingListParameter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RAWProcessingListParameter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRAWProcessingListParameter creates a new RAWProcessingListParameter.
 func NewRAWProcessingListParameter() *RAWProcessingListParameter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingListParameter")), objc.RegisterName("new"))
-	return &RAWProcessingListParameter{inner: raw.MERAWProcessingListParameterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingListParameter")), objc.RegisterName("new"))
+	return rAWProcessingListParameterAdopt(_id)
 }
 
-// NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValue creates a new [RAWProcessingListParameter].
-func NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValue(name string, key string, description string, listElements *foundation.NSArray[*raw.MERAWProcessingListElementParameter], initialValue int) *RAWProcessingListParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingListParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:list:initialValue:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(key).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), listElements.Ptr(), initialValue)
-	return &RAWProcessingListParameter{inner: raw.MERAWProcessingListParameterFromID(_id)}
+// NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValue creates a new RAWProcessingListParameter.
+func NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValue(name string, key string, description string, listElements []*RAWProcessingListElementParameter, initialValue int) *RAWProcessingListParameter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingListParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:list:initialValue:"), purego.NSString(name), purego.NSString(key), purego.NSString(description), purego.SliceToNSArray(listElements, func(_v *RAWProcessingListElementParameter) objc.ID { return objref.IDOf(_v) }), initialValue)
+	return rAWProcessingListParameterAdopt(_id)
 }
 
-// NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueNeutralValue creates a new [RAWProcessingListParameter].
-func NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueNeutralValue(name string, key string, description string, listElements *foundation.NSArray[*raw.MERAWProcessingListElementParameter], initialValue int, neutralValue int) *RAWProcessingListParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingListParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:list:initialValue:neutralValue:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(key).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), listElements.Ptr(), initialValue, neutralValue)
-	return &RAWProcessingListParameter{inner: raw.MERAWProcessingListParameterFromID(_id)}
+// NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueNeutralValue creates a new RAWProcessingListParameter.
+func NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueNeutralValue(name string, key string, description string, listElements []*RAWProcessingListElementParameter, initialValue int, neutralValue int) *RAWProcessingListParameter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingListParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:list:initialValue:neutralValue:"), purego.NSString(name), purego.NSString(key), purego.NSString(description), purego.SliceToNSArray(listElements, func(_v *RAWProcessingListElementParameter) objc.ID { return objref.IDOf(_v) }), initialValue, neutralValue)
+	return rAWProcessingListParameterAdopt(_id)
 }
 
-// NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueCameraValue creates a new [RAWProcessingListParameter].
-func NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueCameraValue(name string, key string, description string, listElements *foundation.NSArray[*raw.MERAWProcessingListElementParameter], initialValue int, cameraValue int) *RAWProcessingListParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingListParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:list:initialValue:cameraValue:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(key).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), listElements.Ptr(), initialValue, cameraValue)
-	return &RAWProcessingListParameter{inner: raw.MERAWProcessingListParameterFromID(_id)}
+// NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueCameraValue creates a new RAWProcessingListParameter.
+func NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueCameraValue(name string, key string, description string, listElements []*RAWProcessingListElementParameter, initialValue int, cameraValue int) *RAWProcessingListParameter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingListParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:list:initialValue:cameraValue:"), purego.NSString(name), purego.NSString(key), purego.NSString(description), purego.SliceToNSArray(listElements, func(_v *RAWProcessingListElementParameter) objc.ID { return objref.IDOf(_v) }), initialValue, cameraValue)
+	return rAWProcessingListParameterAdopt(_id)
 }
 
-// NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueNeutralValueCameraValue creates a new [RAWProcessingListParameter].
-func NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueNeutralValueCameraValue(name string, key string, description string, listElements *foundation.NSArray[*raw.MERAWProcessingListElementParameter], initialValue int, neutralValue int, cameraValue int) *RAWProcessingListParameter {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MERAWProcessingListParameter")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:list:initialValue:neutralValue:cameraValue:"), foundation.NSStringStringWithUTF8String(name).Ptr(), foundation.NSStringStringWithUTF8String(key).Ptr(), foundation.NSStringStringWithUTF8String(description).Ptr(), listElements.Ptr(), initialValue, neutralValue, cameraValue)
-	return &RAWProcessingListParameter{inner: raw.MERAWProcessingListParameterFromID(_id)}
+// NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueNeutralValueCameraValue creates a new RAWProcessingListParameter.
+func NewRAWProcessingListParameterWithNameKeyDescriptionListInitialValueNeutralValueCameraValue(name string, key string, description string, listElements []*RAWProcessingListElementParameter, initialValue int, neutralValue int, cameraValue int) *RAWProcessingListParameter {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MERAWProcessingListParameter")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithName:key:description:list:initialValue:neutralValue:cameraValue:"), purego.NSString(name), purego.NSString(key), purego.NSString(description), purego.SliceToNSArray(listElements, func(_v *RAWProcessingListElementParameter) objc.ID { return objref.IDOf(_v) }), initialValue, neutralValue, cameraValue)
+	return rAWProcessingListParameterAdopt(_id)
 }
 
-// @property		currentValue @abstract		Get or set the current value for this parameter. @discussion		The value is the listElementID value of the selected MERAWProcessingListElementParameter.   This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
+// Get or set the current value for this parameter. The value is the listElementID value of the selected MERAWProcessingListElementParameter.   This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 //
-// WithCurrentValue sets the currentValue property and returns the receiver for chaining.
+// WithCurrentValue sets currentValue and returns the receiver so calls can be chained.
 func (x *RAWProcessingListParameter) WithCurrentValue(currentValue int) *RAWProcessingListParameter {
-	x.inner.SetCurrentValue(currentValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
 	return x
 }
 
 // A Boolean value that indicates whether the extension enables the parameter.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *RAWProcessingListParameter) WithEnabled(enabled bool) *RAWProcessingListParameter {
-	x.inner.MERAWProcessingParameter.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
-// @property		hasNeutralValue @abstract		Return value indicates whether the MERAWProcessingListParameter has an optional declared Neutral value. @discussion	If the return value is YES and outNeutralValue is not nil, the value held by outNeutralValue will be set to the neutral value. If the return value is NO and outNeutralValue is not nil, the value held by outNeutralValue will be set to 0.
-//
-// HasNeutralValue calls the underlying HasNeutralValue.
-func (x *RAWProcessingListParameter) HasNeutralValue(outNeutralValue *int64) bool {
-	return x.inner.HasNeutralValue(outNeutralValue)
-}
-
-// @property		hasCameraValue @abstract		Return value indicates whether the MERAWProcessingListParameter has an optional declared Camera value. @discussion	If the return value is YES and outCameraValue is not nil, the value held by outCameraValue will be set to the camera value. If the return value is NO and outCameraValue is not nil, the value held by outCameraValue will be set to 0.
-//
-// HasCameraValue calls the underlying HasCameraValue.
-func (x *RAWProcessingListParameter) HasCameraValue(outCameraValue *int64) bool {
-	return x.inner.HasCameraValue(outCameraValue)
-}
-
-// @property		listElements @abstract		The ordered array of MERAWProcessingListElementParameter which make up this list.
+// The ordered array of MERAWProcessingListElementParameter which make up this list.
 //
 // ListElements returns the collection as a Go slice.
 func (x *RAWProcessingListParameter) ListElements() []*RAWProcessingListElementParameter {
-	arr := x.inner.ListElements()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RAWProcessingListElementParameter {
-		return &RAWProcessingListElementParameter{inner: raw.MERAWProcessingListElementParameterFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("listElements"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RAWProcessingListElementParameter {
+		return RAWProcessingListElementParameterFromID(_id)
 	})
 }
 
-// @property		currentValue @abstract		Get or set the current value for this parameter. @discussion		The value is the listElementID value of the selected MERAWProcessingListElementParameter.   This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
-//
-// CurrentValue calls the underlying CurrentValue.
+// Get or set the current value for this parameter. The value is the listElementID value of the selected MERAWProcessingListElementParameter.   This property can be observed if appropriate in order to react to changes which would result in changes to the set of MERAWProcessingParameters vended by the extension.
 func (x *RAWProcessingListParameter) CurrentValue() int {
-	return x.inner.CurrentValue()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("currentValue"))
+	return _r
 }
 
-// SetCurrentValue calls the underlying SetCurrentValue.
 func (x *RAWProcessingListParameter) SetCurrentValue(currentValue int) {
-	x.inner.SetCurrentValue(currentValue)
-}
-
-func (x *RAWProcessingListParameter) asRAWProcessingParameter() *raw.MERAWProcessingParameter {
-	return &x.inner.MERAWProcessingParameter
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentValue:"), currentValue)
 }
 
 // RAWProcessingListParameterable is the interface implemented by [RAWProcessingListParameter], for mocking and DI.
 type RAWProcessingListParameterable interface {
-	Unwrap() *raw.MERAWProcessingListParameter
+	obj.Object
 	WithCurrentValue(currentValue int) *RAWProcessingListParameter
 	WithEnabled(enabled bool) *RAWProcessingListParameter
-	HasNeutralValue(outNeutralValue *int64) bool
-	HasCameraValue(outCameraValue *int64) bool
 	ListElements() []*RAWProcessingListElementParameter
 	CurrentValue() int
 	SetCurrentValue(currentValue int)

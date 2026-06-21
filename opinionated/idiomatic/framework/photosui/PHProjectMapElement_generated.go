@@ -5,86 +5,80 @@
 package photosui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An element that represents a map within project section content.
 //
-// ProjectMapElement wraps [raw.PHProjectMapElement] with a fluent Go API.
+// ProjectMapElement is an idiomatic wrapper over the Objective-C class PHProjectMapElement.
 type ProjectMapElement struct {
-	inner *raw.PHProjectMapElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHProjectMapElement].
-func (x *ProjectMapElement) Unwrap() *raw.PHProjectMapElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProjectMapElement) ID() objc.ID { return x.inner.Ptr() }
-
-// ProjectMapElementFromID adopts an existing object pointer as a ProjectMapElement (nil for 0).
+// ProjectMapElementFromID adopts an existing Objective-C object as a ProjectMapElement
+// (nil for 0), retaining it and registering a release finalizer.
 func ProjectMapElementFromID(id objc.ID) *ProjectMapElement {
 	if id == 0 {
 		return nil
 	}
-	return &ProjectMapElement{inner: raw.PHProjectMapElementFromID(id)}
+	x := &ProjectMapElement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewProjectMapElement creates a new [ProjectMapElement].
+// projectMapElementAdopt wraps an Objective-C object that this code just created as a
+// ProjectMapElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func projectMapElementAdopt(id objc.ID) *ProjectMapElement {
+	if id == 0 {
+		return nil
+	}
+	x := &ProjectMapElement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ProjectMapElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProjectMapElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProjectMapElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewProjectMapElement creates a new ProjectMapElement.
 func NewProjectMapElement() *ProjectMapElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProjectMapElement")), objc.RegisterName("new"))
-	return &ProjectMapElement{inner: raw.PHProjectMapElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectMapElement")), objc.RegisterName("new"))
+	return projectMapElementAdopt(_id)
 }
 
-// The type of the map in the project.
-//
-// MapType calls the underlying MapType.
-func (x *ProjectMapElement) MapType() mapkit.MKMapType {
-	return x.inner.MapType()
-}
-
-// CenterCoordinate calls the underlying CenterCoordinate.
-func (x *ProjectMapElement) CenterCoordinate() unsafe.Pointer {
-	return x.inner.CenterCoordinate()
-}
-
-// Heading calls the underlying Heading.
-func (x *ProjectMapElement) Heading() unsafe.Pointer {
-	return x.inner.Heading()
-}
-
-// Pitch calls the underlying Pitch.
 func (x *ProjectMapElement) Pitch() float64 {
-	return x.inner.Pitch()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("pitch"))
+	return _r
 }
 
-// Altitude calls the underlying Altitude.
-func (x *ProjectMapElement) Altitude() unsafe.Pointer {
-	return x.inner.Altitude()
-}
-
-// Annotations calls the underlying Annotations.
-func (x *ProjectMapElement) Annotations() *foundation.NSArray[mapkit.MKAnnotation] {
-	return x.inner.Annotations()
-}
-
-func (x *ProjectMapElement) asProjectElement() *raw.PHProjectElement {
-	return &x.inner.PHProjectElement
+func (x *ProjectMapElement) Annotations() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotations"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // ProjectMapElementable is the interface implemented by [ProjectMapElement], for mocking and DI.
 type ProjectMapElementable interface {
-	Unwrap() *raw.PHProjectMapElement
-	MapType() mapkit.MKMapType
-	CenterCoordinate() unsafe.Pointer
-	Heading() unsafe.Pointer
+	obj.Object
 	Pitch() float64
-	Altitude() unsafe.Pointer
-	Annotations() *foundation.NSArray[mapkit.MKAnnotation]
+	Annotations() []obj.Object
 }
 
 var _ ProjectMapElementable = (*ProjectMapElement)(nil)

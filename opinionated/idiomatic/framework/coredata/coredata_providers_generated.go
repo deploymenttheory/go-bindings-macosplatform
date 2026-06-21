@@ -5,45 +5,45 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AttributeDescriptionProvider is implemented by AttributeDescription and any idiomatic type wrapping a NSAttributeDescription subclass.
+// AttributeDescriptionProvider is accepted wherever a NSAttributeDescription (or one of its subclasses) is expected.
 type AttributeDescriptionProvider interface {
-	asAttributeDescription() *raw.NSAttributeDescription
+	objref.Object
 }
 
-// MigrationStageProvider is implemented by MigrationStage and any idiomatic type wrapping a NSMigrationStage subclass.
+// MigrationStageProvider is accepted wherever a NSMigrationStage (or one of its subclasses) is expected.
 type MigrationStageProvider interface {
-	asMigrationStage() *raw.NSMigrationStage
+	objref.Object
 }
 
-// PersistentContainerProvider is implemented by PersistentContainer and any idiomatic type wrapping a NSPersistentContainer subclass.
+// PersistentContainerProvider is accepted wherever a NSPersistentContainer (or one of its subclasses) is expected.
 type PersistentContainerProvider interface {
-	asPersistentContainer() *raw.NSPersistentContainer
+	objref.Object
 }
 
-// PersistentStoreProvider is implemented by PersistentStore and any idiomatic type wrapping a NSPersistentStore subclass.
+// PersistentStoreProvider is accepted wherever a NSPersistentStore (or one of its subclasses) is expected.
 type PersistentStoreProvider interface {
-	asPersistentStore() *raw.NSPersistentStore
+	objref.Object
 }
 
-// PersistentStoreAsynchronousResultProvider is implemented by PersistentStoreAsynchronousResult and any idiomatic type wrapping a NSPersistentStoreAsynchronousResult subclass.
+// PersistentStoreAsynchronousResultProvider is accepted wherever a NSPersistentStoreAsynchronousResult (or one of its subclasses) is expected.
 type PersistentStoreAsynchronousResultProvider interface {
-	asPersistentStoreAsynchronousResult() *raw.NSPersistentStoreAsynchronousResult
+	objref.Object
 }
 
-// PersistentStoreRequestProvider is implemented by PersistentStoreRequest and any idiomatic type wrapping a NSPersistentStoreRequest subclass.
+// PersistentStoreRequestProvider is accepted wherever a NSPersistentStoreRequest (or one of its subclasses) is expected.
 type PersistentStoreRequestProvider interface {
-	asPersistentStoreRequest() *raw.NSPersistentStoreRequest
+	objref.Object
 }
 
-// PersistentStoreResultProvider is implemented by PersistentStoreResult and any idiomatic type wrapping a NSPersistentStoreResult subclass.
+// PersistentStoreResultProvider is accepted wherever a NSPersistentStoreResult (or one of its subclasses) is expected.
 type PersistentStoreResultProvider interface {
-	asPersistentStoreResult() *raw.NSPersistentStoreResult
+	objref.Object
 }
 
-// PropertyDescriptionProvider is implemented by PropertyDescription and any idiomatic type wrapping a NSPropertyDescription subclass.
+// PropertyDescriptionProvider is accepted wherever a NSPropertyDescription (or one of its subclasses) is expected.
 type PropertyDescriptionProvider interface {
-	asPropertyDescription() *raw.NSPropertyDescription
+	objref.Object
 }

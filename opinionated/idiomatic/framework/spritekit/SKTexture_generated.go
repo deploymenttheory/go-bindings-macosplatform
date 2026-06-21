@@ -6,109 +6,103 @@ package spritekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An image, decoded on the GPU, that can be used to render various SpriteKit objects.
 //
-// Texture wraps [raw.SKTexture] with a fluent Go API.
+// Texture is an idiomatic wrapper over the Objective-C class SKTexture.
 type Texture struct {
-	inner *raw.SKTexture
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKTexture].
-func (x *Texture) Unwrap() *raw.SKTexture { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Texture) ID() objc.ID { return x.inner.Ptr() }
-
-// TextureFromID adopts an existing object pointer as a Texture (nil for 0).
+// TextureFromID adopts an existing Objective-C object as a Texture
+// (nil for 0), retaining it and registering a release finalizer.
 func TextureFromID(id objc.ID) *Texture {
 	if id == 0 {
 		return nil
 	}
-	return &Texture{inner: raw.SKTextureFromID(id)}
+	x := &Texture{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTexture creates a new [Texture].
+// textureAdopt wraps an Objective-C object that this code just created as a
+// Texture (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textureAdopt(id objc.ID) *Texture {
+	if id == 0 {
+		return nil
+	}
+	x := &Texture{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Texture) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Texture) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Texture) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTexture creates a new Texture.
 func NewTexture() *Texture {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTexture")), objc.RegisterName("new"))
-	return &Texture{inner: raw.SKTextureFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKTexture")), objc.RegisterName("new"))
+	return textureAdopt(_id)
 }
 
 // The filtering mode used when the size of a sprite drawn with the texture is not drawn at the texture’s native size.
 //
-// WithFilteringMode sets the filteringMode property and returns the receiver for chaining.
-func (x *Texture) WithFilteringMode(filteringMode SKTextureFilteringMode) *Texture {
-	x.inner.SetFilteringMode(raw.SKTextureFilteringMode(filteringMode))
+// WithFilteringMode sets filteringMode and returns the receiver so calls can be chained.
+func (x *Texture) WithFilteringMode(filteringMode TextureFilteringMode) *Texture {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilteringMode:"), filteringMode)
 	return x
 }
 
 // A Boolean value that indicates whether the texture attempts to generate mipmaps.
 //
-// WithUsesMipmaps sets the usesMipmaps property and returns the receiver for chaining.
+// WithUsesMipmaps sets usesMipmaps and returns the receiver so calls can be chained.
 func (x *Texture) WithUsesMipmaps(usesMipmaps bool) *Texture {
-	x.inner.SetUsesMipmaps(usesMipmaps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesMipmaps:"), usesMipmaps)
 	return x
 }
 
-// Create new texture by applying a CIFilter to an existing one. Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed. @param filter the CI filter to apply in the copy.
-//
-// TextureByApplyingCIFilter calls the underlying TextureByApplyingCIFilter.
-func (x *Texture) TextureByApplyingCIFilter(filter *coreimage.CIFilter) *Texture {
-	_r := x.inner.TextureByApplyingCIFilter(filter)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+// Create new texture by applying a CIFilter to an existing one. Any CIFilter that requires only a single "inputImage" and produces an "outputImage" is allowed.
+func (x *Texture) TextureByApplyingCIFilter(filter obj.Object) *Texture {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureByApplyingCIFilter:"), objref.IDOf(filter))
+	return TextureFromID(_r)
 }
 
 // Create new texture by generating a normal map texture.
-//
-// TextureByGeneratingNormalMap calls the underlying TextureByGeneratingNormalMap.
 func (x *Texture) TextureByGeneratingNormalMap() *Texture {
-	_r := x.inner.TextureByGeneratingNormalMap()
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureByGeneratingNormalMap"))
+	return TextureFromID(_r)
 }
 
-// Create new texture by generating a normal map texture. @param smoothness the smooth level of the generated normal map. @param contrast  the scale applied to the generated normal map.
-//
-// TextureByGeneratingNormalMapWithSmoothnessContrast calls the underlying TextureByGeneratingNormalMapWithSmoothnessContrast.
+// Create new texture by generating a normal map texture.
 func (x *Texture) TextureByGeneratingNormalMapWithSmoothnessContrast(smoothness float64, contrast float64) *Texture {
-	_r := x.inner.TextureByGeneratingNormalMapWithSmoothnessContrast(smoothness, contrast)
-	if _r == nil {
-		return nil
-	}
-	return &Texture{inner: _r}
-}
-
-// Gets a rectangle that defines the portion of the texture used to render its image.
-//
-// TextureRect calls the underlying TextureRect.
-func (x *Texture) TextureRect() corefoundation.CGRect {
-	return x.inner.TextureRect()
-}
-
-// Gets the size of the texture.
-//
-// Size calls the underlying Size.
-func (x *Texture) Size() corefoundation.CGSize {
-	return x.inner.Size()
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textureByGeneratingNormalMapWithSmoothness:contrast:"), smoothness, contrast)
+	return TextureFromID(_r)
 }
 
 // Returns the texture’s image data as a Quartz 2D image.
-//
-// CGImage calls the underlying CGImage.
-func (x *Texture) CGImage() unsafe.Pointer {
-	return x.inner.CGImage()
+func (x *Texture) CGImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("CGImage"))
+	return obj.Wrap(_r)
 }
 
 // Load texture data into memory, calling a completion handler after the task completes.
@@ -116,9 +110,10 @@ func (x *Texture) CGImage() unsafe.Pointer {
 // Preload blocks until the operation completes or ctx is cancelled.
 func (x *Texture) Preload(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.PreloadWithCompletionHandler(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preloadWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -128,45 +123,37 @@ func (x *Texture) Preload(ctx context.Context) error {
 }
 
 // The filtering mode the texture should use when not drawn at native size. Defaults to SKTextureFilteringLinear.
-//
-// FilteringMode calls the underlying FilteringMode.
-func (x *Texture) FilteringMode() SKTextureFilteringMode {
-	return SKTextureFilteringMode(x.inner.FilteringMode())
+func (x *Texture) FilteringMode() TextureFilteringMode {
+	_r := objc.Send[TextureFilteringMode](objref.IDOf(x), objc.RegisterName("filteringMode"))
+	return _r
 }
 
-// SetFilteringMode calls the underlying SetFilteringMode.
-func (x *Texture) SetFilteringMode(filteringMode SKTextureFilteringMode) {
-	x.inner.SetFilteringMode(raw.SKTextureFilteringMode(filteringMode))
+func (x *Texture) SetFilteringMode(filteringMode TextureFilteringMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilteringMode:"), filteringMode)
 }
 
 // Request that the texture have mipmaps generated if possible. Only supported for power of 2 texture sizes.
-//
-// UsesMipmaps calls the underlying UsesMipmaps.
 func (x *Texture) UsesMipmaps() bool {
-	return x.inner.UsesMipmaps()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("usesMipmaps"))
+	return _r
 }
 
-// SetUsesMipmaps calls the underlying SetUsesMipmaps.
 func (x *Texture) SetUsesMipmaps(usesMipmaps bool) {
-	x.inner.SetUsesMipmaps(usesMipmaps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesMipmaps:"), usesMipmaps)
 }
-
-func (x *Texture) asTexture() *raw.SKTexture { return x.inner }
 
 // Textureable is the interface implemented by [Texture], for mocking and DI.
 type Textureable interface {
-	Unwrap() *raw.SKTexture
-	WithFilteringMode(filteringMode SKTextureFilteringMode) *Texture
+	obj.Object
+	WithFilteringMode(filteringMode TextureFilteringMode) *Texture
 	WithUsesMipmaps(usesMipmaps bool) *Texture
-	TextureByApplyingCIFilter(filter *coreimage.CIFilter) *Texture
+	TextureByApplyingCIFilter(filter obj.Object) *Texture
 	TextureByGeneratingNormalMap() *Texture
 	TextureByGeneratingNormalMapWithSmoothnessContrast(smoothness float64, contrast float64) *Texture
-	TextureRect() corefoundation.CGRect
-	Size() corefoundation.CGSize
-	CGImage() unsafe.Pointer
+	CGImage() obj.Object
 	Preload(ctx context.Context) error
-	FilteringMode() SKTextureFilteringMode
-	SetFilteringMode(filteringMode SKTextureFilteringMode)
+	FilteringMode() TextureFilteringMode
+	SetFilteringMode(filteringMode TextureFilteringMode)
 	UsesMipmaps() bool
 	SetUsesMipmaps(usesMipmaps bool)
 }

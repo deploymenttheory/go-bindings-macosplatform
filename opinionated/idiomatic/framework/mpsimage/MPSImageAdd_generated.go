@@ -5,152 +5,105 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageAdd wraps [raw.MPSImageAdd] with a fluent Go API.
+// ImageAdd is an idiomatic wrapper over the Objective-C class MPSImageAdd.
 type ImageAdd struct {
-	inner *raw.MPSImageAdd
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageAdd].
-func (x *ImageAdd) Unwrap() *raw.MPSImageAdd { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageAdd) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageAddFromID adopts an existing object pointer as a ImageAdd (nil for 0).
+// ImageAddFromID adopts an existing Objective-C object as a ImageAdd
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageAddFromID(id objc.ID) *ImageAdd {
 	if id == 0 {
 		return nil
 	}
-	return &ImageAdd{inner: raw.MPSImageAddFromID(id)}
+	x := &ImageAdd{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// @abstract  Initialize the addition operator @param     device           The device the filter will run on. @return    A valid MPSImageAdd object or nil, if failure.
-//
-// NewImageAddWithDevice creates a new [ImageAdd].
-func NewImageAddWithDevice(device metal.MTLDevice) *ImageAdd {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageAdd")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageAdd{inner: raw.MPSImageAddFromID(_id)}
+// imageAddAdopt wraps an Objective-C object that this code just created as a
+// ImageAdd (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageAddAdopt(id objc.ID) *ImageAdd {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageAdd{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+// Description returns the object's -description text.
+func (x *ImageAdd) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageAdd) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageAdd) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageAdd creates a new ImageAdd.
+func NewImageAdd() *ImageAdd {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageAdd")), objc.RegisterName("new"))
+	return imageAddAdopt(_id)
+}
+
+// WithPrimaryScale sets primaryScale and returns the receiver so calls can be chained.
 func (x *ImageAdd) WithPrimaryScale(primaryScale float32) *ImageAdd {
-	x.inner.MPSImageArithmetic.SetPrimaryScale(primaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+// WithSecondaryScale sets secondaryScale and returns the receiver so calls can be chained.
 func (x *ImageAdd) WithSecondaryScale(secondaryScale float32) *ImageAdd {
-	x.inner.MPSImageArithmetic.SetSecondaryScale(secondaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets the bias property and returns the receiver for chaining.
+// WithBias sets bias and returns the receiver so calls can be chained.
 func (x *ImageAdd) WithBias(bias float32) *ImageAdd {
-	x.inner.MPSImageArithmetic.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// @property   primaryStrideInPixels @abstract   The secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
+// minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
 //
-// WithPrimaryStrideInPixels sets the primaryStrideInPixels property and returns the receiver for chaining.
-func (x *ImageAdd) WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageAdd {
-	x.inner.MPSImageArithmetic.SetPrimaryStrideInPixels(primaryStrideInPixels)
-	return x
-}
-
-// @property   secondaryStrideInPixels @abstract   The secondarySource stride in the x, y, and z dimensions. The only supported values are 0 or 1. The default value for each dimension is 1.
-//
-// WithSecondaryStrideInPixels sets the secondaryStrideInPixels property and returns the receiver for chaining.
-func (x *ImageAdd) WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageAdd {
-	x.inner.MPSImageArithmetic.SetSecondaryStrideInPixels(secondaryStrideInPixels)
-	return x
-}
-
-// @property   minimumValue @abstract   minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
-//
-// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+// WithMinimumValue sets minimumValue and returns the receiver so calls can be chained.
 func (x *ImageAdd) WithMinimumValue(minimumValue float32) *ImageAdd {
-	x.inner.MPSImageArithmetic.SetMinimumValue(minimumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// @property   maximumValue @abstract   maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
+// maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
 //
-// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+// WithMaximumValue sets maximumValue and returns the receiver so calls can be chained.
 func (x *ImageAdd) WithMaximumValue(maximumValue float32) *ImageAdd {
-	x.inner.MPSImageArithmetic.SetMaximumValue(maximumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
-}
-
-// @property   primaryOffset @abstract   The position of the destination clip rectangle origin relative to the primary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. See Also: @ref MetalPerformanceShaders.h  subsubsection_mpsoffset
-//
-// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
-func (x *ImageAdd) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageAdd {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetPrimaryOffset(primaryOffset)
-	return x
-}
-
-// @property   secondaryOffset @abstract   The position of the destination clip rectangle origin relative to the secondary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. See Also: @ref MetalPerformanceShaders.h  subsubsection_mpsoffset
-//
-// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
-func (x *ImageAdd) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageAdd {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetSecondaryOffset(secondaryOffset)
-	return x
-}
-
-// @property   primaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of a source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h  subsubsection_edgemode
-//
-// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
-func (x *ImageAdd) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageAdd {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetPrimaryEdgeMode(primaryEdgeMode)
-	return x
-}
-
-// @property   secondaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the secondary source image @discussion Most MPSKernel objects can read off the edge of a source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h  subsubsection_edgemode
-//
-// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
-func (x *ImageAdd) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageAdd {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
-	return x
-}
-
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageAdd) WithClipRect(clipRect metal.MTLRegion) *ImageAdd {
-	x.inner.MPSImageArithmetic.MPSBinaryImageKernel.SetClipRect(clipRect)
-	return x
-}
-
-func (x *ImageAdd) asImageArithmetic() *raw.MPSImageArithmetic { return &x.inner.MPSImageArithmetic }
-
-func (x *ImageAdd) asBinaryImageKernel() *raw.MPSBinaryImageKernel {
-	return &x.inner.MPSImageArithmetic.MPSBinaryImageKernel
 }
 
 // ImageAddable is the interface implemented by [ImageAdd], for mocking and DI.
 type ImageAddable interface {
-	Unwrap() *raw.MPSImageAdd
+	obj.Object
 	WithPrimaryScale(primaryScale float32) *ImageAdd
 	WithSecondaryScale(secondaryScale float32) *ImageAdd
 	WithBias(bias float32) *ImageAdd
-	WithPrimaryStrideInPixels(primaryStrideInPixels metal.MTLSize) *ImageAdd
-	WithSecondaryStrideInPixels(secondaryStrideInPixels metal.MTLSize) *ImageAdd
 	WithMinimumValue(minimumValue float32) *ImageAdd
 	WithMaximumValue(maximumValue float32) *ImageAdd
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *ImageAdd
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *ImageAdd
-	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *ImageAdd
-	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *ImageAdd
-	WithClipRect(clipRect metal.MTLRegion) *ImageAdd
 }
 
 var _ ImageAddable = (*ImageAdd)(nil)

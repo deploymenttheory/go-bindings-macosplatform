@@ -5,77 +5,100 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A data object for an emoji-like image that can appear in attributed text.
 //
-// AdaptiveImageGlyph wraps [raw.NSAdaptiveImageGlyph] with a fluent Go API.
+// AdaptiveImageGlyph is an idiomatic wrapper over the Objective-C class NSAdaptiveImageGlyph.
 type AdaptiveImageGlyph struct {
-	inner *raw.NSAdaptiveImageGlyph
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAdaptiveImageGlyph].
-func (x *AdaptiveImageGlyph) Unwrap() *raw.NSAdaptiveImageGlyph { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AdaptiveImageGlyph) ID() objc.ID { return x.inner.Ptr() }
-
-// AdaptiveImageGlyphFromID adopts an existing object pointer as a AdaptiveImageGlyph (nil for 0).
+// AdaptiveImageGlyphFromID adopts an existing Objective-C object as a AdaptiveImageGlyph
+// (nil for 0), retaining it and registering a release finalizer.
 func AdaptiveImageGlyphFromID(id objc.ID) *AdaptiveImageGlyph {
 	if id == 0 {
 		return nil
 	}
-	return &AdaptiveImageGlyph{inner: raw.NSAdaptiveImageGlyphFromID(id)}
+	x := &AdaptiveImageGlyph{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// adaptiveImageGlyphAdopt wraps an Objective-C object that this code just created as a
+// AdaptiveImageGlyph (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func adaptiveImageGlyphAdopt(id objc.ID) *AdaptiveImageGlyph {
+	if id == 0 {
+		return nil
+	}
+	x := &AdaptiveImageGlyph{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AdaptiveImageGlyph) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AdaptiveImageGlyph) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AdaptiveImageGlyph) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Create an adaptive image glyph from the previously saved data.
 //
-// NewAdaptiveImageGlyphWithImageContent creates a new [AdaptiveImageGlyph].
-func NewAdaptiveImageGlyphWithImageContent(imageContent *foundation.NSData) *AdaptiveImageGlyph {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAdaptiveImageGlyph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageContent:"), imageContent.Ptr())
-	return &AdaptiveImageGlyph{inner: raw.NSAdaptiveImageGlyphFromID(_id)}
+// NewAdaptiveImageGlyphWithImageContent creates a new AdaptiveImageGlyph.
+func NewAdaptiveImageGlyphWithImageContent(imageContent obj.Object) *AdaptiveImageGlyph {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAdaptiveImageGlyph")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImageContent:"), objref.IDOf(imageContent))
+	return adaptiveImageGlyphAdopt(_id)
 }
 
-// NewAdaptiveImageGlyphWithCoder creates a new [AdaptiveImageGlyph].
-func NewAdaptiveImageGlyphWithCoder(coder *foundation.NSCoder) *AdaptiveImageGlyph {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAdaptiveImageGlyph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &AdaptiveImageGlyph{inner: raw.NSAdaptiveImageGlyphFromID(_id)}
+// NewAdaptiveImageGlyphWithCoder creates a new AdaptiveImageGlyph.
+func NewAdaptiveImageGlyphWithCoder(coder obj.Object) *AdaptiveImageGlyph {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSAdaptiveImageGlyph")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return adaptiveImageGlyphAdopt(_id)
 }
 
-// ImageContent calls the underlying ImageContent.
-func (x *AdaptiveImageGlyph) ImageContent() *foundation.NSData {
-	return x.inner.ImageContent()
+func (x *AdaptiveImageGlyph) ImageContent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("imageContent"))
+	return obj.Wrap(_r)
 }
 
-// ContentIdentifier calls the underlying ContentIdentifier.
 func (x *AdaptiveImageGlyph) ContentIdentifier() string {
-	_r := x.inner.ContentIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ContentDescription calls the underlying ContentDescription.
 func (x *AdaptiveImageGlyph) ContentDescription() string {
-	_r := x.inner.ContentDescription()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentDescription"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // AdaptiveImageGlyphable is the interface implemented by [AdaptiveImageGlyph], for mocking and DI.
 type AdaptiveImageGlyphable interface {
-	Unwrap() *raw.NSAdaptiveImageGlyph
-	ImageContent() *foundation.NSData
+	obj.Object
+	ImageContent() obj.Object
 	ContentIdentifier() string
 	ContentDescription() string
 }

@@ -5,62 +5,85 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract class that provides a description of how to convert a unit to and from the base unit of its dimension.
 //
-// UnitConverter wraps [raw.NSUnitConverter] with a fluent Go API.
+// UnitConverter is an idiomatic wrapper over the Objective-C class NSUnitConverter.
 type UnitConverter struct {
-	inner *raw.NSUnitConverter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSUnitConverter].
-func (x *UnitConverter) Unwrap() *raw.NSUnitConverter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitConverter) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitConverterFromID adopts an existing object pointer as a UnitConverter (nil for 0).
+// UnitConverterFromID adopts an existing Objective-C object as a UnitConverter
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitConverterFromID(id objc.ID) *UnitConverter {
 	if id == 0 {
 		return nil
 	}
-	return &UnitConverter{inner: raw.NSUnitConverterFromID(id)}
-}
-
-// NewUnitConverter creates a new [UnitConverter].
-func NewUnitConverter() *UnitConverter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitConverter")), objc.RegisterName("new"))
-	return &UnitConverter{inner: raw.NSUnitConverterFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitConverter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitConverter {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitConverter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// BaseUnitValueFromValue calls the underlying BaseUnitValueFromValue.
+// unitConverterAdopt wraps an Objective-C object that this code just created as a
+// UnitConverter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitConverterAdopt(id objc.ID) *UnitConverter {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitConverter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UnitConverter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UnitConverter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UnitConverter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUnitConverter creates a new UnitConverter.
+func NewUnitConverter() *UnitConverter {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitConverter")), objc.RegisterName("new"))
+	return unitConverterAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *UnitConverter) WithScriptingProperties(scriptingProperties obj.Object) *UnitConverter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
 func (x *UnitConverter) BaseUnitValueFromValue(value float64) float64 {
-	return x.inner.BaseUnitValueFromValue(value)
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("baseUnitValueFromValue:"), value)
+	return _r
 }
 
-// ValueFromBaseUnitValue calls the underlying ValueFromBaseUnitValue.
 func (x *UnitConverter) ValueFromBaseUnitValue(baseUnitValue float64) float64 {
-	return x.inner.ValueFromBaseUnitValue(baseUnitValue)
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("valueFromBaseUnitValue:"), baseUnitValue)
+	return _r
 }
-
-func (x *UnitConverter) asUnitConverter() *raw.NSUnitConverter { return x.inner }
-
-func (x *UnitConverter) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // UnitConverterable is the interface implemented by [UnitConverter], for mocking and DI.
 type UnitConverterable interface {
-	Unwrap() *raw.NSUnitConverter
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitConverter
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitConverter
 	BaseUnitValueFromValue(value float64) float64
 	ValueFromBaseUnitValue(baseUnitValue float64) float64
 }

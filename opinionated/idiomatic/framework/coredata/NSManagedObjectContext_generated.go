@@ -6,134 +6,161 @@ package coredata
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // An object space to manipulate and track changes to managed objects.
 //
-// ManagedObjectContext wraps [raw.NSManagedObjectContext] with a fluent Go API.
+// ManagedObjectContext is an idiomatic wrapper over the Objective-C class NSManagedObjectContext.
 type ManagedObjectContext struct {
-	inner *raw.NSManagedObjectContext
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSManagedObjectContext].
-func (x *ManagedObjectContext) Unwrap() *raw.NSManagedObjectContext { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ManagedObjectContext) ID() objc.ID { return x.inner.Ptr() }
-
-// ManagedObjectContextFromID adopts an existing object pointer as a ManagedObjectContext (nil for 0).
+// ManagedObjectContextFromID adopts an existing Objective-C object as a ManagedObjectContext
+// (nil for 0), retaining it and registering a release finalizer.
 func ManagedObjectContextFromID(id objc.ID) *ManagedObjectContext {
 	if id == 0 {
 		return nil
 	}
-	return &ManagedObjectContext{inner: raw.NSManagedObjectContextFromID(id)}
+	x := &ManagedObjectContext{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewManagedObjectContext creates a new [ManagedObjectContext].
+// managedObjectContextAdopt wraps an Objective-C object that this code just created as a
+// ManagedObjectContext (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func managedObjectContextAdopt(id objc.ID) *ManagedObjectContext {
+	if id == 0 {
+		return nil
+	}
+	x := &ManagedObjectContext{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ManagedObjectContext) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ManagedObjectContext) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ManagedObjectContext) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewManagedObjectContext creates a new ManagedObjectContext.
 func NewManagedObjectContext() *ManagedObjectContext {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectContext")), objc.RegisterName("new"))
-	return &ManagedObjectContext{inner: raw.NSManagedObjectContextFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectContext")), objc.RegisterName("new"))
+	return managedObjectContextAdopt(_id)
 }
 
 // Creates a context that uses the specified concurrency type.
 //
-// NewManagedObjectContextWithConcurrencyType creates a new [ManagedObjectContext].
-func NewManagedObjectContextWithConcurrencyType(ct NSManagedObjectContextConcurrencyType) *ManagedObjectContext {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObjectContext")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConcurrencyType:"), raw.NSManagedObjectContextConcurrencyType(ct))
-	return &ManagedObjectContext{inner: raw.NSManagedObjectContextFromID(_id)}
+// NewManagedObjectContextWithConcurrencyType creates a new ManagedObjectContext.
+func NewManagedObjectContextWithConcurrencyType(ct ManagedObjectContextConcurrencyType) *ManagedObjectContext {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObjectContext")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithConcurrencyType:"), ct)
+	return managedObjectContextAdopt(_id)
 }
 
 // The persistent store coordinator of the context.
 //
-// WithPersistentStoreCoordinator sets the persistentStoreCoordinator property and returns the receiver for chaining.
+// WithPersistentStoreCoordinator sets persistentStoreCoordinator and returns the receiver so calls can be chained.
 func (x *ManagedObjectContext) WithPersistentStoreCoordinator(persistentStoreCoordinator *PersistentStoreCoordinator) *ManagedObjectContext {
-	x.inner.SetPersistentStoreCoordinator(persistentStoreCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistentStoreCoordinator:"), objref.IDOf(persistentStoreCoordinator))
 	return x
 }
 
 // The parent of the context.
 //
-// WithParentContext sets the parentContext property and returns the receiver for chaining.
+// WithParentContext sets parentContext and returns the receiver so calls can be chained.
 func (x *ManagedObjectContext) WithParentContext(parentContext *ManagedObjectContext) *ManagedObjectContext {
-	x.inner.SetParentContext(parentContext.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentContext:"), objref.IDOf(parentContext))
 	return x
 }
 
 // The developer-provided name of the context.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *ManagedObjectContext) WithName(name string) *ManagedObjectContext {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // The object that provides undo support for the context.
 //
-// WithUndoManager sets the undoManager property and returns the receiver for chaining.
-func (x *ManagedObjectContext) WithUndoManager(undoManager *foundation.NSUndoManager) *ManagedObjectContext {
-	x.inner.SetUndoManager(undoManager)
+// WithUndoManager sets undoManager and returns the receiver so calls can be chained.
+func (x *ManagedObjectContext) WithUndoManager(undoManager obj.Object) *ManagedObjectContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUndoManager:"), objref.IDOf(undoManager))
 	return x
 }
 
 // A Boolean value that indicates whether the context propagates deletes at the end of the event in which a change was made.
 //
-// WithPropagatesDeletesAtEndOfEvent sets the propagatesDeletesAtEndOfEvent property and returns the receiver for chaining.
+// WithPropagatesDeletesAtEndOfEvent sets propagatesDeletesAtEndOfEvent and returns the receiver so calls can be chained.
 func (x *ManagedObjectContext) WithPropagatesDeletesAtEndOfEvent(propagatesDeletesAtEndOfEvent bool) *ManagedObjectContext {
-	x.inner.SetPropagatesDeletesAtEndOfEvent(propagatesDeletesAtEndOfEvent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropagatesDeletesAtEndOfEvent:"), propagatesDeletesAtEndOfEvent)
 	return x
 }
 
 // A Boolean value that indicates whether the context keeps strong references to all registered managed objects.
 //
-// WithRetainsRegisteredObjects sets the retainsRegisteredObjects property and returns the receiver for chaining.
+// WithRetainsRegisteredObjects sets retainsRegisteredObjects and returns the receiver so calls can be chained.
 func (x *ManagedObjectContext) WithRetainsRegisteredObjects(retainsRegisteredObjects bool) *ManagedObjectContext {
-	x.inner.SetRetainsRegisteredObjects(retainsRegisteredObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRetainsRegisteredObjects:"), retainsRegisteredObjects)
 	return x
 }
 
 // A Boolean value that determines whether the context turns inaccessible faults into deleted objects.
 //
-// WithShouldDeleteInaccessibleFaults sets the shouldDeleteInaccessibleFaults property and returns the receiver for chaining.
+// WithShouldDeleteInaccessibleFaults sets shouldDeleteInaccessibleFaults and returns the receiver so calls can be chained.
 func (x *ManagedObjectContext) WithShouldDeleteInaccessibleFaults(shouldDeleteInaccessibleFaults bool) *ManagedObjectContext {
-	x.inner.SetShouldDeleteInaccessibleFaults(shouldDeleteInaccessibleFaults)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldDeleteInaccessibleFaults:"), shouldDeleteInaccessibleFaults)
 	return x
 }
 
 // The maximum length of time that may have elapsed since the store previously fetched data before fulfilling a fault issues a new fetch.
 //
-// WithStalenessInterval sets the stalenessInterval property and returns the receiver for chaining.
+// WithStalenessInterval sets stalenessInterval and returns the receiver so calls can be chained.
 func (x *ManagedObjectContext) WithStalenessInterval(stalenessInterval float64) *ManagedObjectContext {
-	x.inner.SetStalenessInterval(stalenessInterval)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStalenessInterval:"), stalenessInterval)
 	return x
 }
 
 // The merge policy of the context.
 //
-// WithMergePolicy sets the mergePolicy property and returns the receiver for chaining.
-func (x *ManagedObjectContext) WithMergePolicy(mergePolicy objc.ID) *ManagedObjectContext {
-	x.inner.SetMergePolicy(mergePolicy)
+// WithMergePolicy sets mergePolicy and returns the receiver so calls can be chained.
+func (x *ManagedObjectContext) WithMergePolicy(mergePolicy obj.Object) *ManagedObjectContext {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMergePolicy:"), objref.IDOf(mergePolicy))
 	return x
 }
 
 // A Boolean value that indicates whether the context automatically merges changes saved to its persistent store coordinator or parent context.
 //
-// WithAutomaticallyMergesChangesFromParent sets the automaticallyMergesChangesFromParent property and returns the receiver for chaining.
+// WithAutomaticallyMergesChangesFromParent sets automaticallyMergesChangesFromParent and returns the receiver so calls can be chained.
 func (x *ManagedObjectContext) WithAutomaticallyMergesChangesFromParent(automaticallyMergesChangesFromParent bool) *ManagedObjectContext {
-	x.inner.SetAutomaticallyMergesChangesFromParent(automaticallyMergesChangesFromParent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyMergesChangesFromParent:"), automaticallyMergesChangesFromParent)
 	return x
 }
 
 // The author for the context that is used as an identifier in persistent history transactions.
 //
-// WithTransactionAuthor sets the transactionAuthor property and returns the receiver for chaining.
+// WithTransactionAuthor sets transactionAuthor and returns the receiver so calls can be chained.
 func (x *ManagedObjectContext) WithTransactionAuthor(transactionAuthor string) *ManagedObjectContext {
-	x.inner.SetTransactionAuthor(foundation.NSStringStringWithUTF8String(transactionAuthor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransactionAuthor:"), purego.NSString(transactionAuthor))
 	return x
 }
 
@@ -142,9 +169,10 @@ func (x *ManagedObjectContext) WithTransactionAuthor(transactionAuthor string) *
 // PerformBlock blocks until the operation completes or ctx is cancelled.
 func (x *ManagedObjectContext) PerformBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.PerformBlock(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -158,9 +186,10 @@ func (x *ManagedObjectContext) PerformBlock(ctx context.Context) error {
 // PerformBlockAndWait blocks until the operation completes or ctx is cancelled.
 func (x *ManagedObjectContext) PerformBlockAndWait(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.PerformBlockAndWait(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performBlockAndWait:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -170,395 +199,341 @@ func (x *ManagedObjectContext) PerformBlockAndWait(ctx context.Context) error {
 }
 
 // Returns an object that exists in the context.
-//
-// ObjectRegisteredForID calls the underlying ObjectRegisteredForID.
-func (x *ManagedObjectContext) ObjectRegisteredForID(objectID *raw.NSManagedObjectID) *ManagedObject {
-	_r := x.inner.ObjectRegisteredForID(objectID)
-	if _r == nil {
-		return nil
-	}
-	return &ManagedObject{inner: _r}
+func (x *ManagedObjectContext) ObjectRegisteredForID(objectID *ManagedObjectID) *ManagedObject {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectRegisteredForID:"), objref.IDOf(objectID))
+	return ManagedObjectFromID(_r)
 }
 
 // Returns either an existing object from the context or a fault that represents that object.
-//
-// ObjectWithID calls the underlying ObjectWithID.
-func (x *ManagedObjectContext) ObjectWithID(objectID *raw.NSManagedObjectID) *ManagedObject {
-	_r := x.inner.ObjectWithID(objectID)
-	if _r == nil {
-		return nil
-	}
-	return &ManagedObject{inner: _r}
+func (x *ManagedObjectContext) ObjectWithID(objectID *ManagedObjectID) *ManagedObject {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectWithID:"), objref.IDOf(objectID))
+	return ManagedObjectFromID(_r)
 }
 
 // Returns an existing object from either the context or the persistent store.
-//
-// ExistingObjectWithIDError calls the underlying ExistingObjectWithIDError.
-func (x *ManagedObjectContext) ExistingObjectWithIDError(objectID *raw.NSManagedObjectID) (*ManagedObject, error) {
-	_r, _err := x.inner.ExistingObjectWithIDError(objectID)
-	if _err != nil {
-		return nil, _err
+func (x *ManagedObjectContext) ExistingObjectWithIDError(objectID *ManagedObjectID) (*ManagedObject, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("existingObjectWithID:error:"), objref.IDOf(objectID), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &ManagedObject{inner: _r}, nil
+	return ManagedObjectFromID(_r), nil
 }
 
 // Returns an array of objects that meet the criteria of the specified fetch request.
-//
-// ExecuteFetchRequestError calls the underlying ExecuteFetchRequestError.
-func (x *ManagedObjectContext) ExecuteFetchRequestError(request *raw.NSFetchRequest[objc.ID]) (*foundation.NSArray[objc.ID], error) {
-	return x.inner.ExecuteFetchRequestError(request)
+func (x *ManagedObjectContext) ExecuteFetchRequestError(request obj.Object) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeFetchRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Returns the number of objects the specified request fetches when it executes.
-//
-// CountForFetchRequestError calls the underlying CountForFetchRequestError.
-func (x *ManagedObjectContext) CountForFetchRequestError(request *raw.NSFetchRequest[objc.ID]) (uint, error) {
-	return x.inner.CountForFetchRequestError(request)
+func (x *ManagedObjectContext) CountForFetchRequestError(request obj.Object) (int, error) {
+	var _nsErr uintptr
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("countForFetchRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return 0, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return _r, nil
 }
 
 // Passes a request to the persistent store without affecting the contents of the managed object context, and returns a persistent store result.
-//
-// ExecuteRequestError calls the underlying ExecuteRequestError.
-func (x *ManagedObjectContext) ExecuteRequestError(request *raw.NSPersistentStoreRequest) (*PersistentStoreResult, error) {
-	_r, _err := x.inner.ExecuteRequestError(request)
-	if _err != nil {
-		return nil, _err
+func (x *ManagedObjectContext) ExecuteRequestError(request *PersistentStoreRequest) (*PersistentStoreResult, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("executeRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &PersistentStoreResult{inner: _r}, nil
+	return PersistentStoreResultFromID(_r), nil
 }
 
 // Registers an object to be inserted in the context’s persistent store the next time changes are saved.
-//
-// InsertObject calls the underlying InsertObject.
-func (x *ManagedObjectContext) InsertObject(object *raw.NSManagedObject) {
-	x.inner.InsertObject(object)
+func (x *ManagedObjectContext) InsertObject(object *ManagedObject) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertObject:"), objref.IDOf(object))
 }
 
 // Specifies an object that should be removed from its persistent store when changes are committed.
-//
-// DeleteObject calls the underlying DeleteObject.
-func (x *ManagedObjectContext) DeleteObject(object *raw.NSManagedObject) {
-	x.inner.DeleteObject(object)
+func (x *ManagedObjectContext) DeleteObject(object *ManagedObject) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deleteObject:"), objref.IDOf(object))
 }
 
 // Updates the persistent properties of a managed object to use the latest values from the persistent store.
-//
-// RefreshObjectMergeChanges calls the underlying RefreshObjectMergeChanges.
-func (x *ManagedObjectContext) RefreshObjectMergeChanges(object *raw.NSManagedObject, flag bool) {
-	x.inner.RefreshObjectMergeChanges(object, flag)
+func (x *ManagedObjectContext) RefreshObjectMergeChanges(object *ManagedObject, flag bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("refreshObject:mergeChanges:"), objref.IDOf(object), flag)
 }
 
 // Marks an object for conflict detection.
-//
-// DetectConflictsForObject calls the underlying DetectConflictsForObject.
-func (x *ManagedObjectContext) DetectConflictsForObject(object *raw.NSManagedObject) {
-	x.inner.DetectConflictsForObject(object)
+func (x *ManagedObjectContext) DetectConflictsForObject(object *ManagedObject) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("detectConflictsForObject:"), objref.IDOf(object))
 }
 
 // Forces the context to process changes to the object graph.
-//
-// ProcessPendingChanges calls the underlying ProcessPendingChanges.
 func (x *ManagedObjectContext) ProcessPendingChanges() {
-	x.inner.ProcessPendingChanges()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("processPendingChanges"))
 }
 
 // Specifies the store in which a newly inserted object will be saved.
-//
-// AssignObjectToPersistentStore calls the underlying AssignObjectToPersistentStore.
-func (x *ManagedObjectContext) AssignObjectToPersistentStore(object objc.ID, store *raw.NSPersistentStore) {
-	x.inner.AssignObjectToPersistentStore(object, store)
+func (x *ManagedObjectContext) AssignObjectToPersistentStore(object obj.Object, store *PersistentStore) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("assignObject:toPersistentStore:"), objref.IDOf(object), objref.IDOf(store))
 }
 
 // Sends an undo message to the context’s undo manager, asking it to reverse the latest uncommitted changes applied to objects in the object graph.
-//
-// Undo calls the underlying Undo.
 func (x *ManagedObjectContext) Undo() {
-	x.inner.Undo()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("undo"))
 }
 
 // Sends a redo message to the context’s undo manager, asking it to reverse the latest undo operation applied to objects in the object graph.
-//
-// Redo calls the underlying Redo.
 func (x *ManagedObjectContext) Redo() {
-	x.inner.Redo()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("redo"))
 }
 
 // Returns the context to its base state.
-//
-// Reset calls the underlying Reset.
 func (x *ManagedObjectContext) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
 // Removes everything from the undo stack, discards all insertions and deletions, and restores updated objects to their last committed values.
-//
-// Rollback calls the underlying Rollback.
 func (x *ManagedObjectContext) Rollback() {
-	x.inner.Rollback()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rollback"))
 }
 
 // Attempts to commit unsaved changes to registered objects to the context’s parent store.
 //
-// Save returns any validation error.
+// Save returns an error if the operation did not succeed.
 func (x *ManagedObjectContext) Save() error {
-	_, err := x.inner.Save()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("save:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Refreshes all of the registered managed objects in the context.
-//
-// RefreshAllObjects calls the underlying RefreshAllObjects.
 func (x *ManagedObjectContext) RefreshAllObjects() {
-	x.inner.RefreshAllObjects()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("refreshAllObjects"))
 }
 
-// Lock calls the underlying Lock.
 func (x *ManagedObjectContext) Lock() {
-	x.inner.Lock()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lock"))
 }
 
-// Unlock calls the underlying Unlock.
 func (x *ManagedObjectContext) Unlock() {
-	x.inner.Unlock()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unlock"))
 }
 
-// TryLock calls the underlying TryLock.
 func (x *ManagedObjectContext) TryLock() bool {
-	return x.inner.TryLock()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("tryLock"))
+	return _r
 }
 
 // Creates a log of the inaccessible fault.
-//
-// ShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty calls the underlying ShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty.
-func (x *ManagedObjectContext) ShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty(fault *raw.NSManagedObject, oid *raw.NSManagedObjectID, property *raw.NSPropertyDescription) bool {
-	return x.inner.ShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty(fault, oid, property)
+func (x *ManagedObjectContext) ShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty(fault *ManagedObject, oid *ManagedObjectID, property *PropertyDescription) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldHandleInaccessibleFault:forObjectID:triggeredByProperty:"), objref.IDOf(fault), objref.IDOf(oid), objref.IDOf(property))
+	return _r
 }
 
 // Converts to permanent IDs the object IDs of the objects in a given array.
-//
-// ObtainPermanentIDsForObjectsError calls the underlying ObtainPermanentIDsForObjectsError.
-func (x *ManagedObjectContext) ObtainPermanentIDsForObjectsError(objects *foundation.NSArray[*raw.NSManagedObject]) (bool, error) {
-	return x.inner.ObtainPermanentIDsForObjectsError(objects)
+func (x *ManagedObjectContext) ObtainPermanentIDsForObjects(objects []*ManagedObject) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("obtainPermanentIDsForObjects:error:"), purego.SliceToNSArray(objects, func(_v *ManagedObject) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Merges the changes specified in a given notification.
-//
-// MergeChangesFromContextDidSaveNotification calls the underlying MergeChangesFromContextDidSaveNotification.
-func (x *ManagedObjectContext) MergeChangesFromContextDidSaveNotification(notification *foundation.NSNotification) {
-	x.inner.MergeChangesFromContextDidSaveNotification(notification)
+func (x *ManagedObjectContext) MergeChangesFromContextDidSaveNotification(notification obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mergeChangesFromContextDidSaveNotification:"), objref.IDOf(notification))
 }
 
 // Sets the query generation this context should use.
-//
-// SetQueryGenerationFromTokenError calls the underlying SetQueryGenerationFromTokenError.
-func (x *ManagedObjectContext) SetQueryGenerationFromTokenError(generation *raw.NSQueryGenerationToken) (bool, error) {
-	return x.inner.SetQueryGenerationFromTokenError(generation)
+func (x *ManagedObjectContext) SetQueryGenerationFromToken(generation *QueryGenerationToken) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setQueryGenerationFromToken:error:"), objref.IDOf(generation), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// PersistentStoreCoordinator calls the underlying PersistentStoreCoordinator.
 func (x *ManagedObjectContext) PersistentStoreCoordinator() *PersistentStoreCoordinator {
-	_r := x.inner.PersistentStoreCoordinator()
-	if _r == nil {
-		return nil
-	}
-	return &PersistentStoreCoordinator{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("persistentStoreCoordinator"))
+	return PersistentStoreCoordinatorFromID(_r)
 }
 
-// SetPersistentStoreCoordinator calls the underlying SetPersistentStoreCoordinator.
-func (x *ManagedObjectContext) SetPersistentStoreCoordinator(persistentStoreCoordinator *raw.NSPersistentStoreCoordinator) {
-	x.inner.SetPersistentStoreCoordinator(persistentStoreCoordinator)
+func (x *ManagedObjectContext) SetPersistentStoreCoordinator(persistentStoreCoordinator *PersistentStoreCoordinator) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPersistentStoreCoordinator:"), objref.IDOf(persistentStoreCoordinator))
 }
 
-// ParentContext calls the underlying ParentContext.
 func (x *ManagedObjectContext) ParentContext() *ManagedObjectContext {
-	_r := x.inner.ParentContext()
-	if _r == nil {
-		return nil
-	}
-	return &ManagedObjectContext{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentContext"))
+	return ManagedObjectContextFromID(_r)
 }
 
-// SetParentContext calls the underlying SetParentContext.
-func (x *ManagedObjectContext) SetParentContext(parentContext *raw.NSManagedObjectContext) {
-	x.inner.SetParentContext(parentContext)
+func (x *ManagedObjectContext) SetParentContext(parentContext *ManagedObjectContext) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setParentContext:"), objref.IDOf(parentContext))
 }
 
-// Name calls the underlying Name.
 func (x *ManagedObjectContext) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *ManagedObjectContext) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// UndoManager calls the underlying UndoManager.
-func (x *ManagedObjectContext) UndoManager() *foundation.NSUndoManager {
-	return x.inner.UndoManager()
+func (x *ManagedObjectContext) UndoManager() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("undoManager"))
+	return obj.Wrap(_r)
 }
 
-// SetUndoManager calls the underlying SetUndoManager.
-func (x *ManagedObjectContext) SetUndoManager(undoManager *foundation.NSUndoManager) {
-	x.inner.SetUndoManager(undoManager)
+func (x *ManagedObjectContext) SetUndoManager(undoManager obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUndoManager:"), objref.IDOf(undoManager))
 }
 
-// HasChanges calls the underlying HasChanges.
 func (x *ManagedObjectContext) HasChanges() bool {
-	return x.inner.HasChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasChanges"))
+	return _r
 }
 
-// UserInfo calls the underlying UserInfo.
-func (x *ManagedObjectContext) UserInfo() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	return x.inner.UserInfo()
+func (x *ManagedObjectContext) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
 }
 
-// ConcurrencyType calls the underlying ConcurrencyType.
-func (x *ManagedObjectContext) ConcurrencyType() NSManagedObjectContextConcurrencyType {
-	return NSManagedObjectContextConcurrencyType(x.inner.ConcurrencyType())
+func (x *ManagedObjectContext) ConcurrencyType() ManagedObjectContextConcurrencyType {
+	_r := objc.Send[ManagedObjectContextConcurrencyType](objref.IDOf(x), objc.RegisterName("concurrencyType"))
+	return _r
 }
 
-// InsertedObjects calls the underlying InsertedObjects.
-func (x *ManagedObjectContext) InsertedObjects() *foundation.NSSet[*raw.NSManagedObject] {
-	return x.inner.InsertedObjects()
+func (x *ManagedObjectContext) InsertedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("insertedObjects"))
+	return obj.Wrap(_r)
 }
 
-// UpdatedObjects calls the underlying UpdatedObjects.
-func (x *ManagedObjectContext) UpdatedObjects() *foundation.NSSet[*raw.NSManagedObject] {
-	return x.inner.UpdatedObjects()
+func (x *ManagedObjectContext) UpdatedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedObjects"))
+	return obj.Wrap(_r)
 }
 
-// DeletedObjects calls the underlying DeletedObjects.
-func (x *ManagedObjectContext) DeletedObjects() *foundation.NSSet[*raw.NSManagedObject] {
-	return x.inner.DeletedObjects()
+func (x *ManagedObjectContext) DeletedObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deletedObjects"))
+	return obj.Wrap(_r)
 }
 
-// RegisteredObjects calls the underlying RegisteredObjects.
-func (x *ManagedObjectContext) RegisteredObjects() *foundation.NSSet[*raw.NSManagedObject] {
-	return x.inner.RegisteredObjects()
+func (x *ManagedObjectContext) RegisteredObjects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("registeredObjects"))
+	return obj.Wrap(_r)
 }
 
-// PropagatesDeletesAtEndOfEvent calls the underlying PropagatesDeletesAtEndOfEvent.
 func (x *ManagedObjectContext) PropagatesDeletesAtEndOfEvent() bool {
-	return x.inner.PropagatesDeletesAtEndOfEvent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("propagatesDeletesAtEndOfEvent"))
+	return _r
 }
 
-// SetPropagatesDeletesAtEndOfEvent calls the underlying SetPropagatesDeletesAtEndOfEvent.
 func (x *ManagedObjectContext) SetPropagatesDeletesAtEndOfEvent(propagatesDeletesAtEndOfEvent bool) {
-	x.inner.SetPropagatesDeletesAtEndOfEvent(propagatesDeletesAtEndOfEvent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPropagatesDeletesAtEndOfEvent:"), propagatesDeletesAtEndOfEvent)
 }
 
-// RetainsRegisteredObjects calls the underlying RetainsRegisteredObjects.
 func (x *ManagedObjectContext) RetainsRegisteredObjects() bool {
-	return x.inner.RetainsRegisteredObjects()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("retainsRegisteredObjects"))
+	return _r
 }
 
-// SetRetainsRegisteredObjects calls the underlying SetRetainsRegisteredObjects.
 func (x *ManagedObjectContext) SetRetainsRegisteredObjects(retainsRegisteredObjects bool) {
-	x.inner.SetRetainsRegisteredObjects(retainsRegisteredObjects)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRetainsRegisteredObjects:"), retainsRegisteredObjects)
 }
 
-// ShouldDeleteInaccessibleFaults calls the underlying ShouldDeleteInaccessibleFaults.
 func (x *ManagedObjectContext) ShouldDeleteInaccessibleFaults() bool {
-	return x.inner.ShouldDeleteInaccessibleFaults()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldDeleteInaccessibleFaults"))
+	return _r
 }
 
-// SetShouldDeleteInaccessibleFaults calls the underlying SetShouldDeleteInaccessibleFaults.
 func (x *ManagedObjectContext) SetShouldDeleteInaccessibleFaults(shouldDeleteInaccessibleFaults bool) {
-	x.inner.SetShouldDeleteInaccessibleFaults(shouldDeleteInaccessibleFaults)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldDeleteInaccessibleFaults:"), shouldDeleteInaccessibleFaults)
 }
 
-// StalenessInterval calls the underlying StalenessInterval.
 func (x *ManagedObjectContext) StalenessInterval() float64 {
-	return x.inner.StalenessInterval()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("stalenessInterval"))
+	return _r
 }
 
-// SetStalenessInterval calls the underlying SetStalenessInterval.
 func (x *ManagedObjectContext) SetStalenessInterval(stalenessInterval float64) {
-	x.inner.SetStalenessInterval(stalenessInterval)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStalenessInterval:"), stalenessInterval)
 }
 
-// MergePolicy calls the underlying MergePolicy.
-func (x *ManagedObjectContext) MergePolicy() objc.ID {
-	return x.inner.MergePolicy()
+func (x *ManagedObjectContext) MergePolicy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("mergePolicy"))
+	return obj.Wrap(_r)
 }
 
-// SetMergePolicy calls the underlying SetMergePolicy.
-func (x *ManagedObjectContext) SetMergePolicy(mergePolicy objc.ID) {
-	x.inner.SetMergePolicy(mergePolicy)
+func (x *ManagedObjectContext) SetMergePolicy(mergePolicy obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMergePolicy:"), objref.IDOf(mergePolicy))
 }
 
-// QueryGenerationToken calls the underlying QueryGenerationToken.
 func (x *ManagedObjectContext) QueryGenerationToken() *QueryGenerationToken {
-	_r := x.inner.QueryGenerationToken()
-	if _r == nil {
-		return nil
-	}
-	return &QueryGenerationToken{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queryGenerationToken"))
+	return QueryGenerationTokenFromID(_r)
 }
 
-// AutomaticallyMergesChangesFromParent calls the underlying AutomaticallyMergesChangesFromParent.
 func (x *ManagedObjectContext) AutomaticallyMergesChangesFromParent() bool {
-	return x.inner.AutomaticallyMergesChangesFromParent()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("automaticallyMergesChangesFromParent"))
+	return _r
 }
 
-// SetAutomaticallyMergesChangesFromParent calls the underlying SetAutomaticallyMergesChangesFromParent.
 func (x *ManagedObjectContext) SetAutomaticallyMergesChangesFromParent(automaticallyMergesChangesFromParent bool) {
-	x.inner.SetAutomaticallyMergesChangesFromParent(automaticallyMergesChangesFromParent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticallyMergesChangesFromParent:"), automaticallyMergesChangesFromParent)
 }
 
-// TransactionAuthor calls the underlying TransactionAuthor.
 func (x *ManagedObjectContext) TransactionAuthor() string {
-	_r := x.inner.TransactionAuthor()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionAuthor"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTransactionAuthor calls the underlying SetTransactionAuthor.
 func (x *ManagedObjectContext) SetTransactionAuthor(transactionAuthor string) {
-	x.inner.SetTransactionAuthor(foundation.NSStringStringWithUTF8String(transactionAuthor))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransactionAuthor:"), purego.NSString(transactionAuthor))
 }
 
 // ManagedObjectContextable is the interface implemented by [ManagedObjectContext], for mocking and DI.
 type ManagedObjectContextable interface {
-	Unwrap() *raw.NSManagedObjectContext
+	obj.Object
 	WithPersistentStoreCoordinator(persistentStoreCoordinator *PersistentStoreCoordinator) *ManagedObjectContext
 	WithParentContext(parentContext *ManagedObjectContext) *ManagedObjectContext
 	WithName(name string) *ManagedObjectContext
-	WithUndoManager(undoManager *foundation.NSUndoManager) *ManagedObjectContext
+	WithUndoManager(undoManager obj.Object) *ManagedObjectContext
 	WithPropagatesDeletesAtEndOfEvent(propagatesDeletesAtEndOfEvent bool) *ManagedObjectContext
 	WithRetainsRegisteredObjects(retainsRegisteredObjects bool) *ManagedObjectContext
 	WithShouldDeleteInaccessibleFaults(shouldDeleteInaccessibleFaults bool) *ManagedObjectContext
 	WithStalenessInterval(stalenessInterval float64) *ManagedObjectContext
-	WithMergePolicy(mergePolicy objc.ID) *ManagedObjectContext
+	WithMergePolicy(mergePolicy obj.Object) *ManagedObjectContext
 	WithAutomaticallyMergesChangesFromParent(automaticallyMergesChangesFromParent bool) *ManagedObjectContext
 	WithTransactionAuthor(transactionAuthor string) *ManagedObjectContext
 	PerformBlock(ctx context.Context) error
 	PerformBlockAndWait(ctx context.Context) error
-	ObjectRegisteredForID(objectID *raw.NSManagedObjectID) *ManagedObject
-	ObjectWithID(objectID *raw.NSManagedObjectID) *ManagedObject
-	ExistingObjectWithIDError(objectID *raw.NSManagedObjectID) (*ManagedObject, error)
-	ExecuteFetchRequestError(request *raw.NSFetchRequest[objc.ID]) (*foundation.NSArray[objc.ID], error)
-	CountForFetchRequestError(request *raw.NSFetchRequest[objc.ID]) (uint, error)
-	ExecuteRequestError(request *raw.NSPersistentStoreRequest) (*PersistentStoreResult, error)
-	InsertObject(object *raw.NSManagedObject)
-	DeleteObject(object *raw.NSManagedObject)
-	RefreshObjectMergeChanges(object *raw.NSManagedObject, flag bool)
-	DetectConflictsForObject(object *raw.NSManagedObject)
+	ObjectRegisteredForID(objectID *ManagedObjectID) *ManagedObject
+	ObjectWithID(objectID *ManagedObjectID) *ManagedObject
+	ExistingObjectWithIDError(objectID *ManagedObjectID) (*ManagedObject, error)
+	ExecuteFetchRequestError(request obj.Object) (obj.Object, error)
+	CountForFetchRequestError(request obj.Object) (int, error)
+	ExecuteRequestError(request *PersistentStoreRequest) (*PersistentStoreResult, error)
+	InsertObject(object *ManagedObject)
+	DeleteObject(object *ManagedObject)
+	RefreshObjectMergeChanges(object *ManagedObject, flag bool)
+	DetectConflictsForObject(object *ManagedObject)
 	ProcessPendingChanges()
-	AssignObjectToPersistentStore(object objc.ID, store *raw.NSPersistentStore)
+	AssignObjectToPersistentStore(object obj.Object, store *PersistentStore)
 	Undo()
 	Redo()
 	Reset()
@@ -568,25 +543,25 @@ type ManagedObjectContextable interface {
 	Lock()
 	Unlock()
 	TryLock() bool
-	ShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty(fault *raw.NSManagedObject, oid *raw.NSManagedObjectID, property *raw.NSPropertyDescription) bool
-	ObtainPermanentIDsForObjectsError(objects *foundation.NSArray[*raw.NSManagedObject]) (bool, error)
-	MergeChangesFromContextDidSaveNotification(notification *foundation.NSNotification)
-	SetQueryGenerationFromTokenError(generation *raw.NSQueryGenerationToken) (bool, error)
+	ShouldHandleInaccessibleFaultForObjectIDTriggeredByProperty(fault *ManagedObject, oid *ManagedObjectID, property *PropertyDescription) bool
+	ObtainPermanentIDsForObjects(objects []*ManagedObject) error
+	MergeChangesFromContextDidSaveNotification(notification obj.Object)
+	SetQueryGenerationFromToken(generation *QueryGenerationToken) error
 	PersistentStoreCoordinator() *PersistentStoreCoordinator
-	SetPersistentStoreCoordinator(persistentStoreCoordinator *raw.NSPersistentStoreCoordinator)
+	SetPersistentStoreCoordinator(persistentStoreCoordinator *PersistentStoreCoordinator)
 	ParentContext() *ManagedObjectContext
-	SetParentContext(parentContext *raw.NSManagedObjectContext)
+	SetParentContext(parentContext *ManagedObjectContext)
 	Name() string
 	SetName(name string)
-	UndoManager() *foundation.NSUndoManager
-	SetUndoManager(undoManager *foundation.NSUndoManager)
+	UndoManager() obj.Object
+	SetUndoManager(undoManager obj.Object)
 	HasChanges() bool
-	UserInfo() *foundation.NSMutableDictionary[objc.ID, objc.ID]
-	ConcurrencyType() NSManagedObjectContextConcurrencyType
-	InsertedObjects() *foundation.NSSet[*raw.NSManagedObject]
-	UpdatedObjects() *foundation.NSSet[*raw.NSManagedObject]
-	DeletedObjects() *foundation.NSSet[*raw.NSManagedObject]
-	RegisteredObjects() *foundation.NSSet[*raw.NSManagedObject]
+	UserInfo() obj.Object
+	ConcurrencyType() ManagedObjectContextConcurrencyType
+	InsertedObjects() obj.Object
+	UpdatedObjects() obj.Object
+	DeletedObjects() obj.Object
+	RegisteredObjects() obj.Object
 	PropagatesDeletesAtEndOfEvent() bool
 	SetPropagatesDeletesAtEndOfEvent(propagatesDeletesAtEndOfEvent bool)
 	RetainsRegisteredObjects() bool
@@ -595,8 +570,8 @@ type ManagedObjectContextable interface {
 	SetShouldDeleteInaccessibleFaults(shouldDeleteInaccessibleFaults bool)
 	StalenessInterval() float64
 	SetStalenessInterval(stalenessInterval float64)
-	MergePolicy() objc.ID
-	SetMergePolicy(mergePolicy objc.ID)
+	MergePolicy() obj.Object
+	SetMergePolicy(mergePolicy obj.Object)
 	QueryGenerationToken() *QueryGenerationToken
 	AutomaticallyMergesChangesFromParent() bool
 	SetAutomaticallyMergesChangesFromParent(automaticallyMergesChangesFromParent bool)

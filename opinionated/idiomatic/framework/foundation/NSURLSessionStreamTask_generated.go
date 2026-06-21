@@ -6,104 +6,117 @@ package foundation
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A URL session task that is stream-based.
 //
-// URLSessionStreamTask wraps [raw.NSURLSessionStreamTask] with a fluent Go API.
+// URLSessionStreamTask is an idiomatic wrapper over the Objective-C class NSURLSessionStreamTask.
 type URLSessionStreamTask struct {
-	inner *raw.NSURLSessionStreamTask
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURLSessionStreamTask].
-func (x *URLSessionStreamTask) Unwrap() *raw.NSURLSessionStreamTask { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLSessionStreamTask) ID() objc.ID { return x.inner.Ptr() }
-
-// URLSessionStreamTaskFromID adopts an existing object pointer as a URLSessionStreamTask (nil for 0).
+// URLSessionStreamTaskFromID adopts an existing Objective-C object as a URLSessionStreamTask
+// (nil for 0), retaining it and registering a release finalizer.
 func URLSessionStreamTaskFromID(id objc.ID) *URLSessionStreamTask {
 	if id == 0 {
 		return nil
 	}
-	return &URLSessionStreamTask{inner: raw.NSURLSessionStreamTaskFromID(id)}
+	x := &URLSessionStreamTask{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewURLSessionStreamTask creates a new [URLSessionStreamTask].
+// uRLSessionStreamTaskAdopt wraps an Objective-C object that this code just created as a
+// URLSessionStreamTask (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLSessionStreamTaskAdopt(id objc.ID) *URLSessionStreamTask {
+	if id == 0 {
+		return nil
+	}
+	x := &URLSessionStreamTask{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *URLSessionStreamTask) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLSessionStreamTask) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLSessionStreamTask) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewURLSessionStreamTask creates a new URLSessionStreamTask.
 func NewURLSessionStreamTask() *URLSessionStreamTask {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLSessionStreamTask")), objc.RegisterName("new"))
-	return &URLSessionStreamTask{inner: raw.NSURLSessionStreamTaskFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSURLSessionStreamTask")), objc.RegisterName("new"))
+	return uRLSessionStreamTaskAdopt(_id)
 }
 
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *URLSessionStreamTask) WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionStreamTask {
-	x.inner.NSURLSessionTask.SetDelegate(delegate)
-	return x
-}
-
-// WithEarliestBeginDate sets the earliestBeginDate property and returns the receiver for chaining.
+// WithEarliestBeginDate sets earliestBeginDate and returns the receiver so calls can be chained.
 func (x *URLSessionStreamTask) WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionStreamTask {
-	x.inner.NSURLSessionTask.SetEarliestBeginDate(earliestBeginDate.asDate())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEarliestBeginDate:"), objref.IDOf(earliestBeginDate))
 	return x
 }
 
-// WithCountOfBytesClientExpectsToSend sets the countOfBytesClientExpectsToSend property and returns the receiver for chaining.
+// WithCountOfBytesClientExpectsToSend sets countOfBytesClientExpectsToSend and returns the receiver so calls can be chained.
 func (x *URLSessionStreamTask) WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionStreamTask {
-	x.inner.NSURLSessionTask.SetCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToSend:"), countOfBytesClientExpectsToSend)
 	return x
 }
 
-// WithCountOfBytesClientExpectsToReceive sets the countOfBytesClientExpectsToReceive property and returns the receiver for chaining.
+// WithCountOfBytesClientExpectsToReceive sets countOfBytesClientExpectsToReceive and returns the receiver so calls can be chained.
 func (x *URLSessionStreamTask) WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionStreamTask {
-	x.inner.NSURLSessionTask.SetCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCountOfBytesClientExpectsToReceive:"), countOfBytesClientExpectsToReceive)
 	return x
 }
 
-// WithTaskDescription sets the taskDescription property and returns the receiver for chaining.
-func (x *URLSessionStreamTask) WithTaskDescription(taskDescription string) *URLSessionStreamTask {
-	x.inner.NSURLSessionTask.SetTaskDescription(foundation.NSStringStringWithUTF8String(taskDescription))
+// WithTaskDescription sets taskDescription and returns the receiver so calls can be chained.
+func (x *URLSessionStreamTask) WithTaskDescription(taskDescription StringProvider) *URLSessionStreamTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTaskDescription:"), objref.IDOf(taskDescription))
 	return x
 }
 
-// WithPriority sets the priority property and returns the receiver for chaining.
+// WithPriority sets priority and returns the receiver so calls can be chained.
 func (x *URLSessionStreamTask) WithPriority(priority float32) *URLSessionStreamTask {
-	x.inner.NSURLSessionTask.SetPriority(priority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPriority:"), priority)
 	return x
 }
 
-// WithPrefersIncrementalDelivery sets the prefersIncrementalDelivery property and returns the receiver for chaining.
+// WithPrefersIncrementalDelivery sets prefersIncrementalDelivery and returns the receiver so calls can be chained.
 func (x *URLSessionStreamTask) WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionStreamTask {
-	x.inner.NSURLSessionTask.SetPrefersIncrementalDelivery(prefersIncrementalDelivery)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersIncrementalDelivery:"), prefersIncrementalDelivery)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLSessionStreamTask) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionStreamTask {
-	x.inner.NSURLSessionTask.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *URLSessionStreamTask) WithScriptingProperties(scriptingProperties obj.Object) *URLSessionStreamTask {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
-}
-
-// ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler calls the underlying ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler.
-func (x *URLSessionStreamTask) ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler(minBytes uint, maxBytes uint, timeout float64, completionHandler func(unsafe.Pointer, bool, unsafe.Pointer)) {
-	x.inner.ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler(minBytes, maxBytes, timeout, completionHandler)
 }
 
 // WriteDataTimeout blocks until the operation completes or ctx is cancelled.
-func (x *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data *raw.NSData, timeout float64) error {
+func (x *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data *Data, timeout float64) error {
 	_ch := make(chan error, 1)
-	x.inner.WriteDataTimeoutCompletionHandler(data, timeout, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeData:timeout:completionHandler:"), objref.IDOf(data), timeout, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -112,50 +125,37 @@ func (x *URLSessionStreamTask) WriteDataTimeout(ctx context.Context, data *raw.N
 	}
 }
 
-// CaptureStreams calls the underlying CaptureStreams.
 func (x *URLSessionStreamTask) CaptureStreams() {
-	x.inner.CaptureStreams()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("captureStreams"))
 }
 
-// CloseWrite calls the underlying CloseWrite.
 func (x *URLSessionStreamTask) CloseWrite() {
-	x.inner.CloseWrite()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closeWrite"))
 }
 
-// CloseRead calls the underlying CloseRead.
 func (x *URLSessionStreamTask) CloseRead() {
-	x.inner.CloseRead()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("closeRead"))
 }
 
-// StartSecureConnection calls the underlying StartSecureConnection.
 func (x *URLSessionStreamTask) StartSecureConnection() {
-	x.inner.StartSecureConnection()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startSecureConnection"))
 }
 
-// StopSecureConnection calls the underlying StopSecureConnection.
 func (x *URLSessionStreamTask) StopSecureConnection() {
-	x.inner.StopSecureConnection()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopSecureConnection"))
 }
-
-func (x *URLSessionStreamTask) asURLSessionTask() *raw.NSURLSessionTask {
-	return &x.inner.NSURLSessionTask
-}
-
-func (x *URLSessionStreamTask) asObject() *raw.NSObject { return &x.inner.NSURLSessionTask.NSObject }
 
 // URLSessionStreamTaskable is the interface implemented by [URLSessionStreamTask], for mocking and DI.
 type URLSessionStreamTaskable interface {
-	Unwrap() *raw.NSURLSessionStreamTask
-	WithDelegate(delegate raw.NSURLSessionTaskDelegate) *URLSessionStreamTask
+	obj.Object
 	WithEarliestBeginDate(earliestBeginDate DateProvider) *URLSessionStreamTask
 	WithCountOfBytesClientExpectsToSend(countOfBytesClientExpectsToSend int64) *URLSessionStreamTask
 	WithCountOfBytesClientExpectsToReceive(countOfBytesClientExpectsToReceive int64) *URLSessionStreamTask
-	WithTaskDescription(taskDescription string) *URLSessionStreamTask
+	WithTaskDescription(taskDescription StringProvider) *URLSessionStreamTask
 	WithPriority(priority float32) *URLSessionStreamTask
 	WithPrefersIncrementalDelivery(prefersIncrementalDelivery bool) *URLSessionStreamTask
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLSessionStreamTask
-	ReadDataOfMinLengthMaxLengthTimeoutCompletionHandler(minBytes uint, maxBytes uint, timeout float64, completionHandler func(unsafe.Pointer, bool, unsafe.Pointer))
-	WriteDataTimeout(ctx context.Context, data *raw.NSData, timeout float64) error
+	WithScriptingProperties(scriptingProperties obj.Object) *URLSessionStreamTask
+	WriteDataTimeout(ctx context.Context, data *Data, timeout float64) error
 	CaptureStreams()
 	CloseWrite()
 	CloseRead()

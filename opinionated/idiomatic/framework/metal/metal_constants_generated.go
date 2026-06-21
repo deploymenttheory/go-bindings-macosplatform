@@ -5,220 +5,176 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
 // An error domain for errors that pertain to creating a tensor.
-// MTLTensorDomain returns the string constant MTLTensorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTLTensorDomain() objc.ID {
-	if _r := raw.MTLTensorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MTLTensorDomain returns the string constant MTLTensorDomain, for use as a dictionary key or argument.
+func MTLTensorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTLTensorDomain"))) }
+
+// MTLLibraryErrorDomain returns the string constant MTLLibraryErrorDomain, for use as a dictionary key or argument.
+func MTLLibraryErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLLibraryErrorDomain")))
 }
 
-// MTLLibraryErrorDomain returns the string constant MTLLibraryErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTLLibraryErrorDomain() objc.ID {
-	if _r := raw.MTLLibraryErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MTLCommonCounterTimestamp returns the string constant MTLCommonCounterTimestamp, for use as a dictionary key or argument.
+func MTLCommonCounterTimestamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterTimestamp")))
 }
 
-// MTLCommonCounterTimestamp returns the string constant MTLCommonCounterTimestamp as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterTimestamp() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterTimestamp())
+// MTLCommonCounterTessellationInputPatches returns the string constant MTLCommonCounterTessellationInputPatches, for use as a dictionary key or argument.
+func MTLCommonCounterTessellationInputPatches() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterTessellationInputPatches")))
 }
 
-// MTLCommonCounterTessellationInputPatches returns the string constant MTLCommonCounterTessellationInputPatches as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterTessellationInputPatches() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterTessellationInputPatches())
+// MTLCommonCounterVertexInvocations returns the string constant MTLCommonCounterVertexInvocations, for use as a dictionary key or argument.
+func MTLCommonCounterVertexInvocations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterVertexInvocations")))
 }
 
-// MTLCommonCounterVertexInvocations returns the string constant MTLCommonCounterVertexInvocations as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterVertexInvocations() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterVertexInvocations())
+// MTLCommonCounterPostTessellationVertexInvocations returns the string constant MTLCommonCounterPostTessellationVertexInvocations, for use as a dictionary key or argument.
+func MTLCommonCounterPostTessellationVertexInvocations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterPostTessellationVertexInvocations")))
 }
 
-// MTLCommonCounterPostTessellationVertexInvocations returns the string constant MTLCommonCounterPostTessellationVertexInvocations as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterPostTessellationVertexInvocations() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterPostTessellationVertexInvocations())
+// MTLCommonCounterClipperInvocations returns the string constant MTLCommonCounterClipperInvocations, for use as a dictionary key or argument.
+func MTLCommonCounterClipperInvocations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterClipperInvocations")))
 }
 
-// MTLCommonCounterClipperInvocations returns the string constant MTLCommonCounterClipperInvocations as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterClipperInvocations() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterClipperInvocations())
+// MTLCommonCounterClipperPrimitivesOut returns the string constant MTLCommonCounterClipperPrimitivesOut, for use as a dictionary key or argument.
+func MTLCommonCounterClipperPrimitivesOut() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterClipperPrimitivesOut")))
 }
 
-// MTLCommonCounterClipperPrimitivesOut returns the string constant MTLCommonCounterClipperPrimitivesOut as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterClipperPrimitivesOut() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterClipperPrimitivesOut())
+// MTLCommonCounterFragmentInvocations returns the string constant MTLCommonCounterFragmentInvocations, for use as a dictionary key or argument.
+func MTLCommonCounterFragmentInvocations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterFragmentInvocations")))
 }
 
-// MTLCommonCounterFragmentInvocations returns the string constant MTLCommonCounterFragmentInvocations as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterFragmentInvocations() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterFragmentInvocations())
+// MTLCommonCounterFragmentsPassed returns the string constant MTLCommonCounterFragmentsPassed, for use as a dictionary key or argument.
+func MTLCommonCounterFragmentsPassed() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterFragmentsPassed")))
 }
 
-// MTLCommonCounterFragmentsPassed returns the string constant MTLCommonCounterFragmentsPassed as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterFragmentsPassed() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterFragmentsPassed())
+// MTLCommonCounterComputeKernelInvocations returns the string constant MTLCommonCounterComputeKernelInvocations, for use as a dictionary key or argument.
+func MTLCommonCounterComputeKernelInvocations() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterComputeKernelInvocations")))
 }
 
-// MTLCommonCounterComputeKernelInvocations returns the string constant MTLCommonCounterComputeKernelInvocations as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterComputeKernelInvocations() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterComputeKernelInvocations())
+// MTLCommonCounterTotalCycles returns the string constant MTLCommonCounterTotalCycles, for use as a dictionary key or argument.
+func MTLCommonCounterTotalCycles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterTotalCycles")))
 }
 
-// MTLCommonCounterTotalCycles returns the string constant MTLCommonCounterTotalCycles as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterTotalCycles() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterTotalCycles())
+// MTLCommonCounterVertexCycles returns the string constant MTLCommonCounterVertexCycles, for use as a dictionary key or argument.
+func MTLCommonCounterVertexCycles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterVertexCycles")))
 }
 
-// MTLCommonCounterVertexCycles returns the string constant MTLCommonCounterVertexCycles as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterVertexCycles() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterVertexCycles())
+// MTLCommonCounterTessellationCycles returns the string constant MTLCommonCounterTessellationCycles, for use as a dictionary key or argument.
+func MTLCommonCounterTessellationCycles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterTessellationCycles")))
 }
 
-// MTLCommonCounterTessellationCycles returns the string constant MTLCommonCounterTessellationCycles as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterTessellationCycles() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterTessellationCycles())
+// MTLCommonCounterPostTessellationVertexCycles returns the string constant MTLCommonCounterPostTessellationVertexCycles, for use as a dictionary key or argument.
+func MTLCommonCounterPostTessellationVertexCycles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterPostTessellationVertexCycles")))
 }
 
-// MTLCommonCounterPostTessellationVertexCycles returns the string constant MTLCommonCounterPostTessellationVertexCycles as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterPostTessellationVertexCycles() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterPostTessellationVertexCycles())
+// MTLCommonCounterFragmentCycles returns the string constant MTLCommonCounterFragmentCycles, for use as a dictionary key or argument.
+func MTLCommonCounterFragmentCycles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterFragmentCycles")))
 }
 
-// MTLCommonCounterFragmentCycles returns the string constant MTLCommonCounterFragmentCycles as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterFragmentCycles() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterFragmentCycles())
+// MTLCommonCounterRenderTargetWriteCycles returns the string constant MTLCommonCounterRenderTargetWriteCycles, for use as a dictionary key or argument.
+func MTLCommonCounterRenderTargetWriteCycles() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterRenderTargetWriteCycles")))
 }
 
-// MTLCommonCounterRenderTargetWriteCycles returns the string constant MTLCommonCounterRenderTargetWriteCycles as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterRenderTargetWriteCycles() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterRenderTargetWriteCycles())
+// MTLCommonCounterSetTimestamp returns the string constant MTLCommonCounterSetTimestamp, for use as a dictionary key or argument.
+func MTLCommonCounterSetTimestamp() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterSetTimestamp")))
 }
 
-// MTLCommonCounterSetTimestamp returns the string constant MTLCommonCounterSetTimestamp as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterSetTimestamp() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterSetTimestamp())
+// MTLCommonCounterSetStageUtilization returns the string constant MTLCommonCounterSetStageUtilization, for use as a dictionary key or argument.
+func MTLCommonCounterSetStageUtilization() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterSetStageUtilization")))
 }
 
-// MTLCommonCounterSetStageUtilization returns the string constant MTLCommonCounterSetStageUtilization as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterSetStageUtilization() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterSetStageUtilization())
+// MTLCommonCounterSetStatistic returns the string constant MTLCommonCounterSetStatistic, for use as a dictionary key or argument.
+func MTLCommonCounterSetStatistic() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommonCounterSetStatistic")))
 }
 
-// MTLCommonCounterSetStatistic returns the string constant MTLCommonCounterSetStatistic as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommonCounterSetStatistic() objc.ID {
-	return purego.CFConstant(raw.MTLCommonCounterSetStatistic())
+// MTLCounterErrorDomain returns the string constant MTLCounterErrorDomain, for use as a dictionary key or argument.
+func MTLCounterErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCounterErrorDomain")))
 }
 
-// MTLCounterErrorDomain returns the string constant MTLCounterErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCounterErrorDomain() objc.ID {
-	if _r := raw.MTLCounterErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// This notification is posted when a new Metal device is added to the system
+// MTLDeviceWasAddedNotification returns the string constant MTLDeviceWasAddedNotification, for use as a dictionary key or argument.
+func MTLDeviceWasAddedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLDeviceWasAddedNotification")))
 }
 
-// @brief This notification is posted when a new Metal device is added to the system
-// MTLDeviceWasAddedNotification returns the string constant MTLDeviceWasAddedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func MTLDeviceWasAddedNotification() objc.ID {
-	return purego.CFConstant(raw.MTLDeviceWasAddedNotification())
+// This notification is posted when the user has requested that applications cease using a particular device.  Applications should assume that the device will be removed (terminated) imminently.  Additionally, the device will be removed from the internal device array prior to this notification being posted.  Applications should immediately begin the process of releasing all resources created on the given device, as well as any references to the device itself.
+// MTLDeviceRemovalRequestedNotification returns the string constant MTLDeviceRemovalRequestedNotification, for use as a dictionary key or argument.
+func MTLDeviceRemovalRequestedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLDeviceRemovalRequestedNotification")))
 }
 
-// @brief This notification is posted when the user has requested that applications cease using a particular device.  Applications should assume that the device will be removed (terminated) imminently.  Additionally, the device will be removed from the internal device array prior to this notification being posted.  Applications should immediately begin the process of releasing all resources created on the given device, as well as any references to the device itself.
-// MTLDeviceRemovalRequestedNotification returns the string constant MTLDeviceRemovalRequestedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func MTLDeviceRemovalRequestedNotification() objc.ID {
-	return purego.CFConstant(raw.MTLDeviceRemovalRequestedNotification())
+// This notification is posted if the device is removed while there are still outstanding references to it, due to either a surprise or forced disconnect by the user.  Applications must expect that any attempt to use the device after this point will fail.
+// MTLDeviceWasRemovedNotification returns the string constant MTLDeviceWasRemovedNotification, for use as a dictionary key or argument.
+func MTLDeviceWasRemovedNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLDeviceWasRemovedNotification")))
 }
 
-// @brief This notification is posted if the device is removed while there are still outstanding references to it, due to either a surprise or forced disconnect by the user.  Applications must expect that any attempt to use the device after this point will fail.
-// MTLDeviceWasRemovedNotification returns the string constant MTLDeviceWasRemovedNotification as an objc.ID, for use as a dictionary key or selector argument.
-func MTLDeviceWasRemovedNotification() objc.ID {
-	return purego.CFConstant(raw.MTLDeviceWasRemovedNotification())
+// MTLDeviceErrorDomain returns the string constant MTLDeviceErrorDomain, for use as a dictionary key or argument.
+func MTLDeviceErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLDeviceErrorDomain")))
 }
 
-// MTLDeviceErrorDomain returns the string constant MTLDeviceErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTLDeviceErrorDomain() objc.ID {
-	if _r := raw.MTLDeviceErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MTLCommandBufferErrorDomain returns the string constant MTLCommandBufferErrorDomain, for use as a dictionary key or argument.
+func MTLCommandBufferErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommandBufferErrorDomain")))
 }
 
-// MTLCommandBufferErrorDomain returns the string constant MTLCommandBufferErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommandBufferErrorDomain() objc.ID {
-	if _r := raw.MTLCommandBufferErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MTLCommandBufferEncoderInfoErrorKey returns the string constant MTLCommandBufferEncoderInfoErrorKey, for use as a dictionary key or argument.
+func MTLCommandBufferEncoderInfoErrorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCommandBufferEncoderInfoErrorKey")))
 }
 
-// MTLCommandBufferEncoderInfoErrorKey returns the string constant MTLCommandBufferEncoderInfoErrorKey as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCommandBufferEncoderInfoErrorKey() objc.ID {
-	if _r := raw.MTLCommandBufferEncoderInfoErrorKey(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSProcessInfoPerformanceProfileDidChangeNotification returns the string constant NSProcessInfoPerformanceProfileDidChangeNotification, for use as a dictionary key or argument.
+func NSProcessInfoPerformanceProfileDidChangeNotification() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSProcessInfoPerformanceProfileDidChangeNotification")))
 }
 
-// NSProcessInfoPerformanceProfileDidChangeNotification returns the string constant NSProcessInfoPerformanceProfileDidChangeNotification as an objc.ID, for use as a dictionary key or selector argument.
-func NSProcessInfoPerformanceProfileDidChangeNotification() objc.ID {
-	if _r := raw.NSProcessInfoPerformanceProfileDidChangeNotification(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MTL4CommandQueueErrorDomain returns the string constant MTL4CommandQueueErrorDomain, for use as a dictionary key or argument.
+func MTL4CommandQueueErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTL4CommandQueueErrorDomain")))
 }
 
-// MTL4CommandQueueErrorDomain returns the string constant MTL4CommandQueueErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTL4CommandQueueErrorDomain() objc.ID {
-	if _r := raw.MTL4CommandQueueErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MTLCaptureErrorDomain returns the string constant MTLCaptureErrorDomain, for use as a dictionary key or argument.
+func MTLCaptureErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLCaptureErrorDomain")))
 }
 
-// MTLCaptureErrorDomain returns the string constant MTLCaptureErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTLCaptureErrorDomain() objc.ID {
-	if _r := raw.MTLCaptureErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MTLDynamicLibraryDomain returns the string constant MTLDynamicLibraryDomain, for use as a dictionary key or argument.
+func MTLDynamicLibraryDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLDynamicLibraryDomain")))
 }
 
-// MTLDynamicLibraryDomain returns the string constant MTLDynamicLibraryDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTLDynamicLibraryDomain() objc.ID {
-	if _r := raw.MTLDynamicLibraryDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MTLLogStateErrorDomain returns the string constant MTLLogStateErrorDomain, for use as a dictionary key or argument.
+func MTLLogStateErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLLogStateErrorDomain")))
 }
 
-// MTLLogStateErrorDomain returns the string constant MTLLogStateErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTLLogStateErrorDomain() objc.ID {
-	if _r := raw.MTLLogStateErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// MTLBinaryArchiveDomain returns the string constant MTLBinaryArchiveDomain, for use as a dictionary key or argument.
+func MTLBinaryArchiveDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MTLBinaryArchiveDomain")))
 }
 
-// MTLBinaryArchiveDomain returns the string constant MTLBinaryArchiveDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTLBinaryArchiveDomain() objc.ID {
-	if _r := raw.MTLBinaryArchiveDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
-
-// MTLIOErrorDomain returns the string constant MTLIOErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func MTLIOErrorDomain() objc.ID {
-	if _r := raw.MTLIOErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// MTLIOErrorDomain returns the string constant MTLIOErrorDomain, for use as a dictionary key or argument.
+func MTLIOErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("MTLIOErrorDomain"))) }

@@ -5,237 +5,236 @@
 package diskarbitration
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/diskarbitration"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KDADiskDescriptionVolumeKindKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumeKindKey as an objc.ID.
-func KDADiskDescriptionVolumeKindKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionVolumeKindKey())
+// KDADiskDescriptionVolumeKindKey returns the value of the constant kDADiskDescriptionVolumeKindKey.
+func KDADiskDescriptionVolumeKindKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionVolumeKindKey")))
 }
 
-// KDADiskDescriptionVolumeMountableKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumeMountableKey as an objc.ID.
-func KDADiskDescriptionVolumeMountableKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionVolumeMountableKey())
+// KDADiskDescriptionVolumeMountableKey returns the value of the constant kDADiskDescriptionVolumeMountableKey.
+func KDADiskDescriptionVolumeMountableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionVolumeMountableKey")))
 }
 
-// KDADiskDescriptionVolumeNameKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumeNameKey as an objc.ID.
-func KDADiskDescriptionVolumeNameKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionVolumeNameKey())
+// KDADiskDescriptionVolumeNameKey returns the value of the constant kDADiskDescriptionVolumeNameKey.
+func KDADiskDescriptionVolumeNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionVolumeNameKey")))
 }
 
-// KDADiskDescriptionVolumeNetworkKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumeNetworkKey as an objc.ID.
-func KDADiskDescriptionVolumeNetworkKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionVolumeNetworkKey())
+// KDADiskDescriptionVolumeNetworkKey returns the value of the constant kDADiskDescriptionVolumeNetworkKey.
+func KDADiskDescriptionVolumeNetworkKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionVolumeNetworkKey")))
 }
 
-// KDADiskDescriptionVolumePathKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumePathKey as an objc.ID.
-func KDADiskDescriptionVolumePathKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionVolumePathKey())
+// KDADiskDescriptionVolumePathKey returns the value of the constant kDADiskDescriptionVolumePathKey.
+func KDADiskDescriptionVolumePathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionVolumePathKey")))
 }
 
-// KDADiskDescriptionVolumeTypeKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumeTypeKey as an objc.ID.
-func KDADiskDescriptionVolumeTypeKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionVolumeTypeKey())
+// KDADiskDescriptionVolumeTypeKey returns the value of the constant kDADiskDescriptionVolumeTypeKey.
+func KDADiskDescriptionVolumeTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionVolumeTypeKey")))
 }
 
-// KDADiskDescriptionVolumeUUIDKey returns the value of the CoreFoundation reference constant kDADiskDescriptionVolumeUUIDKey as an objc.ID.
-func KDADiskDescriptionVolumeUUIDKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionVolumeUUIDKey())
+// KDADiskDescriptionVolumeUUIDKey returns the value of the constant kDADiskDescriptionVolumeUUIDKey.
+func KDADiskDescriptionVolumeUUIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionVolumeUUIDKey")))
 }
 
-// KDADiskDescriptionMediaBlockSizeKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaBlockSizeKey as an objc.ID.
-func KDADiskDescriptionMediaBlockSizeKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaBlockSizeKey())
+// KDADiskDescriptionMediaBlockSizeKey returns the value of the constant kDADiskDescriptionMediaBlockSizeKey.
+func KDADiskDescriptionMediaBlockSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaBlockSizeKey")))
 }
 
-// KDADiskDescriptionMediaBSDMajorKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaBSDMajorKey as an objc.ID.
-func KDADiskDescriptionMediaBSDMajorKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaBSDMajorKey())
+// KDADiskDescriptionMediaBSDMajorKey returns the value of the constant kDADiskDescriptionMediaBSDMajorKey.
+func KDADiskDescriptionMediaBSDMajorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaBSDMajorKey")))
 }
 
-// KDADiskDescriptionMediaBSDMinorKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaBSDMinorKey as an objc.ID.
-func KDADiskDescriptionMediaBSDMinorKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaBSDMinorKey())
+// KDADiskDescriptionMediaBSDMinorKey returns the value of the constant kDADiskDescriptionMediaBSDMinorKey.
+func KDADiskDescriptionMediaBSDMinorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaBSDMinorKey")))
 }
 
-// KDADiskDescriptionMediaBSDNameKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaBSDNameKey as an objc.ID.
-func KDADiskDescriptionMediaBSDNameKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaBSDNameKey())
+// KDADiskDescriptionMediaBSDNameKey returns the value of the constant kDADiskDescriptionMediaBSDNameKey.
+func KDADiskDescriptionMediaBSDNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaBSDNameKey")))
 }
 
-// KDADiskDescriptionMediaBSDUnitKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaBSDUnitKey as an objc.ID.
-func KDADiskDescriptionMediaBSDUnitKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaBSDUnitKey())
+// KDADiskDescriptionMediaBSDUnitKey returns the value of the constant kDADiskDescriptionMediaBSDUnitKey.
+func KDADiskDescriptionMediaBSDUnitKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaBSDUnitKey")))
 }
 
-// KDADiskDescriptionMediaContentKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaContentKey as an objc.ID.
-func KDADiskDescriptionMediaContentKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaContentKey())
+// KDADiskDescriptionMediaContentKey returns the value of the constant kDADiskDescriptionMediaContentKey.
+func KDADiskDescriptionMediaContentKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaContentKey")))
 }
 
-// KDADiskDescriptionMediaEjectableKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaEjectableKey as an objc.ID.
-func KDADiskDescriptionMediaEjectableKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaEjectableKey())
+// KDADiskDescriptionMediaEjectableKey returns the value of the constant kDADiskDescriptionMediaEjectableKey.
+func KDADiskDescriptionMediaEjectableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaEjectableKey")))
 }
 
-// KDADiskDescriptionMediaIconKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaIconKey as an objc.ID.
-func KDADiskDescriptionMediaIconKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaIconKey())
+// KDADiskDescriptionMediaIconKey returns the value of the constant kDADiskDescriptionMediaIconKey.
+func KDADiskDescriptionMediaIconKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaIconKey")))
 }
 
-// KDADiskDescriptionMediaKindKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaKindKey as an objc.ID.
-func KDADiskDescriptionMediaKindKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaKindKey())
+// KDADiskDescriptionMediaKindKey returns the value of the constant kDADiskDescriptionMediaKindKey.
+func KDADiskDescriptionMediaKindKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaKindKey")))
 }
 
-// KDADiskDescriptionMediaLeafKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaLeafKey as an objc.ID.
-func KDADiskDescriptionMediaLeafKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaLeafKey())
+// KDADiskDescriptionMediaLeafKey returns the value of the constant kDADiskDescriptionMediaLeafKey.
+func KDADiskDescriptionMediaLeafKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaLeafKey")))
 }
 
-// KDADiskDescriptionMediaNameKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaNameKey as an objc.ID.
-func KDADiskDescriptionMediaNameKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaNameKey())
+// KDADiskDescriptionMediaNameKey returns the value of the constant kDADiskDescriptionMediaNameKey.
+func KDADiskDescriptionMediaNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaNameKey")))
 }
 
-// KDADiskDescriptionMediaPathKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaPathKey as an objc.ID.
-func KDADiskDescriptionMediaPathKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaPathKey())
+// KDADiskDescriptionMediaPathKey returns the value of the constant kDADiskDescriptionMediaPathKey.
+func KDADiskDescriptionMediaPathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaPathKey")))
 }
 
-// KDADiskDescriptionMediaRemovableKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaRemovableKey as an objc.ID.
-func KDADiskDescriptionMediaRemovableKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaRemovableKey())
+// KDADiskDescriptionMediaRemovableKey returns the value of the constant kDADiskDescriptionMediaRemovableKey.
+func KDADiskDescriptionMediaRemovableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaRemovableKey")))
 }
 
-// KDADiskDescriptionMediaSizeKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaSizeKey as an objc.ID.
-func KDADiskDescriptionMediaSizeKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaSizeKey())
+// KDADiskDescriptionMediaSizeKey returns the value of the constant kDADiskDescriptionMediaSizeKey.
+func KDADiskDescriptionMediaSizeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaSizeKey")))
 }
 
-// KDADiskDescriptionMediaTypeKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaTypeKey as an objc.ID.
-func KDADiskDescriptionMediaTypeKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaTypeKey())
+// KDADiskDescriptionMediaTypeKey returns the value of the constant kDADiskDescriptionMediaTypeKey.
+func KDADiskDescriptionMediaTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaTypeKey")))
 }
 
-// KDADiskDescriptionMediaUUIDKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaUUIDKey as an objc.ID.
-func KDADiskDescriptionMediaUUIDKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaUUIDKey())
+// KDADiskDescriptionMediaUUIDKey returns the value of the constant kDADiskDescriptionMediaUUIDKey.
+func KDADiskDescriptionMediaUUIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaUUIDKey")))
 }
 
-// KDADiskDescriptionMediaWholeKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaWholeKey as an objc.ID.
-func KDADiskDescriptionMediaWholeKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaWholeKey())
+// KDADiskDescriptionMediaWholeKey returns the value of the constant kDADiskDescriptionMediaWholeKey.
+func KDADiskDescriptionMediaWholeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaWholeKey")))
 }
 
-// KDADiskDescriptionMediaWritableKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaWritableKey as an objc.ID.
-func KDADiskDescriptionMediaWritableKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaWritableKey())
+// KDADiskDescriptionMediaWritableKey returns the value of the constant kDADiskDescriptionMediaWritableKey.
+func KDADiskDescriptionMediaWritableKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaWritableKey")))
 }
 
-// KDADiskDescriptionMediaEncryptedKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaEncryptedKey as an objc.ID.
-func KDADiskDescriptionMediaEncryptedKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaEncryptedKey())
+// KDADiskDescriptionMediaEncryptedKey returns the value of the constant kDADiskDescriptionMediaEncryptedKey.
+func KDADiskDescriptionMediaEncryptedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaEncryptedKey")))
 }
 
-// KDADiskDescriptionMediaEncryptionDetailKey returns the value of the CoreFoundation reference constant kDADiskDescriptionMediaEncryptionDetailKey as an objc.ID.
-func KDADiskDescriptionMediaEncryptionDetailKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMediaEncryptionDetailKey())
+// KDADiskDescriptionMediaEncryptionDetailKey returns the value of the constant kDADiskDescriptionMediaEncryptionDetailKey.
+func KDADiskDescriptionMediaEncryptionDetailKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMediaEncryptionDetailKey")))
 }
 
-// KDADiskDescriptionDeviceGUIDKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceGUIDKey as an objc.ID.
-func KDADiskDescriptionDeviceGUIDKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionDeviceGUIDKey())
+// KDADiskDescriptionDeviceGUIDKey returns the value of the constant kDADiskDescriptionDeviceGUIDKey.
+func KDADiskDescriptionDeviceGUIDKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionDeviceGUIDKey")))
 }
 
-// KDADiskDescriptionDeviceInternalKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceInternalKey as an objc.ID.
-func KDADiskDescriptionDeviceInternalKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionDeviceInternalKey())
+// KDADiskDescriptionDeviceInternalKey returns the value of the constant kDADiskDescriptionDeviceInternalKey.
+func KDADiskDescriptionDeviceInternalKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionDeviceInternalKey")))
 }
 
-// KDADiskDescriptionDeviceModelKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceModelKey as an objc.ID.
-func KDADiskDescriptionDeviceModelKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionDeviceModelKey())
+// KDADiskDescriptionDeviceModelKey returns the value of the constant kDADiskDescriptionDeviceModelKey.
+func KDADiskDescriptionDeviceModelKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionDeviceModelKey")))
 }
 
-// KDADiskDescriptionDevicePathKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDevicePathKey as an objc.ID.
-func KDADiskDescriptionDevicePathKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionDevicePathKey())
+// KDADiskDescriptionDevicePathKey returns the value of the constant kDADiskDescriptionDevicePathKey.
+func KDADiskDescriptionDevicePathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionDevicePathKey")))
 }
 
-// KDADiskDescriptionDeviceProtocolKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceProtocolKey as an objc.ID.
-func KDADiskDescriptionDeviceProtocolKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionDeviceProtocolKey())
+// KDADiskDescriptionDeviceProtocolKey returns the value of the constant kDADiskDescriptionDeviceProtocolKey.
+func KDADiskDescriptionDeviceProtocolKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionDeviceProtocolKey")))
 }
 
-// KDADiskDescriptionDeviceRevisionKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceRevisionKey as an objc.ID.
-func KDADiskDescriptionDeviceRevisionKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionDeviceRevisionKey())
+// KDADiskDescriptionDeviceRevisionKey returns the value of the constant kDADiskDescriptionDeviceRevisionKey.
+func KDADiskDescriptionDeviceRevisionKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionDeviceRevisionKey")))
 }
 
-// KDADiskDescriptionDeviceUnitKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceUnitKey as an objc.ID.
-func KDADiskDescriptionDeviceUnitKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionDeviceUnitKey())
+// KDADiskDescriptionDeviceUnitKey returns the value of the constant kDADiskDescriptionDeviceUnitKey.
+func KDADiskDescriptionDeviceUnitKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionDeviceUnitKey")))
 }
 
-// KDADiskDescriptionDeviceVendorKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceVendorKey as an objc.ID.
-func KDADiskDescriptionDeviceVendorKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionDeviceVendorKey())
+// KDADiskDescriptionDeviceVendorKey returns the value of the constant kDADiskDescriptionDeviceVendorKey.
+func KDADiskDescriptionDeviceVendorKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionDeviceVendorKey")))
 }
 
-// KDADiskDescriptionDeviceTDMLockedKey returns the value of the CoreFoundation reference constant kDADiskDescriptionDeviceTDMLockedKey as an objc.ID.
-func KDADiskDescriptionDeviceTDMLockedKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionDeviceTDMLockedKey())
+// KDADiskDescriptionDeviceTDMLockedKey returns the value of the constant kDADiskDescriptionDeviceTDMLockedKey.
+func KDADiskDescriptionDeviceTDMLockedKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionDeviceTDMLockedKey")))
 }
 
-// KDADiskDescriptionBusNameKey returns the value of the CoreFoundation reference constant kDADiskDescriptionBusNameKey as an objc.ID.
-func KDADiskDescriptionBusNameKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionBusNameKey())
+// KDADiskDescriptionBusNameKey returns the value of the constant kDADiskDescriptionBusNameKey.
+func KDADiskDescriptionBusNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionBusNameKey")))
 }
 
-// KDADiskDescriptionBusPathKey returns the value of the CoreFoundation reference constant kDADiskDescriptionBusPathKey as an objc.ID.
-func KDADiskDescriptionBusPathKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionBusPathKey())
+// KDADiskDescriptionBusPathKey returns the value of the constant kDADiskDescriptionBusPathKey.
+func KDADiskDescriptionBusPathKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionBusPathKey")))
 }
 
-// KDADiskDescriptionFSKitPrefix returns the value of the CoreFoundation reference constant kDADiskDescriptionFSKitPrefix as an objc.ID.
-func KDADiskDescriptionFSKitPrefix() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionFSKitPrefix())
+// KDADiskDescriptionFSKitPrefix returns the value of the constant kDADiskDescriptionFSKitPrefix.
+func KDADiskDescriptionFSKitPrefix() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionFSKitPrefix")))
 }
 
-// KDADiskDescriptionRepairRunningKey returns the value of the CoreFoundation reference constant kDADiskDescriptionRepairRunningKey as an objc.ID.
-func KDADiskDescriptionRepairRunningKey() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionRepairRunningKey())
+// KDADiskDescriptionRepairRunningKey returns the value of the constant kDADiskDescriptionRepairRunningKey.
+func KDADiskDescriptionRepairRunningKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionRepairRunningKey")))
 }
 
-// KDADiskDescriptionMatchMediaUnformatted returns the value of the CoreFoundation reference constant kDADiskDescriptionMatchMediaUnformatted as an objc.ID.
-func KDADiskDescriptionMatchMediaUnformatted() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMatchMediaUnformatted())
+// KDADiskDescriptionMatchMediaUnformatted returns the value of the constant kDADiskDescriptionMatchMediaUnformatted.
+func KDADiskDescriptionMatchMediaUnformatted() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMatchMediaUnformatted")))
 }
 
-// KDADiskDescriptionMatchMediaWhole returns the value of the CoreFoundation reference constant kDADiskDescriptionMatchMediaWhole as an objc.ID.
-func KDADiskDescriptionMatchMediaWhole() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMatchMediaWhole())
+// KDADiskDescriptionMatchMediaWhole returns the value of the constant kDADiskDescriptionMatchMediaWhole.
+func KDADiskDescriptionMatchMediaWhole() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMatchMediaWhole")))
 }
 
-// KDADiskDescriptionMatchVolumeMountable returns the value of the CoreFoundation reference constant kDADiskDescriptionMatchVolumeMountable as an objc.ID.
-func KDADiskDescriptionMatchVolumeMountable() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMatchVolumeMountable())
+// KDADiskDescriptionMatchVolumeMountable returns the value of the constant kDADiskDescriptionMatchVolumeMountable.
+func KDADiskDescriptionMatchVolumeMountable() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMatchVolumeMountable")))
 }
 
-// KDADiskDescriptionMatchVolumeUnrecognized returns the value of the CoreFoundation reference constant kDADiskDescriptionMatchVolumeUnrecognized as an objc.ID.
-func KDADiskDescriptionMatchVolumeUnrecognized() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionMatchVolumeUnrecognized())
+// KDADiskDescriptionMatchVolumeUnrecognized returns the value of the constant kDADiskDescriptionMatchVolumeUnrecognized.
+func KDADiskDescriptionMatchVolumeUnrecognized() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionMatchVolumeUnrecognized")))
 }
 
-// KDADiskDescriptionWatchVolumeName returns the value of the CoreFoundation reference constant kDADiskDescriptionWatchVolumeName as an objc.ID.
-func KDADiskDescriptionWatchVolumeName() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionWatchVolumeName())
+// KDADiskDescriptionWatchVolumeName returns the value of the constant kDADiskDescriptionWatchVolumeName.
+func KDADiskDescriptionWatchVolumeName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionWatchVolumeName")))
 }
 
-// KDADiskDescriptionWatchVolumePath returns the value of the CoreFoundation reference constant kDADiskDescriptionWatchVolumePath as an objc.ID.
-func KDADiskDescriptionWatchVolumePath() objc.ID {
-	return purego.CFConstant(raw.KDADiskDescriptionWatchVolumePath())
+// KDADiskDescriptionWatchVolumePath returns the value of the constant kDADiskDescriptionWatchVolumePath.
+func KDADiskDescriptionWatchVolumePath() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kDADiskDescriptionWatchVolumePath")))
 }

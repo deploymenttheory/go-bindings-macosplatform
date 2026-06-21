@@ -5,85 +5,108 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An interface that represents a log state configuration.
 //
-// LogStateDescriptor wraps [raw.MTLLogStateDescriptor] with a fluent Go API.
+// LogStateDescriptor is an idiomatic wrapper over the Objective-C class MTLLogStateDescriptor.
 type LogStateDescriptor struct {
-	inner *raw.MTLLogStateDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLLogStateDescriptor].
-func (x *LogStateDescriptor) Unwrap() *raw.MTLLogStateDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LogStateDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// LogStateDescriptorFromID adopts an existing object pointer as a LogStateDescriptor (nil for 0).
+// LogStateDescriptorFromID adopts an existing Objective-C object as a LogStateDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func LogStateDescriptorFromID(id objc.ID) *LogStateDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &LogStateDescriptor{inner: raw.MTLLogStateDescriptorFromID(id)}
+	x := &LogStateDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLogStateDescriptor creates a new [LogStateDescriptor].
+// logStateDescriptorAdopt wraps an Objective-C object that this code just created as a
+// LogStateDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func logStateDescriptorAdopt(id objc.ID) *LogStateDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &LogStateDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LogStateDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LogStateDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LogStateDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLogStateDescriptor creates a new LogStateDescriptor.
 func NewLogStateDescriptor() *LogStateDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLLogStateDescriptor")), objc.RegisterName("new"))
-	return &LogStateDescriptor{inner: raw.MTLLogStateDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLLogStateDescriptor")), objc.RegisterName("new"))
+	return logStateDescriptorAdopt(_id)
 }
 
 // The minimum level of messages that the shader can log.
 //
-// WithLevel sets the level property and returns the receiver for chaining.
-func (x *LogStateDescriptor) WithLevel(level MTLLogLevel) *LogStateDescriptor {
-	x.inner.SetLevel(raw.MTLLogLevel(level))
+// WithLevel sets level and returns the receiver so calls can be chained.
+func (x *LogStateDescriptor) WithLevel(level LogLevel) *LogStateDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
 	return x
 }
 
 // The size of the internal buffer the log state uses, specified in bytes.
 //
-// WithBufferSize sets the bufferSize property and returns the receiver for chaining.
+// WithBufferSize sets bufferSize and returns the receiver so calls can be chained.
 func (x *LogStateDescriptor) WithBufferSize(bufferSize int) *LogStateDescriptor {
-	x.inner.SetBufferSize(bufferSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferSize:"), bufferSize)
 	return x
 }
 
-// @abstract level indicates the minimum level of the logs that will be printed. @discussion All the logs with level less than given level will be skipped on the GPU Side.
-//
-// Level calls the underlying Level.
-func (x *LogStateDescriptor) Level() MTLLogLevel {
-	return MTLLogLevel(x.inner.Level())
+// level indicates the minimum level of the logs that will be printed. All the logs with level less than given level will be skipped on the GPU Side.
+func (x *LogStateDescriptor) Level() LogLevel {
+	_r := objc.Send[LogLevel](objref.IDOf(x), objc.RegisterName("level"))
+	return _r
 }
 
-// SetLevel calls the underlying SetLevel.
-func (x *LogStateDescriptor) SetLevel(level MTLLogLevel) {
-	x.inner.SetLevel(raw.MTLLogLevel(level))
+func (x *LogStateDescriptor) SetLevel(level LogLevel) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLevel:"), level)
 }
 
-// @abstract bufferSize indicates the size of the buffer where GPU will store the logging content from shaders. Minimum value is 1KB
-//
-// BufferSize calls the underlying BufferSize.
+// bufferSize indicates the size of the buffer where GPU will store the logging content from shaders. Minimum value is 1KB
 func (x *LogStateDescriptor) BufferSize() int {
-	return x.inner.BufferSize()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bufferSize"))
+	return _r
 }
 
-// SetBufferSize calls the underlying SetBufferSize.
 func (x *LogStateDescriptor) SetBufferSize(bufferSize int) {
-	x.inner.SetBufferSize(bufferSize)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBufferSize:"), bufferSize)
 }
 
 // LogStateDescriptorable is the interface implemented by [LogStateDescriptor], for mocking and DI.
 type LogStateDescriptorable interface {
-	Unwrap() *raw.MTLLogStateDescriptor
-	WithLevel(level MTLLogLevel) *LogStateDescriptor
+	obj.Object
+	WithLevel(level LogLevel) *LogStateDescriptor
 	WithBufferSize(bufferSize int) *LogStateDescriptor
-	Level() MTLLogLevel
-	SetLevel(level MTLLogLevel)
+	Level() LogLevel
+	SetLevel(level LogLevel)
 	BufferSize() int
 	SetBufferSize(bufferSize int)
 }

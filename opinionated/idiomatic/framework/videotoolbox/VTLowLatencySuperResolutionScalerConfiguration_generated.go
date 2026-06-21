@@ -5,101 +5,114 @@
 package videotoolbox
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object you use to configure frame processor for low-latency super-resolution scaler processing.
 //
-// LowLatencySuperResolutionScalerConfiguration wraps [raw.VTLowLatencySuperResolutionScalerConfiguration] with a fluent Go API.
+// LowLatencySuperResolutionScalerConfiguration is an idiomatic wrapper over the Objective-C class VTLowLatencySuperResolutionScalerConfiguration.
 type LowLatencySuperResolutionScalerConfiguration struct {
-	inner *raw.VTLowLatencySuperResolutionScalerConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VTLowLatencySuperResolutionScalerConfiguration].
-func (x *LowLatencySuperResolutionScalerConfiguration) Unwrap() *raw.VTLowLatencySuperResolutionScalerConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LowLatencySuperResolutionScalerConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// LowLatencySuperResolutionScalerConfigurationFromID adopts an existing object pointer as a LowLatencySuperResolutionScalerConfiguration (nil for 0).
+// LowLatencySuperResolutionScalerConfigurationFromID adopts an existing Objective-C object as a LowLatencySuperResolutionScalerConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func LowLatencySuperResolutionScalerConfigurationFromID(id objc.ID) *LowLatencySuperResolutionScalerConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &LowLatencySuperResolutionScalerConfiguration{inner: raw.VTLowLatencySuperResolutionScalerConfigurationFromID(id)}
+	x := &LowLatencySuperResolutionScalerConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// lowLatencySuperResolutionScalerConfigurationAdopt wraps an Objective-C object that this code just created as a
+// LowLatencySuperResolutionScalerConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lowLatencySuperResolutionScalerConfigurationAdopt(id objc.ID) *LowLatencySuperResolutionScalerConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &LowLatencySuperResolutionScalerConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LowLatencySuperResolutionScalerConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LowLatencySuperResolutionScalerConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LowLatencySuperResolutionScalerConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new low-latency super-resolution scaler configuration with specified frame width and height.
 //
-// NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactor creates a new [LowLatencySuperResolutionScalerConfiguration].
+// NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactor creates a new LowLatencySuperResolutionScalerConfiguration.
 func NewLowLatencySuperResolutionScalerConfigurationWithFrameWidthFrameHeightScaleFactor(frameWidth int, frameHeight int, scaleFactor float32) *LowLatencySuperResolutionScalerConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VTLowLatencySuperResolutionScalerConfiguration")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrameWidth:frameHeight:scaleFactor:"), frameWidth, frameHeight, scaleFactor)
-	return &LowLatencySuperResolutionScalerConfiguration{inner: raw.VTLowLatencySuperResolutionScalerConfigurationFromID(_id)}
+	return lowLatencySuperResolutionScalerConfigurationAdopt(_id)
 }
 
 // Width of source frame in pixels.
-//
-// FrameWidth calls the underlying FrameWidth.
 func (x *LowLatencySuperResolutionScalerConfiguration) FrameWidth() int {
-	return x.inner.FrameWidth()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameWidth"))
+	return _r
 }
 
 // Height of source frame in pixels.
-//
-// FrameHeight calls the underlying FrameHeight.
 func (x *LowLatencySuperResolutionScalerConfiguration) FrameHeight() int {
-	return x.inner.FrameHeight()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("frameHeight"))
+	return _r
 }
 
 // Available supported pixel formats for source frames for current configuration.
 //
 // FrameSupportedPixelFormats returns the collection as a Go slice.
-func (x *LowLatencySuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []*foundation.NSNumber {
-	arr := x.inner.FrameSupportedPixelFormats()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *LowLatencySuperResolutionScalerConfiguration) FrameSupportedPixelFormats() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("frameSupportedPixelFormats"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent source frames and reference frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-//
-// SourcePixelBufferAttributes calls the underlying SourcePixelBufferAttributes.
-func (x *LowLatencySuperResolutionScalerConfiguration) SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.SourcePixelBufferAttributes()
+func (x *LowLatencySuperResolutionScalerConfiguration) SourcePixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourcePixelBufferAttributes"))
+	return obj.Wrap(_r)
 }
 
 // Pixel buffer attributes dictionary that describes requirements for pixel buffers which represent destination frames. Use “CVPixelBufferCreateResolvedAttributesDictionary“ to combine this dictionary with your pixel buffer attributes dictionary.
-//
-// DestinationPixelBufferAttributes calls the underlying DestinationPixelBufferAttributes.
-func (x *LowLatencySuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.DestinationPixelBufferAttributes()
+func (x *LowLatencySuperResolutionScalerConfiguration) DestinationPixelBufferAttributes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationPixelBufferAttributes"))
+	return obj.Wrap(_r)
 }
 
 // Scale factor with which you initialized the configuration.
-//
-// ScaleFactor calls the underlying ScaleFactor.
 func (x *LowLatencySuperResolutionScalerConfiguration) ScaleFactor() float32 {
-	return x.inner.ScaleFactor()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("scaleFactor"))
+	return _r
 }
 
 // LowLatencySuperResolutionScalerConfigurationable is the interface implemented by [LowLatencySuperResolutionScalerConfiguration], for mocking and DI.
 type LowLatencySuperResolutionScalerConfigurationable interface {
-	Unwrap() *raw.VTLowLatencySuperResolutionScalerConfiguration
+	obj.Object
 	FrameWidth() int
 	FrameHeight() int
-	FrameSupportedPixelFormats() []*foundation.NSNumber
-	SourcePixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	DestinationPixelBufferAttributes() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	FrameSupportedPixelFormats() []obj.Object
+	SourcePixelBufferAttributes() obj.Object
+	DestinationPixelBufferAttributes() obj.Object
 	ScaleFactor() float32
 }
 

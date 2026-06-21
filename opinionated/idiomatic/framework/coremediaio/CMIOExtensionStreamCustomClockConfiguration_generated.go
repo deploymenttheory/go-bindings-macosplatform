@@ -5,91 +5,97 @@
 package coremediaio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that describes the parameters to create a custom clock on the host side.
 //
-// ExtensionStreamCustomClockConfiguration wraps [raw.CMIOExtensionStreamCustomClockConfiguration] with a fluent Go API.
+// ExtensionStreamCustomClockConfiguration is an idiomatic wrapper over the Objective-C class CMIOExtensionStreamCustomClockConfiguration.
 type ExtensionStreamCustomClockConfiguration struct {
-	inner *raw.CMIOExtensionStreamCustomClockConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMIOExtensionStreamCustomClockConfiguration].
-func (x *ExtensionStreamCustomClockConfiguration) Unwrap() *raw.CMIOExtensionStreamCustomClockConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionStreamCustomClockConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionStreamCustomClockConfigurationFromID adopts an existing object pointer as a ExtensionStreamCustomClockConfiguration (nil for 0).
+// ExtensionStreamCustomClockConfigurationFromID adopts an existing Objective-C object as a ExtensionStreamCustomClockConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionStreamCustomClockConfigurationFromID(id objc.ID) *ExtensionStreamCustomClockConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionStreamCustomClockConfiguration{inner: raw.CMIOExtensionStreamCustomClockConfigurationFromID(id)}
+	x := &ExtensionStreamCustomClockConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a custom clock configuration.
-//
-// NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing creates a new [ExtensionStreamCustomClockConfiguration].
-func NewExtensionStreamCustomClockConfigurationWithClockNameSourceIdentifierGetTimeCallMinimumIntervalNumberOfEventsForRateSmoothingNumberOfAveragesForRateSmoothing(clockName string, sourceIdentifier *foundation.NSUUID, getTimeCallMinimumInterval coremedia.CMTime, numberOfEventsForRateSmoothing uint32, numberOfAveragesForRateSmoothing uint32) *ExtensionStreamCustomClockConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionStreamCustomClockConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithClockName:sourceIdentifier:getTimeCallMinimumInterval:numberOfEventsForRateSmoothing:numberOfAveragesForRateSmoothing:"), foundation.NSStringStringWithUTF8String(clockName).Ptr(), sourceIdentifier.Ptr(), getTimeCallMinimumInterval, numberOfEventsForRateSmoothing, numberOfAveragesForRateSmoothing)
-	return &ExtensionStreamCustomClockConfiguration{inner: raw.CMIOExtensionStreamCustomClockConfigurationFromID(_id)}
+// extensionStreamCustomClockConfigurationAdopt wraps an Objective-C object that this code just created as a
+// ExtensionStreamCustomClockConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionStreamCustomClockConfigurationAdopt(id objc.ID) *ExtensionStreamCustomClockConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionStreamCustomClockConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property clockName @abstract The name of the clock.
-//
-// ClockName calls the underlying ClockName.
+// Description returns the object's -description text.
+func (x *ExtensionStreamCustomClockConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionStreamCustomClockConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionStreamCustomClockConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewExtensionStreamCustomClockConfiguration creates a new ExtensionStreamCustomClockConfiguration.
+func NewExtensionStreamCustomClockConfiguration() *ExtensionStreamCustomClockConfiguration {
+	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionStreamCustomClockConfiguration")), objc.RegisterName("new"))
+	return extensionStreamCustomClockConfigurationAdopt(_id)
+}
+
+// The name of the clock.
 func (x *ExtensionStreamCustomClockConfiguration) ClockName() string {
-	_r := x.inner.ClockName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clockName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property sourceIdentifier @abstract The identifier of the entity driving the clock. @discussion An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value.
-//
-// SourceIdentifier calls the underlying SourceIdentifier.
-func (x *ExtensionStreamCustomClockConfiguration) SourceIdentifier() *foundation.NSUUID {
-	return x.inner.SourceIdentifier()
+// The identifier of the entity driving the clock. An unique identifier that is used to indicate the entity that is driving the clock. This value is used internally to determine if two custom clocks have the same hardware source, and thus determine whether or not they will drift relative to one another. This parameter is used in the following way: if a device supports multiple active streams that are internally clocked by a common source, then instead of sharing one clock between each stream, a clock per stream can be configured with the sourceIdentifier for each clock set to be the same value.
+func (x *ExtensionStreamCustomClockConfiguration) SourceIdentifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceIdentifier"))
+	return obj.Wrap(_r)
 }
 
-// @property getTimeCallMinimumInterval @abstract If the clock is queried for its current time more often than this interval, an interpolated value will be returned.
-//
-// GetTimeCallMinimumInterval calls the underlying GetTimeCallMinimumInterval.
-func (x *ExtensionStreamCustomClockConfiguration) GetTimeCallMinimumInterval() coremedia.CMTime {
-	return x.inner.GetTimeCallMinimumInterval()
-}
-
-// @property numberOfEventsForRateSmoothing @abstract The number of events to use for rate smoothing; will be > 0.
-//
-// NumberOfEventsForRateSmoothing calls the underlying NumberOfEventsForRateSmoothing.
+// The number of events to use for rate smoothing; will be > 0.
 func (x *ExtensionStreamCustomClockConfiguration) NumberOfEventsForRateSmoothing() uint32 {
-	return x.inner.NumberOfEventsForRateSmoothing()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("numberOfEventsForRateSmoothing"))
+	return _r
 }
 
-// @property numberOfAveragesForRateSmoothing @abstract The number of averages used for rate smoothing; 0 indicates that the default smoothing algorithm is used.
-//
-// NumberOfAveragesForRateSmoothing calls the underlying NumberOfAveragesForRateSmoothing.
+// The number of averages used for rate smoothing; 0 indicates that the default smoothing algorithm is used.
 func (x *ExtensionStreamCustomClockConfiguration) NumberOfAveragesForRateSmoothing() uint32 {
-	return x.inner.NumberOfAveragesForRateSmoothing()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("numberOfAveragesForRateSmoothing"))
+	return _r
 }
 
 // ExtensionStreamCustomClockConfigurationable is the interface implemented by [ExtensionStreamCustomClockConfiguration], for mocking and DI.
 type ExtensionStreamCustomClockConfigurationable interface {
-	Unwrap() *raw.CMIOExtensionStreamCustomClockConfiguration
+	obj.Object
 	ClockName() string
-	SourceIdentifier() *foundation.NSUUID
-	GetTimeCallMinimumInterval() coremedia.CMTime
+	SourceIdentifier() obj.Object
 	NumberOfEventsForRateSmoothing() uint32
 	NumberOfAveragesForRateSmoothing() uint32
 }

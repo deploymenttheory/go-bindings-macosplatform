@@ -5,542 +5,452 @@
 package scenekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A set of shading attributes that define the appearance of a geometry’s surface when rendered.
 //
-// Material wraps [raw.SCNMaterial] with a fluent Go API.
+// Material is an idiomatic wrapper over the Objective-C class SCNMaterial.
 type Material struct {
-	inner *raw.SCNMaterial
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNMaterial].
-func (x *Material) Unwrap() *raw.SCNMaterial { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Material) ID() objc.ID { return x.inner.Ptr() }
-
-// MaterialFromID adopts an existing object pointer as a Material (nil for 0).
+// MaterialFromID adopts an existing Objective-C object as a Material
+// (nil for 0), retaining it and registering a release finalizer.
 func MaterialFromID(id objc.ID) *Material {
 	if id == 0 {
 		return nil
 	}
-	return &Material{inner: raw.SCNMaterialFromID(id)}
+	x := &Material{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMaterial creates a new [Material].
+// materialAdopt wraps an Objective-C object that this code just created as a
+// Material (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func materialAdopt(id objc.ID) *Material {
+	if id == 0 {
+		return nil
+	}
+	x := &Material{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Material) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Material) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Material) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMaterial creates a new Material.
 func NewMaterial() *Material {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNMaterial")), objc.RegisterName("new"))
-	return &Material{inner: raw.SCNMaterialFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNMaterial")), objc.RegisterName("new"))
+	return materialAdopt(_id)
 }
 
 // A name associated with the material.
 //
-// WithName sets the name property and returns the receiver for chaining.
+// WithName sets name and returns the receiver so calls can be chained.
 func (x *Material) WithName(name string) *Material {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 	return x
 }
 
 // The sharpness of specular highlights. Animatable.
 //
-// WithShininess sets the shininess property and returns the receiver for chaining.
+// WithShininess sets shininess and returns the receiver so calls can be chained.
 func (x *Material) WithShininess(shininess float64) *Material {
-	x.inner.SetShininess(shininess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShininess:"), shininess)
 	return x
 }
 
 // The uniform transparency of the material. Animatable.
 //
-// WithTransparency sets the transparency property and returns the receiver for chaining.
+// WithTransparency sets transparency and returns the receiver so calls can be chained.
 func (x *Material) WithTransparency(transparency float64) *Material {
-	x.inner.SetTransparency(transparency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparency:"), transparency)
 	return x
 }
 
 // The lighting formula that SceneKit uses to render the material.
 //
-// WithLightingModelName sets the lightingModelName property and returns the receiver for chaining.
-func (x *Material) WithLightingModelName(lightingModelName *foundation.NSString) *Material {
-	x.inner.SetLightingModelName(lightingModelName)
+// WithLightingModelName sets lightingModelName and returns the receiver so calls can be chained.
+func (x *Material) WithLightingModelName(lightingModelName obj.Object) *Material {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightingModelName:"), objref.IDOf(lightingModelName))
 	return x
 }
 
 // A Boolean value that determines whether SceneKit performs lighting calculations per vertex or per pixel. Animatable.
 //
-// WithLitPerPixel sets the litPerPixel property and returns the receiver for chaining.
+// WithLitPerPixel sets litPerPixel and returns the receiver so calls can be chained.
 func (x *Material) WithLitPerPixel(litPerPixel bool) *Material {
-	x.inner.SetLitPerPixel(litPerPixel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLitPerPixel:"), litPerPixel)
 	return x
 }
 
 // A Boolean value that determines whether SceneKit renders both front and back faces of a surface.
 //
-// WithDoubleSided sets the doubleSided property and returns the receiver for chaining.
+// WithDoubleSided sets doubleSided and returns the receiver so calls can be chained.
 func (x *Material) WithDoubleSided(doubleSided bool) *Material {
-	x.inner.SetDoubleSided(doubleSided)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
 	return x
 }
 
-// @property fillMode @abstract Determines of to how to rasterize the receiver's primitives. Defaults to SCNFillModeFill.
+// Determines of to how to rasterize the receiver's primitives. Defaults to SCNFillModeFill.
 //
-// WithFillMode sets the fillMode property and returns the receiver for chaining.
-func (x *Material) WithFillMode(fillMode SCNFillMode) *Material {
-	x.inner.SetFillMode(raw.SCNFillMode(fillMode))
+// WithFillMode sets fillMode and returns the receiver so calls can be chained.
+func (x *Material) WithFillMode(fillMode FillMode) *Material {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillMode:"), fillMode)
 	return x
 }
 
 // The mode determining which faces of a surface SceneKit renders. Animatable.
 //
-// WithCullMode sets the cullMode property and returns the receiver for chaining.
-func (x *Material) WithCullMode(cullMode SCNCullMode) *Material {
-	x.inner.SetCullMode(raw.SCNCullMode(cullMode))
+// WithCullMode sets cullMode and returns the receiver so calls can be chained.
+func (x *Material) WithCullMode(cullMode CullMode) *Material {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCullMode:"), cullMode)
 	return x
 }
 
 // The mode SceneKit uses to calculate transparency for the material.
 //
-// WithTransparencyMode sets the transparencyMode property and returns the receiver for chaining.
-func (x *Material) WithTransparencyMode(transparencyMode SCNTransparencyMode) *Material {
-	x.inner.SetTransparencyMode(raw.SCNTransparencyMode(transparencyMode))
+// WithTransparencyMode sets transparencyMode and returns the receiver so calls can be chained.
+func (x *Material) WithTransparencyMode(transparencyMode TransparencyMode) *Material {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparencyMode:"), transparencyMode)
 	return x
 }
 
 // A Boolean value that determines whether the material responds identically to both ambient and diffuse lighting. Animatable.
 //
-// WithLocksAmbientWithDiffuse sets the locksAmbientWithDiffuse property and returns the receiver for chaining.
+// WithLocksAmbientWithDiffuse sets locksAmbientWithDiffuse and returns the receiver so calls can be chained.
 func (x *Material) WithLocksAmbientWithDiffuse(locksAmbientWithDiffuse bool) *Material {
-	x.inner.SetLocksAmbientWithDiffuse(locksAmbientWithDiffuse)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocksAmbientWithDiffuse:"), locksAmbientWithDiffuse)
 	return x
 }
 
 // A Boolean value that determines whether SceneKit produces depth information when rendering the material.
 //
-// WithWritesToDepthBuffer sets the writesToDepthBuffer property and returns the receiver for chaining.
+// WithWritesToDepthBuffer sets writesToDepthBuffer and returns the receiver so calls can be chained.
 func (x *Material) WithWritesToDepthBuffer(writesToDepthBuffer bool) *Material {
-	x.inner.SetWritesToDepthBuffer(writesToDepthBuffer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritesToDepthBuffer:"), writesToDepthBuffer)
 	return x
 }
 
-// @abstract Determines whether the receiver writes to the color buffer when rendered. Defaults to SCNColorMaskAll.
+// Determines whether the receiver writes to the color buffer when rendered. Defaults to SCNColorMaskAll.
 //
-// WithColorBufferWriteMask sets the colorBufferWriteMask property and returns the receiver for chaining.
-func (x *Material) WithColorBufferWriteMask(colorBufferWriteMask SCNColorMask) *Material {
-	x.inner.SetColorBufferWriteMask(raw.SCNColorMask(colorBufferWriteMask))
+// WithColorBufferWriteMask sets colorBufferWriteMask and returns the receiver so calls can be chained.
+func (x *Material) WithColorBufferWriteMask(colorBufferWriteMask ColorMask) *Material {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorBufferWriteMask:"), colorBufferWriteMask)
 	return x
 }
 
 // A Boolean value that determines whether SceneKit uses depth information when rendering the material.
 //
-// WithReadsFromDepthBuffer sets the readsFromDepthBuffer property and returns the receiver for chaining.
+// WithReadsFromDepthBuffer sets readsFromDepthBuffer and returns the receiver so calls can be chained.
 func (x *Material) WithReadsFromDepthBuffer(readsFromDepthBuffer bool) *Material {
-	x.inner.SetReadsFromDepthBuffer(readsFromDepthBuffer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadsFromDepthBuffer:"), readsFromDepthBuffer)
 	return x
 }
 
 // A factor affecting the material’s reflectivity. Animatable.
 //
-// WithFresnelExponent sets the fresnelExponent property and returns the receiver for chaining.
+// WithFresnelExponent sets fresnelExponent and returns the receiver so calls can be chained.
 func (x *Material) WithFresnelExponent(fresnelExponent float64) *Material {
-	x.inner.SetFresnelExponent(fresnelExponent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFresnelExponent:"), fresnelExponent)
 	return x
 }
 
 // The mode that determines how pixel colors rendered using this material blend with other pixel colors in the rendering target.
 //
-// WithBlendMode sets the blendMode property and returns the receiver for chaining.
-func (x *Material) WithBlendMode(blendMode SCNBlendMode) *Material {
-	x.inner.SetBlendMode(raw.SCNBlendMode(blendMode))
+// WithBlendMode sets blendMode and returns the receiver so calls can be chained.
+func (x *Material) WithBlendMode(blendMode BlendMode) *Material {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
 	return x
 }
 
-// @property name @abstract Determines the name of the receiver.
-//
-// Name calls the underlying Name.
+// Determines the name of the receiver.
 func (x *Material) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *Material) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// @property diffuse @abstract Specifies the receiver's diffuse property. @discussion The diffuse property specifies the amount of light diffusely reflected from the surface. The diffuse light is reflected equally in all directions and is therefore independent of the point of view.
-//
-// Diffuse calls the underlying Diffuse.
+// Specifies the receiver's diffuse property. The diffuse property specifies the amount of light diffusely reflected from the surface. The diffuse light is reflected equally in all directions and is therefore independent of the point of view.
 func (x *Material) Diffuse() *MaterialProperty {
-	_r := x.inner.Diffuse()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("diffuse"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property ambient @abstract Specifies the receiver's ambient property. @discussion The ambient property specifies the amount of ambient light to reflect. This property has no visual impact on scenes that have no ambient light. Setting the ambient has no effect if locksAmbientWithDiffuse is set to YES.
-//
-// Ambient calls the underlying Ambient.
+// Specifies the receiver's ambient property. The ambient property specifies the amount of ambient light to reflect. This property has no visual impact on scenes that have no ambient light. Setting the ambient has no effect if locksAmbientWithDiffuse is set to YES.
 func (x *Material) Ambient() *MaterialProperty {
-	_r := x.inner.Ambient()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ambient"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property specular @abstract Specifies the receiver's specular property. @discussion The specular property specifies the amount of light to reflect in a mirror-like manner. The specular intensity increases when the point of view lines up with the direction of the reflected light.
-//
-// Specular calls the underlying Specular.
+// Specifies the receiver's specular property. The specular property specifies the amount of light to reflect in a mirror-like manner. The specular intensity increases when the point of view lines up with the direction of the reflected light.
 func (x *Material) Specular() *MaterialProperty {
-	_r := x.inner.Specular()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("specular"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property emission @abstract The emission property specifies the amount of light the material emits. This emission does not light up other surfaces in the scene.
-//
-// Emission calls the underlying Emission.
+// The emission property specifies the amount of light the material emits. This emission does not light up other surfaces in the scene.
 func (x *Material) Emission() *MaterialProperty {
-	_r := x.inner.Emission()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emission"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property transparent @abstract The transparent property specifies the transparent areas of the material.
-//
-// Transparent calls the underlying Transparent.
+// The transparent property specifies the transparent areas of the material.
 func (x *Material) Transparent() *MaterialProperty {
-	_r := x.inner.Transparent()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transparent"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property reflective @abstract The reflective property specifies the reflectivity of the surface. The surface will not actually reflect other objects in the scene. This property may be used as a sphere mapping to reflect a precomputed environment.
-//
-// Reflective calls the underlying Reflective.
+// The reflective property specifies the reflectivity of the surface. The surface will not actually reflect other objects in the scene. This property may be used as a sphere mapping to reflect a precomputed environment.
 func (x *Material) Reflective() *MaterialProperty {
-	_r := x.inner.Reflective()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reflective"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property multiply @abstract The multiply property specifies a color or an image used to multiply the output fragments with. The computed fragments are multiplied with the multiply value to produce the final fragments. This property may be used for shadow maps, to fade out or tint 3d objects.
-//
-// Multiply calls the underlying Multiply.
+// The multiply property specifies a color or an image used to multiply the output fragments with. The computed fragments are multiplied with the multiply value to produce the final fragments. This property may be used for shadow maps, to fade out or tint 3d objects.
 func (x *Material) Multiply() *MaterialProperty {
-	_r := x.inner.Multiply()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("multiply"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property normal @abstract The normal property specifies the surface orientation. @discussion When an image is set on the normal property the material is automatically lit per pixel. Setting a color has no effect.
-//
-// Normal calls the underlying Normal.
+// The normal property specifies the surface orientation. When an image is set on the normal property the material is automatically lit per pixel. Setting a color has no effect.
 func (x *Material) Normal() *MaterialProperty {
-	_r := x.inner.Normal()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("normal"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property displacement @abstract The displacement property specifies how vertex are translated in tangent space. @discussion Pass a grayscale image for a simple 'elevation' or rgb image for a vector displacement.
-//
-// Displacement calls the underlying Displacement.
+// The displacement property specifies how vertex are translated in tangent space. Pass a grayscale image for a simple 'elevation' or rgb image for a vector displacement.
 func (x *Material) Displacement() *MaterialProperty {
-	_r := x.inner.Displacement()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displacement"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property ambientOcclusion @abstract The ambientOcclusion property specifies the ambient occlusion of the surface. The ambient occlusion is multiplied with the ambient light, then the result is added to the lighting contribution. This property has no visual impact on scenes that have no ambient light. When an ambient occlusion map is set, the ambient property is ignored.
-//
-// AmbientOcclusion calls the underlying AmbientOcclusion.
+// The ambientOcclusion property specifies the ambient occlusion of the surface. The ambient occlusion is multiplied with the ambient light, then the result is added to the lighting contribution. This property has no visual impact on scenes that have no ambient light. When an ambient occlusion map is set, the ambient property is ignored.
 func (x *Material) AmbientOcclusion() *MaterialProperty {
-	_r := x.inner.AmbientOcclusion()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ambientOcclusion"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property selfIllumination @abstract The selfIllumination property specifies a texture or a color that is added to the lighting contribution of the surface. When a selfIllumination is set, the emission property is ignored.
-//
-// SelfIllumination calls the underlying SelfIllumination.
+// The selfIllumination property specifies a texture or a color that is added to the lighting contribution of the surface. When a selfIllumination is set, the emission property is ignored.
 func (x *Material) SelfIllumination() *MaterialProperty {
-	_r := x.inner.SelfIllumination()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selfIllumination"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property metalness @abstract The metalness property specifies how metallic the material's surface appears. Lower values (darker colors) cause the material to appear more like a dielectric surface. Higher values (brighter colors) cause the surface to appear more metallic. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
-//
-// Metalness calls the underlying Metalness.
+// The metalness property specifies how metallic the material's surface appears. Lower values (darker colors) cause the material to appear more like a dielectric surface. Higher values (brighter colors) cause the surface to appear more metallic. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
 func (x *Material) Metalness() *MaterialProperty {
-	_r := x.inner.Metalness()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metalness"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property roughness @abstract The roughness property specifies the apparent smoothness of the surface. Lower values (darker colors) cause the material to appear shiny, with well-defined specular highlights. Higher values (brighter colors) cause specular highlights to spread out and the diffuse property of the material to become more retroreflective. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
-//
-// Roughness calls the underlying Roughness.
+// The roughness property specifies the apparent smoothness of the surface. Lower values (darker colors) cause the material to appear shiny, with well-defined specular highlights. Higher values (brighter colors) cause specular highlights to spread out and the diffuse property of the material to become more retroreflective. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
 func (x *Material) Roughness() *MaterialProperty {
-	_r := x.inner.Roughness()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("roughness"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property clearCoat @abstract The clearCoat property specifies color and intensity of the coat layer.
-//
-// ClearCoat calls the underlying ClearCoat.
+// The clearCoat property specifies color and intensity of the coat layer.
 func (x *Material) ClearCoat() *MaterialProperty {
-	_r := x.inner.ClearCoat()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearCoat"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property clearCoatRoughness @abstract The clearCoat property specifies color and intensity of the coat roughness.
-//
-// ClearCoatRoughness calls the underlying ClearCoatRoughness.
+// The clearCoat property specifies color and intensity of the coat roughness.
 func (x *Material) ClearCoatRoughness() *MaterialProperty {
-	_r := x.inner.ClearCoatRoughness()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearCoatRoughness"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property clearCoatNormal @abstract The clearCoatNormal property specifies color and intensity of the optional coat normal map.
-//
-// ClearCoatNormal calls the underlying ClearCoatNormal.
+// The clearCoatNormal property specifies color and intensity of the optional coat normal map.
 func (x *Material) ClearCoatNormal() *MaterialProperty {
-	_r := x.inner.ClearCoatNormal()
-	if _r == nil {
-		return nil
-	}
-	return &MaterialProperty{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearCoatNormal"))
+	return MaterialPropertyFromID(_r)
 }
 
-// @property shininess @abstract Specifies the receiver's shininess value. Defaults to 1.0. Animatable.
-//
-// Shininess calls the underlying Shininess.
+// Specifies the receiver's shininess value. Defaults to 1.0. Animatable.
 func (x *Material) Shininess() float64 {
-	return x.inner.Shininess()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("shininess"))
+	return _r
 }
 
-// SetShininess calls the underlying SetShininess.
 func (x *Material) SetShininess(shininess float64) {
-	x.inner.SetShininess(shininess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShininess:"), shininess)
 }
 
-// @property transparency @abstract Specifies the receiver's transparency value. Defaults to 1.0. Animatable. @discussion The color of the transparent property is multiplied by this property. The result is then used to produce the final transparency according to the rule defined by the transparencyMode property.
-//
-// Transparency calls the underlying Transparency.
+// Specifies the receiver's transparency value. Defaults to 1.0. Animatable. The color of the transparent property is multiplied by this property. The result is then used to produce the final transparency according to the rule defined by the transparencyMode property.
 func (x *Material) Transparency() float64 {
-	return x.inner.Transparency()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("transparency"))
+	return _r
 }
 
-// SetTransparency calls the underlying SetTransparency.
 func (x *Material) SetTransparency(transparency float64) {
-	x.inner.SetTransparency(transparency)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparency:"), transparency)
 }
 
-// @property lightingModelName @abstract Determines the receiver's lighting model. See above for the list of lighting models. Defaults to SCNLightingModelBlinn.
-//
-// LightingModelName calls the underlying LightingModelName.
-func (x *Material) LightingModelName() string {
-	_r := x.inner.LightingModelName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+// Determines the receiver's lighting model. See above for the list of lighting models. Defaults to SCNLightingModelBlinn.
+func (x *Material) LightingModelName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lightingModelName"))
+	return obj.Wrap(_r)
 }
 
-// SetLightingModelName calls the underlying SetLightingModelName.
-func (x *Material) SetLightingModelName(lightingModelName *foundation.NSString) {
-	x.inner.SetLightingModelName(lightingModelName)
+func (x *Material) SetLightingModelName(lightingModelName obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLightingModelName:"), objref.IDOf(lightingModelName))
 }
 
-// @property litPerPixel @abstract Determines whether the receiver is lit per pixel. Defaults to YES. Animatable.
-//
-// IsLitPerPixel calls the underlying IsLitPerPixel.
+// Determines whether the receiver is lit per pixel. Defaults to YES. Animatable.
 func (x *Material) IsLitPerPixel() bool {
-	return x.inner.IsLitPerPixel()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLitPerPixel"))
+	return _r
 }
 
-// SetLitPerPixel calls the underlying SetLitPerPixel.
 func (x *Material) SetLitPerPixel(litPerPixel bool) {
-	x.inner.SetLitPerPixel(litPerPixel)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLitPerPixel:"), litPerPixel)
 }
 
-// @property doubleSided @abstract Determines whether the receiver is double sided. Defaults to NO. Animatable.
-//
-// IsDoubleSided calls the underlying IsDoubleSided.
+// Determines whether the receiver is double sided. Defaults to NO. Animatable.
 func (x *Material) IsDoubleSided() bool {
-	return x.inner.IsDoubleSided()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDoubleSided"))
+	return _r
 }
 
-// SetDoubleSided calls the underlying SetDoubleSided.
 func (x *Material) SetDoubleSided(doubleSided bool) {
-	x.inner.SetDoubleSided(doubleSided)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleSided:"), doubleSided)
 }
 
-// @property fillMode @abstract Determines of to how to rasterize the receiver's primitives. Defaults to SCNFillModeFill.
-//
-// FillMode calls the underlying FillMode.
-func (x *Material) FillMode() SCNFillMode {
-	return SCNFillMode(x.inner.FillMode())
+// Determines of to how to rasterize the receiver's primitives. Defaults to SCNFillModeFill.
+func (x *Material) FillMode() FillMode {
+	_r := objc.Send[FillMode](objref.IDOf(x), objc.RegisterName("fillMode"))
+	return _r
 }
 
-// SetFillMode calls the underlying SetFillMode.
-func (x *Material) SetFillMode(fillMode SCNFillMode) {
-	x.inner.SetFillMode(raw.SCNFillMode(fillMode))
+func (x *Material) SetFillMode(fillMode FillMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFillMode:"), fillMode)
 }
 
-// @property cullMode @abstract Determines the culling mode of the receiver. Defaults to SCNCullModeBack. Animatable.
-//
-// CullMode calls the underlying CullMode.
-func (x *Material) CullMode() SCNCullMode {
-	return SCNCullMode(x.inner.CullMode())
+// Determines the culling mode of the receiver. Defaults to SCNCullModeBack. Animatable.
+func (x *Material) CullMode() CullMode {
+	_r := objc.Send[CullMode](objref.IDOf(x), objc.RegisterName("cullMode"))
+	return _r
 }
 
-// SetCullMode calls the underlying SetCullMode.
-func (x *Material) SetCullMode(cullMode SCNCullMode) {
-	x.inner.SetCullMode(raw.SCNCullMode(cullMode))
+func (x *Material) SetCullMode(cullMode CullMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCullMode:"), cullMode)
 }
 
-// @property transparencyMode @abstract Determines the transparency mode of the receiver. See above for the transparency modes. Defaults to SCNTransparencyModeDefault.
-//
-// TransparencyMode calls the underlying TransparencyMode.
-func (x *Material) TransparencyMode() SCNTransparencyMode {
-	return SCNTransparencyMode(x.inner.TransparencyMode())
+// Determines the transparency mode of the receiver. See above for the transparency modes. Defaults to SCNTransparencyModeDefault.
+func (x *Material) TransparencyMode() TransparencyMode {
+	_r := objc.Send[TransparencyMode](objref.IDOf(x), objc.RegisterName("transparencyMode"))
+	return _r
 }
 
-// SetTransparencyMode calls the underlying SetTransparencyMode.
-func (x *Material) SetTransparencyMode(transparencyMode SCNTransparencyMode) {
-	x.inner.SetTransparencyMode(raw.SCNTransparencyMode(transparencyMode))
+func (x *Material) SetTransparencyMode(transparencyMode TransparencyMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparencyMode:"), transparencyMode)
 }
 
-// @property locksAmbientWithDiffuse @abstract Makes the ambient property automatically match the diffuse property. Defaults to NO on 10.9 and before, defaults to YES otherwise. Animatable.
-//
-// LocksAmbientWithDiffuse calls the underlying LocksAmbientWithDiffuse.
+// Makes the ambient property automatically match the diffuse property. Defaults to NO on 10.9 and before, defaults to YES otherwise. Animatable.
 func (x *Material) LocksAmbientWithDiffuse() bool {
-	return x.inner.LocksAmbientWithDiffuse()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("locksAmbientWithDiffuse"))
+	return _r
 }
 
-// SetLocksAmbientWithDiffuse calls the underlying SetLocksAmbientWithDiffuse.
 func (x *Material) SetLocksAmbientWithDiffuse(locksAmbientWithDiffuse bool) {
-	x.inner.SetLocksAmbientWithDiffuse(locksAmbientWithDiffuse)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocksAmbientWithDiffuse:"), locksAmbientWithDiffuse)
 }
 
-// @property writeToDepthBuffer @abstract Determines whether the receiver writes to the depth buffer when rendered. Defaults to YES.
-//
-// WritesToDepthBuffer calls the underlying WritesToDepthBuffer.
+// Determines whether the receiver writes to the depth buffer when rendered. Defaults to YES.
 func (x *Material) WritesToDepthBuffer() bool {
-	return x.inner.WritesToDepthBuffer()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("writesToDepthBuffer"))
+	return _r
 }
 
-// SetWritesToDepthBuffer calls the underlying SetWritesToDepthBuffer.
 func (x *Material) SetWritesToDepthBuffer(writesToDepthBuffer bool) {
-	x.inner.SetWritesToDepthBuffer(writesToDepthBuffer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritesToDepthBuffer:"), writesToDepthBuffer)
 }
 
-// @abstract Determines whether the receiver writes to the color buffer when rendered. Defaults to SCNColorMaskAll.
-//
-// ColorBufferWriteMask calls the underlying ColorBufferWriteMask.
-func (x *Material) ColorBufferWriteMask() SCNColorMask {
-	return SCNColorMask(x.inner.ColorBufferWriteMask())
+// Determines whether the receiver writes to the color buffer when rendered. Defaults to SCNColorMaskAll.
+func (x *Material) ColorBufferWriteMask() ColorMask {
+	_r := objc.Send[ColorMask](objref.IDOf(x), objc.RegisterName("colorBufferWriteMask"))
+	return _r
 }
 
-// SetColorBufferWriteMask calls the underlying SetColorBufferWriteMask.
-func (x *Material) SetColorBufferWriteMask(colorBufferWriteMask SCNColorMask) {
-	x.inner.SetColorBufferWriteMask(raw.SCNColorMask(colorBufferWriteMask))
+func (x *Material) SetColorBufferWriteMask(colorBufferWriteMask ColorMask) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setColorBufferWriteMask:"), colorBufferWriteMask)
 }
 
-// @property readsFromDepthBuffer @abstract Determines whether the receiver reads from the depth buffer when rendered. Defaults to YES.
-//
-// ReadsFromDepthBuffer calls the underlying ReadsFromDepthBuffer.
+// Determines whether the receiver reads from the depth buffer when rendered. Defaults to YES.
 func (x *Material) ReadsFromDepthBuffer() bool {
-	return x.inner.ReadsFromDepthBuffer()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("readsFromDepthBuffer"))
+	return _r
 }
 
-// SetReadsFromDepthBuffer calls the underlying SetReadsFromDepthBuffer.
 func (x *Material) SetReadsFromDepthBuffer(readsFromDepthBuffer bool) {
-	x.inner.SetReadsFromDepthBuffer(readsFromDepthBuffer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadsFromDepthBuffer:"), readsFromDepthBuffer)
 }
 
-// @property fresnelExponent @abstract Specifies the receiver's fresnel exponent value. Defaults to 0.0. Animatable. @discussion The effect of the reflectivity property is modulated by this property. The fresnelExponent changes the exponent of the reflectance. The bigger the exponent, the more concentrated the reflection is around the edges.
-//
-// FresnelExponent calls the underlying FresnelExponent.
+// Specifies the receiver's fresnel exponent value. Defaults to 0.0. Animatable. The effect of the reflectivity property is modulated by this property. The fresnelExponent changes the exponent of the reflectance. The bigger the exponent, the more concentrated the reflection is around the edges.
 func (x *Material) FresnelExponent() float64 {
-	return x.inner.FresnelExponent()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("fresnelExponent"))
+	return _r
 }
 
-// SetFresnelExponent calls the underlying SetFresnelExponent.
 func (x *Material) SetFresnelExponent(fresnelExponent float64) {
-	x.inner.SetFresnelExponent(fresnelExponent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFresnelExponent:"), fresnelExponent)
 }
 
-// @property blendMode @abstract Specifies the receiver's blend mode. Defaults to SCNBlendModeAlpha.
-//
-// BlendMode calls the underlying BlendMode.
-func (x *Material) BlendMode() SCNBlendMode {
-	return SCNBlendMode(x.inner.BlendMode())
+// Specifies the receiver's blend mode. Defaults to SCNBlendModeAlpha.
+func (x *Material) BlendMode() BlendMode {
+	_r := objc.Send[BlendMode](objref.IDOf(x), objc.RegisterName("blendMode"))
+	return _r
 }
 
-// SetBlendMode calls the underlying SetBlendMode.
-func (x *Material) SetBlendMode(blendMode SCNBlendMode) {
-	x.inner.SetBlendMode(raw.SCNBlendMode(blendMode))
+func (x *Material) SetBlendMode(blendMode BlendMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlendMode:"), blendMode)
 }
 
 // Materialable is the interface implemented by [Material], for mocking and DI.
 type Materialable interface {
-	Unwrap() *raw.SCNMaterial
+	obj.Object
 	WithName(name string) *Material
 	WithShininess(shininess float64) *Material
 	WithTransparency(transparency float64) *Material
-	WithLightingModelName(lightingModelName *foundation.NSString) *Material
+	WithLightingModelName(lightingModelName obj.Object) *Material
 	WithLitPerPixel(litPerPixel bool) *Material
 	WithDoubleSided(doubleSided bool) *Material
-	WithFillMode(fillMode SCNFillMode) *Material
-	WithCullMode(cullMode SCNCullMode) *Material
-	WithTransparencyMode(transparencyMode SCNTransparencyMode) *Material
+	WithFillMode(fillMode FillMode) *Material
+	WithCullMode(cullMode CullMode) *Material
+	WithTransparencyMode(transparencyMode TransparencyMode) *Material
 	WithLocksAmbientWithDiffuse(locksAmbientWithDiffuse bool) *Material
 	WithWritesToDepthBuffer(writesToDepthBuffer bool) *Material
-	WithColorBufferWriteMask(colorBufferWriteMask SCNColorMask) *Material
+	WithColorBufferWriteMask(colorBufferWriteMask ColorMask) *Material
 	WithReadsFromDepthBuffer(readsFromDepthBuffer bool) *Material
 	WithFresnelExponent(fresnelExponent float64) *Material
-	WithBlendMode(blendMode SCNBlendMode) *Material
+	WithBlendMode(blendMode BlendMode) *Material
 	Name() string
 	SetName(name string)
 	Diffuse() *MaterialProperty
@@ -563,30 +473,30 @@ type Materialable interface {
 	SetShininess(shininess float64)
 	Transparency() float64
 	SetTransparency(transparency float64)
-	LightingModelName() string
-	SetLightingModelName(lightingModelName *foundation.NSString)
+	LightingModelName() obj.Object
+	SetLightingModelName(lightingModelName obj.Object)
 	IsLitPerPixel() bool
 	SetLitPerPixel(litPerPixel bool)
 	IsDoubleSided() bool
 	SetDoubleSided(doubleSided bool)
-	FillMode() SCNFillMode
-	SetFillMode(fillMode SCNFillMode)
-	CullMode() SCNCullMode
-	SetCullMode(cullMode SCNCullMode)
-	TransparencyMode() SCNTransparencyMode
-	SetTransparencyMode(transparencyMode SCNTransparencyMode)
+	FillMode() FillMode
+	SetFillMode(fillMode FillMode)
+	CullMode() CullMode
+	SetCullMode(cullMode CullMode)
+	TransparencyMode() TransparencyMode
+	SetTransparencyMode(transparencyMode TransparencyMode)
 	LocksAmbientWithDiffuse() bool
 	SetLocksAmbientWithDiffuse(locksAmbientWithDiffuse bool)
 	WritesToDepthBuffer() bool
 	SetWritesToDepthBuffer(writesToDepthBuffer bool)
-	ColorBufferWriteMask() SCNColorMask
-	SetColorBufferWriteMask(colorBufferWriteMask SCNColorMask)
+	ColorBufferWriteMask() ColorMask
+	SetColorBufferWriteMask(colorBufferWriteMask ColorMask)
 	ReadsFromDepthBuffer() bool
 	SetReadsFromDepthBuffer(readsFromDepthBuffer bool)
 	FresnelExponent() float64
 	SetFresnelExponent(fresnelExponent float64)
-	BlendMode() SCNBlendMode
-	SetBlendMode(blendMode SCNBlendMode)
+	BlendMode() BlendMode
+	SetBlendMode(blendMode BlendMode)
 }
 
 var _ Materialable = (*Material)(nil)

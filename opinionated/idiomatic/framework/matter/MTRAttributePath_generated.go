@@ -5,48 +5,72 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRAttributePath wraps [raw.MTRAttributePath] with a fluent Go API.
+// MTRAttributePath is an idiomatic wrapper over the Objective-C class MTRAttributePath.
 type MTRAttributePath struct {
-	inner *raw.MTRAttributePath
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRAttributePath].
-func (x *MTRAttributePath) Unwrap() *raw.MTRAttributePath { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRAttributePath) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRAttributePathFromID adopts an existing object pointer as a MTRAttributePath (nil for 0).
+// MTRAttributePathFromID adopts an existing Objective-C object as a MTRAttributePath
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRAttributePathFromID(id objc.ID) *MTRAttributePath {
 	if id == 0 {
 		return nil
 	}
-	return &MTRAttributePath{inner: raw.MTRAttributePathFromID(id)}
+	x := &MTRAttributePath{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRAttributePath creates a new [MTRAttributePath].
+// mTRAttributePathAdopt wraps an Objective-C object that this code just created as a
+// MTRAttributePath (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRAttributePathAdopt(id objc.ID) *MTRAttributePath {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRAttributePath{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRAttributePath) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRAttributePath) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRAttributePath) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRAttributePath creates a new MTRAttributePath.
 func NewMTRAttributePath() *MTRAttributePath {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRAttributePath")), objc.RegisterName("new"))
-	return &MTRAttributePath{inner: raw.MTRAttributePathFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRAttributePath")), objc.RegisterName("new"))
+	return mTRAttributePathAdopt(_id)
 }
 
-// Attribute calls the underlying Attribute.
-func (x *MTRAttributePath) Attribute() *foundation.NSNumber {
-	return x.inner.Attribute()
+func (x *MTRAttributePath) Attribute() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attribute"))
+	return obj.Wrap(_r)
 }
-
-func (x *MTRAttributePath) asMTRClusterPath() *raw.MTRClusterPath { return &x.inner.MTRClusterPath }
 
 // MTRAttributePathable is the interface implemented by [MTRAttributePath], for mocking and DI.
 type MTRAttributePathable interface {
-	Unwrap() *raw.MTRAttributePath
-	Attribute() *foundation.NSNumber
+	obj.Object
+	Attribute() obj.Object
 }
 
 var _ MTRAttributePathable = (*MTRAttributePath)(nil)

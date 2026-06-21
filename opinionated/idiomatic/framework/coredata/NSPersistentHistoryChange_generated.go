@@ -5,86 +5,104 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A change representing the insertion, update, or deletion of a managed object in the persistent store.
 //
-// PersistentHistoryChange wraps [raw.NSPersistentHistoryChange] with a fluent Go API.
+// PersistentHistoryChange is an idiomatic wrapper over the Objective-C class NSPersistentHistoryChange.
 type PersistentHistoryChange struct {
-	inner *raw.NSPersistentHistoryChange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPersistentHistoryChange].
-func (x *PersistentHistoryChange) Unwrap() *raw.NSPersistentHistoryChange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentHistoryChange) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentHistoryChangeFromID adopts an existing object pointer as a PersistentHistoryChange (nil for 0).
+// PersistentHistoryChangeFromID adopts an existing Objective-C object as a PersistentHistoryChange
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentHistoryChangeFromID(id objc.ID) *PersistentHistoryChange {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentHistoryChange{inner: raw.NSPersistentHistoryChangeFromID(id)}
+	x := &PersistentHistoryChange{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPersistentHistoryChange creates a new [PersistentHistoryChange].
+// persistentHistoryChangeAdopt wraps an Objective-C object that this code just created as a
+// PersistentHistoryChange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentHistoryChangeAdopt(id objc.ID) *PersistentHistoryChange {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentHistoryChange{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistentHistoryChange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistentHistoryChange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistentHistoryChange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPersistentHistoryChange creates a new PersistentHistoryChange.
 func NewPersistentHistoryChange() *PersistentHistoryChange {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersistentHistoryChange")), objc.RegisterName("new"))
-	return &PersistentHistoryChange{inner: raw.NSPersistentHistoryChangeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPersistentHistoryChange")), objc.RegisterName("new"))
+	return persistentHistoryChangeAdopt(_id)
 }
 
-// ChangeID calls the underlying ChangeID.
 func (x *PersistentHistoryChange) ChangeID() int64 {
-	return x.inner.ChangeID()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("changeID"))
+	return _r
 }
 
-// ChangedObjectID calls the underlying ChangedObjectID.
 func (x *PersistentHistoryChange) ChangedObjectID() *ManagedObjectID {
-	_r := x.inner.ChangedObjectID()
-	if _r == nil {
-		return nil
-	}
-	return &ManagedObjectID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedObjectID"))
+	return ManagedObjectIDFromID(_r)
 }
 
-// ChangeType calls the underlying ChangeType.
-func (x *PersistentHistoryChange) ChangeType() NSPersistentHistoryChangeType {
-	return NSPersistentHistoryChangeType(x.inner.ChangeType())
+func (x *PersistentHistoryChange) ChangeType() PersistentHistoryChangeType {
+	_r := objc.Send[PersistentHistoryChangeType](objref.IDOf(x), objc.RegisterName("changeType"))
+	return _r
 }
 
-// Tombstone calls the underlying Tombstone.
-func (x *PersistentHistoryChange) Tombstone() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.Tombstone()
+func (x *PersistentHistoryChange) Tombstone() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tombstone"))
+	return obj.Wrap(_r)
 }
 
-// Transaction calls the underlying Transaction.
 func (x *PersistentHistoryChange) Transaction() *PersistentHistoryTransaction {
-	_r := x.inner.Transaction()
-	if _r == nil {
-		return nil
-	}
-	return &PersistentHistoryTransaction{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transaction"))
+	return PersistentHistoryTransactionFromID(_r)
 }
 
-// UpdatedProperties calls the underlying UpdatedProperties.
-func (x *PersistentHistoryChange) UpdatedProperties() *foundation.NSSet[*raw.NSPropertyDescription] {
-	return x.inner.UpdatedProperties()
+func (x *PersistentHistoryChange) UpdatedProperties() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("updatedProperties"))
+	return obj.Wrap(_r)
 }
 
 // PersistentHistoryChangeable is the interface implemented by [PersistentHistoryChange], for mocking and DI.
 type PersistentHistoryChangeable interface {
-	Unwrap() *raw.NSPersistentHistoryChange
+	obj.Object
 	ChangeID() int64
 	ChangedObjectID() *ManagedObjectID
-	ChangeType() NSPersistentHistoryChangeType
-	Tombstone() *foundation.NSDictionary[objc.ID, objc.ID]
+	ChangeType() PersistentHistoryChangeType
+	Tombstone() obj.Object
 	Transaction() *PersistentHistoryTransaction
-	UpdatedProperties() *foundation.NSSet[*raw.NSPropertyDescription]
+	UpdatedProperties() obj.Object
 }
 
 var _ PersistentHistoryChangeable = (*PersistentHistoryChange)(nil)

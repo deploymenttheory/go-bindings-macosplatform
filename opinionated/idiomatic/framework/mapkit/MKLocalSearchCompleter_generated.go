@@ -5,247 +5,208 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A utility object for generating a list of completion strings based on a partial search string that you provide.
 //
-// LocalSearchCompleter wraps [raw.MKLocalSearchCompleter] with a fluent Go API.
+// LocalSearchCompleter is an idiomatic wrapper over the Objective-C class MKLocalSearchCompleter.
 type LocalSearchCompleter struct {
-	inner *raw.MKLocalSearchCompleter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKLocalSearchCompleter].
-func (x *LocalSearchCompleter) Unwrap() *raw.MKLocalSearchCompleter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LocalSearchCompleter) ID() objc.ID { return x.inner.Ptr() }
-
-// LocalSearchCompleterFromID adopts an existing object pointer as a LocalSearchCompleter (nil for 0).
+// LocalSearchCompleterFromID adopts an existing Objective-C object as a LocalSearchCompleter
+// (nil for 0), retaining it and registering a release finalizer.
 func LocalSearchCompleterFromID(id objc.ID) *LocalSearchCompleter {
 	if id == 0 {
 		return nil
 	}
-	return &LocalSearchCompleter{inner: raw.MKLocalSearchCompleterFromID(id)}
+	x := &LocalSearchCompleter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLocalSearchCompleter creates a new [LocalSearchCompleter].
+// localSearchCompleterAdopt wraps an Objective-C object that this code just created as a
+// LocalSearchCompleter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func localSearchCompleterAdopt(id objc.ID) *LocalSearchCompleter {
+	if id == 0 {
+		return nil
+	}
+	x := &LocalSearchCompleter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LocalSearchCompleter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LocalSearchCompleter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LocalSearchCompleter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLocalSearchCompleter creates a new LocalSearchCompleter.
 func NewLocalSearchCompleter() *LocalSearchCompleter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLocalSearchCompleter")), objc.RegisterName("new"))
-	return &LocalSearchCompleter{inner: raw.MKLocalSearchCompleterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKLocalSearchCompleter")), objc.RegisterName("new"))
+	return localSearchCompleterAdopt(_id)
 }
 
 // The search string that you want completions for.
 //
-// WithQueryFragment sets the queryFragment property and returns the receiver for chaining.
+// WithQueryFragment sets queryFragment and returns the receiver so calls can be chained.
 func (x *LocalSearchCompleter) WithQueryFragment(queryFragment string) *LocalSearchCompleter {
-	x.inner.SetQueryFragment(foundation.NSStringStringWithUTF8String(queryFragment))
-	return x
-}
-
-// The region that defines the geographic scope of the search.
-//
-// WithRegion sets the region property and returns the receiver for chaining.
-func (x *LocalSearchCompleter) WithRegion(region raw.MKCoordinateRegion) *LocalSearchCompleter {
-	x.inner.SetRegion(region)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryFragment:"), purego.NSString(queryFragment))
 	return x
 }
 
 // A value that indicates the importance of the configured region.
 //
-// WithRegionPriority sets the regionPriority property and returns the receiver for chaining.
-func (x *LocalSearchCompleter) WithRegionPriority(regionPriority MKLocalSearchRegionPriority) *LocalSearchCompleter {
-	x.inner.SetRegionPriority(raw.MKLocalSearchRegionPriority(regionPriority))
+// WithRegionPriority sets regionPriority and returns the receiver so calls can be chained.
+func (x *LocalSearchCompleter) WithRegionPriority(regionPriority LocalSearchRegionPriority) *LocalSearchCompleter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionPriority:"), regionPriority)
 	return x
 }
 
 // The filter options for the search results.
 //
-// WithFilterType sets the filterType property and returns the receiver for chaining.
-func (x *LocalSearchCompleter) WithFilterType(filterType MKSearchCompletionFilterType) *LocalSearchCompleter {
-	x.inner.SetFilterType(raw.MKSearchCompletionFilterType(filterType))
+// WithFilterType sets filterType and returns the receiver so calls can be chained.
+func (x *LocalSearchCompleter) WithFilterType(filterType SearchCompletionFilterType) *LocalSearchCompleter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterType:"), filterType)
 	return x
 }
 
 // The types of search completions to include.
 //
-// WithResultTypes sets the resultTypes property and returns the receiver for chaining.
-func (x *LocalSearchCompleter) WithResultTypes(resultTypes MKLocalSearchCompleterResultType) *LocalSearchCompleter {
-	x.inner.SetResultTypes(raw.MKLocalSearchCompleterResultType(resultTypes))
+// WithResultTypes sets resultTypes and returns the receiver so calls can be chained.
+func (x *LocalSearchCompleter) WithResultTypes(resultTypes LocalSearchCompleterResultType) *LocalSearchCompleter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultTypes:"), resultTypes)
 	return x
 }
 
 // A filter that lists point of interest categories to include or exclude in the search.
 //
-// WithPointOfInterestFilter sets the pointOfInterestFilter property and returns the receiver for chaining.
+// WithPointOfInterestFilter sets pointOfInterestFilter and returns the receiver so calls can be chained.
 func (x *LocalSearchCompleter) WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalSearchCompleter {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 	return x
 }
 
 // A filter that lists which address options to include or exclude in search results.
 //
-// WithAddressFilter sets the addressFilter property and returns the receiver for chaining.
+// WithAddressFilter sets addressFilter and returns the receiver so calls can be chained.
 func (x *LocalSearchCompleter) WithAddressFilter(addressFilter *AddressFilter) *LocalSearchCompleter {
-	x.inner.SetAddressFilter(addressFilter.Unwrap())
-	return x
-}
-
-// The object that receives the completion results.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *LocalSearchCompleter) WithDelegate(delegate raw.MKLocalSearchCompleterDelegate) *LocalSearchCompleter {
-	x.inner.SetDelegate(delegate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddressFilter:"), objref.IDOf(addressFilter))
 	return x
 }
 
 // Cancels an in-progress search operation.
-//
-// Cancel calls the underlying Cancel.
 func (x *LocalSearchCompleter) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// QueryFragment calls the underlying QueryFragment.
 func (x *LocalSearchCompleter) QueryFragment() string {
-	_r := x.inner.QueryFragment()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queryFragment"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetQueryFragment calls the underlying SetQueryFragment.
 func (x *LocalSearchCompleter) SetQueryFragment(queryFragment string) {
-	x.inner.SetQueryFragment(foundation.NSStringStringWithUTF8String(queryFragment))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryFragment:"), purego.NSString(queryFragment))
 }
 
-// Region calls the underlying Region.
-func (x *LocalSearchCompleter) Region() raw.MKCoordinateRegion {
-	return x.inner.Region()
+func (x *LocalSearchCompleter) RegionPriority() LocalSearchRegionPriority {
+	_r := objc.Send[LocalSearchRegionPriority](objref.IDOf(x), objc.RegisterName("regionPriority"))
+	return _r
 }
 
-// SetRegion calls the underlying SetRegion.
-func (x *LocalSearchCompleter) SetRegion(region raw.MKCoordinateRegion) {
-	x.inner.SetRegion(region)
+func (x *LocalSearchCompleter) SetRegionPriority(regionPriority LocalSearchRegionPriority) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRegionPriority:"), regionPriority)
 }
 
-// RegionPriority calls the underlying RegionPriority.
-func (x *LocalSearchCompleter) RegionPriority() MKLocalSearchRegionPriority {
-	return MKLocalSearchRegionPriority(x.inner.RegionPriority())
+func (x *LocalSearchCompleter) FilterType() SearchCompletionFilterType {
+	_r := objc.Send[SearchCompletionFilterType](objref.IDOf(x), objc.RegisterName("filterType"))
+	return _r
 }
 
-// SetRegionPriority calls the underlying SetRegionPriority.
-func (x *LocalSearchCompleter) SetRegionPriority(regionPriority MKLocalSearchRegionPriority) {
-	x.inner.SetRegionPriority(raw.MKLocalSearchRegionPriority(regionPriority))
+func (x *LocalSearchCompleter) SetFilterType(filterType SearchCompletionFilterType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFilterType:"), filterType)
 }
 
-// FilterType calls the underlying FilterType.
-func (x *LocalSearchCompleter) FilterType() MKSearchCompletionFilterType {
-	return MKSearchCompletionFilterType(x.inner.FilterType())
+func (x *LocalSearchCompleter) ResultTypes() LocalSearchCompleterResultType {
+	_r := objc.Send[LocalSearchCompleterResultType](objref.IDOf(x), objc.RegisterName("resultTypes"))
+	return _r
 }
 
-// SetFilterType calls the underlying SetFilterType.
-func (x *LocalSearchCompleter) SetFilterType(filterType MKSearchCompletionFilterType) {
-	x.inner.SetFilterType(raw.MKSearchCompletionFilterType(filterType))
+func (x *LocalSearchCompleter) SetResultTypes(resultTypes LocalSearchCompleterResultType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultTypes:"), resultTypes)
 }
 
-// ResultTypes calls the underlying ResultTypes.
-func (x *LocalSearchCompleter) ResultTypes() MKLocalSearchCompleterResultType {
-	return MKLocalSearchCompleterResultType(x.inner.ResultTypes())
-}
-
-// SetResultTypes calls the underlying SetResultTypes.
-func (x *LocalSearchCompleter) SetResultTypes(resultTypes MKLocalSearchCompleterResultType) {
-	x.inner.SetResultTypes(raw.MKLocalSearchCompleterResultType(resultTypes))
-}
-
-// PointOfInterestFilter calls the underlying PointOfInterestFilter.
 func (x *LocalSearchCompleter) PointOfInterestFilter() *PointOfInterestFilter {
-	_r := x.inner.PointOfInterestFilter()
-	if _r == nil {
-		return nil
-	}
-	return &PointOfInterestFilter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pointOfInterestFilter"))
+	return PointOfInterestFilterFromID(_r)
 }
 
-// SetPointOfInterestFilter calls the underlying SetPointOfInterestFilter.
-func (x *LocalSearchCompleter) SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter) {
-	x.inner.SetPointOfInterestFilter(pointOfInterestFilter)
+func (x *LocalSearchCompleter) SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPointOfInterestFilter:"), objref.IDOf(pointOfInterestFilter))
 }
 
-// AddressFilter calls the underlying AddressFilter.
 func (x *LocalSearchCompleter) AddressFilter() *AddressFilter {
-	_r := x.inner.AddressFilter()
-	if _r == nil {
-		return nil
-	}
-	return &AddressFilter{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addressFilter"))
+	return AddressFilterFromID(_r)
 }
 
-// SetAddressFilter calls the underlying SetAddressFilter.
-func (x *LocalSearchCompleter) SetAddressFilter(addressFilter *raw.MKAddressFilter) {
-	x.inner.SetAddressFilter(addressFilter)
-}
-
-// Delegate calls the underlying Delegate.
-func (x *LocalSearchCompleter) Delegate() raw.MKLocalSearchCompleterDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *LocalSearchCompleter) SetDelegate(delegate raw.MKLocalSearchCompleterDelegate) {
-	x.inner.SetDelegate(delegate)
+func (x *LocalSearchCompleter) SetAddressFilter(addressFilter *AddressFilter) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAddressFilter:"), objref.IDOf(addressFilter))
 }
 
 // Results returns the collection as a Go slice.
 func (x *LocalSearchCompleter) Results() []*LocalSearchCompletion {
-	arr := x.inner.Results()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LocalSearchCompletion {
-		return &LocalSearchCompletion{inner: raw.MKLocalSearchCompletionFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("results"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LocalSearchCompletion { return LocalSearchCompletionFromID(_id) })
 }
 
-// IsSearching calls the underlying IsSearching.
 func (x *LocalSearchCompleter) IsSearching() bool {
-	return x.inner.IsSearching()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSearching"))
+	return _r
 }
 
 // LocalSearchCompleterable is the interface implemented by [LocalSearchCompleter], for mocking and DI.
 type LocalSearchCompleterable interface {
-	Unwrap() *raw.MKLocalSearchCompleter
+	obj.Object
 	WithQueryFragment(queryFragment string) *LocalSearchCompleter
-	WithRegion(region raw.MKCoordinateRegion) *LocalSearchCompleter
-	WithRegionPriority(regionPriority MKLocalSearchRegionPriority) *LocalSearchCompleter
-	WithFilterType(filterType MKSearchCompletionFilterType) *LocalSearchCompleter
-	WithResultTypes(resultTypes MKLocalSearchCompleterResultType) *LocalSearchCompleter
+	WithRegionPriority(regionPriority LocalSearchRegionPriority) *LocalSearchCompleter
+	WithFilterType(filterType SearchCompletionFilterType) *LocalSearchCompleter
+	WithResultTypes(resultTypes LocalSearchCompleterResultType) *LocalSearchCompleter
 	WithPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter) *LocalSearchCompleter
 	WithAddressFilter(addressFilter *AddressFilter) *LocalSearchCompleter
-	WithDelegate(delegate raw.MKLocalSearchCompleterDelegate) *LocalSearchCompleter
 	Cancel()
 	QueryFragment() string
 	SetQueryFragment(queryFragment string)
-	Region() raw.MKCoordinateRegion
-	SetRegion(region raw.MKCoordinateRegion)
-	RegionPriority() MKLocalSearchRegionPriority
-	SetRegionPriority(regionPriority MKLocalSearchRegionPriority)
-	FilterType() MKSearchCompletionFilterType
-	SetFilterType(filterType MKSearchCompletionFilterType)
-	ResultTypes() MKLocalSearchCompleterResultType
-	SetResultTypes(resultTypes MKLocalSearchCompleterResultType)
+	RegionPriority() LocalSearchRegionPriority
+	SetRegionPriority(regionPriority LocalSearchRegionPriority)
+	FilterType() SearchCompletionFilterType
+	SetFilterType(filterType SearchCompletionFilterType)
+	ResultTypes() LocalSearchCompleterResultType
+	SetResultTypes(resultTypes LocalSearchCompleterResultType)
 	PointOfInterestFilter() *PointOfInterestFilter
-	SetPointOfInterestFilter(pointOfInterestFilter *raw.MKPointOfInterestFilter)
+	SetPointOfInterestFilter(pointOfInterestFilter *PointOfInterestFilter)
 	AddressFilter() *AddressFilter
-	SetAddressFilter(addressFilter *raw.MKAddressFilter)
-	Delegate() raw.MKLocalSearchCompleterDelegate
-	SetDelegate(delegate raw.MKLocalSearchCompleterDelegate)
+	SetAddressFilter(addressFilter *AddressFilter)
 	Results() []*LocalSearchCompletion
 	IsSearching() bool
 }

@@ -5,80 +5,98 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams wraps [raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams] with a fluent Go API.
+// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams is an idiomatic wrapper over the Objective-C class MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams.
 type MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams struct {
-	inner *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams].
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID adopts an existing object pointer as a MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams (nil for 0).
+// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID adopts an existing Objective-C object as a MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID(id objc.ID) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams{inner: raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID(id)}
-}
-
-// NewMTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams creates a new [MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams].
-func NewMTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams() *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams")), objc.RegisterName("new"))
-	return &MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams{inner: raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsFromID(_id)}
-}
-
-// WithUpdateToken sets the updateToken property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithUpdateToken(updateToken *foundation.NSData) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams.SetUpdateToken(updateToken)
+	x := &MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithNewVersion sets the newVersion property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithNewVersion(newVersion *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams.SetNewVersion(newVersion)
+// mTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsAdopt(id objc.ID) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams creates a new MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams.
+func NewMTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams() *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams")), objc.RegisterName("new"))
+	return mTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsAdopt(_id)
+}
+
+// WithUpdateToken sets updateToken and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithUpdateToken(updateToken obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpdateToken:"), objref.IDOf(updateToken))
+	return x
+}
+
+// WithNewVersion sets newVersion and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithNewVersion(newVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewVersion:"), objref.IDOf(newVersion))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
-}
-
-func (x *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams) asMTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams() *raw.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams {
-	return &x.inner.MTROTASoftwareUpdateProviderClusterApplyUpdateRequestParams
 }
 
 // MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable is the interface implemented by [MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams], for mocking and DI.
 type MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable interface {
-	Unwrap() *raw.MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
-	WithUpdateToken(updateToken *foundation.NSData) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
-	WithNewVersion(newVersion *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
+	obj.Object
+	WithUpdateToken(updateToken obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
+	WithNewVersion(newVersion obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams
 }
 
 var _ MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParamsable = (*MTROtaSoftwareUpdateProviderClusterApplyUpdateRequestParams)(nil)

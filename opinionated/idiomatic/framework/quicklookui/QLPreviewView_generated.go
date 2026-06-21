@@ -5,158 +5,139 @@
 package quicklookui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quicklookui"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A Quick Look preview of an item that you can embed into your view hierarchy.
 //
-// PreviewView wraps [raw.QLPreviewView] with a fluent Go API.
+// PreviewView is an idiomatic wrapper over the Objective-C class QLPreviewView.
 type PreviewView struct {
-	inner *raw.QLPreviewView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.QLPreviewView].
-func (x *PreviewView) Unwrap() *raw.QLPreviewView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PreviewView) ID() objc.ID { return x.inner.Ptr() }
-
-// PreviewViewFromID adopts an existing object pointer as a PreviewView (nil for 0).
+// PreviewViewFromID adopts an existing Objective-C object as a PreviewView
+// (nil for 0), retaining it and registering a release finalizer.
 func PreviewViewFromID(id objc.ID) *PreviewView {
 	if id == 0 {
 		return nil
 	}
-	return &PreviewView{inner: raw.QLPreviewViewFromID(id)}
-}
-
-// Creates a preview view with the provided frame and style.
-//
-// NewPreviewViewWithFrameStyle creates a new [PreviewView].
-func NewPreviewViewWithFrameStyle(frame corefoundation.CGRect, style QLPreviewViewStyle) *PreviewView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:style:"), frame, raw.QLPreviewViewStyle(style))
-	return &PreviewView{inner: raw.QLPreviewViewFromID(_id)}
-}
-
-// Creates a preview view with the provided frame.
-//
-// NewPreviewViewWithFrame creates a new [PreviewView].
-func NewPreviewViewWithFrame(frame corefoundation.CGRect) *PreviewView {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("QLPreviewView")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithFrame:"), frame)
-	return &PreviewView{inner: raw.QLPreviewViewFromID(_id)}
-}
-
-// The item to preview.
-//
-// WithPreviewItem sets the previewItem property and returns the receiver for chaining.
-func (x *PreviewView) WithPreviewItem(previewItem raw.QLPreviewItem) *PreviewView {
-	x.inner.SetPreviewItem(previewItem)
+	x := &PreviewView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// previewViewAdopt wraps an Objective-C object that this code just created as a
+// PreviewView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func previewViewAdopt(id objc.ID) *PreviewView {
+	if id == 0 {
+		return nil
+	}
+	x := &PreviewView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PreviewView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PreviewView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PreviewView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPreviewView creates a new PreviewView.
+func NewPreviewView() *PreviewView {
+	_id := objc.Send[objc.ID](objc.ID(_class("QLPreviewView")), objc.RegisterName("new"))
+	return previewViewAdopt(_id)
 }
 
 // The current display state of the previewItem.
 //
-// WithDisplayState sets the displayState property and returns the receiver for chaining.
-func (x *PreviewView) WithDisplayState(displayState objc.ID) *PreviewView {
-	x.inner.SetDisplayState(displayState)
+// WithDisplayState sets displayState and returns the receiver so calls can be chained.
+func (x *PreviewView) WithDisplayState(displayState obj.Object) *PreviewView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
 	return x
 }
 
 // A Boolean value that determines whether the preview should close when its window closes.
 //
-// WithShouldCloseWithWindow sets the shouldCloseWithWindow property and returns the receiver for chaining.
+// WithShouldCloseWithWindow sets shouldCloseWithWindow and returns the receiver so calls can be chained.
 func (x *PreviewView) WithShouldCloseWithWindow(shouldCloseWithWindow bool) *PreviewView {
-	x.inner.SetShouldCloseWithWindow(shouldCloseWithWindow)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCloseWithWindow:"), shouldCloseWithWindow)
 	return x
 }
 
 // A Boolean value that determines whether the preview starts automatically.
 //
-// WithAutostarts sets the autostarts property and returns the receiver for chaining.
+// WithAutostarts sets autostarts and returns the receiver so calls can be chained.
 func (x *PreviewView) WithAutostarts(autostarts bool) *PreviewView {
-	x.inner.SetAutostarts(autostarts)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutostarts:"), autostarts)
 	return x
 }
 
 // Updates the preview to display the currently previewed item.
-//
-// RefreshPreviewItem calls the underlying RefreshPreviewItem.
 func (x *PreviewView) RefreshPreviewItem() {
-	x.inner.RefreshPreviewItem()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("refreshPreviewItem"))
 }
 
 // Closes the view, releasing the current preview item.
-//
-// Close calls the underlying Close.
 func (x *PreviewView) Close() {
-	x.inner.Close()
-}
-
-// The item to preview. Quick Look requires Items you wish to conform to the <doc://com.apple.documentation/documentation/quicklook/qlpreviewitem> protocol. When you set this property, the “QuickLookUI/QLPreviewView“ loads the preview asynchronously. Due to this asynchronous behavior, don’t assume that the preview is ready immediately after assigning it to this property.
-//
-// PreviewItem calls the underlying PreviewItem.
-func (x *PreviewView) PreviewItem() raw.QLPreviewItem {
-	return x.inner.PreviewItem()
-}
-
-// SetPreviewItem calls the underlying SetPreviewItem.
-func (x *PreviewView) SetPreviewItem(previewItem raw.QLPreviewItem) {
-	x.inner.SetPreviewItem(previewItem)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("close"))
 }
 
 // The current display state of the <doc://com.apple.documentation/documentation/quicklookui/qlpreviewview/1504747-previewitem>. This property is an opaque object that Quick Look uses to get and set the current display state of the preview. The display state could be, for example, the currently displayed page, the zoom factor on an image, or the position in a movie. You can use this property to get and save the current display state of the preview before switching to another. This saving allows you to restore a preview later on when the user switches back to it.
-//
-// DisplayState calls the underlying DisplayState.
-func (x *PreviewView) DisplayState() objc.ID {
-	return x.inner.DisplayState()
+func (x *PreviewView) DisplayState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displayState"))
+	return obj.Wrap(_r)
 }
 
-// SetDisplayState calls the underlying SetDisplayState.
-func (x *PreviewView) SetDisplayState(displayState objc.ID) {
-	x.inner.SetDisplayState(displayState)
+func (x *PreviewView) SetDisplayState(displayState obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayState:"), objref.IDOf(displayState))
 }
 
 // A Boolean value that determines whether the preview should close when its window closes. The default value of this property is <doc://com.apple.documentation/documentation/objectivec/yes>, which means that the preview automatically closes when its window closes. If you set this property to <doc://com.apple.documentation/documentation/objectivec/no>, close the preview by calling the “QuickLookUI/QLPreviewView/close“ method when finished with it. Once you close a “QuickLookUI/QLPreviewView“, it won’t accept any more preview items.
-//
-// ShouldCloseWithWindow calls the underlying ShouldCloseWithWindow.
 func (x *PreviewView) ShouldCloseWithWindow() bool {
-	return x.inner.ShouldCloseWithWindow()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldCloseWithWindow"))
+	return _r
 }
 
-// SetShouldCloseWithWindow calls the underlying SetShouldCloseWithWindow.
 func (x *PreviewView) SetShouldCloseWithWindow(shouldCloseWithWindow bool) {
-	x.inner.SetShouldCloseWithWindow(shouldCloseWithWindow)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldCloseWithWindow:"), shouldCloseWithWindow)
 }
 
 // A Boolean value that determines whether the preview starts automatically. Set this property to allow previews of movie files to start playback automatically when displayed.
-//
-// Autostarts calls the underlying Autostarts.
 func (x *PreviewView) Autostarts() bool {
-	return x.inner.Autostarts()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autostarts"))
+	return _r
 }
 
-// SetAutostarts calls the underlying SetAutostarts.
 func (x *PreviewView) SetAutostarts(autostarts bool) {
-	x.inner.SetAutostarts(autostarts)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutostarts:"), autostarts)
 }
 
 // PreviewViewable is the interface implemented by [PreviewView], for mocking and DI.
 type PreviewViewable interface {
-	Unwrap() *raw.QLPreviewView
-	WithPreviewItem(previewItem raw.QLPreviewItem) *PreviewView
-	WithDisplayState(displayState objc.ID) *PreviewView
+	obj.Object
+	WithDisplayState(displayState obj.Object) *PreviewView
 	WithShouldCloseWithWindow(shouldCloseWithWindow bool) *PreviewView
 	WithAutostarts(autostarts bool) *PreviewView
 	RefreshPreviewItem()
 	Close()
-	PreviewItem() raw.QLPreviewItem
-	SetPreviewItem(previewItem raw.QLPreviewItem)
-	DisplayState() objc.ID
-	SetDisplayState(displayState objc.ID)
+	DisplayState() obj.Object
+	SetDisplayState(displayState obj.Object)
 	ShouldCloseWithWindow() bool
 	SetShouldCloseWithWindow(shouldCloseWithWindow bool)
 	Autostarts() bool

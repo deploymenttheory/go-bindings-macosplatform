@@ -5,62 +5,80 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A fetch result object that encompasses the response from an executed asynchronous fetch request.
 //
-// AsynchronousFetchResult wraps [raw.NSAsynchronousFetchResult] with a fluent Go API.
+// AsynchronousFetchResult is an idiomatic wrapper over the Objective-C class NSAsynchronousFetchResult.
 type AsynchronousFetchResult struct {
-	inner *raw.NSAsynchronousFetchResult[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSAsynchronousFetchResult].
-func (x *AsynchronousFetchResult) Unwrap() *raw.NSAsynchronousFetchResult[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AsynchronousFetchResult) ID() objc.ID { return x.inner.Ptr() }
-
-// AsynchronousFetchResultFromID adopts an existing object pointer as a AsynchronousFetchResult (nil for 0).
+// AsynchronousFetchResultFromID adopts an existing Objective-C object as a AsynchronousFetchResult
+// (nil for 0), retaining it and registering a release finalizer.
 func AsynchronousFetchResultFromID(id objc.ID) *AsynchronousFetchResult {
 	if id == 0 {
 		return nil
 	}
-	return &AsynchronousFetchResult{inner: raw.NSAsynchronousFetchResultFromID[objc.ID](id)}
+	x := &AsynchronousFetchResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAsynchronousFetchResult creates a new [AsynchronousFetchResult].
+// asynchronousFetchResultAdopt wraps an Objective-C object that this code just created as a
+// AsynchronousFetchResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func asynchronousFetchResultAdopt(id objc.ID) *AsynchronousFetchResult {
+	if id == 0 {
+		return nil
+	}
+	x := &AsynchronousFetchResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AsynchronousFetchResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AsynchronousFetchResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AsynchronousFetchResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAsynchronousFetchResult creates a new AsynchronousFetchResult.
 func NewAsynchronousFetchResult() *AsynchronousFetchResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSAsynchronousFetchResult")), objc.RegisterName("new"))
-	return &AsynchronousFetchResult{inner: raw.NSAsynchronousFetchResultFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSAsynchronousFetchResult")), objc.RegisterName("new"))
+	return asynchronousFetchResultAdopt(_id)
 }
 
-// FetchRequest calls the underlying FetchRequest.
-func (x *AsynchronousFetchResult) FetchRequest() *raw.NSAsynchronousFetchRequest[objc.ID] {
-	return x.inner.FetchRequest()
+func (x *AsynchronousFetchResult) FetchRequest() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchRequest"))
+	return obj.Wrap(_r)
 }
 
-// FinalResult calls the underlying FinalResult.
-func (x *AsynchronousFetchResult) FinalResult() *foundation.NSArray[objc.ID] {
-	return x.inner.FinalResult()
-}
-
-func (x *AsynchronousFetchResult) asPersistentStoreAsynchronousResult() *raw.NSPersistentStoreAsynchronousResult {
-	return &x.inner.NSPersistentStoreAsynchronousResult
-}
-
-func (x *AsynchronousFetchResult) asPersistentStoreResult() *raw.NSPersistentStoreResult {
-	return &x.inner.NSPersistentStoreAsynchronousResult.NSPersistentStoreResult
+func (x *AsynchronousFetchResult) FinalResult() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("finalResult"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // AsynchronousFetchResultable is the interface implemented by [AsynchronousFetchResult], for mocking and DI.
 type AsynchronousFetchResultable interface {
-	Unwrap() *raw.NSAsynchronousFetchResult[objc.ID]
-	FetchRequest() *raw.NSAsynchronousFetchRequest[objc.ID]
-	FinalResult() *foundation.NSArray[objc.ID]
+	obj.Object
+	FetchRequest() obj.Object
+	FinalResult() []obj.Object
 }
 
 var _ AsynchronousFetchResultable = (*AsynchronousFetchResult)(nil)

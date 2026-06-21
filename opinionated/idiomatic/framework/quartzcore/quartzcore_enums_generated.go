@@ -11,26 +11,26 @@ import (
 
 // These constants are used by the autoresizingMask property.
 // Bitmask — values may be combined with |.
-type CAAutoresizingMask uint32
+type AutoresizingMask uint32
 
 const (
 	// The receiver cannot be resized.
-	KCALayerNotSizable CAAutoresizingMask = 0
+	KCALayerNotSizable AutoresizingMask = 0
 	// The left margin between the receiver and its superview is flexible.
-	KCALayerMinXMargin CAAutoresizingMask = 1
+	KCALayerMinXMargin AutoresizingMask = 1
 	// The receiver’s width is flexible.
-	KCALayerWidthSizable CAAutoresizingMask = 2
+	KCALayerWidthSizable AutoresizingMask = 2
 	// The right margin between the receiver and its superview is flexible.
-	KCALayerMaxXMargin CAAutoresizingMask = 4
+	KCALayerMaxXMargin AutoresizingMask = 4
 	// The bottom margin between the receiver and its superview is flexible.
-	KCALayerMinYMargin CAAutoresizingMask = 8
+	KCALayerMinYMargin AutoresizingMask = 8
 	// The receiver’s height is flexible.
-	KCALayerHeightSizable CAAutoresizingMask = 16
+	KCALayerHeightSizable AutoresizingMask = 16
 	// The top margin between the receiver and its superview is flexible.
-	KCALayerMaxYMargin CAAutoresizingMask = 32
+	KCALayerMaxYMargin AutoresizingMask = 32
 )
 
-func (e CAAutoresizingMask) String() string {
+func (e AutoresizingMask) String() string {
 	var parts []string
 	if e&KCALayerMinXMargin != 0 {
 		parts = append(parts, "KCALayerMinXMargin")
@@ -57,28 +57,28 @@ func (e CAAutoresizingMask) String() string {
 }
 
 // The constraint attribute type.
-type CAConstraintAttribute int32
+type ConstraintAttribute int32
 
 const (
 	// The left edge of a layer’s frame.
-	KCAConstraintMinX CAConstraintAttribute = 0
+	KCAConstraintMinX ConstraintAttribute = 0
 	// The horizontal location of the center of a layer’s frame.
-	KCAConstraintMidX CAConstraintAttribute = 1
+	KCAConstraintMidX ConstraintAttribute = 1
 	// The right edge of a layer’s frame.
-	KCAConstraintMaxX CAConstraintAttribute = 2
+	KCAConstraintMaxX ConstraintAttribute = 2
 	// The width of a layer.
-	KCAConstraintWidth CAConstraintAttribute = 3
+	KCAConstraintWidth ConstraintAttribute = 3
 	// The bottom edge of a layer’s frame.
-	KCAConstraintMinY CAConstraintAttribute = 4
+	KCAConstraintMinY ConstraintAttribute = 4
 	// The vertical location of the center of a layer’s frame.
-	KCAConstraintMidY CAConstraintAttribute = 5
+	KCAConstraintMidY ConstraintAttribute = 5
 	// The top edge of a layer’s frame.
-	KCAConstraintMaxY CAConstraintAttribute = 6
+	KCAConstraintMaxY ConstraintAttribute = 6
 	// The height of a layer.
-	KCAConstraintHeight CAConstraintAttribute = 7
+	KCAConstraintHeight ConstraintAttribute = 7
 )
 
-func (e CAConstraintAttribute) String() string {
+func (e ConstraintAttribute) String() string {
 	switch e {
 	case KCAConstraintMinX:
 		return "KCAConstraintMinX"
@@ -97,21 +97,21 @@ func (e CAConstraintAttribute) String() string {
 	case KCAConstraintHeight:
 		return "KCAConstraintHeight"
 	default:
-		return fmt.Sprintf("CAConstraintAttribute(%d)", int64(e))
+		return fmt.Sprintf("ConstraintAttribute(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type CACornerMask uint64
+type CornerMask uint64
 
 const (
-	KCALayerMinXMinYCorner CACornerMask = 1
-	KCALayerMaxXMinYCorner CACornerMask = 2
-	KCALayerMinXMaxYCorner CACornerMask = 4
-	KCALayerMaxXMaxYCorner CACornerMask = 8
+	KCALayerMinXMinYCorner CornerMask = 1
+	KCALayerMaxXMinYCorner CornerMask = 2
+	KCALayerMinXMaxYCorner CornerMask = 4
+	KCALayerMaxXMaxYCorner CornerMask = 8
 )
 
-func (e CACornerMask) String() string {
+func (e CornerMask) String() string {
 	var parts []string
 	if e&KCALayerMinXMinYCorner != 0 {
 		parts = append(parts, "KCALayerMinXMinYCorner")
@@ -133,16 +133,16 @@ func (e CACornerMask) String() string {
 
 // This mask is used by the edgeAntialiasingMask property.
 // Bitmask — values may be combined with |.
-type CAEdgeAntialiasingMask uint32
+type EdgeAntialiasingMask uint32
 
 const (
-	KCALayerLeftEdge   CAEdgeAntialiasingMask = 1
-	KCALayerRightEdge  CAEdgeAntialiasingMask = 2
-	KCALayerBottomEdge CAEdgeAntialiasingMask = 4
-	KCALayerTopEdge    CAEdgeAntialiasingMask = 8
+	KCALayerLeftEdge   EdgeAntialiasingMask = 1
+	KCALayerRightEdge  EdgeAntialiasingMask = 2
+	KCALayerBottomEdge EdgeAntialiasingMask = 4
+	KCALayerTopEdge    EdgeAntialiasingMask = 8
 )
 
-func (e CAEdgeAntialiasingMask) String() string {
+func (e EdgeAntialiasingMask) String() string {
 	var parts []string
 	if e&KCALayerLeftEdge != 0 {
 		parts = append(parts, "KCALayerLeftEdge")

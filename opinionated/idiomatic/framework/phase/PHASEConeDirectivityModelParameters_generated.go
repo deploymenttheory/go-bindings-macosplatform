@@ -5,63 +5,79 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that directs sound in a cone-shaped curve that extends from a sound source.
 //
-// ConeDirectivityModelParameters wraps [raw.PHASEConeDirectivityModelParameters] with a fluent Go API.
+// ConeDirectivityModelParameters is an idiomatic wrapper over the Objective-C class PHASEConeDirectivityModelParameters.
 type ConeDirectivityModelParameters struct {
-	inner *raw.PHASEConeDirectivityModelParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEConeDirectivityModelParameters].
-func (x *ConeDirectivityModelParameters) Unwrap() *raw.PHASEConeDirectivityModelParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ConeDirectivityModelParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// ConeDirectivityModelParametersFromID adopts an existing object pointer as a ConeDirectivityModelParameters (nil for 0).
+// ConeDirectivityModelParametersFromID adopts an existing Objective-C object as a ConeDirectivityModelParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func ConeDirectivityModelParametersFromID(id objc.ID) *ConeDirectivityModelParameters {
 	if id == 0 {
 		return nil
 	}
-	return &ConeDirectivityModelParameters{inner: raw.PHASEConeDirectivityModelParametersFromID(id)}
+	x := &ConeDirectivityModelParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// coneDirectivityModelParametersAdopt wraps an Objective-C object that this code just created as a
+// ConeDirectivityModelParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func coneDirectivityModelParametersAdopt(id objc.ID) *ConeDirectivityModelParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &ConeDirectivityModelParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ConeDirectivityModelParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ConeDirectivityModelParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ConeDirectivityModelParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an object that directs sound in a cone-shaped curve that extends from a sound source.
 //
-// NewConeDirectivityModelParametersWithSubbandParameters creates a new [ConeDirectivityModelParameters].
-func NewConeDirectivityModelParametersWithSubbandParameters(subbandParameters *foundation.NSArray[*raw.PHASEConeDirectivityModelSubbandParameters]) *ConeDirectivityModelParameters {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEConeDirectivityModelParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubbandParameters:"), subbandParameters.Ptr())
-	return &ConeDirectivityModelParameters{inner: raw.PHASEConeDirectivityModelParametersFromID(_id)}
+// NewConeDirectivityModelParametersWithSubbandParameters creates a new ConeDirectivityModelParameters.
+func NewConeDirectivityModelParametersWithSubbandParameters(subbandParameters []*ConeDirectivityModelSubbandParameters) *ConeDirectivityModelParameters {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEConeDirectivityModelParameters")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSubbandParameters:"), purego.SliceToNSArray(subbandParameters, func(_v *ConeDirectivityModelSubbandParameters) objc.ID { return objref.IDOf(_v) }))
+	return coneDirectivityModelParametersAdopt(_id)
 }
 
 // SubbandParameters returns the collection as a Go slice.
 func (x *ConeDirectivityModelParameters) SubbandParameters() []*ConeDirectivityModelSubbandParameters {
-	arr := x.inner.SubbandParameters()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ConeDirectivityModelSubbandParameters {
-		return &ConeDirectivityModelSubbandParameters{inner: raw.PHASEConeDirectivityModelSubbandParametersFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subbandParameters"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ConeDirectivityModelSubbandParameters {
+		return ConeDirectivityModelSubbandParametersFromID(_id)
 	})
-}
-
-func (x *ConeDirectivityModelParameters) asDirectivityModelParameters() *raw.PHASEDirectivityModelParameters {
-	return &x.inner.PHASEDirectivityModelParameters
 }
 
 // ConeDirectivityModelParametersable is the interface implemented by [ConeDirectivityModelParameters], for mocking and DI.
 type ConeDirectivityModelParametersable interface {
-	Unwrap() *raw.PHASEConeDirectivityModelParameters
+	obj.Object
 	SubbandParameters() []*ConeDirectivityModelSubbandParameters
 }
 

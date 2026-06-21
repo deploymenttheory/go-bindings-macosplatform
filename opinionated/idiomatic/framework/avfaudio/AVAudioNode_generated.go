@@ -5,178 +5,161 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object you use for audio generation, processing, or an I/O block.
 //
-// AudioNode wraps [raw.AVAudioNode] with a fluent Go API.
+// AudioNode is an idiomatic wrapper over the Objective-C class AVAudioNode.
 type AudioNode struct {
-	inner *raw.AVAudioNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVAudioNode].
-func (x *AudioNode) Unwrap() *raw.AVAudioNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AudioNode) ID() objc.ID { return x.inner.Ptr() }
-
-// AudioNodeFromID adopts an existing object pointer as a AudioNode (nil for 0).
+// AudioNodeFromID adopts an existing Objective-C object as a AudioNode
+// (nil for 0), retaining it and registering a release finalizer.
 func AudioNodeFromID(id objc.ID) *AudioNode {
 	if id == 0 {
 		return nil
 	}
-	return &AudioNode{inner: raw.AVAudioNodeFromID(id)}
+	x := &AudioNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAudioNode creates a new [AudioNode].
+// audioNodeAdopt wraps an Objective-C object that this code just created as a
+// AudioNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func audioNodeAdopt(id objc.ID) *AudioNode {
+	if id == 0 {
+		return nil
+	}
+	x := &AudioNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AudioNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AudioNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AudioNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAudioNode creates a new AudioNode.
 func NewAudioNode() *AudioNode {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVAudioNode")), objc.RegisterName("new"))
-	return &AudioNode{inner: raw.AVAudioNodeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVAudioNode")), objc.RegisterName("new"))
+	return audioNodeAdopt(_id)
 }
 
 // Clears a unit’s previous processing state.
-//
-// Reset calls the underlying Reset.
 func (x *AudioNode) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
 // Gets the input format for the bus you specify.
-//
-// InputFormatForBus calls the underlying InputFormatForBus.
-func (x *AudioNode) InputFormatForBus(bus uint) *AudioFormat {
-	_r := x.inner.InputFormatForBus(bus)
-	if _r == nil {
-		return nil
-	}
-	return &AudioFormat{inner: _r}
+func (x *AudioNode) InputFormatForBus(bus int) *AudioFormat {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inputFormatForBus:"), bus)
+	return AudioFormatFromID(_r)
 }
 
 // Retrieves the output format for the bus you specify.
-//
-// OutputFormatForBus calls the underlying OutputFormatForBus.
-func (x *AudioNode) OutputFormatForBus(bus uint) *AudioFormat {
-	_r := x.inner.OutputFormatForBus(bus)
-	if _r == nil {
-		return nil
-	}
-	return &AudioFormat{inner: _r}
+func (x *AudioNode) OutputFormatForBus(bus int) *AudioFormat {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("outputFormatForBus:"), bus)
+	return AudioFormatFromID(_r)
 }
 
 // Gets the name of the input bus you specify.
-//
-// NameForInputBus calls the underlying NameForInputBus.
-func (x *AudioNode) NameForInputBus(bus uint) string {
-	_r := x.inner.NameForInputBus(bus)
-	if _r == nil {
+func (x *AudioNode) NameForInputBus(bus int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nameForInputBus:"), bus)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Retrieves the name of the output bus you specify.
-//
-// NameForOutputBus calls the underlying NameForOutputBus.
-func (x *AudioNode) NameForOutputBus(bus uint) string {
-	_r := x.inner.NameForOutputBus(bus)
-	if _r == nil {
+func (x *AudioNode) NameForOutputBus(bus int) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nameForOutputBus:"), bus)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
-}
-
-// Installs an audio tap on a bus you specify to record, monitor, and observe the output of the node.
-//
-// InstallTapOnBusBufferSizeFormatBlock calls the underlying InstallTapOnBusBufferSizeFormatBlock.
-func (x *AudioNode) InstallTapOnBusBufferSizeFormatBlock(bus uint, bufferSize uint32, format *raw.AVAudioFormat, tapBlock func(*raw.AVAudioPCMBuffer, *raw.AVAudioTime)) {
-	x.inner.InstallTapOnBusBufferSizeFormatBlock(bus, bufferSize, format, tapBlock)
+	return purego.GoString(_r)
 }
 
 // Removes an audio tap on a bus you specify.
-//
-// RemoveTapOnBus calls the underlying RemoveTapOnBus.
-func (x *AudioNode) RemoveTapOnBus(bus uint) {
-	x.inner.RemoveTapOnBus(bus)
+func (x *AudioNode) RemoveTapOnBus(bus int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeTapOnBus:"), bus)
 }
 
-// @property engine @abstract The engine to which the node is attached (or nil).
-//
-// Engine calls the underlying Engine.
+// The engine to which the node is attached (or nil).
 func (x *AudioNode) Engine() *AudioEngine {
-	_r := x.inner.Engine()
-	if _r == nil {
-		return nil
-	}
-	return &AudioEngine{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("engine"))
+	return AudioEngineFromID(_r)
 }
 
-// @property numberOfInputs @abstract The node's number of input busses.
-//
-// NumberOfInputs calls the underlying NumberOfInputs.
-func (x *AudioNode) NumberOfInputs() uint {
-	return x.inner.NumberOfInputs()
+// The node's number of input busses.
+func (x *AudioNode) NumberOfInputs() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfInputs"))
+	return _r
 }
 
-// @property numberOfOutputs @abstract The node's number of output busses.
-//
-// NumberOfOutputs calls the underlying NumberOfOutputs.
-func (x *AudioNode) NumberOfOutputs() uint {
-	return x.inner.NumberOfOutputs()
+// The node's number of output busses.
+func (x *AudioNode) NumberOfOutputs() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfOutputs"))
+	return _r
 }
 
-// @property lastRenderTime @abstract Obtain the time for which the node most recently rendered. @discussion Will return nil if the engine is not running or if the node is not connected to an input or output node.
-//
-// LastRenderTime calls the underlying LastRenderTime.
+// Obtain the time for which the node most recently rendered. Will return nil if the engine is not running or if the node is not connected to an input or output node.
 func (x *AudioNode) LastRenderTime() *AudioTime {
-	_r := x.inner.LastRenderTime()
-	if _r == nil {
-		return nil
-	}
-	return &AudioTime{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastRenderTime"))
+	return AudioTimeFromID(_r)
 }
 
-// @property AUAudioUnit @abstract An AUAudioUnit wrapping or underlying the implementation's AudioUnit. @discussion This provides an AUAudioUnit which either wraps or underlies the implementation's AudioUnit, depending on how that audio unit is packaged. Applications can interact with this AUAudioUnit to control custom properties, select presets, change parameters, etc. No operations that may conflict with state maintained by the engine should be performed directly on the audio unit. These include changing initialization state, stream formats, channel layouts or connections to other audio units.
-//
-// AUAudioUnit calls the underlying AUAudioUnit.
-func (x *AudioNode) AUAudioUnit() objc.ID {
-	return x.inner.AUAudioUnit()
+// An AUAudioUnit wrapping or underlying the implementation's AudioUnit. This provides an AUAudioUnit which either wraps or underlies the implementation's AudioUnit, depending on how that audio unit is packaged. Applications can interact with this AUAudioUnit to control custom properties, select presets, change parameters, etc. No operations that may conflict with state maintained by the engine should be performed directly on the audio unit. These include changing initialization state, stream formats, channel layouts or connections to other audio units.
+func (x *AudioNode) AUAudioUnit() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("AUAudioUnit"))
+	return obj.Wrap(_r)
 }
 
-// @property latency @abstract The processing latency of the node, in seconds. @discussion This property reflects the delay between when an impulse in the audio stream arrives at the input vs. output of the node. This should reflect the delay due to signal processing (e.g. filters, FFT's, etc.), not delay or reverberation which is being applied as an effect. A value of zero indicates either no latency or an unknown latency.
-//
-// Latency calls the underlying Latency.
+// The processing latency of the node, in seconds. This property reflects the delay between when an impulse in the audio stream arrives at the input vs. output of the node. This should reflect the delay due to signal processing (e.g. filters, FFT's, etc.), not delay or reverberation which is being applied as an effect. A value of zero indicates either no latency or an unknown latency.
 func (x *AudioNode) Latency() float64 {
-	return x.inner.Latency()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("latency"))
+	return _r
 }
 
-// @property outputPresentationLatency @abstract The maximum render pipeline latency downstream of the node, in seconds. @discussion This describes the maximum time it will take for the audio at the output of a node to be presented. For instance, the output presentation latency of the output node in the engine is: - zero in manual rendering mode - the presentation latency of the device itself when rendering to an audio device (see `AVAudioIONode(presentationLatency)`) The output presentation latency of a node connected directly to the output node is the output node's presentation latency plus the output node's processing latency (see `latency`). For a node which is exclusively in the input node chain (i.e. not connected to engine's output node), this property reflects the latency for the output of this node to be presented at the output of the terminating node in the input chain. A value of zero indicates either an unknown or no latency. Note that this latency value can change as the engine is reconfigured (started/stopped, connections made/altered downstream of this node etc.). So it is recommended not to cache this value and fetch it whenever it's needed.
-//
-// OutputPresentationLatency calls the underlying OutputPresentationLatency.
+// The maximum render pipeline latency downstream of the node, in seconds. This describes the maximum time it will take for the audio at the output of a node to be presented. For instance, the output presentation latency of the output node in the engine is: - zero in manual rendering mode - the presentation latency of the device itself when rendering to an audio device (see `AVAudioIONode(presentationLatency)`) The output presentation latency of a node connected directly to the output node is the output node's presentation latency plus the output node's processing latency (see `latency`). For a node which is exclusively in the input node chain (i.e. not connected to engine's output node), this property reflects the latency for the output of this node to be presented at the output of the terminating node in the input chain. A value of zero indicates either an unknown or no latency. Note that this latency value can change as the engine is reconfigured (started/stopped, connections made/altered downstream of this node etc.). So it is recommended not to cache this value and fetch it whenever it's needed.
 func (x *AudioNode) OutputPresentationLatency() float64 {
-	return x.inner.OutputPresentationLatency()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("outputPresentationLatency"))
+	return _r
 }
-
-func (x *AudioNode) asAudioNode() *raw.AVAudioNode { return x.inner }
 
 // AudioNodeable is the interface implemented by [AudioNode], for mocking and DI.
 type AudioNodeable interface {
-	Unwrap() *raw.AVAudioNode
+	obj.Object
 	Reset()
-	InputFormatForBus(bus uint) *AudioFormat
-	OutputFormatForBus(bus uint) *AudioFormat
-	NameForInputBus(bus uint) string
-	NameForOutputBus(bus uint) string
-	InstallTapOnBusBufferSizeFormatBlock(bus uint, bufferSize uint32, format *raw.AVAudioFormat, tapBlock func(*raw.AVAudioPCMBuffer, *raw.AVAudioTime))
-	RemoveTapOnBus(bus uint)
+	InputFormatForBus(bus int) *AudioFormat
+	OutputFormatForBus(bus int) *AudioFormat
+	NameForInputBus(bus int) string
+	NameForOutputBus(bus int) string
+	RemoveTapOnBus(bus int)
 	Engine() *AudioEngine
-	NumberOfInputs() uint
-	NumberOfOutputs() uint
+	NumberOfInputs() int
+	NumberOfOutputs() int
 	LastRenderTime() *AudioTime
-	AUAudioUnit() objc.ID
+	AUAudioUnit() obj.Object
 	Latency() float64
 	OutputPresentationLatency() float64
 }

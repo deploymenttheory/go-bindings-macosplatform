@@ -5,114 +5,129 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Description of an Index Element
 //
-// FetchIndexElementDescription wraps [raw.NSFetchIndexElementDescription] with a fluent Go API.
+// FetchIndexElementDescription is an idiomatic wrapper over the Objective-C class NSFetchIndexElementDescription.
 type FetchIndexElementDescription struct {
-	inner *raw.NSFetchIndexElementDescription
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFetchIndexElementDescription].
-func (x *FetchIndexElementDescription) Unwrap() *raw.NSFetchIndexElementDescription { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FetchIndexElementDescription) ID() objc.ID { return x.inner.Ptr() }
-
-// FetchIndexElementDescriptionFromID adopts an existing object pointer as a FetchIndexElementDescription (nil for 0).
+// FetchIndexElementDescriptionFromID adopts an existing Objective-C object as a FetchIndexElementDescription
+// (nil for 0), retaining it and registering a release finalizer.
 func FetchIndexElementDescriptionFromID(id objc.ID) *FetchIndexElementDescription {
 	if id == 0 {
 		return nil
 	}
-	return &FetchIndexElementDescription{inner: raw.NSFetchIndexElementDescriptionFromID(id)}
+	x := &FetchIndexElementDescription{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// fetchIndexElementDescriptionAdopt wraps an Objective-C object that this code just created as a
+// FetchIndexElementDescription (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fetchIndexElementDescriptionAdopt(id objc.ID) *FetchIndexElementDescription {
+	if id == 0 {
+		return nil
+	}
+	x := &FetchIndexElementDescription{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FetchIndexElementDescription) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FetchIndexElementDescription) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FetchIndexElementDescription) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an index element description using the specified property description and collation type.
 //
-// NewFetchIndexElementDescriptionWithPropertyCollationType creates a new [FetchIndexElementDescription].
-func NewFetchIndexElementDescriptionWithPropertyCollationType(property *raw.NSPropertyDescription, collationType NSFetchIndexElementType) *FetchIndexElementDescription {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFetchIndexElementDescription")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProperty:collationType:"), property.Ptr(), raw.NSFetchIndexElementType(collationType))
-	return &FetchIndexElementDescription{inner: raw.NSFetchIndexElementDescriptionFromID(_id)}
+// NewFetchIndexElementDescriptionWithPropertyCollationType creates a new FetchIndexElementDescription.
+func NewFetchIndexElementDescriptionWithPropertyCollationType(property *PropertyDescription, collationType FetchIndexElementType) *FetchIndexElementDescription {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFetchIndexElementDescription")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithProperty:collationType:"), objref.IDOf(property), collationType)
+	return fetchIndexElementDescriptionAdopt(_id)
 }
 
 // The type of collation that the index element uses, either binary or R-tree.
 //
-// WithCollationType sets the collationType property and returns the receiver for chaining.
-func (x *FetchIndexElementDescription) WithCollationType(collationType NSFetchIndexElementType) *FetchIndexElementDescription {
-	x.inner.SetCollationType(raw.NSFetchIndexElementType(collationType))
+// WithCollationType sets collationType and returns the receiver so calls can be chained.
+func (x *FetchIndexElementDescription) WithCollationType(collationType FetchIndexElementType) *FetchIndexElementDescription {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollationType:"), collationType)
 	return x
 }
 
 // A Boolean value that controls whether an index that supports direction is an ascending or descending index.
 //
-// WithAscending sets the ascending property and returns the receiver for chaining.
+// WithAscending sets ascending and returns the receiver so calls can be chained.
 func (x *FetchIndexElementDescription) WithAscending(ascending bool) *FetchIndexElementDescription {
-	x.inner.SetAscending(ascending)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAscending:"), ascending)
 	return x
 }
 
-// Property calls the underlying Property.
 func (x *FetchIndexElementDescription) Property() *PropertyDescription {
-	_r := x.inner.Property()
-	if _r == nil {
-		return nil
-	}
-	return &PropertyDescription{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("property"))
+	return PropertyDescriptionFromID(_r)
 }
 
-// PropertyName calls the underlying PropertyName.
 func (x *FetchIndexElementDescription) PropertyName() string {
-	_r := x.inner.PropertyName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// CollationType calls the underlying CollationType.
-func (x *FetchIndexElementDescription) CollationType() NSFetchIndexElementType {
-	return NSFetchIndexElementType(x.inner.CollationType())
+func (x *FetchIndexElementDescription) CollationType() FetchIndexElementType {
+	_r := objc.Send[FetchIndexElementType](objref.IDOf(x), objc.RegisterName("collationType"))
+	return _r
 }
 
-// SetCollationType calls the underlying SetCollationType.
-func (x *FetchIndexElementDescription) SetCollationType(collationType NSFetchIndexElementType) {
-	x.inner.SetCollationType(raw.NSFetchIndexElementType(collationType))
+func (x *FetchIndexElementDescription) SetCollationType(collationType FetchIndexElementType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCollationType:"), collationType)
 }
 
-// IsAscending calls the underlying IsAscending.
 func (x *FetchIndexElementDescription) IsAscending() bool {
-	return x.inner.IsAscending()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAscending"))
+	return _r
 }
 
-// SetAscending calls the underlying SetAscending.
 func (x *FetchIndexElementDescription) SetAscending(ascending bool) {
-	x.inner.SetAscending(ascending)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAscending:"), ascending)
 }
 
-// IndexDescription calls the underlying IndexDescription.
 func (x *FetchIndexElementDescription) IndexDescription() *FetchIndexDescription {
-	_r := x.inner.IndexDescription()
-	if _r == nil {
-		return nil
-	}
-	return &FetchIndexDescription{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexDescription"))
+	return FetchIndexDescriptionFromID(_r)
 }
 
 // FetchIndexElementDescriptionable is the interface implemented by [FetchIndexElementDescription], for mocking and DI.
 type FetchIndexElementDescriptionable interface {
-	Unwrap() *raw.NSFetchIndexElementDescription
-	WithCollationType(collationType NSFetchIndexElementType) *FetchIndexElementDescription
+	obj.Object
+	WithCollationType(collationType FetchIndexElementType) *FetchIndexElementDescription
 	WithAscending(ascending bool) *FetchIndexElementDescription
 	Property() *PropertyDescription
 	PropertyName() string
-	CollationType() NSFetchIndexElementType
-	SetCollationType(collationType NSFetchIndexElementType)
+	CollationType() FetchIndexElementType
+	SetCollationType(collationType FetchIndexElementType)
 	IsAscending() bool
 	SetAscending(ascending bool)
 	IndexDescription() *FetchIndexDescription

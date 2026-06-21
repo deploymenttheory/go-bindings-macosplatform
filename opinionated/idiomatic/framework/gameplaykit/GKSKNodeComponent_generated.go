@@ -5,68 +5,91 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A component that manages a SpriteKit node.
 //
-// SKNodeComponent wraps [raw.GKSKNodeComponent] with a fluent Go API.
+// SKNodeComponent is an idiomatic wrapper over the Objective-C class GKSKNodeComponent.
 type SKNodeComponent struct {
-	inner *raw.GKSKNodeComponent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKSKNodeComponent].
-func (x *SKNodeComponent) Unwrap() *raw.GKSKNodeComponent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SKNodeComponent) ID() objc.ID { return x.inner.Ptr() }
-
-// SKNodeComponentFromID adopts an existing object pointer as a SKNodeComponent (nil for 0).
+// SKNodeComponentFromID adopts an existing Objective-C object as a SKNodeComponent
+// (nil for 0), retaining it and registering a release finalizer.
 func SKNodeComponentFromID(id objc.ID) *SKNodeComponent {
 	if id == 0 {
 		return nil
 	}
-	return &SKNodeComponent{inner: raw.GKSKNodeComponentFromID(id)}
+	x := &SKNodeComponent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// sKNodeComponentAdopt wraps an Objective-C object that this code just created as a
+// SKNodeComponent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sKNodeComponentAdopt(id objc.ID) *SKNodeComponent {
+	if id == 0 {
+		return nil
+	}
+	x := &SKNodeComponent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SKNodeComponent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SKNodeComponent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SKNodeComponent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a component to manage the specified SpriteKit node.
 //
-// NewSKNodeComponentWithNode creates a new [SKNodeComponent].
-func NewSKNodeComponentWithNode(node *spritekit.SKNode) *SKNodeComponent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKSKNodeComponent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:"), node.Ptr())
-	return &SKNodeComponent{inner: raw.GKSKNodeComponentFromID(_id)}
+// NewSKNodeComponentWithNode creates a new SKNodeComponent.
+func NewSKNodeComponentWithNode(node obj.Object) *SKNodeComponent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKSKNodeComponent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNode:"), objref.IDOf(node))
+	return sKNodeComponentAdopt(_id)
 }
 
 // The SpriteKit node managed by the component.
 //
-// WithNode sets the node property and returns the receiver for chaining.
-func (x *SKNodeComponent) WithNode(node *spritekit.SKNode) *SKNodeComponent {
-	x.inner.SetNode(node)
+// WithNode sets node and returns the receiver so calls can be chained.
+func (x *SKNodeComponent) WithNode(node obj.Object) *SKNodeComponent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
 	return x
 }
 
-// Node calls the underlying Node.
-func (x *SKNodeComponent) Node() *spritekit.SKNode {
-	return x.inner.Node()
+func (x *SKNodeComponent) Node() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("node"))
+	return obj.Wrap(_r)
 }
 
-// SetNode calls the underlying SetNode.
-func (x *SKNodeComponent) SetNode(node *spritekit.SKNode) {
-	x.inner.SetNode(node)
+func (x *SKNodeComponent) SetNode(node obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNode:"), objref.IDOf(node))
 }
-
-func (x *SKNodeComponent) asComponent() *raw.GKComponent { return &x.inner.GKComponent }
 
 // SKNodeComponentable is the interface implemented by [SKNodeComponent], for mocking and DI.
 type SKNodeComponentable interface {
-	Unwrap() *raw.GKSKNodeComponent
-	WithNode(node *spritekit.SKNode) *SKNodeComponent
-	Node() *spritekit.SKNode
-	SetNode(node *spritekit.SKNode)
+	obj.Object
+	WithNode(node obj.Object) *SKNodeComponent
+	Node() obj.Object
+	SetNode(node obj.Object)
 }
 
 var _ SKNodeComponentable = (*SKNodeComponent)(nil)

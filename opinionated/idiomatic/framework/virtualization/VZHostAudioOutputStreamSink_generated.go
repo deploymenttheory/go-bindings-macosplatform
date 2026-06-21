@@ -5,45 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Host audio output stream sink plays audio to the host system’s default output device.
 //
-// HostAudioOutputStreamSink wraps [raw.VZHostAudioOutputStreamSink] with a fluent Go API.
+// HostAudioOutputStreamSink is an idiomatic wrapper over the Objective-C class VZHostAudioOutputStreamSink.
 type HostAudioOutputStreamSink struct {
-	inner *raw.VZHostAudioOutputStreamSink
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZHostAudioOutputStreamSink].
-func (x *HostAudioOutputStreamSink) Unwrap() *raw.VZHostAudioOutputStreamSink { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HostAudioOutputStreamSink) ID() objc.ID { return x.inner.Ptr() }
-
-// HostAudioOutputStreamSinkFromID adopts an existing object pointer as a HostAudioOutputStreamSink (nil for 0).
+// HostAudioOutputStreamSinkFromID adopts an existing Objective-C object as a HostAudioOutputStreamSink
+// (nil for 0), retaining it and registering a release finalizer.
 func HostAudioOutputStreamSinkFromID(id objc.ID) *HostAudioOutputStreamSink {
 	if id == 0 {
 		return nil
 	}
-	return &HostAudioOutputStreamSink{inner: raw.VZHostAudioOutputStreamSinkFromID(id)}
+	x := &HostAudioOutputStreamSink{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHostAudioOutputStreamSink creates a new [HostAudioOutputStreamSink].
+// hostAudioOutputStreamSinkAdopt wraps an Objective-C object that this code just created as a
+// HostAudioOutputStreamSink (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hostAudioOutputStreamSinkAdopt(id objc.ID) *HostAudioOutputStreamSink {
+	if id == 0 {
+		return nil
+	}
+	x := &HostAudioOutputStreamSink{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HostAudioOutputStreamSink) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HostAudioOutputStreamSink) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HostAudioOutputStreamSink) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHostAudioOutputStreamSink creates a new HostAudioOutputStreamSink.
 func NewHostAudioOutputStreamSink() *HostAudioOutputStreamSink {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZHostAudioOutputStreamSink")), objc.RegisterName("new"))
-	return &HostAudioOutputStreamSink{inner: raw.VZHostAudioOutputStreamSinkFromID(_id)}
-}
-
-func (x *HostAudioOutputStreamSink) asAudioOutputStreamSink() *raw.VZAudioOutputStreamSink {
-	return &x.inner.VZAudioOutputStreamSink
+	_id := objc.Send[objc.ID](objc.ID(_class("VZHostAudioOutputStreamSink")), objc.RegisterName("new"))
+	return hostAudioOutputStreamSinkAdopt(_id)
 }
 
 // HostAudioOutputStreamSinkable is the interface implemented by [HostAudioOutputStreamSink], for mocking and DI.
 type HostAudioOutputStreamSinkable interface {
-	Unwrap() *raw.VZHostAudioOutputStreamSink
+	obj.Object
 }
 
 var _ HostAudioOutputStreamSinkable = (*HostAudioOutputStreamSink)(nil)

@@ -5,64 +5,86 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that identifies the supported network interfaces of the host computer.
 //
-// BridgedNetworkInterface wraps [raw.VZBridgedNetworkInterface] with a fluent Go API.
+// BridgedNetworkInterface is an idiomatic wrapper over the Objective-C class VZBridgedNetworkInterface.
 type BridgedNetworkInterface struct {
-	inner *raw.VZBridgedNetworkInterface
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZBridgedNetworkInterface].
-func (x *BridgedNetworkInterface) Unwrap() *raw.VZBridgedNetworkInterface { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BridgedNetworkInterface) ID() objc.ID { return x.inner.Ptr() }
-
-// BridgedNetworkInterfaceFromID adopts an existing object pointer as a BridgedNetworkInterface (nil for 0).
+// BridgedNetworkInterfaceFromID adopts an existing Objective-C object as a BridgedNetworkInterface
+// (nil for 0), retaining it and registering a release finalizer.
 func BridgedNetworkInterfaceFromID(id objc.ID) *BridgedNetworkInterface {
 	if id == 0 {
 		return nil
 	}
-	return &BridgedNetworkInterface{inner: raw.VZBridgedNetworkInterfaceFromID(id)}
+	x := &BridgedNetworkInterface{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBridgedNetworkInterface creates a new [BridgedNetworkInterface].
+// bridgedNetworkInterfaceAdopt wraps an Objective-C object that this code just created as a
+// BridgedNetworkInterface (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func bridgedNetworkInterfaceAdopt(id objc.ID) *BridgedNetworkInterface {
+	if id == 0 {
+		return nil
+	}
+	x := &BridgedNetworkInterface{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BridgedNetworkInterface) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BridgedNetworkInterface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BridgedNetworkInterface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBridgedNetworkInterface creates a new BridgedNetworkInterface.
 func NewBridgedNetworkInterface() *BridgedNetworkInterface {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZBridgedNetworkInterface")), objc.RegisterName("new"))
-	return &BridgedNetworkInterface{inner: raw.VZBridgedNetworkInterfaceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZBridgedNetworkInterface")), objc.RegisterName("new"))
+	return bridgedNetworkInterfaceAdopt(_id)
 }
 
-// @abstract Return the unique identifier for this interface. The identifier is the BSD name associated with the interface (e.g. "en0").
-//
-// Identifier calls the underlying Identifier.
+// Return the unique identifier for this interface. The identifier is the BSD name associated with the interface (e.g. "en0").
 func (x *BridgedNetworkInterface) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract Return a display name if available (e.g. "Ethernet").
-//
-// LocalizedDisplayName calls the underlying LocalizedDisplayName.
+// Return a display name if available (e.g. "Ethernet").
 func (x *BridgedNetworkInterface) LocalizedDisplayName() string {
-	_r := x.inner.LocalizedDisplayName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedDisplayName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // BridgedNetworkInterfaceable is the interface implemented by [BridgedNetworkInterface], for mocking and DI.
 type BridgedNetworkInterfaceable interface {
-	Unwrap() *raw.VZBridgedNetworkInterface
+	obj.Object
 	Identifier() string
 	LocalizedDisplayName() string
 }

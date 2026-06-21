@@ -5,94 +5,98 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // The metadata associated with a file.
 //
-// MetadataItem wraps [raw.NSMetadataItem] with a fluent Go API.
+// MetadataItem is an idiomatic wrapper over the Objective-C class NSMetadataItem.
 type MetadataItem struct {
-	inner *raw.NSMetadataItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMetadataItem].
-func (x *MetadataItem) Unwrap() *raw.NSMetadataItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataItem) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataItemFromID adopts an existing object pointer as a MetadataItem (nil for 0).
+// MetadataItemFromID adopts an existing Objective-C object as a MetadataItem
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataItemFromID(id objc.ID) *MetadataItem {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataItem{inner: raw.NSMetadataItemFromID(id)}
+	x := &MetadataItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// metadataItemAdopt wraps an Objective-C object that this code just created as a
+// MetadataItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataItemAdopt(id objc.ID) *MetadataItem {
+	if id == 0 {
+		return nil
+	}
+	x := &MetadataItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetadataItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetadataItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetadataItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a metadata item with a given URL.
 //
-// NewMetadataItemWithURL creates a new [MetadataItem].
+// NewMetadataItemWithURL creates a new MetadataItem.
 func NewMetadataItemWithURL(url string) *MetadataItem {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMetadataItem")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr())
-	return &MetadataItem{inner: raw.NSMetadataItemFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMetadataItem")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:"), rt.FileURL(url))
+	return metadataItemAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MetadataItem) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataItem {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *MetadataItem) WithScriptingProperties(scriptingProperties obj.Object) *MetadataItem {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Returns the receiver’s metadata attribute name specified by a given key.
-//
-// ValueForAttribute calls the underlying ValueForAttribute.
-func (x *MetadataItem) ValueForAttribute(key string) objc.ID {
-	return x.inner.ValueForAttribute(foundation.NSStringStringWithUTF8String(key))
+func (x *MetadataItem) ValueForAttribute(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valueForAttribute:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
 // Returns a dictionary containing the key-value pairs for the attribute names specified by a given array of keys.
-//
-// ValuesForAttributes calls the underlying ValuesForAttributes.
-func (x *MetadataItem) ValuesForAttributes(keys ...StringProvider) *raw.NSDictionary[*raw.NSString, objc.ID] {
-	_ptrs := make([]objc.ID, len(keys))
-	for _i, _v := range keys {
-		_ptrs[_i] = _v.asString().Ptr()
-	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.ValuesForAttributes(_arg0)
+func (x *MetadataItem) ValuesForAttributes(keys []string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("valuesForAttributes:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return obj.Wrap(_r)
 }
 
 // Attributes returns the collection as a Go slice.
 func (x *MetadataItem) Attributes() []string {
-	arr := x.inner.Attributes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
-
-func (x *MetadataItem) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // MetadataItemable is the interface implemented by [MetadataItem], for mocking and DI.
 type MetadataItemable interface {
-	Unwrap() *raw.NSMetadataItem
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataItem
-	ValueForAttribute(key string) objc.ID
-	ValuesForAttributes(keys ...StringProvider) *raw.NSDictionary[*raw.NSString, objc.ID]
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MetadataItem
+	ValueForAttribute(key string) obj.Object
+	ValuesForAttributes(keys []string) obj.Object
 	Attributes() []string
 }
 

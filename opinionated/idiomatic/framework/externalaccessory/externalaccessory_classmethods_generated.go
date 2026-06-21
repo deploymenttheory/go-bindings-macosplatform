@@ -5,14 +5,11 @@
 package externalaccessory
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/externalaccessory"
+	"github.com/ebitengine/purego/objc"
 )
 
-// SharedAccessoryManager calls the underlying EAAccessoryManagerSharedAccessoryManager.
+// Returns the shared accessory manager object for the iOS-based device.
 func SharedAccessoryManager() *AccessoryManager {
-	_r := raw.EAAccessoryManagerSharedAccessoryManager()
-	if _r == nil {
-		return nil
-	}
-	return &AccessoryManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("EAAccessoryManager")), objc.RegisterName("sharedAccessoryManager"))
+	return AccessoryManagerFromID(_r)
 }

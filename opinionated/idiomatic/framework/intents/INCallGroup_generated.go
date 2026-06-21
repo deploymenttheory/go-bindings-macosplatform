@@ -5,64 +5,87 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The details of a group call handled by your app.
 //
-// CallGroup wraps [raw.INCallGroup] with a fluent Go API.
+// CallGroup is an idiomatic wrapper over the Objective-C class INCallGroup.
 type CallGroup struct {
-	inner *raw.INCallGroup
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INCallGroup].
-func (x *CallGroup) Unwrap() *raw.INCallGroup { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CallGroup) ID() objc.ID { return x.inner.Ptr() }
-
-// CallGroupFromID adopts an existing object pointer as a CallGroup (nil for 0).
+// CallGroupFromID adopts an existing Objective-C object as a CallGroup
+// (nil for 0), retaining it and registering a release finalizer.
 func CallGroupFromID(id objc.ID) *CallGroup {
 	if id == 0 {
 		return nil
 	}
-	return &CallGroup{inner: raw.INCallGroupFromID(id)}
+	x := &CallGroup{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// callGroupAdopt wraps an Objective-C object that this code just created as a
+// CallGroup (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func callGroupAdopt(id objc.ID) *CallGroup {
+	if id == 0 {
+		return nil
+	}
+	x := &CallGroup{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CallGroup) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CallGroup) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CallGroup) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a call record with the group details.
 //
-// NewCallGroupWithGroupNameGroupId creates a new [CallGroup].
+// NewCallGroupWithGroupNameGroupId creates a new CallGroup.
 func NewCallGroupWithGroupNameGroupId(groupName string, groupId string) *CallGroup {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("INCallGroup")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGroupName:groupId:"), foundation.NSStringStringWithUTF8String(groupName).Ptr(), foundation.NSStringStringWithUTF8String(groupId).Ptr())
-	return &CallGroup{inner: raw.INCallGroupFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("INCallGroup")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGroupName:groupId:"), purego.NSString(groupName), purego.NSString(groupId))
+	return callGroupAdopt(_id)
 }
 
-// GroupName calls the underlying GroupName.
 func (x *CallGroup) GroupName() string {
-	_r := x.inner.GroupName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// GroupId calls the underlying GroupId.
 func (x *CallGroup) GroupId() string {
-	_r := x.inner.GroupId()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupId"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // CallGroupable is the interface implemented by [CallGroup], for mocking and DI.
 type CallGroupable interface {
-	Unwrap() *raw.INCallGroup
+	obj.Object
 	GroupName() string
 	GroupId() string
 }

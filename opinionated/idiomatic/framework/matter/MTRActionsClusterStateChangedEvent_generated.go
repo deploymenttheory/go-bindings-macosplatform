@@ -5,99 +5,120 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRActionsClusterStateChangedEvent wraps [raw.MTRActionsClusterStateChangedEvent] with a fluent Go API.
+// MTRActionsClusterStateChangedEvent is an idiomatic wrapper over the Objective-C class MTRActionsClusterStateChangedEvent.
 type MTRActionsClusterStateChangedEvent struct {
-	inner *raw.MTRActionsClusterStateChangedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRActionsClusterStateChangedEvent].
-func (x *MTRActionsClusterStateChangedEvent) Unwrap() *raw.MTRActionsClusterStateChangedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRActionsClusterStateChangedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRActionsClusterStateChangedEventFromID adopts an existing object pointer as a MTRActionsClusterStateChangedEvent (nil for 0).
+// MTRActionsClusterStateChangedEventFromID adopts an existing Objective-C object as a MTRActionsClusterStateChangedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRActionsClusterStateChangedEventFromID(id objc.ID) *MTRActionsClusterStateChangedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRActionsClusterStateChangedEvent{inner: raw.MTRActionsClusterStateChangedEventFromID(id)}
+	x := &MTRActionsClusterStateChangedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRActionsClusterStateChangedEvent creates a new [MTRActionsClusterStateChangedEvent].
+// mTRActionsClusterStateChangedEventAdopt wraps an Objective-C object that this code just created as a
+// MTRActionsClusterStateChangedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRActionsClusterStateChangedEventAdopt(id objc.ID) *MTRActionsClusterStateChangedEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRActionsClusterStateChangedEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRActionsClusterStateChangedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRActionsClusterStateChangedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRActionsClusterStateChangedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRActionsClusterStateChangedEvent creates a new MTRActionsClusterStateChangedEvent.
 func NewMTRActionsClusterStateChangedEvent() *MTRActionsClusterStateChangedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRActionsClusterStateChangedEvent")), objc.RegisterName("new"))
-	return &MTRActionsClusterStateChangedEvent{inner: raw.MTRActionsClusterStateChangedEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRActionsClusterStateChangedEvent")), objc.RegisterName("new"))
+	return mTRActionsClusterStateChangedEventAdopt(_id)
 }
 
-// WithActionID sets the actionID property and returns the receiver for chaining.
-func (x *MTRActionsClusterStateChangedEvent) WithActionID(actionID *foundation.NSNumber) *MTRActionsClusterStateChangedEvent {
-	x.inner.SetActionID(actionID)
+// WithActionID sets actionID and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterStateChangedEvent) WithActionID(actionID obj.Object) *MTRActionsClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 	return x
 }
 
-// WithInvokeID sets the invokeID property and returns the receiver for chaining.
-func (x *MTRActionsClusterStateChangedEvent) WithInvokeID(invokeID *foundation.NSNumber) *MTRActionsClusterStateChangedEvent {
-	x.inner.SetInvokeID(invokeID)
+// WithInvokeID sets invokeID and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterStateChangedEvent) WithInvokeID(invokeID obj.Object) *MTRActionsClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 	return x
 }
 
-// WithNewState sets the newState property and returns the receiver for chaining.
-func (x *MTRActionsClusterStateChangedEvent) WithNewState(newState *foundation.NSNumber) *MTRActionsClusterStateChangedEvent {
-	x.inner.SetNewState(newState)
+// WithNewState sets newState and returns the receiver so calls can be chained.
+func (x *MTRActionsClusterStateChangedEvent) WithNewState(newState obj.Object) *MTRActionsClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 	return x
 }
 
-// ActionID calls the underlying ActionID.
-func (x *MTRActionsClusterStateChangedEvent) ActionID() *foundation.NSNumber {
-	return x.inner.ActionID()
+func (x *MTRActionsClusterStateChangedEvent) ActionID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("actionID"))
+	return obj.Wrap(_r)
 }
 
-// SetActionID calls the underlying SetActionID.
-func (x *MTRActionsClusterStateChangedEvent) SetActionID(actionID *foundation.NSNumber) {
-	x.inner.SetActionID(actionID)
+func (x *MTRActionsClusterStateChangedEvent) SetActionID(actionID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setActionID:"), objref.IDOf(actionID))
 }
 
-// InvokeID calls the underlying InvokeID.
-func (x *MTRActionsClusterStateChangedEvent) InvokeID() *foundation.NSNumber {
-	return x.inner.InvokeID()
+func (x *MTRActionsClusterStateChangedEvent) InvokeID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invokeID"))
+	return obj.Wrap(_r)
 }
 
-// SetInvokeID calls the underlying SetInvokeID.
-func (x *MTRActionsClusterStateChangedEvent) SetInvokeID(invokeID *foundation.NSNumber) {
-	x.inner.SetInvokeID(invokeID)
+func (x *MTRActionsClusterStateChangedEvent) SetInvokeID(invokeID obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvokeID:"), objref.IDOf(invokeID))
 }
 
-// GetNewState calls the underlying GetNewState.
-func (x *MTRActionsClusterStateChangedEvent) GetNewState() *foundation.NSNumber {
-	return x.inner.GetNewState()
+func (x *MTRActionsClusterStateChangedEvent) GetNewState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNewState"))
+	return obj.Wrap(_r)
 }
 
-// SetNewState calls the underlying SetNewState.
-func (x *MTRActionsClusterStateChangedEvent) SetNewState(newState *foundation.NSNumber) {
-	x.inner.SetNewState(newState)
+func (x *MTRActionsClusterStateChangedEvent) SetNewState(newState obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNewState:"), objref.IDOf(newState))
 }
 
 // MTRActionsClusterStateChangedEventable is the interface implemented by [MTRActionsClusterStateChangedEvent], for mocking and DI.
 type MTRActionsClusterStateChangedEventable interface {
-	Unwrap() *raw.MTRActionsClusterStateChangedEvent
-	WithActionID(actionID *foundation.NSNumber) *MTRActionsClusterStateChangedEvent
-	WithInvokeID(invokeID *foundation.NSNumber) *MTRActionsClusterStateChangedEvent
-	WithNewState(newState *foundation.NSNumber) *MTRActionsClusterStateChangedEvent
-	ActionID() *foundation.NSNumber
-	SetActionID(actionID *foundation.NSNumber)
-	InvokeID() *foundation.NSNumber
-	SetInvokeID(invokeID *foundation.NSNumber)
-	GetNewState() *foundation.NSNumber
-	SetNewState(newState *foundation.NSNumber)
+	obj.Object
+	WithActionID(actionID obj.Object) *MTRActionsClusterStateChangedEvent
+	WithInvokeID(invokeID obj.Object) *MTRActionsClusterStateChangedEvent
+	WithNewState(newState obj.Object) *MTRActionsClusterStateChangedEvent
+	ActionID() obj.Object
+	SetActionID(actionID obj.Object)
+	InvokeID() obj.Object
+	SetInvokeID(invokeID obj.Object)
+	GetNewState() obj.Object
+	SetNewState(newState obj.Object)
 }
 
 var _ MTRActionsClusterStateChangedEventable = (*MTRActionsClusterStateChangedEvent)(nil)

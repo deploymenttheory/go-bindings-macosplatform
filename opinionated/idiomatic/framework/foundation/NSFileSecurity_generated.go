@@ -5,51 +5,76 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A stub class that encapsulates security information about a file.
 //
-// FileSecurity wraps [raw.NSFileSecurity] with a fluent Go API.
+// FileSecurity is an idiomatic wrapper over the Objective-C class NSFileSecurity.
 type FileSecurity struct {
-	inner *raw.NSFileSecurity
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSFileSecurity].
-func (x *FileSecurity) Unwrap() *raw.NSFileSecurity { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FileSecurity) ID() objc.ID { return x.inner.Ptr() }
-
-// FileSecurityFromID adopts an existing object pointer as a FileSecurity (nil for 0).
+// FileSecurityFromID adopts an existing Objective-C object as a FileSecurity
+// (nil for 0), retaining it and registering a release finalizer.
 func FileSecurityFromID(id objc.ID) *FileSecurity {
 	if id == 0 {
 		return nil
 	}
-	return &FileSecurity{inner: raw.NSFileSecurityFromID(id)}
-}
-
-// NewFileSecurityWithCoder creates a new [FileSecurity].
-func NewFileSecurityWithCoder(coder *raw.NSCoder) *FileSecurity {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSFileSecurity")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &FileSecurity{inner: raw.NSFileSecurityFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *FileSecurity) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileSecurity {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &FileSecurity{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *FileSecurity) asObject() *raw.NSObject { return &x.inner.NSObject }
+// fileSecurityAdopt wraps an Objective-C object that this code just created as a
+// FileSecurity (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func fileSecurityAdopt(id objc.ID) *FileSecurity {
+	if id == 0 {
+		return nil
+	}
+	x := &FileSecurity{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *FileSecurity) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FileSecurity) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FileSecurity) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFileSecurityWithCoder creates a new FileSecurity.
+func NewFileSecurityWithCoder(coder *Coder) *FileSecurity {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSFileSecurity")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return fileSecurityAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *FileSecurity) WithScriptingProperties(scriptingProperties obj.Object) *FileSecurity {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // FileSecurityable is the interface implemented by [FileSecurity], for mocking and DI.
 type FileSecurityable interface {
-	Unwrap() *raw.NSFileSecurity
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *FileSecurity
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *FileSecurity
 }
 
 var _ FileSecurityable = (*FileSecurity)(nil)

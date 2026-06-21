@@ -5,217 +5,228 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRMediaPlaybackClusterStateChangedEvent wraps [raw.MTRMediaPlaybackClusterStateChangedEvent] with a fluent Go API.
+// MTRMediaPlaybackClusterStateChangedEvent is an idiomatic wrapper over the Objective-C class MTRMediaPlaybackClusterStateChangedEvent.
 type MTRMediaPlaybackClusterStateChangedEvent struct {
-	inner *raw.MTRMediaPlaybackClusterStateChangedEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRMediaPlaybackClusterStateChangedEvent].
-func (x *MTRMediaPlaybackClusterStateChangedEvent) Unwrap() *raw.MTRMediaPlaybackClusterStateChangedEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRMediaPlaybackClusterStateChangedEventFromID adopts an existing object pointer as a MTRMediaPlaybackClusterStateChangedEvent (nil for 0).
+// MTRMediaPlaybackClusterStateChangedEventFromID adopts an existing Objective-C object as a MTRMediaPlaybackClusterStateChangedEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRMediaPlaybackClusterStateChangedEventFromID(id objc.ID) *MTRMediaPlaybackClusterStateChangedEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRMediaPlaybackClusterStateChangedEvent{inner: raw.MTRMediaPlaybackClusterStateChangedEventFromID(id)}
-}
-
-// NewMTRMediaPlaybackClusterStateChangedEvent creates a new [MTRMediaPlaybackClusterStateChangedEvent].
-func NewMTRMediaPlaybackClusterStateChangedEvent() *MTRMediaPlaybackClusterStateChangedEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRMediaPlaybackClusterStateChangedEvent")), objc.RegisterName("new"))
-	return &MTRMediaPlaybackClusterStateChangedEvent{inner: raw.MTRMediaPlaybackClusterStateChangedEventFromID(_id)}
-}
-
-// WithCurrentState sets the currentState property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) WithCurrentState(currentState *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent {
-	x.inner.SetCurrentState(currentState)
+	x := &MTRMediaPlaybackClusterStateChangedEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithStartTime sets the startTime property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) WithStartTime(startTime *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent {
-	x.inner.SetStartTime(startTime)
-	return x
-}
-
-// WithDuration sets the duration property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) WithDuration(duration *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent {
-	x.inner.SetDuration(duration)
-	return x
-}
-
-// WithSampledPosition sets the sampledPosition property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) WithSampledPosition(sampledPosition MTRMediaPlaybackClusterPlaybackPositionStructProvider) *MTRMediaPlaybackClusterStateChangedEvent {
-	x.inner.SetSampledPosition(sampledPosition.asMTRMediaPlaybackClusterPlaybackPositionStruct())
-	return x
-}
-
-// WithPlaybackSpeed sets the playbackSpeed property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) WithPlaybackSpeed(playbackSpeed *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent {
-	x.inner.SetPlaybackSpeed(playbackSpeed)
-	return x
-}
-
-// WithSeekRangeEnd sets the seekRangeEnd property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) WithSeekRangeEnd(seekRangeEnd *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent {
-	x.inner.SetSeekRangeEnd(seekRangeEnd)
-	return x
-}
-
-// WithSeekRangeStart sets the seekRangeStart property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) WithSeekRangeStart(seekRangeStart *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent {
-	x.inner.SetSeekRangeStart(seekRangeStart)
-	return x
-}
-
-// WithData sets the data property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) WithData(data *foundation.NSData) *MTRMediaPlaybackClusterStateChangedEvent {
-	x.inner.SetData(data)
-	return x
-}
-
-// WithAudioAdvanceUnmuted sets the audioAdvanceUnmuted property and returns the receiver for chaining.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) WithAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent {
-	x.inner.SetAudioAdvanceUnmuted(audioAdvanceUnmuted)
-	return x
-}
-
-// CurrentState calls the underlying CurrentState.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) CurrentState() *foundation.NSNumber {
-	return x.inner.CurrentState()
-}
-
-// SetCurrentState calls the underlying SetCurrentState.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) SetCurrentState(currentState *foundation.NSNumber) {
-	x.inner.SetCurrentState(currentState)
-}
-
-// StartTime calls the underlying StartTime.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) StartTime() *foundation.NSNumber {
-	return x.inner.StartTime()
-}
-
-// SetStartTime calls the underlying SetStartTime.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) SetStartTime(startTime *foundation.NSNumber) {
-	x.inner.SetStartTime(startTime)
-}
-
-// Duration calls the underlying Duration.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) Duration() *foundation.NSNumber {
-	return x.inner.Duration()
-}
-
-// SetDuration calls the underlying SetDuration.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) SetDuration(duration *foundation.NSNumber) {
-	x.inner.SetDuration(duration)
-}
-
-// SampledPosition calls the underlying SampledPosition.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) SampledPosition() *MTRMediaPlaybackClusterPlaybackPositionStruct {
-	_r := x.inner.SampledPosition()
-	if _r == nil {
+// mTRMediaPlaybackClusterStateChangedEventAdopt wraps an Objective-C object that this code just created as a
+// MTRMediaPlaybackClusterStateChangedEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRMediaPlaybackClusterStateChangedEventAdopt(id objc.ID) *MTRMediaPlaybackClusterStateChangedEvent {
+	if id == 0 {
 		return nil
 	}
-	return &MTRMediaPlaybackClusterPlaybackPositionStruct{inner: _r}
+	x := &MTRMediaPlaybackClusterStateChangedEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetSampledPosition calls the underlying SetSampledPosition.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) SetSampledPosition(sampledPosition *raw.MTRMediaPlaybackClusterPlaybackPositionStruct) {
-	x.inner.SetSampledPosition(sampledPosition)
+// Description returns the object's -description text.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// PlaybackSpeed calls the underlying PlaybackSpeed.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) PlaybackSpeed() *foundation.NSNumber {
-	return x.inner.PlaybackSpeed()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// SetPlaybackSpeed calls the underlying SetPlaybackSpeed.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) SetPlaybackSpeed(playbackSpeed *foundation.NSNumber) {
-	x.inner.SetPlaybackSpeed(playbackSpeed)
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SeekRangeEnd calls the underlying SeekRangeEnd.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) SeekRangeEnd() *foundation.NSNumber {
-	return x.inner.SeekRangeEnd()
+// NewMTRMediaPlaybackClusterStateChangedEvent creates a new MTRMediaPlaybackClusterStateChangedEvent.
+func NewMTRMediaPlaybackClusterStateChangedEvent() *MTRMediaPlaybackClusterStateChangedEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRMediaPlaybackClusterStateChangedEvent")), objc.RegisterName("new"))
+	return mTRMediaPlaybackClusterStateChangedEventAdopt(_id)
 }
 
-// SetSeekRangeEnd calls the underlying SetSeekRangeEnd.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) SetSeekRangeEnd(seekRangeEnd *foundation.NSNumber) {
-	x.inner.SetSeekRangeEnd(seekRangeEnd)
+// WithCurrentState sets currentState and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) WithCurrentState(currentState obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentState:"), objref.IDOf(currentState))
+	return x
 }
 
-// SeekRangeStart calls the underlying SeekRangeStart.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) SeekRangeStart() *foundation.NSNumber {
-	return x.inner.SeekRangeStart()
+// WithStartTime sets startTime and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) WithStartTime(startTime obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
+	return x
 }
 
-// SetSeekRangeStart calls the underlying SetSeekRangeStart.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) SetSeekRangeStart(seekRangeStart *foundation.NSNumber) {
-	x.inner.SetSeekRangeStart(seekRangeStart)
+// WithDuration sets duration and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) WithDuration(duration obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
+	return x
 }
 
-// Data calls the underlying Data.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) Data() *foundation.NSData {
-	return x.inner.Data()
+// WithSampledPosition sets sampledPosition and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) WithSampledPosition(sampledPosition MTRMediaPlaybackClusterPlaybackPositionStructProvider) *MTRMediaPlaybackClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampledPosition:"), objref.IDOf(sampledPosition))
+	return x
 }
 
-// SetData calls the underlying SetData.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) SetData(data *foundation.NSData) {
-	x.inner.SetData(data)
+// WithPlaybackSpeed sets playbackSpeed and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) WithPlaybackSpeed(playbackSpeed obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaybackSpeed:"), objref.IDOf(playbackSpeed))
+	return x
 }
 
-// AudioAdvanceUnmuted calls the underlying AudioAdvanceUnmuted.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) AudioAdvanceUnmuted() *foundation.NSNumber {
-	return x.inner.AudioAdvanceUnmuted()
+// WithSeekRangeEnd sets seekRangeEnd and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) WithSeekRangeEnd(seekRangeEnd obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeekRangeEnd:"), objref.IDOf(seekRangeEnd))
+	return x
 }
 
-// SetAudioAdvanceUnmuted calls the underlying SetAudioAdvanceUnmuted.
-func (x *MTRMediaPlaybackClusterStateChangedEvent) SetAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) {
-	x.inner.SetAudioAdvanceUnmuted(audioAdvanceUnmuted)
+// WithSeekRangeStart sets seekRangeStart and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) WithSeekRangeStart(seekRangeStart obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeekRangeStart:"), objref.IDOf(seekRangeStart))
+	return x
+}
+
+// WithData sets data and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) WithData(data obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
+	return x
+}
+
+// WithAudioAdvanceUnmuted sets audioAdvanceUnmuted and returns the receiver so calls can be chained.
+func (x *MTRMediaPlaybackClusterStateChangedEvent) WithAudioAdvanceUnmuted(audioAdvanceUnmuted obj.Object) *MTRMediaPlaybackClusterStateChangedEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioAdvanceUnmuted:"), objref.IDOf(audioAdvanceUnmuted))
+	return x
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) CurrentState() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentState"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetCurrentState(currentState obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentState:"), objref.IDOf(currentState))
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) StartTime() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startTime"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetStartTime(startTime obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartTime:"), objref.IDOf(startTime))
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) Duration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("duration"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetDuration(duration obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDuration:"), objref.IDOf(duration))
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SampledPosition() *MTRMediaPlaybackClusterPlaybackPositionStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampledPosition"))
+	return MTRMediaPlaybackClusterPlaybackPositionStructFromID(_r)
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetSampledPosition(sampledPosition *MTRMediaPlaybackClusterPlaybackPositionStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSampledPosition:"), objref.IDOf(sampledPosition))
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) PlaybackSpeed() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("playbackSpeed"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetPlaybackSpeed(playbackSpeed obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaybackSpeed:"), objref.IDOf(playbackSpeed))
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SeekRangeEnd() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekRangeEnd"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetSeekRangeEnd(seekRangeEnd obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeekRangeEnd:"), objref.IDOf(seekRangeEnd))
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SeekRangeStart() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("seekRangeStart"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetSeekRangeStart(seekRangeStart obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSeekRangeStart:"), objref.IDOf(seekRangeStart))
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetData(data obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), objref.IDOf(data))
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) AudioAdvanceUnmuted() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audioAdvanceUnmuted"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRMediaPlaybackClusterStateChangedEvent) SetAudioAdvanceUnmuted(audioAdvanceUnmuted obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAudioAdvanceUnmuted:"), objref.IDOf(audioAdvanceUnmuted))
 }
 
 // MTRMediaPlaybackClusterStateChangedEventable is the interface implemented by [MTRMediaPlaybackClusterStateChangedEvent], for mocking and DI.
 type MTRMediaPlaybackClusterStateChangedEventable interface {
-	Unwrap() *raw.MTRMediaPlaybackClusterStateChangedEvent
-	WithCurrentState(currentState *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
-	WithStartTime(startTime *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
-	WithDuration(duration *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
+	obj.Object
+	WithCurrentState(currentState obj.Object) *MTRMediaPlaybackClusterStateChangedEvent
+	WithStartTime(startTime obj.Object) *MTRMediaPlaybackClusterStateChangedEvent
+	WithDuration(duration obj.Object) *MTRMediaPlaybackClusterStateChangedEvent
 	WithSampledPosition(sampledPosition MTRMediaPlaybackClusterPlaybackPositionStructProvider) *MTRMediaPlaybackClusterStateChangedEvent
-	WithPlaybackSpeed(playbackSpeed *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
-	WithSeekRangeEnd(seekRangeEnd *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
-	WithSeekRangeStart(seekRangeStart *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
-	WithData(data *foundation.NSData) *MTRMediaPlaybackClusterStateChangedEvent
-	WithAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber) *MTRMediaPlaybackClusterStateChangedEvent
-	CurrentState() *foundation.NSNumber
-	SetCurrentState(currentState *foundation.NSNumber)
-	StartTime() *foundation.NSNumber
-	SetStartTime(startTime *foundation.NSNumber)
-	Duration() *foundation.NSNumber
-	SetDuration(duration *foundation.NSNumber)
+	WithPlaybackSpeed(playbackSpeed obj.Object) *MTRMediaPlaybackClusterStateChangedEvent
+	WithSeekRangeEnd(seekRangeEnd obj.Object) *MTRMediaPlaybackClusterStateChangedEvent
+	WithSeekRangeStart(seekRangeStart obj.Object) *MTRMediaPlaybackClusterStateChangedEvent
+	WithData(data obj.Object) *MTRMediaPlaybackClusterStateChangedEvent
+	WithAudioAdvanceUnmuted(audioAdvanceUnmuted obj.Object) *MTRMediaPlaybackClusterStateChangedEvent
+	CurrentState() obj.Object
+	SetCurrentState(currentState obj.Object)
+	StartTime() obj.Object
+	SetStartTime(startTime obj.Object)
+	Duration() obj.Object
+	SetDuration(duration obj.Object)
 	SampledPosition() *MTRMediaPlaybackClusterPlaybackPositionStruct
-	SetSampledPosition(sampledPosition *raw.MTRMediaPlaybackClusterPlaybackPositionStruct)
-	PlaybackSpeed() *foundation.NSNumber
-	SetPlaybackSpeed(playbackSpeed *foundation.NSNumber)
-	SeekRangeEnd() *foundation.NSNumber
-	SetSeekRangeEnd(seekRangeEnd *foundation.NSNumber)
-	SeekRangeStart() *foundation.NSNumber
-	SetSeekRangeStart(seekRangeStart *foundation.NSNumber)
-	Data() *foundation.NSData
-	SetData(data *foundation.NSData)
-	AudioAdvanceUnmuted() *foundation.NSNumber
-	SetAudioAdvanceUnmuted(audioAdvanceUnmuted *foundation.NSNumber)
+	SetSampledPosition(sampledPosition *MTRMediaPlaybackClusterPlaybackPositionStruct)
+	PlaybackSpeed() obj.Object
+	SetPlaybackSpeed(playbackSpeed obj.Object)
+	SeekRangeEnd() obj.Object
+	SetSeekRangeEnd(seekRangeEnd obj.Object)
+	SeekRangeStart() obj.Object
+	SetSeekRangeStart(seekRangeStart obj.Object)
+	Data() obj.Object
+	SetData(data obj.Object)
+	AudioAdvanceUnmuted() obj.Object
+	SetAudioAdvanceUnmuted(audioAdvanceUnmuted obj.Object)
 }
 
 var _ MTRMediaPlaybackClusterStateChangedEventable = (*MTRMediaPlaybackClusterStateChangedEvent)(nil)

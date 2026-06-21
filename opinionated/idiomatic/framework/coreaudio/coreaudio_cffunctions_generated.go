@@ -5,111 +5,68 @@
 package coreaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiotypes"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AudioDeviceGetCurrentTime wraps [raw.AudioDeviceGetCurrentTime], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioDeviceGetCurrentTime(inDevice uint, outTime *coreaudiotypes.AudioTimeStamp) error {
-	if _err := purego.NewOSStatus(raw.AudioDeviceGetCurrentTime(inDevice, outTime)).Err(); _err != nil {
+var _fnAudioHardwareAddRunLoopSource func(objc.ID) int32
+
+// AudioHardwareAddRunLoopSource reports an error if the CoreAudio framework function AudioHardwareAddRunLoopSource fails.
+func AudioHardwareAddRunLoopSource(inRunLoopSource obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioHardwareAddRunLoopSource == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioHardwareAddRunLoopSource, _lib, "AudioHardwareAddRunLoopSource")
+	}
+	_rc := _fnAudioHardwareAddRunLoopSource(objref.IDOf(inRunLoopSource))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioDeviceGetNearestStartTime wraps [raw.AudioDeviceGetNearestStartTime], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioDeviceGetNearestStartTime(inDevice uint, ioRequestedStartTime *coreaudiotypes.AudioTimeStamp, inFlags uint) error {
-	if _err := purego.NewOSStatus(raw.AudioDeviceGetNearestStartTime(inDevice, ioRequestedStartTime, inFlags)).Err(); _err != nil {
+var _fnAudioHardwareDestroyAggregateDevice func(int) int32
+
+// AudioHardwareDestroyAggregateDevice reports an error if the CoreAudio framework function AudioHardwareDestroyAggregateDevice fails.
+func AudioHardwareDestroyAggregateDevice(inDeviceID int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioHardwareDestroyAggregateDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioHardwareDestroyAggregateDevice, _lib, "AudioHardwareDestroyAggregateDevice")
+	}
+	_rc := _fnAudioHardwareDestroyAggregateDevice(inDeviceID)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioDeviceGetPropertyInfo wraps [raw.AudioDeviceGetPropertyInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioDeviceGetPropertyInfo(inDevice uint, inChannel uint, isInput uint8, inPropertyID uint, outSize *uint, outWritable *uint8) error {
-	if _err := purego.NewOSStatus(raw.AudioDeviceGetPropertyInfo(inDevice, inChannel, isInput, inPropertyID, outSize, outWritable)).Err(); _err != nil {
+var _fnAudioHardwareRemoveRunLoopSource func(objc.ID) int32
+
+// AudioHardwareRemoveRunLoopSource reports an error if the CoreAudio framework function AudioHardwareRemoveRunLoopSource fails.
+func AudioHardwareRemoveRunLoopSource(inRunLoopSource obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioHardwareRemoveRunLoopSource == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioHardwareRemoveRunLoopSource, _lib, "AudioHardwareRemoveRunLoopSource")
+	}
+	_rc := _fnAudioHardwareRemoveRunLoopSource(objref.IDOf(inRunLoopSource))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// AudioDeviceRead wraps [raw.AudioDeviceRead], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioDeviceRead(inDevice uint, inStartTime *coreaudiotypes.AudioTimeStamp, outData *coreaudiotypes.AudioBufferList) error {
-	if _err := purego.NewOSStatus(raw.AudioDeviceRead(inDevice, inStartTime, outData)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnAudioHardwareUnload func() int32
 
-// AudioDeviceTranslateTime wraps [raw.AudioDeviceTranslateTime], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioDeviceTranslateTime(inDevice uint, inTime *coreaudiotypes.AudioTimeStamp, outTime *coreaudiotypes.AudioTimeStamp) error {
-	if _err := purego.NewOSStatus(raw.AudioDeviceTranslateTime(inDevice, inTime, outTime)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioHardwareAddRunLoopSource wraps [raw.AudioHardwareAddRunLoopSource], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioHardwareAddRunLoopSource(inRunLoopSource objc.ID) error {
-	if _err := purego.NewOSStatus(raw.AudioHardwareAddRunLoopSource(purego.CFRef(inRunLoopSource))).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioHardwareCreateAggregateDevice wraps [raw.AudioHardwareCreateAggregateDevice], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioHardwareCreateAggregateDevice(inDescription objc.ID, outDeviceID *uint) error {
-	if _err := purego.NewOSStatus(raw.AudioHardwareCreateAggregateDevice(purego.CFRef(inDescription), outDeviceID)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioHardwareDestroyAggregateDevice wraps [raw.AudioHardwareDestroyAggregateDevice], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioHardwareDestroyAggregateDevice(inDeviceID uint) error {
-	if _err := purego.NewOSStatus(raw.AudioHardwareDestroyAggregateDevice(inDeviceID)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioHardwareGetPropertyInfo wraps [raw.AudioHardwareGetPropertyInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioHardwareGetPropertyInfo(inPropertyID uint, outSize *uint, outWritable *uint8) error {
-	if _err := purego.NewOSStatus(raw.AudioHardwareGetPropertyInfo(inPropertyID, outSize, outWritable)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioHardwareRemoveRunLoopSource wraps [raw.AudioHardwareRemoveRunLoopSource], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioHardwareRemoveRunLoopSource(inRunLoopSource objc.ID) error {
-	if _err := purego.NewOSStatus(raw.AudioHardwareRemoveRunLoopSource(purego.CFRef(inRunLoopSource))).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioHardwareUnload wraps [raw.AudioHardwareUnload], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+// AudioHardwareUnload reports an error if the CoreAudio framework function AudioHardwareUnload fails.
 func AudioHardwareUnload() error {
-	if _err := purego.NewOSStatus(raw.AudioHardwareUnload()).Err(); _err != nil {
-		return _err
+	_loadOnce.Do(_loadLibrary)
+	if _fnAudioHardwareUnload == nil {
+		ebipurego.RegisterLibFunc(&_fnAudioHardwareUnload, _lib, "AudioHardwareUnload")
 	}
-	return nil
-}
-
-// AudioObjectIsPropertySettable wraps [raw.AudioObjectIsPropertySettable], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioObjectIsPropertySettable(inObjectID uint, inAddress *raw.AudioObjectPropertyAddress, outIsSettable *uint8) error {
-	if _err := purego.NewOSStatus(raw.AudioObjectIsPropertySettable(inObjectID, inAddress, outIsSettable)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// AudioStreamGetPropertyInfo wraps [raw.AudioStreamGetPropertyInfo], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func AudioStreamGetPropertyInfo(inStream uint, inChannel uint, inPropertyID uint, outSize *uint, outWritable *uint8) error {
-	if _err := purego.NewOSStatus(raw.AudioStreamGetPropertyInfo(inStream, inChannel, inPropertyID, outSize, outWritable)).Err(); _err != nil {
+	_rc := _fnAudioHardwareUnload()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

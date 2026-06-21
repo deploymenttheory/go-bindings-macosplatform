@@ -5,158 +5,177 @@
 package mpsneuralnetwork
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNSubPixelConvolutionDescriptor wraps [raw.MPSCNNSubPixelConvolutionDescriptor] with a fluent Go API.
+// CNNSubPixelConvolutionDescriptor is an idiomatic wrapper over the Objective-C class MPSCNNSubPixelConvolutionDescriptor.
 type CNNSubPixelConvolutionDescriptor struct {
-	inner *raw.MPSCNNSubPixelConvolutionDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNSubPixelConvolutionDescriptor].
-func (x *CNNSubPixelConvolutionDescriptor) Unwrap() *raw.MPSCNNSubPixelConvolutionDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNSubPixelConvolutionDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNSubPixelConvolutionDescriptorFromID adopts an existing object pointer as a CNNSubPixelConvolutionDescriptor (nil for 0).
+// CNNSubPixelConvolutionDescriptorFromID adopts an existing Objective-C object as a CNNSubPixelConvolutionDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNSubPixelConvolutionDescriptorFromID(id objc.ID) *CNNSubPixelConvolutionDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &CNNSubPixelConvolutionDescriptor{inner: raw.MPSCNNSubPixelConvolutionDescriptorFromID(id)}
+	x := &CNNSubPixelConvolutionDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCNNSubPixelConvolutionDescriptor creates a new [CNNSubPixelConvolutionDescriptor].
+// cNNSubPixelConvolutionDescriptorAdopt wraps an Objective-C object that this code just created as a
+// CNNSubPixelConvolutionDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNSubPixelConvolutionDescriptorAdopt(id objc.ID) *CNNSubPixelConvolutionDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNSubPixelConvolutionDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CNNSubPixelConvolutionDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNSubPixelConvolutionDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNSubPixelConvolutionDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNSubPixelConvolutionDescriptor creates a new CNNSubPixelConvolutionDescriptor.
 func NewCNNSubPixelConvolutionDescriptor() *CNNSubPixelConvolutionDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNSubPixelConvolutionDescriptor")), objc.RegisterName("new"))
-	return &CNNSubPixelConvolutionDescriptor{inner: raw.MPSCNNSubPixelConvolutionDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNSubPixelConvolutionDescriptor")), objc.RegisterName("new"))
+	return cNNSubPixelConvolutionDescriptorAdopt(_id)
 }
 
-// @property      subPixelScaleFactor @discussion    Upsampling scale factor. Each pixel in input is upsampled into a subPixelScaleFactor x subPixelScaleFactor pixel block by rearranging the outputFeatureChannels as described above. Default value is 1.
+// Upsampling scale factor. Each pixel in input is upsampled into a subPixelScaleFactor x subPixelScaleFactor pixel block by rearranging the outputFeatureChannels as described above. Default value is 1.
 //
-// WithSubPixelScaleFactor sets the subPixelScaleFactor property and returns the receiver for chaining.
-func (x *CNNSubPixelConvolutionDescriptor) WithSubPixelScaleFactor(subPixelScaleFactor uint) *CNNSubPixelConvolutionDescriptor {
-	x.inner.SetSubPixelScaleFactor(subPixelScaleFactor)
+// WithSubPixelScaleFactor sets subPixelScaleFactor and returns the receiver so calls can be chained.
+func (x *CNNSubPixelConvolutionDescriptor) WithSubPixelScaleFactor(subPixelScaleFactor int) *CNNSubPixelConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubPixelScaleFactor:"), subPixelScaleFactor)
 	return x
 }
 
-// @property   kernelWidth @abstract   The width of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the left edge of the filter window is given by offset.x - (kernelWidth>>1)
+// The width of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the left edge of the filter window is given by offset.x - (kernelWidth>>1)
 //
-// WithKernelWidth sets the kernelWidth property and returns the receiver for chaining.
-func (x *CNNSubPixelConvolutionDescriptor) WithKernelWidth(kernelWidth uint) *CNNSubPixelConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetKernelWidth(kernelWidth)
+// WithKernelWidth sets kernelWidth and returns the receiver so calls can be chained.
+func (x *CNNSubPixelConvolutionDescriptor) WithKernelWidth(kernelWidth int) *CNNSubPixelConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelWidth:"), kernelWidth)
 	return x
 }
 
-// @property   kernelHeight @abstract   The height of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the top edge of the filter window is given by offset.y - (kernelHeight>>1)
+// The height of the filter window.  The default value is 3. Any positive non-zero value is valid, including even values. The position of the top edge of the filter window is given by offset.y - (kernelHeight>>1)
 //
-// WithKernelHeight sets the kernelHeight property and returns the receiver for chaining.
-func (x *CNNSubPixelConvolutionDescriptor) WithKernelHeight(kernelHeight uint) *CNNSubPixelConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetKernelHeight(kernelHeight)
+// WithKernelHeight sets kernelHeight and returns the receiver so calls can be chained.
+func (x *CNNSubPixelConvolutionDescriptor) WithKernelHeight(kernelHeight int) *CNNSubPixelConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKernelHeight:"), kernelHeight)
 	return x
 }
 
-// @property   inputFeatureChannels @abstract   The number of feature channels per pixel in the input image.
+// The number of feature channels per pixel in the input image.
 //
-// WithInputFeatureChannels sets the inputFeatureChannels property and returns the receiver for chaining.
-func (x *CNNSubPixelConvolutionDescriptor) WithInputFeatureChannels(inputFeatureChannels uint) *CNNSubPixelConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetInputFeatureChannels(inputFeatureChannels)
+// WithInputFeatureChannels sets inputFeatureChannels and returns the receiver so calls can be chained.
+func (x *CNNSubPixelConvolutionDescriptor) WithInputFeatureChannels(inputFeatureChannels int) *CNNSubPixelConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInputFeatureChannels:"), inputFeatureChannels)
 	return x
 }
 
-// @property   outputFeatureChannels @abstract   The number of feature channels per pixel in the output image.
+// The number of feature channels per pixel in the output image.
 //
-// WithOutputFeatureChannels sets the outputFeatureChannels property and returns the receiver for chaining.
-func (x *CNNSubPixelConvolutionDescriptor) WithOutputFeatureChannels(outputFeatureChannels uint) *CNNSubPixelConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetOutputFeatureChannels(outputFeatureChannels)
+// WithOutputFeatureChannels sets outputFeatureChannels and returns the receiver so calls can be chained.
+func (x *CNNSubPixelConvolutionDescriptor) WithOutputFeatureChannels(outputFeatureChannels int) *CNNSubPixelConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOutputFeatureChannels:"), outputFeatureChannels)
 	return x
 }
 
-// @property   strideInPixelsX @abstract   The output stride (downsampling factor) in the x dimension. The default value is 1.
+// The output stride (downsampling factor) in the x dimension. The default value is 1.
 //
-// WithStrideInPixelsX sets the strideInPixelsX property and returns the receiver for chaining.
-func (x *CNNSubPixelConvolutionDescriptor) WithStrideInPixelsX(strideInPixelsX uint) *CNNSubPixelConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetStrideInPixelsX(strideInPixelsX)
+// WithStrideInPixelsX sets strideInPixelsX and returns the receiver so calls can be chained.
+func (x *CNNSubPixelConvolutionDescriptor) WithStrideInPixelsX(strideInPixelsX int) *CNNSubPixelConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInPixelsX:"), strideInPixelsX)
 	return x
 }
 
-// @property   strideInPixelsY @abstract   The output stride (downsampling factor) in the y dimension. The default value is 1.
+// The output stride (downsampling factor) in the y dimension. The default value is 1.
 //
-// WithStrideInPixelsY sets the strideInPixelsY property and returns the receiver for chaining.
-func (x *CNNSubPixelConvolutionDescriptor) WithStrideInPixelsY(strideInPixelsY uint) *CNNSubPixelConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetStrideInPixelsY(strideInPixelsY)
+// WithStrideInPixelsY sets strideInPixelsY and returns the receiver so calls can be chained.
+func (x *CNNSubPixelConvolutionDescriptor) WithStrideInPixelsY(strideInPixelsY int) *CNNSubPixelConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStrideInPixelsY:"), strideInPixelsY)
 	return x
 }
 
-// @property   groups @abstract   Number of groups input and output channels are divided into. The default value is 1. Groups lets you reduce the parameterization. If groups is set to n, input is divided into n groups with inputFeatureChannels/n channels in each group. Similarly output is divided into n groups with outputFeatureChannels/n channels in each group. ith group in input is only connected to ith group in output so number of weights (parameters) needed is reduced by factor of n. Both inputFeatureChannels and outputFeatureChannels must be divisible by n and number of channels in each group must be multiple of 4.
+// Number of groups input and output channels are divided into. The default value is 1. Groups lets you reduce the parameterization. If groups is set to n, input is divided into n groups with inputFeatureChannels/n channels in each group. Similarly output is divided into n groups with outputFeatureChannels/n channels in each group. ith group in input is only connected to ith group in output so number of weights (parameters) needed is reduced by factor of n. Both inputFeatureChannels and outputFeatureChannels must be divisible by n and number of channels in each group must be multiple of 4.
 //
-// WithGroups sets the groups property and returns the receiver for chaining.
-func (x *CNNSubPixelConvolutionDescriptor) WithGroups(groups uint) *CNNSubPixelConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetGroups(groups)
+// WithGroups sets groups and returns the receiver so calls can be chained.
+func (x *CNNSubPixelConvolutionDescriptor) WithGroups(groups int) *CNNSubPixelConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroups:"), groups)
 	return x
 }
 
-// @property      dilationRateX @discussion    dilationRateX property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel width, kW is dilated to kW_Dilated = (kW-1)*dilationRateX + 1 by inserting d-1 zeros between consecutive entries in each row of the original kernel. The kernel is centered based on kW_Dilated.
+// dilationRateX property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel width, kW is dilated to kW_Dilated = (kW-1)*dilationRateX + 1 by inserting d-1 zeros between consecutive entries in each row of the original kernel. The kernel is centered based on kW_Dilated.
 //
-// WithDilationRateX sets the dilationRateX property and returns the receiver for chaining.
-func (x *CNNSubPixelConvolutionDescriptor) WithDilationRateX(dilationRateX uint) *CNNSubPixelConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetDilationRateX(dilationRateX)
+// WithDilationRateX sets dilationRateX and returns the receiver so calls can be chained.
+func (x *CNNSubPixelConvolutionDescriptor) WithDilationRateX(dilationRateX int) *CNNSubPixelConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateX:"), dilationRateX)
 	return x
 }
 
-// @property      dilationRateY @discussion    dilationRateY property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel height, kH is dilated to kH_Dilated = (kH-1)*dilationRateY + 1 by inserting d-1 rows of zeros between consecutive row of the original kernel. The kernel is centered based on kH_Dilated.
+// dilationRateY property can be used to implement dilated convolution as described in https://arxiv.org/pdf/1511.07122v3.pdf to aggregate global information in dense prediction problems. Default value is 1. When set to value > 1, original kernel height, kH is dilated to kH_Dilated = (kH-1)*dilationRateY + 1 by inserting d-1 rows of zeros between consecutive row of the original kernel. The kernel is centered based on kH_Dilated.
 //
-// WithDilationRateY sets the dilationRateY property and returns the receiver for chaining.
-func (x *CNNSubPixelConvolutionDescriptor) WithDilationRateY(dilationRateY uint) *CNNSubPixelConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetDilationRateY(dilationRateY)
+// WithDilationRateY sets dilationRateY and returns the receiver so calls can be chained.
+func (x *CNNSubPixelConvolutionDescriptor) WithDilationRateY(dilationRateY int) *CNNSubPixelConvolutionDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDilationRateY:"), dilationRateY)
 	return x
 }
 
-// @property   fusedNeuronDescriptor @discussion This mathod can be used to add a neuron activation funtion of given type with associated scalar parameters A and B that are shared across all output channels. Neuron activation fucntion is applied to output of convolution. This is a per-pixel operation that is fused with convolution kernel itself for best performance. Note that this method can only be used to fuse neuron of kind for which parameters A and B are shared across all channels of convoution output. It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions. Default is descriptor with neuronType MPSCNNNeuronTypeNone. Note: in certain cases the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined.
+// This mathod can be used to add a neuron activation funtion of given type with associated scalar parameters A and B that are shared across all output channels. Neuron activation fucntion is applied to output of convolution. This is a per-pixel operation that is fused with convolution kernel itself for best performance. Note that this method can only be used to fuse neuron of kind for which parameters A and B are shared across all channels of convoution output. It is an error to call this method for neuron activation functions like MPSCNNNeuronTypePReLU, which require per-channel parameter values. For those kind of neuron activation functions, use appropriate setter functions. Default is descriptor with neuronType MPSCNNNeuronTypeNone. Note: in certain cases the neuron descriptor will be cached by the MPSNNGraph or the MPSCNNConvolution. If the neuron type changes after either is made, behavior is undefined.
 //
-// WithFusedNeuronDescriptor sets the fusedNeuronDescriptor property and returns the receiver for chaining.
+// WithFusedNeuronDescriptor sets fusedNeuronDescriptor and returns the receiver so calls can be chained.
 func (x *CNNSubPixelConvolutionDescriptor) WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNSubPixelConvolutionDescriptor {
-	x.inner.MPSCNNConvolutionDescriptor.SetFusedNeuronDescriptor(fusedNeuronDescriptor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFusedNeuronDescriptor:"), objref.IDOf(fusedNeuronDescriptor))
 	return x
 }
 
-// @property      subPixelScaleFactor @discussion    Upsampling scale factor. Each pixel in input is upsampled into a subPixelScaleFactor x subPixelScaleFactor pixel block by rearranging the outputFeatureChannels as described above. Default value is 1.
-//
-// SubPixelScaleFactor calls the underlying SubPixelScaleFactor.
-func (x *CNNSubPixelConvolutionDescriptor) SubPixelScaleFactor() uint {
-	return x.inner.SubPixelScaleFactor()
+// Upsampling scale factor. Each pixel in input is upsampled into a subPixelScaleFactor x subPixelScaleFactor pixel block by rearranging the outputFeatureChannels as described above. Default value is 1.
+func (x *CNNSubPixelConvolutionDescriptor) SubPixelScaleFactor() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("subPixelScaleFactor"))
+	return _r
 }
 
-// SetSubPixelScaleFactor calls the underlying SetSubPixelScaleFactor.
-func (x *CNNSubPixelConvolutionDescriptor) SetSubPixelScaleFactor(subPixelScaleFactor uint) {
-	x.inner.SetSubPixelScaleFactor(subPixelScaleFactor)
-}
-
-func (x *CNNSubPixelConvolutionDescriptor) asCNNConvolutionDescriptor() *raw.MPSCNNConvolutionDescriptor {
-	return &x.inner.MPSCNNConvolutionDescriptor
+func (x *CNNSubPixelConvolutionDescriptor) SetSubPixelScaleFactor(subPixelScaleFactor int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubPixelScaleFactor:"), subPixelScaleFactor)
 }
 
 // CNNSubPixelConvolutionDescriptorable is the interface implemented by [CNNSubPixelConvolutionDescriptor], for mocking and DI.
 type CNNSubPixelConvolutionDescriptorable interface {
-	Unwrap() *raw.MPSCNNSubPixelConvolutionDescriptor
-	WithSubPixelScaleFactor(subPixelScaleFactor uint) *CNNSubPixelConvolutionDescriptor
-	WithKernelWidth(kernelWidth uint) *CNNSubPixelConvolutionDescriptor
-	WithKernelHeight(kernelHeight uint) *CNNSubPixelConvolutionDescriptor
-	WithInputFeatureChannels(inputFeatureChannels uint) *CNNSubPixelConvolutionDescriptor
-	WithOutputFeatureChannels(outputFeatureChannels uint) *CNNSubPixelConvolutionDescriptor
-	WithStrideInPixelsX(strideInPixelsX uint) *CNNSubPixelConvolutionDescriptor
-	WithStrideInPixelsY(strideInPixelsY uint) *CNNSubPixelConvolutionDescriptor
-	WithGroups(groups uint) *CNNSubPixelConvolutionDescriptor
-	WithDilationRateX(dilationRateX uint) *CNNSubPixelConvolutionDescriptor
-	WithDilationRateY(dilationRateY uint) *CNNSubPixelConvolutionDescriptor
+	obj.Object
+	WithSubPixelScaleFactor(subPixelScaleFactor int) *CNNSubPixelConvolutionDescriptor
+	WithKernelWidth(kernelWidth int) *CNNSubPixelConvolutionDescriptor
+	WithKernelHeight(kernelHeight int) *CNNSubPixelConvolutionDescriptor
+	WithInputFeatureChannels(inputFeatureChannels int) *CNNSubPixelConvolutionDescriptor
+	WithOutputFeatureChannels(outputFeatureChannels int) *CNNSubPixelConvolutionDescriptor
+	WithStrideInPixelsX(strideInPixelsX int) *CNNSubPixelConvolutionDescriptor
+	WithStrideInPixelsY(strideInPixelsY int) *CNNSubPixelConvolutionDescriptor
+	WithGroups(groups int) *CNNSubPixelConvolutionDescriptor
+	WithDilationRateX(dilationRateX int) *CNNSubPixelConvolutionDescriptor
+	WithDilationRateY(dilationRateY int) *CNNSubPixelConvolutionDescriptor
 	WithFusedNeuronDescriptor(fusedNeuronDescriptor *NNNeuronDescriptor) *CNNSubPixelConvolutionDescriptor
-	SubPixelScaleFactor() uint
-	SetSubPixelScaleFactor(subPixelScaleFactor uint)
+	SubPixelScaleFactor() int
+	SetSubPixelScaleFactor(subPixelScaleFactor int)
 }
 
 var _ CNNSubPixelConvolutionDescriptorable = (*CNNSubPixelConvolutionDescriptor)(nil)

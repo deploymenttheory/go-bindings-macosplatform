@@ -5,39 +5,66 @@
 package mailkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ExtensionManager wraps [raw.MEExtensionManager] with a fluent Go API.
+// ExtensionManager is an idiomatic wrapper over the Objective-C class MEExtensionManager.
 type ExtensionManager struct {
-	inner *raw.MEExtensionManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEExtensionManager].
-func (x *ExtensionManager) Unwrap() *raw.MEExtensionManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionManager) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionManagerFromID adopts an existing object pointer as a ExtensionManager (nil for 0).
+// ExtensionManagerFromID adopts an existing Objective-C object as a ExtensionManager
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionManagerFromID(id objc.ID) *ExtensionManager {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionManager{inner: raw.MEExtensionManagerFromID(id)}
+	x := &ExtensionManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewExtensionManager creates a new [ExtensionManager].
+// extensionManagerAdopt wraps an Objective-C object that this code just created as a
+// ExtensionManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionManagerAdopt(id objc.ID) *ExtensionManager {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExtensionManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewExtensionManager creates a new ExtensionManager.
 func NewExtensionManager() *ExtensionManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MEExtensionManager")), objc.RegisterName("new"))
-	return &ExtensionManager{inner: raw.MEExtensionManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MEExtensionManager")), objc.RegisterName("new"))
+	return extensionManagerAdopt(_id)
 }
 
 // ExtensionManagerable is the interface implemented by [ExtensionManager], for mocking and DI.
 type ExtensionManagerable interface {
-	Unwrap() *raw.MEExtensionManager
+	obj.Object
 }
 
 var _ ExtensionManagerable = (*ExtensionManager)(nil)

@@ -5,99 +5,102 @@
 package videotoolbox
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains both input and output parameters that the low-latency frame interpolation processor needs.
 //
-// LowLatencyFrameInterpolationParameters wraps [raw.VTLowLatencyFrameInterpolationParameters] with a fluent Go API.
+// LowLatencyFrameInterpolationParameters is an idiomatic wrapper over the Objective-C class VTLowLatencyFrameInterpolationParameters.
 type LowLatencyFrameInterpolationParameters struct {
-	inner *raw.VTLowLatencyFrameInterpolationParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VTLowLatencyFrameInterpolationParameters].
-func (x *LowLatencyFrameInterpolationParameters) Unwrap() *raw.VTLowLatencyFrameInterpolationParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LowLatencyFrameInterpolationParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// LowLatencyFrameInterpolationParametersFromID adopts an existing object pointer as a LowLatencyFrameInterpolationParameters (nil for 0).
+// LowLatencyFrameInterpolationParametersFromID adopts an existing Objective-C object as a LowLatencyFrameInterpolationParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func LowLatencyFrameInterpolationParametersFromID(id objc.ID) *LowLatencyFrameInterpolationParameters {
 	if id == 0 {
 		return nil
 	}
-	return &LowLatencyFrameInterpolationParameters{inner: raw.VTLowLatencyFrameInterpolationParametersFromID(id)}
+	x := &LowLatencyFrameInterpolationParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// lowLatencyFrameInterpolationParametersAdopt wraps an Objective-C object that this code just created as a
+// LowLatencyFrameInterpolationParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func lowLatencyFrameInterpolationParametersAdopt(id objc.ID) *LowLatencyFrameInterpolationParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &LowLatencyFrameInterpolationParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LowLatencyFrameInterpolationParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LowLatencyFrameInterpolationParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LowLatencyFrameInterpolationParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new low-latency frame interpolation parameters object.
 //
-// NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames creates a new [LowLatencyFrameInterpolationParameters].
-func NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames(sourceFrame *raw.VTFrameProcessorFrame, previousFrame *raw.VTFrameProcessorFrame, interpolationPhase *foundation.NSArray[*foundation.NSNumber], destinationFrames *foundation.NSArray[*raw.VTFrameProcessorFrame]) *LowLatencyFrameInterpolationParameters {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTLowLatencyFrameInterpolationParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:previousFrame:interpolationPhase:destinationFrames:"), sourceFrame.Ptr(), previousFrame.Ptr(), interpolationPhase.Ptr(), destinationFrames.Ptr())
-	return &LowLatencyFrameInterpolationParameters{inner: raw.VTLowLatencyFrameInterpolationParametersFromID(_id)}
+// NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames creates a new LowLatencyFrameInterpolationParameters.
+func NewLowLatencyFrameInterpolationParametersWithSourceFramePreviousFrameInterpolationPhaseDestinationFrames(sourceFrame *FrameProcessorFrame, previousFrame *FrameProcessorFrame, interpolationPhase []obj.Object, destinationFrames []*FrameProcessorFrame) *LowLatencyFrameInterpolationParameters {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VTLowLatencyFrameInterpolationParameters")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:previousFrame:interpolationPhase:destinationFrames:"), objref.IDOf(sourceFrame), objref.IDOf(previousFrame), purego.SliceToNSArray(interpolationPhase, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), purego.SliceToNSArray(destinationFrames, func(_v *FrameProcessorFrame) objc.ID { return objref.IDOf(_v) }))
+	return lowLatencyFrameInterpolationParametersAdopt(_id)
 }
 
 // Source frame that you provided when creating the low-latency frame interpolation parameters object.
-//
-// SourceFrame calls the underlying SourceFrame.
 func (x *LowLatencyFrameInterpolationParameters) SourceFrame() *FrameProcessorFrame {
-	_r := x.inner.SourceFrame()
-	if _r == nil {
-		return nil
-	}
-	return &FrameProcessorFrame{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
+	return FrameProcessorFrameFromID(_r)
 }
 
 // Previous frame that you provided when creating the low-latency frame interpolation parameters object.
-//
-// PreviousFrame calls the underlying PreviousFrame.
 func (x *LowLatencyFrameInterpolationParameters) PreviousFrame() *FrameProcessorFrame {
-	_r := x.inner.PreviousFrame()
-	if _r == nil {
-		return nil
-	}
-	return &FrameProcessorFrame{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousFrame"))
+	return FrameProcessorFrameFromID(_r)
 }
 
 // Array of interpolation phases that you provided when creating the low-latency frame interpolation parameters object.
 //
 // InterpolationPhase returns the collection as a Go slice.
-func (x *LowLatencyFrameInterpolationParameters) InterpolationPhase() []*foundation.NSNumber {
-	arr := x.inner.InterpolationPhase()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *LowLatencyFrameInterpolationParameters) InterpolationPhase() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interpolationPhase"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // Array of destination frames that you provided when creating the low-latency frame interpolation parameters object.
 //
 // DestinationFrames returns the collection as a Go slice.
 func (x *LowLatencyFrameInterpolationParameters) DestinationFrames() []*FrameProcessorFrame {
-	arr := x.inner.DestinationFrames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *FrameProcessorFrame {
-		return &FrameProcessorFrame{inner: raw.VTFrameProcessorFrameFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationFrames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *FrameProcessorFrame { return FrameProcessorFrameFromID(_id) })
 }
 
 // LowLatencyFrameInterpolationParametersable is the interface implemented by [LowLatencyFrameInterpolationParameters], for mocking and DI.
 type LowLatencyFrameInterpolationParametersable interface {
-	Unwrap() *raw.VTLowLatencyFrameInterpolationParameters
+	obj.Object
 	SourceFrame() *FrameProcessorFrame
 	PreviousFrame() *FrameProcessorFrame
-	InterpolationPhase() []*foundation.NSNumber
+	InterpolationPhase() []obj.Object
 	DestinationFrames() []*FrameProcessorFrame
 }
 

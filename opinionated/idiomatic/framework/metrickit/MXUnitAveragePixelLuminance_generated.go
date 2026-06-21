@@ -5,41 +5,68 @@
 package metrickit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A unit of measure of pixel luminosity on an OLED display.
 //
-// UnitAveragePixelLuminance wraps [raw.MXUnitAveragePixelLuminance] with a fluent Go API.
+// UnitAveragePixelLuminance is an idiomatic wrapper over the Objective-C class MXUnitAveragePixelLuminance.
 type UnitAveragePixelLuminance struct {
-	inner *raw.MXUnitAveragePixelLuminance
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXUnitAveragePixelLuminance].
-func (x *UnitAveragePixelLuminance) Unwrap() *raw.MXUnitAveragePixelLuminance { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitAveragePixelLuminance) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitAveragePixelLuminanceFromID adopts an existing object pointer as a UnitAveragePixelLuminance (nil for 0).
+// UnitAveragePixelLuminanceFromID adopts an existing Objective-C object as a UnitAveragePixelLuminance
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitAveragePixelLuminanceFromID(id objc.ID) *UnitAveragePixelLuminance {
 	if id == 0 {
 		return nil
 	}
-	return &UnitAveragePixelLuminance{inner: raw.MXUnitAveragePixelLuminanceFromID(id)}
+	x := &UnitAveragePixelLuminance{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUnitAveragePixelLuminance creates a new [UnitAveragePixelLuminance].
+// unitAveragePixelLuminanceAdopt wraps an Objective-C object that this code just created as a
+// UnitAveragePixelLuminance (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitAveragePixelLuminanceAdopt(id objc.ID) *UnitAveragePixelLuminance {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitAveragePixelLuminance{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *UnitAveragePixelLuminance) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UnitAveragePixelLuminance) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UnitAveragePixelLuminance) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUnitAveragePixelLuminance creates a new UnitAveragePixelLuminance.
 func NewUnitAveragePixelLuminance() *UnitAveragePixelLuminance {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXUnitAveragePixelLuminance")), objc.RegisterName("new"))
-	return &UnitAveragePixelLuminance{inner: raw.MXUnitAveragePixelLuminanceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MXUnitAveragePixelLuminance")), objc.RegisterName("new"))
+	return unitAveragePixelLuminanceAdopt(_id)
 }
 
 // UnitAveragePixelLuminanceable is the interface implemented by [UnitAveragePixelLuminance], for mocking and DI.
 type UnitAveragePixelLuminanceable interface {
-	Unwrap() *raw.MXUnitAveragePixelLuminance
+	obj.Object
 }
 
 var _ UnitAveragePixelLuminanceable = (*UnitAveragePixelLuminance)(nil)

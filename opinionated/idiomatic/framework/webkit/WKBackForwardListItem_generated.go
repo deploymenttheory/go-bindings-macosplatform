@@ -5,62 +5,84 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A representation of a webpage that the web view previously visited.
 //
-// WKBackForwardListItem wraps [raw.WKBackForwardListItem] with a fluent Go API.
+// WKBackForwardListItem is an idiomatic wrapper over the Objective-C class WKBackForwardListItem.
 type WKBackForwardListItem struct {
-	inner *raw.WKBackForwardListItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.WKBackForwardListItem].
-func (x *WKBackForwardListItem) Unwrap() *raw.WKBackForwardListItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WKBackForwardListItem) ID() objc.ID { return x.inner.Ptr() }
-
-// WKBackForwardListItemFromID adopts an existing object pointer as a WKBackForwardListItem (nil for 0).
+// WKBackForwardListItemFromID adopts an existing Objective-C object as a WKBackForwardListItem
+// (nil for 0), retaining it and registering a release finalizer.
 func WKBackForwardListItemFromID(id objc.ID) *WKBackForwardListItem {
 	if id == 0 {
 		return nil
 	}
-	return &WKBackForwardListItem{inner: raw.WKBackForwardListItemFromID(id)}
+	x := &WKBackForwardListItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWKBackForwardListItem creates a new [WKBackForwardListItem].
+// wKBackForwardListItemAdopt wraps an Objective-C object that this code just created as a
+// WKBackForwardListItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func wKBackForwardListItemAdopt(id objc.ID) *WKBackForwardListItem {
+	if id == 0 {
+		return nil
+	}
+	x := &WKBackForwardListItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WKBackForwardListItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WKBackForwardListItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WKBackForwardListItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWKBackForwardListItem creates a new WKBackForwardListItem.
 func NewWKBackForwardListItem() *WKBackForwardListItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("WKBackForwardListItem")), objc.RegisterName("new"))
-	return &WKBackForwardListItem{inner: raw.WKBackForwardListItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("WKBackForwardListItem")), objc.RegisterName("new"))
+	return wKBackForwardListItemAdopt(_id)
 }
 
-// @abstract The URL of the webpage represented by this item.
-//
-// URL calls the underlying URL.
-func (x *WKBackForwardListItem) URL() *foundation.NSURL {
-	return x.inner.URL()
+// The URL of the webpage represented by this item.
+func (x *WKBackForwardListItem) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// @abstract The title of the webpage represented by this item.
-//
-// Title calls the underlying Title.
+// The title of the webpage represented by this item.
 func (x *WKBackForwardListItem) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // WKBackForwardListItemable is the interface implemented by [WKBackForwardListItem], for mocking and DI.
 type WKBackForwardListItemable interface {
-	Unwrap() *raw.WKBackForwardListItem
-	URL() *foundation.NSURL
+	obj.Object
+	URL() obj.Object
 	Title() string
 }
 

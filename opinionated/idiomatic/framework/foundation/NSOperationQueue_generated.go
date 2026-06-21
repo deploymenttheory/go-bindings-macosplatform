@@ -6,92 +6,116 @@ package foundation
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A queue that regulates the execution of operations.
 //
-// OperationQueue wraps [raw.NSOperationQueue] with a fluent Go API.
+// OperationQueue is an idiomatic wrapper over the Objective-C class NSOperationQueue.
 type OperationQueue struct {
-	inner *raw.NSOperationQueue
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSOperationQueue].
-func (x *OperationQueue) Unwrap() *raw.NSOperationQueue { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OperationQueue) ID() objc.ID { return x.inner.Ptr() }
-
-// OperationQueueFromID adopts an existing object pointer as a OperationQueue (nil for 0).
+// OperationQueueFromID adopts an existing Objective-C object as a OperationQueue
+// (nil for 0), retaining it and registering a release finalizer.
 func OperationQueueFromID(id objc.ID) *OperationQueue {
 	if id == 0 {
 		return nil
 	}
-	return &OperationQueue{inner: raw.NSOperationQueueFromID(id)}
+	x := &OperationQueue{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewOperationQueue creates a new [OperationQueue].
+// operationQueueAdopt wraps an Objective-C object that this code just created as a
+// OperationQueue (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func operationQueueAdopt(id objc.ID) *OperationQueue {
+	if id == 0 {
+		return nil
+	}
+	x := &OperationQueue{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OperationQueue) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OperationQueue) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OperationQueue) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewOperationQueue creates a new OperationQueue.
 func NewOperationQueue() *OperationQueue {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOperationQueue")), objc.RegisterName("new"))
-	return &OperationQueue{inner: raw.NSOperationQueueFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSOperationQueue")), objc.RegisterName("new"))
+	return operationQueueAdopt(_id)
 }
 
-// WithMaxConcurrentOperationCount sets the maxConcurrentOperationCount property and returns the receiver for chaining.
+// WithMaxConcurrentOperationCount sets maxConcurrentOperationCount and returns the receiver so calls can be chained.
 func (x *OperationQueue) WithMaxConcurrentOperationCount(maxConcurrentOperationCount int) *OperationQueue {
-	x.inner.SetMaxConcurrentOperationCount(maxConcurrentOperationCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxConcurrentOperationCount:"), maxConcurrentOperationCount)
 	return x
 }
 
-// WithSuspended sets the suspended property and returns the receiver for chaining.
+// WithSuspended sets suspended and returns the receiver so calls can be chained.
 func (x *OperationQueue) WithSuspended(suspended bool) *OperationQueue {
-	x.inner.SetSuspended(suspended)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspended:"), suspended)
 	return x
 }
 
-// WithName sets the name property and returns the receiver for chaining.
-func (x *OperationQueue) WithName(name string) *OperationQueue {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+// WithName sets name and returns the receiver so calls can be chained.
+func (x *OperationQueue) WithName(name StringProvider) *OperationQueue {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), objref.IDOf(name))
 	return x
 }
 
-// WithQualityOfService sets the qualityOfService property and returns the receiver for chaining.
-func (x *OperationQueue) WithQualityOfService(qualityOfService NSQualityOfService) *OperationQueue {
-	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
+// WithQualityOfService sets qualityOfService and returns the receiver so calls can be chained.
+func (x *OperationQueue) WithQualityOfService(qualityOfService QualityOfService) *OperationQueue {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
 	return x
 }
 
-// WithUnderlyingQueue sets the underlyingQueue property and returns the receiver for chaining.
+// WithUnderlyingQueue sets underlyingQueue and returns the receiver so calls can be chained.
 func (x *OperationQueue) WithUnderlyingQueue(underlyingQueue ObjectProvider) *OperationQueue {
-	x.inner.SetUnderlyingQueue(underlyingQueue.asObject())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnderlyingQueue:"), objref.IDOf(underlyingQueue))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *OperationQueue) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OperationQueue {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *OperationQueue) WithScriptingProperties(scriptingProperties obj.Object) *OperationQueue {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// AddOperation calls the underlying AddOperation.
-func (x *OperationQueue) AddOperation(op *raw.NSOperation) {
-	x.inner.AddOperation(op)
+func (x *OperationQueue) AddOperation(op *Operation) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOperation:"), objref.IDOf(op))
 }
 
-// AddOperationsWaitUntilFinished calls the underlying AddOperationsWaitUntilFinished.
-func (x *OperationQueue) AddOperationsWaitUntilFinished(ops *raw.NSArray[*raw.NSOperation], wait bool) {
-	x.inner.AddOperationsWaitUntilFinished(ops, wait)
+func (x *OperationQueue) AddOperationsWaitUntilFinished(ops []*Operation, wait bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOperations:waitUntilFinished:"), purego.SliceToNSArray(ops, func(_v *Operation) objc.ID { return objref.IDOf(_v) }), wait)
 }
 
 // AddOperationWith blocks until the operation completes or ctx is cancelled.
 func (x *OperationQueue) AddOperationWith(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.AddOperationWith(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addOperationWithBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -100,14 +124,15 @@ func (x *OperationQueue) AddOperationWith(ctx context.Context) error {
 	}
 }
 
-// @method addBarrierBlock: @param barrier      A block to execute @discussion         The `addBarrierBlock:` method executes the block when the NSOperationQueue has finished all enqueued operations and prevents any subsequent operations to be executed until the barrier has been completed. This acts similarly to the `dispatch_barrier_async` function.
+// The `addBarrierBlock:` method executes the block when the NSOperationQueue has finished all enqueued operations and prevents any subsequent operations to be executed until the barrier has been completed. This acts similarly to the `dispatch_barrier_async` function.
 //
 // AddBarrierBlock blocks until the operation completes or ctx is cancelled.
 func (x *OperationQueue) AddBarrierBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.AddBarrierBlock(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addBarrierBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -116,114 +141,90 @@ func (x *OperationQueue) AddBarrierBlock(ctx context.Context) error {
 	}
 }
 
-// CancelAllOperations calls the underlying CancelAllOperations.
 func (x *OperationQueue) CancelAllOperations() {
-	x.inner.CancelAllOperations()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelAllOperations"))
 }
 
-// WaitUntilAllOperationsAreFinished calls the underlying WaitUntilAllOperationsAreFinished.
 func (x *OperationQueue) WaitUntilAllOperationsAreFinished() {
-	x.inner.WaitUntilAllOperationsAreFinished()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("waitUntilAllOperationsAreFinished"))
 }
 
-// @property progress @discussion     The `progress` property represents a total progress of the operations executed in the queue. By default NSOperationQueue does not report progress until the `totalUnitCount` of the progress is set. When the `totalUnitCount` property of the progress is set the queue then opts into participating in progress reporting. When enabled, each operation will contribute 1 unit of completion to the overall progress of the queue for operations that are finished by the end of main (operations that override start and do not invoke super will not contribute to progress). Special attention to race conditions should be made when updating the `totalUnitCount` of the progress as well as care should be taken to avoid 'backwards progress'. For example; when a NSOperationQueue's progress is 5/10, representing 50% completed, and there are 90 more operations about to be added and the `totalUnitCount` that would then make the progress report as 5/100 which represents 5%. In this example it would mean that any progress bar would jump from displaying 50% back to 5%, which might not be desirable. In the cases where the `totalUnitCount` needs to be adjusted it is suggested to do this for thread-safety in a barrier by using the `addBarrierBlock:` API. This ensures that no un-expected execution state occurs adjusting into a potentially backwards moving progress scenario. @example NSOperationQueue *queue = [[NSOperationQueue alloc] init]; queue.progress.totalUnitCount = 10;
-//
-// Progress calls the underlying Progress.
+// The `progress` property represents a total progress of the operations executed in the queue. By default NSOperationQueue does not report progress until the `totalUnitCount` of the progress is set. When the `totalUnitCount` property of the progress is set the queue then opts into participating in progress reporting. When enabled, each operation will contribute 1 unit of completion to the overall progress of the queue for operations that are finished by the end of main (operations that override start and do not invoke super will not contribute to progress). Special attention to race conditions should be made when updating the `totalUnitCount` of the progress as well as care should be taken to avoid 'backwards progress'. For example; when a NSOperationQueue's progress is 5/10, representing 50% completed, and there are 90 more operations about to be added and the `totalUnitCount` that would then make the progress report as 5/100 which represents 5%. In this example it would mean that any progress bar would jump from displaying 50% back to 5%, which might not be desirable. In the cases where the `totalUnitCount` needs to be adjusted it is suggested to do this for thread-safety in a barrier by using the `addBarrierBlock:` API. This ensures that no un-expected execution state occurs adjusting into a potentially backwards moving progress scenario.
 func (x *OperationQueue) Progress() *Progress {
-	_r := x.inner.Progress()
-	if _r == nil {
-		return nil
-	}
-	return &Progress{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("progress"))
+	return ProgressFromID(_r)
 }
 
-// MaxConcurrentOperationCount calls the underlying MaxConcurrentOperationCount.
 func (x *OperationQueue) MaxConcurrentOperationCount() int {
-	return x.inner.MaxConcurrentOperationCount()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maxConcurrentOperationCount"))
+	return _r
 }
 
-// SetMaxConcurrentOperationCount calls the underlying SetMaxConcurrentOperationCount.
 func (x *OperationQueue) SetMaxConcurrentOperationCount(maxConcurrentOperationCount int) {
-	x.inner.SetMaxConcurrentOperationCount(maxConcurrentOperationCount)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxConcurrentOperationCount:"), maxConcurrentOperationCount)
 }
 
-// IsSuspended calls the underlying IsSuspended.
 func (x *OperationQueue) IsSuspended() bool {
-	return x.inner.IsSuspended()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isSuspended"))
+	return _r
 }
 
-// SetSuspended calls the underlying SetSuspended.
 func (x *OperationQueue) SetSuspended(suspended bool) {
-	x.inner.SetSuspended(suspended)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspended:"), suspended)
 }
 
-// Name calls the underlying Name.
-func (x *OperationQueue) Name() *String {
-	_r := x.inner.Name()
-	if _r == nil {
-		return nil
+func (x *OperationQueue) Name() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetName calls the underlying SetName.
 func (x *OperationQueue) SetName(name string) {
-	x.inner.SetName(foundation.NSStringStringWithUTF8String(name))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setName:"), purego.NSString(name))
 }
 
-// QualityOfService calls the underlying QualityOfService.
-func (x *OperationQueue) QualityOfService() NSQualityOfService {
-	return NSQualityOfService(x.inner.QualityOfService())
+func (x *OperationQueue) QualityOfService() QualityOfService {
+	_r := objc.Send[QualityOfService](objref.IDOf(x), objc.RegisterName("qualityOfService"))
+	return _r
 }
 
-// SetQualityOfService calls the underlying SetQualityOfService.
-func (x *OperationQueue) SetQualityOfService(qualityOfService NSQualityOfService) {
-	x.inner.SetQualityOfService(raw.NSQualityOfService(qualityOfService))
+func (x *OperationQueue) SetQualityOfService(qualityOfService QualityOfService) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQualityOfService:"), qualityOfService)
 }
 
-// UnderlyingQueue calls the underlying UnderlyingQueue.
 func (x *OperationQueue) UnderlyingQueue() *Object {
-	_r := x.inner.UnderlyingQueue()
-	if _r == nil {
-		return nil
-	}
-	return &Object{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("underlyingQueue"))
+	return ObjectFromID(_r)
 }
 
-// SetUnderlyingQueue calls the underlying SetUnderlyingQueue.
-func (x *OperationQueue) SetUnderlyingQueue(underlyingQueue *raw.NSObject) {
-	x.inner.SetUnderlyingQueue(underlyingQueue)
+func (x *OperationQueue) SetUnderlyingQueue(underlyingQueue *Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnderlyingQueue:"), objref.IDOf(underlyingQueue))
 }
 
 // Operations returns the collection as a Go slice.
 func (x *OperationQueue) Operations() []*Operation {
-	arr := x.inner.Operations()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Operation {
-		return &Operation{inner: raw.NSOperationFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("operations"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Operation { return OperationFromID(_id) })
 }
 
-// OperationCount calls the underlying OperationCount.
-func (x *OperationQueue) OperationCount() uint {
-	return x.inner.OperationCount()
+func (x *OperationQueue) OperationCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("operationCount"))
+	return _r
 }
-
-func (x *OperationQueue) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // OperationQueueable is the interface implemented by [OperationQueue], for mocking and DI.
 type OperationQueueable interface {
-	Unwrap() *raw.NSOperationQueue
+	obj.Object
 	WithMaxConcurrentOperationCount(maxConcurrentOperationCount int) *OperationQueue
 	WithSuspended(suspended bool) *OperationQueue
-	WithName(name string) *OperationQueue
-	WithQualityOfService(qualityOfService NSQualityOfService) *OperationQueue
+	WithName(name StringProvider) *OperationQueue
+	WithQualityOfService(qualityOfService QualityOfService) *OperationQueue
 	WithUnderlyingQueue(underlyingQueue ObjectProvider) *OperationQueue
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OperationQueue
-	AddOperation(op *raw.NSOperation)
-	AddOperationsWaitUntilFinished(ops *raw.NSArray[*raw.NSOperation], wait bool)
+	WithScriptingProperties(scriptingProperties obj.Object) *OperationQueue
+	AddOperation(op *Operation)
+	AddOperationsWaitUntilFinished(ops []*Operation, wait bool)
 	AddOperationWith(ctx context.Context) error
 	AddBarrierBlock(ctx context.Context) error
 	CancelAllOperations()
@@ -233,14 +234,14 @@ type OperationQueueable interface {
 	SetMaxConcurrentOperationCount(maxConcurrentOperationCount int)
 	IsSuspended() bool
 	SetSuspended(suspended bool)
-	Name() *String
+	Name() string
 	SetName(name string)
-	QualityOfService() NSQualityOfService
-	SetQualityOfService(qualityOfService NSQualityOfService)
+	QualityOfService() QualityOfService
+	SetQualityOfService(qualityOfService QualityOfService)
 	UnderlyingQueue() *Object
-	SetUnderlyingQueue(underlyingQueue *raw.NSObject)
+	SetUnderlyingQueue(underlyingQueue *Object)
 	Operations() []*Operation
-	OperationCount() uint
+	OperationCount() int
 }
 
 var _ OperationQueueable = (*OperationQueue)(nil)

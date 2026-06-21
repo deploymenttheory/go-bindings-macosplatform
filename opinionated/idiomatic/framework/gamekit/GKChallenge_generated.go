@@ -5,134 +5,136 @@
 package gamekit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A challenge issued by the local player to another player.
 //
-// Challenge wraps [raw.GKChallenge] with a fluent Go API.
+// Challenge is an idiomatic wrapper over the Objective-C class GKChallenge.
 type Challenge struct {
-	inner *raw.GKChallenge
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKChallenge].
-func (x *Challenge) Unwrap() *raw.GKChallenge { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Challenge) ID() objc.ID { return x.inner.Ptr() }
-
-// ChallengeFromID adopts an existing object pointer as a Challenge (nil for 0).
+// ChallengeFromID adopts an existing Objective-C object as a Challenge
+// (nil for 0), retaining it and registering a release finalizer.
 func ChallengeFromID(id objc.ID) *Challenge {
 	if id == 0 {
 		return nil
 	}
-	return &Challenge{inner: raw.GKChallengeFromID(id)}
+	x := &Challenge{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewChallenge creates a new [Challenge].
+// challengeAdopt wraps an Objective-C object that this code just created as a
+// Challenge (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func challengeAdopt(id objc.ID) *Challenge {
+	if id == 0 {
+		return nil
+	}
+	x := &Challenge{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Challenge) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Challenge) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Challenge) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChallenge creates a new Challenge.
 func NewChallenge() *Challenge {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKChallenge")), objc.RegisterName("new"))
-	return &Challenge{inner: raw.GKChallengeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKChallenge")), objc.RegisterName("new"))
+	return challengeAdopt(_id)
 }
 
 // Declines a challenge that another player issues to the local player.
-//
-// Decline calls the underlying Decline.
 func (x *Challenge) Decline() {
-	x.inner.Decline()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("decline"))
 }
 
 // The GKPlayer who issued the challenge
-//
-// IssuingPlayer calls the underlying IssuingPlayer.
 func (x *Challenge) IssuingPlayer() *Player {
-	_r := x.inner.IssuingPlayer()
-	if _r == nil {
-		return nil
-	}
-	return &Player{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuingPlayer"))
+	return PlayerFromID(_r)
 }
 
 // The GKPlayer who has received the challenge
-//
-// ReceivingPlayer calls the underlying ReceivingPlayer.
 func (x *Challenge) ReceivingPlayer() *Player {
-	_r := x.inner.ReceivingPlayer()
-	if _r == nil {
-		return nil
-	}
-	return &Player{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receivingPlayer"))
+	return PlayerFromID(_r)
 }
 
 // Current state of the challenge
-//
-// State calls the underlying State.
-func (x *Challenge) State() GKChallengeState {
-	return GKChallengeState(x.inner.State())
+func (x *Challenge) State() ChallengeState {
+	_r := objc.Send[ChallengeState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
 // Date the challenge was issued
-//
-// IssueDate calls the underlying IssueDate.
-func (x *Challenge) IssueDate() *foundation.NSDate {
-	return x.inner.IssueDate()
+func (x *Challenge) IssueDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issueDate"))
+	return obj.Wrap(_r)
 }
 
 // Date the challenge was completed or aborted
-//
-// CompletionDate calls the underlying CompletionDate.
-func (x *Challenge) CompletionDate() *foundation.NSDate {
-	return x.inner.CompletionDate()
+func (x *Challenge) CompletionDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionDate"))
+	return obj.Wrap(_r)
 }
 
 // The message sent to receivers of this challenge
-//
-// Message calls the underlying Message.
 func (x *Challenge) Message() string {
-	_r := x.inner.Message()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("message"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // * This property is obsolete. **
-//
-// IssuingPlayerID calls the underlying IssuingPlayerID.
 func (x *Challenge) IssuingPlayerID() string {
-	_r := x.inner.IssuingPlayerID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuingPlayerID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // * This property is obsolete. **
-//
-// ReceivingPlayerID calls the underlying ReceivingPlayerID.
 func (x *Challenge) ReceivingPlayerID() string {
-	_r := x.inner.ReceivingPlayerID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("receivingPlayerID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *Challenge) asChallenge() *raw.GKChallenge { return x.inner }
 
 // Challengeable is the interface implemented by [Challenge], for mocking and DI.
 type Challengeable interface {
-	Unwrap() *raw.GKChallenge
+	obj.Object
 	Decline()
 	IssuingPlayer() *Player
 	ReceivingPlayer() *Player
-	State() GKChallengeState
-	IssueDate() *foundation.NSDate
-	CompletionDate() *foundation.NSDate
+	State() ChallengeState
+	IssueDate() obj.Object
+	CompletionDate() obj.Object
 	Message() string
 	IssuingPlayerID() string
 	ReceivingPlayerID() string

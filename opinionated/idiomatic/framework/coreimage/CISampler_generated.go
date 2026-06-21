@@ -5,80 +5,95 @@
 package coreimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that retrieves pixel samples for processing by a filter kernel.
 //
-// Sampler wraps [raw.CISampler] with a fluent Go API.
+// Sampler is an idiomatic wrapper over the Objective-C class CISampler.
 type Sampler struct {
-	inner *raw.CISampler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CISampler].
-func (x *Sampler) Unwrap() *raw.CISampler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Sampler) ID() objc.ID { return x.inner.Ptr() }
-
-// SamplerFromID adopts an existing object pointer as a Sampler (nil for 0).
+// SamplerFromID adopts an existing Objective-C object as a Sampler
+// (nil for 0), retaining it and registering a release finalizer.
 func SamplerFromID(id objc.ID) *Sampler {
 	if id == 0 {
 		return nil
 	}
-	return &Sampler{inner: raw.CISamplerFromID(id)}
+	x := &Sampler{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// samplerAdopt wraps an Objective-C object that this code just created as a
+// Sampler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func samplerAdopt(id objc.ID) *Sampler {
+	if id == 0 {
+		return nil
+	}
+	x := &Sampler{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Sampler) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Sampler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Sampler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a sampler with an image object.
 //
-// NewSamplerWithImage creates a new [Sampler].
-func NewSamplerWithImage(im *raw.CIImage) *Sampler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CISampler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:"), im.Ptr())
-	return &Sampler{inner: raw.CISamplerFromID(_id)}
+// NewSamplerWithImage creates a new Sampler.
+func NewSamplerWithImage(im *Image) *Sampler {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CISampler")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:"), objref.IDOf(im))
+	return samplerAdopt(_id)
 }
 
 // Initializes the sampler with an image object using options specified as key-value pairs.
 //
-// NewSamplerWithImageKeysAndValues creates a new [Sampler].
-func NewSamplerWithImageKeysAndValues(im *raw.CIImage, key0 objc.ID) *Sampler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CISampler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:keysAndValues:"), im.Ptr(), key0)
-	return &Sampler{inner: raw.CISamplerFromID(_id)}
+// NewSamplerWithImageKeysAndValues creates a new Sampler.
+func NewSamplerWithImageKeysAndValues(im *Image, key0 obj.Object) *Sampler {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CISampler")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:keysAndValues:"), objref.IDOf(im), objref.IDOf(key0))
+	return samplerAdopt(_id)
 }
 
 // Initializes the sampler with an image object using options specified in a dictionary.
 //
-// NewSamplerWithImageOptions creates a new [Sampler].
-func NewSamplerWithImageOptions(im *raw.CIImage, dict purego.IDer) *Sampler {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CISampler")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:options:"), im.Ptr(), dict.ID())
-	return &Sampler{inner: raw.CISamplerFromID(_id)}
+// NewSamplerWithImageOptions creates a new Sampler.
+func NewSamplerWithImageOptions(im *Image, dict obj.Object) *Sampler {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CISampler")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithImage:options:"), objref.IDOf(im), objref.IDOf(dict))
+	return samplerAdopt(_id)
 }
 
-// Definition calls the underlying Definition.
 func (x *Sampler) Definition() *FilterShape {
-	_r := x.inner.Definition()
-	if _r == nil {
-		return nil
-	}
-	return &FilterShape{inner: _r}
-}
-
-// Extent calls the underlying Extent.
-func (x *Sampler) Extent() corefoundation.CGRect {
-	return x.inner.Extent()
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("definition"))
+	return FilterShapeFromID(_r)
 }
 
 // Samplerable is the interface implemented by [Sampler], for mocking and DI.
 type Samplerable interface {
-	Unwrap() *raw.CISampler
+	obj.Object
 	Definition() *FilterShape
-	Extent() corefoundation.CGRect
 }
 
 var _ Samplerable = (*Sampler)(nil)

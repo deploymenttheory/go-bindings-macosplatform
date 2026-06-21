@@ -5,41 +5,68 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The type of accessory to display for a selected annotation.
 //
-// SelectionAccessory wraps [raw.MKSelectionAccessory] with a fluent Go API.
+// SelectionAccessory is an idiomatic wrapper over the Objective-C class MKSelectionAccessory.
 type SelectionAccessory struct {
-	inner *raw.MKSelectionAccessory
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKSelectionAccessory].
-func (x *SelectionAccessory) Unwrap() *raw.MKSelectionAccessory { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SelectionAccessory) ID() objc.ID { return x.inner.Ptr() }
-
-// SelectionAccessoryFromID adopts an existing object pointer as a SelectionAccessory (nil for 0).
+// SelectionAccessoryFromID adopts an existing Objective-C object as a SelectionAccessory
+// (nil for 0), retaining it and registering a release finalizer.
 func SelectionAccessoryFromID(id objc.ID) *SelectionAccessory {
 	if id == 0 {
 		return nil
 	}
-	return &SelectionAccessory{inner: raw.MKSelectionAccessoryFromID(id)}
+	x := &SelectionAccessory{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSelectionAccessory creates a new [SelectionAccessory].
+// selectionAccessoryAdopt wraps an Objective-C object that this code just created as a
+// SelectionAccessory (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func selectionAccessoryAdopt(id objc.ID) *SelectionAccessory {
+	if id == 0 {
+		return nil
+	}
+	x := &SelectionAccessory{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SelectionAccessory) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SelectionAccessory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SelectionAccessory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSelectionAccessory creates a new SelectionAccessory.
 func NewSelectionAccessory() *SelectionAccessory {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKSelectionAccessory")), objc.RegisterName("new"))
-	return &SelectionAccessory{inner: raw.MKSelectionAccessoryFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKSelectionAccessory")), objc.RegisterName("new"))
+	return selectionAccessoryAdopt(_id)
 }
 
 // SelectionAccessoryable is the interface implemented by [SelectionAccessory], for mocking and DI.
 type SelectionAccessoryable interface {
-	Unwrap() *raw.MKSelectionAccessory
+	obj.Object
 }
 
 var _ SelectionAccessoryable = (*SelectionAccessory)(nil)

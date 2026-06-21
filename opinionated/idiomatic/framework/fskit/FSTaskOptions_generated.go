@@ -5,64 +5,83 @@
 package fskit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that passes command options to a task, optionally providing security-scoped URLs.
 //
-// TaskOptions wraps [raw.FSTaskOptions] with a fluent Go API.
+// TaskOptions is an idiomatic wrapper over the Objective-C class FSTaskOptions.
 type TaskOptions struct {
-	inner *raw.FSTaskOptions
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSTaskOptions].
-func (x *TaskOptions) Unwrap() *raw.FSTaskOptions { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TaskOptions) ID() objc.ID { return x.inner.Ptr() }
-
-// TaskOptionsFromID adopts an existing object pointer as a TaskOptions (nil for 0).
+// TaskOptionsFromID adopts an existing Objective-C object as a TaskOptions
+// (nil for 0), retaining it and registering a release finalizer.
 func TaskOptionsFromID(id objc.ID) *TaskOptions {
 	if id == 0 {
 		return nil
 	}
-	return &TaskOptions{inner: raw.FSTaskOptionsFromID(id)}
+	x := &TaskOptions{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTaskOptions creates a new [TaskOptions].
+// taskOptionsAdopt wraps an Objective-C object that this code just created as a
+// TaskOptions (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func taskOptionsAdopt(id objc.ID) *TaskOptions {
+	if id == 0 {
+		return nil
+	}
+	x := &TaskOptions{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TaskOptions) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TaskOptions) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TaskOptions) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTaskOptions creates a new TaskOptions.
 func NewTaskOptions() *TaskOptions {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("FSTaskOptions")), objc.RegisterName("new"))
-	return &TaskOptions{inner: raw.FSTaskOptionsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("FSTaskOptions")), objc.RegisterName("new"))
+	return taskOptionsAdopt(_id)
 }
 
 // Retrieves a URL for a given option.
-//
-// UrlForOption calls the underlying UrlForOption.
-func (x *TaskOptions) UrlForOption(option string) *foundation.NSURL {
-	return x.inner.UrlForOption(foundation.NSStringStringWithUTF8String(option))
+func (x *TaskOptions) UrlForOption(option string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("urlForOption:"), purego.NSString(option))
+	return obj.Wrap(_r)
 }
 
 // An array of strings that represent command-line options for the task. This property is equivalent to the `argv` array of C strings passed to a command-line tool.
 //
 // TaskOptions returns the collection as a Go slice.
 func (x *TaskOptions) TaskOptions() []string {
-	arr := x.inner.TaskOptions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("taskOptions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // TaskOptionsable is the interface implemented by [TaskOptions], for mocking and DI.
 type TaskOptionsable interface {
-	Unwrap() *raw.FSTaskOptions
-	UrlForOption(option string) *foundation.NSURL
+	obj.Object
+	UrlForOption(option string) obj.Object
 	TaskOptions() []string
 }
 

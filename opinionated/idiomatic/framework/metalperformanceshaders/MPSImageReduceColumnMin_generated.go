@@ -5,111 +5,76 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A filter that returns the minimum value for each column in an image.
 //
-// ImageReduceColumnMin wraps [raw.MPSImageReduceColumnMin] with a fluent Go API.
+// ImageReduceColumnMin is an idiomatic wrapper over the Objective-C class MPSImageReduceColumnMin.
 type ImageReduceColumnMin struct {
-	inner *raw.MPSImageReduceColumnMin
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageReduceColumnMin].
-func (x *ImageReduceColumnMin) Unwrap() *raw.MPSImageReduceColumnMin { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageReduceColumnMin) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageReduceColumnMinFromID adopts an existing object pointer as a ImageReduceColumnMin (nil for 0).
+// ImageReduceColumnMinFromID adopts an existing Objective-C object as a ImageReduceColumnMin
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageReduceColumnMinFromID(id objc.ID) *ImageReduceColumnMin {
 	if id == 0 {
 		return nil
 	}
-	return &ImageReduceColumnMin{inner: raw.MPSImageReduceColumnMinFromID(id)}
-}
-
-// NewImageReduceColumnMinWithDevice creates a new [ImageReduceColumnMin].
-func NewImageReduceColumnMinWithDevice(device metal.MTLDevice) *ImageReduceColumnMin {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageReduceColumnMin")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageReduceColumnMin{inner: raw.MPSImageReduceColumnMinFromID(_id)}
-}
-
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
-func (x *ImageReduceColumnMin) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMin {
-	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	x := &ImageReduceColumnMin{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageReduceColumnMin) WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMin {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+// imageReduceColumnMinAdopt wraps an Objective-C object that this code just created as a
+// ImageReduceColumnMin (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageReduceColumnMinAdopt(id objc.ID) *ImageReduceColumnMin {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageReduceColumnMin{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageReduceColumnMin) WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMin {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
+// Description returns the object's -description text.
+func (x *ImageReduceColumnMin) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageReduceColumnMin) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceColumnMin {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageReduceColumnMin) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageReduceColumnMin) WithOptions(options mpscore.MPSKernelOptions) *ImageReduceColumnMin {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageReduceColumnMin) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageReduceColumnMin creates a new ImageReduceColumnMin.
+func NewImageReduceColumnMin() *ImageReduceColumnMin {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageReduceColumnMin")), objc.RegisterName("new"))
+	return imageReduceColumnMinAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageReduceColumnMin) WithLabel(label string) *ImageReduceColumnMin {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *ImageReduceColumnMin) asImageReduceUnary() *mpsimage.MPSImageReduceUnary {
-	return &x.inner.MPSImageReduceUnary
-}
-
-func (x *ImageReduceColumnMin) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
-}
-
-func (x *ImageReduceColumnMin) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageReduceColumnMinable is the interface implemented by [ImageReduceColumnMin], for mocking and DI.
 type ImageReduceColumnMinable interface {
-	Unwrap() *raw.MPSImageReduceColumnMin
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceColumnMin
-	WithOffset(offset mpscore.MPSOffset) *ImageReduceColumnMin
-	WithClipRect(clipRect metal.MTLRegion) *ImageReduceColumnMin
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceColumnMin
-	WithOptions(options mpscore.MPSKernelOptions) *ImageReduceColumnMin
+	obj.Object
 	WithLabel(label string) *ImageReduceColumnMin
 }
 

@@ -5,83 +5,84 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that stores gamma and beta terms used to apply a scale and bias in instance- or batch-normalization operations.
 //
-// CNNNormalizationGammaAndBetaState wraps [raw.MPSCNNNormalizationGammaAndBetaState] with a fluent Go API.
+// CNNNormalizationGammaAndBetaState is an idiomatic wrapper over the Objective-C class MPSCNNNormalizationGammaAndBetaState.
 type CNNNormalizationGammaAndBetaState struct {
-	inner *raw.MPSCNNNormalizationGammaAndBetaState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNNormalizationGammaAndBetaState].
-func (x *CNNNormalizationGammaAndBetaState) Unwrap() *raw.MPSCNNNormalizationGammaAndBetaState {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNNormalizationGammaAndBetaState) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNNormalizationGammaAndBetaStateFromID adopts an existing object pointer as a CNNNormalizationGammaAndBetaState (nil for 0).
+// CNNNormalizationGammaAndBetaStateFromID adopts an existing Objective-C object as a CNNNormalizationGammaAndBetaState
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNNormalizationGammaAndBetaStateFromID(id objc.ID) *CNNNormalizationGammaAndBetaState {
 	if id == 0 {
 		return nil
 	}
-	return &CNNNormalizationGammaAndBetaState{inner: raw.MPSCNNNormalizationGammaAndBetaStateFromID(id)}
-}
-
-// @abstract   Initialize a MPSCNNNormalizationGammaAndBetaState object using values contained in MTLBuffers. @param      gamma       The MTLBuffer containing gamma terms. @param      beta        The MTLBuffer containing beta terms.
-//
-// NewCNNNormalizationGammaAndBetaStateWithGammaBeta creates a new [CNNNormalizationGammaAndBetaState].
-func NewCNNNormalizationGammaAndBetaStateWithGammaBeta(gamma metal.MTLBuffer, beta metal.MTLBuffer) *CNNNormalizationGammaAndBetaState {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNNormalizationGammaAndBetaState")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithGamma:beta:"), gamma, beta)
-	return &CNNNormalizationGammaAndBetaState{inner: raw.MPSCNNNormalizationGammaAndBetaStateFromID(_id)}
-}
-
-// WithReadCount sets the readCount property and returns the receiver for chaining.
-func (x *CNNNormalizationGammaAndBetaState) WithReadCount(readCount uint) *CNNNormalizationGammaAndBetaState {
-	x.inner.MPSState.SetReadCount(readCount)
+	x := &CNNNormalizationGammaAndBetaState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// cNNNormalizationGammaAndBetaStateAdopt wraps an Objective-C object that this code just created as a
+// CNNNormalizationGammaAndBetaState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNNormalizationGammaAndBetaStateAdopt(id objc.ID) *CNNNormalizationGammaAndBetaState {
+	if id == 0 {
+		return nil
+	}
+	x := &CNNNormalizationGammaAndBetaState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CNNNormalizationGammaAndBetaState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNNormalizationGammaAndBetaState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNNormalizationGammaAndBetaState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNNormalizationGammaAndBetaState creates a new CNNNormalizationGammaAndBetaState.
+func NewCNNNormalizationGammaAndBetaState() *CNNNormalizationGammaAndBetaState {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNNormalizationGammaAndBetaState")), objc.RegisterName("new"))
+	return cNNNormalizationGammaAndBetaStateAdopt(_id)
+}
+
+// WithReadCount sets readCount and returns the receiver so calls can be chained.
+func (x *CNNNormalizationGammaAndBetaState) WithReadCount(readCount int) *CNNNormalizationGammaAndBetaState {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReadCount:"), readCount)
+	return x
+}
+
+// A string to help identify this object.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *CNNNormalizationGammaAndBetaState) WithLabel(label string) *CNNNormalizationGammaAndBetaState {
-	x.inner.MPSState.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
-
-// @property   gamma @abstract   A MTLBuffer containing the gamma terms.
-//
-// Gamma calls the underlying Gamma.
-func (x *CNNNormalizationGammaAndBetaState) Gamma() metal.MTLBuffer {
-	return x.inner.Gamma()
-}
-
-// @property   beta @abstract   A MTLBuffer containing the beta terms.
-//
-// Beta calls the underlying Beta.
-func (x *CNNNormalizationGammaAndBetaState) Beta() metal.MTLBuffer {
-	return x.inner.Beta()
-}
-
-func (x *CNNNormalizationGammaAndBetaState) asState() *mpscore.MPSState { return &x.inner.MPSState }
 
 // CNNNormalizationGammaAndBetaStateable is the interface implemented by [CNNNormalizationGammaAndBetaState], for mocking and DI.
 type CNNNormalizationGammaAndBetaStateable interface {
-	Unwrap() *raw.MPSCNNNormalizationGammaAndBetaState
-	WithReadCount(readCount uint) *CNNNormalizationGammaAndBetaState
+	obj.Object
+	WithReadCount(readCount int) *CNNNormalizationGammaAndBetaState
 	WithLabel(label string) *CNNNormalizationGammaAndBetaState
-	Gamma() metal.MTLBuffer
-	Beta() metal.MTLBuffer
 }
 
 var _ CNNNormalizationGammaAndBetaStateable = (*CNNNormalizationGammaAndBetaState)(nil)

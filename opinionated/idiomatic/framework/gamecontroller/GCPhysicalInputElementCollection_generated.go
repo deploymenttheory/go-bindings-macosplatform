@@ -5,72 +5,94 @@
 package gamecontroller
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A collection of physical input elements.
 //
-// PhysicalInputElementCollection wraps [raw.GCPhysicalInputElementCollection] with a fluent Go API.
+// PhysicalInputElementCollection is an idiomatic wrapper over the Objective-C class GCPhysicalInputElementCollection.
 type PhysicalInputElementCollection struct {
-	inner *raw.GCPhysicalInputElementCollection[objc.ID, objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCPhysicalInputElementCollection].
-func (x *PhysicalInputElementCollection) Unwrap() *raw.GCPhysicalInputElementCollection[objc.ID, objc.ID] {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PhysicalInputElementCollection) ID() objc.ID { return x.inner.Ptr() }
-
-// PhysicalInputElementCollectionFromID adopts an existing object pointer as a PhysicalInputElementCollection (nil for 0).
+// PhysicalInputElementCollectionFromID adopts an existing Objective-C object as a PhysicalInputElementCollection
+// (nil for 0), retaining it and registering a release finalizer.
 func PhysicalInputElementCollectionFromID(id objc.ID) *PhysicalInputElementCollection {
 	if id == 0 {
 		return nil
 	}
-	return &PhysicalInputElementCollection{inner: raw.GCPhysicalInputElementCollectionFromID[objc.ID, objc.ID](id)}
+	x := &PhysicalInputElementCollection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPhysicalInputElementCollection creates a new [PhysicalInputElementCollection].
+// physicalInputElementCollectionAdopt wraps an Objective-C object that this code just created as a
+// PhysicalInputElementCollection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func physicalInputElementCollectionAdopt(id objc.ID) *PhysicalInputElementCollection {
+	if id == 0 {
+		return nil
+	}
+	x := &PhysicalInputElementCollection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PhysicalInputElementCollection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PhysicalInputElementCollection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PhysicalInputElementCollection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPhysicalInputElementCollection creates a new PhysicalInputElementCollection.
 func NewPhysicalInputElementCollection() *PhysicalInputElementCollection {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCPhysicalInputElementCollection")), objc.RegisterName("new"))
-	return &PhysicalInputElementCollection{inner: raw.GCPhysicalInputElementCollectionFromID[objc.ID, objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCPhysicalInputElementCollection")), objc.RegisterName("new"))
+	return physicalInputElementCollectionAdopt(_id)
 }
 
-// Returns the element associated with a given alias. @param alias The alias for which to return the corresponding element.  Typically, you pass one of the constants defined in \c GCInputNames.h. @return The element associated with \a alias, or nil if no element is associated with \a alias.
-//
-// ElementForAlias calls the underlying ElementForAlias.
-func (x *PhysicalInputElementCollection) ElementForAlias(alias objc.ID) objc.ID {
-	return x.inner.ElementForAlias(alias)
+// Returns the element associated with a given alias.
+func (x *PhysicalInputElementCollection) ElementForAlias(alias obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementForAlias:"), objref.IDOf(alias))
+	return obj.Wrap(_r)
 }
 
-// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
-func (x *PhysicalInputElementCollection) ObjectForKeyedSubscript(key objc.ID) objc.ID {
-	return x.inner.ObjectForKeyedSubscript(key)
+func (x *PhysicalInputElementCollection) ObjectForKeyedSubscript(key obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), objref.IDOf(key))
+	return obj.Wrap(_r)
 }
 
-// ElementEnumerator calls the underlying ElementEnumerator.
-func (x *PhysicalInputElementCollection) ElementEnumerator() *foundation.NSEnumerator[objc.ID] {
-	return x.inner.ElementEnumerator()
+func (x *PhysicalInputElementCollection) ElementEnumerator() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("elementEnumerator"))
+	return obj.Wrap(_r)
 }
 
 // The number of elements in the collection.
-//
-// Count calls the underlying Count.
-func (x *PhysicalInputElementCollection) Count() uint {
-	return x.inner.Count()
+func (x *PhysicalInputElementCollection) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
 }
 
 // PhysicalInputElementCollectionable is the interface implemented by [PhysicalInputElementCollection], for mocking and DI.
 type PhysicalInputElementCollectionable interface {
-	Unwrap() *raw.GCPhysicalInputElementCollection[objc.ID, objc.ID]
-	ElementForAlias(alias objc.ID) objc.ID
-	ObjectForKeyedSubscript(key objc.ID) objc.ID
-	ElementEnumerator() *foundation.NSEnumerator[objc.ID]
-	Count() uint
+	obj.Object
+	ElementForAlias(alias obj.Object) obj.Object
+	ObjectForKeyedSubscript(key obj.Object) obj.Object
+	ElementEnumerator() obj.Object
+	Count() int
 }
 
 var _ PhysicalInputElementCollectionable = (*PhysicalInputElementCollection)(nil)

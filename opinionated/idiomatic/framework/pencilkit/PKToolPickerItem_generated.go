@@ -5,66 +5,83 @@
 package pencilkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pencilkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The base class for an item in the tool picker.
 //
-// ToolPickerItem wraps [raw.PKToolPickerItem] with a fluent Go API.
+// ToolPickerItem is an idiomatic wrapper over the Objective-C class PKToolPickerItem.
 type ToolPickerItem struct {
-	inner *raw.PKToolPickerItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKToolPickerItem].
-func (x *ToolPickerItem) Unwrap() *raw.PKToolPickerItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ToolPickerItem) ID() objc.ID { return x.inner.Ptr() }
-
-// ToolPickerItemFromID adopts an existing object pointer as a ToolPickerItem (nil for 0).
+// ToolPickerItemFromID adopts an existing Objective-C object as a ToolPickerItem
+// (nil for 0), retaining it and registering a release finalizer.
 func ToolPickerItemFromID(id objc.ID) *ToolPickerItem {
 	if id == 0 {
 		return nil
 	}
-	return &ToolPickerItem{inner: raw.PKToolPickerItemFromID(id)}
+	x := &ToolPickerItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewToolPickerItem creates a new [ToolPickerItem].
+// toolPickerItemAdopt wraps an Objective-C object that this code just created as a
+// ToolPickerItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func toolPickerItemAdopt(id objc.ID) *ToolPickerItem {
+	if id == 0 {
+		return nil
+	}
+	x := &ToolPickerItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ToolPickerItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ToolPickerItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ToolPickerItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewToolPickerItem creates a new ToolPickerItem.
 func NewToolPickerItem() *ToolPickerItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKToolPickerItem")), objc.RegisterName("new"))
-	return &ToolPickerItem{inner: raw.PKToolPickerItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKToolPickerItem")), objc.RegisterName("new"))
+	return toolPickerItemAdopt(_id)
 }
 
 // A string that identifies the item in the picker. For example, com.example.myapp.toolpicker.pencil. If multiple items with the same identifier are used to create the picker, only the first instance is used.
-//
-// Identifier calls the underlying Identifier.
 func (x *ToolPickerItem) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The `PKTool` this tool picker item represents.
-//
-// Tool calls the underlying Tool.
 func (x *ToolPickerItem) Tool() *Tool {
-	_r := x.inner.Tool()
-	if _r == nil {
-		return nil
-	}
-	return &Tool{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("tool"))
+	return ToolFromID(_r)
 }
-
-func (x *ToolPickerItem) asToolPickerItem() *raw.PKToolPickerItem { return x.inner }
 
 // ToolPickerItemable is the interface implemented by [ToolPickerItem], for mocking and DI.
 type ToolPickerItemable interface {
-	Unwrap() *raw.PKToolPickerItem
+	obj.Object
 	Identifier() string
 	Tool() *Tool
 }

@@ -5,108 +5,111 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class for managing the units of measure within HealthKit.
 //
-// Unit wraps [raw.HKUnit] with a fluent Go API.
+// Unit is an idiomatic wrapper over the Objective-C class HKUnit.
 type Unit struct {
-	inner *raw.HKUnit
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKUnit].
-func (x *Unit) Unwrap() *raw.HKUnit { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Unit) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitFromID adopts an existing object pointer as a Unit (nil for 0).
+// UnitFromID adopts an existing Objective-C object as a Unit
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitFromID(id objc.ID) *Unit {
 	if id == 0 {
 		return nil
 	}
-	return &Unit{inner: raw.HKUnitFromID(id)}
+	x := &Unit{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewUnit creates a new [Unit].
+// unitAdopt wraps an Objective-C object that this code just created as a
+// Unit (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitAdopt(id objc.ID) *Unit {
+	if id == 0 {
+		return nil
+	}
+	x := &Unit{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Unit) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Unit) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Unit) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUnit creates a new Unit.
 func NewUnit() *Unit {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKUnit")), objc.RegisterName("new"))
-	return &Unit{inner: raw.HKUnitFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKUnit")), objc.RegisterName("new"))
+	return unitAdopt(_id)
 }
 
 // Returns a Boolean value indicating whether the unit is null.
-//
-// IsNull calls the underlying IsNull.
 func (x *Unit) IsNull() bool {
-	return x.inner.IsNull()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isNull"))
+	return _r
 }
 
 // Returns a unique string representation for the unit that could be used with +unitFromString:
-//
-// UnitString calls the underlying UnitString.
 func (x *Unit) UnitString() string {
-	_r := x.inner.UnitString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Creates a complex unit by multiplying the receiving unit with another unit.
-//
-// UnitMultipliedByUnit calls the underlying UnitMultipliedByUnit.
-func (x *Unit) UnitMultipliedByUnit(unit *raw.HKUnit) *Unit {
-	_r := x.inner.UnitMultipliedByUnit(unit)
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+func (x *Unit) UnitMultipliedByUnit(unit *Unit) *Unit {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitMultipliedByUnit:"), objref.IDOf(unit))
+	return UnitFromID(_r)
 }
 
 // Creates a complex unit by dividing the receiving unit by another unit.
-//
-// UnitDividedByUnit calls the underlying UnitDividedByUnit.
-func (x *Unit) UnitDividedByUnit(unit *raw.HKUnit) *Unit {
-	_r := x.inner.UnitDividedByUnit(unit)
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+func (x *Unit) UnitDividedByUnit(unit *Unit) *Unit {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitDividedByUnit:"), objref.IDOf(unit))
+	return UnitFromID(_r)
 }
 
 // Creates a complex unit by raising the unit to the given power.
-//
-// UnitRaisedToPower calls the underlying UnitRaisedToPower.
 func (x *Unit) UnitRaisedToPower(power int) *Unit {
-	_r := x.inner.UnitRaisedToPower(power)
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unitRaisedToPower:"), power)
+	return UnitFromID(_r)
 }
 
 // Returns a complex unit representing the unit’s reciprocal.
-//
-// ReciprocalUnit calls the underlying ReciprocalUnit.
 func (x *Unit) ReciprocalUnit() *Unit {
-	_r := x.inner.ReciprocalUnit()
-	if _r == nil {
-		return nil
-	}
-	return &Unit{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reciprocalUnit"))
+	return UnitFromID(_r)
 }
 
 // Unitable is the interface implemented by [Unit], for mocking and DI.
 type Unitable interface {
-	Unwrap() *raw.HKUnit
+	obj.Object
 	IsNull() bool
 	UnitString() string
-	UnitMultipliedByUnit(unit *raw.HKUnit) *Unit
-	UnitDividedByUnit(unit *raw.HKUnit) *Unit
+	UnitMultipliedByUnit(unit *Unit) *Unit
+	UnitDividedByUnit(unit *Unit) *Unit
 	UnitRaisedToPower(power int) *Unit
 	ReciprocalUnit() *Unit
 }

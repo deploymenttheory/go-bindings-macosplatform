@@ -5,107 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRThermostatClusterSetActiveScheduleRequestParams wraps [raw.MTRThermostatClusterSetActiveScheduleRequestParams] with a fluent Go API.
+// MTRThermostatClusterSetActiveScheduleRequestParams is an idiomatic wrapper over the Objective-C class MTRThermostatClusterSetActiveScheduleRequestParams.
 type MTRThermostatClusterSetActiveScheduleRequestParams struct {
-	inner *raw.MTRThermostatClusterSetActiveScheduleRequestParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRThermostatClusterSetActiveScheduleRequestParams].
-func (x *MTRThermostatClusterSetActiveScheduleRequestParams) Unwrap() *raw.MTRThermostatClusterSetActiveScheduleRequestParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRThermostatClusterSetActiveScheduleRequestParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRThermostatClusterSetActiveScheduleRequestParamsFromID adopts an existing object pointer as a MTRThermostatClusterSetActiveScheduleRequestParams (nil for 0).
+// MTRThermostatClusterSetActiveScheduleRequestParamsFromID adopts an existing Objective-C object as a MTRThermostatClusterSetActiveScheduleRequestParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRThermostatClusterSetActiveScheduleRequestParamsFromID(id objc.ID) *MTRThermostatClusterSetActiveScheduleRequestParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRThermostatClusterSetActiveScheduleRequestParams{inner: raw.MTRThermostatClusterSetActiveScheduleRequestParamsFromID(id)}
+	x := &MTRThermostatClusterSetActiveScheduleRequestParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRThermostatClusterSetActiveScheduleRequestParams creates a new [MTRThermostatClusterSetActiveScheduleRequestParams].
+// mTRThermostatClusterSetActiveScheduleRequestParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRThermostatClusterSetActiveScheduleRequestParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRThermostatClusterSetActiveScheduleRequestParamsAdopt(id objc.ID) *MTRThermostatClusterSetActiveScheduleRequestParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRThermostatClusterSetActiveScheduleRequestParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRThermostatClusterSetActiveScheduleRequestParams creates a new MTRThermostatClusterSetActiveScheduleRequestParams.
 func NewMTRThermostatClusterSetActiveScheduleRequestParams() *MTRThermostatClusterSetActiveScheduleRequestParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRThermostatClusterSetActiveScheduleRequestParams")), objc.RegisterName("new"))
-	return &MTRThermostatClusterSetActiveScheduleRequestParams{inner: raw.MTRThermostatClusterSetActiveScheduleRequestParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRThermostatClusterSetActiveScheduleRequestParams")), objc.RegisterName("new"))
+	return mTRThermostatClusterSetActiveScheduleRequestParamsAdopt(_id)
 }
 
-// WithScheduleHandle sets the scheduleHandle property and returns the receiver for chaining.
-func (x *MTRThermostatClusterSetActiveScheduleRequestParams) WithScheduleHandle(scheduleHandle *foundation.NSData) *MTRThermostatClusterSetActiveScheduleRequestParams {
-	x.inner.SetScheduleHandle(scheduleHandle)
+// WithScheduleHandle sets scheduleHandle and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) WithScheduleHandle(scheduleHandle obj.Object) *MTRThermostatClusterSetActiveScheduleRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScheduleHandle:"), objref.IDOf(scheduleHandle))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke).
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRThermostatClusterSetActiveScheduleRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterSetActiveScheduleRequestParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterSetActiveScheduleRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRThermostatClusterSetActiveScheduleRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterSetActiveScheduleRequestParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterSetActiveScheduleRequestParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// ScheduleHandle calls the underlying ScheduleHandle.
-func (x *MTRThermostatClusterSetActiveScheduleRequestParams) ScheduleHandle() *foundation.NSData {
-	return x.inner.ScheduleHandle()
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) ScheduleHandle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleHandle"))
+	return obj.Wrap(_r)
 }
 
-// SetScheduleHandle calls the underlying SetScheduleHandle.
-func (x *MTRThermostatClusterSetActiveScheduleRequestParams) SetScheduleHandle(scheduleHandle *foundation.NSData) {
-	x.inner.SetScheduleHandle(scheduleHandle)
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) SetScheduleHandle(scheduleHandle obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScheduleHandle:"), objref.IDOf(scheduleHandle))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRThermostatClusterSetActiveScheduleRequestParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRThermostatClusterSetActiveScheduleRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRThermostatClusterSetActiveScheduleRequestParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRThermostatClusterSetActiveScheduleRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRThermostatClusterSetActiveScheduleRequestParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRThermostatClusterSetActiveScheduleRequestParamsable is the interface implemented by [MTRThermostatClusterSetActiveScheduleRequestParams], for mocking and DI.
 type MTRThermostatClusterSetActiveScheduleRequestParamsable interface {
-	Unwrap() *raw.MTRThermostatClusterSetActiveScheduleRequestParams
-	WithScheduleHandle(scheduleHandle *foundation.NSData) *MTRThermostatClusterSetActiveScheduleRequestParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRThermostatClusterSetActiveScheduleRequestParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRThermostatClusterSetActiveScheduleRequestParams
-	ScheduleHandle() *foundation.NSData
-	SetScheduleHandle(scheduleHandle *foundation.NSData)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithScheduleHandle(scheduleHandle obj.Object) *MTRThermostatClusterSetActiveScheduleRequestParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRThermostatClusterSetActiveScheduleRequestParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRThermostatClusterSetActiveScheduleRequestParams
+	ScheduleHandle() obj.Object
+	SetScheduleHandle(scheduleHandle obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRThermostatClusterSetActiveScheduleRequestParamsable = (*MTRThermostatClusterSetActiveScheduleRequestParams)(nil)

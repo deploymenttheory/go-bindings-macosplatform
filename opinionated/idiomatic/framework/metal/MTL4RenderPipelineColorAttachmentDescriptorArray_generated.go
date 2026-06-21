@@ -5,70 +5,86 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An array of color attachment descriptions for a render pipeline.
 //
-// MTL4RenderPipelineColorAttachmentDescriptorArray wraps [raw.MTL4RenderPipelineColorAttachmentDescriptorArray] with a fluent Go API.
+// MTL4RenderPipelineColorAttachmentDescriptorArray is an idiomatic wrapper over the Objective-C class MTL4RenderPipelineColorAttachmentDescriptorArray.
 type MTL4RenderPipelineColorAttachmentDescriptorArray struct {
-	inner *raw.MTL4RenderPipelineColorAttachmentDescriptorArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTL4RenderPipelineColorAttachmentDescriptorArray].
-func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) Unwrap() *raw.MTL4RenderPipelineColorAttachmentDescriptorArray {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) ID() objc.ID { return x.inner.Ptr() }
-
-// MTL4RenderPipelineColorAttachmentDescriptorArrayFromID adopts an existing object pointer as a MTL4RenderPipelineColorAttachmentDescriptorArray (nil for 0).
+// MTL4RenderPipelineColorAttachmentDescriptorArrayFromID adopts an existing Objective-C object as a MTL4RenderPipelineColorAttachmentDescriptorArray
+// (nil for 0), retaining it and registering a release finalizer.
 func MTL4RenderPipelineColorAttachmentDescriptorArrayFromID(id objc.ID) *MTL4RenderPipelineColorAttachmentDescriptorArray {
 	if id == 0 {
 		return nil
 	}
-	return &MTL4RenderPipelineColorAttachmentDescriptorArray{inner: raw.MTL4RenderPipelineColorAttachmentDescriptorArrayFromID(id)}
+	x := &MTL4RenderPipelineColorAttachmentDescriptorArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTL4RenderPipelineColorAttachmentDescriptorArray creates a new [MTL4RenderPipelineColorAttachmentDescriptorArray].
+// mTL4RenderPipelineColorAttachmentDescriptorArrayAdopt wraps an Objective-C object that this code just created as a
+// MTL4RenderPipelineColorAttachmentDescriptorArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTL4RenderPipelineColorAttachmentDescriptorArrayAdopt(id objc.ID) *MTL4RenderPipelineColorAttachmentDescriptorArray {
+	if id == 0 {
+		return nil
+	}
+	x := &MTL4RenderPipelineColorAttachmentDescriptorArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTL4RenderPipelineColorAttachmentDescriptorArray creates a new MTL4RenderPipelineColorAttachmentDescriptorArray.
 func NewMTL4RenderPipelineColorAttachmentDescriptorArray() *MTL4RenderPipelineColorAttachmentDescriptorArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTL4RenderPipelineColorAttachmentDescriptorArray")), objc.RegisterName("new"))
-	return &MTL4RenderPipelineColorAttachmentDescriptorArray{inner: raw.MTL4RenderPipelineColorAttachmentDescriptorArrayFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTL4RenderPipelineColorAttachmentDescriptorArray")), objc.RegisterName("new"))
+	return mTL4RenderPipelineColorAttachmentDescriptorArrayAdopt(_id)
 }
 
 // Accesses a color attachment at a specific index.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex uint) *MTL4RenderPipelineColorAttachmentDescriptor {
-	_r := x.inner.ObjectAtIndexedSubscript(attachmentIndex)
-	if _r == nil {
-		return nil
-	}
-	return &MTL4RenderPipelineColorAttachmentDescriptor{inner: _r}
+func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) ObjectAtIndexedSubscript(attachmentIndex int) *MTL4RenderPipelineColorAttachmentDescriptor {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), attachmentIndex)
+	return MTL4RenderPipelineColorAttachmentDescriptorFromID(_r)
 }
 
 // Sets an attachment at an index.
-//
-// SetObjectAtIndexedSubscript calls the underlying SetObjectAtIndexedSubscript.
-func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *raw.MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex uint) {
-	x.inner.SetObjectAtIndexedSubscript(attachment, attachmentIndex)
+func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) SetObjectAtIndexedSubscript(attachment *MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObject:atIndexedSubscript:"), objref.IDOf(attachment), attachmentIndex)
 }
 
 // Resets the elements of the descriptor array
-//
-// Reset calls the underlying Reset.
 func (x *MTL4RenderPipelineColorAttachmentDescriptorArray) Reset() {
-	x.inner.Reset()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("reset"))
 }
 
 // MTL4RenderPipelineColorAttachmentDescriptorArrayable is the interface implemented by [MTL4RenderPipelineColorAttachmentDescriptorArray], for mocking and DI.
 type MTL4RenderPipelineColorAttachmentDescriptorArrayable interface {
-	Unwrap() *raw.MTL4RenderPipelineColorAttachmentDescriptorArray
-	ObjectAtIndexedSubscript(attachmentIndex uint) *MTL4RenderPipelineColorAttachmentDescriptor
-	SetObjectAtIndexedSubscript(attachment *raw.MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex uint)
+	obj.Object
+	ObjectAtIndexedSubscript(attachmentIndex int) *MTL4RenderPipelineColorAttachmentDescriptor
+	SetObjectAtIndexedSubscript(attachment *MTL4RenderPipelineColorAttachmentDescriptor, attachmentIndex int)
 	Reset()
 }
 

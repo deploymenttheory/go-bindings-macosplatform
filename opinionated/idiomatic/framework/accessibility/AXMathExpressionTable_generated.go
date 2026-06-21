@@ -5,69 +5,73 @@
 package accessibility
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/accessibility"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MathExpressionTable wraps [raw.AXMathExpressionTable] with a fluent Go API.
+// MathExpressionTable is an idiomatic wrapper over the Objective-C class AXMathExpressionTable.
 type MathExpressionTable struct {
-	inner *raw.AXMathExpressionTable
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AXMathExpressionTable].
-func (x *MathExpressionTable) Unwrap() *raw.AXMathExpressionTable { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MathExpressionTable) ID() objc.ID { return x.inner.Ptr() }
-
-// MathExpressionTableFromID adopts an existing object pointer as a MathExpressionTable (nil for 0).
+// MathExpressionTableFromID adopts an existing Objective-C object as a MathExpressionTable
+// (nil for 0), retaining it and registering a release finalizer.
 func MathExpressionTableFromID(id objc.ID) *MathExpressionTable {
 	if id == 0 {
 		return nil
 	}
-	return &MathExpressionTable{inner: raw.AXMathExpressionTableFromID(id)}
+	x := &MathExpressionTable{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMathExpressionTableWithExpressions creates a new [MathExpressionTable].
-func NewMathExpressionTableWithExpressions(expressions ...MathExpressionProvider) *MathExpressionTable {
-	_ptrs := make([]objc.ID, len(expressions))
-	for _i, _v := range expressions {
-		_ptrs[_i] = _v.asMathExpression().Ptr()
+// mathExpressionTableAdopt wraps an Objective-C object that this code just created as a
+// MathExpressionTable (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mathExpressionTableAdopt(id objc.ID) *MathExpressionTable {
+	if id == 0 {
+		return nil
 	}
-	var _arg0 *foundation.NSArray[*raw.AXMathExpression]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.AXMathExpression](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.AXMathExpression](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
+	x := &MathExpressionTable{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
 
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AXMathExpressionTable")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExpressions:"), _arg0.Ptr())
-	return &MathExpressionTable{inner: raw.AXMathExpressionTableFromID(_id)}
+// Description returns the object's -description text.
+func (x *MathExpressionTable) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MathExpressionTable) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MathExpressionTable) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMathExpressionTableWithExpressions creates a new MathExpressionTable.
+func NewMathExpressionTableWithExpressions(expressions []*MathExpression) *MathExpressionTable {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AXMathExpressionTable")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExpressions:"), purego.SliceToNSArray(expressions, func(_v *MathExpression) objc.ID { return objref.IDOf(_v) }))
+	return mathExpressionTableAdopt(_id)
 }
 
 // Expressions returns the collection as a Go slice.
 func (x *MathExpressionTable) Expressions() []*MathExpression {
-	arr := x.inner.Expressions()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *MathExpression {
-		return &MathExpression{inner: raw.AXMathExpressionFromID(purego.Retain(_id))}
-	})
-}
-
-func (x *MathExpressionTable) asMathExpression() *raw.AXMathExpression {
-	return &x.inner.AXMathExpression
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("expressions"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *MathExpression { return MathExpressionFromID(_id) })
 }
 
 // MathExpressionTableable is the interface implemented by [MathExpressionTable], for mocking and DI.
 type MathExpressionTableable interface {
-	Unwrap() *raw.AXMathExpressionTable
+	obj.Object
 	Expressions() []*MathExpression
 }
 

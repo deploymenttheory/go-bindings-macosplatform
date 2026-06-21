@@ -5,111 +5,75 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An interface that may be sent to an exported object or remote object proxy.
 //
-// XPCInterface wraps [raw.NSXPCInterface] with a fluent Go API.
+// XPCInterface is an idiomatic wrapper over the Objective-C class NSXPCInterface.
 type XPCInterface struct {
-	inner *raw.NSXPCInterface
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSXPCInterface].
-func (x *XPCInterface) Unwrap() *raw.NSXPCInterface { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *XPCInterface) ID() objc.ID { return x.inner.Ptr() }
-
-// XPCInterfaceFromID adopts an existing object pointer as a XPCInterface (nil for 0).
+// XPCInterfaceFromID adopts an existing Objective-C object as a XPCInterface
+// (nil for 0), retaining it and registering a release finalizer.
 func XPCInterfaceFromID(id objc.ID) *XPCInterface {
 	if id == 0 {
 		return nil
 	}
-	return &XPCInterface{inner: raw.NSXPCInterfaceFromID(id)}
-}
-
-// NewXPCInterface creates a new [XPCInterface].
-func NewXPCInterface() *XPCInterface {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXPCInterface")), objc.RegisterName("new"))
-	return &XPCInterface{inner: raw.NSXPCInterfaceFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *XPCInterface) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCInterface {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &XPCInterface{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Sets the classes that can appear within the (numerically) specified collection object argument to the specified method.
-//
-// SetClassesForSelectorArgumentIndexOfReply calls the underlying SetClassesForSelectorArgumentIndexOfReply.
-func (x *XPCInterface) SetClassesForSelectorArgumentIndexOfReply(classes *raw.NSSet[objc.Class], sel objc.SEL, arg uint, ofReply bool) {
-	x.inner.SetClassesForSelectorArgumentIndexOfReply(classes, sel, arg, ofReply)
-}
-
-// Returns the current list of allowed classes that can appear within the specified collection object argument to the specified method.
-//
-// ClassesForSelectorArgumentIndexOfReply calls the underlying ClassesForSelectorArgumentIndexOfReply.
-func (x *XPCInterface) ClassesForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *raw.NSSet[objc.Class] {
-	return x.inner.ClassesForSelectorArgumentIndexOfReply(sel, arg, ofReply)
-}
-
-// Configures a specific parameter of a method to be sent as a proxy object instead of copied.
-//
-// SetInterfaceForSelectorArgumentIndexOfReply calls the underlying SetInterfaceForSelectorArgumentIndexOfReply.
-func (x *XPCInterface) SetInterfaceForSelectorArgumentIndexOfReply(ifc *raw.NSXPCInterface, sel objc.SEL, arg uint, ofReply bool) {
-	x.inner.SetInterfaceForSelectorArgumentIndexOfReply(ifc, sel, arg, ofReply)
-}
-
-// Returns the interface previously set for the specified selector and parameter.
-//
-// InterfaceForSelectorArgumentIndexOfReply calls the underlying InterfaceForSelectorArgumentIndexOfReply.
-func (x *XPCInterface) InterfaceForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *XPCInterface {
-	_r := x.inner.InterfaceForSelectorArgumentIndexOfReply(sel, arg, ofReply)
-	if _r == nil {
+// xPCInterfaceAdopt wraps an Objective-C object that this code just created as a
+// XPCInterface (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func xPCInterfaceAdopt(id objc.ID) *XPCInterface {
+	if id == 0 {
 		return nil
 	}
-	return &XPCInterface{inner: _r}
+	x := &XPCInterface{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetXPCTypeForSelectorArgumentIndexOfReply calls the underlying SetXPCTypeForSelectorArgumentIndexOfReply.
-func (x *XPCInterface) SetXPCTypeForSelectorArgumentIndexOfReply(type_ unsafe.Pointer, sel objc.SEL, arg uint, ofReply bool) {
-	x.inner.SetXPCTypeForSelectorArgumentIndexOfReply(type_, sel, arg, ofReply)
+// Description returns the object's -description text.
+func (x *XPCInterface) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// XPCTypeForSelectorArgumentIndexOfReply calls the underlying XPCTypeForSelectorArgumentIndexOfReply.
-func (x *XPCInterface) XPCTypeForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) unsafe.Pointer {
-	return x.inner.XPCTypeForSelectorArgumentIndexOfReply(sel, arg, ofReply)
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *XPCInterface) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// Protocol calls the underlying Protocol.
-func (x *XPCInterface) Protocol() unsafe.Pointer {
-	return x.inner.Protocol()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *XPCInterface) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// SetProtocol calls the underlying SetProtocol.
-func (x *XPCInterface) SetProtocol(protocol unsafe.Pointer) {
-	x.inner.SetProtocol(protocol)
+// NewXPCInterface creates a new XPCInterface.
+func NewXPCInterface() *XPCInterface {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSXPCInterface")), objc.RegisterName("new"))
+	return xPCInterfaceAdopt(_id)
 }
 
-func (x *XPCInterface) asObject() *raw.NSObject { return &x.inner.NSObject }
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *XPCInterface) WithScriptingProperties(scriptingProperties obj.Object) *XPCInterface {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // XPCInterfaceable is the interface implemented by [XPCInterface], for mocking and DI.
 type XPCInterfaceable interface {
-	Unwrap() *raw.NSXPCInterface
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCInterface
-	SetClassesForSelectorArgumentIndexOfReply(classes *raw.NSSet[objc.Class], sel objc.SEL, arg uint, ofReply bool)
-	ClassesForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *raw.NSSet[objc.Class]
-	SetInterfaceForSelectorArgumentIndexOfReply(ifc *raw.NSXPCInterface, sel objc.SEL, arg uint, ofReply bool)
-	InterfaceForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) *XPCInterface
-	SetXPCTypeForSelectorArgumentIndexOfReply(type_ unsafe.Pointer, sel objc.SEL, arg uint, ofReply bool)
-	XPCTypeForSelectorArgumentIndexOfReply(sel objc.SEL, arg uint, ofReply bool) unsafe.Pointer
-	Protocol() unsafe.Pointer
-	SetProtocol(protocol unsafe.Pointer)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *XPCInterface
 }
 
 var _ XPCInterfaceable = (*XPCInterface)(nil)

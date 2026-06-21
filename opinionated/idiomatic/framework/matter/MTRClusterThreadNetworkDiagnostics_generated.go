@@ -5,505 +5,496 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterThreadNetworkDiagnostics wraps [raw.MTRClusterThreadNetworkDiagnostics] with a fluent Go API.
+// MTRClusterThreadNetworkDiagnostics is an idiomatic wrapper over the Objective-C class MTRClusterThreadNetworkDiagnostics.
 type MTRClusterThreadNetworkDiagnostics struct {
-	inner *raw.MTRClusterThreadNetworkDiagnostics
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterThreadNetworkDiagnostics].
-func (x *MTRClusterThreadNetworkDiagnostics) Unwrap() *raw.MTRClusterThreadNetworkDiagnostics {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterThreadNetworkDiagnostics) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterThreadNetworkDiagnosticsFromID adopts an existing object pointer as a MTRClusterThreadNetworkDiagnostics (nil for 0).
+// MTRClusterThreadNetworkDiagnosticsFromID adopts an existing Objective-C object as a MTRClusterThreadNetworkDiagnostics
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterThreadNetworkDiagnosticsFromID(id objc.ID) *MTRClusterThreadNetworkDiagnostics {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterThreadNetworkDiagnostics{inner: raw.MTRClusterThreadNetworkDiagnosticsFromID(id)}
+	x := &MTRClusterThreadNetworkDiagnostics{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterThreadNetworkDiagnosticsAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterThreadNetworkDiagnostics (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterThreadNetworkDiagnosticsAdopt(id objc.ID) *MTRClusterThreadNetworkDiagnostics {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterThreadNetworkDiagnostics{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterThreadNetworkDiagnostics) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterThreadNetworkDiagnostics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterThreadNetworkDiagnostics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new [MTRClusterThreadNetworkDiagnostics].
-func NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterThreadNetworkDiagnostics {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterThreadNetworkDiagnostics{inner: raw.MTRClusterThreadNetworkDiagnosticsFromID(_id)}
+// NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue creates a new MTRClusterThreadNetworkDiagnostics.
+func NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterThreadNetworkDiagnostics {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterThreadNetworkDiagnosticsAdopt(_id)
 }
 
-// NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue creates a new [MTRClusterThreadNetworkDiagnostics].
-func NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterThreadNetworkDiagnostics {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterThreadNetworkDiagnostics{inner: raw.MTRClusterThreadNetworkDiagnosticsFromID(_id)}
+// NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue creates a new MTRClusterThreadNetworkDiagnostics.
+func NewMTRClusterThreadNetworkDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterThreadNetworkDiagnostics {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThreadNetworkDiagnostics")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterThreadNetworkDiagnosticsAdopt(_id)
 }
 
-// ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterThreadNetworkDiagnostics) ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeChannelWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ResetCountsWithExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetCountsWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterThreadNetworkDiagnostics) ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRoutingRoleWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeChannelWithParams calls the underlying ReadAttributeChannelWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeChannelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeChannelWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNetworkNameWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRoutingRoleWithParams calls the underlying ReadAttributeRoutingRoleWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRoutingRoleWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRoutingRoleWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributePanIdWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePanIdWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeNetworkNameWithParams calls the underlying ReadAttributeNetworkNameWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeNetworkNameWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeNetworkNameWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIdWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeExtendedPanIdWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePanIdWithParams calls the underlying ReadAttributePanIdWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributePanIdWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePanIdWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeMeshLocalPrefixWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeExtendedPanIdWithParams calls the underlying ReadAttributeExtendedPanIdWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeExtendedPanIdWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeExtendedPanIdWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOverrunCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeMeshLocalPrefixWithParams calls the underlying ReadAttributeMeshLocalPrefixWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeMeshLocalPrefixWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeMeshLocalPrefixWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNeighborTableWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeOverrunCountWithParams calls the underlying ReadAttributeOverrunCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeOverrunCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOverrunCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouteTableWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeNeighborTableWithParams calls the underlying ReadAttributeNeighborTableWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeNeighborTableWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributePartitionIdWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartitionIdWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRouteTableWithParams calls the underlying ReadAttributeRouteTableWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouteTableWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRouteTableWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeWeightingWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePartitionIdWithParams calls the underlying ReadAttributePartitionIdWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributePartitionIdWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePartitionIdWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDataVersionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeWeightingWithParams calls the underlying ReadAttributeWeightingWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeWeightingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeWeightingWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeStableDataVersionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeDataVersionWithParams calls the underlying ReadAttributeDataVersionWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeDataVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDataVersionWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIdWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLeaderRouterIdWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeStableDataVersionWithParams calls the underlying ReadAttributeStableDataVersionWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeStableDataVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeStableDataVersionWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDetachedRoleCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeLeaderRouterIdWithParams calls the underlying ReadAttributeLeaderRouterIdWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeLeaderRouterIdWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLeaderRouterIdWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChildRoleCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeDetachedRoleCountWithParams calls the underlying ReadAttributeDetachedRoleCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeDetachedRoleCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDetachedRoleCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouterRoleCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeChildRoleCountWithParams calls the underlying ReadAttributeChildRoleCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeChildRoleCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeChildRoleCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeLeaderRoleCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRouterRoleCountWithParams calls the underlying ReadAttributeRouterRoleCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouterRoleCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRouterRoleCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttachAttemptCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeLeaderRoleCountWithParams calls the underlying ReadAttributeLeaderRoleCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeLeaderRoleCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeLeaderRoleCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePartitionIdChangeCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttachAttemptCountWithParams calls the underlying ReadAttributeAttachAttemptCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeAttachAttemptCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttachAttemptCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeBetterPartitionAttachAttemptCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePartitionIdChangeCountWithParams calls the underlying ReadAttributePartitionIdChangeCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributePartitionIdChangeCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePartitionIdChangeCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeParentChangeCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeBetterPartitionAttachAttemptCountWithParams calls the underlying ReadAttributeBetterPartitionAttachAttemptCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeBetterPartitionAttachAttemptCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeBetterPartitionAttachAttemptCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxTotalCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeParentChangeCountWithParams calls the underlying ReadAttributeParentChangeCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeParentChangeCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeParentChangeCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxUnicastCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxTotalCountWithParams calls the underlying ReadAttributeTxTotalCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxTotalCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxTotalCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBroadcastCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxUnicastCountWithParams calls the underlying ReadAttributeTxUnicastCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxUnicastCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxUnicastCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxAckRequestedCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxBroadcastCountWithParams calls the underlying ReadAttributeTxBroadcastCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBroadcastCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxBroadcastCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxAckedCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxAckRequestedCountWithParams calls the underlying ReadAttributeTxAckRequestedCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxAckRequestedCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxAckRequestedCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxNoAckRequestedCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxAckedCountWithParams calls the underlying ReadAttributeTxAckedCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxAckedCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxAckedCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDataCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxNoAckRequestedCountWithParams calls the underlying ReadAttributeTxNoAckRequestedCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxNoAckRequestedCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxNoAckRequestedCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDataPollCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxDataCountWithParams calls the underlying ReadAttributeTxDataCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDataCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxDataCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBeaconCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxDataPollCountWithParams calls the underlying ReadAttributeTxDataPollCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDataPollCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxDataPollCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxBeaconRequestCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxBeaconCountWithParams calls the underlying ReadAttributeTxBeaconCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxBeaconCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxOtherCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxBeaconRequestCountWithParams calls the underlying ReadAttributeTxBeaconRequestCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxBeaconRequestCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxBeaconRequestCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxRetryCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxOtherCountWithParams calls the underlying ReadAttributeTxOtherCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxOtherCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxOtherCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxDirectMaxRetryExpiryCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxRetryCountWithParams calls the underlying ReadAttributeTxRetryCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxRetryCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxRetryCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxIndirectMaxRetryExpiryCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxDirectMaxRetryExpiryCountWithParams calls the underlying ReadAttributeTxDirectMaxRetryExpiryCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxDirectMaxRetryExpiryCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxDirectMaxRetryExpiryCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrCcaCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxIndirectMaxRetryExpiryCountWithParams calls the underlying ReadAttributeTxIndirectMaxRetryExpiryCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxIndirectMaxRetryExpiryCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxIndirectMaxRetryExpiryCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrAbortCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxErrCcaCountWithParams calls the underlying ReadAttributeTxErrCcaCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrCcaCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxErrCcaCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeTxErrBusyChannelCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxErrAbortCountWithParams calls the underlying ReadAttributeTxErrAbortCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrAbortCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxErrAbortCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxTotalCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeTxErrBusyChannelCountWithParams calls the underlying ReadAttributeTxErrBusyChannelCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeTxErrBusyChannelCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeTxErrBusyChannelCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxUnicastCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxTotalCountWithParams calls the underlying ReadAttributeRxTotalCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxTotalCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxTotalCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBroadcastCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxUnicastCountWithParams calls the underlying ReadAttributeRxUnicastCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxUnicastCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxUnicastCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDataCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxBroadcastCountWithParams calls the underlying ReadAttributeRxBroadcastCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBroadcastCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxBroadcastCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDataPollCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxDataCountWithParams calls the underlying ReadAttributeRxDataCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDataCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxDataCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBeaconCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxDataPollCountWithParams calls the underlying ReadAttributeRxDataPollCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDataPollCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxDataPollCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxBeaconRequestCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxBeaconCountWithParams calls the underlying ReadAttributeRxBeaconCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxBeaconCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxOtherCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxBeaconRequestCountWithParams calls the underlying ReadAttributeRxBeaconRequestCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxBeaconRequestCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxBeaconRequestCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxAddressFilteredCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxOtherCountWithParams calls the underlying ReadAttributeRxOtherCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxOtherCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxOtherCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDestAddrFilteredCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxAddressFilteredCountWithParams calls the underlying ReadAttributeRxAddressFilteredCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxAddressFilteredCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxAddressFilteredCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxDuplicatedCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxDestAddrFilteredCountWithParams calls the underlying ReadAttributeRxDestAddrFilteredCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDestAddrFilteredCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxDestAddrFilteredCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrNoFrameCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxDuplicatedCountWithParams calls the underlying ReadAttributeRxDuplicatedCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxDuplicatedCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxDuplicatedCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrUnknownNeighborCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxErrNoFrameCountWithParams calls the underlying ReadAttributeRxErrNoFrameCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrNoFrameCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxErrNoFrameCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrInvalidSrcAddrCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxErrUnknownNeighborCountWithParams calls the underlying ReadAttributeRxErrUnknownNeighborCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrUnknownNeighborCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxErrUnknownNeighborCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrSecCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxErrInvalidSrcAddrCountWithParams calls the underlying ReadAttributeRxErrInvalidSrcAddrCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrInvalidSrcAddrCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxErrInvalidSrcAddrCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrFcsCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxErrSecCountWithParams calls the underlying ReadAttributeRxErrSecCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrSecCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxErrSecCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRxErrOtherCountWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxErrFcsCountWithParams calls the underlying ReadAttributeRxErrFcsCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrFcsCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxErrFcsCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveTimestampWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeRxErrOtherCountWithParams calls the underlying ReadAttributeRxErrOtherCountWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRxErrOtherCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRxErrOtherCountWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePendingTimestampWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveTimestampWithParams calls the underlying ReadAttributeActiveTimestampWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeActiveTimestampWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveTimestampWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeDelayWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeDelayWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributePendingTimestampWithParams calls the underlying ReadAttributePendingTimestampWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributePendingTimestampWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePendingTimestampWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeSecurityPolicyWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeDelayWithParams calls the underlying ReadAttributeDelayWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeDelayWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeDelayWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeChannelPage0MaskWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeSecurityPolicyWithParams calls the underlying ReadAttributeSecurityPolicyWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeSecurityPolicyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeSecurityPolicyWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponentsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeOperationalDatasetComponentsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeChannelPage0MaskWithParams calls the underlying ReadAttributeChannelPage0MaskWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeChannelPage0MaskWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeChannelPage0MaskWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeActiveNetworkFaultsListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeOperationalDatasetComponentsWithParams calls the underlying ReadAttributeOperationalDatasetComponentsWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeOperationalDatasetComponentsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeOperationalDatasetComponentsWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeActiveNetworkFaultsListWithParams calls the underlying ReadAttributeActiveNetworkFaultsListWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeActiveNetworkFaultsListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeActiveNetworkFaultsListWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeNeighborTableListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-// ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterThreadNetworkDiagnostics) ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterThreadNetworkDiagnostics) ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-// ReadAttributeNeighborTableListWithParams calls the underlying ReadAttributeNeighborTableListWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeNeighborTableListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeNeighborTableListWithParams(params)
-}
-
-// ReadAttributeRouteTableListWithParams calls the underlying ReadAttributeRouteTableListWithParams.
-func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouteTableListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeRouteTableListWithParams(params)
-}
-
-func (x *MTRClusterThreadNetworkDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterThreadNetworkDiagnostics) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterThreadNetworkDiagnostics) ReadAttributeRouteTableListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeRouteTableListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterThreadNetworkDiagnosticsable is the interface implemented by [MTRClusterThreadNetworkDiagnostics], for mocking and DI.
 type MTRClusterThreadNetworkDiagnosticsable interface {
-	Unwrap() *raw.MTRClusterThreadNetworkDiagnostics
-	ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ResetCountsWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeChannelWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRoutingRoleWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeNetworkNameWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePanIdWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeExtendedPanIdWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeMeshLocalPrefixWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeOverrunCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeNeighborTableWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRouteTableWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePartitionIdWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeWeightingWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeDataVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeStableDataVersionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeLeaderRouterIdWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeDetachedRoleCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeChildRoleCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRouterRoleCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeLeaderRoleCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttachAttemptCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePartitionIdChangeCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeBetterPartitionAttachAttemptCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeParentChangeCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxTotalCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxUnicastCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxBroadcastCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxAckRequestedCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxAckedCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxNoAckRequestedCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxDataCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxDataPollCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxBeaconCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxBeaconRequestCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxOtherCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxRetryCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxDirectMaxRetryExpiryCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxIndirectMaxRetryExpiryCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxErrCcaCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxErrAbortCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeTxErrBusyChannelCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxTotalCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxUnicastCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxBroadcastCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxDataCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxDataPollCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxBeaconCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxBeaconRequestCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxOtherCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxAddressFilteredCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxDestAddrFilteredCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxDuplicatedCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxErrNoFrameCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxErrUnknownNeighborCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxErrInvalidSrcAddrCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxErrSecCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxErrFcsCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRxErrOtherCountWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeActiveTimestampWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributePendingTimestampWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeDelayWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeSecurityPolicyWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeChannelPage0MaskWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeOperationalDatasetComponentsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeActiveNetworkFaultsListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ResetCountsWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRThreadNetworkDiagnosticsClusterResetCountsParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	ResetCountsWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	ReadAttributeNeighborTableListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeRouteTableListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	ReadAttributeChannelWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRoutingRoleWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeNetworkNameWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePanIdWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeExtendedPanIdWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeMeshLocalPrefixWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeOverrunCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeNeighborTableWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRouteTableWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePartitionIdWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeWeightingWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeDataVersionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeStableDataVersionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeLeaderRouterIdWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeDetachedRoleCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeChildRoleCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRouterRoleCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeLeaderRoleCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttachAttemptCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePartitionIdChangeCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeBetterPartitionAttachAttemptCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeParentChangeCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxTotalCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxUnicastCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxBroadcastCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxAckRequestedCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxAckedCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxNoAckRequestedCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxDataCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxDataPollCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxBeaconCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxBeaconRequestCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxOtherCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxRetryCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxDirectMaxRetryExpiryCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxIndirectMaxRetryExpiryCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxErrCcaCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxErrAbortCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeTxErrBusyChannelCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxTotalCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxUnicastCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxBroadcastCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxDataCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxDataPollCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxBeaconCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxBeaconRequestCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxOtherCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxAddressFilteredCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxDestAddrFilteredCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxDuplicatedCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxErrNoFrameCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxErrUnknownNeighborCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxErrInvalidSrcAddrCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxErrSecCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxErrFcsCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRxErrOtherCountWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeActiveTimestampWithParams(params *MTRReadParams) obj.Object
+	ReadAttributePendingTimestampWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeDelayWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeSecurityPolicyWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeChannelPage0MaskWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeOperationalDatasetComponentsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeActiveNetworkFaultsListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeNeighborTableListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeRouteTableListWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterThreadNetworkDiagnosticsable = (*MTRClusterThreadNetworkDiagnostics)(nil)

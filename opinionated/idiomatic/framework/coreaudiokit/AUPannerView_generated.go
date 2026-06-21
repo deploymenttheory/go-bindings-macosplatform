@@ -5,50 +5,68 @@
 package coreaudiokit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/carboncore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiokit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A view that provides a specialized user interface for a Cocoa-based panner audio unit.
 //
-// AUPannerView wraps [raw.AUPannerView] with a fluent Go API.
+// AUPannerView is an idiomatic wrapper over the Objective-C class AUPannerView.
 type AUPannerView struct {
-	inner *raw.AUPannerView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AUPannerView].
-func (x *AUPannerView) Unwrap() *raw.AUPannerView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AUPannerView) ID() objc.ID { return x.inner.Ptr() }
-
-// AUPannerViewFromID adopts an existing object pointer as a AUPannerView (nil for 0).
+// AUPannerViewFromID adopts an existing Objective-C object as a AUPannerView
+// (nil for 0), retaining it and registering a release finalizer.
 func AUPannerViewFromID(id objc.ID) *AUPannerView {
 	if id == 0 {
 		return nil
 	}
-	return &AUPannerView{inner: raw.AUPannerViewFromID(id)}
+	x := &AUPannerView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAUPannerView creates a new [AUPannerView].
+// aUPannerViewAdopt wraps an Objective-C object that this code just created as a
+// AUPannerView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aUPannerViewAdopt(id objc.ID) *AUPannerView {
+	if id == 0 {
+		return nil
+	}
+	x := &AUPannerView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AUPannerView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AUPannerView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AUPannerView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAUPannerView creates a new AUPannerView.
 func NewAUPannerView() *AUPannerView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AUPannerView")), objc.RegisterName("new"))
-	return &AUPannerView{inner: raw.AUPannerViewFromID(_id)}
-}
-
-// @property audioUnit @abstract Read-only property for the audio unit associated with the view @result   The audio unit associated with the generic panner view
-//
-// AudioUnit calls the underlying AudioUnit.
-func (x *AUPannerView) AudioUnit() *carboncore.ComponentInstanceRecord {
-	return x.inner.AudioUnit()
+	_id := objc.Send[objc.ID](objc.ID(_class("AUPannerView")), objc.RegisterName("new"))
+	return aUPannerViewAdopt(_id)
 }
 
 // AUPannerViewable is the interface implemented by [AUPannerView], for mocking and DI.
 type AUPannerViewable interface {
-	Unwrap() *raw.AUPannerView
-	AudioUnit() *carboncore.ComponentInstanceRecord
+	obj.Object
 }
 
 var _ AUPannerViewable = (*AUPannerView)(nil)

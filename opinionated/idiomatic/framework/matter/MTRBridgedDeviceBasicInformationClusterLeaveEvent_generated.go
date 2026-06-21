@@ -5,45 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRBridgedDeviceBasicInformationClusterLeaveEvent wraps [raw.MTRBridgedDeviceBasicInformationClusterLeaveEvent] with a fluent Go API.
+// MTRBridgedDeviceBasicInformationClusterLeaveEvent is an idiomatic wrapper over the Objective-C class MTRBridgedDeviceBasicInformationClusterLeaveEvent.
 type MTRBridgedDeviceBasicInformationClusterLeaveEvent struct {
-	inner *raw.MTRBridgedDeviceBasicInformationClusterLeaveEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRBridgedDeviceBasicInformationClusterLeaveEvent].
-func (x *MTRBridgedDeviceBasicInformationClusterLeaveEvent) Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterLeaveEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRBridgedDeviceBasicInformationClusterLeaveEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRBridgedDeviceBasicInformationClusterLeaveEventFromID adopts an existing object pointer as a MTRBridgedDeviceBasicInformationClusterLeaveEvent (nil for 0).
+// MTRBridgedDeviceBasicInformationClusterLeaveEventFromID adopts an existing Objective-C object as a MTRBridgedDeviceBasicInformationClusterLeaveEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRBridgedDeviceBasicInformationClusterLeaveEventFromID(id objc.ID) *MTRBridgedDeviceBasicInformationClusterLeaveEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRBridgedDeviceBasicInformationClusterLeaveEvent{inner: raw.MTRBridgedDeviceBasicInformationClusterLeaveEventFromID(id)}
+	x := &MTRBridgedDeviceBasicInformationClusterLeaveEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRBridgedDeviceBasicInformationClusterLeaveEvent creates a new [MTRBridgedDeviceBasicInformationClusterLeaveEvent].
+// mTRBridgedDeviceBasicInformationClusterLeaveEventAdopt wraps an Objective-C object that this code just created as a
+// MTRBridgedDeviceBasicInformationClusterLeaveEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRBridgedDeviceBasicInformationClusterLeaveEventAdopt(id objc.ID) *MTRBridgedDeviceBasicInformationClusterLeaveEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRBridgedDeviceBasicInformationClusterLeaveEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRBridgedDeviceBasicInformationClusterLeaveEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRBridgedDeviceBasicInformationClusterLeaveEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRBridgedDeviceBasicInformationClusterLeaveEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRBridgedDeviceBasicInformationClusterLeaveEvent creates a new MTRBridgedDeviceBasicInformationClusterLeaveEvent.
 func NewMTRBridgedDeviceBasicInformationClusterLeaveEvent() *MTRBridgedDeviceBasicInformationClusterLeaveEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRBridgedDeviceBasicInformationClusterLeaveEvent")), objc.RegisterName("new"))
-	return &MTRBridgedDeviceBasicInformationClusterLeaveEvent{inner: raw.MTRBridgedDeviceBasicInformationClusterLeaveEventFromID(_id)}
-}
-
-func (x *MTRBridgedDeviceBasicInformationClusterLeaveEvent) asMTRBridgedDeviceBasicInformationClusterLeaveEvent() *raw.MTRBridgedDeviceBasicInformationClusterLeaveEvent {
-	return x.inner
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRBridgedDeviceBasicInformationClusterLeaveEvent")), objc.RegisterName("new"))
+	return mTRBridgedDeviceBasicInformationClusterLeaveEventAdopt(_id)
 }
 
 // MTRBridgedDeviceBasicInformationClusterLeaveEventable is the interface implemented by [MTRBridgedDeviceBasicInformationClusterLeaveEvent], for mocking and DI.
 type MTRBridgedDeviceBasicInformationClusterLeaveEventable interface {
-	Unwrap() *raw.MTRBridgedDeviceBasicInformationClusterLeaveEvent
+	obj.Object
 }
 
 var _ MTRBridgedDeviceBasicInformationClusterLeaveEventable = (*MTRBridgedDeviceBasicInformationClusterLeaveEvent)(nil)

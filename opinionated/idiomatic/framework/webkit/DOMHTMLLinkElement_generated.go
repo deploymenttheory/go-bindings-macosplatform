@@ -5,342 +5,332 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMHTMLLinkElement wraps [raw.DOMHTMLLinkElement] with a fluent Go API.
+// DOMHTMLLinkElement is an idiomatic wrapper over the Objective-C class DOMHTMLLinkElement.
 type DOMHTMLLinkElement struct {
-	inner *raw.DOMHTMLLinkElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMHTMLLinkElement].
-func (x *DOMHTMLLinkElement) Unwrap() *raw.DOMHTMLLinkElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMHTMLLinkElement) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMHTMLLinkElementFromID adopts an existing object pointer as a DOMHTMLLinkElement (nil for 0).
+// DOMHTMLLinkElementFromID adopts an existing Objective-C object as a DOMHTMLLinkElement
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMHTMLLinkElementFromID(id objc.ID) *DOMHTMLLinkElement {
 	if id == 0 {
 		return nil
 	}
-	return &DOMHTMLLinkElement{inner: raw.DOMHTMLLinkElementFromID(id)}
+	x := &DOMHTMLLinkElement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMHTMLLinkElement creates a new [DOMHTMLLinkElement].
+// dOMHTMLLinkElementAdopt wraps an Objective-C object that this code just created as a
+// DOMHTMLLinkElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMHTMLLinkElementAdopt(id objc.ID) *DOMHTMLLinkElement {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMHTMLLinkElement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMHTMLLinkElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMHTMLLinkElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMHTMLLinkElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMHTMLLinkElement creates a new DOMHTMLLinkElement.
 func NewDOMHTMLLinkElement() *DOMHTMLLinkElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMHTMLLinkElement")), objc.RegisterName("new"))
-	return &DOMHTMLLinkElement{inner: raw.DOMHTMLLinkElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMHTMLLinkElement")), objc.RegisterName("new"))
+	return dOMHTMLLinkElementAdopt(_id)
 }
 
-// WithDisabled sets the disabled property and returns the receiver for chaining.
+// WithDisabled sets disabled and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithDisabled(disabled bool) *DOMHTMLLinkElement {
-	x.inner.SetDisabled(disabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 	return x
 }
 
-// WithCharset sets the charset property and returns the receiver for chaining.
+// WithCharset sets charset and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithCharset(charset string) *DOMHTMLLinkElement {
-	x.inner.SetCharset(foundation.NSStringStringWithUTF8String(charset))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharset:"), purego.NSString(charset))
 	return x
 }
 
-// WithHref sets the href property and returns the receiver for chaining.
+// WithHref sets href and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithHref(href string) *DOMHTMLLinkElement {
-	x.inner.SetHref(foundation.NSStringStringWithUTF8String(href))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHref:"), purego.NSString(href))
 	return x
 }
 
-// WithHreflang sets the hreflang property and returns the receiver for chaining.
+// WithHreflang sets hreflang and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithHreflang(hreflang string) *DOMHTMLLinkElement {
-	x.inner.SetHreflang(foundation.NSStringStringWithUTF8String(hreflang))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHreflang:"), purego.NSString(hreflang))
 	return x
 }
 
-// WithMedia sets the media property and returns the receiver for chaining.
+// WithMedia sets media and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithMedia(media string) *DOMHTMLLinkElement {
-	x.inner.SetMedia(foundation.NSStringStringWithUTF8String(media))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMedia:"), purego.NSString(media))
 	return x
 }
 
-// WithRel sets the rel property and returns the receiver for chaining.
+// WithRel sets rel and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithRel(rel string) *DOMHTMLLinkElement {
-	x.inner.SetRel(foundation.NSStringStringWithUTF8String(rel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRel:"), purego.NSString(rel))
 	return x
 }
 
-// WithRev sets the rev property and returns the receiver for chaining.
+// WithRev sets rev and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithRev(rev string) *DOMHTMLLinkElement {
-	x.inner.SetRev(foundation.NSStringStringWithUTF8String(rev))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRev:"), purego.NSString(rev))
 	return x
 }
 
-// WithTarget sets the target property and returns the receiver for chaining.
+// WithTarget sets target and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithTarget(target string) *DOMHTMLLinkElement {
-	x.inner.SetTarget(foundation.NSStringStringWithUTF8String(target))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), purego.NSString(target))
 	return x
 }
 
-// WithType sets the type_ property and returns the receiver for chaining.
+// WithType sets type_ and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithType(type_ string) *DOMHTMLLinkElement {
-	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 	return x
 }
 
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithTitle(title string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// WithLang sets the lang property and returns the receiver for chaining.
+// WithLang sets lang and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithLang(lang string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.SetLang(foundation.NSStringStringWithUTF8String(lang))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLang:"), purego.NSString(lang))
 	return x
 }
 
-// WithDir sets the dir property and returns the receiver for chaining.
+// WithDir sets dir and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithDir(dir string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.SetDir(foundation.NSStringStringWithUTF8String(dir))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDir:"), purego.NSString(dir))
 	return x
 }
 
-// WithTabIndex sets the tabIndex property and returns the receiver for chaining.
+// WithTabIndex sets tabIndex and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithTabIndex(tabIndex int) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.SetTabIndex(tabIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTabIndex:"), tabIndex)
 	return x
 }
 
-// WithAccessKey sets the accessKey property and returns the receiver for chaining.
+// WithAccessKey sets accessKey and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithAccessKey(accessKey string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.SetAccessKey(foundation.NSStringStringWithUTF8String(accessKey))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessKey:"), purego.NSString(accessKey))
 	return x
 }
 
-// WithInnerText sets the innerText property and returns the receiver for chaining.
+// WithInnerText sets innerText and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithInnerText(innerText string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.SetInnerText(foundation.NSStringStringWithUTF8String(innerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerText:"), purego.NSString(innerText))
 	return x
 }
 
-// WithOuterText sets the outerText property and returns the receiver for chaining.
+// WithOuterText sets outerText and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithOuterText(outerText string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.SetOuterText(foundation.NSStringStringWithUTF8String(outerText))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterText:"), purego.NSString(outerText))
 	return x
 }
 
-// WithContentEditable sets the contentEditable property and returns the receiver for chaining.
+// WithContentEditable sets contentEditable and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithContentEditable(contentEditable string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.SetContentEditable(foundation.NSStringStringWithUTF8String(contentEditable))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentEditable:"), purego.NSString(contentEditable))
 	return x
 }
 
-// WithIdName sets the idName property and returns the receiver for chaining.
+// WithIdName sets idName and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithIdName(idName string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.SetIdName(foundation.NSStringStringWithUTF8String(idName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIdName:"), purego.NSString(idName))
 	return x
 }
 
-// WithScrollLeft sets the scrollLeft property and returns the receiver for chaining.
+// WithScrollLeft sets scrollLeft and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithScrollLeft(scrollLeft int) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollLeft(scrollLeft)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollLeft:"), scrollLeft)
 	return x
 }
 
-// WithScrollTop sets the scrollTop property and returns the receiver for chaining.
+// WithScrollTop sets scrollTop and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithScrollTop(scrollTop int) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.DOMElement.SetScrollTop(scrollTop)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollTop:"), scrollTop)
 	return x
 }
 
-// WithInnerHTML sets the innerHTML property and returns the receiver for chaining.
+// WithInnerHTML sets innerHTML and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithInnerHTML(innerHTML string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.DOMElement.SetInnerHTML(foundation.NSStringStringWithUTF8String(innerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInnerHTML:"), purego.NSString(innerHTML))
 	return x
 }
 
-// WithOuterHTML sets the outerHTML property and returns the receiver for chaining.
+// WithOuterHTML sets outerHTML and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithOuterHTML(outerHTML string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.DOMElement.SetOuterHTML(foundation.NSStringStringWithUTF8String(outerHTML))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOuterHTML:"), purego.NSString(outerHTML))
 	return x
 }
 
-// WithClassName sets the className property and returns the receiver for chaining.
+// WithClassName sets className and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithClassName(className string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.DOMElement.SetClassName(foundation.NSStringStringWithUTF8String(className))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClassName:"), purego.NSString(className))
 	return x
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithNodeValue(nodeValue string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets prefix and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithPrefix(prefix string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets textContent and returns the receiver so calls can be chained.
 func (x *DOMHTMLLinkElement) WithTextContent(textContent string) *DOMHTMLLinkElement {
-	x.inner.DOMHTMLElement.DOMElement.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
 }
 
-// Disabled calls the underlying Disabled.
 func (x *DOMHTMLLinkElement) Disabled() bool {
-	return x.inner.Disabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("disabled"))
+	return _r
 }
 
-// SetDisabled calls the underlying SetDisabled.
 func (x *DOMHTMLLinkElement) SetDisabled(disabled bool) {
-	x.inner.SetDisabled(disabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisabled:"), disabled)
 }
 
-// Charset calls the underlying Charset.
 func (x *DOMHTMLLinkElement) Charset() string {
-	_r := x.inner.Charset()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("charset"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetCharset calls the underlying SetCharset.
 func (x *DOMHTMLLinkElement) SetCharset(charset string) {
-	x.inner.SetCharset(foundation.NSStringStringWithUTF8String(charset))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCharset:"), purego.NSString(charset))
 }
 
-// Href calls the underlying Href.
 func (x *DOMHTMLLinkElement) Href() string {
-	_r := x.inner.Href()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("href"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetHref calls the underlying SetHref.
 func (x *DOMHTMLLinkElement) SetHref(href string) {
-	x.inner.SetHref(foundation.NSStringStringWithUTF8String(href))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHref:"), purego.NSString(href))
 }
 
-// Hreflang calls the underlying Hreflang.
 func (x *DOMHTMLLinkElement) Hreflang() string {
-	_r := x.inner.Hreflang()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hreflang"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetHreflang calls the underlying SetHreflang.
 func (x *DOMHTMLLinkElement) SetHreflang(hreflang string) {
-	x.inner.SetHreflang(foundation.NSStringStringWithUTF8String(hreflang))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHreflang:"), purego.NSString(hreflang))
 }
 
-// Media calls the underlying Media.
 func (x *DOMHTMLLinkElement) Media() string {
-	_r := x.inner.Media()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("media"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetMedia calls the underlying SetMedia.
 func (x *DOMHTMLLinkElement) SetMedia(media string) {
-	x.inner.SetMedia(foundation.NSStringStringWithUTF8String(media))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMedia:"), purego.NSString(media))
 }
 
-// Rel calls the underlying Rel.
 func (x *DOMHTMLLinkElement) Rel() string {
-	_r := x.inner.Rel()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rel"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetRel calls the underlying SetRel.
 func (x *DOMHTMLLinkElement) SetRel(rel string) {
-	x.inner.SetRel(foundation.NSStringStringWithUTF8String(rel))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRel:"), purego.NSString(rel))
 }
 
-// Rev calls the underlying Rev.
 func (x *DOMHTMLLinkElement) Rev() string {
-	_r := x.inner.Rev()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rev"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetRev calls the underlying SetRev.
 func (x *DOMHTMLLinkElement) SetRev(rev string) {
-	x.inner.SetRev(foundation.NSStringStringWithUTF8String(rev))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRev:"), purego.NSString(rev))
 }
 
-// Target calls the underlying Target.
 func (x *DOMHTMLLinkElement) Target() string {
-	_r := x.inner.Target()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTarget calls the underlying SetTarget.
 func (x *DOMHTMLLinkElement) SetTarget(target string) {
-	x.inner.SetTarget(foundation.NSStringStringWithUTF8String(target))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), purego.NSString(target))
 }
 
-// Type calls the underlying Type.
 func (x *DOMHTMLLinkElement) Type() string {
-	_r := x.inner.Type()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("type"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetType calls the underlying SetType.
 func (x *DOMHTMLLinkElement) SetType(type_ string) {
-	x.inner.SetType(foundation.NSStringStringWithUTF8String(type_))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), purego.NSString(type_))
 }
 
-// AbsoluteLinkURL calls the underlying AbsoluteLinkURL.
-func (x *DOMHTMLLinkElement) AbsoluteLinkURL() *foundation.NSURL {
-	return x.inner.AbsoluteLinkURL()
-}
-
-func (x *DOMHTMLLinkElement) asDOMHTMLElement() *raw.DOMHTMLElement { return &x.inner.DOMHTMLElement }
-
-func (x *DOMHTMLLinkElement) asDOMElement() *raw.DOMElement {
-	return &x.inner.DOMHTMLElement.DOMElement
-}
-
-func (x *DOMHTMLLinkElement) asDOMNode() *raw.DOMNode {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode
-}
-
-func (x *DOMHTMLLinkElement) asDOMObject() *raw.DOMObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject
-}
-
-func (x *DOMHTMLLinkElement) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMHTMLElement.DOMElement.DOMNode.DOMObject.WebScriptObject
+func (x *DOMHTMLLinkElement) AbsoluteLinkURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteLinkURL"))
+	return obj.Wrap(_r)
 }
 
 // DOMHTMLLinkElementable is the interface implemented by [DOMHTMLLinkElement], for mocking and DI.
 type DOMHTMLLinkElementable interface {
-	Unwrap() *raw.DOMHTMLLinkElement
+	obj.Object
 	WithDisabled(disabled bool) *DOMHTMLLinkElement
 	WithCharset(charset string) *DOMHTMLLinkElement
 	WithHref(href string) *DOMHTMLLinkElement
@@ -385,7 +375,7 @@ type DOMHTMLLinkElementable interface {
 	SetTarget(target string)
 	Type() string
 	SetType(type_ string)
-	AbsoluteLinkURL() *foundation.NSURL
+	AbsoluteLinkURL() obj.Object
 }
 
 var _ DOMHTMLLinkElementable = (*DOMHTMLLinkElement)(nil)

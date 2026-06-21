@@ -5,73 +5,91 @@
 package photosui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photosui"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An element that represents text within project section content.
 //
-// ProjectTextElement wraps [raw.PHProjectTextElement] with a fluent Go API.
+// ProjectTextElement is an idiomatic wrapper over the Objective-C class PHProjectTextElement.
 type ProjectTextElement struct {
-	inner *raw.PHProjectTextElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHProjectTextElement].
-func (x *ProjectTextElement) Unwrap() *raw.PHProjectTextElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProjectTextElement) ID() objc.ID { return x.inner.Ptr() }
-
-// ProjectTextElementFromID adopts an existing object pointer as a ProjectTextElement (nil for 0).
+// ProjectTextElementFromID adopts an existing Objective-C object as a ProjectTextElement
+// (nil for 0), retaining it and registering a release finalizer.
 func ProjectTextElementFromID(id objc.ID) *ProjectTextElement {
 	if id == 0 {
 		return nil
 	}
-	return &ProjectTextElement{inner: raw.PHProjectTextElementFromID(id)}
+	x := &ProjectTextElement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewProjectTextElement creates a new [ProjectTextElement].
+// projectTextElementAdopt wraps an Objective-C object that this code just created as a
+// ProjectTextElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func projectTextElementAdopt(id objc.ID) *ProjectTextElement {
+	if id == 0 {
+		return nil
+	}
+	x := &ProjectTextElement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ProjectTextElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProjectTextElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProjectTextElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewProjectTextElement creates a new ProjectTextElement.
 func NewProjectTextElement() *ProjectTextElement {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHProjectTextElement")), objc.RegisterName("new"))
-	return &ProjectTextElement{inner: raw.PHProjectTextElementFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHProjectTextElement")), objc.RegisterName("new"))
+	return projectTextElementAdopt(_id)
 }
 
 // Unformatted, raw string for the text element
-//
-// Text calls the underlying Text.
 func (x *ProjectTextElement) Text() string {
-	_r := x.inner.Text()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("text"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // If the text was presented to the user in a stylized manner in Photos, attributedText will provide access to those same attributes.
-//
-// AttributedText calls the underlying AttributedText.
-func (x *ProjectTextElement) AttributedText() *foundation.NSAttributedString {
-	return x.inner.AttributedText()
+func (x *ProjectTextElement) AttributedText() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedText"))
+	return obj.Wrap(_r)
 }
 
-// TextElementType calls the underlying TextElementType.
-func (x *ProjectTextElement) TextElementType() PHProjectTextElementType {
-	return PHProjectTextElementType(x.inner.TextElementType())
-}
-
-func (x *ProjectTextElement) asProjectElement() *raw.PHProjectElement {
-	return &x.inner.PHProjectElement
+func (x *ProjectTextElement) TextElementType() ProjectTextElementType {
+	_r := objc.Send[ProjectTextElementType](objref.IDOf(x), objc.RegisterName("textElementType"))
+	return _r
 }
 
 // ProjectTextElementable is the interface implemented by [ProjectTextElement], for mocking and DI.
 type ProjectTextElementable interface {
-	Unwrap() *raw.PHProjectTextElement
+	obj.Object
 	Text() string
-	AttributedText() *foundation.NSAttributedString
-	TextElementType() PHProjectTextElementType
+	AttributedText() obj.Object
+	TextElementType() ProjectTextElementType
 }
 
 var _ ProjectTextElementable = (*ProjectTextElement)(nil)

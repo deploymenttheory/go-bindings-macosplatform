@@ -5,99 +5,99 @@
 package pushkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pushkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that requests the delivery and handles the receipt of PushKit notifications.
 //
-// PushRegistry wraps [raw.PKPushRegistry] with a fluent Go API.
+// PushRegistry is an idiomatic wrapper over the Objective-C class PKPushRegistry.
 type PushRegistry struct {
-	inner *raw.PKPushRegistry
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKPushRegistry].
-func (x *PushRegistry) Unwrap() *raw.PKPushRegistry { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PushRegistry) ID() objc.ID { return x.inner.Ptr() }
-
-// PushRegistryFromID adopts an existing object pointer as a PushRegistry (nil for 0).
+// PushRegistryFromID adopts an existing Objective-C object as a PushRegistry
+// (nil for 0), retaining it and registering a release finalizer.
 func PushRegistryFromID(id objc.ID) *PushRegistry {
 	if id == 0 {
 		return nil
 	}
-	return &PushRegistry{inner: raw.PKPushRegistryFromID(id)}
+	x := &PushRegistry{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// pushRegistryAdopt wraps an Objective-C object that this code just created as a
+// PushRegistry (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pushRegistryAdopt(id objc.ID) *PushRegistry {
+	if id == 0 {
+		return nil
+	}
+	x := &PushRegistry{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PushRegistry) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PushRegistry) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PushRegistry) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a push registry with the specified dispatch queue.
 //
-// NewPushRegistryWithQueue creates a new [PushRegistry].
-func NewPushRegistryWithQueue(queue *foundation.NSObject) *PushRegistry {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PKPushRegistry")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueue:"), queue.Ptr())
-	return &PushRegistry{inner: raw.PKPushRegistryFromID(_id)}
-}
-
-// The delegate object that receives notifications coming from the push registry object.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *PushRegistry) WithDelegate(delegate raw.PKPushRegistryDelegate) *PushRegistry {
-	x.inner.SetDelegate(delegate)
-	return x
+// NewPushRegistryWithQueue creates a new PushRegistry.
+func NewPushRegistryWithQueue(queue obj.Object) *PushRegistry {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PKPushRegistry")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithQueue:"), objref.IDOf(queue))
+	return pushRegistryAdopt(_id)
 }
 
 // Registers the push types for this push registry object.
 //
-// WithDesiredPushTypes sets the desiredPushTypes property and returns the receiver for chaining.
-func (x *PushRegistry) WithDesiredPushTypes(desiredPushTypes *foundation.NSSet[*foundation.NSString]) *PushRegistry {
-	x.inner.SetDesiredPushTypes(desiredPushTypes)
+// WithDesiredPushTypes sets desiredPushTypes and returns the receiver so calls can be chained.
+func (x *PushRegistry) WithDesiredPushTypes(desiredPushTypes obj.Object) *PushRegistry {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredPushTypes:"), objref.IDOf(desiredPushTypes))
 	return x
 }
 
 // Retrieves the locally cached push token for the specified push type.
-//
-// PushTokenForType calls the underlying PushTokenForType.
-func (x *PushRegistry) PushTokenForType(type_ *foundation.NSString) *foundation.NSData {
-	return x.inner.PushTokenForType(type_)
-}
-
-// The delegate object that receives notifications coming from the push registry object. You must assign a valid object to this property before modifying the “PushKit/PKPushRegistry/desiredPushTypes“ property. A valid delegate object is required to receive push tokens and payload data from incoming pushes. For more information about the methods of the `PKPushRegistryDelegate` protocol, see “PushKit/PKPushRegistryDelegate“.
-//
-// Delegate calls the underlying Delegate.
-func (x *PushRegistry) Delegate() raw.PKPushRegistryDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *PushRegistry) SetDelegate(delegate raw.PKPushRegistryDelegate) {
-	x.inner.SetDelegate(delegate)
+func (x *PushRegistry) PushTokenForType(type_ obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pushTokenForType:"), objref.IDOf(type_))
+	return obj.Wrap(_r)
 }
 
 // Registers the push types for this push registry object. When you assign a value to this property, the push registry object makes a registration request with the PushKit server. This request is asynchronous, and the success or failure of the request is reported to your registery's delegate object. For a successful registration, PushKit delivers a push token to the delegate. Use that token to generate push requests from your server. For a list of push types that you may include in the set, see “PushKit/PKPushType“.
-//
-// DesiredPushTypes calls the underlying DesiredPushTypes.
-func (x *PushRegistry) DesiredPushTypes() *foundation.NSSet[*foundation.NSString] {
-	return x.inner.DesiredPushTypes()
+func (x *PushRegistry) DesiredPushTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("desiredPushTypes"))
+	return obj.Wrap(_r)
 }
 
-// SetDesiredPushTypes calls the underlying SetDesiredPushTypes.
-func (x *PushRegistry) SetDesiredPushTypes(desiredPushTypes *foundation.NSSet[*foundation.NSString]) {
-	x.inner.SetDesiredPushTypes(desiredPushTypes)
+func (x *PushRegistry) SetDesiredPushTypes(desiredPushTypes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDesiredPushTypes:"), objref.IDOf(desiredPushTypes))
 }
 
 // PushRegistryable is the interface implemented by [PushRegistry], for mocking and DI.
 type PushRegistryable interface {
-	Unwrap() *raw.PKPushRegistry
-	WithDelegate(delegate raw.PKPushRegistryDelegate) *PushRegistry
-	WithDesiredPushTypes(desiredPushTypes *foundation.NSSet[*foundation.NSString]) *PushRegistry
-	PushTokenForType(type_ *foundation.NSString) *foundation.NSData
-	Delegate() raw.PKPushRegistryDelegate
-	SetDelegate(delegate raw.PKPushRegistryDelegate)
-	DesiredPushTypes() *foundation.NSSet[*foundation.NSString]
-	SetDesiredPushTypes(desiredPushTypes *foundation.NSSet[*foundation.NSString])
+	obj.Object
+	WithDesiredPushTypes(desiredPushTypes obj.Object) *PushRegistry
+	PushTokenForType(type_ obj.Object) obj.Object
+	DesiredPushTypes() obj.Object
+	SetDesiredPushTypes(desiredPushTypes obj.Object)
 }
 
 var _ PushRegistryable = (*PushRegistry)(nil)

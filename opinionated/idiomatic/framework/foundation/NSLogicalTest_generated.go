@@ -5,73 +5,96 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The logical combination of one or more specifier tests.
 //
-// LogicalTest wraps [raw.NSLogicalTest] with a fluent Go API.
+// LogicalTest is an idiomatic wrapper over the Objective-C class NSLogicalTest.
 type LogicalTest struct {
-	inner *raw.NSLogicalTest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSLogicalTest].
-func (x *LogicalTest) Unwrap() *raw.NSLogicalTest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LogicalTest) ID() objc.ID { return x.inner.Ptr() }
-
-// LogicalTestFromID adopts an existing object pointer as a LogicalTest (nil for 0).
+// LogicalTestFromID adopts an existing Objective-C object as a LogicalTest
+// (nil for 0), retaining it and registering a release finalizer.
 func LogicalTestFromID(id objc.ID) *LogicalTest {
 	if id == 0 {
 		return nil
 	}
-	return &LogicalTest{inner: raw.NSLogicalTestFromID(id)}
+	x := &LogicalTest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// logicalTestAdopt wraps an Objective-C object that this code just created as a
+// LogicalTest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func logicalTestAdopt(id objc.ID) *LogicalTest {
+	if id == 0 {
+		return nil
+	}
+	x := &LogicalTest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LogicalTest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LogicalTest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LogicalTest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Returns an NSLogicalTest object initialized to perform an AND operation with the NSSpecifierTest objects in a given array.
 //
-// NewLogicalTestAndTestWithTests creates a new [LogicalTest].
-func NewLogicalTestAndTestWithTests(subTests *raw.NSArray[*raw.NSSpecifierTest]) *LogicalTest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLogicalTest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initAndTestWithTests:"), subTests.Ptr())
-	return &LogicalTest{inner: raw.NSLogicalTestFromID(_id)}
+// NewLogicalTestAndTestWithTests creates a new LogicalTest.
+func NewLogicalTestAndTestWithTests(subTests []*SpecifierTest) *LogicalTest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLogicalTest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initAndTestWithTests:"), purego.SliceToNSArray(subTests, func(_v *SpecifierTest) objc.ID { return objref.IDOf(_v) }))
+	return logicalTestAdopt(_id)
 }
 
 // Returns an NSLogicalTest object initialized to perform an OR operation with the NSSpecifierTest objects in a given array.
 //
-// NewLogicalTestOrTestWithTests creates a new [LogicalTest].
-func NewLogicalTestOrTestWithTests(subTests *raw.NSArray[*raw.NSSpecifierTest]) *LogicalTest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLogicalTest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initOrTestWithTests:"), subTests.Ptr())
-	return &LogicalTest{inner: raw.NSLogicalTestFromID(_id)}
+// NewLogicalTestOrTestWithTests creates a new LogicalTest.
+func NewLogicalTestOrTestWithTests(subTests []*SpecifierTest) *LogicalTest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLogicalTest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initOrTestWithTests:"), purego.SliceToNSArray(subTests, func(_v *SpecifierTest) objc.ID { return objref.IDOf(_v) }))
+	return logicalTestAdopt(_id)
 }
 
 // Returns an NSLogicalTest object initialized to perform a NOT operation on the given NSScriptWhoseTest object.
 //
-// NewLogicalTestNotTestWithTest creates a new [LogicalTest].
-func NewLogicalTestNotTestWithTest(subTest *raw.NSScriptWhoseTest) *LogicalTest {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSLogicalTest")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initNotTestWithTest:"), subTest.Ptr())
-	return &LogicalTest{inner: raw.NSLogicalTestFromID(_id)}
+// NewLogicalTestNotTestWithTest creates a new LogicalTest.
+func NewLogicalTestNotTestWithTest(subTest *ScriptWhoseTest) *LogicalTest {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSLogicalTest")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initNotTestWithTest:"), objref.IDOf(subTest))
+	return logicalTestAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *LogicalTest) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LogicalTest {
-	x.inner.NSScriptWhoseTest.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *LogicalTest) WithScriptingProperties(scriptingProperties obj.Object) *LogicalTest {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-func (x *LogicalTest) asScriptWhoseTest() *raw.NSScriptWhoseTest { return &x.inner.NSScriptWhoseTest }
-
-func (x *LogicalTest) asObject() *raw.NSObject { return &x.inner.NSScriptWhoseTest.NSObject }
-
 // LogicalTestable is the interface implemented by [LogicalTest], for mocking and DI.
 type LogicalTestable interface {
-	Unwrap() *raw.NSLogicalTest
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *LogicalTest
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *LogicalTest
 }
 
 var _ LogicalTestable = (*LogicalTest)(nil)

@@ -5,71 +5,91 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // A convenience wrapper for the given dictionary of data.
 //
-// DictionaryFeatureProvider wraps [raw.MLDictionaryFeatureProvider] with a fluent Go API.
+// DictionaryFeatureProvider is an idiomatic wrapper over the Objective-C class MLDictionaryFeatureProvider.
 type DictionaryFeatureProvider struct {
-	inner *raw.MLDictionaryFeatureProvider
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLDictionaryFeatureProvider].
-func (x *DictionaryFeatureProvider) Unwrap() *raw.MLDictionaryFeatureProvider { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DictionaryFeatureProvider) ID() objc.ID { return x.inner.Ptr() }
-
-// DictionaryFeatureProviderFromID adopts an existing object pointer as a DictionaryFeatureProvider (nil for 0).
+// DictionaryFeatureProviderFromID adopts an existing Objective-C object as a DictionaryFeatureProvider
+// (nil for 0), retaining it and registering a release finalizer.
 func DictionaryFeatureProviderFromID(id objc.ID) *DictionaryFeatureProvider {
 	if id == 0 {
 		return nil
 	}
-	return &DictionaryFeatureProvider{inner: raw.MLDictionaryFeatureProviderFromID(id)}
+	x := &DictionaryFeatureProvider{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// dictionaryFeatureProviderAdopt wraps an Objective-C object that this code just created as a
+// DictionaryFeatureProvider (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dictionaryFeatureProviderAdopt(id objc.ID) *DictionaryFeatureProvider {
+	if id == 0 {
+		return nil
+	}
+	x := &DictionaryFeatureProvider{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DictionaryFeatureProvider) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DictionaryFeatureProvider) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DictionaryFeatureProvider) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates the feature provider based on a dictionary.
 //
-// NewDictionaryFeatureProviderWithDictionaryError creates a new [DictionaryFeatureProvider].
-func NewDictionaryFeatureProviderWithDictionaryError(dictionary purego.IDer) (*DictionaryFeatureProvider, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MLDictionaryFeatureProvider")), objc.RegisterName("alloc"))
+// NewDictionaryFeatureProviderWithDictionaryError creates a new DictionaryFeatureProvider.
+func NewDictionaryFeatureProviderWithDictionaryError(dictionary obj.Object) (*DictionaryFeatureProvider, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MLDictionaryFeatureProvider")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), dictionary.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDictionary:error:"), objref.IDOf(dictionary), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &DictionaryFeatureProvider{inner: raw.MLDictionaryFeatureProviderFromID(_id)}, nil
+	return dictionaryFeatureProviderAdopt(_id), nil
 }
 
 // Subscript interface for the feature provider to pass through to the dictionary.
-//
-// ObjectForKeyedSubscript calls the underlying ObjectForKeyedSubscript.
 func (x *DictionaryFeatureProvider) ObjectForKeyedSubscript(featureName string) *FeatureValue {
-	_r := x.inner.ObjectForKeyedSubscript(foundation.NSStringStringWithUTF8String(featureName))
-	if _r == nil {
-		return nil
-	}
-	return &FeatureValue{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectForKeyedSubscript:"), purego.NSString(featureName))
+	return FeatureValueFromID(_r)
 }
 
 // Dictionary holding the feature values
-//
-// Dictionary calls the underlying Dictionary.
-func (x *DictionaryFeatureProvider) Dictionary() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureValue] {
-	return x.inner.Dictionary()
+func (x *DictionaryFeatureProvider) Dictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dictionary"))
+	return obj.Wrap(_r)
 }
 
 // DictionaryFeatureProviderable is the interface implemented by [DictionaryFeatureProvider], for mocking and DI.
 type DictionaryFeatureProviderable interface {
-	Unwrap() *raw.MLDictionaryFeatureProvider
+	obj.Object
 	ObjectForKeyedSubscript(featureName string) *FeatureValue
-	Dictionary() *foundation.NSDictionary[*foundation.NSString, *raw.MLFeatureValue]
+	Dictionary() obj.Object
 }
 
 var _ DictionaryFeatureProviderable = (*DictionaryFeatureProvider)(nil)

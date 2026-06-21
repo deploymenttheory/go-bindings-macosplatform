@@ -5,80 +5,100 @@
 package gameplaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A rule to be used in the context of a rule system, with a predicate to be tested and an action to be executed when the test succeeds.
 //
-// Rule wraps [raw.GKRule] with a fluent Go API.
+// Rule is an idiomatic wrapper over the Objective-C class GKRule.
 type Rule struct {
-	inner *raw.GKRule
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKRule].
-func (x *Rule) Unwrap() *raw.GKRule { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Rule) ID() objc.ID { return x.inner.Ptr() }
-
-// RuleFromID adopts an existing object pointer as a Rule (nil for 0).
+// RuleFromID adopts an existing Objective-C object as a Rule
+// (nil for 0), retaining it and registering a release finalizer.
 func RuleFromID(id objc.ID) *Rule {
 	if id == 0 {
 		return nil
 	}
-	return &Rule{inner: raw.GKRuleFromID(id)}
+	x := &Rule{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRule creates a new [Rule].
+// ruleAdopt wraps an Objective-C object that this code just created as a
+// Rule (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func ruleAdopt(id objc.ID) *Rule {
+	if id == 0 {
+		return nil
+	}
+	x := &Rule{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Rule) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Rule) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Rule) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRule creates a new Rule.
 func NewRule() *Rule {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKRule")), objc.RegisterName("new"))
-	return &Rule{inner: raw.GKRuleFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKRule")), objc.RegisterName("new"))
+	return ruleAdopt(_id)
 }
 
 // The importance of the rule relative to others in a rule system’s agenda.
 //
-// WithSalience sets the salience property and returns the receiver for chaining.
+// WithSalience sets salience and returns the receiver so calls can be chained.
 func (x *Rule) WithSalience(salience int) *Rule {
-	x.inner.SetSalience(salience)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalience:"), salience)
 	return x
 }
 
 // Returns a Boolean value indicating whether the rule has been satisfied in the context of the specified rule system.
-//
-// EvaluatePredicateWithSystem calls the underlying EvaluatePredicateWithSystem.
-func (x *Rule) EvaluatePredicateWithSystem(system *raw.GKRuleSystem) bool {
-	return x.inner.EvaluatePredicateWithSystem(system)
+func (x *Rule) EvaluatePredicateWithSystem(system *RuleSystem) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("evaluatePredicateWithSystem:"), objref.IDOf(system))
+	return _r
 }
 
 // Performs actions that should result when the rule is satisfied in the context of the specified rule system.
-//
-// PerformActionWithSystem calls the underlying PerformActionWithSystem.
-func (x *Rule) PerformActionWithSystem(system *raw.GKRuleSystem) {
-	x.inner.PerformActionWithSystem(system)
+func (x *Rule) PerformActionWithSystem(system *RuleSystem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performActionWithSystem:"), objref.IDOf(system))
 }
 
-// Salience defines the order in the rule agenda that the system will evaluate. A rule with higher salience will be evaluated before another rule in the agenda that has a lower salience. Defaults to 0. @see GKRuleSystem.agenda
-//
-// Salience calls the underlying Salience.
+// Salience defines the order in the rule agenda that the system will evaluate. A rule with higher salience will be evaluated before another rule in the agenda that has a lower salience. Defaults to 0.
 func (x *Rule) Salience() int {
-	return x.inner.Salience()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("salience"))
+	return _r
 }
 
-// SetSalience calls the underlying SetSalience.
 func (x *Rule) SetSalience(salience int) {
-	x.inner.SetSalience(salience)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSalience:"), salience)
 }
-
-func (x *Rule) asRule() *raw.GKRule { return x.inner }
 
 // Ruleable is the interface implemented by [Rule], for mocking and DI.
 type Ruleable interface {
-	Unwrap() *raw.GKRule
+	obj.Object
 	WithSalience(salience int) *Rule
-	EvaluatePredicateWithSystem(system *raw.GKRuleSystem) bool
-	PerformActionWithSystem(system *raw.GKRuleSystem)
+	EvaluatePredicateWithSystem(system *RuleSystem) bool
+	PerformActionWithSystem(system *RuleSystem)
 	Salience() int
 	SetSalience(salience int)
 }

@@ -5,60 +5,82 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An array of length matching the rank, holding the dimensions of a tensor.
 //
-// TensorExtents wraps [raw.MTLTensorExtents] with a fluent Go API.
+// TensorExtents is an idiomatic wrapper over the Objective-C class MTLTensorExtents.
 type TensorExtents struct {
-	inner *raw.MTLTensorExtents
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLTensorExtents].
-func (x *TensorExtents) Unwrap() *raw.MTLTensorExtents { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TensorExtents) ID() objc.ID { return x.inner.Ptr() }
-
-// TensorExtentsFromID adopts an existing object pointer as a TensorExtents (nil for 0).
+// TensorExtentsFromID adopts an existing Objective-C object as a TensorExtents
+// (nil for 0), retaining it and registering a release finalizer.
 func TensorExtentsFromID(id objc.ID) *TensorExtents {
 	if id == 0 {
 		return nil
 	}
-	return &TensorExtents{inner: raw.MTLTensorExtentsFromID(id)}
+	x := &TensorExtents{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new tensor extents with the rank and extent values you provide.
-//
-// NewTensorExtentsWithRankValues creates a new [TensorExtents].
-func NewTensorExtentsWithRankValues(rank uint, values *int64) *TensorExtents {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLTensorExtents")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithRank:values:"), rank, values)
-	return &TensorExtents{inner: raw.MTLTensorExtentsFromID(_id)}
+// tensorExtentsAdopt wraps an Objective-C object that this code just created as a
+// TensorExtents (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func tensorExtentsAdopt(id objc.ID) *TensorExtents {
+	if id == 0 {
+		return nil
+	}
+	x := &TensorExtents{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TensorExtents) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TensorExtents) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TensorExtents) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTensorExtents creates a new TensorExtents.
+func NewTensorExtents() *TensorExtents {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLTensorExtents")), objc.RegisterName("new"))
+	return tensorExtentsAdopt(_id)
 }
 
 // Returns the extent at an index.
-//
-// ExtentAtDimensionIndex calls the underlying ExtentAtDimensionIndex.
-func (x *TensorExtents) ExtentAtDimensionIndex(dimensionIndex uint) int {
-	return x.inner.ExtentAtDimensionIndex(dimensionIndex)
+func (x *TensorExtents) ExtentAtDimensionIndex(dimensionIndex int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("extentAtDimensionIndex:"), dimensionIndex)
+	return _r
 }
 
 // Obtains the rank of the tensor. The rank represents the number of dimensions.
-//
-// Rank calls the underlying Rank.
-func (x *TensorExtents) Rank() uint {
-	return x.inner.Rank()
+func (x *TensorExtents) Rank() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rank"))
+	return _r
 }
 
 // TensorExtentsable is the interface implemented by [TensorExtents], for mocking and DI.
 type TensorExtentsable interface {
-	Unwrap() *raw.MTLTensorExtents
-	ExtentAtDimensionIndex(dimensionIndex uint) int
-	Rank() uint
+	obj.Object
+	ExtentAtDimensionIndex(dimensionIndex int) int
+	Rank() int
 }
 
 var _ TensorExtentsable = (*TensorExtents)(nil)

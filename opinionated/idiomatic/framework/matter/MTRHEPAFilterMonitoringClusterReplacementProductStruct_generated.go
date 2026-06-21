@@ -5,83 +5,103 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRHEPAFilterMonitoringClusterReplacementProductStruct wraps [raw.MTRHEPAFilterMonitoringClusterReplacementProductStruct] with a fluent Go API.
+// MTRHEPAFilterMonitoringClusterReplacementProductStruct is an idiomatic wrapper over the Objective-C class MTRHEPAFilterMonitoringClusterReplacementProductStruct.
 type MTRHEPAFilterMonitoringClusterReplacementProductStruct struct {
-	inner *raw.MTRHEPAFilterMonitoringClusterReplacementProductStruct
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRHEPAFilterMonitoringClusterReplacementProductStruct].
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) Unwrap() *raw.MTRHEPAFilterMonitoringClusterReplacementProductStruct {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRHEPAFilterMonitoringClusterReplacementProductStructFromID adopts an existing object pointer as a MTRHEPAFilterMonitoringClusterReplacementProductStruct (nil for 0).
+// MTRHEPAFilterMonitoringClusterReplacementProductStructFromID adopts an existing Objective-C object as a MTRHEPAFilterMonitoringClusterReplacementProductStruct
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRHEPAFilterMonitoringClusterReplacementProductStructFromID(id objc.ID) *MTRHEPAFilterMonitoringClusterReplacementProductStruct {
 	if id == 0 {
 		return nil
 	}
-	return &MTRHEPAFilterMonitoringClusterReplacementProductStruct{inner: raw.MTRHEPAFilterMonitoringClusterReplacementProductStructFromID(id)}
+	x := &MTRHEPAFilterMonitoringClusterReplacementProductStruct{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRHEPAFilterMonitoringClusterReplacementProductStruct creates a new [MTRHEPAFilterMonitoringClusterReplacementProductStruct].
+// mTRHEPAFilterMonitoringClusterReplacementProductStructAdopt wraps an Objective-C object that this code just created as a
+// MTRHEPAFilterMonitoringClusterReplacementProductStruct (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRHEPAFilterMonitoringClusterReplacementProductStructAdopt(id objc.ID) *MTRHEPAFilterMonitoringClusterReplacementProductStruct {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRHEPAFilterMonitoringClusterReplacementProductStruct{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRHEPAFilterMonitoringClusterReplacementProductStruct creates a new MTRHEPAFilterMonitoringClusterReplacementProductStruct.
 func NewMTRHEPAFilterMonitoringClusterReplacementProductStruct() *MTRHEPAFilterMonitoringClusterReplacementProductStruct {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRHEPAFilterMonitoringClusterReplacementProductStruct")), objc.RegisterName("new"))
-	return &MTRHEPAFilterMonitoringClusterReplacementProductStruct{inner: raw.MTRHEPAFilterMonitoringClusterReplacementProductStructFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRHEPAFilterMonitoringClusterReplacementProductStruct")), objc.RegisterName("new"))
+	return mTRHEPAFilterMonitoringClusterReplacementProductStructAdopt(_id)
 }
 
-// WithProductIdentifierType sets the productIdentifierType property and returns the receiver for chaining.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierType(productIdentifierType *foundation.NSNumber) *MTRHEPAFilterMonitoringClusterReplacementProductStruct {
-	x.inner.SetProductIdentifierType(productIdentifierType)
+// WithProductIdentifierType sets productIdentifierType and returns the receiver so calls can be chained.
+func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierType(productIdentifierType obj.Object) *MTRHEPAFilterMonitoringClusterReplacementProductStruct {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierType:"), objref.IDOf(productIdentifierType))
 	return x
 }
 
-// WithProductIdentifierValue sets the productIdentifierValue property and returns the receiver for chaining.
+// WithProductIdentifierValue sets productIdentifierValue and returns the receiver so calls can be chained.
 func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) WithProductIdentifierValue(productIdentifierValue string) *MTRHEPAFilterMonitoringClusterReplacementProductStruct {
-	x.inner.SetProductIdentifierValue(foundation.NSStringStringWithUTF8String(productIdentifierValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierValue:"), purego.NSString(productIdentifierValue))
 	return x
 }
 
-// ProductIdentifierType calls the underlying ProductIdentifierType.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() *foundation.NSNumber {
-	return x.inner.ProductIdentifierType()
+func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifierType"))
+	return obj.Wrap(_r)
 }
 
-// SetProductIdentifierType calls the underlying SetProductIdentifierType.
-func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierType(productIdentifierType *foundation.NSNumber) {
-	x.inner.SetProductIdentifierType(productIdentifierType)
+func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierType(productIdentifierType obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierType:"), objref.IDOf(productIdentifierType))
 }
 
-// ProductIdentifierValue calls the underlying ProductIdentifierValue.
 func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) ProductIdentifierValue() string {
-	_r := x.inner.ProductIdentifierValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("productIdentifierValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetProductIdentifierValue calls the underlying SetProductIdentifierValue.
 func (x *MTRHEPAFilterMonitoringClusterReplacementProductStruct) SetProductIdentifierValue(productIdentifierValue string) {
-	x.inner.SetProductIdentifierValue(foundation.NSStringStringWithUTF8String(productIdentifierValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setProductIdentifierValue:"), purego.NSString(productIdentifierValue))
 }
 
 // MTRHEPAFilterMonitoringClusterReplacementProductStructable is the interface implemented by [MTRHEPAFilterMonitoringClusterReplacementProductStruct], for mocking and DI.
 type MTRHEPAFilterMonitoringClusterReplacementProductStructable interface {
-	Unwrap() *raw.MTRHEPAFilterMonitoringClusterReplacementProductStruct
-	WithProductIdentifierType(productIdentifierType *foundation.NSNumber) *MTRHEPAFilterMonitoringClusterReplacementProductStruct
+	obj.Object
+	WithProductIdentifierType(productIdentifierType obj.Object) *MTRHEPAFilterMonitoringClusterReplacementProductStruct
 	WithProductIdentifierValue(productIdentifierValue string) *MTRHEPAFilterMonitoringClusterReplacementProductStruct
-	ProductIdentifierType() *foundation.NSNumber
-	SetProductIdentifierType(productIdentifierType *foundation.NSNumber)
+	ProductIdentifierType() obj.Object
+	SetProductIdentifierType(productIdentifierType obj.Object)
 	ProductIdentifierValue() string
 	SetProductIdentifierValue(productIdentifierValue string)
 }

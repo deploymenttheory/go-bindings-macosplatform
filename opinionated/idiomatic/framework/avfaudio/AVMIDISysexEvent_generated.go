@@ -5,53 +5,77 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a MIDI system exclusive message.
 //
-// MIDISysexEvent wraps [raw.AVMIDISysexEvent] with a fluent Go API.
+// MIDISysexEvent is an idiomatic wrapper over the Objective-C class AVMIDISysexEvent.
 type MIDISysexEvent struct {
-	inner *raw.AVMIDISysexEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMIDISysexEvent].
-func (x *MIDISysexEvent) Unwrap() *raw.AVMIDISysexEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MIDISysexEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MIDISysexEventFromID adopts an existing object pointer as a MIDISysexEvent (nil for 0).
+// MIDISysexEventFromID adopts an existing Objective-C object as a MIDISysexEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MIDISysexEventFromID(id objc.ID) *MIDISysexEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MIDISysexEvent{inner: raw.AVMIDISysexEventFromID(id)}
+	x := &MIDISysexEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mIDISysexEventAdopt wraps an Objective-C object that this code just created as a
+// MIDISysexEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mIDISysexEventAdopt(id objc.ID) *MIDISysexEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MIDISysexEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MIDISysexEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MIDISysexEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MIDISysexEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a system event with the data you specify.
 //
-// NewMIDISysexEventWithData creates a new [MIDISysexEvent].
-func NewMIDISysexEventWithData(data *foundation.NSData) *MIDISysexEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDISysexEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), data.Ptr())
-	return &MIDISysexEvent{inner: raw.AVMIDISysexEventFromID(_id)}
+// NewMIDISysexEventWithData creates a new MIDISysexEvent.
+func NewMIDISysexEventWithData(data obj.Object) *MIDISysexEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDISysexEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithData:"), objref.IDOf(data))
+	return mIDISysexEventAdopt(_id)
 }
 
-// SizeInBytes calls the underlying SizeInBytes.
-func (x *MIDISysexEvent) SizeInBytes() uint {
-	return x.inner.SizeInBytes()
+func (x *MIDISysexEvent) SizeInBytes() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("sizeInBytes"))
+	return _r
 }
-
-func (x *MIDISysexEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
 
 // MIDISysexEventable is the interface implemented by [MIDISysexEvent], for mocking and DI.
 type MIDISysexEventable interface {
-	Unwrap() *raw.AVMIDISysexEvent
-	SizeInBytes() uint
+	obj.Object
+	SizeInBytes() int
 }
 
 var _ MIDISysexEventable = (*MIDISysexEvent)(nil)

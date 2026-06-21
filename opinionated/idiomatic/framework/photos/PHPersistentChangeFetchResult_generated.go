@@ -5,49 +5,75 @@
 package photos
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // An object that represents a fetch result and allows you to enumerate a very large set of change records.
 //
-// PersistentChangeFetchResult wraps [raw.PHPersistentChangeFetchResult] with a fluent Go API.
+// PersistentChangeFetchResult is an idiomatic wrapper over the Objective-C class PHPersistentChangeFetchResult.
 type PersistentChangeFetchResult struct {
-	inner *raw.PHPersistentChangeFetchResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHPersistentChangeFetchResult].
-func (x *PersistentChangeFetchResult) Unwrap() *raw.PHPersistentChangeFetchResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersistentChangeFetchResult) ID() objc.ID { return x.inner.Ptr() }
-
-// PersistentChangeFetchResultFromID adopts an existing object pointer as a PersistentChangeFetchResult (nil for 0).
+// PersistentChangeFetchResultFromID adopts an existing Objective-C object as a PersistentChangeFetchResult
+// (nil for 0), retaining it and registering a release finalizer.
 func PersistentChangeFetchResultFromID(id objc.ID) *PersistentChangeFetchResult {
 	if id == 0 {
 		return nil
 	}
-	return &PersistentChangeFetchResult{inner: raw.PHPersistentChangeFetchResultFromID(id)}
+	x := &PersistentChangeFetchResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPersistentChangeFetchResult creates a new [PersistentChangeFetchResult].
+// persistentChangeFetchResultAdopt wraps an Objective-C object that this code just created as a
+// PersistentChangeFetchResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func persistentChangeFetchResultAdopt(id objc.ID) *PersistentChangeFetchResult {
+	if id == 0 {
+		return nil
+	}
+	x := &PersistentChangeFetchResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersistentChangeFetchResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersistentChangeFetchResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersistentChangeFetchResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPersistentChangeFetchResult creates a new PersistentChangeFetchResult.
 func NewPersistentChangeFetchResult() *PersistentChangeFetchResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHPersistentChangeFetchResult")), objc.RegisterName("new"))
-	return &PersistentChangeFetchResult{inner: raw.PHPersistentChangeFetchResultFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHPersistentChangeFetchResult")), objc.RegisterName("new"))
+	return persistentChangeFetchResultAdopt(_id)
 }
 
 // Executes the block you specify by using the objects in the fetch result.
-//
-// EnumerateChangesWith calls the underlying EnumerateChangesWith.
-func (x *PersistentChangeFetchResult) EnumerateChangesWith(block func(*raw.PHPersistentChange, *bool)) {
-	x.inner.EnumerateChangesWith(block)
+func (x *PersistentChangeFetchResult) EnumerateChangesWith(block func(obj.Object, *bool)) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumerateChangesWithBlock:"), objc.NewBlock(func(_ objc.Block, _b0 objc.ID, _b1 unsafe.Pointer) { block(obj.Wrap(_b0), (*bool)(_b1)) }))
 }
 
 // PersistentChangeFetchResultable is the interface implemented by [PersistentChangeFetchResult], for mocking and DI.
 type PersistentChangeFetchResultable interface {
-	Unwrap() *raw.PHPersistentChangeFetchResult
-	EnumerateChangesWith(block func(*raw.PHPersistentChange, *bool))
+	obj.Object
+	EnumerateChangesWith(block func(obj.Object, *bool))
 }
 
 var _ PersistentChangeFetchResultable = (*PersistentChangeFetchResult)(nil)

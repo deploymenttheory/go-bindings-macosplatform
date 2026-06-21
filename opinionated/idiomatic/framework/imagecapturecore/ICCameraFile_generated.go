@@ -6,142 +6,150 @@ package imagecapturecore
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that represents a file on a camera.
 //
-// CameraFile wraps [raw.ICCameraFile] with a fluent Go API.
+// CameraFile is an idiomatic wrapper over the Objective-C class ICCameraFile.
 type CameraFile struct {
-	inner *raw.ICCameraFile
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ICCameraFile].
-func (x *CameraFile) Unwrap() *raw.ICCameraFile { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CameraFile) ID() objc.ID { return x.inner.Ptr() }
-
-// CameraFileFromID adopts an existing object pointer as a CameraFile (nil for 0).
+// CameraFileFromID adopts an existing Objective-C object as a CameraFile
+// (nil for 0), retaining it and registering a release finalizer.
 func CameraFileFromID(id objc.ID) *CameraFile {
 	if id == 0 {
 		return nil
 	}
-	return &CameraFile{inner: raw.ICCameraFileFromID(id)}
+	x := &CameraFile{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCameraFile creates a new [CameraFile].
+// cameraFileAdopt wraps an Objective-C object that this code just created as a
+// CameraFile (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cameraFileAdopt(id objc.ID) *CameraFile {
+	if id == 0 {
+		return nil
+	}
+	x := &CameraFile{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CameraFile) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CameraFile) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CameraFile) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCameraFile creates a new CameraFile.
 func NewCameraFile() *CameraFile {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICCameraFile")), objc.RegisterName("new"))
-	return &CameraFile{inner: raw.ICCameraFileFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ICCameraFile")), objc.RegisterName("new"))
+	return cameraFileAdopt(_id)
 }
 
 // The orientation to use when downloading the image.
 //
-// WithOrientation sets the orientation property and returns the receiver for chaining.
-func (x *CameraFile) WithOrientation(orientation ICEXIFOrientationType) *CameraFile {
-	x.inner.SetOrientation(raw.ICEXIFOrientationType(orientation))
+// WithOrientation sets orientation and returns the receiver so calls can be chained.
+func (x *CameraFile) WithOrientation(orientation EXIFOrientationType) *CameraFile {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrientation:"), orientation)
 	return x
 }
 
 // Requests a thumbnail and executes the completion block in place of the delegate.
 //
 // RequestThumbnailDataWithOptionsCompletion blocks until the operation completes or ctx is cancelled.
-func (x *CameraFile) RequestThumbnailDataWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error) {
+func (x *CameraFile) RequestThumbnailDataWithOptionsCompletion(ctx context.Context, options obj.Object) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RequestThumbnailDataWithOptionsCompletion(options, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestThumbnailDataWithOptions:completion:"), objref.IDOf(options), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
-}
-
-// Requests metadata and executes the completion block in place of the delegate.
-//
-// RequestMetadataDictionaryWithOptionsCompletion calls the underlying RequestMetadataDictionaryWithOptionsCompletion.
-func (x *CameraFile) RequestMetadataDictionaryWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSDictionary[objc.ID, objc.ID], unsafe.Pointer)) {
-	x.inner.RequestMetadataDictionaryWithOptionsCompletion(options, completion)
-}
-
-// Requests a download and executes the completion block in place of the delegate.
-//
-// RequestDownloadWithOptionsCompletion calls the underlying RequestDownloadWithOptionsCompletion.
-func (x *CameraFile) RequestDownloadWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSString, unsafe.Pointer)) *foundation.NSProgress {
-	return x.inner.RequestDownloadWithOptionsCompletion(options, completion)
 }
 
 // Requests to asynchronously read data of a specified length from a specified offset, then executes the completion block.
 //
 // RequestReadDataAtOffsetLengthCompletion blocks until the operation completes or ctx is cancelled.
-func (x *CameraFile) RequestReadDataAtOffsetLengthCompletion(ctx context.Context, offset int64, length int64) (*foundation.NSData, error) {
+func (x *CameraFile) RequestReadDataAtOffsetLengthCompletion(ctx context.Context, offset int64, length int64) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSData
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RequestReadDataAtOffsetLengthCompletion(offset, length, func(_p0 *foundation.NSData, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestReadDataAtOffset:length:completion:"), offset, length, _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSData
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// @method requestSecurityScopedURLWithCompletion @abstract ￼Requests a security scoped NSURL* for a media file on a mass storage volume. The returned NSURL* requires the use of startAccessingSecurityScopedResource, and stopAccessingSecurityScopedResource for access. @param completion Completion block called with an NSURL*, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// ￼Requests a security scoped NSURL* for a media file on a mass storage volume. The returned NSURL* requires the use of startAccessingSecurityScopedResource, and stopAccessingSecurityScopedResource for access.
 //
 // RequestSecurityScopedURLWithCompletion blocks until the operation completes or ctx is cancelled.
-func (x *CameraFile) RequestSecurityScopedURLWithCompletion(ctx context.Context) (*foundation.NSURL, error) {
+func (x *CameraFile) RequestSecurityScopedURLWithCompletion(ctx context.Context) (obj.Object, error) {
 	type _result struct {
-		val *foundation.NSURL
+		val obj.Object
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RequestSecurityScopedURLWithCompletion(func(_p0 *foundation.NSURL, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		_o.val = _p0
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = obj.Wrap(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestSecurityScopedURLWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
 	case <-ctx.Done():
-		var _zero *foundation.NSURL
+		var _zero obj.Object
 		return _zero, ctx.Err()
 	}
 }
 
-// @method requestFingerprintWithCompletion @abstract ￼Requests a fingerprint be generated for camera file. @param completion Completion block called with an NSString*, and an NSError* for status. @note The completion block will execute on an any available queue, often this will not be the main queue.
+// ￼Requests a fingerprint be generated for camera file.
 //
 // RequestFingerprintWithCompletion blocks until the operation completes or ctx is cancelled.
 func (x *CameraFile) RequestFingerprintWithCompletion(ctx context.Context) (string, error) {
@@ -150,16 +158,13 @@ func (x *CameraFile) RequestFingerprintWithCompletion(ctx context.Context) (stri
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.RequestFingerprintWithCompletion(func(_p0 *foundation.NSString, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = purego.GoString(_p0.Ptr())
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = purego.GoString(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestFingerprintWithCompletion:"), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -169,240 +174,195 @@ func (x *CameraFile) RequestFingerprintWithCompletion(ctx context.Context) (stri
 	}
 }
 
-// @property width @abstract Width of an image or movie frame.
-//
-// Width calls the underlying Width.
+// Width of an image or movie frame.
 func (x *CameraFile) Width() int {
-	return x.inner.Width()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("width"))
+	return _r
 }
 
-// @property height @abstract Height of an image or movie frame.
-//
-// Height calls the underlying Height.
+// Height of an image or movie frame.
 func (x *CameraFile) Height() int {
-	return x.inner.Height()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// @property originalFilename @abstract Original filename on disk
-//
-// OriginalFilename calls the underlying OriginalFilename.
+// Original filename on disk
 func (x *CameraFile) OriginalFilename() string {
-	_r := x.inner.OriginalFilename()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originalFilename"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property createdFilename @abstract Created filename
-//
-// CreatedFilename calls the underlying CreatedFilename.
+// Created filename
 func (x *CameraFile) CreatedFilename() string {
-	_r := x.inner.CreatedFilename()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createdFilename"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property fileSize @abstract ￼Size of file in bytes.
-//
-// FileSize calls the underlying FileSize.
+// ￼Size of file in bytes.
 func (x *CameraFile) FileSize() int64 {
-	return x.inner.FileSize()
+	_r := objc.Send[int64](objref.IDOf(x), objc.RegisterName("fileSize"))
+	return _r
 }
 
-// @property orientation @abstract ￼Desired orientation of image to use when it is downloaded. @discussion This property is set to ICEXIFOrientation1 initially. If the format of this file supports EXIF orientation tag, then this property will be updated to match the value of that tag, when the thumbnail or metadata for this file is received.
-//
-// Orientation calls the underlying Orientation.
-func (x *CameraFile) Orientation() ICEXIFOrientationType {
-	return ICEXIFOrientationType(x.inner.Orientation())
+// ￼Desired orientation of image to use when it is downloaded. This property is set to ICEXIFOrientation1 initially. If the format of this file supports EXIF orientation tag, then this property will be updated to match the value of that tag, when the thumbnail or metadata for this file is received.
+func (x *CameraFile) Orientation() EXIFOrientationType {
+	_r := objc.Send[EXIFOrientationType](objref.IDOf(x), objc.RegisterName("orientation"))
+	return _r
 }
 
-// SetOrientation calls the underlying SetOrientation.
-func (x *CameraFile) SetOrientation(orientation ICEXIFOrientationType) {
-	x.inner.SetOrientation(raw.ICEXIFOrientationType(orientation))
+func (x *CameraFile) SetOrientation(orientation EXIFOrientationType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOrientation:"), orientation)
 }
 
-// @property duration @abstract ￼Duration of audio/video file in seconds.
-//
-// Duration calls the underlying Duration.
+// ￼Duration of audio/video file in seconds.
 func (x *CameraFile) Duration() float64 {
-	return x.inner.Duration()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("duration"))
+	return _r
 }
 
-// @property highFramerate @abstract True if file is a slo-mo or high framerate video file, nil otherwise.
-//
-// HighFramerate calls the underlying HighFramerate.
+// True if file is a slo-mo or high framerate video file, nil otherwise.
 func (x *CameraFile) HighFramerate() bool {
-	return x.inner.HighFramerate()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("highFramerate"))
+	return _r
 }
 
-// @property timeLapse @abstract True if file is a time-lapse video file, nil otherwise.
-//
-// TimeLapse calls the underlying TimeLapse.
+// True if file is a time-lapse video file, nil otherwise.
 func (x *CameraFile) TimeLapse() bool {
-	return x.inner.TimeLapse()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("timeLapse"))
+	return _r
 }
 
-// @property firstPicked @abstract True if file is a firstPicked nil otherwise.
-//
-// FirstPicked calls the underlying FirstPicked.
+// True if file is a firstPicked nil otherwise.
 func (x *CameraFile) FirstPicked() bool {
-	return x.inner.FirstPicked()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("firstPicked"))
+	return _r
 }
 
-// @property originatingAssetID @abstract originatingAssetID of file if present, nil if not a HEIF or HVEC.
-//
-// OriginatingAssetID calls the underlying OriginatingAssetID.
+// originatingAssetID of file if present, nil if not a HEIF or HVEC.
 func (x *CameraFile) OriginatingAssetID() string {
-	_r := x.inner.OriginatingAssetID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("originatingAssetID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property groupUUID @abstract groupUUID of file if present, nil if file has no groupUUID.
-//
-// GroupUUID calls the underlying GroupUUID.
+// groupUUID of file if present, nil if file has no groupUUID.
 func (x *CameraFile) GroupUUID() string {
-	_r := x.inner.GroupUUID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupUUID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property gpsString @abstract GPS String in standard format.
-//
-// GpsString calls the underlying GpsString.
+// GPS String in standard format.
 func (x *CameraFile) GpsString() string {
-	_r := x.inner.GpsString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gpsString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property relatedUUID @abstract Internal related UUID for dbg/aae/etc.
-//
-// RelatedUUID calls the underlying RelatedUUID.
+// Internal related UUID for dbg/aae/etc.
 func (x *CameraFile) RelatedUUID() string {
-	_r := x.inner.RelatedUUID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relatedUUID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property burstUUID @abstract burstUUID of file if present, nil if not in a burst.
-//
-// BurstUUID calls the underlying BurstUUID.
+// burstUUID of file if present, nil if not in a burst.
 func (x *CameraFile) BurstUUID() string {
-	_r := x.inner.BurstUUID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("burstUUID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property burstFavorite @abstract True if burst favorite, ignored if not in a burst or not a burst favorite.
-//
-// BurstFavorite calls the underlying BurstFavorite.
+// True if burst favorite, ignored if not in a burst or not a burst favorite.
 func (x *CameraFile) BurstFavorite() bool {
-	return x.inner.BurstFavorite()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("burstFavorite"))
+	return _r
 }
 
-// @property burstPicked @abstract True if burst user picked, ignored if not in a burst or not a burst user picked.
-//
-// BurstPicked calls the underlying BurstPicked.
+// True if burst user picked, ignored if not in a burst or not a burst user picked.
 func (x *CameraFile) BurstPicked() bool {
-	return x.inner.BurstPicked()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("burstPicked"))
+	return _r
 }
 
-// @property sidecarFiles @abstract This property is NULL if there are no sidecar files associated with this file. Otherwise it is an array of ICCameraFile instances of sidecar files associated with this file. An example of a sidecar file is a file with the same base name as this file and having an extension XMP.
+// This property is NULL if there are no sidecar files associated with this file. Otherwise it is an array of ICCameraFile instances of sidecar files associated with this file. An example of a sidecar file is a file with the same base name as this file and having an extension XMP.
 //
 // SidecarFiles returns the collection as a Go slice.
 func (x *CameraFile) SidecarFiles() []*CameraItem {
-	arr := x.inner.SidecarFiles()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CameraItem {
-		return &CameraItem{inner: raw.ICCameraItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sidecarFiles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CameraItem { return CameraItemFromID(_id) })
 }
 
-// @property pairedRawImage @abstract A single item subset of the sidecarFiles array, which contains the logical RAW compliment of a JPG or other format image.
-//
-// PairedRawImage calls the underlying PairedRawImage.
+// A single item subset of the sidecarFiles array, which contains the logical RAW compliment of a JPG or other format image.
 func (x *CameraFile) PairedRawImage() *CameraFile {
-	_r := x.inner.PairedRawImage()
-	if _r == nil {
-		return nil
-	}
-	return &CameraFile{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pairedRawImage"))
+	return CameraFileFromID(_r)
 }
 
-// @property fileCreationDate @abstract Properties will either represent the actual file creation date, or nil.
-//
-// FileCreationDate calls the underlying FileCreationDate.
-func (x *CameraFile) FileCreationDate() *foundation.NSDate {
-	return x.inner.FileCreationDate()
+// Properties will either represent the actual file creation date, or nil.
+func (x *CameraFile) FileCreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileCreationDate"))
+	return obj.Wrap(_r)
 }
 
-// @property fileModificationDate @abstract Properties will either represent the actual file modification date, or nil.
-//
-// FileModificationDate calls the underlying FileModificationDate.
-func (x *CameraFile) FileModificationDate() *foundation.NSDate {
-	return x.inner.FileModificationDate()
+// Properties will either represent the actual file modification date, or nil.
+func (x *CameraFile) FileModificationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileModificationDate"))
+	return obj.Wrap(_r)
 }
 
-// @property exifCreationDate @abstract Properties will either represent the exif creation date, or nil.
-//
-// ExifCreationDate calls the underlying ExifCreationDate.
-func (x *CameraFile) ExifCreationDate() *foundation.NSDate {
-	return x.inner.ExifCreationDate()
+// Properties will either represent the exif creation date, or nil.
+func (x *CameraFile) ExifCreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exifCreationDate"))
+	return obj.Wrap(_r)
 }
 
-// @property exifModificationDate @abstract Properties will either represent the exif modification date, or nil.
-//
-// ExifModificationDate calls the underlying ExifModificationDate.
-func (x *CameraFile) ExifModificationDate() *foundation.NSDate {
-	return x.inner.ExifModificationDate()
+// Properties will either represent the exif modification date, or nil.
+func (x *CameraFile) ExifModificationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exifModificationDate"))
+	return obj.Wrap(_r)
 }
 
-// @property fingerprint @abstract A fingerprint generated from the camera file data date, or nil.
-//
-// Fingerprint calls the underlying Fingerprint.
+// A fingerprint generated from the camera file data date, or nil.
 func (x *CameraFile) Fingerprint() string {
-	_r := x.inner.Fingerprint()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fingerprint"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *CameraFile) asCameraItem() *raw.ICCameraItem { return &x.inner.ICCameraItem }
 
 // CameraFileable is the interface implemented by [CameraFile], for mocking and DI.
 type CameraFileable interface {
-	Unwrap() *raw.ICCameraFile
-	WithOrientation(orientation ICEXIFOrientationType) *CameraFile
-	RequestThumbnailDataWithOptionsCompletion(ctx context.Context, options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (*foundation.NSData, error)
-	RequestMetadataDictionaryWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSDictionary[objc.ID, objc.ID], unsafe.Pointer))
-	RequestDownloadWithOptionsCompletion(options *foundation.NSDictionary[*foundation.NSString, objc.ID], completion func(*foundation.NSString, unsafe.Pointer)) *foundation.NSProgress
-	RequestReadDataAtOffsetLengthCompletion(ctx context.Context, offset int64, length int64) (*foundation.NSData, error)
-	RequestSecurityScopedURLWithCompletion(ctx context.Context) (*foundation.NSURL, error)
+	obj.Object
+	WithOrientation(orientation EXIFOrientationType) *CameraFile
+	RequestThumbnailDataWithOptionsCompletion(ctx context.Context, options obj.Object) (obj.Object, error)
+	RequestReadDataAtOffsetLengthCompletion(ctx context.Context, offset int64, length int64) (obj.Object, error)
+	RequestSecurityScopedURLWithCompletion(ctx context.Context) (obj.Object, error)
 	RequestFingerprintWithCompletion(ctx context.Context) (string, error)
 	Width() int
 	Height() int
 	OriginalFilename() string
 	CreatedFilename() string
 	FileSize() int64
-	Orientation() ICEXIFOrientationType
-	SetOrientation(orientation ICEXIFOrientationType)
+	Orientation() EXIFOrientationType
+	SetOrientation(orientation EXIFOrientationType)
 	Duration() float64
 	HighFramerate() bool
 	TimeLapse() bool
@@ -416,10 +376,10 @@ type CameraFileable interface {
 	BurstPicked() bool
 	SidecarFiles() []*CameraItem
 	PairedRawImage() *CameraFile
-	FileCreationDate() *foundation.NSDate
-	FileModificationDate() *foundation.NSDate
-	ExifCreationDate() *foundation.NSDate
-	ExifModificationDate() *foundation.NSDate
+	FileCreationDate() obj.Object
+	FileModificationDate() obj.Object
+	ExifCreationDate() obj.Object
+	ExifModificationDate() obj.Object
 	Fingerprint() string
 }
 

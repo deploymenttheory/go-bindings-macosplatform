@@ -5,50 +5,71 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AccelerationStructurePassDescriptor wraps [raw.MTLAccelerationStructurePassDescriptor] with a fluent Go API.
+// AccelerationStructurePassDescriptor is an idiomatic wrapper over the Objective-C class MTLAccelerationStructurePassDescriptor.
 type AccelerationStructurePassDescriptor struct {
-	inner *raw.MTLAccelerationStructurePassDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLAccelerationStructurePassDescriptor].
-func (x *AccelerationStructurePassDescriptor) Unwrap() *raw.MTLAccelerationStructurePassDescriptor {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AccelerationStructurePassDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// AccelerationStructurePassDescriptorFromID adopts an existing object pointer as a AccelerationStructurePassDescriptor (nil for 0).
+// AccelerationStructurePassDescriptorFromID adopts an existing Objective-C object as a AccelerationStructurePassDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func AccelerationStructurePassDescriptorFromID(id objc.ID) *AccelerationStructurePassDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &AccelerationStructurePassDescriptor{inner: raw.MTLAccelerationStructurePassDescriptorFromID(id)}
+	x := &AccelerationStructurePassDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAccelerationStructurePassDescriptor creates a new [AccelerationStructurePassDescriptor].
-func NewAccelerationStructurePassDescriptor() *AccelerationStructurePassDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLAccelerationStructurePassDescriptor")), objc.RegisterName("new"))
-	return &AccelerationStructurePassDescriptor{inner: raw.MTLAccelerationStructurePassDescriptorFromID(_id)}
-}
-
-// SampleBufferAttachments calls the underlying SampleBufferAttachments.
-func (x *AccelerationStructurePassDescriptor) SampleBufferAttachments() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
-	_r := x.inner.SampleBufferAttachments()
-	if _r == nil {
+// accelerationStructurePassDescriptorAdopt wraps an Objective-C object that this code just created as a
+// AccelerationStructurePassDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func accelerationStructurePassDescriptorAdopt(id objc.ID) *AccelerationStructurePassDescriptor {
+	if id == 0 {
 		return nil
 	}
-	return &AccelerationStructurePassSampleBufferAttachmentDescriptorArray{inner: _r}
+	x := &AccelerationStructurePassDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AccelerationStructurePassDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AccelerationStructurePassDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AccelerationStructurePassDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAccelerationStructurePassDescriptor creates a new AccelerationStructurePassDescriptor.
+func NewAccelerationStructurePassDescriptor() *AccelerationStructurePassDescriptor {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLAccelerationStructurePassDescriptor")), objc.RegisterName("new"))
+	return accelerationStructurePassDescriptorAdopt(_id)
+}
+
+func (x *AccelerationStructurePassDescriptor) SampleBufferAttachments() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
+	return AccelerationStructurePassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }
 
 // AccelerationStructurePassDescriptorable is the interface implemented by [AccelerationStructurePassDescriptor], for mocking and DI.
 type AccelerationStructurePassDescriptorable interface {
-	Unwrap() *raw.MTLAccelerationStructurePassDescriptor
+	obj.Object
 	SampleBufferAttachments() *AccelerationStructurePassSampleBufferAttachmentDescriptorArray
 }
 

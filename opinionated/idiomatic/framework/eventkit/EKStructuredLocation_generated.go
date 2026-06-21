@@ -5,102 +5,109 @@
 package eventkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/eventkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A class that specifies a geofence to activate the alarm of a calendar item.
 //
-// StructuredLocation wraps [raw.EKStructuredLocation] with a fluent Go API.
+// StructuredLocation is an idiomatic wrapper over the Objective-C class EKStructuredLocation.
 type StructuredLocation struct {
-	inner *raw.EKStructuredLocation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.EKStructuredLocation].
-func (x *StructuredLocation) Unwrap() *raw.EKStructuredLocation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *StructuredLocation) ID() objc.ID { return x.inner.Ptr() }
-
-// StructuredLocationFromID adopts an existing object pointer as a StructuredLocation (nil for 0).
+// StructuredLocationFromID adopts an existing Objective-C object as a StructuredLocation
+// (nil for 0), retaining it and registering a release finalizer.
 func StructuredLocationFromID(id objc.ID) *StructuredLocation {
 	if id == 0 {
 		return nil
 	}
-	return &StructuredLocation{inner: raw.EKStructuredLocationFromID(id)}
+	x := &StructuredLocation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewStructuredLocation creates a new [StructuredLocation].
+// structuredLocationAdopt wraps an Objective-C object that this code just created as a
+// StructuredLocation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func structuredLocationAdopt(id objc.ID) *StructuredLocation {
+	if id == 0 {
+		return nil
+	}
+	x := &StructuredLocation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *StructuredLocation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *StructuredLocation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *StructuredLocation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewStructuredLocation creates a new StructuredLocation.
 func NewStructuredLocation() *StructuredLocation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("EKStructuredLocation")), objc.RegisterName("new"))
-	return &StructuredLocation{inner: raw.EKStructuredLocationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("EKStructuredLocation")), objc.RegisterName("new"))
+	return structuredLocationAdopt(_id)
 }
 
 // The title of the location.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *StructuredLocation) WithTitle(title string) *StructuredLocation {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // A minimum distance from the core location that would trigger the alarm or reminder.
 //
-// WithRadius sets the radius property and returns the receiver for chaining.
+// WithRadius sets radius and returns the receiver so calls can be chained.
 func (x *StructuredLocation) WithRadius(radius float64) *StructuredLocation {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 	return x
 }
 
-// Title calls the underlying Title.
 func (x *StructuredLocation) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
 func (x *StructuredLocation) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// GeoLocation calls the underlying GeoLocation.
-func (x *StructuredLocation) GeoLocation() unsafe.Pointer {
-	return x.inner.GeoLocation()
-}
-
-// SetGeoLocation calls the underlying SetGeoLocation.
-func (x *StructuredLocation) SetGeoLocation(geoLocation unsafe.Pointer) {
-	x.inner.SetGeoLocation(geoLocation)
-}
-
-// Radius calls the underlying Radius.
 func (x *StructuredLocation) Radius() float64 {
-	return x.inner.Radius()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("radius"))
+	return _r
 }
 
-// SetRadius calls the underlying SetRadius.
 func (x *StructuredLocation) SetRadius(radius float64) {
-	x.inner.SetRadius(radius)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRadius:"), radius)
 }
-
-func (x *StructuredLocation) asObject() *raw.EKObject { return &x.inner.EKObject }
 
 // StructuredLocationable is the interface implemented by [StructuredLocation], for mocking and DI.
 type StructuredLocationable interface {
-	Unwrap() *raw.EKStructuredLocation
+	obj.Object
 	WithTitle(title string) *StructuredLocation
 	WithRadius(radius float64) *StructuredLocation
 	Title() string
 	SetTitle(title string)
-	GeoLocation() unsafe.Pointer
-	SetGeoLocation(geoLocation unsafe.Pointer)
 	Radius() float64
 	SetRadius(radius float64)
 }

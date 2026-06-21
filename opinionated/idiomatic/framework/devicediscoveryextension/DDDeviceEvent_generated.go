@@ -5,62 +5,83 @@
 package devicediscoveryextension
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/devicediscoveryextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides a device or communicates its change in status.
 //
-// DDDeviceEvent wraps [raw.DDDeviceEvent] with a fluent Go API.
+// DDDeviceEvent is an idiomatic wrapper over the Objective-C class DDDeviceEvent.
 type DDDeviceEvent struct {
-	inner *raw.DDDeviceEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DDDeviceEvent].
-func (x *DDDeviceEvent) Unwrap() *raw.DDDeviceEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DDDeviceEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// DDDeviceEventFromID adopts an existing object pointer as a DDDeviceEvent (nil for 0).
+// DDDeviceEventFromID adopts an existing Objective-C object as a DDDeviceEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func DDDeviceEventFromID(id objc.ID) *DDDeviceEvent {
 	if id == 0 {
 		return nil
 	}
-	return &DDDeviceEvent{inner: raw.DDDeviceEventFromID(id)}
+	x := &DDDeviceEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// dDDeviceEventAdopt wraps an Objective-C object that this code just created as a
+// DDDeviceEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dDDeviceEventAdopt(id objc.ID) *DDDeviceEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &DDDeviceEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DDDeviceEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DDDeviceEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DDDeviceEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an event object that conveys status for a discovered device of interest.
 //
-// NewDDDeviceEventWithEventTypeDevice creates a new [DDDeviceEvent].
-func NewDDDeviceEventWithEventTypeDevice(type_ DDEventType, device *raw.DDDevice) *DDDeviceEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("DDDeviceEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEventType:device:"), raw.DDEventType(type_), device.Ptr())
-	return &DDDeviceEvent{inner: raw.DDDeviceEventFromID(_id)}
+// NewDDDeviceEventWithEventTypeDevice creates a new DDDeviceEvent.
+func NewDDDeviceEventWithEventTypeDevice(type_ DDEventType, device *DDDevice) *DDDeviceEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("DDDeviceEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEventType:device:"), type_, objref.IDOf(device))
+	return dDDeviceEventAdopt(_id)
 }
 
 // Device found or lost.
-//
-// Device calls the underlying Device.
 func (x *DDDeviceEvent) Device() *DDDevice {
-	_r := x.inner.Device()
-	if _r == nil {
-		return nil
-	}
-	return &DDDevice{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return DDDeviceFromID(_r)
 }
 
 // Type of event.
-//
-// EventType calls the underlying EventType.
 func (x *DDDeviceEvent) EventType() DDEventType {
-	return DDEventType(x.inner.EventType())
+	_r := objc.Send[DDEventType](objref.IDOf(x), objc.RegisterName("eventType"))
+	return _r
 }
 
 // DDDeviceEventable is the interface implemented by [DDDeviceEvent], for mocking and DI.
 type DDDeviceEventable interface {
-	Unwrap() *raw.DDDeviceEvent
+	obj.Object
 	Device() *DDDevice
 	EventType() DDEventType
 }

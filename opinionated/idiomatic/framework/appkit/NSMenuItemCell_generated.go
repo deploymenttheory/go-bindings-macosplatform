@@ -5,730 +5,673 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that handles the measurement and display of a single menu item in its encompassing frame.
 //
-// MenuItemCell wraps [raw.NSMenuItemCell] with a fluent Go API.
+// MenuItemCell is an idiomatic wrapper over the Objective-C class NSMenuItemCell.
 type MenuItemCell struct {
-	inner *raw.NSMenuItemCell
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMenuItemCell].
-func (x *MenuItemCell) Unwrap() *raw.NSMenuItemCell { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MenuItemCell) ID() objc.ID { return x.inner.Ptr() }
-
-// MenuItemCellFromID adopts an existing object pointer as a MenuItemCell (nil for 0).
+// MenuItemCellFromID adopts an existing Objective-C object as a MenuItemCell
+// (nil for 0), retaining it and registering a release finalizer.
 func MenuItemCellFromID(id objc.ID) *MenuItemCell {
 	if id == 0 {
 		return nil
 	}
-	return &MenuItemCell{inner: raw.NSMenuItemCellFromID(id)}
+	x := &MenuItemCell{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMenuItemCellTextCell creates a new [MenuItemCell].
+// menuItemCellAdopt wraps an Objective-C object that this code just created as a
+// MenuItemCell (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func menuItemCellAdopt(id objc.ID) *MenuItemCell {
+	if id == 0 {
+		return nil
+	}
+	x := &MenuItemCell{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MenuItemCell) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MenuItemCell) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MenuItemCell) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMenuItemCellTextCell creates a new MenuItemCell.
 func NewMenuItemCellTextCell(string_ string) *MenuItemCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMenuItemCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &MenuItemCell{inner: raw.NSMenuItemCellFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initTextCell:"), purego.NSString(string_))
+	return menuItemCellAdopt(_id)
 }
 
-// NewMenuItemCellWithCoder creates a new [MenuItemCell].
-func NewMenuItemCellWithCoder(coder *foundation.NSCoder) *MenuItemCell {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMenuItemCell")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), coder.Ptr())
-	return &MenuItemCell{inner: raw.NSMenuItemCellFromID(_id)}
+// NewMenuItemCellWithCoder creates a new MenuItemCell.
+func NewMenuItemCellWithCoder(coder obj.Object) *MenuItemCell {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSMenuItemCell")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(coder))
+	return menuItemCellAdopt(_id)
 }
 
 // The menu item object associated with the cell.
 //
-// WithMenuItem sets the menuItem property and returns the receiver for chaining.
+// WithMenuItem sets menuItem and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithMenuItem(menuItem *MenuItem) *MenuItemCell {
-	x.inner.SetMenuItem(menuItem.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
 	return x
 }
 
 // A Boolean value indicating whether the size of the menu needs to be calculated.
 //
-// WithNeedsSizing sets the needsSizing property and returns the receiver for chaining.
+// WithNeedsSizing sets needsSizing and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithNeedsSizing(needsSizing bool) *MenuItemCell {
-	x.inner.SetNeedsSizing(needsSizing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsSizing:"), needsSizing)
 	return x
 }
 
 // A Boolean value indicating whether the menu item needs to be displayed.
 //
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithNeedsDisplay(needsDisplay bool) *MenuItemCell {
-	x.inner.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
 // The appearance of the button’s border, if it has one.
 //
-// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *MenuItemCell) WithBezelStyle(bezelStyle NSBezelStyle) *MenuItemCell {
-	x.inner.NSButtonCell.SetBezelStyle(raw.NSBezelStyle(bezelStyle))
+// WithBezelStyle sets bezelStyle and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithBezelStyle(bezelStyle BezelStyle) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 	return x
 }
 
 // A set of flags that indicate how the button highlights when it receives a mouse-down event (that is, when the button is pressed).
 //
-// WithHighlightsBy sets the highlightsBy property and returns the receiver for chaining.
-func (x *MenuItemCell) WithHighlightsBy(highlightsBy NSCellStyleMask) *MenuItemCell {
-	x.inner.NSButtonCell.SetHighlightsBy(raw.NSCellStyleMask(highlightsBy))
+// WithHighlightsBy sets highlightsBy and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithHighlightsBy(highlightsBy CellStyleMask) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlightsBy:"), highlightsBy)
 	return x
 }
 
 // The flags that indicate how the button cell shows its alternate state.
 //
-// WithShowsStateBy sets the showsStateBy property and returns the receiver for chaining.
-func (x *MenuItemCell) WithShowsStateBy(showsStateBy NSCellStyleMask) *MenuItemCell {
-	x.inner.NSButtonCell.SetShowsStateBy(raw.NSCellStyleMask(showsStateBy))
+// WithShowsStateBy sets showsStateBy and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithShowsStateBy(showsStateBy CellStyleMask) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsStateBy:"), showsStateBy)
 	return x
 }
 
 // The title displayed by the button when it’s in its normal state as an attributed string.
 //
-// WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
-func (x *MenuItemCell) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *MenuItemCell {
-	x.inner.NSButtonCell.SetAttributedTitle(attributedTitle)
+// WithAttributedTitle sets attributedTitle and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithAttributedTitle(attributedTitle obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return x
 }
 
 // The string displayed by the button when it’s in its alternate state.
 //
-// WithAlternateTitle sets the alternateTitle property and returns the receiver for chaining.
+// WithAlternateTitle sets alternateTitle and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithAlternateTitle(alternateTitle string) *MenuItemCell {
-	x.inner.NSButtonCell.SetAlternateTitle(foundation.NSStringStringWithUTF8String(alternateTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateTitle:"), purego.NSString(alternateTitle))
 	return x
 }
 
 // The title displayed by the button when it’s in its alternate state, as an attributed string.
 //
-// WithAttributedAlternateTitle sets the attributedAlternateTitle property and returns the receiver for chaining.
-func (x *MenuItemCell) WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *MenuItemCell {
-	x.inner.NSButtonCell.SetAttributedAlternateTitle(attributedAlternateTitle)
+// WithAttributedAlternateTitle sets attributedAlternateTitle and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedAlternateTitle:"), objref.IDOf(attributedAlternateTitle))
 	return x
 }
 
 // The image the button displays in its alternate state.
 //
-// WithAlternateImage sets the alternateImage property and returns the receiver for chaining.
+// WithAlternateImage sets alternateImage and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithAlternateImage(alternateImage *Image) *MenuItemCell {
-	x.inner.NSButtonCell.SetAlternateImage(alternateImage.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlternateImage:"), objref.IDOf(alternateImage))
 	return x
 }
 
 // The position of the button’s image relative to its title.
 //
-// WithImagePosition sets the imagePosition property and returns the receiver for chaining.
-func (x *MenuItemCell) WithImagePosition(imagePosition NSCellImagePosition) *MenuItemCell {
-	x.inner.NSButtonCell.SetImagePosition(raw.NSCellImagePosition(imagePosition))
+// WithImagePosition sets imagePosition and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithImagePosition(imagePosition CellImagePosition) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImagePosition:"), imagePosition)
 	return x
 }
 
 // The scale factor for the button’s image.
 //
-// WithImageScaling sets the imageScaling property and returns the receiver for chaining.
-func (x *MenuItemCell) WithImageScaling(imageScaling NSImageScaling) *MenuItemCell {
-	x.inner.NSButtonCell.SetImageScaling(raw.NSImageScaling(imageScaling))
+// WithImageScaling sets imageScaling and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithImageScaling(imageScaling ImageScaling) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageScaling:"), imageScaling)
 	return x
 }
 
 // The button’s key-equivalent character.
 //
-// WithKeyEquivalent sets the keyEquivalent property and returns the receiver for chaining.
+// WithKeyEquivalent sets keyEquivalent and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithKeyEquivalent(keyEquivalent string) *MenuItemCell {
-	x.inner.NSButtonCell.SetKeyEquivalent(foundation.NSStringStringWithUTF8String(keyEquivalent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalent:"), purego.NSString(keyEquivalent))
 	return x
 }
 
 // The mask that identifies the modifier keys for the button’s key equivalent.
 //
-// WithKeyEquivalentModifierMask sets the keyEquivalentModifierMask property and returns the receiver for chaining.
-func (x *MenuItemCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *MenuItemCell {
-	x.inner.NSButtonCell.SetKeyEquivalentModifierMask(raw.NSEventModifierFlags(keyEquivalentModifierMask))
+// WithKeyEquivalentModifierMask sets keyEquivalentModifierMask and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentModifierMask:"), keyEquivalentModifierMask)
 	return x
 }
 
 // A Boolean value that indicates if the button is transparent.
 //
-// WithTransparent sets the transparent property and returns the receiver for chaining.
+// WithTransparent sets transparent and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithTransparent(transparent bool) *MenuItemCell {
-	x.inner.NSButtonCell.SetTransparent(transparent)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTransparent:"), transparent)
 	return x
 }
 
 // A Boolean value that indicates if the button’s image and text appear “dim” when the button is disabled.
 //
-// WithImageDimsWhenDisabled sets the imageDimsWhenDisabled property and returns the receiver for chaining.
+// WithImageDimsWhenDisabled sets imageDimsWhenDisabled and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *MenuItemCell {
-	x.inner.NSButtonCell.SetImageDimsWhenDisabled(imageDimsWhenDisabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageDimsWhenDisabled:"), imageDimsWhenDisabled)
 	return x
 }
 
 // A Boolean value that indicates if the button displays its border only when the pointer is over it.
 //
-// WithShowsBorderOnlyWhileMouseInside sets the showsBorderOnlyWhileMouseInside property and returns the receiver for chaining.
+// WithShowsBorderOnlyWhileMouseInside sets showsBorderOnlyWhileMouseInside and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *MenuItemCell {
-	x.inner.NSButtonCell.SetShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsBorderOnlyWhileMouseInside:"), showsBorderOnlyWhileMouseInside)
 	return x
 }
 
 // The sound that’s played when the user presses the button (that is during a mouse-down event).
 //
-// WithSound sets the sound property and returns the receiver for chaining.
+// WithSound sets sound and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithSound(sound *Sound) *MenuItemCell {
-	x.inner.NSButtonCell.SetSound(sound.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSound:"), objref.IDOf(sound))
 	return x
 }
 
 // The background color of the button.
 //
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithBackgroundColor(backgroundColor *Color) *MenuItemCell {
-	x.inner.NSButtonCell.SetBackgroundColor(backgroundColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
 // The gradient of the button’s border.
 //
-// WithGradientType sets the gradientType property and returns the receiver for chaining.
-func (x *MenuItemCell) WithGradientType(gradientType NSGradientType) *MenuItemCell {
-	x.inner.NSButtonCell.SetGradientType(raw.NSGradientType(gradientType))
+// WithGradientType sets gradientType and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithGradientType(gradientType GradientType) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGradientType:"), gradientType)
 	return x
 }
 
 // The font used to draw the button’s key equivalent.
 //
-// WithKeyEquivalentFont sets the keyEquivalentFont property and returns the receiver for chaining.
+// WithKeyEquivalentFont sets keyEquivalentFont and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithKeyEquivalentFont(keyEquivalentFont *Font) *MenuItemCell {
-	x.inner.NSButtonCell.SetKeyEquivalentFont(keyEquivalentFont.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyEquivalentFont:"), objref.IDOf(keyEquivalentFont))
 	return x
 }
 
 // The view associated with the cell.
 //
-// WithControlView sets the controlView property and returns the receiver for chaining.
+// WithControlView sets controlView and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithControlView(controlView ViewProvider) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetControlView(controlView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlView:"), objref.IDOf(controlView))
 	return x
 }
 
 // The type of the cell.
 //
-// WithType sets the type_ property and returns the receiver for chaining.
-func (x *MenuItemCell) WithType(type_ NSCellType) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetType(raw.NSCellType(type_))
+// WithType sets type_ and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithType(type_ CellType) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setType:"), type_)
 	return x
 }
 
 // The cell’s current state.
 //
-// WithState sets the state property and returns the receiver for chaining.
+// WithState sets state and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithState(state int) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetState(state)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setState:"), state)
 	return x
 }
 
 // The object that receives the cell’s action messages.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *MenuItemCell) WithTarget(target objc.ID) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetTarget(target)
-	return x
-}
-
-// The action performed by the cell.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *MenuItemCell) WithAction(action objc.SEL) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithTarget(target obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // A tag for identifying the cell.
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithTag(tag int) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // The cell’s title text.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithTitle(title string) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // A Boolean value indicating whether the cell is currently enabled.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithEnabled(enabled bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the cell sends its action message continuously during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithContinuous(continuous bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value indicating whether the cell is editable.
 //
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable sets editable and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithEditable(editable bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
 // A Boolean value indicating whether the cell’s text can be selected.
 //
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable sets selectable and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithSelectable(selectable bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetSelectable(selectable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
 // A Boolean value indicating whether the cell draws itself outlined with a plain border.
 //
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered sets bordered and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithBordered(bordered bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a bezeled border.
 //
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled sets bezeled and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithBezeled(bezeled bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
 // A Boolean value indicating whether excess text scrolls past the cell’s bounds.
 //
-// WithScrollable sets the scrollable property and returns the receiver for chaining.
+// WithScrollable sets scrollable and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithScrollable(scrollable bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetScrollable(scrollable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScrollable:"), scrollable)
 	return x
 }
 
 // A Boolean value indicating whether the cell has a highlighted appearance.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithHighlighted(highlighted bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The alignment of the cell’s text.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *MenuItemCell) WithAlignment(alignment NSTextAlignment) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithAlignment(alignment TextAlignment) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // A Boolean value indicating whether the cell wraps text whose length that exceeds the cell’s frame.
 //
-// WithWraps sets the wraps property and returns the receiver for chaining.
+// WithWraps sets wraps and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithWraps(wraps bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetWraps(wraps)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWraps:"), wraps)
 	return x
 }
 
 // The font that the cell uses to display text.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithFont(font *Font) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // The cell’s formatter object.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *MenuItemCell) WithFormatter(formatter *foundation.NSFormatter) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithFormatter(formatter obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The cell’s value as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *MenuItemCell) WithObjectValue(objectValue objc.ID) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithObjectValue(objectValue obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The cell’s value as a string.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithStringValue(stringValue string) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The cell’s value as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithIntValue(intValue int) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The cell’s value as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithFloatValue(floatValue float32) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The cell’s value as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithDoubleValue(doubleValue float64) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The cell’s value as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithIntegerValue(integerValue int) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The image displayed by the cell, if any.
 //
-// WithImage sets the image property and returns the receiver for chaining.
+// WithImage sets image and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithImage(image *Image) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetImage(image.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImage:"), objref.IDOf(image))
 	return x
 }
 
 // The size of the cell.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *MenuItemCell) WithControlSize(controlSize NSControlSize) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithControlSize(controlSize ControlSize) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The object represented by the cell.
 //
-// WithRepresentedObject sets the representedObject property and returns the receiver for chaining.
-func (x *MenuItemCell) WithRepresentedObject(representedObject objc.ID) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetRepresentedObject(representedObject)
+// WithRepresentedObject sets representedObject and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithRepresentedObject(representedObject obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRepresentedObject:"), objref.IDOf(representedObject))
 	return x
 }
 
 // The cell’s contextual menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithMenu(menu *Menu) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // A Boolean value indicating whether the cell’s control object sends its action message when the user finishes editing the cell’s text.
 //
-// WithSendsActionOnEndEditing sets the sendsActionOnEndEditing property and returns the receiver for chaining.
+// WithSendsActionOnEndEditing sets sendsActionOnEndEditing and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetSendsActionOnEndEditing(sendsActionOnEndEditing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsActionOnEndEditing:"), sendsActionOnEndEditing)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *MenuItemCell) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithBaseWritingDirection(baseWritingDirection WritingDirection) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // The line break mode to use when drawing text in the cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *MenuItemCell) WithLineBreakMode(lineBreakMode NSLineBreakMode) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithLineBreakMode(lineBreakMode LineBreakMode) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell assumes responsibility for undo operations.
 //
-// WithAllowsUndo sets the allowsUndo property and returns the receiver for chaining.
+// WithAllowsUndo sets allowsUndo and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithAllowsUndo(allowsUndo bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetAllowsUndo(allowsUndo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsUndo:"), allowsUndo)
 	return x
 }
 
 // A Boolean value indicating whether the cell truncates text that does not fit within the cell’s bounds.
 //
-// WithTruncatesLastVisibleLine sets the truncatesLastVisibleLine property and returns the receiver for chaining.
+// WithTruncatesLastVisibleLine sets truncatesLastVisibleLine and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetTruncatesLastVisibleLine(truncatesLastVisibleLine)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTruncatesLastVisibleLine:"), truncatesLastVisibleLine)
 	return x
 }
 
 // The layout direction of the user interface.
 //
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *MenuItemCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
 // A Boolean value indicating whether the cell restricts layout and rendering of text to a single line.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithUsesSingleLineMode(usesSingleLineMode bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // A Boolean value indicating whether the cell refuses the first responder status.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithRefusesFirstResponder(refusesFirstResponder bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value indicating whether the cell provides a visual indication that it is the first responder.
 //
-// WithShowsFirstResponder sets the showsFirstResponder property and returns the receiver for chaining.
+// WithShowsFirstResponder sets showsFirstResponder and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithShowsFirstResponder(showsFirstResponder bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetShowsFirstResponder(showsFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShowsFirstResponder:"), showsFirstResponder)
 	return x
 }
 
 // The type of focus ring to use with the associated view.
 //
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *MenuItemCell) WithFocusRingType(focusRingType NSFocusRingType) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithFocusRingType(focusRingType FocusRingType) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
 // The cell’s value as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *MenuItemCell) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithAttributedStringValue(attributedStringValue obj.Object) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // A Boolean value indicating whether the cell allows the editing of its content’s text attributes by the user.
 //
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes sets allowsEditingTextAttributes and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports the importation of images into its text.
 //
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics sets importsGraphics and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithImportsGraphics(importsGraphics bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
 // A Boolean value indicating whether the cell supports three states instead of two.
 //
-// WithAllowsMixedState sets the allowsMixedState property and returns the receiver for chaining.
+// WithAllowsMixedState sets allowsMixedState and returns the receiver so calls can be chained.
 func (x *MenuItemCell) WithAllowsMixedState(allowsMixedState bool) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetAllowsMixedState(allowsMixedState)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsMixedState:"), allowsMixedState)
 	return x
 }
 
 // The cell’s background style.
 //
-// WithBackgroundStyle sets the backgroundStyle property and returns the receiver for chaining.
-func (x *MenuItemCell) WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetBackgroundStyle(raw.NSBackgroundStyle(backgroundStyle))
+// WithBackgroundStyle sets backgroundStyle and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithBackgroundStyle(backgroundStyle BackgroundStyle) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundStyle:"), backgroundStyle)
 	return x
 }
 
 // The cell’s control tint.
 //
-// WithControlTint sets the controlTint property and returns the receiver for chaining.
-func (x *MenuItemCell) WithControlTint(controlTint NSControlTint) *MenuItemCell {
-	x.inner.NSButtonCell.NSActionCell.NSCell.SetControlTint(raw.NSControlTint(controlTint))
+// WithControlTint sets controlTint and returns the receiver so calls can be chained.
+func (x *MenuItemCell) WithControlTint(controlTint ControlTint) *MenuItemCell {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlTint:"), controlTint)
 	return x
 }
 
 // Calculates the minimum required width and height of the receiver’s menu item.
-//
-// CalcSize calls the underlying CalcSize.
 func (x *MenuItemCell) CalcSize() {
-	x.inner.CalcSize()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("calcSize"))
 }
 
-// Returns the rectangle into which the menu item’s state image should be drawn.
-//
-// StateImageRectForBounds calls the underlying StateImageRectForBounds.
-func (x *MenuItemCell) StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.StateImageRectForBounds(cellFrame)
-}
-
-// Returns the rectangle into which the menu item’s key equivalent should be drawn.
-//
-// KeyEquivalentRectForBounds calls the underlying KeyEquivalentRectForBounds.
-func (x *MenuItemCell) KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect {
-	return x.inner.KeyEquivalentRectForBounds(cellFrame)
-}
-
-// Draws a menu item separator.
-//
-// DrawSeparatorItemWithFrameInView calls the underlying DrawSeparatorItemWithFrameInView.
-func (x *MenuItemCell) DrawSeparatorItemWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.DrawSeparatorItemWithFrameInView(cellFrame, controlView)
-}
-
-// Draws the state image associated with the menu item.
-//
-// DrawStateImageWithFrameInView calls the underlying DrawStateImageWithFrameInView.
-func (x *MenuItemCell) DrawStateImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.DrawStateImageWithFrameInView(cellFrame, controlView)
-}
-
-// Draws the image associated with the menu item.
-//
-// DrawImageWithFrameInView calls the underlying DrawImageWithFrameInView.
-func (x *MenuItemCell) DrawImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.DrawImageWithFrameInView(cellFrame, controlView)
-}
-
-// Draws the title associated with the menu item.
-//
-// DrawTitleWithFrameInView calls the underlying DrawTitleWithFrameInView.
-func (x *MenuItemCell) DrawTitleWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.DrawTitleWithFrameInView(cellFrame, controlView)
-}
-
-// Draws the key equivalent associated with the menu item.
-//
-// DrawKeyEquivalentWithFrameInView calls the underlying DrawKeyEquivalentWithFrameInView.
-func (x *MenuItemCell) DrawKeyEquivalentWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.DrawKeyEquivalentWithFrameInView(cellFrame, controlView)
-}
-
-// Draws the borders and background associated with the receiver’s menu item (if any).
-//
-// DrawBorderAndBackgroundWithFrameInView calls the underlying DrawBorderAndBackgroundWithFrameInView.
-func (x *MenuItemCell) DrawBorderAndBackgroundWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView) {
-	x.inner.DrawBorderAndBackgroundWithFrameInView(cellFrame, controlView)
-}
-
-// MenuItem calls the underlying MenuItem.
 func (x *MenuItemCell) MenuItem() *MenuItem {
-	_r := x.inner.MenuItem()
-	if _r == nil {
-		return nil
-	}
-	return &MenuItem{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("menuItem"))
+	return MenuItemFromID(_r)
 }
 
-// SetMenuItem calls the underlying SetMenuItem.
-func (x *MenuItemCell) SetMenuItem(menuItem *raw.NSMenuItem) {
-	x.inner.SetMenuItem(menuItem)
+func (x *MenuItemCell) SetMenuItem(menuItem *MenuItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenuItem:"), objref.IDOf(menuItem))
 }
 
-// NeedsSizing calls the underlying NeedsSizing.
 func (x *MenuItemCell) NeedsSizing() bool {
-	return x.inner.NeedsSizing()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsSizing"))
+	return _r
 }
 
-// SetNeedsSizing calls the underlying SetNeedsSizing.
 func (x *MenuItemCell) SetNeedsSizing(needsSizing bool) {
-	x.inner.SetNeedsSizing(needsSizing)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsSizing:"), needsSizing)
 }
 
-// NeedsDisplay calls the underlying NeedsDisplay.
 func (x *MenuItemCell) NeedsDisplay() bool {
-	return x.inner.NeedsDisplay()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("needsDisplay"))
+	return _r
 }
 
-// SetNeedsDisplay calls the underlying SetNeedsDisplay.
 func (x *MenuItemCell) SetNeedsDisplay(needsDisplay bool) {
-	x.inner.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 }
 
-// StateImageWidth calls the underlying StateImageWidth.
 func (x *MenuItemCell) StateImageWidth() float64 {
-	return x.inner.StateImageWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("stateImageWidth"))
+	return _r
 }
 
-// ImageWidth calls the underlying ImageWidth.
 func (x *MenuItemCell) ImageWidth() float64 {
-	return x.inner.ImageWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("imageWidth"))
+	return _r
 }
 
-// TitleWidth calls the underlying TitleWidth.
 func (x *MenuItemCell) TitleWidth() float64 {
-	return x.inner.TitleWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("titleWidth"))
+	return _r
 }
 
-// KeyEquivalentWidth calls the underlying KeyEquivalentWidth.
 func (x *MenuItemCell) KeyEquivalentWidth() float64 {
-	return x.inner.KeyEquivalentWidth()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("keyEquivalentWidth"))
+	return _r
 }
-
-func (x *MenuItemCell) asMenuItemCell() *raw.NSMenuItemCell { return x.inner }
-
-func (x *MenuItemCell) asButtonCell() *raw.NSButtonCell { return &x.inner.NSButtonCell }
-
-func (x *MenuItemCell) asActionCell() *raw.NSActionCell { return &x.inner.NSButtonCell.NSActionCell }
-
-func (x *MenuItemCell) asCell() *raw.NSCell { return &x.inner.NSButtonCell.NSActionCell.NSCell }
 
 // MenuItemCellable is the interface implemented by [MenuItemCell], for mocking and DI.
 type MenuItemCellable interface {
-	Unwrap() *raw.NSMenuItemCell
+	obj.Object
 	WithMenuItem(menuItem *MenuItem) *MenuItemCell
 	WithNeedsSizing(needsSizing bool) *MenuItemCell
 	WithNeedsDisplay(needsDisplay bool) *MenuItemCell
-	WithBezelStyle(bezelStyle NSBezelStyle) *MenuItemCell
-	WithHighlightsBy(highlightsBy NSCellStyleMask) *MenuItemCell
-	WithShowsStateBy(showsStateBy NSCellStyleMask) *MenuItemCell
-	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *MenuItemCell
+	WithBezelStyle(bezelStyle BezelStyle) *MenuItemCell
+	WithHighlightsBy(highlightsBy CellStyleMask) *MenuItemCell
+	WithShowsStateBy(showsStateBy CellStyleMask) *MenuItemCell
+	WithAttributedTitle(attributedTitle obj.Object) *MenuItemCell
 	WithAlternateTitle(alternateTitle string) *MenuItemCell
-	WithAttributedAlternateTitle(attributedAlternateTitle *foundation.NSAttributedString) *MenuItemCell
+	WithAttributedAlternateTitle(attributedAlternateTitle obj.Object) *MenuItemCell
 	WithAlternateImage(alternateImage *Image) *MenuItemCell
-	WithImagePosition(imagePosition NSCellImagePosition) *MenuItemCell
-	WithImageScaling(imageScaling NSImageScaling) *MenuItemCell
+	WithImagePosition(imagePosition CellImagePosition) *MenuItemCell
+	WithImageScaling(imageScaling ImageScaling) *MenuItemCell
 	WithKeyEquivalent(keyEquivalent string) *MenuItemCell
-	WithKeyEquivalentModifierMask(keyEquivalentModifierMask NSEventModifierFlags) *MenuItemCell
+	WithKeyEquivalentModifierMask(keyEquivalentModifierMask EventModifierFlags) *MenuItemCell
 	WithTransparent(transparent bool) *MenuItemCell
 	WithImageDimsWhenDisabled(imageDimsWhenDisabled bool) *MenuItemCell
 	WithShowsBorderOnlyWhileMouseInside(showsBorderOnlyWhileMouseInside bool) *MenuItemCell
 	WithSound(sound *Sound) *MenuItemCell
 	WithBackgroundColor(backgroundColor *Color) *MenuItemCell
-	WithGradientType(gradientType NSGradientType) *MenuItemCell
+	WithGradientType(gradientType GradientType) *MenuItemCell
 	WithKeyEquivalentFont(keyEquivalentFont *Font) *MenuItemCell
 	WithControlView(controlView ViewProvider) *MenuItemCell
-	WithType(type_ NSCellType) *MenuItemCell
+	WithType(type_ CellType) *MenuItemCell
 	WithState(state int) *MenuItemCell
-	WithTarget(target objc.ID) *MenuItemCell
-	WithAction(action objc.SEL) *MenuItemCell
+	WithTarget(target obj.Object) *MenuItemCell
 	WithTag(tag int) *MenuItemCell
 	WithTitle(title string) *MenuItemCell
 	WithEnabled(enabled bool) *MenuItemCell
@@ -739,47 +682,39 @@ type MenuItemCellable interface {
 	WithBezeled(bezeled bool) *MenuItemCell
 	WithScrollable(scrollable bool) *MenuItemCell
 	WithHighlighted(highlighted bool) *MenuItemCell
-	WithAlignment(alignment NSTextAlignment) *MenuItemCell
+	WithAlignment(alignment TextAlignment) *MenuItemCell
 	WithWraps(wraps bool) *MenuItemCell
 	WithFont(font *Font) *MenuItemCell
-	WithFormatter(formatter *foundation.NSFormatter) *MenuItemCell
-	WithObjectValue(objectValue objc.ID) *MenuItemCell
+	WithFormatter(formatter obj.Object) *MenuItemCell
+	WithObjectValue(objectValue obj.Object) *MenuItemCell
 	WithStringValue(stringValue string) *MenuItemCell
 	WithIntValue(intValue int) *MenuItemCell
 	WithFloatValue(floatValue float32) *MenuItemCell
 	WithDoubleValue(doubleValue float64) *MenuItemCell
 	WithIntegerValue(integerValue int) *MenuItemCell
 	WithImage(image *Image) *MenuItemCell
-	WithControlSize(controlSize NSControlSize) *MenuItemCell
-	WithRepresentedObject(representedObject objc.ID) *MenuItemCell
+	WithControlSize(controlSize ControlSize) *MenuItemCell
+	WithRepresentedObject(representedObject obj.Object) *MenuItemCell
 	WithMenu(menu *Menu) *MenuItemCell
 	WithSendsActionOnEndEditing(sendsActionOnEndEditing bool) *MenuItemCell
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *MenuItemCell
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *MenuItemCell
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *MenuItemCell
+	WithLineBreakMode(lineBreakMode LineBreakMode) *MenuItemCell
 	WithAllowsUndo(allowsUndo bool) *MenuItemCell
 	WithTruncatesLastVisibleLine(truncatesLastVisibleLine bool) *MenuItemCell
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *MenuItemCell
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *MenuItemCell
 	WithUsesSingleLineMode(usesSingleLineMode bool) *MenuItemCell
 	WithRefusesFirstResponder(refusesFirstResponder bool) *MenuItemCell
 	WithShowsFirstResponder(showsFirstResponder bool) *MenuItemCell
-	WithFocusRingType(focusRingType NSFocusRingType) *MenuItemCell
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *MenuItemCell
+	WithFocusRingType(focusRingType FocusRingType) *MenuItemCell
+	WithAttributedStringValue(attributedStringValue obj.Object) *MenuItemCell
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *MenuItemCell
 	WithImportsGraphics(importsGraphics bool) *MenuItemCell
 	WithAllowsMixedState(allowsMixedState bool) *MenuItemCell
-	WithBackgroundStyle(backgroundStyle NSBackgroundStyle) *MenuItemCell
-	WithControlTint(controlTint NSControlTint) *MenuItemCell
+	WithBackgroundStyle(backgroundStyle BackgroundStyle) *MenuItemCell
+	WithControlTint(controlTint ControlTint) *MenuItemCell
 	CalcSize()
-	StateImageRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect
-	KeyEquivalentRectForBounds(cellFrame corefoundation.CGRect) corefoundation.CGRect
-	DrawSeparatorItemWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView)
-	DrawStateImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView)
-	DrawImageWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView)
-	DrawTitleWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView)
-	DrawKeyEquivalentWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView)
-	DrawBorderAndBackgroundWithFrameInView(cellFrame corefoundation.CGRect, controlView *raw.NSView)
 	MenuItem() *MenuItem
-	SetMenuItem(menuItem *raw.NSMenuItem)
+	SetMenuItem(menuItem *MenuItem)
 	NeedsSizing() bool
 	SetNeedsSizing(needsSizing bool)
 	NeedsDisplay() bool

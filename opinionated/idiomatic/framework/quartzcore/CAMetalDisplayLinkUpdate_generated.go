@@ -5,57 +5,78 @@
 package quartzcore
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Stores information about a single update from a Metal display link instance.
 //
-// MetalDisplayLinkUpdate wraps [raw.CAMetalDisplayLinkUpdate] with a fluent Go API.
+// MetalDisplayLinkUpdate is an idiomatic wrapper over the Objective-C class CAMetalDisplayLinkUpdate.
 type MetalDisplayLinkUpdate struct {
-	inner *raw.CAMetalDisplayLinkUpdate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CAMetalDisplayLinkUpdate].
-func (x *MetalDisplayLinkUpdate) Unwrap() *raw.CAMetalDisplayLinkUpdate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetalDisplayLinkUpdate) ID() objc.ID { return x.inner.Ptr() }
-
-// MetalDisplayLinkUpdateFromID adopts an existing object pointer as a MetalDisplayLinkUpdate (nil for 0).
+// MetalDisplayLinkUpdateFromID adopts an existing Objective-C object as a MetalDisplayLinkUpdate
+// (nil for 0), retaining it and registering a release finalizer.
 func MetalDisplayLinkUpdateFromID(id objc.ID) *MetalDisplayLinkUpdate {
 	if id == 0 {
 		return nil
 	}
-	return &MetalDisplayLinkUpdate{inner: raw.CAMetalDisplayLinkUpdateFromID(id)}
+	x := &MetalDisplayLinkUpdate{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMetalDisplayLinkUpdate creates a new [MetalDisplayLinkUpdate].
+// metalDisplayLinkUpdateAdopt wraps an Objective-C object that this code just created as a
+// MetalDisplayLinkUpdate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metalDisplayLinkUpdateAdopt(id objc.ID) *MetalDisplayLinkUpdate {
+	if id == 0 {
+		return nil
+	}
+	x := &MetalDisplayLinkUpdate{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetalDisplayLinkUpdate) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetalDisplayLinkUpdate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetalDisplayLinkUpdate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMetalDisplayLinkUpdate creates a new MetalDisplayLinkUpdate.
 func NewMetalDisplayLinkUpdate() *MetalDisplayLinkUpdate {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CAMetalDisplayLinkUpdate")), objc.RegisterName("new"))
-	return &MetalDisplayLinkUpdate{inner: raw.CAMetalDisplayLinkUpdateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CAMetalDisplayLinkUpdate")), objc.RegisterName("new"))
+	return metalDisplayLinkUpdateAdopt(_id)
 }
 
-// Drawable calls the underlying Drawable.
-func (x *MetalDisplayLinkUpdate) Drawable() raw.CAMetalDrawable {
-	return x.inner.Drawable()
-}
-
-// TargetTimestamp calls the underlying TargetTimestamp.
 func (x *MetalDisplayLinkUpdate) TargetTimestamp() float64 {
-	return x.inner.TargetTimestamp()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("targetTimestamp"))
+	return _r
 }
 
-// TargetPresentationTimestamp calls the underlying TargetPresentationTimestamp.
 func (x *MetalDisplayLinkUpdate) TargetPresentationTimestamp() float64 {
-	return x.inner.TargetPresentationTimestamp()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("targetPresentationTimestamp"))
+	return _r
 }
 
 // MetalDisplayLinkUpdateable is the interface implemented by [MetalDisplayLinkUpdate], for mocking and DI.
 type MetalDisplayLinkUpdateable interface {
-	Unwrap() *raw.CAMetalDisplayLinkUpdate
-	Drawable() raw.CAMetalDrawable
+	obj.Object
 	TargetTimestamp() float64
 	TargetPresentationTimestamp() float64
 }

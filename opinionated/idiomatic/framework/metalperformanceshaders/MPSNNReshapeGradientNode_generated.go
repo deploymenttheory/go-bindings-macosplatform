@@ -5,69 +5,77 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNReshapeGradientNode wraps [raw.MPSNNReshapeGradientNode] with a fluent Go API.
+// NNReshapeGradientNode is an idiomatic wrapper over the Objective-C class MPSNNReshapeGradientNode.
 type NNReshapeGradientNode struct {
-	inner *raw.MPSNNReshapeGradientNode
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNReshapeGradientNode].
-func (x *NNReshapeGradientNode) Unwrap() *raw.MPSNNReshapeGradientNode { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNReshapeGradientNode) ID() objc.ID { return x.inner.Ptr() }
-
-// NNReshapeGradientNodeFromID adopts an existing object pointer as a NNReshapeGradientNode (nil for 0).
+// NNReshapeGradientNodeFromID adopts an existing Objective-C object as a NNReshapeGradientNode
+// (nil for 0), retaining it and registering a release finalizer.
 func NNReshapeGradientNodeFromID(id objc.ID) *NNReshapeGradientNode {
 	if id == 0 {
 		return nil
 	}
-	return &NNReshapeGradientNode{inner: raw.MPSNNReshapeGradientNodeFromID(id)}
-}
-
-// @abstract   A node to represent the gradient of a reshape node. @param sourceGradient   The input gradient from the 'downstream' gradient filter. @param sourceImage      The input image from the forward reshape node. @return  A MPSCNNConvolutionGradientNode
-//
-// NewNNReshapeGradientNodeWithSourceGradientSourceImageGradientState creates a new [NNReshapeGradientNode].
-func NewNNReshapeGradientNodeWithSourceGradientSourceImageGradientState(sourceGradient *mpsneuralnetwork.MPSNNImageNode, sourceImage *mpsneuralnetwork.MPSNNImageNode, gradientState *mpsneuralnetwork.MPSNNGradientStateNode) *NNReshapeGradientNode {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNReshapeGradientNode")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), sourceGradient.Ptr(), sourceImage.Ptr(), gradientState.Ptr())
-	return &NNReshapeGradientNode{inner: raw.MPSNNReshapeGradientNodeFromID(_id)}
-}
-
-// @abstract   The padding method used for the filter node @discussion The padding policy configures how the filter centers the region of interest in the source image. It principally is responsible for setting the MPSCNNKernel.offset and the size of the image produced, and sometimes will also configure .sourceFeatureChannelOffset, .sourceFeatureChannelMaxCount, and .edgeMode.  It is permitted to set any other filter properties as needed using a custom padding policy. The default padding policy varies per filter to conform to consensus expectation for the behavior of that filter.  In some cases, pre-made padding policies are provided to match the behavior of common neural networking frameworks with particularly complex or unexpected behavior for specific nodes. See MPSNNDefaultPadding class methods in MPSNeuralNetworkTypes.h for more. BUG: MPS doesn't provide a good way to reset the MPSKernel properties in the context of a MPSNNGraph after the kernel is finished encoding. These values carry on to the next time the graph is used. Consequently, if your custom padding policy modifies the property as a function of the previous value, e.g.: kernel.someProperty += 2; then the second time the graph runs, the property may have an inconsistent value, leading to unexpected behavior. The default padding computation runs before the custom padding method to provide it with a sense of what is expected for the default configuration and will reinitialize the value in the case of the .offset. However, that computation usually doesn't reset other properties. In such cases, the custom padding policy may need to keep a record of the original value to enable consistent behavior.
-//
-// WithPaddingPolicy sets the paddingPolicy property and returns the receiver for chaining.
-func (x *NNReshapeGradientNode) WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNReshapeGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetPaddingPolicy(paddingPolicy)
+	x := &NNReshapeGradientNode{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property label @abstract A string to help identify this object.
+// nNReshapeGradientNodeAdopt wraps an Objective-C object that this code just created as a
+// NNReshapeGradientNode (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNReshapeGradientNodeAdopt(id objc.ID) *NNReshapeGradientNode {
+	if id == 0 {
+		return nil
+	}
+	x := &NNReshapeGradientNode{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNReshapeGradientNode) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNReshapeGradientNode) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNReshapeGradientNode) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// A node to represent the gradient of a reshape node.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// NewNNReshapeGradientNodeWithSourceGradientSourceImageGradientState creates a new NNReshapeGradientNode.
+func NewNNReshapeGradientNodeWithSourceGradientSourceImageGradientState(sourceGradient obj.Object, sourceImage obj.Object, gradientState obj.Object) *NNReshapeGradientNode {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MPSNNReshapeGradientNode")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceGradient:sourceImage:gradientState:"), objref.IDOf(sourceGradient), objref.IDOf(sourceImage), objref.IDOf(gradientState))
+	return nNReshapeGradientNodeAdopt(_id)
+}
+
+// A string to help identify this object.
+//
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NNReshapeGradientNode) WithLabel(label string) *NNReshapeGradientNode {
-	x.inner.MPSNNGradientFilterNode.MPSNNFilterNode.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *NNReshapeGradientNode) asNNGradientFilterNode() *mpsneuralnetwork.MPSNNGradientFilterNode {
-	return &x.inner.MPSNNGradientFilterNode
-}
-
-func (x *NNReshapeGradientNode) asNNFilterNode() *mpsneuralnetwork.MPSNNFilterNode {
-	return &x.inner.MPSNNGradientFilterNode.MPSNNFilterNode
 }
 
 // NNReshapeGradientNodeable is the interface implemented by [NNReshapeGradientNode], for mocking and DI.
 type NNReshapeGradientNodeable interface {
-	Unwrap() *raw.MPSNNReshapeGradientNode
-	WithPaddingPolicy(paddingPolicy mpsneuralnetwork.MPSNNPadding) *NNReshapeGradientNode
+	obj.Object
 	WithLabel(label string) *NNReshapeGradientNode
 }
 

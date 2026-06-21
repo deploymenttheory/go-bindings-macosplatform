@@ -5,20 +5,20 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// AVB17221AECPMessageProvider is implemented by AVB17221AECPMessage and any idiomatic type wrapping a AVB17221AECPMessage subclass.
+// AVB17221AECPMessageProvider is accepted wherever a AVB17221AECPMessage (or one of its subclasses) is expected.
 type AVB17221AECPMessageProvider interface {
-	asAVB17221AECPMessage() *raw.AVB17221AECPMessage
+	objref.Object
 }
 
-// AVB1722ControlInterfaceProvider is implemented by AVB1722ControlInterface and any idiomatic type wrapping a AVB1722ControlInterface subclass.
+// AVB1722ControlInterfaceProvider is accepted wherever a AVB1722ControlInterface (or one of its subclasses) is expected.
 type AVB1722ControlInterfaceProvider interface {
-	asAVB1722ControlInterface() *raw.AVB1722ControlInterface
+	objref.Object
 }
 
-// InterfaceProvider is implemented by Interface and any idiomatic type wrapping a AVBInterface subclass.
+// InterfaceProvider is accepted wherever a AVBInterface (or one of its subclasses) is expected.
 type InterfaceProvider interface {
-	asInterface() *raw.AVBInterface
+	objref.Object
 }

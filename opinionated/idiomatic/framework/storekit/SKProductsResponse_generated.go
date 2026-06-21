@@ -5,64 +5,80 @@
 package storekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/storekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An App Store response to a request for information about a list of products.
 //
-// ProductsResponse wraps [raw.SKProductsResponse] with a fluent Go API.
+// ProductsResponse is an idiomatic wrapper over the Objective-C class SKProductsResponse.
 type ProductsResponse struct {
-	inner *raw.SKProductsResponse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKProductsResponse].
-func (x *ProductsResponse) Unwrap() *raw.SKProductsResponse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ProductsResponse) ID() objc.ID { return x.inner.Ptr() }
-
-// ProductsResponseFromID adopts an existing object pointer as a ProductsResponse (nil for 0).
+// ProductsResponseFromID adopts an existing Objective-C object as a ProductsResponse
+// (nil for 0), retaining it and registering a release finalizer.
 func ProductsResponseFromID(id objc.ID) *ProductsResponse {
 	if id == 0 {
 		return nil
 	}
-	return &ProductsResponse{inner: raw.SKProductsResponseFromID(id)}
+	x := &ProductsResponse{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewProductsResponse creates a new [ProductsResponse].
+// productsResponseAdopt wraps an Objective-C object that this code just created as a
+// ProductsResponse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func productsResponseAdopt(id objc.ID) *ProductsResponse {
+	if id == 0 {
+		return nil
+	}
+	x := &ProductsResponse{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ProductsResponse) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ProductsResponse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ProductsResponse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewProductsResponse creates a new ProductsResponse.
 func NewProductsResponse() *ProductsResponse {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKProductsResponse")), objc.RegisterName("new"))
-	return &ProductsResponse{inner: raw.SKProductsResponseFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKProductsResponse")), objc.RegisterName("new"))
+	return productsResponseAdopt(_id)
 }
 
 // Products returns the collection as a Go slice.
 func (x *ProductsResponse) Products() []*Product {
-	arr := x.inner.Products()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Product {
-		return &Product{inner: raw.SKProductFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("products"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Product { return ProductFromID(_id) })
 }
 
 // InvalidProductIdentifiers returns the collection as a Go slice.
 func (x *ProductsResponse) InvalidProductIdentifiers() []string {
-	arr := x.inner.InvalidProductIdentifiers()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidProductIdentifiers"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // ProductsResponseable is the interface implemented by [ProductsResponse], for mocking and DI.
 type ProductsResponseable interface {
-	Unwrap() *raw.SKProductsResponse
+	obj.Object
 	Products() []*Product
 	InvalidProductIdentifiers() []string
 }

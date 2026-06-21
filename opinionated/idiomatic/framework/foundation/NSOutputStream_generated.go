@@ -5,92 +5,94 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A stream that provides write-only stream functionality.
 //
-// OutputStream wraps [raw.NSOutputStream] with a fluent Go API.
+// OutputStream is an idiomatic wrapper over the Objective-C class NSOutputStream.
 type OutputStream struct {
-	inner *raw.NSOutputStream
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSOutputStream].
-func (x *OutputStream) Unwrap() *raw.NSOutputStream { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *OutputStream) ID() objc.ID { return x.inner.Ptr() }
-
-// OutputStreamFromID adopts an existing object pointer as a OutputStream (nil for 0).
+// OutputStreamFromID adopts an existing Objective-C object as a OutputStream
+// (nil for 0), retaining it and registering a release finalizer.
 func OutputStreamFromID(id objc.ID) *OutputStream {
 	if id == 0 {
 		return nil
 	}
-	return &OutputStream{inner: raw.NSOutputStreamFromID(id)}
+	x := &OutputStream{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewOutputStream creates a new [OutputStream].
+// outputStreamAdopt wraps an Objective-C object that this code just created as a
+// OutputStream (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func outputStreamAdopt(id objc.ID) *OutputStream {
+	if id == 0 {
+		return nil
+	}
+	x := &OutputStream{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *OutputStream) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *OutputStream) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *OutputStream) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewOutputStream creates a new OutputStream.
 func NewOutputStream() *OutputStream {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOutputStream")), objc.RegisterName("new"))
-	return &OutputStream{inner: raw.NSOutputStreamFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("new"))
+	return outputStreamAdopt(_id)
 }
 
-// NewOutputStreamToBufferCapacity creates a new [OutputStream].
-func NewOutputStreamToBufferCapacity(buffer *uint8, capacity uint) *OutputStream {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOutputStream")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initToBuffer:capacity:"), buffer, capacity)
-	return &OutputStream{inner: raw.NSOutputStreamFromID(_id)}
-}
-
-// NewOutputStreamWithURLAppend creates a new [OutputStream].
+// NewOutputStreamWithURLAppend creates a new OutputStream.
 func NewOutputStreamWithURLAppend(url string, shouldAppend bool) *OutputStream {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOutputStream")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:append:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), shouldAppend)
-	return &OutputStream{inner: raw.NSOutputStreamFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:append:"), rt.FileURL(url), shouldAppend)
+	return outputStreamAdopt(_id)
 }
 
-// NewOutputStreamToFileAtPathAppend creates a new [OutputStream].
+// NewOutputStreamToFileAtPathAppend creates a new OutputStream.
 func NewOutputStreamToFileAtPathAppend(path string, shouldAppend bool) *OutputStream {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSOutputStream")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initToFileAtPath:append:"), foundation.NSStringStringWithUTF8String(path).Ptr(), shouldAppend)
-	return &OutputStream{inner: raw.NSOutputStreamFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSOutputStream")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initToFileAtPath:append:"), purego.NSString(path), shouldAppend)
+	return outputStreamAdopt(_id)
 }
 
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *OutputStream) WithDelegate(delegate raw.NSStreamDelegate) *OutputStream {
-	x.inner.NSStream.SetDelegate(delegate)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *OutputStream) WithScriptingProperties(scriptingProperties obj.Object) *OutputStream {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *OutputStream) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OutputStream {
-	x.inner.NSStream.NSObject.SetScriptingProperties(scriptingProperties)
-	return x
-}
-
-// WriteMaxLength calls the underlying WriteMaxLength.
-func (x *OutputStream) WriteMaxLength(buffer *uint8, len_ uint) int {
-	return x.inner.WriteMaxLength(buffer, len_)
-}
-
-// HasSpaceAvailable calls the underlying HasSpaceAvailable.
 func (x *OutputStream) HasSpaceAvailable() bool {
-	return x.inner.HasSpaceAvailable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasSpaceAvailable"))
+	return _r
 }
-
-func (x *OutputStream) asStream() *raw.NSStream { return &x.inner.NSStream }
-
-func (x *OutputStream) asObject() *raw.NSObject { return &x.inner.NSStream.NSObject }
 
 // OutputStreamable is the interface implemented by [OutputStream], for mocking and DI.
 type OutputStreamable interface {
-	Unwrap() *raw.NSOutputStream
-	WithDelegate(delegate raw.NSStreamDelegate) *OutputStream
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *OutputStream
-	WriteMaxLength(buffer *uint8, len_ uint) int
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *OutputStream
 	HasSpaceAvailable() bool
 }
 

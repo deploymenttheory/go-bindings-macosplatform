@@ -5,216 +5,188 @@
 package imagecapturecore
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/imagecapturecore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An abstract class that represents a camera item.
 //
-// CameraItem wraps [raw.ICCameraItem] with a fluent Go API.
+// CameraItem is an idiomatic wrapper over the Objective-C class ICCameraItem.
 type CameraItem struct {
-	inner *raw.ICCameraItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ICCameraItem].
-func (x *CameraItem) Unwrap() *raw.ICCameraItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CameraItem) ID() objc.ID { return x.inner.Ptr() }
-
-// CameraItemFromID adopts an existing object pointer as a CameraItem (nil for 0).
+// CameraItemFromID adopts an existing Objective-C object as a CameraItem
+// (nil for 0), retaining it and registering a release finalizer.
 func CameraItemFromID(id objc.ID) *CameraItem {
 	if id == 0 {
 		return nil
 	}
-	return &CameraItem{inner: raw.ICCameraItemFromID(id)}
+	x := &CameraItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCameraItem creates a new [CameraItem].
+// cameraItemAdopt wraps an Objective-C object that this code just created as a
+// CameraItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cameraItemAdopt(id objc.ID) *CameraItem {
+	if id == 0 {
+		return nil
+	}
+	x := &CameraItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CameraItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CameraItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CameraItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCameraItem creates a new CameraItem.
 func NewCameraItem() *CameraItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ICCameraItem")), objc.RegisterName("new"))
-	return &CameraItem{inner: raw.ICCameraItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ICCameraItem")), objc.RegisterName("new"))
+	return cameraItemAdopt(_id)
 }
 
 // Requests a thumbnail for the item.
-//
-// RequestThumbnail calls the underlying RequestThumbnail.
 func (x *CameraItem) RequestThumbnail() {
-	x.inner.RequestThumbnail()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestThumbnail"))
 }
 
 // Requests metadata for the item.
-//
-// RequestMetadata calls the underlying RequestMetadata.
 func (x *CameraItem) RequestMetadata() {
-	x.inner.RequestMetadata()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("requestMetadata"))
 }
 
 // Deletes the item’s cached thumbnail.
-//
-// FlushThumbnailCache calls the underlying FlushThumbnailCache.
 func (x *CameraItem) FlushThumbnailCache() {
-	x.inner.FlushThumbnailCache()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushThumbnailCache"))
 }
 
 // Deletes the item’s cached metadata.
-//
-// FlushMetadataCache calls the underlying FlushMetadataCache.
 func (x *CameraItem) FlushMetadataCache() {
-	x.inner.FlushMetadataCache()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushMetadataCache"))
 }
 
-// @property device @abstract ￼Parent device of this item.
-//
-// Device calls the underlying Device.
+// ￼Parent device of this item.
 func (x *CameraItem) Device() *CameraDevice {
-	_r := x.inner.Device()
-	if _r == nil {
-		return nil
-	}
-	return &CameraDevice{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return CameraDeviceFromID(_r)
 }
 
-// @property parentFolder @abstract ￼Parent folder of this folder. The root folder's parentFolder is nil.
-//
-// ParentFolder calls the underlying ParentFolder.
+// ￼Parent folder of this folder. The root folder's parentFolder is nil.
 func (x *CameraItem) ParentFolder() *CameraFolder {
-	_r := x.inner.ParentFolder()
-	if _r == nil {
-		return nil
-	}
-	return &CameraFolder{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentFolder"))
+	return CameraFolderFromID(_r)
 }
 
-// @property name @abstract ￼Name of this item.
-//
-// Name calls the underlying Name.
+// ￼Name of this item.
 func (x *CameraItem) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property UTI @abstract ￼Item UTI. This is an Uniform Type Identifier string. It is one of: kUTTypeFolder, kUTTypeImage, kUTTypeMovie, kUTTypeAudio, or kUTTypeData.
-//
-// UTI calls the underlying UTI.
+// ￼Item UTI. This is an Uniform Type Identifier string. It is one of: kUTTypeFolder, kUTTypeImage, kUTTypeMovie, kUTTypeAudio, or kUTTypeData.
 func (x *CameraItem) UTI() string {
-	_r := x.inner.UTI()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UTI"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property fileSystemPath @abstract ￼The file system path of the item for items on a device with transportType of ICTransportTypeMassStorage.
-//
-// FileSystemPath calls the underlying FileSystemPath.
-func (x *CameraItem) FileSystemPath() unsafe.Pointer {
-	return x.inner.FileSystemPath()
-}
-
-// @property locked @abstract ￼Indicates the protection state of this item. It is locked if the storage card in the camera is locked.
-//
-// IsLocked calls the underlying IsLocked.
+// ￼Indicates the protection state of this item. It is locked if the storage card in the camera is locked.
 func (x *CameraItem) IsLocked() bool {
-	return x.inner.IsLocked()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isLocked"))
+	return _r
 }
 
-// @property raw @abstract ￼Indicates if the file is a raw image file.
-//
-// IsRaw calls the underlying IsRaw.
+// ￼Indicates if the file is a raw image file.
 func (x *CameraItem) IsRaw() bool {
-	return x.inner.IsRaw()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRaw"))
+	return _r
 }
 
-// @property inTemporaryStore @abstract ￼Indicates if this folder is in a temporary store. A temporary store may be used by the device when images are captures on the device when it is tethered to the computer.
-//
-// IsInTemporaryStore calls the underlying IsInTemporaryStore.
+// ￼Indicates if this folder is in a temporary store. A temporary store may be used by the device when images are captures on the device when it is tethered to the computer.
 func (x *CameraItem) IsInTemporaryStore() bool {
-	return x.inner.IsInTemporaryStore()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInTemporaryStore"))
+	return _r
 }
 
-// @property creationDate @abstract ￼Creation date of this file. This information is usually the same as the EXIF creation date.
-//
-// CreationDate calls the underlying CreationDate.
-func (x *CameraItem) CreationDate() *foundation.NSDate {
-	return x.inner.CreationDate()
+// ￼Creation date of this file. This information is usually the same as the EXIF creation date.
+func (x *CameraItem) CreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
+	return obj.Wrap(_r)
 }
 
-// @property modificationDate @abstract ￼Modification date of this file. This information is usually the same as the EXIF modification date.
-//
-// ModificationDate calls the underlying ModificationDate.
-func (x *CameraItem) ModificationDate() *foundation.NSDate {
-	return x.inner.ModificationDate()
+// ￼Modification date of this file. This information is usually the same as the EXIF modification date.
+func (x *CameraItem) ModificationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("modificationDate"))
+	return obj.Wrap(_r)
 }
 
-// @property thumbnail @abstract ￼Thumbnail for the item. The value of this property is NULL unless a 'requestThumbnail' message is sent to this object.
-//
-// Thumbnail calls the underlying Thumbnail.
-func (x *CameraItem) Thumbnail() unsafe.Pointer {
-	return x.inner.Thumbnail()
+// ￼Thumbnail for the item. The value of this property is NULL unless a 'requestThumbnail' message is sent to this object.
+func (x *CameraItem) Thumbnail() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thumbnail"))
+	return obj.Wrap(_r)
 }
 
-// @property metadata @abstract ￼Metadata for the item. The value of this property is NULL unless a 'requestMetadata' message is sent to this object.
-//
-// Metadata calls the underlying Metadata.
-func (x *CameraItem) Metadata() *foundation.NSDictionary[objc.ID, objc.ID] {
-	return x.inner.Metadata()
+// ￼Metadata for the item. The value of this property is NULL unless a 'requestMetadata' message is sent to this object.
+func (x *CameraItem) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return obj.Wrap(_r)
 }
 
-// @property userData @abstract ￼A mutable dictionary to store arbitrary key-value pairs associated with a camera item object. This can be used by view objects that bind to this object to store "house-keeping" information.
-//
-// UserData calls the underlying UserData.
-func (x *CameraItem) UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID] {
-	return x.inner.UserData()
+// ￼A mutable dictionary to store arbitrary key-value pairs associated with a camera item object. This can be used by view objects that bind to this object to store "house-keeping" information.
+func (x *CameraItem) UserData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userData"))
+	return obj.Wrap(_r)
 }
 
-// @property ptpObjectHandle @abstract PTP object handle value if the item is on a camera that uses PTP protocol. The value of this property is set to 0 if the camera does not use PTP protocol.
-//
-// PtpObjectHandle calls the underlying PtpObjectHandle.
-func (x *CameraItem) PtpObjectHandle() uint {
-	return x.inner.PtpObjectHandle()
+// PTP object handle value if the item is on a camera that uses PTP protocol. The value of this property is set to 0 if the camera does not use PTP protocol.
+func (x *CameraItem) PtpObjectHandle() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("ptpObjectHandle"))
+	return _r
 }
 
-// @property addedAfterContentCatalogCompleted @abstract This property is set if the file is captured on the device after the device's content is fully enumerated. This does not apply to files added as a result of adding a new store to the device.
-//
-// WasAddedAfterContentCatalogCompleted calls the underlying WasAddedAfterContentCatalogCompleted.
+// This property is set if the file is captured on the device after the device's content is fully enumerated. This does not apply to files added as a result of adding a new store to the device.
 func (x *CameraItem) WasAddedAfterContentCatalogCompleted() bool {
-	return x.inner.WasAddedAfterContentCatalogCompleted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("wasAddedAfterContentCatalogCompleted"))
+	return _r
 }
 
-// @property thumbnailIfAvailable
-//
-// ThumbnailIfAvailable calls the underlying ThumbnailIfAvailable.
-func (x *CameraItem) ThumbnailIfAvailable() unsafe.Pointer {
-	return x.inner.ThumbnailIfAvailable()
+func (x *CameraItem) ThumbnailIfAvailable() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("thumbnailIfAvailable"))
+	return obj.Wrap(_r)
 }
 
-// @property largeThumbnailIfAvailable
-//
-// LargeThumbnailIfAvailable calls the underlying LargeThumbnailIfAvailable.
-func (x *CameraItem) LargeThumbnailIfAvailable() unsafe.Pointer {
-	return x.inner.LargeThumbnailIfAvailable()
+func (x *CameraItem) LargeThumbnailIfAvailable() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("largeThumbnailIfAvailable"))
+	return obj.Wrap(_r)
 }
-
-// @property metadataIfAvailable
-//
-// MetadataIfAvailable calls the underlying MetadataIfAvailable.
-func (x *CameraItem) MetadataIfAvailable() unsafe.Pointer {
-	return x.inner.MetadataIfAvailable()
-}
-
-func (x *CameraItem) asCameraItem() *raw.ICCameraItem { return x.inner }
 
 // CameraItemable is the interface implemented by [CameraItem], for mocking and DI.
 type CameraItemable interface {
-	Unwrap() *raw.ICCameraItem
+	obj.Object
 	RequestThumbnail()
 	RequestMetadata()
 	FlushThumbnailCache()
@@ -223,20 +195,18 @@ type CameraItemable interface {
 	ParentFolder() *CameraFolder
 	Name() string
 	UTI() string
-	FileSystemPath() unsafe.Pointer
 	IsLocked() bool
 	IsRaw() bool
 	IsInTemporaryStore() bool
-	CreationDate() *foundation.NSDate
-	ModificationDate() *foundation.NSDate
-	Thumbnail() unsafe.Pointer
-	Metadata() *foundation.NSDictionary[objc.ID, objc.ID]
-	UserData() *foundation.NSMutableDictionary[objc.ID, objc.ID]
-	PtpObjectHandle() uint
+	CreationDate() obj.Object
+	ModificationDate() obj.Object
+	Thumbnail() obj.Object
+	Metadata() obj.Object
+	UserData() obj.Object
+	PtpObjectHandle() int
 	WasAddedAfterContentCatalogCompleted() bool
-	ThumbnailIfAvailable() unsafe.Pointer
-	LargeThumbnailIfAvailable() unsafe.Pointer
-	MetadataIfAvailable() unsafe.Pointer
+	ThumbnailIfAvailable() obj.Object
+	LargeThumbnailIfAvailable() obj.Object
 }
 
 var _ CameraItemable = (*CameraItem)(nil)

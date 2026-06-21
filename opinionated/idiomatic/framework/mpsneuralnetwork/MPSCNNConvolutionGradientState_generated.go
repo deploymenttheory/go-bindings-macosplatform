@@ -5,84 +5,80 @@
 package mpsneuralnetwork
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// CNNConvolutionGradientState wraps [raw.MPSCNNConvolutionGradientState] with a fluent Go API.
+// CNNConvolutionGradientState is an idiomatic wrapper over the Objective-C class MPSCNNConvolutionGradientState.
 type CNNConvolutionGradientState struct {
-	inner *raw.MPSCNNConvolutionGradientState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSCNNConvolutionGradientState].
-func (x *CNNConvolutionGradientState) Unwrap() *raw.MPSCNNConvolutionGradientState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CNNConvolutionGradientState) ID() objc.ID { return x.inner.Ptr() }
-
-// CNNConvolutionGradientStateFromID adopts an existing object pointer as a CNNConvolutionGradientState (nil for 0).
+// CNNConvolutionGradientStateFromID adopts an existing Objective-C object as a CNNConvolutionGradientState
+// (nil for 0), retaining it and registering a release finalizer.
 func CNNConvolutionGradientStateFromID(id objc.ID) *CNNConvolutionGradientState {
 	if id == 0 {
 		return nil
 	}
-	return &CNNConvolutionGradientState{inner: raw.MPSCNNConvolutionGradientStateFromID(id)}
+	x := &CNNConvolutionGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCNNConvolutionGradientState creates a new [CNNConvolutionGradientState].
-func NewCNNConvolutionGradientState() *CNNConvolutionGradientState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSCNNConvolutionGradientState")), objc.RegisterName("new"))
-	return &CNNConvolutionGradientState{inner: raw.MPSCNNConvolutionGradientStateFromID(_id)}
-}
-
-// @property   gradientForWeights @abstract   A buffer that contains the loss function gradients with respect to weights. Each value in the buffer is a float. The layout of the gradients with respect to the weights is the same as the weights layout provided by data source i.e. it can be interpreted as 4D array gradientForWeights[outputFeatureChannels][kernelHeight][kernelWidth][inputFeatureChannels/groups] For depthwise convolution it will be (since we only support channel multiplier of 1 currently) gradientForWeights[outputFeatureChannels][kernelHeight][kernelWidth]
-//
-// GradientForWeights calls the underlying GradientForWeights.
-func (x *CNNConvolutionGradientState) GradientForWeights() metal.MTLBuffer {
-	return x.inner.GradientForWeights()
-}
-
-// @property   gradientForBiases @abstract   A buffer that contains the loss function gradients with respect to biases.
-//
-// GradientForBiases calls the underlying GradientForBiases.
-func (x *CNNConvolutionGradientState) GradientForBiases() metal.MTLBuffer {
-	return x.inner.GradientForBiases()
-}
-
-// @property   convolution @abstract   The convolution filter that produced the state. For child MPSCNNConvolutionTrasposeGradientState object, convolution below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates method of MPSCNNConvolutionTranspose below.
-//
-// Convolution calls the underlying Convolution.
-func (x *CNNConvolutionGradientState) Convolution() *CNNConvolution {
-	_r := x.inner.Convolution()
-	if _r == nil {
+// cNNConvolutionGradientStateAdopt wraps an Objective-C object that this code just created as a
+// CNNConvolutionGradientState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cNNConvolutionGradientStateAdopt(id objc.ID) *CNNConvolutionGradientState {
+	if id == 0 {
 		return nil
 	}
-	return &CNNConvolution{inner: _r}
+	x := &CNNConvolutionGradientState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property   gradientForWeightsLayout @abstract   Layout of gradient with respect to weights in gradientForWeights buffer. Currently only MPSCNNConvolutionWeightsLayoutOHWI is supported.
-//
-// GradientForWeightsLayout calls the underlying GradientForWeightsLayout.
-func (x *CNNConvolutionGradientState) GradientForWeightsLayout() MPSCNNConvolutionWeightsLayout {
-	return MPSCNNConvolutionWeightsLayout(x.inner.GradientForWeightsLayout())
+// Description returns the object's -description text.
+func (x *CNNConvolutionGradientState) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *CNNConvolutionGradientState) asCNNConvolutionGradientState() *raw.MPSCNNConvolutionGradientState {
-	return x.inner
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CNNConvolutionGradientState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *CNNConvolutionGradientState) asNNGradientState() *raw.MPSNNGradientState {
-	return &x.inner.MPSNNGradientState
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CNNConvolutionGradientState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCNNConvolutionGradientState creates a new CNNConvolutionGradientState.
+func NewCNNConvolutionGradientState() *CNNConvolutionGradientState {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSCNNConvolutionGradientState")), objc.RegisterName("new"))
+	return cNNConvolutionGradientStateAdopt(_id)
+}
+
+// The convolution filter that produced the state. For child MPSCNNConvolutionTrasposeGradientState object, convolution below refers to MPSCNNConvolution object that produced MPSCNNConvolutionGradientState object which was used to create MPSCNNConvolutionTransposeGradientState object. See resultStateForSourceImage:sourceStates method of MPSCNNConvolutionTranspose below.
+func (x *CNNConvolutionGradientState) Convolution() *CNNConvolution {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("convolution"))
+	return CNNConvolutionFromID(_r)
+}
+
+// Layout of gradient with respect to weights in gradientForWeights buffer. Currently only MPSCNNConvolutionWeightsLayoutOHWI is supported.
+func (x *CNNConvolutionGradientState) GradientForWeightsLayout() CNNConvolutionWeightsLayout {
+	_r := objc.Send[CNNConvolutionWeightsLayout](objref.IDOf(x), objc.RegisterName("gradientForWeightsLayout"))
+	return _r
 }
 
 // CNNConvolutionGradientStateable is the interface implemented by [CNNConvolutionGradientState], for mocking and DI.
 type CNNConvolutionGradientStateable interface {
-	Unwrap() *raw.MPSCNNConvolutionGradientState
-	GradientForWeights() metal.MTLBuffer
-	GradientForBiases() metal.MTLBuffer
+	obj.Object
 	Convolution() *CNNConvolution
-	GradientForWeightsLayout() MPSCNNConvolutionWeightsLayout
+	GradientForWeightsLayout() CNNConvolutionWeightsLayout
 }
 
 var _ CNNConvolutionGradientStateable = (*CNNConvolutionGradientState)(nil)

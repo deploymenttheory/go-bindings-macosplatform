@@ -5,721 +5,573 @@
 package pdfkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/pdfkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that encapsulates the functionality of PDF Kit into a single widget that you can add to your application using Interface Builder.
 //
-// View wraps [raw.PDFView] with a fluent Go API.
+// View is an idiomatic wrapper over the Objective-C class PDFView.
 type View struct {
-	inner *raw.PDFView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PDFView].
-func (x *View) Unwrap() *raw.PDFView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *View) ID() objc.ID { return x.inner.Ptr() }
-
-// ViewFromID adopts an existing object pointer as a View (nil for 0).
+// ViewFromID adopts an existing Objective-C object as a View
+// (nil for 0), retaining it and registering a release finalizer.
 func ViewFromID(id objc.ID) *View {
 	if id == 0 {
 		return nil
 	}
-	return &View{inner: raw.PDFViewFromID(id)}
+	x := &View{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewView creates a new [View].
+// viewAdopt wraps an Objective-C object that this code just created as a
+// View (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func viewAdopt(id objc.ID) *View {
+	if id == 0 {
+		return nil
+	}
+	x := &View{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *View) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *View) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *View) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewView creates a new View.
 func NewView() *View {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PDFView")), objc.RegisterName("new"))
-	return &View{inner: raw.PDFViewFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PDFView")), objc.RegisterName("new"))
+	return viewAdopt(_id)
 }
 
 // Returns the document associated with a PDFView object.
 //
-// WithDocument sets the document property and returns the receiver for chaining.
+// WithDocument sets document and returns the receiver so calls can be chained.
 func (x *View) WithDocument(document *Document) *View {
-	x.inner.SetDocument(document.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocument:"), objref.IDOf(document))
 	return x
 }
 
-// WithDisplayMode sets the displayMode property and returns the receiver for chaining.
-func (x *View) WithDisplayMode(displayMode PDFDisplayMode) *View {
-	x.inner.SetDisplayMode(raw.PDFDisplayMode(displayMode))
+// WithDisplayMode sets displayMode and returns the receiver so calls can be chained.
+func (x *View) WithDisplayMode(displayMode DisplayMode) *View {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayMode:"), displayMode)
 	return x
 }
 
-// WithDisplayDirection sets the displayDirection property and returns the receiver for chaining.
-func (x *View) WithDisplayDirection(displayDirection PDFDisplayDirection) *View {
-	x.inner.SetDisplayDirection(raw.PDFDisplayDirection(displayDirection))
+// WithDisplayDirection sets displayDirection and returns the receiver so calls can be chained.
+func (x *View) WithDisplayDirection(displayDirection DisplayDirection) *View {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayDirection:"), displayDirection)
 	return x
 }
 
-// WithDisplaysPageBreaks sets the displaysPageBreaks property and returns the receiver for chaining.
+// WithDisplaysPageBreaks sets displaysPageBreaks and returns the receiver so calls can be chained.
 func (x *View) WithDisplaysPageBreaks(displaysPageBreaks bool) *View {
-	x.inner.SetDisplaysPageBreaks(displaysPageBreaks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysPageBreaks:"), displaysPageBreaks)
 	return x
 }
 
-// WithPageBreakMargins sets the pageBreakMargins property and returns the receiver for chaining.
-func (x *View) WithPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets) *View {
-	x.inner.SetPageBreakMargins(pageBreakMargins)
+// WithDisplayBox sets displayBox and returns the receiver so calls can be chained.
+func (x *View) WithDisplayBox(displayBox DisplayBox) *View {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayBox:"), displayBox)
 	return x
 }
 
-// WithDisplayBox sets the displayBox property and returns the receiver for chaining.
-func (x *View) WithDisplayBox(displayBox PDFDisplayBox) *View {
-	x.inner.SetDisplayBox(raw.PDFDisplayBox(displayBox))
-	return x
-}
-
-// WithDisplaysAsBook sets the displaysAsBook property and returns the receiver for chaining.
+// WithDisplaysAsBook sets displaysAsBook and returns the receiver so calls can be chained.
 func (x *View) WithDisplaysAsBook(displaysAsBook bool) *View {
-	x.inner.SetDisplaysAsBook(displaysAsBook)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysAsBook:"), displaysAsBook)
 	return x
 }
 
-// WithDisplaysRTL sets the displaysRTL property and returns the receiver for chaining.
+// WithDisplaysRTL sets displaysRTL and returns the receiver so calls can be chained.
 func (x *View) WithDisplaysRTL(displaysRTL bool) *View {
-	x.inner.SetDisplaysRTL(displaysRTL)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysRTL:"), displaysRTL)
 	return x
 }
 
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
-func (x *View) WithBackgroundColor(backgroundColor *appkit.NSColor) *View {
-	x.inner.SetBackgroundColor(backgroundColor)
+// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
+func (x *View) WithBackgroundColor(backgroundColor obj.Object) *View {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
-// WithInterpolationQuality sets the interpolationQuality property and returns the receiver for chaining.
-func (x *View) WithInterpolationQuality(interpolationQuality PDFInterpolationQuality) *View {
-	x.inner.SetInterpolationQuality(raw.PDFInterpolationQuality(interpolationQuality))
+// WithInterpolationQuality sets interpolationQuality and returns the receiver so calls can be chained.
+func (x *View) WithInterpolationQuality(interpolationQuality InterpolationQuality) *View {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolationQuality:"), interpolationQuality)
 	return x
 }
 
-// WithPageShadowsEnabled sets the pageShadowsEnabled property and returns the receiver for chaining.
+// WithPageShadowsEnabled sets pageShadowsEnabled and returns the receiver so calls can be chained.
 func (x *View) WithPageShadowsEnabled(pageShadowsEnabled bool) *View {
-	x.inner.EnablePageShadows(pageShadowsEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enablePageShadows:"), pageShadowsEnabled)
 	return x
 }
 
-// Returns the view’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *View) WithDelegate(delegate raw.PDFViewDelegate) *View {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// WithScaleFactor sets the scaleFactor property and returns the receiver for chaining.
+// WithScaleFactor sets scaleFactor and returns the receiver so calls can be chained.
 func (x *View) WithScaleFactor(scaleFactor float64) *View {
-	x.inner.SetScaleFactor(scaleFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
 	return x
 }
 
-// WithMinScaleFactor sets the minScaleFactor property and returns the receiver for chaining.
+// WithMinScaleFactor sets minScaleFactor and returns the receiver so calls can be chained.
 func (x *View) WithMinScaleFactor(minScaleFactor float64) *View {
-	x.inner.SetMinScaleFactor(minScaleFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinScaleFactor:"), minScaleFactor)
 	return x
 }
 
-// WithMaxScaleFactor sets the maxScaleFactor property and returns the receiver for chaining.
+// WithMaxScaleFactor sets maxScaleFactor and returns the receiver so calls can be chained.
 func (x *View) WithMaxScaleFactor(maxScaleFactor float64) *View {
-	x.inner.SetMaxScaleFactor(maxScaleFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxScaleFactor:"), maxScaleFactor)
 	return x
 }
 
-// WithAutoScales sets the autoScales property and returns the receiver for chaining.
+// WithAutoScales sets autoScales and returns the receiver so calls can be chained.
 func (x *View) WithAutoScales(autoScales bool) *View {
-	x.inner.SetAutoScales(autoScales)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoScales:"), autoScales)
 	return x
 }
 
-// WithCurrentSelection sets the currentSelection property and returns the receiver for chaining.
+// WithCurrentSelection sets currentSelection and returns the receiver so calls can be chained.
 func (x *View) WithCurrentSelection(currentSelection *Selection) *View {
-	x.inner.SetCurrentSelection(currentSelection.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentSelection:"), objref.IDOf(currentSelection))
 	return x
 }
 
-// WithAcceptsDraggedFiles sets the acceptsDraggedFiles property and returns the receiver for chaining.
+// WithAcceptsDraggedFiles sets acceptsDraggedFiles and returns the receiver so calls can be chained.
 func (x *View) WithAcceptsDraggedFiles(acceptsDraggedFiles bool) *View {
-	x.inner.SetAcceptsDraggedFiles(acceptsDraggedFiles)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsDraggedFiles:"), acceptsDraggedFiles)
 	return x
 }
 
-// WithEnableDataDetectors sets the enableDataDetectors property and returns the receiver for chaining.
+// WithEnableDataDetectors sets enableDataDetectors and returns the receiver so calls can be chained.
 func (x *View) WithEnableDataDetectors(enableDataDetectors bool) *View {
-	x.inner.SetEnableDataDetectors(enableDataDetectors)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableDataDetectors:"), enableDataDetectors)
 	return x
 }
 
-// WithInMarkupMode sets the inMarkupMode property and returns the receiver for chaining.
+// WithInMarkupMode sets inMarkupMode and returns the receiver so calls can be chained.
 func (x *View) WithInMarkupMode(inMarkupMode bool) *View {
-	x.inner.SetInMarkupMode(inMarkupMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInMarkupMode:"), inMarkupMode)
 	return x
 }
 
-// WithShouldAntiAlias sets the shouldAntiAlias property and returns the receiver for chaining.
+// WithShouldAntiAlias sets shouldAntiAlias and returns the receiver so calls can be chained.
 func (x *View) WithShouldAntiAlias(shouldAntiAlias bool) *View {
-	x.inner.SetShouldAntiAlias(shouldAntiAlias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAntiAlias:"), shouldAntiAlias)
 	return x
 }
 
-// WithGreekingThreshold sets the greekingThreshold property and returns the receiver for chaining.
+// WithGreekingThreshold sets greekingThreshold and returns the receiver so calls can be chained.
 func (x *View) WithGreekingThreshold(greekingThreshold float64) *View {
-	x.inner.SetGreekingThreshold(greekingThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGreekingThreshold:"), greekingThreshold)
 	return x
 }
 
-// WithAllowsDragging sets the allowsDragging property and returns the receiver for chaining.
+// WithAllowsDragging sets allowsDragging and returns the receiver so calls can be chained.
 func (x *View) WithAllowsDragging(allowsDragging bool) *View {
-	x.inner.SetAllowsDragging(allowsDragging)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDragging:"), allowsDragging)
 	return x
 }
 
-// GoToFirstPage calls the underlying GoToFirstPage.
-func (x *View) GoToFirstPage(sender objc.ID) {
-	x.inner.GoToFirstPage(sender)
+func (x *View) GoToFirstPage(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToFirstPage:"), objref.IDOf(sender))
 }
 
-// GoToLastPage calls the underlying GoToLastPage.
-func (x *View) GoToLastPage(sender objc.ID) {
-	x.inner.GoToLastPage(sender)
+func (x *View) GoToLastPage(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToLastPage:"), objref.IDOf(sender))
 }
 
-// GoToNextPage calls the underlying GoToNextPage.
-func (x *View) GoToNextPage(sender objc.ID) {
-	x.inner.GoToNextPage(sender)
+func (x *View) GoToNextPage(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToNextPage:"), objref.IDOf(sender))
 }
 
-// GoToPreviousPage calls the underlying GoToPreviousPage.
-func (x *View) GoToPreviousPage(sender objc.ID) {
-	x.inner.GoToPreviousPage(sender)
+func (x *View) GoToPreviousPage(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToPreviousPage:"), objref.IDOf(sender))
 }
 
-// GoBack calls the underlying GoBack.
-func (x *View) GoBack(sender objc.ID) {
-	x.inner.GoBack(sender)
+func (x *View) GoBack(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goBack:"), objref.IDOf(sender))
 }
 
-// GoForward calls the underlying GoForward.
-func (x *View) GoForward(sender objc.ID) {
-	x.inner.GoForward(sender)
+func (x *View) GoForward(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goForward:"), objref.IDOf(sender))
 }
 
-// GoToPage calls the underlying GoToPage.
-func (x *View) GoToPage(page *raw.PDFPage) {
-	x.inner.GoToPage(page)
+func (x *View) GoToPage(page *Page) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToPage:"), objref.IDOf(page))
 }
 
-// GoToDestination calls the underlying GoToDestination.
-func (x *View) GoToDestination(destination *raw.PDFDestination) {
-	x.inner.GoToDestination(destination)
+func (x *View) GoToDestination(destination *Destination) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToDestination:"), objref.IDOf(destination))
 }
 
-// GoToSelection calls the underlying GoToSelection.
-func (x *View) GoToSelection(selection *raw.PDFSelection) {
-	x.inner.GoToSelection(selection)
+func (x *View) GoToSelection(selection *Selection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("goToSelection:"), objref.IDOf(selection))
 }
 
-// GoToRectOnPage calls the underlying GoToRectOnPage.
-func (x *View) GoToRectOnPage(rect corefoundation.CGRect, page *raw.PDFPage) {
-	x.inner.GoToRectOnPage(rect, page)
+func (x *View) ZoomIn(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomIn:"), objref.IDOf(sender))
 }
 
-// ZoomIn calls the underlying ZoomIn.
-func (x *View) ZoomIn(sender objc.ID) {
-	x.inner.ZoomIn(sender)
+func (x *View) ZoomOut(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoomOut:"), objref.IDOf(sender))
 }
 
-// ZoomOut calls the underlying ZoomOut.
-func (x *View) ZoomOut(sender objc.ID) {
-	x.inner.ZoomOut(sender)
+func (x *View) AreaOfInterestForMouse(event obj.Object) AreaOfInterest {
+	_r := objc.Send[AreaOfInterest](objref.IDOf(x), objc.RegisterName("areaOfInterestForMouse:"), objref.IDOf(event))
+	return _r
 }
 
-// AreaOfInterestForMouse calls the underlying AreaOfInterestForMouse.
-func (x *View) AreaOfInterestForMouse(event *appkit.NSEvent) PDFAreaOfInterest {
-	return PDFAreaOfInterest(x.inner.AreaOfInterestForMouse(event))
+func (x *View) SetCursorForAreaOfInterest(area AreaOfInterest) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCursorForAreaOfInterest:"), area)
 }
 
-// AreaOfInterestForPoint calls the underlying AreaOfInterestForPoint.
-func (x *View) AreaOfInterestForPoint(cursorLocation corefoundation.CGPoint) PDFAreaOfInterest {
-	return PDFAreaOfInterest(x.inner.AreaOfInterestForPoint(cursorLocation))
+func (x *View) PerformAction(action *Action) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performAction:"), objref.IDOf(action))
 }
 
-// SetCursorForAreaOfInterest calls the underlying SetCursorForAreaOfInterest.
-func (x *View) SetCursorForAreaOfInterest(area PDFAreaOfInterest) {
-	x.inner.SetCursorForAreaOfInterest(raw.PDFAreaOfInterest(area))
+func (x *View) SetCurrentSelectionAnimate(selection *Selection, animate bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentSelection:animate:"), objref.IDOf(selection), animate)
 }
 
-// PerformAction calls the underlying PerformAction.
-func (x *View) PerformAction(action *raw.PDFAction) {
-	x.inner.PerformAction(action)
-}
-
-// SetCurrentSelectionAnimate calls the underlying SetCurrentSelectionAnimate.
-func (x *View) SetCurrentSelectionAnimate(selection *raw.PDFSelection, animate bool) {
-	x.inner.SetCurrentSelectionAnimate(selection, animate)
-}
-
-// ClearSelection calls the underlying ClearSelection.
 func (x *View) ClearSelection() {
-	x.inner.ClearSelection()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("clearSelection"))
 }
 
-// SelectAll calls the underlying SelectAll.
-func (x *View) SelectAll(sender objc.ID) {
-	x.inner.SelectAll(sender)
+func (x *View) SelectAll(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("selectAll:"), objref.IDOf(sender))
 }
 
-// ScrollSelectionToVisible calls the underlying ScrollSelectionToVisible.
-func (x *View) ScrollSelectionToVisible(sender objc.ID) {
-	x.inner.ScrollSelectionToVisible(sender)
+func (x *View) ScrollSelectionToVisible(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scrollSelectionToVisible:"), objref.IDOf(sender))
 }
 
-// DrawPageToContext calls the underlying DrawPageToContext.
-func (x *View) DrawPageToContext(page *raw.PDFPage, context_ unsafe.Pointer) {
-	x.inner.DrawPageToContext(page, context_)
+func (x *View) DrawPageToContext(page *Page, context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawPage:toContext:"), objref.IDOf(page), objref.IDOf(context_))
 }
 
-// DrawPagePostToContext calls the underlying DrawPagePostToContext.
-func (x *View) DrawPagePostToContext(page *raw.PDFPage, context_ unsafe.Pointer) {
-	x.inner.DrawPagePostToContext(page, context_)
+func (x *View) DrawPagePostToContext(page *Page, context_ obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawPagePost:toContext:"), objref.IDOf(page), objref.IDOf(context_))
 }
 
-// Copy calls the underlying Copy.
-func (x *View) Copy(sender objc.ID) {
-	x.inner.Copy(sender)
+func (x *View) Copy(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("copy:"), objref.IDOf(sender))
 }
 
-// PrintWithInfoAutoRotate calls the underlying PrintWithInfoAutoRotate.
-func (x *View) PrintWithInfoAutoRotate(printInfo *appkit.NSPrintInfo, doRotate bool) {
-	x.inner.PrintWithInfoAutoRotate(printInfo, doRotate)
+func (x *View) PrintWithInfoAutoRotate(printInfo obj.Object, doRotate bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printWithInfo:autoRotate:"), objref.IDOf(printInfo), doRotate)
 }
 
-// PrintWithInfoAutoRotatePageScaling calls the underlying PrintWithInfoAutoRotatePageScaling.
-func (x *View) PrintWithInfoAutoRotatePageScaling(printInfo *appkit.NSPrintInfo, doRotate bool, scale PDFPrintScalingMode) {
-	x.inner.PrintWithInfoAutoRotatePageScaling(printInfo, doRotate, raw.PDFPrintScalingMode(scale))
+func (x *View) PrintWithInfoAutoRotatePageScaling(printInfo obj.Object, doRotate bool, scale PrintScalingMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("printWithInfo:autoRotate:pageScaling:"), objref.IDOf(printInfo), doRotate, scale)
 }
 
-// PageForPointNearest calls the underlying PageForPointNearest.
-func (x *View) PageForPointNearest(point corefoundation.CGPoint, nearest bool) *Page {
-	_r := x.inner.PageForPointNearest(point, nearest)
-	if _r == nil {
-		return nil
-	}
-	return &Page{inner: _r}
-}
-
-// ConvertPointToPage calls the underlying ConvertPointToPage.
-func (x *View) ConvertPointToPage(point corefoundation.CGPoint, page *raw.PDFPage) corefoundation.CGPoint {
-	return x.inner.ConvertPointToPage(point, page)
-}
-
-// ConvertRectToPage calls the underlying ConvertRectToPage.
-func (x *View) ConvertRectToPage(rect corefoundation.CGRect, page *raw.PDFPage) corefoundation.CGRect {
-	return x.inner.ConvertRectToPage(rect, page)
-}
-
-// ConvertPointFromPage calls the underlying ConvertPointFromPage.
-func (x *View) ConvertPointFromPage(point corefoundation.CGPoint, page *raw.PDFPage) corefoundation.CGPoint {
-	return x.inner.ConvertPointFromPage(point, page)
-}
-
-// ConvertRectFromPage calls the underlying ConvertRectFromPage.
-func (x *View) ConvertRectFromPage(rect corefoundation.CGRect, page *raw.PDFPage) corefoundation.CGRect {
-	return x.inner.ConvertRectFromPage(rect, page)
-}
-
-// LayoutDocumentView calls the underlying LayoutDocumentView.
 func (x *View) LayoutDocumentView() {
-	x.inner.LayoutDocumentView()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutDocumentView"))
 }
 
-// AnnotationsChangedOnPage calls the underlying AnnotationsChangedOnPage.
-func (x *View) AnnotationsChangedOnPage(page *raw.PDFPage) {
-	x.inner.AnnotationsChangedOnPage(page)
+func (x *View) AnnotationsChangedOnPage(page *Page) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotationsChangedOnPage:"), objref.IDOf(page))
 }
 
-// RowSizeForPage calls the underlying RowSizeForPage.
-func (x *View) RowSizeForPage(page *raw.PDFPage) corefoundation.CGSize {
-	return x.inner.RowSizeForPage(page)
-}
-
-// Document calls the underlying Document.
 func (x *View) Document() *Document {
-	_r := x.inner.Document()
-	if _r == nil {
-		return nil
-	}
-	return &Document{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("document"))
+	return DocumentFromID(_r)
 }
 
-// SetDocument calls the underlying SetDocument.
-func (x *View) SetDocument(document *raw.PDFDocument) {
-	x.inner.SetDocument(document)
+func (x *View) SetDocument(document *Document) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDocument:"), objref.IDOf(document))
 }
 
-// CanGoToFirstPage calls the underlying CanGoToFirstPage.
 func (x *View) CanGoToFirstPage() bool {
-	return x.inner.CanGoToFirstPage()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoToFirstPage"))
+	return _r
 }
 
-// CanGoToLastPage calls the underlying CanGoToLastPage.
 func (x *View) CanGoToLastPage() bool {
-	return x.inner.CanGoToLastPage()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoToLastPage"))
+	return _r
 }
 
-// CanGoToNextPage calls the underlying CanGoToNextPage.
 func (x *View) CanGoToNextPage() bool {
-	return x.inner.CanGoToNextPage()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoToNextPage"))
+	return _r
 }
 
-// CanGoToPreviousPage calls the underlying CanGoToPreviousPage.
 func (x *View) CanGoToPreviousPage() bool {
-	return x.inner.CanGoToPreviousPage()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoToPreviousPage"))
+	return _r
 }
 
-// CanGoBack calls the underlying CanGoBack.
 func (x *View) CanGoBack() bool {
-	return x.inner.CanGoBack()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoBack"))
+	return _r
 }
 
-// CanGoForward calls the underlying CanGoForward.
 func (x *View) CanGoForward() bool {
-	return x.inner.CanGoForward()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canGoForward"))
+	return _r
 }
 
-// CurrentPage calls the underlying CurrentPage.
 func (x *View) CurrentPage() *Page {
-	_r := x.inner.CurrentPage()
-	if _r == nil {
-		return nil
-	}
-	return &Page{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentPage"))
+	return PageFromID(_r)
 }
 
-// CurrentDestination calls the underlying CurrentDestination.
 func (x *View) CurrentDestination() *Destination {
-	_r := x.inner.CurrentDestination()
-	if _r == nil {
-		return nil
-	}
-	return &Destination{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentDestination"))
+	return DestinationFromID(_r)
 }
 
-// DisplayMode calls the underlying DisplayMode.
-func (x *View) DisplayMode() PDFDisplayMode {
-	return PDFDisplayMode(x.inner.DisplayMode())
+func (x *View) DisplayMode() DisplayMode {
+	_r := objc.Send[DisplayMode](objref.IDOf(x), objc.RegisterName("displayMode"))
+	return _r
 }
 
-// SetDisplayMode calls the underlying SetDisplayMode.
-func (x *View) SetDisplayMode(displayMode PDFDisplayMode) {
-	x.inner.SetDisplayMode(raw.PDFDisplayMode(displayMode))
+func (x *View) SetDisplayMode(displayMode DisplayMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayMode:"), displayMode)
 }
 
-// DisplayDirection calls the underlying DisplayDirection.
-func (x *View) DisplayDirection() PDFDisplayDirection {
-	return PDFDisplayDirection(x.inner.DisplayDirection())
+func (x *View) DisplayDirection() DisplayDirection {
+	_r := objc.Send[DisplayDirection](objref.IDOf(x), objc.RegisterName("displayDirection"))
+	return _r
 }
 
-// SetDisplayDirection calls the underlying SetDisplayDirection.
-func (x *View) SetDisplayDirection(displayDirection PDFDisplayDirection) {
-	x.inner.SetDisplayDirection(raw.PDFDisplayDirection(displayDirection))
+func (x *View) SetDisplayDirection(displayDirection DisplayDirection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayDirection:"), displayDirection)
 }
 
-// DisplaysPageBreaks calls the underlying DisplaysPageBreaks.
 func (x *View) DisplaysPageBreaks() bool {
-	return x.inner.DisplaysPageBreaks()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysPageBreaks"))
+	return _r
 }
 
-// SetDisplaysPageBreaks calls the underlying SetDisplaysPageBreaks.
 func (x *View) SetDisplaysPageBreaks(displaysPageBreaks bool) {
-	x.inner.SetDisplaysPageBreaks(displaysPageBreaks)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysPageBreaks:"), displaysPageBreaks)
 }
 
-// PageBreakMargins calls the underlying PageBreakMargins.
-func (x *View) PageBreakMargins() foundation.NSEdgeInsets {
-	return x.inner.PageBreakMargins()
+func (x *View) DisplayBox() DisplayBox {
+	_r := objc.Send[DisplayBox](objref.IDOf(x), objc.RegisterName("displayBox"))
+	return _r
 }
 
-// SetPageBreakMargins calls the underlying SetPageBreakMargins.
-func (x *View) SetPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets) {
-	x.inner.SetPageBreakMargins(pageBreakMargins)
+func (x *View) SetDisplayBox(displayBox DisplayBox) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplayBox:"), displayBox)
 }
 
-// DisplayBox calls the underlying DisplayBox.
-func (x *View) DisplayBox() PDFDisplayBox {
-	return PDFDisplayBox(x.inner.DisplayBox())
-}
-
-// SetDisplayBox calls the underlying SetDisplayBox.
-func (x *View) SetDisplayBox(displayBox PDFDisplayBox) {
-	x.inner.SetDisplayBox(raw.PDFDisplayBox(displayBox))
-}
-
-// DisplaysAsBook calls the underlying DisplaysAsBook.
 func (x *View) DisplaysAsBook() bool {
-	return x.inner.DisplaysAsBook()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysAsBook"))
+	return _r
 }
 
-// SetDisplaysAsBook calls the underlying SetDisplaysAsBook.
 func (x *View) SetDisplaysAsBook(displaysAsBook bool) {
-	x.inner.SetDisplaysAsBook(displaysAsBook)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysAsBook:"), displaysAsBook)
 }
 
-// DisplaysRTL calls the underlying DisplaysRTL.
 func (x *View) DisplaysRTL() bool {
-	return x.inner.DisplaysRTL()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("displaysRTL"))
+	return _r
 }
 
-// SetDisplaysRTL calls the underlying SetDisplaysRTL.
 func (x *View) SetDisplaysRTL(displaysRTL bool) {
-	x.inner.SetDisplaysRTL(displaysRTL)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDisplaysRTL:"), displaysRTL)
 }
 
-// BackgroundColor calls the underlying BackgroundColor.
-func (x *View) BackgroundColor() *appkit.NSColor {
-	return x.inner.BackgroundColor()
+func (x *View) BackgroundColor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("backgroundColor"))
+	return obj.Wrap(_r)
 }
 
-// SetBackgroundColor calls the underlying SetBackgroundColor.
-func (x *View) SetBackgroundColor(backgroundColor *appkit.NSColor) {
-	x.inner.SetBackgroundColor(backgroundColor)
+func (x *View) SetBackgroundColor(backgroundColor obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 }
 
-// InterpolationQuality calls the underlying InterpolationQuality.
-func (x *View) InterpolationQuality() PDFInterpolationQuality {
-	return PDFInterpolationQuality(x.inner.InterpolationQuality())
+func (x *View) InterpolationQuality() InterpolationQuality {
+	_r := objc.Send[InterpolationQuality](objref.IDOf(x), objc.RegisterName("interpolationQuality"))
+	return _r
 }
 
-// SetInterpolationQuality calls the underlying SetInterpolationQuality.
-func (x *View) SetInterpolationQuality(interpolationQuality PDFInterpolationQuality) {
-	x.inner.SetInterpolationQuality(raw.PDFInterpolationQuality(interpolationQuality))
+func (x *View) SetInterpolationQuality(interpolationQuality InterpolationQuality) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterpolationQuality:"), interpolationQuality)
 }
 
-// PageShadowsEnabled calls the underlying PageShadowsEnabled.
 func (x *View) PageShadowsEnabled() bool {
-	return x.inner.PageShadowsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pageShadowsEnabled"))
+	return _r
 }
 
-// EnablePageShadows calls the underlying EnablePageShadows.
 func (x *View) EnablePageShadows(pageShadowsEnabled bool) {
-	x.inner.EnablePageShadows(pageShadowsEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enablePageShadows:"), pageShadowsEnabled)
 }
 
-// Delegate calls the underlying Delegate.
-func (x *View) Delegate() raw.PDFViewDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *View) SetDelegate(delegate raw.PDFViewDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// PageOverlayViewProvider calls the underlying PageOverlayViewProvider.
-func (x *View) PageOverlayViewProvider() unsafe.Pointer {
-	return x.inner.PageOverlayViewProvider()
-}
-
-// SetPageOverlayViewProvider calls the underlying SetPageOverlayViewProvider.
-func (x *View) SetPageOverlayViewProvider(pageOverlayViewProvider unsafe.Pointer) {
-	x.inner.SetPageOverlayViewProvider(pageOverlayViewProvider)
-}
-
-// ScaleFactor calls the underlying ScaleFactor.
 func (x *View) ScaleFactor() float64 {
-	return x.inner.ScaleFactor()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactor"))
+	return _r
 }
 
-// SetScaleFactor calls the underlying SetScaleFactor.
 func (x *View) SetScaleFactor(scaleFactor float64) {
-	x.inner.SetScaleFactor(scaleFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScaleFactor:"), scaleFactor)
 }
 
-// MinScaleFactor calls the underlying MinScaleFactor.
 func (x *View) MinScaleFactor() float64 {
-	return x.inner.MinScaleFactor()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("minScaleFactor"))
+	return _r
 }
 
-// SetMinScaleFactor calls the underlying SetMinScaleFactor.
 func (x *View) SetMinScaleFactor(minScaleFactor float64) {
-	x.inner.SetMinScaleFactor(minScaleFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinScaleFactor:"), minScaleFactor)
 }
 
-// MaxScaleFactor calls the underlying MaxScaleFactor.
 func (x *View) MaxScaleFactor() float64 {
-	return x.inner.MaxScaleFactor()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("maxScaleFactor"))
+	return _r
 }
 
-// SetMaxScaleFactor calls the underlying SetMaxScaleFactor.
 func (x *View) SetMaxScaleFactor(maxScaleFactor float64) {
-	x.inner.SetMaxScaleFactor(maxScaleFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaxScaleFactor:"), maxScaleFactor)
 }
 
-// AutoScales calls the underlying AutoScales.
 func (x *View) AutoScales() bool {
-	return x.inner.AutoScales()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("autoScales"))
+	return _r
 }
 
-// SetAutoScales calls the underlying SetAutoScales.
 func (x *View) SetAutoScales(autoScales bool) {
-	x.inner.SetAutoScales(autoScales)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoScales:"), autoScales)
 }
 
-// ScaleFactorForSizeToFit calls the underlying ScaleFactorForSizeToFit.
 func (x *View) ScaleFactorForSizeToFit() float64 {
-	return x.inner.ScaleFactorForSizeToFit()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("scaleFactorForSizeToFit"))
+	return _r
 }
 
-// CanZoomIn calls the underlying CanZoomIn.
 func (x *View) CanZoomIn() bool {
-	return x.inner.CanZoomIn()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canZoomIn"))
+	return _r
 }
 
-// CanZoomOut calls the underlying CanZoomOut.
 func (x *View) CanZoomOut() bool {
-	return x.inner.CanZoomOut()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canZoomOut"))
+	return _r
 }
 
-// CurrentSelection calls the underlying CurrentSelection.
 func (x *View) CurrentSelection() *Selection {
-	_r := x.inner.CurrentSelection()
-	if _r == nil {
-		return nil
-	}
-	return &Selection{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentSelection"))
+	return SelectionFromID(_r)
 }
 
-// SetCurrentSelection calls the underlying SetCurrentSelection.
-func (x *View) SetCurrentSelection(currentSelection *raw.PDFSelection) {
-	x.inner.SetCurrentSelection(currentSelection)
+func (x *View) SetCurrentSelection(currentSelection *Selection) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCurrentSelection:"), objref.IDOf(currentSelection))
 }
 
-// HighlightedSelections calls the underlying HighlightedSelections.
-func (x *View) HighlightedSelections() unsafe.Pointer {
-	return x.inner.HighlightedSelections()
+func (x *View) DocumentView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("documentView"))
+	return obj.Wrap(_r)
 }
 
-// SetHighlightedSelections calls the underlying SetHighlightedSelections.
-func (x *View) SetHighlightedSelections(highlightedSelections unsafe.Pointer) {
-	x.inner.SetHighlightedSelections(highlightedSelections)
-}
-
-// DocumentView calls the underlying DocumentView.
-func (x *View) DocumentView() *appkit.NSView {
-	return x.inner.DocumentView()
-}
-
-// AcceptsDraggedFiles calls the underlying AcceptsDraggedFiles.
 func (x *View) AcceptsDraggedFiles() bool {
-	return x.inner.AcceptsDraggedFiles()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("acceptsDraggedFiles"))
+	return _r
 }
 
-// SetAcceptsDraggedFiles calls the underlying SetAcceptsDraggedFiles.
 func (x *View) SetAcceptsDraggedFiles(acceptsDraggedFiles bool) {
-	x.inner.SetAcceptsDraggedFiles(acceptsDraggedFiles)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsDraggedFiles:"), acceptsDraggedFiles)
 }
 
-// VisiblePages calls the underlying VisiblePages.
-func (x *View) VisiblePages() unsafe.Pointer {
-	return x.inner.VisiblePages()
-}
-
-// EnableDataDetectors calls the underlying EnableDataDetectors.
 func (x *View) EnableDataDetectors() bool {
-	return x.inner.EnableDataDetectors()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("enableDataDetectors"))
+	return _r
 }
 
-// SetEnableDataDetectors calls the underlying SetEnableDataDetectors.
 func (x *View) SetEnableDataDetectors(enableDataDetectors bool) {
-	x.inner.SetEnableDataDetectors(enableDataDetectors)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnableDataDetectors:"), enableDataDetectors)
 }
 
-// IsInMarkupMode calls the underlying IsInMarkupMode.
 func (x *View) IsInMarkupMode() bool {
-	return x.inner.IsInMarkupMode()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInMarkupMode"))
+	return _r
 }
 
-// SetInMarkupMode calls the underlying SetInMarkupMode.
 func (x *View) SetInMarkupMode(inMarkupMode bool) {
-	x.inner.SetInMarkupMode(inMarkupMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInMarkupMode:"), inMarkupMode)
 }
 
 // Unlocks with the password from the specified sender.
-//
-// TakePasswordFrom calls the underlying TakePasswordFrom.
-func (x *View) TakePasswordFrom(sender objc.ID) {
-	x.inner.TakePasswordFrom(sender)
+func (x *View) TakePasswordFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takePasswordFrom:"), objref.IDOf(sender))
 }
 
-// DrawPage calls the underlying DrawPage.
-func (x *View) DrawPage(page *raw.PDFPage) {
-	x.inner.DrawPage(page)
+func (x *View) DrawPage(page *Page) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawPage:"), objref.IDOf(page))
 }
 
-// DrawPagePost calls the underlying DrawPagePost.
-func (x *View) DrawPagePost(page *raw.PDFPage) {
-	x.inner.DrawPagePost(page)
+func (x *View) DrawPagePost(page *Page) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("drawPagePost:"), objref.IDOf(page))
 }
 
-// TakeBackgroundColorFrom calls the underlying TakeBackgroundColorFrom.
-func (x *View) TakeBackgroundColorFrom(sender objc.ID) {
-	x.inner.TakeBackgroundColorFrom(sender)
+func (x *View) TakeBackgroundColorFrom(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("takeBackgroundColorFrom:"), objref.IDOf(sender))
 }
 
-// ShouldAntiAlias calls the underlying ShouldAntiAlias.
 func (x *View) ShouldAntiAlias() bool {
-	return x.inner.ShouldAntiAlias()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("shouldAntiAlias"))
+	return _r
 }
 
-// SetShouldAntiAlias calls the underlying SetShouldAntiAlias.
 func (x *View) SetShouldAntiAlias(shouldAntiAlias bool) {
-	x.inner.SetShouldAntiAlias(shouldAntiAlias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShouldAntiAlias:"), shouldAntiAlias)
 }
 
-// GreekingThreshold calls the underlying GreekingThreshold.
 func (x *View) GreekingThreshold() float64 {
-	return x.inner.GreekingThreshold()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("greekingThreshold"))
+	return _r
 }
 
-// SetGreekingThreshold calls the underlying SetGreekingThreshold.
 func (x *View) SetGreekingThreshold(greekingThreshold float64) {
-	x.inner.SetGreekingThreshold(greekingThreshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGreekingThreshold:"), greekingThreshold)
 }
 
-// AllowsDragging calls the underlying AllowsDragging.
 func (x *View) AllowsDragging() bool {
-	return x.inner.AllowsDragging()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsDragging"))
+	return _r
 }
 
-// SetAllowsDragging calls the underlying SetAllowsDragging.
 func (x *View) SetAllowsDragging(allowsDragging bool) {
-	x.inner.SetAllowsDragging(allowsDragging)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDragging:"), allowsDragging)
 }
 
 // Viewable is the interface implemented by [View], for mocking and DI.
 type Viewable interface {
-	Unwrap() *raw.PDFView
+	obj.Object
 	WithDocument(document *Document) *View
-	WithDisplayMode(displayMode PDFDisplayMode) *View
-	WithDisplayDirection(displayDirection PDFDisplayDirection) *View
+	WithDisplayMode(displayMode DisplayMode) *View
+	WithDisplayDirection(displayDirection DisplayDirection) *View
 	WithDisplaysPageBreaks(displaysPageBreaks bool) *View
-	WithPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets) *View
-	WithDisplayBox(displayBox PDFDisplayBox) *View
+	WithDisplayBox(displayBox DisplayBox) *View
 	WithDisplaysAsBook(displaysAsBook bool) *View
 	WithDisplaysRTL(displaysRTL bool) *View
-	WithBackgroundColor(backgroundColor *appkit.NSColor) *View
-	WithInterpolationQuality(interpolationQuality PDFInterpolationQuality) *View
+	WithBackgroundColor(backgroundColor obj.Object) *View
+	WithInterpolationQuality(interpolationQuality InterpolationQuality) *View
 	WithPageShadowsEnabled(pageShadowsEnabled bool) *View
-	WithDelegate(delegate raw.PDFViewDelegate) *View
 	WithScaleFactor(scaleFactor float64) *View
 	WithMinScaleFactor(minScaleFactor float64) *View
 	WithMaxScaleFactor(maxScaleFactor float64) *View
@@ -731,41 +583,33 @@ type Viewable interface {
 	WithShouldAntiAlias(shouldAntiAlias bool) *View
 	WithGreekingThreshold(greekingThreshold float64) *View
 	WithAllowsDragging(allowsDragging bool) *View
-	GoToFirstPage(sender objc.ID)
-	GoToLastPage(sender objc.ID)
-	GoToNextPage(sender objc.ID)
-	GoToPreviousPage(sender objc.ID)
-	GoBack(sender objc.ID)
-	GoForward(sender objc.ID)
-	GoToPage(page *raw.PDFPage)
-	GoToDestination(destination *raw.PDFDestination)
-	GoToSelection(selection *raw.PDFSelection)
-	GoToRectOnPage(rect corefoundation.CGRect, page *raw.PDFPage)
-	ZoomIn(sender objc.ID)
-	ZoomOut(sender objc.ID)
-	AreaOfInterestForMouse(event *appkit.NSEvent) PDFAreaOfInterest
-	AreaOfInterestForPoint(cursorLocation corefoundation.CGPoint) PDFAreaOfInterest
-	SetCursorForAreaOfInterest(area PDFAreaOfInterest)
-	PerformAction(action *raw.PDFAction)
-	SetCurrentSelectionAnimate(selection *raw.PDFSelection, animate bool)
+	GoToFirstPage(sender obj.Object)
+	GoToLastPage(sender obj.Object)
+	GoToNextPage(sender obj.Object)
+	GoToPreviousPage(sender obj.Object)
+	GoBack(sender obj.Object)
+	GoForward(sender obj.Object)
+	GoToPage(page *Page)
+	GoToDestination(destination *Destination)
+	GoToSelection(selection *Selection)
+	ZoomIn(sender obj.Object)
+	ZoomOut(sender obj.Object)
+	AreaOfInterestForMouse(event obj.Object) AreaOfInterest
+	SetCursorForAreaOfInterest(area AreaOfInterest)
+	PerformAction(action *Action)
+	SetCurrentSelectionAnimate(selection *Selection, animate bool)
 	ClearSelection()
-	SelectAll(sender objc.ID)
-	ScrollSelectionToVisible(sender objc.ID)
-	DrawPageToContext(page *raw.PDFPage, context_ unsafe.Pointer)
-	DrawPagePostToContext(page *raw.PDFPage, context_ unsafe.Pointer)
-	Copy(sender objc.ID)
-	PrintWithInfoAutoRotate(printInfo *appkit.NSPrintInfo, doRotate bool)
-	PrintWithInfoAutoRotatePageScaling(printInfo *appkit.NSPrintInfo, doRotate bool, scale PDFPrintScalingMode)
-	PageForPointNearest(point corefoundation.CGPoint, nearest bool) *Page
-	ConvertPointToPage(point corefoundation.CGPoint, page *raw.PDFPage) corefoundation.CGPoint
-	ConvertRectToPage(rect corefoundation.CGRect, page *raw.PDFPage) corefoundation.CGRect
-	ConvertPointFromPage(point corefoundation.CGPoint, page *raw.PDFPage) corefoundation.CGPoint
-	ConvertRectFromPage(rect corefoundation.CGRect, page *raw.PDFPage) corefoundation.CGRect
+	SelectAll(sender obj.Object)
+	ScrollSelectionToVisible(sender obj.Object)
+	DrawPageToContext(page *Page, context_ obj.Object)
+	DrawPagePostToContext(page *Page, context_ obj.Object)
+	Copy(sender obj.Object)
+	PrintWithInfoAutoRotate(printInfo obj.Object, doRotate bool)
+	PrintWithInfoAutoRotatePageScaling(printInfo obj.Object, doRotate bool, scale PrintScalingMode)
 	LayoutDocumentView()
-	AnnotationsChangedOnPage(page *raw.PDFPage)
-	RowSizeForPage(page *raw.PDFPage) corefoundation.CGSize
+	AnnotationsChangedOnPage(page *Page)
 	Document() *Document
-	SetDocument(document *raw.PDFDocument)
+	SetDocument(document *Document)
 	CanGoToFirstPage() bool
 	CanGoToLastPage() bool
 	CanGoToNextPage() bool
@@ -774,30 +618,24 @@ type Viewable interface {
 	CanGoForward() bool
 	CurrentPage() *Page
 	CurrentDestination() *Destination
-	DisplayMode() PDFDisplayMode
-	SetDisplayMode(displayMode PDFDisplayMode)
-	DisplayDirection() PDFDisplayDirection
-	SetDisplayDirection(displayDirection PDFDisplayDirection)
+	DisplayMode() DisplayMode
+	SetDisplayMode(displayMode DisplayMode)
+	DisplayDirection() DisplayDirection
+	SetDisplayDirection(displayDirection DisplayDirection)
 	DisplaysPageBreaks() bool
 	SetDisplaysPageBreaks(displaysPageBreaks bool)
-	PageBreakMargins() foundation.NSEdgeInsets
-	SetPageBreakMargins(pageBreakMargins foundation.NSEdgeInsets)
-	DisplayBox() PDFDisplayBox
-	SetDisplayBox(displayBox PDFDisplayBox)
+	DisplayBox() DisplayBox
+	SetDisplayBox(displayBox DisplayBox)
 	DisplaysAsBook() bool
 	SetDisplaysAsBook(displaysAsBook bool)
 	DisplaysRTL() bool
 	SetDisplaysRTL(displaysRTL bool)
-	BackgroundColor() *appkit.NSColor
-	SetBackgroundColor(backgroundColor *appkit.NSColor)
-	InterpolationQuality() PDFInterpolationQuality
-	SetInterpolationQuality(interpolationQuality PDFInterpolationQuality)
+	BackgroundColor() obj.Object
+	SetBackgroundColor(backgroundColor obj.Object)
+	InterpolationQuality() InterpolationQuality
+	SetInterpolationQuality(interpolationQuality InterpolationQuality)
 	PageShadowsEnabled() bool
 	EnablePageShadows(pageShadowsEnabled bool)
-	Delegate() raw.PDFViewDelegate
-	SetDelegate(delegate raw.PDFViewDelegate)
-	PageOverlayViewProvider() unsafe.Pointer
-	SetPageOverlayViewProvider(pageOverlayViewProvider unsafe.Pointer)
 	ScaleFactor() float64
 	SetScaleFactor(scaleFactor float64)
 	MinScaleFactor() float64
@@ -810,21 +648,18 @@ type Viewable interface {
 	CanZoomIn() bool
 	CanZoomOut() bool
 	CurrentSelection() *Selection
-	SetCurrentSelection(currentSelection *raw.PDFSelection)
-	HighlightedSelections() unsafe.Pointer
-	SetHighlightedSelections(highlightedSelections unsafe.Pointer)
-	DocumentView() *appkit.NSView
+	SetCurrentSelection(currentSelection *Selection)
+	DocumentView() obj.Object
 	AcceptsDraggedFiles() bool
 	SetAcceptsDraggedFiles(acceptsDraggedFiles bool)
-	VisiblePages() unsafe.Pointer
 	EnableDataDetectors() bool
 	SetEnableDataDetectors(enableDataDetectors bool)
 	IsInMarkupMode() bool
 	SetInMarkupMode(inMarkupMode bool)
-	TakePasswordFrom(sender objc.ID)
-	DrawPage(page *raw.PDFPage)
-	DrawPagePost(page *raw.PDFPage)
-	TakeBackgroundColorFrom(sender objc.ID)
+	TakePasswordFrom(sender obj.Object)
+	DrawPage(page *Page)
+	DrawPagePost(page *Page)
+	TakeBackgroundColorFrom(sender obj.Object)
 	ShouldAntiAlias() bool
 	SetShouldAntiAlias(shouldAntiAlias bool)
 	GreekingThreshold() float64

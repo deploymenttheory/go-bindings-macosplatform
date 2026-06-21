@@ -5,53 +5,77 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A unique identifier for a place.
 //
-// MapItemIdentifier wraps [raw.MKMapItemIdentifier] with a fluent Go API.
+// MapItemIdentifier is an idiomatic wrapper over the Objective-C class MKMapItemIdentifier.
 type MapItemIdentifier struct {
-	inner *raw.MKMapItemIdentifier
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKMapItemIdentifier].
-func (x *MapItemIdentifier) Unwrap() *raw.MKMapItemIdentifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MapItemIdentifier) ID() objc.ID { return x.inner.Ptr() }
-
-// MapItemIdentifierFromID adopts an existing object pointer as a MapItemIdentifier (nil for 0).
+// MapItemIdentifierFromID adopts an existing Objective-C object as a MapItemIdentifier
+// (nil for 0), retaining it and registering a release finalizer.
 func MapItemIdentifierFromID(id objc.ID) *MapItemIdentifier {
 	if id == 0 {
 		return nil
 	}
-	return &MapItemIdentifier{inner: raw.MKMapItemIdentifierFromID(id)}
+	x := &MapItemIdentifier{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMapItemIdentifierWithIdentifierString creates a new [MapItemIdentifier].
+// mapItemIdentifierAdopt wraps an Objective-C object that this code just created as a
+// MapItemIdentifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mapItemIdentifierAdopt(id objc.ID) *MapItemIdentifier {
+	if id == 0 {
+		return nil
+	}
+	x := &MapItemIdentifier{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MapItemIdentifier) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MapItemIdentifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MapItemIdentifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMapItemIdentifierWithIdentifierString creates a new MapItemIdentifier.
 func NewMapItemIdentifierWithIdentifierString(string_ string) *MapItemIdentifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MKMapItemIdentifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifierString:"), foundation.NSStringStringWithUTF8String(string_).Ptr())
-	return &MapItemIdentifier{inner: raw.MKMapItemIdentifierFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MKMapItemIdentifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithIdentifierString:"), purego.NSString(string_))
+	return mapItemIdentifierAdopt(_id)
 }
 
-// IdentifierString calls the underlying IdentifierString.
 func (x *MapItemIdentifier) IdentifierString() string {
-	_r := x.inner.IdentifierString()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifierString"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // MapItemIdentifierable is the interface implemented by [MapItemIdentifier], for mocking and DI.
 type MapItemIdentifierable interface {
-	Unwrap() *raw.MKMapItemIdentifier
+	obj.Object
 	IdentifierString() string
 }
 

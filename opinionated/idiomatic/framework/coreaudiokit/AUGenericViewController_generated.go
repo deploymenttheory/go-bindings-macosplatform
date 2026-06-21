@@ -5,59 +5,84 @@
 package coreaudiokit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiotoolbox"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreaudiokit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AUGenericViewController wraps [raw.AUGenericViewController] with a fluent Go API.
+// AUGenericViewController is an idiomatic wrapper over the Objective-C class AUGenericViewController.
 type AUGenericViewController struct {
-	inner *raw.AUGenericViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AUGenericViewController].
-func (x *AUGenericViewController) Unwrap() *raw.AUGenericViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AUGenericViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// AUGenericViewControllerFromID adopts an existing object pointer as a AUGenericViewController (nil for 0).
+// AUGenericViewControllerFromID adopts an existing Objective-C object as a AUGenericViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func AUGenericViewControllerFromID(id objc.ID) *AUGenericViewController {
 	if id == 0 {
 		return nil
 	}
-	return &AUGenericViewController{inner: raw.AUGenericViewControllerFromID(id)}
-}
-
-// NewAUGenericViewController creates a new [AUGenericViewController].
-func NewAUGenericViewController() *AUGenericViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AUGenericViewController")), objc.RegisterName("new"))
-	return &AUGenericViewController{inner: raw.AUGenericViewControllerFromID(_id)}
-}
-
-// WithAuAudioUnit sets the auAudioUnit property and returns the receiver for chaining.
-func (x *AUGenericViewController) WithAuAudioUnit(auAudioUnit *audiotoolbox.AUAudioUnit) *AUGenericViewController {
-	x.inner.SetAuAudioUnit(auAudioUnit)
+	x := &AUGenericViewController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// AuAudioUnit calls the underlying AuAudioUnit.
-func (x *AUGenericViewController) AuAudioUnit() *audiotoolbox.AUAudioUnit {
-	return x.inner.AuAudioUnit()
+// aUGenericViewControllerAdopt wraps an Objective-C object that this code just created as a
+// AUGenericViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aUGenericViewControllerAdopt(id objc.ID) *AUGenericViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &AUGenericViewController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetAuAudioUnit calls the underlying SetAuAudioUnit.
-func (x *AUGenericViewController) SetAuAudioUnit(auAudioUnit *audiotoolbox.AUAudioUnit) {
-	x.inner.SetAuAudioUnit(auAudioUnit)
+// Description returns the object's -description text.
+func (x *AUGenericViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AUGenericViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AUGenericViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAUGenericViewController creates a new AUGenericViewController.
+func NewAUGenericViewController() *AUGenericViewController {
+	_id := objc.Send[objc.ID](objc.ID(_class("AUGenericViewController")), objc.RegisterName("new"))
+	return aUGenericViewControllerAdopt(_id)
+}
+
+// WithAuAudioUnit sets auAudioUnit and returns the receiver so calls can be chained.
+func (x *AUGenericViewController) WithAuAudioUnit(auAudioUnit obj.Object) *AUGenericViewController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuAudioUnit:"), objref.IDOf(auAudioUnit))
+	return x
+}
+
+func (x *AUGenericViewController) AuAudioUnit() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("auAudioUnit"))
+	return obj.Wrap(_r)
+}
+
+func (x *AUGenericViewController) SetAuAudioUnit(auAudioUnit obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuAudioUnit:"), objref.IDOf(auAudioUnit))
 }
 
 // AUGenericViewControllerable is the interface implemented by [AUGenericViewController], for mocking and DI.
 type AUGenericViewControllerable interface {
-	Unwrap() *raw.AUGenericViewController
-	WithAuAudioUnit(auAudioUnit *audiotoolbox.AUAudioUnit) *AUGenericViewController
-	AuAudioUnit() *audiotoolbox.AUAudioUnit
-	SetAuAudioUnit(auAudioUnit *audiotoolbox.AUAudioUnit)
+	obj.Object
+	WithAuAudioUnit(auAudioUnit obj.Object) *AUGenericViewController
+	AuAudioUnit() obj.Object
+	SetAuAudioUnit(auAudioUnit obj.Object)
 }
 
 var _ AUGenericViewControllerable = (*AUGenericViewController)(nil)

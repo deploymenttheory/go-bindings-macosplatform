@@ -5,99 +5,99 @@
 package mediaplayer
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that responds to requests to change the playback rate of the playing item.
 //
-// ChangePlaybackRateCommand wraps [raw.MPChangePlaybackRateCommand] with a fluent Go API.
+// ChangePlaybackRateCommand is an idiomatic wrapper over the Objective-C class MPChangePlaybackRateCommand.
 type ChangePlaybackRateCommand struct {
-	inner *raw.MPChangePlaybackRateCommand
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPChangePlaybackRateCommand].
-func (x *ChangePlaybackRateCommand) Unwrap() *raw.MPChangePlaybackRateCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChangePlaybackRateCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// ChangePlaybackRateCommandFromID adopts an existing object pointer as a ChangePlaybackRateCommand (nil for 0).
+// ChangePlaybackRateCommandFromID adopts an existing Objective-C object as a ChangePlaybackRateCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func ChangePlaybackRateCommandFromID(id objc.ID) *ChangePlaybackRateCommand {
 	if id == 0 {
 		return nil
 	}
-	return &ChangePlaybackRateCommand{inner: raw.MPChangePlaybackRateCommandFromID(id)}
+	x := &ChangePlaybackRateCommand{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewChangePlaybackRateCommand creates a new [ChangePlaybackRateCommand].
+// changePlaybackRateCommandAdopt wraps an Objective-C object that this code just created as a
+// ChangePlaybackRateCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func changePlaybackRateCommandAdopt(id objc.ID) *ChangePlaybackRateCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &ChangePlaybackRateCommand{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ChangePlaybackRateCommand) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChangePlaybackRateCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChangePlaybackRateCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChangePlaybackRateCommand creates a new ChangePlaybackRateCommand.
 func NewChangePlaybackRateCommand() *ChangePlaybackRateCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPChangePlaybackRateCommand")), objc.RegisterName("new"))
-	return &ChangePlaybackRateCommand{inner: raw.MPChangePlaybackRateCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPChangePlaybackRateCommand")), objc.RegisterName("new"))
+	return changePlaybackRateCommandAdopt(_id)
 }
 
 // The supported playback rates for a media item.
 //
-// WithSupportedPlaybackRates sets the collection, converting the Go slice to an NSArray.
-func (x *ChangePlaybackRateCommand) WithSupportedPlaybackRates(items ...*foundation.NSNumber) *ChangePlaybackRateCommand {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetSupportedPlaybackRates(foundation.NSArrayFromID[*foundation.NSNumber](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSNumber](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetSupportedPlaybackRates(_arr)
+// WithSupportedPlaybackRates sets the collection and returns the receiver so calls can be chained.
+func (x *ChangePlaybackRateCommand) WithSupportedPlaybackRates(items ...obj.Object) *ChangePlaybackRateCommand {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedPlaybackRates:"), _arr)
 	return x
 }
 
 // A Boolean value that indicates whether a user can interact with the displayed element.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *ChangePlaybackRateCommand) WithEnabled(enabled bool) *ChangePlaybackRateCommand {
-	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // SupportedPlaybackRates returns the collection as a Go slice.
-func (x *ChangePlaybackRateCommand) SupportedPlaybackRates() []*foundation.NSNumber {
-	arr := x.inner.SupportedPlaybackRates()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSNumber {
-		return foundation.NSNumberFromID(purego.Retain(_id))
-	})
+func (x *ChangePlaybackRateCommand) SupportedPlaybackRates() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supportedPlaybackRates"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// SetSupportedPlaybackRates calls the underlying SetSupportedPlaybackRates.
-func (x *ChangePlaybackRateCommand) SetSupportedPlaybackRates(supportedPlaybackRates *foundation.NSArray[*foundation.NSNumber]) {
-	x.inner.SetSupportedPlaybackRates(supportedPlaybackRates)
-}
-
-func (x *ChangePlaybackRateCommand) asRemoteCommand() *raw.MPRemoteCommand {
-	return &x.inner.MPRemoteCommand
+func (x *ChangePlaybackRateCommand) SetSupportedPlaybackRates(supportedPlaybackRates []obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportedPlaybackRates:"), purego.SliceToNSArray(supportedPlaybackRates, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }))
 }
 
 // ChangePlaybackRateCommandable is the interface implemented by [ChangePlaybackRateCommand], for mocking and DI.
 type ChangePlaybackRateCommandable interface {
-	Unwrap() *raw.MPChangePlaybackRateCommand
-	WithSupportedPlaybackRates(items ...*foundation.NSNumber) *ChangePlaybackRateCommand
+	obj.Object
+	WithSupportedPlaybackRates(items ...obj.Object) *ChangePlaybackRateCommand
 	WithEnabled(enabled bool) *ChangePlaybackRateCommand
-	SupportedPlaybackRates() []*foundation.NSNumber
-	SetSupportedPlaybackRates(supportedPlaybackRates *foundation.NSArray[*foundation.NSNumber])
+	SupportedPlaybackRates() []obj.Object
+	SetSupportedPlaybackRates(supportedPlaybackRates []obj.Object)
 }
 
 var _ ChangePlaybackRateCommandable = (*ChangePlaybackRateCommand)(nil)

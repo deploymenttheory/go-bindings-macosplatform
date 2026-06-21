@@ -5,159 +5,136 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A navigation graph for 2D game worlds that creates a space-filling network for smooth pathfinding around obstacles.
 //
-// MeshGraph wraps [raw.GKMeshGraph] with a fluent Go API.
+// MeshGraph is an idiomatic wrapper over the Objective-C class GKMeshGraph.
 type MeshGraph struct {
-	inner *raw.GKMeshGraph[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKMeshGraph].
-func (x *MeshGraph) Unwrap() *raw.GKMeshGraph[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MeshGraph) ID() objc.ID { return x.inner.Ptr() }
-
-// MeshGraphFromID adopts an existing object pointer as a MeshGraph (nil for 0).
+// MeshGraphFromID adopts an existing Objective-C object as a MeshGraph
+// (nil for 0), retaining it and registering a release finalizer.
 func MeshGraphFromID(id objc.ID) *MeshGraph {
 	if id == 0 {
 		return nil
 	}
-	return &MeshGraph{inner: raw.GKMeshGraphFromID[objc.ID](id)}
+	x := &MeshGraph{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a graph to cover the specified area, using the specified node class.
-//
-// NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinateNodeClass creates a new [MeshGraph].
-func NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinateNodeClass(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer, nodeClass objc.Class) *MeshGraph {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMeshGraph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBufferRadius:minCoordinate:maxCoordinate:nodeClass:"), bufferRadius, min, max, nodeClass)
-	return &MeshGraph{inner: raw.GKMeshGraphFromID[objc.ID](_id)}
+// meshGraphAdopt wraps an Objective-C object that this code just created as a
+// MeshGraph (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func meshGraphAdopt(id objc.ID) *MeshGraph {
+	if id == 0 {
+		return nil
+	}
+	x := &MeshGraph{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Initializes a graph to cover the specified area.
-//
-// NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinate creates a new [MeshGraph].
-func NewMeshGraphWithBufferRadiusMinCoordinateMaxCoordinate(bufferRadius float32, min unsafe.Pointer, max unsafe.Pointer) *MeshGraph {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKMeshGraph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBufferRadius:minCoordinate:maxCoordinate:"), bufferRadius, min, max)
-	return &MeshGraph{inner: raw.GKMeshGraphFromID[objc.ID](_id)}
+// Description returns the object's -description text.
+func (x *MeshGraph) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MeshGraph) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MeshGraph) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMeshGraph creates a new MeshGraph.
+func NewMeshGraph() *MeshGraph {
+	_id := objc.Send[objc.ID](objc.ID(_class("GKMeshGraph")), objc.RegisterName("new"))
+	return meshGraphAdopt(_id)
 }
 
 // A set of options for how to place graph nodes when triangulating the graph.
 //
-// WithTriangulationMode sets the triangulationMode property and returns the receiver for chaining.
-func (x *MeshGraph) WithTriangulationMode(triangulationMode GKMeshGraphTriangulationMode) *MeshGraph {
-	x.inner.SetTriangulationMode(raw.GKMeshGraphTriangulationMode(triangulationMode))
+// WithTriangulationMode sets triangulationMode and returns the receiver so calls can be chained.
+func (x *MeshGraph) WithTriangulationMode(triangulationMode MeshGraphTriangulationMode) *MeshGraph {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangulationMode:"), triangulationMode)
 	return x
 }
 
 // Adds new obstacles to the graph.
-//
-// AddObstacles calls the underlying AddObstacles.
-func (x *MeshGraph) AddObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
-	x.inner.AddObstacles(obstacles)
+func (x *MeshGraph) AddObstacles(obstacles []*PolygonObstacle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Removes the specified obstacle from the graph.
-//
-// RemoveObstacles calls the underlying RemoveObstacles.
-func (x *MeshGraph) RemoveObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle]) {
-	x.inner.RemoveObstacles(obstacles)
+func (x *MeshGraph) RemoveObstacles(obstacles []*PolygonObstacle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeObstacles:"), purego.SliceToNSArray(obstacles, func(_v *PolygonObstacle) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Adds the specified node to the graph, connecting it to its nearest neighbors without creating connections that pass through obstacles or their buffer regions.
-//
-// ConnectNodeUsingObstacles calls the underlying ConnectNodeUsingObstacles.
-func (x *MeshGraph) ConnectNodeUsingObstacles(node objc.ID) {
-	x.inner.ConnectNodeUsingObstacles(node)
+func (x *MeshGraph) ConnectNodeUsingObstacles(node obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNodeUsingObstacles:"), objref.IDOf(node))
 }
 
 // Creates or updates the graph with a network of nodes that describes the open space around its obstacles.
-//
-// Triangulate calls the underlying Triangulate.
 func (x *MeshGraph) Triangulate() {
-	x.inner.Triangulate()
-}
-
-// The triangle definition at the specified index.
-//
-// TriangleAtIndex calls the underlying TriangleAtIndex.
-func (x *MeshGraph) TriangleAtIndex(index uint) raw.GKTriangle {
-	return x.inner.TriangleAtIndex(index)
-}
-
-// Returns the class of the specified generic index
-//
-// ClassForGenericArgumentAtIndex calls the underlying ClassForGenericArgumentAtIndex.
-func (x *MeshGraph) ClassForGenericArgumentAtIndex(index uint) objc.Class {
-	return x.inner.ClassForGenericArgumentAtIndex(index)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("triangulate"))
 }
 
 // Array of the extruded obstacles currently represented by this graph
 //
 // Obstacles returns the collection as a Go slice.
 func (x *MeshGraph) Obstacles() []*PolygonObstacle {
-	arr := x.inner.Obstacles()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *PolygonObstacle {
-		return &PolygonObstacle{inner: raw.GKPolygonObstacleFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("obstacles"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *PolygonObstacle { return PolygonObstacleFromID(_id) })
 }
 
 // The distance by which all obstacles are extruded. This is most commonly the spatial bounding radius of a potential traveler on this path
-//
-// BufferRadius calls the underlying BufferRadius.
 func (x *MeshGraph) BufferRadius() float32 {
-	return x.inner.BufferRadius()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("bufferRadius"))
+	return _r
 }
 
-// Specifies how graph nodes are generated when you triangulate this graph. You can combine triangulation modes using the | (OR) operator @see GKMeshGraphTriangulationMode
-//
-// TriangulationMode calls the underlying TriangulationMode.
-func (x *MeshGraph) TriangulationMode() GKMeshGraphTriangulationMode {
-	return GKMeshGraphTriangulationMode(x.inner.TriangulationMode())
+// Specifies how graph nodes are generated when you triangulate this graph. You can combine triangulation modes using the | (OR) operator
+func (x *MeshGraph) TriangulationMode() MeshGraphTriangulationMode {
+	_r := objc.Send[MeshGraphTriangulationMode](objref.IDOf(x), objc.RegisterName("triangulationMode"))
+	return _r
 }
 
-// SetTriangulationMode calls the underlying SetTriangulationMode.
-func (x *MeshGraph) SetTriangulationMode(triangulationMode GKMeshGraphTriangulationMode) {
-	x.inner.SetTriangulationMode(raw.GKMeshGraphTriangulationMode(triangulationMode))
+func (x *MeshGraph) SetTriangulationMode(triangulationMode MeshGraphTriangulationMode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTriangulationMode:"), triangulationMode)
 }
 
 // The number of triangles currently in this mesh graph
-//
-// TriangleCount calls the underlying TriangleCount.
-func (x *MeshGraph) TriangleCount() uint {
-	return x.inner.TriangleCount()
+func (x *MeshGraph) TriangleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("triangleCount"))
+	return _r
 }
-
-func (x *MeshGraph) asGraph() *raw.GKGraph { return &x.inner.GKGraph }
 
 // MeshGraphable is the interface implemented by [MeshGraph], for mocking and DI.
 type MeshGraphable interface {
-	Unwrap() *raw.GKMeshGraph[objc.ID]
-	WithTriangulationMode(triangulationMode GKMeshGraphTriangulationMode) *MeshGraph
-	AddObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle])
-	RemoveObstacles(obstacles *foundation.NSArray[*raw.GKPolygonObstacle])
-	ConnectNodeUsingObstacles(node objc.ID)
+	obj.Object
+	WithTriangulationMode(triangulationMode MeshGraphTriangulationMode) *MeshGraph
+	AddObstacles(obstacles []*PolygonObstacle)
+	RemoveObstacles(obstacles []*PolygonObstacle)
+	ConnectNodeUsingObstacles(node obj.Object)
 	Triangulate()
-	TriangleAtIndex(index uint) raw.GKTriangle
-	ClassForGenericArgumentAtIndex(index uint) objc.Class
 	Obstacles() []*PolygonObstacle
 	BufferRadius() float32
-	TriangulationMode() GKMeshGraphTriangulationMode
-	SetTriangulationMode(triangulationMode GKMeshGraphTriangulationMode)
-	TriangleCount() uint
+	TriangulationMode() MeshGraphTriangulationMode
+	SetTriangulationMode(triangulationMode MeshGraphTriangulationMode)
+	TriangleCount() int
 }
 
 var _ MeshGraphable = (*MeshGraph)(nil)

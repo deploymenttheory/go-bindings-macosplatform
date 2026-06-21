@@ -5,235 +5,246 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A specifier that indicates every object in a collection matching a condition.
 //
-// WhoseSpecifier wraps [raw.NSWhoseSpecifier] with a fluent Go API.
+// WhoseSpecifier is an idiomatic wrapper over the Objective-C class NSWhoseSpecifier.
 type WhoseSpecifier struct {
-	inner *raw.NSWhoseSpecifier
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSWhoseSpecifier].
-func (x *WhoseSpecifier) Unwrap() *raw.NSWhoseSpecifier { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WhoseSpecifier) ID() objc.ID { return x.inner.Ptr() }
-
-// WhoseSpecifierFromID adopts an existing object pointer as a WhoseSpecifier (nil for 0).
+// WhoseSpecifierFromID adopts an existing Objective-C object as a WhoseSpecifier
+// (nil for 0), retaining it and registering a release finalizer.
 func WhoseSpecifierFromID(id objc.ID) *WhoseSpecifier {
 	if id == 0 {
 		return nil
 	}
-	return &WhoseSpecifier{inner: raw.NSWhoseSpecifierFromID(id)}
+	x := &WhoseSpecifier{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWhoseSpecifierWithCoder creates a new [WhoseSpecifier].
-func NewWhoseSpecifierWithCoder(inCoder *raw.NSCoder) *WhoseSpecifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWhoseSpecifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), inCoder.Ptr())
-	return &WhoseSpecifier{inner: raw.NSWhoseSpecifierFromID(_id)}
+// whoseSpecifierAdopt wraps an Objective-C object that this code just created as a
+// WhoseSpecifier (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func whoseSpecifierAdopt(id objc.ID) *WhoseSpecifier {
+	if id == 0 {
+		return nil
+	}
+	x := &WhoseSpecifier{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WhoseSpecifier) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WhoseSpecifier) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WhoseSpecifier) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWhoseSpecifierWithCoder creates a new WhoseSpecifier.
+func NewWhoseSpecifierWithCoder(inCoder *Coder) *WhoseSpecifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSWhoseSpecifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:"), objref.IDOf(inCoder))
+	return whoseSpecifierAdopt(_id)
 }
 
 // Returns an NSWhoseSpecifier object initialized with the given attributes.
 //
-// NewWhoseSpecifierWithContainerClassDescriptionContainerSpecifierKeyTest creates a new [WhoseSpecifier].
-func NewWhoseSpecifierWithContainerClassDescriptionContainerSpecifierKeyTest(classDesc *raw.NSScriptClassDescription, container *raw.NSScriptObjectSpecifier, property string, test *raw.NSScriptWhoseTest) *WhoseSpecifier {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWhoseSpecifier")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:test:"), classDesc.Ptr(), container.Ptr(), foundation.NSStringStringWithUTF8String(property).Ptr(), test.Ptr())
-	return &WhoseSpecifier{inner: raw.NSWhoseSpecifierFromID(_id)}
+// NewWhoseSpecifierWithContainerClassDescriptionContainerSpecifierKeyTest creates a new WhoseSpecifier.
+func NewWhoseSpecifierWithContainerClassDescriptionContainerSpecifierKeyTest(classDesc *ScriptClassDescription, container *ScriptObjectSpecifier, property string, test *ScriptWhoseTest) *WhoseSpecifier {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSWhoseSpecifier")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContainerClassDescription:containerSpecifier:key:test:"), objref.IDOf(classDesc), objref.IDOf(container), purego.NSString(property), objref.IDOf(test))
+	return whoseSpecifierAdopt(_id)
 }
 
 // Returns the test object encapsulated by the receiver.
 //
-// WithTest sets the test property and returns the receiver for chaining.
+// WithTest sets test and returns the receiver so calls can be chained.
 func (x *WhoseSpecifier) WithTest(test ScriptWhoseTestProvider) *WhoseSpecifier {
-	x.inner.SetTest(test.asScriptWhoseTest())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTest:"), objref.IDOf(test))
 	return x
 }
 
 // Returns the start sub-element identifier for the receiver.
 //
-// WithStartSubelementIdentifier sets the startSubelementIdentifier property and returns the receiver for chaining.
-func (x *WhoseSpecifier) WithStartSubelementIdentifier(startSubelementIdentifier NSWhoseSubelementIdentifier) *WhoseSpecifier {
-	x.inner.SetStartSubelementIdentifier(raw.NSWhoseSubelementIdentifier(startSubelementIdentifier))
+// WithStartSubelementIdentifier sets startSubelementIdentifier and returns the receiver so calls can be chained.
+func (x *WhoseSpecifier) WithStartSubelementIdentifier(startSubelementIdentifier WhoseSubelementIdentifier) *WhoseSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSubelementIdentifier:"), startSubelementIdentifier)
 	return x
 }
 
 // Returns the index position of the first sub-element within the range of objects being tested that pass the receiver’s test.
 //
-// WithStartSubelementIndex sets the startSubelementIndex property and returns the receiver for chaining.
+// WithStartSubelementIndex sets startSubelementIndex and returns the receiver so calls can be chained.
 func (x *WhoseSpecifier) WithStartSubelementIndex(startSubelementIndex int) *WhoseSpecifier {
-	x.inner.SetStartSubelementIndex(startSubelementIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSubelementIndex:"), startSubelementIndex)
 	return x
 }
 
 // Sets the end sub-element identifier for the specifier to the value of a given sub-element.
 //
-// WithEndSubelementIdentifier sets the endSubelementIdentifier property and returns the receiver for chaining.
-func (x *WhoseSpecifier) WithEndSubelementIdentifier(endSubelementIdentifier NSWhoseSubelementIdentifier) *WhoseSpecifier {
-	x.inner.SetEndSubelementIdentifier(raw.NSWhoseSubelementIdentifier(endSubelementIdentifier))
+// WithEndSubelementIdentifier sets endSubelementIdentifier and returns the receiver so calls can be chained.
+func (x *WhoseSpecifier) WithEndSubelementIdentifier(endSubelementIdentifier WhoseSubelementIdentifier) *WhoseSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndSubelementIdentifier:"), endSubelementIdentifier)
 	return x
 }
 
 // Sets the index position of the last sub-element within the range of objects being tested that pass the specifier’s test.
 //
-// WithEndSubelementIndex sets the endSubelementIndex property and returns the receiver for chaining.
+// WithEndSubelementIndex sets endSubelementIndex and returns the receiver so calls can be chained.
 func (x *WhoseSpecifier) WithEndSubelementIndex(endSubelementIndex int) *WhoseSpecifier {
-	x.inner.SetEndSubelementIndex(endSubelementIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndSubelementIndex:"), endSubelementIndex)
 	return x
 }
 
 // Sets the receiver’s child reference.
 //
-// WithChildSpecifier sets the childSpecifier property and returns the receiver for chaining.
+// WithChildSpecifier sets childSpecifier and returns the receiver so calls can be chained.
 func (x *WhoseSpecifier) WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetChildSpecifier(childSpecifier.asScriptObjectSpecifier())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setChildSpecifier:"), objref.IDOf(childSpecifier))
 	return x
 }
 
 // Sets the container specifier of the receiver.
 //
-// WithContainerSpecifier sets the containerSpecifier property and returns the receiver for chaining.
+// WithContainerSpecifier sets containerSpecifier and returns the receiver so calls can be chained.
 func (x *WhoseSpecifier) WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerSpecifier(containerSpecifier.asScriptObjectSpecifier())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerSpecifier:"), objref.IDOf(containerSpecifier))
 	return x
 }
 
 // Sets whether the receiver’s container should be an object involved in a filter reference or the top-level object.
 //
-// WithContainerIsObjectBeingTested sets the containerIsObjectBeingTested property and returns the receiver for chaining.
+// WithContainerIsObjectBeingTested sets containerIsObjectBeingTested and returns the receiver so calls can be chained.
 func (x *WhoseSpecifier) WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *WhoseSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerIsObjectBeingTested(containerIsObjectBeingTested)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsObjectBeingTested:"), containerIsObjectBeingTested)
 	return x
 }
 
 // Sets whether the receiver’s container is to be the container for a range specifier or a top-level object.
 //
-// WithContainerIsRangeContainerObject sets the containerIsRangeContainerObject property and returns the receiver for chaining.
+// WithContainerIsRangeContainerObject sets containerIsRangeContainerObject and returns the receiver so calls can be chained.
 func (x *WhoseSpecifier) WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *WhoseSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerIsRangeContainerObject(containerIsRangeContainerObject)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerIsRangeContainerObject:"), containerIsRangeContainerObject)
 	return x
 }
 
 // Sets the key of the receiver.
 //
-// WithKey sets the key property and returns the receiver for chaining.
-func (x *WhoseSpecifier) WithKey(key string) *WhoseSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetKey(foundation.NSStringStringWithUTF8String(key))
+// WithKey sets key and returns the receiver so calls can be chained.
+func (x *WhoseSpecifier) WithKey(key StringProvider) *WhoseSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKey:"), objref.IDOf(key))
 	return x
 }
 
 // Sets the class description of the receiver’s container specifier to a given specifier.
 //
-// WithContainerClassDescription sets the containerClassDescription property and returns the receiver for chaining.
+// WithContainerClassDescription sets containerClassDescription and returns the receiver so calls can be chained.
 func (x *WhoseSpecifier) WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *WhoseSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetContainerClassDescription(containerClassDescription.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContainerClassDescription:"), objref.IDOf(containerClassDescription))
 	return x
 }
 
 // Sets the value of the evaluation error.
 //
-// WithEvaluationErrorNumber sets the evaluationErrorNumber property and returns the receiver for chaining.
+// WithEvaluationErrorNumber sets evaluationErrorNumber and returns the receiver so calls can be chained.
 func (x *WhoseSpecifier) WithEvaluationErrorNumber(evaluationErrorNumber int) *WhoseSpecifier {
-	x.inner.NSScriptObjectSpecifier.SetEvaluationErrorNumber(evaluationErrorNumber)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEvaluationErrorNumber:"), evaluationErrorNumber)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *WhoseSpecifier) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *WhoseSpecifier {
-	x.inner.NSScriptObjectSpecifier.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *WhoseSpecifier) WithScriptingProperties(scriptingProperties obj.Object) *WhoseSpecifier {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// Test calls the underlying Test.
 func (x *WhoseSpecifier) Test() *ScriptWhoseTest {
-	_r := x.inner.Test()
-	if _r == nil {
-		return nil
-	}
-	return &ScriptWhoseTest{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("test"))
+	return ScriptWhoseTestFromID(_r)
 }
 
-// SetTest calls the underlying SetTest.
-func (x *WhoseSpecifier) SetTest(test *raw.NSScriptWhoseTest) {
-	x.inner.SetTest(test)
+func (x *WhoseSpecifier) SetTest(test *ScriptWhoseTest) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTest:"), objref.IDOf(test))
 }
 
-// StartSubelementIdentifier calls the underlying StartSubelementIdentifier.
-func (x *WhoseSpecifier) StartSubelementIdentifier() NSWhoseSubelementIdentifier {
-	return NSWhoseSubelementIdentifier(x.inner.StartSubelementIdentifier())
+func (x *WhoseSpecifier) StartSubelementIdentifier() WhoseSubelementIdentifier {
+	_r := objc.Send[WhoseSubelementIdentifier](objref.IDOf(x), objc.RegisterName("startSubelementIdentifier"))
+	return _r
 }
 
-// SetStartSubelementIdentifier calls the underlying SetStartSubelementIdentifier.
-func (x *WhoseSpecifier) SetStartSubelementIdentifier(startSubelementIdentifier NSWhoseSubelementIdentifier) {
-	x.inner.SetStartSubelementIdentifier(raw.NSWhoseSubelementIdentifier(startSubelementIdentifier))
+func (x *WhoseSpecifier) SetStartSubelementIdentifier(startSubelementIdentifier WhoseSubelementIdentifier) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSubelementIdentifier:"), startSubelementIdentifier)
 }
 
-// StartSubelementIndex calls the underlying StartSubelementIndex.
 func (x *WhoseSpecifier) StartSubelementIndex() int {
-	return x.inner.StartSubelementIndex()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("startSubelementIndex"))
+	return _r
 }
 
-// SetStartSubelementIndex calls the underlying SetStartSubelementIndex.
 func (x *WhoseSpecifier) SetStartSubelementIndex(startSubelementIndex int) {
-	x.inner.SetStartSubelementIndex(startSubelementIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStartSubelementIndex:"), startSubelementIndex)
 }
 
-// EndSubelementIdentifier calls the underlying EndSubelementIdentifier.
-func (x *WhoseSpecifier) EndSubelementIdentifier() NSWhoseSubelementIdentifier {
-	return NSWhoseSubelementIdentifier(x.inner.EndSubelementIdentifier())
+func (x *WhoseSpecifier) EndSubelementIdentifier() WhoseSubelementIdentifier {
+	_r := objc.Send[WhoseSubelementIdentifier](objref.IDOf(x), objc.RegisterName("endSubelementIdentifier"))
+	return _r
 }
 
-// SetEndSubelementIdentifier calls the underlying SetEndSubelementIdentifier.
-func (x *WhoseSpecifier) SetEndSubelementIdentifier(endSubelementIdentifier NSWhoseSubelementIdentifier) {
-	x.inner.SetEndSubelementIdentifier(raw.NSWhoseSubelementIdentifier(endSubelementIdentifier))
+func (x *WhoseSpecifier) SetEndSubelementIdentifier(endSubelementIdentifier WhoseSubelementIdentifier) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndSubelementIdentifier:"), endSubelementIdentifier)
 }
 
-// EndSubelementIndex calls the underlying EndSubelementIndex.
 func (x *WhoseSpecifier) EndSubelementIndex() int {
-	return x.inner.EndSubelementIndex()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("endSubelementIndex"))
+	return _r
 }
 
-// SetEndSubelementIndex calls the underlying SetEndSubelementIndex.
 func (x *WhoseSpecifier) SetEndSubelementIndex(endSubelementIndex int) {
-	x.inner.SetEndSubelementIndex(endSubelementIndex)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEndSubelementIndex:"), endSubelementIndex)
 }
-
-func (x *WhoseSpecifier) asScriptObjectSpecifier() *raw.NSScriptObjectSpecifier {
-	return &x.inner.NSScriptObjectSpecifier
-}
-
-func (x *WhoseSpecifier) asObject() *raw.NSObject { return &x.inner.NSScriptObjectSpecifier.NSObject }
 
 // WhoseSpecifierable is the interface implemented by [WhoseSpecifier], for mocking and DI.
 type WhoseSpecifierable interface {
-	Unwrap() *raw.NSWhoseSpecifier
+	obj.Object
 	WithTest(test ScriptWhoseTestProvider) *WhoseSpecifier
-	WithStartSubelementIdentifier(startSubelementIdentifier NSWhoseSubelementIdentifier) *WhoseSpecifier
+	WithStartSubelementIdentifier(startSubelementIdentifier WhoseSubelementIdentifier) *WhoseSpecifier
 	WithStartSubelementIndex(startSubelementIndex int) *WhoseSpecifier
-	WithEndSubelementIdentifier(endSubelementIdentifier NSWhoseSubelementIdentifier) *WhoseSpecifier
+	WithEndSubelementIdentifier(endSubelementIdentifier WhoseSubelementIdentifier) *WhoseSpecifier
 	WithEndSubelementIndex(endSubelementIndex int) *WhoseSpecifier
 	WithChildSpecifier(childSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier
 	WithContainerSpecifier(containerSpecifier ScriptObjectSpecifierProvider) *WhoseSpecifier
 	WithContainerIsObjectBeingTested(containerIsObjectBeingTested bool) *WhoseSpecifier
 	WithContainerIsRangeContainerObject(containerIsRangeContainerObject bool) *WhoseSpecifier
-	WithKey(key string) *WhoseSpecifier
+	WithKey(key StringProvider) *WhoseSpecifier
 	WithContainerClassDescription(containerClassDescription *ScriptClassDescription) *WhoseSpecifier
 	WithEvaluationErrorNumber(evaluationErrorNumber int) *WhoseSpecifier
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *WhoseSpecifier
+	WithScriptingProperties(scriptingProperties obj.Object) *WhoseSpecifier
 	Test() *ScriptWhoseTest
-	SetTest(test *raw.NSScriptWhoseTest)
-	StartSubelementIdentifier() NSWhoseSubelementIdentifier
-	SetStartSubelementIdentifier(startSubelementIdentifier NSWhoseSubelementIdentifier)
+	SetTest(test *ScriptWhoseTest)
+	StartSubelementIdentifier() WhoseSubelementIdentifier
+	SetStartSubelementIdentifier(startSubelementIdentifier WhoseSubelementIdentifier)
 	StartSubelementIndex() int
 	SetStartSubelementIndex(startSubelementIndex int)
-	EndSubelementIdentifier() NSWhoseSubelementIdentifier
-	SetEndSubelementIdentifier(endSubelementIdentifier NSWhoseSubelementIdentifier)
+	EndSubelementIdentifier() WhoseSubelementIdentifier
+	SetEndSubelementIdentifier(endSubelementIdentifier WhoseSubelementIdentifier)
 	EndSubelementIndex() int
 	SetEndSubelementIndex(endSubelementIndex int)
 }

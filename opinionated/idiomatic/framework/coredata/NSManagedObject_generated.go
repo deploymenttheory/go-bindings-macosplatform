@@ -5,276 +5,276 @@
 package coredata
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coredata"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // The base class that all Core Data model objects inherit from.
 //
-// ManagedObject wraps [raw.NSManagedObject] with a fluent Go API.
+// ManagedObject is an idiomatic wrapper over the Objective-C class NSManagedObject.
 type ManagedObject struct {
-	inner *raw.NSManagedObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSManagedObject].
-func (x *ManagedObject) Unwrap() *raw.NSManagedObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ManagedObject) ID() objc.ID { return x.inner.Ptr() }
-
-// ManagedObjectFromID adopts an existing object pointer as a ManagedObject (nil for 0).
+// ManagedObjectFromID adopts an existing Objective-C object as a ManagedObject
+// (nil for 0), retaining it and registering a release finalizer.
 func ManagedObjectFromID(id objc.ID) *ManagedObject {
 	if id == 0 {
 		return nil
 	}
-	return &ManagedObject{inner: raw.NSManagedObjectFromID(id)}
+	x := &ManagedObject{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// managedObjectAdopt wraps an Objective-C object that this code just created as a
+// ManagedObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func managedObjectAdopt(id objc.ID) *ManagedObject {
+	if id == 0 {
+		return nil
+	}
+	x := &ManagedObject{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ManagedObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ManagedObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ManagedObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a managed object from an entity description and inserts it into the specified managed object context.
 //
-// NewManagedObjectWithEntityInsertIntoManagedObjectContext creates a new [ManagedObject].
-func NewManagedObjectWithEntityInsertIntoManagedObjectContext(entity *raw.NSEntityDescription, context_ *raw.NSManagedObjectContext) *ManagedObject {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObject")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:insertIntoManagedObjectContext:"), entity.Ptr(), context_.Ptr())
-	return &ManagedObject{inner: raw.NSManagedObjectFromID(_id)}
+// NewManagedObjectWithEntityInsertIntoManagedObjectContext creates a new ManagedObject.
+func NewManagedObjectWithEntityInsertIntoManagedObjectContext(entity *EntityDescription, context_ *ManagedObjectContext) *ManagedObject {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObject")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEntity:insertIntoManagedObjectContext:"), objref.IDOf(entity), objref.IDOf(context_))
+	return managedObjectAdopt(_id)
 }
 
 // Initializes a managed object subclass and inserts it into the specified managed object context.
 //
-// NewManagedObjectWithContext creates a new [ManagedObject].
-func NewManagedObjectWithContext(moc *raw.NSManagedObjectContext) *ManagedObject {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSManagedObject")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:"), moc.Ptr())
-	return &ManagedObject{inner: raw.NSManagedObjectFromID(_id)}
+// NewManagedObjectWithContext creates a new ManagedObject.
+func NewManagedObjectWithContext(moc *ManagedObjectContext) *ManagedObject {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSManagedObject")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithContext:"), objref.IDOf(moc))
+	return managedObjectAdopt(_id)
 }
 
 // Returns a Boolean value that indicates whether the relationship for a given key is a fault.
-//
-// HasFaultForRelationshipNamed calls the underlying HasFaultForRelationshipNamed.
 func (x *ManagedObject) HasFaultForRelationshipNamed(key string) bool {
-	return x.inner.HasFaultForRelationshipNamed(foundation.NSStringStringWithUTF8String(key))
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasFaultForRelationshipNamed:"), purego.NSString(key))
+	return _r
 }
 
 // Returns the object IDs for all of the managed objects that are in the named relationship.
-//
-// ObjectIDsForRelationshipNamed calls the underlying ObjectIDsForRelationshipNamed.
-func (x *ManagedObject) ObjectIDsForRelationshipNamed(key string) *foundation.NSArray[*raw.NSManagedObjectID] {
-	return x.inner.ObjectIDsForRelationshipNamed(foundation.NSStringStringWithUTF8String(key))
+func (x *ManagedObject) ObjectIDsForRelationshipNamed(key string) []*ManagedObjectID {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectIDsForRelationshipNamed:"), purego.NSString(key))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ManagedObjectID { return ManagedObjectIDFromID(_id) })
 }
 
 // Provides support for key-value observing access notification.
-//
-// WillAccessValueForKey calls the underlying WillAccessValueForKey.
 func (x *ManagedObject) WillAccessValueForKey(key string) {
-	x.inner.WillAccessValueForKey(foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willAccessValueForKey:"), purego.NSString(key))
 }
 
 // Provides support for key-value observing access notification.
-//
-// DidAccessValueForKey calls the underlying DidAccessValueForKey.
 func (x *ManagedObject) DidAccessValueForKey(key string) {
-	x.inner.DidAccessValueForKey(foundation.NSStringStringWithUTF8String(key))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didAccessValueForKey:"), purego.NSString(key))
 }
 
 // Provides an opportunity to add code into the life cycle of the managed object when fufilling it from a fault.
-//
-// AwakeFromFetch calls the underlying AwakeFromFetch.
 func (x *ManagedObject) AwakeFromFetch() {
-	x.inner.AwakeFromFetch()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("awakeFromFetch"))
 }
 
 // Provides an opportunity to add code into the life cycle of the managed object when initially creating it.
-//
-// AwakeFromInsert calls the underlying AwakeFromInsert.
 func (x *ManagedObject) AwakeFromInsert() {
-	x.inner.AwakeFromInsert()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("awakeFromInsert"))
 }
 
 // Provides an opportunity to add code into the life cycle of the managed object when fulfilling it from a snapshot.
-//
-// AwakeFromSnapshotEvents calls the underlying AwakeFromSnapshotEvents.
-func (x *ManagedObject) AwakeFromSnapshotEvents(flags NSSnapshotEventType) {
-	x.inner.AwakeFromSnapshotEvents(raw.NSSnapshotEventType(flags))
+func (x *ManagedObject) AwakeFromSnapshotEvents(flags SnapshotEventType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("awakeFromSnapshotEvents:"), flags)
 }
 
 // Provides an opportunity to add code into the life cycle of the managed object before deleting it.
-//
-// PrepareForDeletion calls the underlying PrepareForDeletion.
 func (x *ManagedObject) PrepareForDeletion() {
-	x.inner.PrepareForDeletion()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("prepareForDeletion"))
 }
 
 // Provides an opportunity to add code into the life cycle of the managed object before saving it.
-//
-// WillSave calls the underlying WillSave.
 func (x *ManagedObject) WillSave() {
-	x.inner.WillSave()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willSave"))
 }
 
 // Provides an opportunity to add code into the life cycle of the managed object after the managed object’s context completes a save operation.
-//
-// DidSave calls the underlying DidSave.
 func (x *ManagedObject) DidSave() {
-	x.inner.DidSave()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSave"))
 }
 
 // Provides an opportunity to add code into the life cycle of the managed object before converting it to a fault.
-//
-// WillTurnIntoFault calls the underlying WillTurnIntoFault.
 func (x *ManagedObject) WillTurnIntoFault() {
-	x.inner.WillTurnIntoFault()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willTurnIntoFault"))
 }
 
 // Provides an opportunity to add code into the life cycle of the managed object after converting it to a fault.
-//
-// DidTurnIntoFault calls the underlying DidTurnIntoFault.
 func (x *ManagedObject) DidTurnIntoFault() {
-	x.inner.DidTurnIntoFault()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didTurnIntoFault"))
 }
 
 // Returns the value for the specified property from the managed object’s private internal storage .
-//
-// PrimitiveValueForKey calls the underlying PrimitiveValueForKey.
-func (x *ManagedObject) PrimitiveValueForKey(key string) objc.ID {
-	return x.inner.PrimitiveValueForKey(foundation.NSStringStringWithUTF8String(key))
+func (x *ManagedObject) PrimitiveValueForKey(key string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primitiveValueForKey:"), purego.NSString(key))
+	return obj.Wrap(_r)
 }
 
 // Sets the value of a given property in the managed object’s private internal storage.
-//
-// SetPrimitiveValueForKey calls the underlying SetPrimitiveValueForKey.
-func (x *ManagedObject) SetPrimitiveValueForKey(value objc.ID, key string) {
-	x.inner.SetPrimitiveValueForKey(value, foundation.NSStringStringWithUTF8String(key))
+func (x *ManagedObject) SetPrimitiveValueForKey(value obj.Object, key string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimitiveValue:forKey:"), objref.IDOf(value), purego.NSString(key))
 }
 
 // Returns a dictionary of the most recent fetched or saved values of the managed object for the properties of the specified keys.
-//
-// CommittedValuesForKeys calls the underlying CommittedValuesForKeys.
-func (x *ManagedObject) CommittedValuesForKeys(keys *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.CommittedValuesForKeys(keys)
+func (x *ManagedObject) CommittedValuesForKeys(keys []string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("committedValuesForKeys:"), purego.SliceToNSArray(keys, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return obj.Wrap(_r)
 }
 
 // Returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.
-//
-// ChangedValues calls the underlying ChangedValues.
-func (x *ManagedObject) ChangedValues() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ChangedValues()
+func (x *ManagedObject) ChangedValues() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedValues"))
+	return obj.Wrap(_r)
 }
 
 // Returns a dictionary containing the keys and new values of persistent properties with changes since the last fetching or saving of the managed object.
-//
-// ChangedValuesForCurrentEvent calls the underlying ChangedValuesForCurrentEvent.
-func (x *ManagedObject) ChangedValuesForCurrentEvent() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ChangedValuesForCurrentEvent()
+func (x *ManagedObject) ChangedValuesForCurrentEvent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("changedValuesForCurrentEvent"))
+	return obj.Wrap(_r)
 }
 
 // Determines whether the managed object can be deleted in its current state.
 //
-// ValidateForDelete returns any validation error.
+// ValidateForDelete returns an error if the operation did not succeed.
 func (x *ManagedObject) ValidateForDelete() error {
-	_, err := x.inner.ValidateForDelete()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("validateForDelete:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Determines whether the managed object can be inserted in its current state.
 //
-// ValidateForInsert returns any validation error.
+// ValidateForInsert returns an error if the operation did not succeed.
 func (x *ManagedObject) ValidateForInsert() error {
-	_, err := x.inner.ValidateForInsert()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("validateForInsert:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Determines whether the managed object’s current state is valid.
 //
-// ValidateForUpdate returns any validation error.
+// ValidateForUpdate returns an error if the operation did not succeed.
 func (x *ManagedObject) ValidateForUpdate() error {
-	_, err := x.inner.ValidateForUpdate()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("validateForUpdate:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
-// ManagedObjectContext calls the underlying ManagedObjectContext.
 func (x *ManagedObject) ManagedObjectContext() *ManagedObjectContext {
-	_r := x.inner.ManagedObjectContext()
-	if _r == nil {
-		return nil
-	}
-	return &ManagedObjectContext{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("managedObjectContext"))
+	return ManagedObjectContextFromID(_r)
 }
 
-// Entity calls the underlying Entity.
 func (x *ManagedObject) Entity() *EntityDescription {
-	_r := x.inner.Entity()
-	if _r == nil {
-		return nil
-	}
-	return &EntityDescription{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("entity"))
+	return EntityDescriptionFromID(_r)
 }
 
-// ObjectID calls the underlying ObjectID.
 func (x *ManagedObject) ObjectID() *ManagedObjectID {
-	_r := x.inner.ObjectID()
-	if _r == nil {
-		return nil
-	}
-	return &ManagedObjectID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectID"))
+	return ManagedObjectIDFromID(_r)
 }
 
-// IsInserted calls the underlying IsInserted.
 func (x *ManagedObject) IsInserted() bool {
-	return x.inner.IsInserted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isInserted"))
+	return _r
 }
 
-// IsUpdated calls the underlying IsUpdated.
 func (x *ManagedObject) IsUpdated() bool {
-	return x.inner.IsUpdated()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUpdated"))
+	return _r
 }
 
-// IsDeleted calls the underlying IsDeleted.
 func (x *ManagedObject) IsDeleted() bool {
-	return x.inner.IsDeleted()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isDeleted"))
+	return _r
 }
 
-// HasChanges calls the underlying HasChanges.
 func (x *ManagedObject) HasChanges() bool {
-	return x.inner.HasChanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasChanges"))
+	return _r
 }
 
-// HasPersistentChangedValues calls the underlying HasPersistentChangedValues.
 func (x *ManagedObject) HasPersistentChangedValues() bool {
-	return x.inner.HasPersistentChangedValues()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasPersistentChangedValues"))
+	return _r
 }
 
-// IsFault calls the underlying IsFault.
 func (x *ManagedObject) IsFault() bool {
-	return x.inner.IsFault()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFault"))
+	return _r
 }
 
-// FaultingState calls the underlying FaultingState.
-func (x *ManagedObject) FaultingState() uint {
-	return x.inner.FaultingState()
+func (x *ManagedObject) FaultingState() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("faultingState"))
+	return _r
 }
 
 // ManagedObjectable is the interface implemented by [ManagedObject], for mocking and DI.
 type ManagedObjectable interface {
-	Unwrap() *raw.NSManagedObject
+	obj.Object
 	HasFaultForRelationshipNamed(key string) bool
-	ObjectIDsForRelationshipNamed(key string) *foundation.NSArray[*raw.NSManagedObjectID]
+	ObjectIDsForRelationshipNamed(key string) []*ManagedObjectID
 	WillAccessValueForKey(key string)
 	DidAccessValueForKey(key string)
 	AwakeFromFetch()
 	AwakeFromInsert()
-	AwakeFromSnapshotEvents(flags NSSnapshotEventType)
+	AwakeFromSnapshotEvents(flags SnapshotEventType)
 	PrepareForDeletion()
 	WillSave()
 	DidSave()
 	WillTurnIntoFault()
 	DidTurnIntoFault()
-	PrimitiveValueForKey(key string) objc.ID
-	SetPrimitiveValueForKey(value objc.ID, key string)
-	CommittedValuesForKeys(keys *foundation.NSArray[*foundation.NSString]) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ChangedValues() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ChangedValuesForCurrentEvent() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	PrimitiveValueForKey(key string) obj.Object
+	SetPrimitiveValueForKey(value obj.Object, key string)
+	CommittedValuesForKeys(keys []string) obj.Object
+	ChangedValues() obj.Object
+	ChangedValuesForCurrentEvent() obj.Object
 	ValidateForDelete() error
 	ValidateForInsert() error
 	ValidateForUpdate() error
@@ -287,7 +287,7 @@ type ManagedObjectable interface {
 	HasChanges() bool
 	HasPersistentChangedValues() bool
 	IsFault() bool
-	FaultingState() uint
+	FaultingState() int
 }
 
 var _ ManagedObjectable = (*ManagedObject)(nil)

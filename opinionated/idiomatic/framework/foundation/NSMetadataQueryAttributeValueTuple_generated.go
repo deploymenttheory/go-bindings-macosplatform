@@ -5,74 +5,96 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The NSMetadataQueryAttributeValueTuple class represents attribute-value tuples, which are objects that contain the attribute name and value of a metadata attribute.
 //
-// MetadataQueryAttributeValueTuple wraps [raw.NSMetadataQueryAttributeValueTuple] with a fluent Go API.
+// MetadataQueryAttributeValueTuple is an idiomatic wrapper over the Objective-C class NSMetadataQueryAttributeValueTuple.
 type MetadataQueryAttributeValueTuple struct {
-	inner *raw.NSMetadataQueryAttributeValueTuple
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSMetadataQueryAttributeValueTuple].
-func (x *MetadataQueryAttributeValueTuple) Unwrap() *raw.NSMetadataQueryAttributeValueTuple {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataQueryAttributeValueTuple) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataQueryAttributeValueTupleFromID adopts an existing object pointer as a MetadataQueryAttributeValueTuple (nil for 0).
+// MetadataQueryAttributeValueTupleFromID adopts an existing Objective-C object as a MetadataQueryAttributeValueTuple
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataQueryAttributeValueTupleFromID(id objc.ID) *MetadataQueryAttributeValueTuple {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataQueryAttributeValueTuple{inner: raw.NSMetadataQueryAttributeValueTupleFromID(id)}
-}
-
-// NewMetadataQueryAttributeValueTuple creates a new [MetadataQueryAttributeValueTuple].
-func NewMetadataQueryAttributeValueTuple() *MetadataQueryAttributeValueTuple {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSMetadataQueryAttributeValueTuple")), objc.RegisterName("new"))
-	return &MetadataQueryAttributeValueTuple{inner: raw.NSMetadataQueryAttributeValueTupleFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *MetadataQueryAttributeValueTuple) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataQueryAttributeValueTuple {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &MetadataQueryAttributeValueTuple{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Attribute calls the underlying Attribute.
-func (x *MetadataQueryAttributeValueTuple) Attribute() *String {
-	_r := x.inner.Attribute()
-	if _r == nil {
+// metadataQueryAttributeValueTupleAdopt wraps an Objective-C object that this code just created as a
+// MetadataQueryAttributeValueTuple (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataQueryAttributeValueTupleAdopt(id objc.ID) *MetadataQueryAttributeValueTuple {
+	if id == 0 {
 		return nil
 	}
-	return &String{inner: _r}
+	x := &MetadataQueryAttributeValueTuple{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Value calls the underlying Value.
-func (x *MetadataQueryAttributeValueTuple) Value() objc.ID {
-	return x.inner.Value()
+// Description returns the object's -description text.
+func (x *MetadataQueryAttributeValueTuple) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Count calls the underlying Count.
-func (x *MetadataQueryAttributeValueTuple) Count() uint {
-	return x.inner.Count()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetadataQueryAttributeValueTuple) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-func (x *MetadataQueryAttributeValueTuple) asObject() *raw.NSObject { return &x.inner.NSObject }
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetadataQueryAttributeValueTuple) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMetadataQueryAttributeValueTuple creates a new MetadataQueryAttributeValueTuple.
+func NewMetadataQueryAttributeValueTuple() *MetadataQueryAttributeValueTuple {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSMetadataQueryAttributeValueTuple")), objc.RegisterName("new"))
+	return metadataQueryAttributeValueTupleAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *MetadataQueryAttributeValueTuple) WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryAttributeValueTuple {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
+
+func (x *MetadataQueryAttributeValueTuple) Attribute() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attribute"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *MetadataQueryAttributeValueTuple) Value() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("value"))
+	return obj.Wrap(_r)
+}
+
+func (x *MetadataQueryAttributeValueTuple) Count() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("count"))
+	return _r
+}
 
 // MetadataQueryAttributeValueTupleable is the interface implemented by [MetadataQueryAttributeValueTuple], for mocking and DI.
 type MetadataQueryAttributeValueTupleable interface {
-	Unwrap() *raw.NSMetadataQueryAttributeValueTuple
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *MetadataQueryAttributeValueTuple
-	Attribute() *String
-	Value() objc.ID
-	Count() uint
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *MetadataQueryAttributeValueTuple
+	Attribute() string
+	Value() obj.Object
+	Count() int
 }
 
 var _ MetadataQueryAttributeValueTupleable = (*MetadataQueryAttributeValueTuple)(nil)

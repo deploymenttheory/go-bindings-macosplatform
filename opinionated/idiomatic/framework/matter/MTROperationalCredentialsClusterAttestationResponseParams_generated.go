@@ -5,133 +5,150 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTROperationalCredentialsClusterAttestationResponseParams wraps [raw.MTROperationalCredentialsClusterAttestationResponseParams] with a fluent Go API.
+// MTROperationalCredentialsClusterAttestationResponseParams is an idiomatic wrapper over the Objective-C class MTROperationalCredentialsClusterAttestationResponseParams.
 type MTROperationalCredentialsClusterAttestationResponseParams struct {
-	inner *raw.MTROperationalCredentialsClusterAttestationResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROperationalCredentialsClusterAttestationResponseParams].
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) Unwrap() *raw.MTROperationalCredentialsClusterAttestationResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) ID() objc.ID {
-	return x.inner.Ptr()
-}
-
-// MTROperationalCredentialsClusterAttestationResponseParamsFromID adopts an existing object pointer as a MTROperationalCredentialsClusterAttestationResponseParams (nil for 0).
+// MTROperationalCredentialsClusterAttestationResponseParamsFromID adopts an existing Objective-C object as a MTROperationalCredentialsClusterAttestationResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROperationalCredentialsClusterAttestationResponseParamsFromID(id objc.ID) *MTROperationalCredentialsClusterAttestationResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTROperationalCredentialsClusterAttestationResponseParams{inner: raw.MTROperationalCredentialsClusterAttestationResponseParamsFromID(id)}
+	x := &MTROperationalCredentialsClusterAttestationResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTROperationalCredentialsClusterAttestationResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTROperationalCredentialsClusterAttestationResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROperationalCredentialsClusterAttestationResponseParamsAdopt(id objc.ID) *MTROperationalCredentialsClusterAttestationResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTROperationalCredentialsClusterAttestationResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize an MTROperationalCredentialsClusterAttestationResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
-// NewMTROperationalCredentialsClusterAttestationResponseParamsWithResponseValueError creates a new [MTROperationalCredentialsClusterAttestationResponseParams].
-func NewMTROperationalCredentialsClusterAttestationResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTROperationalCredentialsClusterAttestationResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROperationalCredentialsClusterAttestationResponseParams")), objc.RegisterName("alloc"))
+// NewMTROperationalCredentialsClusterAttestationResponseParamsWithResponseValueError creates a new MTROperationalCredentialsClusterAttestationResponseParams.
+func NewMTROperationalCredentialsClusterAttestationResponseParamsWithResponseValueError(responseValue obj.Object) (*MTROperationalCredentialsClusterAttestationResponseParams, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTROperationalCredentialsClusterAttestationResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &MTROperationalCredentialsClusterAttestationResponseParams{inner: raw.MTROperationalCredentialsClusterAttestationResponseParamsFromID(_id)}, nil
+	return mTROperationalCredentialsClusterAttestationResponseParamsAdopt(_id), nil
 }
 
-// WithAttestationElements sets the attestationElements property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) WithAttestationElements(attestationElements *foundation.NSData) *MTROperationalCredentialsClusterAttestationResponseParams {
-	x.inner.SetAttestationElements(attestationElements)
+// WithAttestationElements sets attestationElements and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) WithAttestationElements(attestationElements obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttestationElements:"), objref.IDOf(attestationElements))
 	return x
 }
 
-// WithAttestationSignature sets the attestationSignature property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) WithAttestationSignature(attestationSignature *foundation.NSData) *MTROperationalCredentialsClusterAttestationResponseParams {
-	x.inner.SetAttestationSignature(attestationSignature)
+// WithAttestationSignature sets attestationSignature and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) WithAttestationSignature(attestationSignature obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttestationSignature:"), objref.IDOf(attestationSignature))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterAttestationResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// WithSignature sets the signature property and returns the receiver for chaining.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) WithSignature(signature *foundation.NSData) *MTROperationalCredentialsClusterAttestationResponseParams {
-	x.inner.SetSignature(signature)
+// WithSignature sets signature and returns the receiver so calls can be chained.
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) WithSignature(signature obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSignature:"), objref.IDOf(signature))
 	return x
 }
 
-// AttestationElements calls the underlying AttestationElements.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) AttestationElements() *foundation.NSData {
-	return x.inner.AttestationElements()
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) AttestationElements() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationElements"))
+	return obj.Wrap(_r)
 }
 
-// SetAttestationElements calls the underlying SetAttestationElements.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) SetAttestationElements(attestationElements *foundation.NSData) {
-	x.inner.SetAttestationElements(attestationElements)
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) SetAttestationElements(attestationElements obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttestationElements:"), objref.IDOf(attestationElements))
 }
 
-// AttestationSignature calls the underlying AttestationSignature.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) AttestationSignature() *foundation.NSData {
-	return x.inner.AttestationSignature()
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) AttestationSignature() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attestationSignature"))
+	return obj.Wrap(_r)
 }
 
-// SetAttestationSignature calls the underlying SetAttestationSignature.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) SetAttestationSignature(attestationSignature *foundation.NSData) {
-	x.inner.SetAttestationSignature(attestationSignature)
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) SetAttestationSignature(attestationSignature obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttestationSignature:"), objref.IDOf(attestationSignature))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
-// Signature calls the underlying Signature.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) Signature() *foundation.NSData {
-	return x.inner.Signature()
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) Signature() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("signature"))
+	return obj.Wrap(_r)
 }
 
-// SetSignature calls the underlying SetSignature.
-func (x *MTROperationalCredentialsClusterAttestationResponseParams) SetSignature(signature *foundation.NSData) {
-	x.inner.SetSignature(signature)
+func (x *MTROperationalCredentialsClusterAttestationResponseParams) SetSignature(signature obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSignature:"), objref.IDOf(signature))
 }
 
 // MTROperationalCredentialsClusterAttestationResponseParamsable is the interface implemented by [MTROperationalCredentialsClusterAttestationResponseParams], for mocking and DI.
 type MTROperationalCredentialsClusterAttestationResponseParamsable interface {
-	Unwrap() *raw.MTROperationalCredentialsClusterAttestationResponseParams
-	WithAttestationElements(attestationElements *foundation.NSData) *MTROperationalCredentialsClusterAttestationResponseParams
-	WithAttestationSignature(attestationSignature *foundation.NSData) *MTROperationalCredentialsClusterAttestationResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTROperationalCredentialsClusterAttestationResponseParams
-	WithSignature(signature *foundation.NSData) *MTROperationalCredentialsClusterAttestationResponseParams
-	AttestationElements() *foundation.NSData
-	SetAttestationElements(attestationElements *foundation.NSData)
-	AttestationSignature() *foundation.NSData
-	SetAttestationSignature(attestationSignature *foundation.NSData)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	Signature() *foundation.NSData
-	SetSignature(signature *foundation.NSData)
+	obj.Object
+	WithAttestationElements(attestationElements obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams
+	WithAttestationSignature(attestationSignature obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams
+	WithSignature(signature obj.Object) *MTROperationalCredentialsClusterAttestationResponseParams
+	AttestationElements() obj.Object
+	SetAttestationElements(attestationElements obj.Object)
+	AttestationSignature() obj.Object
+	SetAttestationSignature(attestationSignature obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	Signature() obj.Object
+	SetSignature(signature obj.Object)
 }
 
 var _ MTROperationalCredentialsClusterAttestationResponseParamsable = (*MTROperationalCredentialsClusterAttestationResponseParams)(nil)

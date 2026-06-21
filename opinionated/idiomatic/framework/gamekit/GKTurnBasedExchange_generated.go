@@ -6,53 +6,77 @@ package gamekit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Exchange request information that participants send in a turn-based match.
 //
-// TurnBasedExchange wraps [raw.GKTurnBasedExchange] with a fluent Go API.
+// TurnBasedExchange is an idiomatic wrapper over the Objective-C class GKTurnBasedExchange.
 type TurnBasedExchange struct {
-	inner *raw.GKTurnBasedExchange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKTurnBasedExchange].
-func (x *TurnBasedExchange) Unwrap() *raw.GKTurnBasedExchange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TurnBasedExchange) ID() objc.ID { return x.inner.Ptr() }
-
-// TurnBasedExchangeFromID adopts an existing object pointer as a TurnBasedExchange (nil for 0).
+// TurnBasedExchangeFromID adopts an existing Objective-C object as a TurnBasedExchange
+// (nil for 0), retaining it and registering a release finalizer.
 func TurnBasedExchangeFromID(id objc.ID) *TurnBasedExchange {
 	if id == 0 {
 		return nil
 	}
-	return &TurnBasedExchange{inner: raw.GKTurnBasedExchangeFromID(id)}
+	x := &TurnBasedExchange{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTurnBasedExchange creates a new [TurnBasedExchange].
+// turnBasedExchangeAdopt wraps an Objective-C object that this code just created as a
+// TurnBasedExchange (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func turnBasedExchangeAdopt(id objc.ID) *TurnBasedExchange {
+	if id == 0 {
+		return nil
+	}
+	x := &TurnBasedExchange{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TurnBasedExchange) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TurnBasedExchange) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TurnBasedExchange) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTurnBasedExchange creates a new TurnBasedExchange.
 func NewTurnBasedExchange() *TurnBasedExchange {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GKTurnBasedExchange")), objc.RegisterName("new"))
-	return &TurnBasedExchange{inner: raw.GKTurnBasedExchangeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GKTurnBasedExchange")), objc.RegisterName("new"))
+	return turnBasedExchangeAdopt(_id)
 }
 
 // Cancels an exchange request.
 //
 // CancelWithLocalizableMessageKeyArguments blocks until the operation completes or ctx is cancelled.
-func (x *TurnBasedExchange) CancelWithLocalizableMessageKeyArguments(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString]) error {
+func (x *TurnBasedExchange) CancelWithLocalizableMessageKeyArguments(ctx context.Context, key string, arguments []string) error {
 	_ch := make(chan error, 1)
-	x.inner.CancelWithLocalizableMessageKeyArgumentsCompletionHandler(foundation.NSStringStringWithUTF8String(key), arguments, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancelWithLocalizableMessageKey:arguments:completionHandler:"), purego.NSString(key), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -64,15 +88,14 @@ func (x *TurnBasedExchange) CancelWithLocalizableMessageKeyArguments(ctx context
 // Replies to an exchange request on behalf of a recipient.
 //
 // ReplyWithLocalizableMessageKeyArgumentsData blocks until the operation completes or ctx is cancelled.
-func (x *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString], data *foundation.NSData) error {
+func (x *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx context.Context, key string, arguments []string, data obj.Object) error {
 	_ch := make(chan error, 1)
-	x.inner.ReplyWithLocalizableMessageKeyArgumentsDataCompletionHandler(foundation.NSStringStringWithUTF8String(key), arguments, data, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replyWithLocalizableMessageKey:arguments:data:completionHandler:"), purego.NSString(key), purego.SliceToNSArray(arguments, func(_v string) objc.ID { return purego.NSString(_v) }), objref.IDOf(data), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -81,94 +104,78 @@ func (x *TurnBasedExchange) ReplyWithLocalizableMessageKeyArgumentsData(ctx cont
 	}
 }
 
-// ExchangeID calls the underlying ExchangeID.
 func (x *TurnBasedExchange) ExchangeID() string {
-	_r := x.inner.ExchangeID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exchangeID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Sender calls the underlying Sender.
 func (x *TurnBasedExchange) Sender() *TurnBasedParticipant {
-	_r := x.inner.Sender()
-	if _r == nil {
-		return nil
-	}
-	return &TurnBasedParticipant{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sender"))
+	return TurnBasedParticipantFromID(_r)
 }
 
 // Recipients returns the collection as a Go slice.
 func (x *TurnBasedExchange) Recipients() []*TurnBasedParticipant {
-	arr := x.inner.Recipients()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TurnBasedParticipant {
-		return &TurnBasedParticipant{inner: raw.GKTurnBasedParticipantFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recipients"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedParticipant { return TurnBasedParticipantFromID(_id) })
 }
 
-// Status calls the underlying Status.
-func (x *TurnBasedExchange) Status() GKTurnBasedExchangeStatus {
-	return GKTurnBasedExchangeStatus(x.inner.Status())
+func (x *TurnBasedExchange) Status() TurnBasedExchangeStatus {
+	_r := objc.Send[TurnBasedExchangeStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
 }
 
-// Message calls the underlying Message.
 func (x *TurnBasedExchange) Message() string {
-	_r := x.inner.Message()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("message"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Data calls the underlying Data.
-func (x *TurnBasedExchange) Data() *foundation.NSData {
-	return x.inner.Data()
+func (x *TurnBasedExchange) Data() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	return obj.Wrap(_r)
 }
 
-// SendDate calls the underlying SendDate.
-func (x *TurnBasedExchange) SendDate() *foundation.NSDate {
-	return x.inner.SendDate()
+func (x *TurnBasedExchange) SendDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sendDate"))
+	return obj.Wrap(_r)
 }
 
-// TimeoutDate calls the underlying TimeoutDate.
-func (x *TurnBasedExchange) TimeoutDate() *foundation.NSDate {
-	return x.inner.TimeoutDate()
+func (x *TurnBasedExchange) TimeoutDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timeoutDate"))
+	return obj.Wrap(_r)
 }
 
-// CompletionDate calls the underlying CompletionDate.
-func (x *TurnBasedExchange) CompletionDate() *foundation.NSDate {
-	return x.inner.CompletionDate()
+func (x *TurnBasedExchange) CompletionDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("completionDate"))
+	return obj.Wrap(_r)
 }
 
 // Replies returns the collection as a Go slice.
 func (x *TurnBasedExchange) Replies() []*TurnBasedExchangeReply {
-	arr := x.inner.Replies()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *TurnBasedExchangeReply {
-		return &TurnBasedExchangeReply{inner: raw.GKTurnBasedExchangeReplyFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("replies"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *TurnBasedExchangeReply { return TurnBasedExchangeReplyFromID(_id) })
 }
 
 // TurnBasedExchangeable is the interface implemented by [TurnBasedExchange], for mocking and DI.
 type TurnBasedExchangeable interface {
-	Unwrap() *raw.GKTurnBasedExchange
-	CancelWithLocalizableMessageKeyArguments(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString]) error
-	ReplyWithLocalizableMessageKeyArgumentsData(ctx context.Context, key string, arguments *foundation.NSArray[*foundation.NSString], data *foundation.NSData) error
+	obj.Object
+	CancelWithLocalizableMessageKeyArguments(ctx context.Context, key string, arguments []string) error
+	ReplyWithLocalizableMessageKeyArgumentsData(ctx context.Context, key string, arguments []string, data obj.Object) error
 	ExchangeID() string
 	Sender() *TurnBasedParticipant
 	Recipients() []*TurnBasedParticipant
-	Status() GKTurnBasedExchangeStatus
+	Status() TurnBasedExchangeStatus
 	Message() string
-	Data() *foundation.NSData
-	SendDate() *foundation.NSDate
-	TimeoutDate() *foundation.NSDate
-	CompletionDate() *foundation.NSDate
+	Data() obj.Object
+	SendDate() obj.Object
+	TimeoutDate() obj.Object
+	CompletionDate() obj.Object
 	Replies() []*TurnBasedExchangeReply
 }
 

@@ -5,52 +5,73 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract class that defines the interface for a metadata body object.
 //
-// MetadataBodyObject wraps [raw.AVMetadataBodyObject] with a fluent Go API.
+// MetadataBodyObject is an idiomatic wrapper over the Objective-C class AVMetadataBodyObject.
 type MetadataBodyObject struct {
-	inner *raw.AVMetadataBodyObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMetadataBodyObject].
-func (x *MetadataBodyObject) Unwrap() *raw.AVMetadataBodyObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MetadataBodyObject) ID() objc.ID { return x.inner.Ptr() }
-
-// MetadataBodyObjectFromID adopts an existing object pointer as a MetadataBodyObject (nil for 0).
+// MetadataBodyObjectFromID adopts an existing Objective-C object as a MetadataBodyObject
+// (nil for 0), retaining it and registering a release finalizer.
 func MetadataBodyObjectFromID(id objc.ID) *MetadataBodyObject {
 	if id == 0 {
 		return nil
 	}
-	return &MetadataBodyObject{inner: raw.AVMetadataBodyObjectFromID(id)}
+	x := &MetadataBodyObject{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMetadataBodyObject creates a new [MetadataBodyObject].
+// metadataBodyObjectAdopt wraps an Objective-C object that this code just created as a
+// MetadataBodyObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func metadataBodyObjectAdopt(id objc.ID) *MetadataBodyObject {
+	if id == 0 {
+		return nil
+	}
+	x := &MetadataBodyObject{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MetadataBodyObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MetadataBodyObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MetadataBodyObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMetadataBodyObject creates a new MetadataBodyObject.
 func NewMetadataBodyObject() *MetadataBodyObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMetadataBodyObject")), objc.RegisterName("new"))
-	return &MetadataBodyObject{inner: raw.AVMetadataBodyObjectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVMetadataBodyObject")), objc.RegisterName("new"))
+	return metadataBodyObjectAdopt(_id)
 }
 
-// BodyID calls the underlying BodyID.
 func (x *MetadataBodyObject) BodyID() int {
-	return x.inner.BodyID()
-}
-
-func (x *MetadataBodyObject) asMetadataBodyObject() *raw.AVMetadataBodyObject { return x.inner }
-
-func (x *MetadataBodyObject) asMetadataObject() *raw.AVMetadataObject {
-	return &x.inner.AVMetadataObject
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("bodyID"))
+	return _r
 }
 
 // MetadataBodyObjectable is the interface implemented by [MetadataBodyObject], for mocking and DI.
 type MetadataBodyObjectable interface {
-	Unwrap() *raw.AVMetadataBodyObject
+	obj.Object
 	BodyID() int
 }
 

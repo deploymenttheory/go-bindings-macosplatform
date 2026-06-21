@@ -5,71 +5,87 @@
 package networkextension
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/networkextension"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object to start and stop a tunnel connection and get its status.
 //
-// NETunnelProviderSession wraps [raw.NETunnelProviderSession] with a fluent Go API.
+// NETunnelProviderSession is an idiomatic wrapper over the Objective-C class NETunnelProviderSession.
 type NETunnelProviderSession struct {
-	inner *raw.NETunnelProviderSession
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NETunnelProviderSession].
-func (x *NETunnelProviderSession) Unwrap() *raw.NETunnelProviderSession { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NETunnelProviderSession) ID() objc.ID { return x.inner.Ptr() }
-
-// NETunnelProviderSessionFromID adopts an existing object pointer as a NETunnelProviderSession (nil for 0).
+// NETunnelProviderSessionFromID adopts an existing Objective-C object as a NETunnelProviderSession
+// (nil for 0), retaining it and registering a release finalizer.
 func NETunnelProviderSessionFromID(id objc.ID) *NETunnelProviderSession {
 	if id == 0 {
 		return nil
 	}
-	return &NETunnelProviderSession{inner: raw.NETunnelProviderSessionFromID(id)}
+	x := &NETunnelProviderSession{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNETunnelProviderSession creates a new [NETunnelProviderSession].
+// nETunnelProviderSessionAdopt wraps an Objective-C object that this code just created as a
+// NETunnelProviderSession (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nETunnelProviderSessionAdopt(id objc.ID) *NETunnelProviderSession {
+	if id == 0 {
+		return nil
+	}
+	x := &NETunnelProviderSession{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NETunnelProviderSession) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NETunnelProviderSession) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NETunnelProviderSession) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNETunnelProviderSession creates a new NETunnelProviderSession.
 func NewNETunnelProviderSession() *NETunnelProviderSession {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NETunnelProviderSession")), objc.RegisterName("new"))
-	return &NETunnelProviderSession{inner: raw.NETunnelProviderSessionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NETunnelProviderSession")), objc.RegisterName("new"))
+	return nETunnelProviderSessionAdopt(_id)
 }
 
 // Start the process of connecting the tunnel.
-//
-// StartTunnelWithOptionsAndReturnError calls the underlying StartTunnelWithOptionsAndReturnError.
-func (x *NETunnelProviderSession) StartTunnelWithOptionsAndReturnError(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error) {
-	return x.inner.StartTunnelWithOptionsAndReturnError(options)
+func (x *NETunnelProviderSession) StartTunnelWithOptionsAndReturnError(options obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("startTunnelWithOptions:andReturnError:"), objref.IDOf(options), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Start the process of disconnecting the tunnel.
-//
-// StopTunnel calls the underlying StopTunnel.
 func (x *NETunnelProviderSession) StopTunnel() {
-	x.inner.StopTunnel()
-}
-
-// Send a message to the Tunnel Provider extension. If the extension is not running, it should be launched to handle the message. If this method can’t start sending the message it reports an error in the returnError parameter. If an error occurs while sending the message or returning the result, nil should be sent to the response handler as notification.
-//
-// SendProviderMessageReturnErrorResponseHandler calls the underlying SendProviderMessageReturnErrorResponseHandler.
-func (x *NETunnelProviderSession) SendProviderMessageReturnErrorResponseHandler(messageData *foundation.NSData, error_ unsafe.Pointer, responseHandler func(*foundation.NSData)) bool {
-	return x.inner.SendProviderMessageReturnErrorResponseHandler(messageData, error_, responseHandler)
-}
-
-func (x *NETunnelProviderSession) asNEVPNConnection() *raw.NEVPNConnection {
-	return &x.inner.NEVPNConnection
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopTunnel"))
 }
 
 // NETunnelProviderSessionable is the interface implemented by [NETunnelProviderSession], for mocking and DI.
 type NETunnelProviderSessionable interface {
-	Unwrap() *raw.NETunnelProviderSession
-	StartTunnelWithOptionsAndReturnError(options *foundation.NSDictionary[*foundation.NSString, objc.ID]) (bool, error)
+	obj.Object
+	StartTunnelWithOptionsAndReturnError(options obj.Object) error
 	StopTunnel()
-	SendProviderMessageReturnErrorResponseHandler(messageData *foundation.NSData, error_ unsafe.Pointer, responseHandler func(*foundation.NSData)) bool
 }
 
 var _ NETunnelProviderSessionable = (*NETunnelProviderSession)(nil)

@@ -5,58 +5,82 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents a sample that has been deleted from the HealthKit store.
 //
-// DeletedObject wraps [raw.HKDeletedObject] with a fluent Go API.
+// DeletedObject is an idiomatic wrapper over the Objective-C class HKDeletedObject.
 type DeletedObject struct {
-	inner *raw.HKDeletedObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKDeletedObject].
-func (x *DeletedObject) Unwrap() *raw.HKDeletedObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DeletedObject) ID() objc.ID { return x.inner.Ptr() }
-
-// DeletedObjectFromID adopts an existing object pointer as a DeletedObject (nil for 0).
+// DeletedObjectFromID adopts an existing Objective-C object as a DeletedObject
+// (nil for 0), retaining it and registering a release finalizer.
 func DeletedObjectFromID(id objc.ID) *DeletedObject {
 	if id == 0 {
 		return nil
 	}
-	return &DeletedObject{inner: raw.HKDeletedObjectFromID(id)}
+	x := &DeletedObject{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDeletedObject creates a new [DeletedObject].
+// deletedObjectAdopt wraps an Objective-C object that this code just created as a
+// DeletedObject (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func deletedObjectAdopt(id objc.ID) *DeletedObject {
+	if id == 0 {
+		return nil
+	}
+	x := &DeletedObject{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DeletedObject) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DeletedObject) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DeletedObject) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDeletedObject creates a new DeletedObject.
 func NewDeletedObject() *DeletedObject {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKDeletedObject")), objc.RegisterName("new"))
-	return &DeletedObject{inner: raw.HKDeletedObjectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKDeletedObject")), objc.RegisterName("new"))
+	return deletedObjectAdopt(_id)
 }
 
-// @property      UUID @abstract      The unique identifier of the HKObject that was deleted from the HealthKit database.
-//
-// UUID calls the underlying UUID.
-func (x *DeletedObject) UUID() *foundation.NSUUID {
-	return x.inner.UUID()
+// The unique identifier of the HKObject that was deleted from the HealthKit database.
+func (x *DeletedObject) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+	return obj.Wrap(_r)
 }
 
-// @property      metadata @abstract      Extra information describing properties of the receiver. @discussion    Metadata retained from the deleted HKObject. Available keys: HKMetadataKeySyncIdentifier, HKMetadataKeySyncVersion
-//
-// Metadata calls the underlying Metadata.
-func (x *DeletedObject) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Metadata()
+// Extra information describing properties of the receiver. Metadata retained from the deleted HKObject. Available keys: HKMetadataKeySyncIdentifier, HKMetadataKeySyncVersion
+func (x *DeletedObject) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return obj.Wrap(_r)
 }
 
 // DeletedObjectable is the interface implemented by [DeletedObject], for mocking and DI.
 type DeletedObjectable interface {
-	Unwrap() *raw.HKDeletedObject
-	UUID() *foundation.NSUUID
-	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	UUID() obj.Object
+	Metadata() obj.Object
 }
 
 var _ DeletedObjectable = (*DeletedObject)(nil)

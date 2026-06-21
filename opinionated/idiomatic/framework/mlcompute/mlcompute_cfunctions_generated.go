@@ -5,71 +5,202 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// MLCActivationTypeDebugDescription calls [raw.MLCActivationTypeDebugDescription] (C function MLCActivationTypeDebugDescription).
-func MLCActivationTypeDebugDescription(activationType MLCActivationType) *foundation.NSString {
-	return raw.MLCActivationTypeDebugDescription(raw.MLCActivationType(activationType))
+var _fnMLCActivationTypeDebugDescription func(ActivationType) objc.ID
+
+// MLCActivationTypeDebugDescription calls the MLCompute framework function MLCActivationTypeDebugDescription.
+func MLCActivationTypeDebugDescription(activationType ActivationType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCActivationTypeDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCActivationTypeDebugDescription, _lib, "MLCActivationTypeDebugDescription")
+	}
+	_ret := _fnMLCActivationTypeDebugDescription(activationType)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MLCArithmeticOperationDebugDescription calls [raw.MLCArithmeticOperationDebugDescription] (C function MLCArithmeticOperationDebugDescription).
-func MLCArithmeticOperationDebugDescription(operation MLCArithmeticOperation) *foundation.NSString {
-	return raw.MLCArithmeticOperationDebugDescription(raw.MLCArithmeticOperation(operation))
+var _fnMLCArithmeticOperationDebugDescription func(ArithmeticOperation) objc.ID
+
+// MLCArithmeticOperationDebugDescription calls the MLCompute framework function MLCArithmeticOperationDebugDescription.
+func MLCArithmeticOperationDebugDescription(operation ArithmeticOperation) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCArithmeticOperationDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCArithmeticOperationDebugDescription, _lib, "MLCArithmeticOperationDebugDescription")
+	}
+	_ret := _fnMLCArithmeticOperationDebugDescription(operation)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MLCComparisonOperationDebugDescription calls [raw.MLCComparisonOperationDebugDescription] (C function MLCComparisonOperationDebugDescription).
-func MLCComparisonOperationDebugDescription(operation MLCComparisonOperation) *foundation.NSString {
-	return raw.MLCComparisonOperationDebugDescription(raw.MLCComparisonOperation(operation))
+var _fnMLCComparisonOperationDebugDescription func(ComparisonOperation) objc.ID
+
+// MLCComparisonOperationDebugDescription calls the MLCompute framework function MLCComparisonOperationDebugDescription.
+func MLCComparisonOperationDebugDescription(operation ComparisonOperation) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCComparisonOperationDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCComparisonOperationDebugDescription, _lib, "MLCComparisonOperationDebugDescription")
+	}
+	_ret := _fnMLCComparisonOperationDebugDescription(operation)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MLCConvolutionTypeDebugDescription calls [raw.MLCConvolutionTypeDebugDescription] (C function MLCConvolutionTypeDebugDescription).
-func MLCConvolutionTypeDebugDescription(convolutionType MLCConvolutionType) *foundation.NSString {
-	return raw.MLCConvolutionTypeDebugDescription(raw.MLCConvolutionType(convolutionType))
+var _fnMLCConvolutionTypeDebugDescription func(ConvolutionType) objc.ID
+
+// MLCConvolutionTypeDebugDescription calls the MLCompute framework function MLCConvolutionTypeDebugDescription.
+func MLCConvolutionTypeDebugDescription(convolutionType ConvolutionType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCConvolutionTypeDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCConvolutionTypeDebugDescription, _lib, "MLCConvolutionTypeDebugDescription")
+	}
+	_ret := _fnMLCConvolutionTypeDebugDescription(convolutionType)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MLCGradientClippingTypeDebugDescription calls [raw.MLCGradientClippingTypeDebugDescription] (C function MLCGradientClippingTypeDebugDescription).
-func MLCGradientClippingTypeDebugDescription(gradientClippingType MLCGradientClippingType) *foundation.NSString {
-	return raw.MLCGradientClippingTypeDebugDescription(raw.MLCGradientClippingType(gradientClippingType))
+var _fnMLCGradientClippingTypeDebugDescription func(GradientClippingType) objc.ID
+
+// MLCGradientClippingTypeDebugDescription calls the MLCompute framework function MLCGradientClippingTypeDebugDescription.
+func MLCGradientClippingTypeDebugDescription(gradientClippingType GradientClippingType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCGradientClippingTypeDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCGradientClippingTypeDebugDescription, _lib, "MLCGradientClippingTypeDebugDescription")
+	}
+	_ret := _fnMLCGradientClippingTypeDebugDescription(gradientClippingType)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MLCLSTMResultModeDebugDescription calls [raw.MLCLSTMResultModeDebugDescription] (C function MLCLSTMResultModeDebugDescription).
-func MLCLSTMResultModeDebugDescription(mode MLCLSTMResultMode) *foundation.NSString {
-	return raw.MLCLSTMResultModeDebugDescription(raw.MLCLSTMResultMode(mode))
+var _fnMLCLSTMResultModeDebugDescription func(LSTMResultMode) objc.ID
+
+// MLCLSTMResultModeDebugDescription calls the MLCompute framework function MLCLSTMResultModeDebugDescription.
+func MLCLSTMResultModeDebugDescription(mode LSTMResultMode) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCLSTMResultModeDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCLSTMResultModeDebugDescription, _lib, "MLCLSTMResultModeDebugDescription")
+	}
+	_ret := _fnMLCLSTMResultModeDebugDescription(mode)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MLCLossTypeDebugDescription calls [raw.MLCLossTypeDebugDescription] (C function MLCLossTypeDebugDescription).
-func MLCLossTypeDebugDescription(lossType MLCLossType) *foundation.NSString {
-	return raw.MLCLossTypeDebugDescription(raw.MLCLossType(lossType))
+var _fnMLCLossTypeDebugDescription func(LossType) objc.ID
+
+// MLCLossTypeDebugDescription calls the MLCompute framework function MLCLossTypeDebugDescription.
+func MLCLossTypeDebugDescription(lossType LossType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCLossTypeDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCLossTypeDebugDescription, _lib, "MLCLossTypeDebugDescription")
+	}
+	_ret := _fnMLCLossTypeDebugDescription(lossType)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MLCPaddingPolicyDebugDescription calls [raw.MLCPaddingPolicyDebugDescription] (C function MLCPaddingPolicyDebugDescription).
-func MLCPaddingPolicyDebugDescription(paddingPolicy MLCPaddingPolicy) *foundation.NSString {
-	return raw.MLCPaddingPolicyDebugDescription(raw.MLCPaddingPolicy(paddingPolicy))
+var _fnMLCPaddingPolicyDebugDescription func(PaddingPolicy) objc.ID
+
+// MLCPaddingPolicyDebugDescription calls the MLCompute framework function MLCPaddingPolicyDebugDescription.
+func MLCPaddingPolicyDebugDescription(paddingPolicy PaddingPolicy) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCPaddingPolicyDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCPaddingPolicyDebugDescription, _lib, "MLCPaddingPolicyDebugDescription")
+	}
+	_ret := _fnMLCPaddingPolicyDebugDescription(paddingPolicy)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MLCPaddingTypeDebugDescription calls [raw.MLCPaddingTypeDebugDescription] (C function MLCPaddingTypeDebugDescription).
-func MLCPaddingTypeDebugDescription(paddingType MLCPaddingType) *foundation.NSString {
-	return raw.MLCPaddingTypeDebugDescription(raw.MLCPaddingType(paddingType))
+var _fnMLCPaddingTypeDebugDescription func(PaddingType) objc.ID
+
+// MLCPaddingTypeDebugDescription calls the MLCompute framework function MLCPaddingTypeDebugDescription.
+func MLCPaddingTypeDebugDescription(paddingType PaddingType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCPaddingTypeDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCPaddingTypeDebugDescription, _lib, "MLCPaddingTypeDebugDescription")
+	}
+	_ret := _fnMLCPaddingTypeDebugDescription(paddingType)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MLCPoolingTypeDebugDescription calls [raw.MLCPoolingTypeDebugDescription] (C function MLCPoolingTypeDebugDescription).
-func MLCPoolingTypeDebugDescription(poolingType MLCPoolingType) *foundation.NSString {
-	return raw.MLCPoolingTypeDebugDescription(raw.MLCPoolingType(poolingType))
+var _fnMLCPoolingTypeDebugDescription func(PoolingType) objc.ID
+
+// MLCPoolingTypeDebugDescription calls the MLCompute framework function MLCPoolingTypeDebugDescription.
+func MLCPoolingTypeDebugDescription(poolingType PoolingType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCPoolingTypeDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCPoolingTypeDebugDescription, _lib, "MLCPoolingTypeDebugDescription")
+	}
+	_ret := _fnMLCPoolingTypeDebugDescription(poolingType)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MLCReductionTypeDebugDescription calls [raw.MLCReductionTypeDebugDescription] (C function MLCReductionTypeDebugDescription).
-func MLCReductionTypeDebugDescription(reductionType MLCReductionType) *foundation.NSString {
-	return raw.MLCReductionTypeDebugDescription(raw.MLCReductionType(reductionType))
+var _fnMLCReductionTypeDebugDescription func(ReductionType) objc.ID
+
+// MLCReductionTypeDebugDescription calls the MLCompute framework function MLCReductionTypeDebugDescription.
+func MLCReductionTypeDebugDescription(reductionType ReductionType) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCReductionTypeDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCReductionTypeDebugDescription, _lib, "MLCReductionTypeDebugDescription")
+	}
+	_ret := _fnMLCReductionTypeDebugDescription(reductionType)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MLCSampleModeDebugDescription calls [raw.MLCSampleModeDebugDescription] (C function MLCSampleModeDebugDescription).
-func MLCSampleModeDebugDescription(mode MLCSampleMode) *foundation.NSString {
-	return raw.MLCSampleModeDebugDescription(raw.MLCSampleMode(mode))
+var _fnMLCSampleModeDebugDescription func(SampleMode) objc.ID
+
+// MLCSampleModeDebugDescription calls the MLCompute framework function MLCSampleModeDebugDescription.
+func MLCSampleModeDebugDescription(mode SampleMode) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCSampleModeDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCSampleModeDebugDescription, _lib, "MLCSampleModeDebugDescription")
+	}
+	_ret := _fnMLCSampleModeDebugDescription(mode)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// MLCSoftmaxOperationDebugDescription calls [raw.MLCSoftmaxOperationDebugDescription] (C function MLCSoftmaxOperationDebugDescription).
-func MLCSoftmaxOperationDebugDescription(operation MLCSoftmaxOperation) *foundation.NSString {
-	return raw.MLCSoftmaxOperationDebugDescription(raw.MLCSoftmaxOperation(operation))
+var _fnMLCSoftmaxOperationDebugDescription func(SoftmaxOperation) objc.ID
+
+// MLCSoftmaxOperationDebugDescription calls the MLCompute framework function MLCSoftmaxOperationDebugDescription.
+func MLCSoftmaxOperationDebugDescription(operation SoftmaxOperation) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMLCSoftmaxOperationDebugDescription == nil {
+		ebipurego.RegisterLibFunc(&_fnMLCSoftmaxOperationDebugDescription, _lib, "MLCSoftmaxOperationDebugDescription")
+	}
+	_ret := _fnMLCSoftmaxOperationDebugDescription(operation)
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }

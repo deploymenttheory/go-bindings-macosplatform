@@ -5,50 +5,81 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // An object that decodes GeoJSON objects into MapKit types.
 //
-// GeoJSONDecoder wraps [raw.MKGeoJSONDecoder] with a fluent Go API.
+// GeoJSONDecoder is an idiomatic wrapper over the Objective-C class MKGeoJSONDecoder.
 type GeoJSONDecoder struct {
-	inner *raw.MKGeoJSONDecoder
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKGeoJSONDecoder].
-func (x *GeoJSONDecoder) Unwrap() *raw.MKGeoJSONDecoder { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GeoJSONDecoder) ID() objc.ID { return x.inner.Ptr() }
-
-// GeoJSONDecoderFromID adopts an existing object pointer as a GeoJSONDecoder (nil for 0).
+// GeoJSONDecoderFromID adopts an existing Objective-C object as a GeoJSONDecoder
+// (nil for 0), retaining it and registering a release finalizer.
 func GeoJSONDecoderFromID(id objc.ID) *GeoJSONDecoder {
 	if id == 0 {
 		return nil
 	}
-	return &GeoJSONDecoder{inner: raw.MKGeoJSONDecoderFromID(id)}
+	x := &GeoJSONDecoder{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGeoJSONDecoder creates a new [GeoJSONDecoder].
+// geoJSONDecoderAdopt wraps an Objective-C object that this code just created as a
+// GeoJSONDecoder (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func geoJSONDecoderAdopt(id objc.ID) *GeoJSONDecoder {
+	if id == 0 {
+		return nil
+	}
+	x := &GeoJSONDecoder{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GeoJSONDecoder) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GeoJSONDecoder) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GeoJSONDecoder) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGeoJSONDecoder creates a new GeoJSONDecoder.
 func NewGeoJSONDecoder() *GeoJSONDecoder {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKGeoJSONDecoder")), objc.RegisterName("new"))
-	return &GeoJSONDecoder{inner: raw.MKGeoJSONDecoderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKGeoJSONDecoder")), objc.RegisterName("new"))
+	return geoJSONDecoderAdopt(_id)
 }
 
 // Decodes the provided data into native MapKit types that a map can display.
-//
-// GeoJSONObjectsWithDataError calls the underlying GeoJSONObjectsWithDataError.
-func (x *GeoJSONDecoder) GeoJSONObjectsWithDataError(data *foundation.NSData) (*foundation.NSArray[raw.MKGeoJSONObject], error) {
-	return x.inner.GeoJSONObjectsWithDataError(data)
+func (x *GeoJSONDecoder) GeoJSONObjectsWithDataError(data obj.Object) ([]obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("geoJSONObjectsWithData:error:"), objref.IDOf(data), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
 // GeoJSONDecoderable is the interface implemented by [GeoJSONDecoder], for mocking and DI.
 type GeoJSONDecoderable interface {
-	Unwrap() *raw.MKGeoJSONDecoder
-	GeoJSONObjectsWithDataError(data *foundation.NSData) (*foundation.NSArray[raw.MKGeoJSONObject], error)
+	obj.Object
+	GeoJSONObjectsWithDataError(data obj.Object) ([]obj.Object, error)
 }
 
 var _ GeoJSONDecoderable = (*GeoJSONDecoder)(nil)

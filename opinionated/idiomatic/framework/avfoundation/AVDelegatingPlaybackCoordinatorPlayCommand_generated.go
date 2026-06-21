@@ -5,72 +5,75 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A command that indicates to play at a specific rate and time.
 //
-// DelegatingPlaybackCoordinatorPlayCommand wraps [raw.AVDelegatingPlaybackCoordinatorPlayCommand] with a fluent Go API.
+// DelegatingPlaybackCoordinatorPlayCommand is an idiomatic wrapper over the Objective-C class AVDelegatingPlaybackCoordinatorPlayCommand.
 type DelegatingPlaybackCoordinatorPlayCommand struct {
-	inner *raw.AVDelegatingPlaybackCoordinatorPlayCommand
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVDelegatingPlaybackCoordinatorPlayCommand].
-func (x *DelegatingPlaybackCoordinatorPlayCommand) Unwrap() *raw.AVDelegatingPlaybackCoordinatorPlayCommand {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DelegatingPlaybackCoordinatorPlayCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// DelegatingPlaybackCoordinatorPlayCommandFromID adopts an existing object pointer as a DelegatingPlaybackCoordinatorPlayCommand (nil for 0).
+// DelegatingPlaybackCoordinatorPlayCommandFromID adopts an existing Objective-C object as a DelegatingPlaybackCoordinatorPlayCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func DelegatingPlaybackCoordinatorPlayCommandFromID(id objc.ID) *DelegatingPlaybackCoordinatorPlayCommand {
 	if id == 0 {
 		return nil
 	}
-	return &DelegatingPlaybackCoordinatorPlayCommand{inner: raw.AVDelegatingPlaybackCoordinatorPlayCommandFromID(id)}
+	x := &DelegatingPlaybackCoordinatorPlayCommand{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDelegatingPlaybackCoordinatorPlayCommand creates a new [DelegatingPlaybackCoordinatorPlayCommand].
+// delegatingPlaybackCoordinatorPlayCommandAdopt wraps an Objective-C object that this code just created as a
+// DelegatingPlaybackCoordinatorPlayCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func delegatingPlaybackCoordinatorPlayCommandAdopt(id objc.ID) *DelegatingPlaybackCoordinatorPlayCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &DelegatingPlaybackCoordinatorPlayCommand{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DelegatingPlaybackCoordinatorPlayCommand) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DelegatingPlaybackCoordinatorPlayCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DelegatingPlaybackCoordinatorPlayCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDelegatingPlaybackCoordinatorPlayCommand creates a new DelegatingPlaybackCoordinatorPlayCommand.
 func NewDelegatingPlaybackCoordinatorPlayCommand() *DelegatingPlaybackCoordinatorPlayCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVDelegatingPlaybackCoordinatorPlayCommand")), objc.RegisterName("new"))
-	return &DelegatingPlaybackCoordinatorPlayCommand{inner: raw.AVDelegatingPlaybackCoordinatorPlayCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVDelegatingPlaybackCoordinatorPlayCommand")), objc.RegisterName("new"))
+	return delegatingPlaybackCoordinatorPlayCommandAdopt(_id)
 }
 
 // Playback rate. Will always be non-zero.
-//
-// Rate calls the underlying Rate.
 func (x *DelegatingPlaybackCoordinatorPlayCommand) Rate() float32 {
-	return x.inner.Rate()
-}
-
-// The itemTime that playback should begin at. The receiver of this command should verify that data is loaded for the requested time and potentially begin loading it before beginning playback. It is not important to load data for time exactly. If data "similar" to time is already loaded, it is acceptable to start playback with the loaded data. Playback should still start with the requested timing. Should the receiver be unable to start with the exact requested timing, playback will be out of sync with the group. If data for the requested time cannot be loaded, or playback stalls later, the command handler may want to indicate this to the coordinator by beginning a suspension with AVCoordinatedPlaybackSuspensionReasonStallRecovery.
-//
-// ItemTime calls the underlying ItemTime.
-func (x *DelegatingPlaybackCoordinatorPlayCommand) ItemTime() coremedia.CMTime {
-	return x.inner.ItemTime()
-}
-
-// This is the host clock time (see CMClockGetHostTimeClock()) defining when playback should start (or should have started) at the given itemTime.
-//
-// HostClockTime calls the underlying HostClockTime.
-func (x *DelegatingPlaybackCoordinatorPlayCommand) HostClockTime() coremedia.CMTime {
-	return x.inner.HostClockTime()
-}
-
-func (x *DelegatingPlaybackCoordinatorPlayCommand) asDelegatingPlaybackCoordinatorPlaybackControlCommand() *raw.AVDelegatingPlaybackCoordinatorPlaybackControlCommand {
-	return &x.inner.AVDelegatingPlaybackCoordinatorPlaybackControlCommand
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("rate"))
+	return _r
 }
 
 // DelegatingPlaybackCoordinatorPlayCommandable is the interface implemented by [DelegatingPlaybackCoordinatorPlayCommand], for mocking and DI.
 type DelegatingPlaybackCoordinatorPlayCommandable interface {
-	Unwrap() *raw.AVDelegatingPlaybackCoordinatorPlayCommand
+	obj.Object
 	Rate() float32
-	ItemTime() coremedia.CMTime
-	HostClockTime() coremedia.CMTime
 }
 
 var _ DelegatingPlaybackCoordinatorPlayCommandable = (*DelegatingPlaybackCoordinatorPlayCommand)(nil)

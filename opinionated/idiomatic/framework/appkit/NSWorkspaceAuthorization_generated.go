@@ -5,41 +5,68 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The authorization granted to the app by the user.
 //
-// WorkspaceAuthorization wraps [raw.NSWorkspaceAuthorization] with a fluent Go API.
+// WorkspaceAuthorization is an idiomatic wrapper over the Objective-C class NSWorkspaceAuthorization.
 type WorkspaceAuthorization struct {
-	inner *raw.NSWorkspaceAuthorization
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSWorkspaceAuthorization].
-func (x *WorkspaceAuthorization) Unwrap() *raw.NSWorkspaceAuthorization { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkspaceAuthorization) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkspaceAuthorizationFromID adopts an existing object pointer as a WorkspaceAuthorization (nil for 0).
+// WorkspaceAuthorizationFromID adopts an existing Objective-C object as a WorkspaceAuthorization
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkspaceAuthorizationFromID(id objc.ID) *WorkspaceAuthorization {
 	if id == 0 {
 		return nil
 	}
-	return &WorkspaceAuthorization{inner: raw.NSWorkspaceAuthorizationFromID(id)}
+	x := &WorkspaceAuthorization{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWorkspaceAuthorization creates a new [WorkspaceAuthorization].
+// workspaceAuthorizationAdopt wraps an Objective-C object that this code just created as a
+// WorkspaceAuthorization (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workspaceAuthorizationAdopt(id objc.ID) *WorkspaceAuthorization {
+	if id == 0 {
+		return nil
+	}
+	x := &WorkspaceAuthorization{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WorkspaceAuthorization) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WorkspaceAuthorization) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WorkspaceAuthorization) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWorkspaceAuthorization creates a new WorkspaceAuthorization.
 func NewWorkspaceAuthorization() *WorkspaceAuthorization {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWorkspaceAuthorization")), objc.RegisterName("new"))
-	return &WorkspaceAuthorization{inner: raw.NSWorkspaceAuthorizationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSWorkspaceAuthorization")), objc.RegisterName("new"))
+	return workspaceAuthorizationAdopt(_id)
 }
 
 // WorkspaceAuthorizationable is the interface implemented by [WorkspaceAuthorization], for mocking and DI.
 type WorkspaceAuthorizationable interface {
-	Unwrap() *raw.NSWorkspaceAuthorization
+	obj.Object
 }
 
 var _ WorkspaceAuthorizationable = (*WorkspaceAuthorization)(nil)

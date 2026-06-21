@@ -5,317 +5,246 @@
 package iobluetooth
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
-	"unsafe"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
+	"github.com/ebitengine/purego/objc"
 )
 
-// IOBluetoothAddSCOAudioDevice calls [raw.IOBluetoothAddSCOAudioDevice] (C function IOBluetoothAddSCOAudioDevice).
-func IOBluetoothAddSCOAudioDevice(device unsafe.Pointer, configDict unsafe.Pointer) int {
-	return raw.IOBluetoothAddSCOAudioDevice(device, configDict)
+var _fnIOBluetoothAddSCOAudioDevice func(objc.ID, objc.ID) int
+
+// IOBluetoothAddSCOAudioDevice calls the IOBluetooth framework function IOBluetoothAddSCOAudioDevice.
+func IOBluetoothAddSCOAudioDevice(device obj.Object, configDict obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothAddSCOAudioDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothAddSCOAudioDevice, _lib, "IOBluetoothAddSCOAudioDevice")
+	}
+	return _fnIOBluetoothAddSCOAudioDevice(objref.IDOf(device), objref.IDOf(configDict))
 }
 
-// IOBluetoothFindNumberOfRegistryEntriesOfClassName calls [raw.IOBluetoothFindNumberOfRegistryEntriesOfClassName] (C function IOBluetoothFindNumberOfRegistryEntriesOfClassName).
+var _fnIOBluetoothFindNumberOfRegistryEntriesOfClassName func(string) int
+
+// IOBluetoothFindNumberOfRegistryEntriesOfClassName calls the IOBluetooth framework function IOBluetoothFindNumberOfRegistryEntriesOfClassName.
 func IOBluetoothFindNumberOfRegistryEntriesOfClassName(deviceType string) int {
-	return raw.IOBluetoothFindNumberOfRegistryEntriesOfClassName(deviceType)
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothFindNumberOfRegistryEntriesOfClassName == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothFindNumberOfRegistryEntriesOfClassName, _lib, "IOBluetoothFindNumberOfRegistryEntriesOfClassName")
+	}
+	return _fnIOBluetoothFindNumberOfRegistryEntriesOfClassName(deviceType)
 }
 
-// IOBluetoothGetUniqueFileNameAndPath calls [raw.IOBluetoothGetUniqueFileNameAndPath] (C function IOBluetoothGetUniqueFileNameAndPath).
-func IOBluetoothGetUniqueFileNameAndPath(inName *foundation.NSString, inPath *foundation.NSString) *foundation.NSString {
-	return raw.IOBluetoothGetUniqueFileNameAndPath(inName, inPath)
+var _fnIOBluetoothGetUniqueFileNameAndPath func(objc.ID, objc.ID) objc.ID
+
+// IOBluetoothGetUniqueFileNameAndPath calls the IOBluetooth framework function IOBluetoothGetUniqueFileNameAndPath.
+func IOBluetoothGetUniqueFileNameAndPath(inName string, inPath string) string {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothGetUniqueFileNameAndPath == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothGetUniqueFileNameAndPath, _lib, "IOBluetoothGetUniqueFileNameAndPath")
+	}
+	_ret := _fnIOBluetoothGetUniqueFileNameAndPath(purego.NSString(inName), purego.NSString(inPath))
+	if _ret == 0 {
+		return ""
+	}
+	return purego.GoString(_ret)
 }
 
-// IOBluetoothIgnoreHIDDevice calls [raw.IOBluetoothIgnoreHIDDevice] (C function IOBluetoothIgnoreHIDDevice).
-func IOBluetoothIgnoreHIDDevice(device unsafe.Pointer) {
-	raw.IOBluetoothIgnoreHIDDevice(device)
+var _fnIOBluetoothIgnoreHIDDevice func(objc.ID)
+
+// IOBluetoothIgnoreHIDDevice calls the IOBluetooth framework function IOBluetoothIgnoreHIDDevice.
+func IOBluetoothIgnoreHIDDevice(device obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothIgnoreHIDDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothIgnoreHIDDevice, _lib, "IOBluetoothIgnoreHIDDevice")
+	}
+	_fnIOBluetoothIgnoreHIDDevice(objref.IDOf(device))
 }
 
-// IOBluetoothIsFileAppleDesignatedPIMData calls [raw.IOBluetoothIsFileAppleDesignatedPIMData] (C function IOBluetoothIsFileAppleDesignatedPIMData).
-func IOBluetoothIsFileAppleDesignatedPIMData(inFileName *foundation.NSString) uint8 {
-	return raw.IOBluetoothIsFileAppleDesignatedPIMData(inFileName)
+var _fnIOBluetoothIsFileAppleDesignatedPIMData func(objc.ID) uint8
+
+// IOBluetoothIsFileAppleDesignatedPIMData calls the IOBluetooth framework function IOBluetoothIsFileAppleDesignatedPIMData.
+func IOBluetoothIsFileAppleDesignatedPIMData(inFileName string) uint8 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothIsFileAppleDesignatedPIMData == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothIsFileAppleDesignatedPIMData, _lib, "IOBluetoothIsFileAppleDesignatedPIMData")
+	}
+	return _fnIOBluetoothIsFileAppleDesignatedPIMData(purego.NSString(inFileName))
 }
 
-// IOBluetoothL2CAPChannelRegisterForChannelCloseNotification calls [raw.IOBluetoothL2CAPChannelRegisterForChannelCloseNotification] (C function IOBluetoothL2CAPChannelRegisterForChannelCloseNotification).
-func IOBluetoothL2CAPChannelRegisterForChannelCloseNotification(channel unsafe.Pointer, callback unsafe.Pointer, inRefCon unsafe.Pointer) unsafe.Pointer {
-	return raw.IOBluetoothL2CAPChannelRegisterForChannelCloseNotification(channel, callback, inRefCon)
-}
+var _fnIOBluetoothNumberOfAvailableHIDDevices func() int
 
-// IOBluetoothNSStringFromDeviceAddress calls [raw.IOBluetoothNSStringFromDeviceAddress] (C function IOBluetoothNSStringFromDeviceAddress).
-func IOBluetoothNSStringFromDeviceAddress(deviceAddress *raw.BluetoothDeviceAddress) *foundation.NSString {
-	return raw.IOBluetoothNSStringFromDeviceAddress(deviceAddress)
-}
-
-// IOBluetoothNSStringFromDeviceAddressColon calls [raw.IOBluetoothNSStringFromDeviceAddressColon] (C function IOBluetoothNSStringFromDeviceAddressColon).
-func IOBluetoothNSStringFromDeviceAddressColon(deviceAddress *raw.BluetoothDeviceAddress) *foundation.NSString {
-	return raw.IOBluetoothNSStringFromDeviceAddressColon(deviceAddress)
-}
-
-// IOBluetoothNSStringToDeviceAddress calls [raw.IOBluetoothNSStringToDeviceAddress] (C function IOBluetoothNSStringToDeviceAddress).
-func IOBluetoothNSStringToDeviceAddress(inNameString *foundation.NSString, outDeviceAddress *raw.BluetoothDeviceAddress) int {
-	return raw.IOBluetoothNSStringToDeviceAddress(inNameString, outDeviceAddress)
-}
-
-// IOBluetoothNumberOfAvailableHIDDevices calls [raw.IOBluetoothNumberOfAvailableHIDDevices] (C function IOBluetoothNumberOfAvailableHIDDevices).
+// IOBluetoothNumberOfAvailableHIDDevices calls the IOBluetooth framework function IOBluetoothNumberOfAvailableHIDDevices.
 func IOBluetoothNumberOfAvailableHIDDevices() int {
-	return raw.IOBluetoothNumberOfAvailableHIDDevices()
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothNumberOfAvailableHIDDevices == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothNumberOfAvailableHIDDevices, _lib, "IOBluetoothNumberOfAvailableHIDDevices")
+	}
+	return _fnIOBluetoothNumberOfAvailableHIDDevices()
 }
 
-// IOBluetoothNumberOfKeyboardHIDDevices calls [raw.IOBluetoothNumberOfKeyboardHIDDevices] (C function IOBluetoothNumberOfKeyboardHIDDevices).
+var _fnIOBluetoothNumberOfKeyboardHIDDevices func() int
+
+// IOBluetoothNumberOfKeyboardHIDDevices calls the IOBluetooth framework function IOBluetoothNumberOfKeyboardHIDDevices.
 func IOBluetoothNumberOfKeyboardHIDDevices() int {
-	return raw.IOBluetoothNumberOfKeyboardHIDDevices()
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothNumberOfKeyboardHIDDevices == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothNumberOfKeyboardHIDDevices, _lib, "IOBluetoothNumberOfKeyboardHIDDevices")
+	}
+	return _fnIOBluetoothNumberOfKeyboardHIDDevices()
 }
 
-// IOBluetoothNumberOfPointingHIDDevices calls [raw.IOBluetoothNumberOfPointingHIDDevices] (C function IOBluetoothNumberOfPointingHIDDevices).
+var _fnIOBluetoothNumberOfPointingHIDDevices func() int
+
+// IOBluetoothNumberOfPointingHIDDevices calls the IOBluetooth framework function IOBluetoothNumberOfPointingHIDDevices.
 func IOBluetoothNumberOfPointingHIDDevices() int {
-	return raw.IOBluetoothNumberOfPointingHIDDevices()
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothNumberOfPointingHIDDevices == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothNumberOfPointingHIDDevices, _lib, "IOBluetoothNumberOfPointingHIDDevices")
+	}
+	return _fnIOBluetoothNumberOfPointingHIDDevices()
 }
 
-// IOBluetoothNumberOfTabletHIDDevices calls [raw.IOBluetoothNumberOfTabletHIDDevices] (C function IOBluetoothNumberOfTabletHIDDevices).
+var _fnIOBluetoothNumberOfTabletHIDDevices func() int
+
+// IOBluetoothNumberOfTabletHIDDevices calls the IOBluetooth framework function IOBluetoothNumberOfTabletHIDDevices.
 func IOBluetoothNumberOfTabletHIDDevices() int {
-	return raw.IOBluetoothNumberOfTabletHIDDevices()
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothNumberOfTabletHIDDevices == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothNumberOfTabletHIDDevices, _lib, "IOBluetoothNumberOfTabletHIDDevices")
+	}
+	return _fnIOBluetoothNumberOfTabletHIDDevices()
 }
 
-// IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber calls [raw.IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber] (C function IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber).
-func IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber(inDeviceRef unsafe.Pointer, inChannelID uint8, outSessionRef unsafe.Pointer) int32 {
-	return raw.IOBluetoothOBEXSessionCreateWithIOBluetoothDeviceRefAndChannelNumber(inDeviceRef, inChannelID, outSessionRef)
+var _fnIOBluetoothRemoveIgnoredHIDDevice func(objc.ID)
+
+// IOBluetoothRemoveIgnoredHIDDevice calls the IOBluetooth framework function IOBluetoothRemoveIgnoredHIDDevice.
+func IOBluetoothRemoveIgnoredHIDDevice(device obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothRemoveIgnoredHIDDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothRemoveIgnoredHIDDevice, _lib, "IOBluetoothRemoveIgnoredHIDDevice")
+	}
+	_fnIOBluetoothRemoveIgnoredHIDDevice(objref.IDOf(device))
 }
 
-// IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef calls [raw.IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef] (C function IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef).
-func IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef(inSDPServiceRef unsafe.Pointer, outSessionRef unsafe.Pointer) int32 {
-	return raw.IOBluetoothOBEXSessionCreateWithIOBluetoothSDPServiceRecordRef(inSDPServiceRef, outSessionRef)
+var _fnIOBluetoothRemoveSCOAudioDevice func(objc.ID) int
+
+// IOBluetoothRemoveSCOAudioDevice calls the IOBluetooth framework function IOBluetoothRemoveSCOAudioDevice.
+func IOBluetoothRemoveSCOAudioDevice(device obj.Object) int {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothRemoveSCOAudioDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothRemoveSCOAudioDevice, _lib, "IOBluetoothRemoveSCOAudioDevice")
+	}
+	return _fnIOBluetoothRemoveSCOAudioDevice(objref.IDOf(device))
 }
 
-// IOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel calls [raw.IOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel] (C function IOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel).
-func IOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel(inRFCOMMChannelRef unsafe.Pointer, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer, outSessionRef unsafe.Pointer) int32 {
-	return raw.IOBluetoothOBEXSessionCreateWithIncomingIOBluetoothRFCOMMChannel(inRFCOMMChannelRef, inCallback, inUserRefCon, outSessionRef)
+var _fnIOBluetoothUserNotificationUnregister func(objc.ID)
+
+// IOBluetoothUserNotificationUnregister calls the IOBluetooth framework function IOBluetoothUserNotificationUnregister.
+func IOBluetoothUserNotificationUnregister(notificationRef obj.Object) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnIOBluetoothUserNotificationUnregister == nil {
+		ebipurego.RegisterLibFunc(&_fnIOBluetoothUserNotificationUnregister, _lib, "IOBluetoothUserNotificationUnregister")
+	}
+	_fnIOBluetoothUserNotificationUnregister(objref.IDOf(notificationRef))
 }
 
-// IOBluetoothOBEXSessionOpenTransportConnection calls [raw.IOBluetoothOBEXSessionOpenTransportConnection] (C function IOBluetoothOBEXSessionOpenTransportConnection).
-func IOBluetoothOBEXSessionOpenTransportConnection(inSessionRef unsafe.Pointer, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.IOBluetoothOBEXSessionOpenTransportConnection(inSessionRef, inCallback, inUserRefCon)
+var _fnOBEXAddCountHeader func(uint32, objc.ID) int32
+
+// OBEXAddCountHeader calls the IOBluetooth framework function OBEXAddCountHeader.
+func OBEXAddCountHeader(count uint32, dictRef obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOBEXAddCountHeader == nil {
+		ebipurego.RegisterLibFunc(&_fnOBEXAddCountHeader, _lib, "OBEXAddCountHeader")
+	}
+	return _fnOBEXAddCountHeader(count, objref.IDOf(dictRef))
 }
 
-// IOBluetoothPackDataList calls [raw.IOBluetoothPackDataList] (C function IOBluetoothPackDataList).
-func IOBluetoothPackDataList(ioBuffer unsafe.Pointer, inFormat string, inArgs string) int {
-	return raw.IOBluetoothPackDataList(ioBuffer, inFormat, inArgs)
+var _fnOBEXAddDescriptionHeader func(objc.ID, objc.ID) int32
+
+// OBEXAddDescriptionHeader calls the IOBluetooth framework function OBEXAddDescriptionHeader.
+func OBEXAddDescriptionHeader(description obj.Object, dictRef obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOBEXAddDescriptionHeader == nil {
+		ebipurego.RegisterLibFunc(&_fnOBEXAddDescriptionHeader, _lib, "OBEXAddDescriptionHeader")
+	}
+	return _fnOBEXAddDescriptionHeader(objref.IDOf(description), objref.IDOf(dictRef))
 }
 
-// IOBluetoothRemoveIgnoredHIDDevice calls [raw.IOBluetoothRemoveIgnoredHIDDevice] (C function IOBluetoothRemoveIgnoredHIDDevice).
-func IOBluetoothRemoveIgnoredHIDDevice(device unsafe.Pointer) {
-	raw.IOBluetoothRemoveIgnoredHIDDevice(device)
+var _fnOBEXAddLengthHeader func(uint32, objc.ID) int32
+
+// OBEXAddLengthHeader calls the IOBluetooth framework function OBEXAddLengthHeader.
+func OBEXAddLengthHeader(length uint32, dictRef obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOBEXAddLengthHeader == nil {
+		ebipurego.RegisterLibFunc(&_fnOBEXAddLengthHeader, _lib, "OBEXAddLengthHeader")
+	}
+	return _fnOBEXAddLengthHeader(length, objref.IDOf(dictRef))
 }
 
-// IOBluetoothRemoveSCOAudioDevice calls [raw.IOBluetoothRemoveSCOAudioDevice] (C function IOBluetoothRemoveSCOAudioDevice).
-func IOBluetoothRemoveSCOAudioDevice(device unsafe.Pointer) int {
-	return raw.IOBluetoothRemoveSCOAudioDevice(device)
+var _fnOBEXAddNameHeader func(objc.ID, objc.ID) int32
+
+// OBEXAddNameHeader calls the IOBluetooth framework function OBEXAddNameHeader.
+func OBEXAddNameHeader(name obj.Object, dictRef obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOBEXAddNameHeader == nil {
+		ebipurego.RegisterLibFunc(&_fnOBEXAddNameHeader, _lib, "OBEXAddNameHeader")
+	}
+	return _fnOBEXAddNameHeader(objref.IDOf(name), objref.IDOf(dictRef))
 }
 
-// IOBluetoothUnpackDataList calls [raw.IOBluetoothUnpackDataList] (C function IOBluetoothUnpackDataList).
-func IOBluetoothUnpackDataList(inBufferSize uint, inBuffer unsafe.Pointer, inFormat string, inArgs string) int {
-	return raw.IOBluetoothUnpackDataList(inBufferSize, inBuffer, inFormat, inArgs)
+var _fnOBEXAddTime4ByteHeader func(uint32, objc.ID) int32
+
+// OBEXAddTime4ByteHeader calls the IOBluetooth framework function OBEXAddTime4ByteHeader.
+func OBEXAddTime4ByteHeader(time4Byte uint32, dictRef obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOBEXAddTime4ByteHeader == nil {
+		ebipurego.RegisterLibFunc(&_fnOBEXAddTime4ByteHeader, _lib, "OBEXAddTime4ByteHeader")
+	}
+	return _fnOBEXAddTime4ByteHeader(time4Byte, objref.IDOf(dictRef))
 }
 
-// IOBluetoothUserNotificationUnregister calls [raw.IOBluetoothUserNotificationUnregister] (C function IOBluetoothUserNotificationUnregister).
-func IOBluetoothUserNotificationUnregister(notificationRef unsafe.Pointer) {
-	raw.IOBluetoothUserNotificationUnregister(notificationRef)
+var _fnOBEXAddTypeHeader func(objc.ID, objc.ID) int32
+
+// OBEXAddTypeHeader calls the IOBluetooth framework function OBEXAddTypeHeader.
+func OBEXAddTypeHeader(type_ obj.Object, dictRef obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOBEXAddTypeHeader == nil {
+		ebipurego.RegisterLibFunc(&_fnOBEXAddTypeHeader, _lib, "OBEXAddTypeHeader")
+	}
+	return _fnOBEXAddTypeHeader(objref.IDOf(type_), objref.IDOf(dictRef))
 }
 
-// OBEXAddApplicationParameterHeader calls [raw.OBEXAddApplicationParameterHeader] (C function OBEXAddApplicationParameterHeader).
-func OBEXAddApplicationParameterHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddApplicationParameterHeader(inHeaderData, inHeaderDataLength, dictRef)
+var _fnOBEXCreateVEvent func(string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32, string, uint32) objc.ID
+
+// OBEXCreateVEvent calls the IOBluetooth framework function OBEXCreateVEvent.
+func OBEXCreateVEvent(inCharset string, inCharsetLength uint32, inEncoding string, inEncodingLength uint32, inEventStartDate string, inEventStartDateLength uint32, inEventEndDate string, inEventEndDateLength uint32, inAlarmDate string, inAlarmDateLength uint32, inCategory string, inCategoryLength uint32, inSummary string, inSummaryLength uint32, inLocation string, inLocationLength uint32, inXIRMCLUID string, inXIRMCLUIDLength uint32) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOBEXCreateVEvent == nil {
+		ebipurego.RegisterLibFunc(&_fnOBEXCreateVEvent, _lib, "OBEXCreateVEvent")
+	}
+	_ret := _fnOBEXCreateVEvent(inCharset, inCharsetLength, inEncoding, inEncodingLength, inEventStartDate, inEventStartDateLength, inEventEndDate, inEventEndDateLength, inAlarmDate, inAlarmDateLength, inCategory, inCategoryLength, inSummary, inSummaryLength, inLocation, inLocationLength, inXIRMCLUID, inXIRMCLUIDLength)
+	return obj.Wrap(_ret)
 }
 
-// OBEXAddAuthorizationChallengeHeader calls [raw.OBEXAddAuthorizationChallengeHeader] (C function OBEXAddAuthorizationChallengeHeader).
-func OBEXAddAuthorizationChallengeHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddAuthorizationChallengeHeader(inHeaderData, inHeaderDataLength, dictRef)
+var _fnOBEXHeadersToBytes func(objc.ID) objc.ID
+
+// OBEXHeadersToBytes calls the IOBluetooth framework function OBEXHeadersToBytes.
+func OBEXHeadersToBytes(dictionaryOfHeaders obj.Object) obj.Object {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOBEXHeadersToBytes == nil {
+		ebipurego.RegisterLibFunc(&_fnOBEXHeadersToBytes, _lib, "OBEXHeadersToBytes")
+	}
+	_ret := _fnOBEXHeadersToBytes(objref.IDOf(dictionaryOfHeaders))
+	return obj.Wrap(_ret)
 }
 
-// OBEXAddAuthorizationResponseHeader calls [raw.OBEXAddAuthorizationResponseHeader] (C function OBEXAddAuthorizationResponseHeader).
-func OBEXAddAuthorizationResponseHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddAuthorizationResponseHeader(inHeaderData, inHeaderDataLength, dictRef)
-}
+var _fnOBEXSessionDelete func(objc.ID) int32
 
-// OBEXAddBodyHeader calls [raw.OBEXAddBodyHeader] (C function OBEXAddBodyHeader).
-func OBEXAddBodyHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, isEndOfBody uint8, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddBodyHeader(inHeaderData, inHeaderDataLength, isEndOfBody, dictRef)
-}
-
-// OBEXAddByteSequenceHeader calls [raw.OBEXAddByteSequenceHeader] (C function OBEXAddByteSequenceHeader).
-func OBEXAddByteSequenceHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddByteSequenceHeader(inHeaderData, inHeaderDataLength, dictRef)
-}
-
-// OBEXAddConnectionIDHeader calls [raw.OBEXAddConnectionIDHeader] (C function OBEXAddConnectionIDHeader).
-func OBEXAddConnectionIDHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddConnectionIDHeader(inHeaderData, inHeaderDataLength, dictRef)
-}
-
-// OBEXAddCountHeader calls [raw.OBEXAddCountHeader] (C function OBEXAddCountHeader).
-func OBEXAddCountHeader(count uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddCountHeader(count, dictRef)
-}
-
-// OBEXAddDescriptionHeader calls [raw.OBEXAddDescriptionHeader] (C function OBEXAddDescriptionHeader).
-func OBEXAddDescriptionHeader(description unsafe.Pointer, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddDescriptionHeader(description, dictRef)
-}
-
-// OBEXAddHTTPHeader calls [raw.OBEXAddHTTPHeader] (C function OBEXAddHTTPHeader).
-func OBEXAddHTTPHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddHTTPHeader(inHeaderData, inHeaderDataLength, dictRef)
-}
-
-// OBEXAddLengthHeader calls [raw.OBEXAddLengthHeader] (C function OBEXAddLengthHeader).
-func OBEXAddLengthHeader(length uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddLengthHeader(length, dictRef)
-}
-
-// OBEXAddNameHeader calls [raw.OBEXAddNameHeader] (C function OBEXAddNameHeader).
-func OBEXAddNameHeader(name unsafe.Pointer, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddNameHeader(name, dictRef)
-}
-
-// OBEXAddObjectClassHeader calls [raw.OBEXAddObjectClassHeader] (C function OBEXAddObjectClassHeader).
-func OBEXAddObjectClassHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddObjectClassHeader(inHeaderData, inHeaderDataLength, dictRef)
-}
-
-// OBEXAddTargetHeader calls [raw.OBEXAddTargetHeader] (C function OBEXAddTargetHeader).
-func OBEXAddTargetHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddTargetHeader(inHeaderData, inHeaderDataLength, dictRef)
-}
-
-// OBEXAddTime4ByteHeader calls [raw.OBEXAddTime4ByteHeader] (C function OBEXAddTime4ByteHeader).
-func OBEXAddTime4ByteHeader(time4Byte uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddTime4ByteHeader(time4Byte, dictRef)
-}
-
-// OBEXAddTimeISOHeader calls [raw.OBEXAddTimeISOHeader] (C function OBEXAddTimeISOHeader).
-func OBEXAddTimeISOHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddTimeISOHeader(inHeaderData, inHeaderDataLength, dictRef)
-}
-
-// OBEXAddTypeHeader calls [raw.OBEXAddTypeHeader] (C function OBEXAddTypeHeader).
-func OBEXAddTypeHeader(type_ unsafe.Pointer, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddTypeHeader(type_, dictRef)
-}
-
-// OBEXAddUserDefinedHeader calls [raw.OBEXAddUserDefinedHeader] (C function OBEXAddUserDefinedHeader).
-func OBEXAddUserDefinedHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddUserDefinedHeader(inHeaderData, inHeaderDataLength, dictRef)
-}
-
-// OBEXAddWhoHeader calls [raw.OBEXAddWhoHeader] (C function OBEXAddWhoHeader).
-func OBEXAddWhoHeader(inHeaderData unsafe.Pointer, inHeaderDataLength uint32, dictRef unsafe.Pointer) int32 {
-	return raw.OBEXAddWhoHeader(inHeaderData, inHeaderDataLength, dictRef)
-}
-
-// OBEXCreateVCard calls [raw.OBEXCreateVCard] (C function OBEXCreateVCard).
-func OBEXCreateVCard(inFirstName unsafe.Pointer, inFirstNameLength uint32, inLastName unsafe.Pointer, inLastNameLength uint32, inFriendlyName unsafe.Pointer, inFriendlyNameLength uint32, inNameCharset unsafe.Pointer, inNameCharsetLength uint32, inHomePhone unsafe.Pointer, inHomePhoneLength uint32, inWorkPhone unsafe.Pointer, inWorkPhoneLength uint32, inCellPhone unsafe.Pointer, inCellPhoneLength uint32, inFaxPhone unsafe.Pointer, inFaxPhoneLength uint32, inEMailAddress unsafe.Pointer, inEMailAddressLength uint32, inEMailAddressCharset unsafe.Pointer, inEMailAddressCharsetLength uint32, inOrganization unsafe.Pointer, inOrganizationLength uint32, inOrganizationCharset unsafe.Pointer, inOrganizationCharsetLength uint32, inTitle unsafe.Pointer, inTitleLength uint32, inTitleCharset unsafe.Pointer, inTitleCharsetLength uint32) unsafe.Pointer {
-	return raw.OBEXCreateVCard(inFirstName, inFirstNameLength, inLastName, inLastNameLength, inFriendlyName, inFriendlyNameLength, inNameCharset, inNameCharsetLength, inHomePhone, inHomePhoneLength, inWorkPhone, inWorkPhoneLength, inCellPhone, inCellPhoneLength, inFaxPhone, inFaxPhoneLength, inEMailAddress, inEMailAddressLength, inEMailAddressCharset, inEMailAddressCharsetLength, inOrganization, inOrganizationLength, inOrganizationCharset, inOrganizationCharsetLength, inTitle, inTitleLength, inTitleCharset, inTitleCharsetLength)
-}
-
-// OBEXCreateVEvent calls [raw.OBEXCreateVEvent] (C function OBEXCreateVEvent).
-func OBEXCreateVEvent(inCharset string, inCharsetLength uint32, inEncoding string, inEncodingLength uint32, inEventStartDate string, inEventStartDateLength uint32, inEventEndDate string, inEventEndDateLength uint32, inAlarmDate string, inAlarmDateLength uint32, inCategory string, inCategoryLength uint32, inSummary string, inSummaryLength uint32, inLocation string, inLocationLength uint32, inXIRMCLUID string, inXIRMCLUIDLength uint32) unsafe.Pointer {
-	return raw.OBEXCreateVEvent(inCharset, inCharsetLength, inEncoding, inEncodingLength, inEventStartDate, inEventStartDateLength, inEventEndDate, inEventEndDateLength, inAlarmDate, inAlarmDateLength, inCategory, inCategoryLength, inSummary, inSummaryLength, inLocation, inLocationLength, inXIRMCLUID, inXIRMCLUIDLength)
-}
-
-// OBEXGetHeaders calls [raw.OBEXGetHeaders] (C function OBEXGetHeaders).
-func OBEXGetHeaders(inData unsafe.Pointer, inDataSize uint) unsafe.Pointer {
-	return raw.OBEXGetHeaders(inData, inDataSize)
-}
-
-// OBEXHeadersToBytes calls [raw.OBEXHeadersToBytes] (C function OBEXHeadersToBytes).
-func OBEXHeadersToBytes(dictionaryOfHeaders unsafe.Pointer) unsafe.Pointer {
-	return raw.OBEXHeadersToBytes(dictionaryOfHeaders)
-}
-
-// OBEXSessionAbort calls [raw.OBEXSessionAbort] (C function OBEXSessionAbort).
-func OBEXSessionAbort(inSessionRef unsafe.Pointer, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionAbort(inSessionRef, inOptionalHeaders, inOptionalHeadersLength, inCallback, inUserRefCon)
-}
-
-// OBEXSessionAbortResponse calls [raw.OBEXSessionAbortResponse] (C function OBEXSessionAbortResponse).
-func OBEXSessionAbortResponse(inSessionRef unsafe.Pointer, inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionAbortResponse(inSessionRef, inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inCallback, inUserRefCon)
-}
-
-// OBEXSessionConnect calls [raw.OBEXSessionConnect] (C function OBEXSessionConnect).
-func OBEXSessionConnect(inSessionRef unsafe.Pointer, inFlags uint8, inMaxPacketLength uint16, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionConnect(inSessionRef, inFlags, inMaxPacketLength, inOptionalHeaders, inOptionalHeadersLength, inCallback, inUserRefCon)
-}
-
-// OBEXSessionConnectResponse calls [raw.OBEXSessionConnectResponse] (C function OBEXSessionConnectResponse).
-func OBEXSessionConnectResponse(inSessionRef unsafe.Pointer, inResponseOpCode uint8, inFlags uint8, inMaxPacketLength uint16, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionConnectResponse(inSessionRef, inResponseOpCode, inFlags, inMaxPacketLength, inOptionalHeaders, inOptionalHeadersLength, inCallback, inUserRefCon)
-}
-
-// OBEXSessionDelete calls [raw.OBEXSessionDelete] (C function OBEXSessionDelete).
-func OBEXSessionDelete(inSessionRef unsafe.Pointer) int32 {
-	return raw.OBEXSessionDelete(inSessionRef)
-}
-
-// OBEXSessionDisconnect calls [raw.OBEXSessionDisconnect] (C function OBEXSessionDisconnect).
-func OBEXSessionDisconnect(inSessionRef unsafe.Pointer, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionDisconnect(inSessionRef, inOptionalHeaders, inOptionalHeadersLength, inCallback, inUserRefCon)
-}
-
-// OBEXSessionDisconnectResponse calls [raw.OBEXSessionDisconnectResponse] (C function OBEXSessionDisconnectResponse).
-func OBEXSessionDisconnectResponse(inSessionRef unsafe.Pointer, inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionDisconnectResponse(inSessionRef, inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inCallback, inUserRefCon)
-}
-
-// OBEXSessionGet calls [raw.OBEXSessionGet] (C function OBEXSessionGet).
-func OBEXSessionGet(inSessionRef unsafe.Pointer, inIsFinalChunk uint8, inHeadersData unsafe.Pointer, inHeadersDataLength uint, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionGet(inSessionRef, inIsFinalChunk, inHeadersData, inHeadersDataLength, inCallback, inUserRefCon)
-}
-
-// OBEXSessionGetAvailableCommandPayloadLength calls [raw.OBEXSessionGetAvailableCommandPayloadLength] (C function OBEXSessionGetAvailableCommandPayloadLength).
-func OBEXSessionGetAvailableCommandPayloadLength(inSessionRef unsafe.Pointer, inOpCode uint8, outLength *uint16) int32 {
-	return raw.OBEXSessionGetAvailableCommandPayloadLength(inSessionRef, inOpCode, outLength)
-}
-
-// OBEXSessionGetAvailableCommandResponsePayloadLength calls [raw.OBEXSessionGetAvailableCommandResponsePayloadLength] (C function OBEXSessionGetAvailableCommandResponsePayloadLength).
-func OBEXSessionGetAvailableCommandResponsePayloadLength(inSessionRef unsafe.Pointer, inOpCode uint8, outLength *uint16) int32 {
-	return raw.OBEXSessionGetAvailableCommandResponsePayloadLength(inSessionRef, inOpCode, outLength)
-}
-
-// OBEXSessionGetMaxPacketLength calls [raw.OBEXSessionGetMaxPacketLength] (C function OBEXSessionGetMaxPacketLength).
-func OBEXSessionGetMaxPacketLength(inSessionRef unsafe.Pointer, outLength *uint16) int32 {
-	return raw.OBEXSessionGetMaxPacketLength(inSessionRef, outLength)
-}
-
-// OBEXSessionGetResponse calls [raw.OBEXSessionGetResponse] (C function OBEXSessionGetResponse).
-func OBEXSessionGetResponse(inSessionRef unsafe.Pointer, inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionGetResponse(inSessionRef, inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inCallback, inUserRefCon)
-}
-
-// OBEXSessionHasOpenOBEXConnection calls [raw.OBEXSessionHasOpenOBEXConnection] (C function OBEXSessionHasOpenOBEXConnection).
-func OBEXSessionHasOpenOBEXConnection(inSessionRef unsafe.Pointer, outIsConnected *uint8) int32 {
-	return raw.OBEXSessionHasOpenOBEXConnection(inSessionRef, outIsConnected)
-}
-
-// OBEXSessionPut calls [raw.OBEXSessionPut] (C function OBEXSessionPut).
-func OBEXSessionPut(inSessionRef unsafe.Pointer, inIsFinalChunk uint8, inHeadersData unsafe.Pointer, inHeadersDataLength uint, inBodyData unsafe.Pointer, inBodyDataLength uint, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionPut(inSessionRef, inIsFinalChunk, inHeadersData, inHeadersDataLength, inBodyData, inBodyDataLength, inCallback, inUserRefCon)
-}
-
-// OBEXSessionPutResponse calls [raw.OBEXSessionPutResponse] (C function OBEXSessionPutResponse).
-func OBEXSessionPutResponse(inSessionRef unsafe.Pointer, inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionPutResponse(inSessionRef, inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inCallback, inUserRefCon)
-}
-
-// OBEXSessionSetPath calls [raw.OBEXSessionSetPath] (C function OBEXSessionSetPath).
-func OBEXSessionSetPath(inSessionRef unsafe.Pointer, inFlags uint8, inConstants uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionSetPath(inSessionRef, inFlags, inConstants, inOptionalHeaders, inOptionalHeadersLength, inCallback, inUserRefCon)
-}
-
-// OBEXSessionSetPathResponse calls [raw.OBEXSessionSetPathResponse] (C function OBEXSessionSetPathResponse).
-func OBEXSessionSetPathResponse(inSessionRef unsafe.Pointer, inResponseOpCode uint8, inOptionalHeaders unsafe.Pointer, inOptionalHeadersLength uint, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionSetPathResponse(inSessionRef, inResponseOpCode, inOptionalHeaders, inOptionalHeadersLength, inCallback, inUserRefCon)
-}
-
-// OBEXSessionSetServerCallback calls [raw.OBEXSessionSetServerCallback] (C function OBEXSessionSetServerCallback).
-func OBEXSessionSetServerCallback(inSessionRef unsafe.Pointer, inCallback unsafe.Pointer, inUserRefCon unsafe.Pointer) int32 {
-	return raw.OBEXSessionSetServerCallback(inSessionRef, inCallback, inUserRefCon)
+// OBEXSessionDelete calls the IOBluetooth framework function OBEXSessionDelete.
+func OBEXSessionDelete(inSessionRef obj.Object) int32 {
+	_loadOnce.Do(_loadLibrary)
+	if _fnOBEXSessionDelete == nil {
+		ebipurego.RegisterLibFunc(&_fnOBEXSessionDelete, _lib, "OBEXSessionDelete")
+	}
+	return _fnOBEXSessionDelete(objref.IDOf(inSessionRef))
 }

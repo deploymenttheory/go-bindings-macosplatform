@@ -5,162 +5,154 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// AvoidOccluderConstraint wraps [raw.SCNAvoidOccluderConstraint] with a fluent Go API.
+// AvoidOccluderConstraint is an idiomatic wrapper over the Objective-C class SCNAvoidOccluderConstraint.
 type AvoidOccluderConstraint struct {
-	inner *raw.SCNAvoidOccluderConstraint
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNAvoidOccluderConstraint].
-func (x *AvoidOccluderConstraint) Unwrap() *raw.SCNAvoidOccluderConstraint { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AvoidOccluderConstraint) ID() objc.ID { return x.inner.Ptr() }
-
-// AvoidOccluderConstraintFromID adopts an existing object pointer as a AvoidOccluderConstraint (nil for 0).
+// AvoidOccluderConstraintFromID adopts an existing Objective-C object as a AvoidOccluderConstraint
+// (nil for 0), retaining it and registering a release finalizer.
 func AvoidOccluderConstraintFromID(id objc.ID) *AvoidOccluderConstraint {
 	if id == 0 {
 		return nil
 	}
-	return &AvoidOccluderConstraint{inner: raw.SCNAvoidOccluderConstraintFromID(id)}
+	x := &AvoidOccluderConstraint{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAvoidOccluderConstraint creates a new [AvoidOccluderConstraint].
+// avoidOccluderConstraintAdopt wraps an Objective-C object that this code just created as a
+// AvoidOccluderConstraint (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func avoidOccluderConstraintAdopt(id objc.ID) *AvoidOccluderConstraint {
+	if id == 0 {
+		return nil
+	}
+	x := &AvoidOccluderConstraint{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AvoidOccluderConstraint) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AvoidOccluderConstraint) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AvoidOccluderConstraint) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAvoidOccluderConstraint creates a new AvoidOccluderConstraint.
 func NewAvoidOccluderConstraint() *AvoidOccluderConstraint {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNAvoidOccluderConstraint")), objc.RegisterName("new"))
-	return &AvoidOccluderConstraint{inner: raw.SCNAvoidOccluderConstraintFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNAvoidOccluderConstraint")), objc.RegisterName("new"))
+	return avoidOccluderConstraintAdopt(_id)
 }
 
-// @property delegate @abstract The receiver's delegate
+// Defines the target node
 //
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *AvoidOccluderConstraint) WithDelegate(delegate raw.SCNAvoidOccluderConstraintDelegate) *AvoidOccluderConstraint {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// @property target @abstract Defines the target node
-//
-// WithTarget sets the target property and returns the receiver for chaining.
+// WithTarget sets target and returns the receiver so calls can be chained.
 func (x *AvoidOccluderConstraint) WithTarget(target NodeProvider) *AvoidOccluderConstraint {
-	x.inner.SetTarget(target.asNode())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
-// @property occluderCategoryBitMask @abstract Defines the category of node to consider as occluder. Defaults to 1.
+// Defines the category of node to consider as occluder. Defaults to 1.
 //
-// WithOccluderCategoryBitMask sets the occluderCategoryBitMask property and returns the receiver for chaining.
-func (x *AvoidOccluderConstraint) WithOccluderCategoryBitMask(occluderCategoryBitMask uint) *AvoidOccluderConstraint {
-	x.inner.SetOccluderCategoryBitMask(occluderCategoryBitMask)
+// WithOccluderCategoryBitMask sets occluderCategoryBitMask and returns the receiver so calls can be chained.
+func (x *AvoidOccluderConstraint) WithOccluderCategoryBitMask(occluderCategoryBitMask int) *AvoidOccluderConstraint {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOccluderCategoryBitMask:"), occluderCategoryBitMask)
 	return x
 }
 
-// @property bias @abstract Defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. @discussion A positive bias will move the receiver closer to the target.
+// Defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. A positive bias will move the receiver closer to the target.
 //
-// WithBias sets the bias property and returns the receiver for chaining.
+// WithBias sets bias and returns the receiver so calls can be chained.
 func (x *AvoidOccluderConstraint) WithBias(bias float64) *AvoidOccluderConstraint {
-	x.inner.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// @property enable @abstract Determines whether the constraint is enabled or not. Defaults to YES.
+// Determines whether the constraint is enabled or not. Defaults to YES.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *AvoidOccluderConstraint) WithEnabled(enabled bool) *AvoidOccluderConstraint {
-	x.inner.SCNConstraint.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // The influence of the constraint on the node’s transformation.
 //
-// WithInfluenceFactor sets the influenceFactor property and returns the receiver for chaining.
+// WithInfluenceFactor sets influenceFactor and returns the receiver so calls can be chained.
 func (x *AvoidOccluderConstraint) WithInfluenceFactor(influenceFactor float64) *AvoidOccluderConstraint {
-	x.inner.SCNConstraint.SetInfluenceFactor(influenceFactor)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInfluenceFactor:"), influenceFactor)
 	return x
 }
 
-// @property incremental @abstract Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
+// Specifies whether or not the contraint should applies incrementally and have it's effect being cumulated over the rendered frames. Defaults to YES starting macOS 10.13, iOS 11, tvOS 11 and watchOS 4. Defaults to NO in previous versions.
 //
-// WithIncremental sets the incremental property and returns the receiver for chaining.
+// WithIncremental sets incremental and returns the receiver so calls can be chained.
 func (x *AvoidOccluderConstraint) WithIncremental(incremental bool) *AvoidOccluderConstraint {
-	x.inner.SCNConstraint.SetIncremental(incremental)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIncremental:"), incremental)
 	return x
 }
 
-// @property delegate @abstract The receiver's delegate
-//
-// Delegate calls the underlying Delegate.
-func (x *AvoidOccluderConstraint) Delegate() raw.SCNAvoidOccluderConstraintDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *AvoidOccluderConstraint) SetDelegate(delegate raw.SCNAvoidOccluderConstraintDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @property target @abstract Defines the target node
-//
-// Target calls the underlying Target.
+// Defines the target node
 func (x *AvoidOccluderConstraint) Target() *Node {
-	_r := x.inner.Target()
-	if _r == nil {
-		return nil
-	}
-	return &Node{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("target"))
+	return NodeFromID(_r)
 }
 
-// SetTarget calls the underlying SetTarget.
-func (x *AvoidOccluderConstraint) SetTarget(target *raw.SCNNode) {
-	x.inner.SetTarget(target)
+func (x *AvoidOccluderConstraint) SetTarget(target *Node) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 }
 
-// @property occluderCategoryBitMask @abstract Defines the category of node to consider as occluder. Defaults to 1.
-//
-// OccluderCategoryBitMask calls the underlying OccluderCategoryBitMask.
-func (x *AvoidOccluderConstraint) OccluderCategoryBitMask() uint {
-	return x.inner.OccluderCategoryBitMask()
+// Defines the category of node to consider as occluder. Defaults to 1.
+func (x *AvoidOccluderConstraint) OccluderCategoryBitMask() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("occluderCategoryBitMask"))
+	return _r
 }
 
-// SetOccluderCategoryBitMask calls the underlying SetOccluderCategoryBitMask.
-func (x *AvoidOccluderConstraint) SetOccluderCategoryBitMask(occluderCategoryBitMask uint) {
-	x.inner.SetOccluderCategoryBitMask(occluderCategoryBitMask)
+func (x *AvoidOccluderConstraint) SetOccluderCategoryBitMask(occluderCategoryBitMask int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setOccluderCategoryBitMask:"), occluderCategoryBitMask)
 }
 
-// @property bias @abstract Defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. @discussion A positive bias will move the receiver closer to the target.
-//
-// Bias calls the underlying Bias.
+// Defines the bias the apply after moving the receiver to avoid occluders. Defaults to 10e-5. A positive bias will move the receiver closer to the target.
 func (x *AvoidOccluderConstraint) Bias() float64 {
-	return x.inner.Bias()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bias"))
+	return _r
 }
 
-// SetBias calls the underlying SetBias.
 func (x *AvoidOccluderConstraint) SetBias(bias float64) {
-	x.inner.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 }
-
-func (x *AvoidOccluderConstraint) asConstraint() *raw.SCNConstraint { return &x.inner.SCNConstraint }
 
 // AvoidOccluderConstraintable is the interface implemented by [AvoidOccluderConstraint], for mocking and DI.
 type AvoidOccluderConstraintable interface {
-	Unwrap() *raw.SCNAvoidOccluderConstraint
-	WithDelegate(delegate raw.SCNAvoidOccluderConstraintDelegate) *AvoidOccluderConstraint
+	obj.Object
 	WithTarget(target NodeProvider) *AvoidOccluderConstraint
-	WithOccluderCategoryBitMask(occluderCategoryBitMask uint) *AvoidOccluderConstraint
+	WithOccluderCategoryBitMask(occluderCategoryBitMask int) *AvoidOccluderConstraint
 	WithBias(bias float64) *AvoidOccluderConstraint
 	WithEnabled(enabled bool) *AvoidOccluderConstraint
 	WithInfluenceFactor(influenceFactor float64) *AvoidOccluderConstraint
 	WithIncremental(incremental bool) *AvoidOccluderConstraint
-	Delegate() raw.SCNAvoidOccluderConstraintDelegate
-	SetDelegate(delegate raw.SCNAvoidOccluderConstraintDelegate)
 	Target() *Node
-	SetTarget(target *raw.SCNNode)
-	OccluderCategoryBitMask() uint
-	SetOccluderCategoryBitMask(occluderCategoryBitMask uint)
+	SetTarget(target *Node)
+	OccluderCategoryBitMask() int
+	SetOccluderCategoryBitMask(occluderCategoryBitMask int)
 	Bias() float64
 	SetBias(bias float64)
 }

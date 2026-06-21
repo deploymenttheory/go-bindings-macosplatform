@@ -11,28 +11,28 @@ import (
 
 // The various types of thumbnails that you can request.
 // Bitmask — values may be combined with |.
-type QLThumbnailGenerationRequestRepresentationTypes uint64
+type ThumbnailGenerationRequestRepresentationTypes uint64
 
 const (
-	QLThumbnailGenerationRequestRepresentationTypeIcon                QLThumbnailGenerationRequestRepresentationTypes = 1
-	QLThumbnailGenerationRequestRepresentationTypeLowQualityThumbnail QLThumbnailGenerationRequestRepresentationTypes = 2
-	QLThumbnailGenerationRequestRepresentationTypeThumbnail           QLThumbnailGenerationRequestRepresentationTypes = 4
-	QLThumbnailGenerationRequestRepresentationTypeAll                 QLThumbnailGenerationRequestRepresentationTypes = 18446744073709551615
+	ThumbnailGenerationRequestRepresentationTypeIcon                ThumbnailGenerationRequestRepresentationTypes = 1
+	ThumbnailGenerationRequestRepresentationTypeLowQualityThumbnail ThumbnailGenerationRequestRepresentationTypes = 2
+	ThumbnailGenerationRequestRepresentationTypeThumbnail           ThumbnailGenerationRequestRepresentationTypes = 4
+	ThumbnailGenerationRequestRepresentationTypeAll                 ThumbnailGenerationRequestRepresentationTypes = 18446744073709551615
 )
 
-func (e QLThumbnailGenerationRequestRepresentationTypes) String() string {
+func (e ThumbnailGenerationRequestRepresentationTypes) String() string {
 	var parts []string
-	if e&QLThumbnailGenerationRequestRepresentationTypeIcon != 0 {
-		parts = append(parts, "QLThumbnailGenerationRequestRepresentationTypeIcon")
+	if e&ThumbnailGenerationRequestRepresentationTypeIcon != 0 {
+		parts = append(parts, "ThumbnailGenerationRequestRepresentationTypeIcon")
 	}
-	if e&QLThumbnailGenerationRequestRepresentationTypeLowQualityThumbnail != 0 {
-		parts = append(parts, "QLThumbnailGenerationRequestRepresentationTypeLowQualityThumbnail")
+	if e&ThumbnailGenerationRequestRepresentationTypeLowQualityThumbnail != 0 {
+		parts = append(parts, "ThumbnailGenerationRequestRepresentationTypeLowQualityThumbnail")
 	}
-	if e&QLThumbnailGenerationRequestRepresentationTypeThumbnail != 0 {
-		parts = append(parts, "QLThumbnailGenerationRequestRepresentationTypeThumbnail")
+	if e&ThumbnailGenerationRequestRepresentationTypeThumbnail != 0 {
+		parts = append(parts, "ThumbnailGenerationRequestRepresentationTypeThumbnail")
 	}
-	if e&QLThumbnailGenerationRequestRepresentationTypeAll != 0 {
-		parts = append(parts, "QLThumbnailGenerationRequestRepresentationTypeAll")
+	if e&ThumbnailGenerationRequestRepresentationTypeAll != 0 {
+		parts = append(parts, "ThumbnailGenerationRequestRepresentationTypeAll")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -41,23 +41,23 @@ func (e QLThumbnailGenerationRequestRepresentationTypes) String() string {
 }
 
 // The different types of thumbnails that you can create.
-type QLThumbnailRepresentationType int64
+type ThumbnailRepresentationType int64
 
 const (
-	QLThumbnailRepresentationTypeIcon                QLThumbnailRepresentationType = 0
-	QLThumbnailRepresentationTypeLowQualityThumbnail QLThumbnailRepresentationType = 1
-	QLThumbnailRepresentationTypeThumbnail           QLThumbnailRepresentationType = 2
+	ThumbnailRepresentationTypeIcon                ThumbnailRepresentationType = 0
+	ThumbnailRepresentationTypeLowQualityThumbnail ThumbnailRepresentationType = 1
+	ThumbnailRepresentationTypeThumbnail           ThumbnailRepresentationType = 2
 )
 
-func (e QLThumbnailRepresentationType) String() string {
+func (e ThumbnailRepresentationType) String() string {
 	switch e {
-	case QLThumbnailRepresentationTypeIcon:
-		return "QLThumbnailRepresentationTypeIcon"
-	case QLThumbnailRepresentationTypeLowQualityThumbnail:
-		return "QLThumbnailRepresentationTypeLowQualityThumbnail"
-	case QLThumbnailRepresentationTypeThumbnail:
-		return "QLThumbnailRepresentationTypeThumbnail"
+	case ThumbnailRepresentationTypeIcon:
+		return "ThumbnailRepresentationTypeIcon"
+	case ThumbnailRepresentationTypeLowQualityThumbnail:
+		return "ThumbnailRepresentationTypeLowQualityThumbnail"
+	case ThumbnailRepresentationTypeThumbnail:
+		return "ThumbnailRepresentationTypeThumbnail"
 	default:
-		return fmt.Sprintf("QLThumbnailRepresentationType(%d)", int64(e))
+		return fmt.Sprintf("ThumbnailRepresentationType(%d)", int64(e))
 	}
 }

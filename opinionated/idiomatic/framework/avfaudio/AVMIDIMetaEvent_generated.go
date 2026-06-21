@@ -5,53 +5,77 @@
 package avfaudio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfaudio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that represents MIDI meta event messages.
 //
-// MIDIMetaEvent wraps [raw.AVMIDIMetaEvent] with a fluent Go API.
+// MIDIMetaEvent is an idiomatic wrapper over the Objective-C class AVMIDIMetaEvent.
 type MIDIMetaEvent struct {
-	inner *raw.AVMIDIMetaEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVMIDIMetaEvent].
-func (x *MIDIMetaEvent) Unwrap() *raw.AVMIDIMetaEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MIDIMetaEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MIDIMetaEventFromID adopts an existing object pointer as a MIDIMetaEvent (nil for 0).
+// MIDIMetaEventFromID adopts an existing Objective-C object as a MIDIMetaEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MIDIMetaEventFromID(id objc.ID) *MIDIMetaEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MIDIMetaEvent{inner: raw.AVMIDIMetaEventFromID(id)}
+	x := &MIDIMetaEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mIDIMetaEventAdopt wraps an Objective-C object that this code just created as a
+// MIDIMetaEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mIDIMetaEventAdopt(id objc.ID) *MIDIMetaEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MIDIMetaEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MIDIMetaEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MIDIMetaEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MIDIMetaEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an event with a MIDI meta event type and data.
 //
-// NewMIDIMetaEventWithTypeData creates a new [MIDIMetaEvent].
-func NewMIDIMetaEventWithTypeData(type_ AVMIDIMetaEventType, data *foundation.NSData) *MIDIMetaEvent {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVMIDIMetaEvent")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), raw.AVMIDIMetaEventType(type_), data.Ptr())
-	return &MIDIMetaEvent{inner: raw.AVMIDIMetaEventFromID(_id)}
+// NewMIDIMetaEventWithTypeData creates a new MIDIMetaEvent.
+func NewMIDIMetaEventWithTypeData(type_ MIDIMetaEventType, data obj.Object) *MIDIMetaEvent {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVMIDIMetaEvent")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:data:"), type_, objref.IDOf(data))
+	return mIDIMetaEventAdopt(_id)
 }
 
-// Type calls the underlying Type.
-func (x *MIDIMetaEvent) Type() AVMIDIMetaEventType {
-	return AVMIDIMetaEventType(x.inner.Type())
+func (x *MIDIMetaEvent) Type() MIDIMetaEventType {
+	_r := objc.Send[MIDIMetaEventType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
-
-func (x *MIDIMetaEvent) asMusicEvent() *raw.AVMusicEvent { return &x.inner.AVMusicEvent }
 
 // MIDIMetaEventable is the interface implemented by [MIDIMetaEvent], for mocking and DI.
 type MIDIMetaEventable interface {
-	Unwrap() *raw.AVMIDIMetaEvent
-	Type() AVMIDIMetaEventType
+	obj.Object
+	Type() MIDIMetaEventType
 }
 
 var _ MIDIMetaEventable = (*MIDIMetaEvent)(nil)

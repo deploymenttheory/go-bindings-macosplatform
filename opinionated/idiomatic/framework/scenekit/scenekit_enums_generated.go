@@ -10,95 +10,95 @@ import (
 )
 
 // Constants affecting the animation curve of an action, used by the timingMode property.
-type SCNActionTimingMode int64
+type ActionTimingMode int64
 
 const (
 	// Linear pacing. The animation progresses evenly throughout its duration.
-	SCNActionTimingModeLinear SCNActionTimingMode = 0
+	ActionTimingModeLinear ActionTimingMode = 0
 	// Ease-in pacing. The animation begins slowly, and then speeds up as it progresses.
-	SCNActionTimingModeEaseIn SCNActionTimingMode = 1
+	ActionTimingModeEaseIn ActionTimingMode = 1
 	// Ease-out pacing. The animation begins quickly, and then slows as it completes.
-	SCNActionTimingModeEaseOut SCNActionTimingMode = 2
+	ActionTimingModeEaseOut ActionTimingMode = 2
 	// Ease-in ease-out pacing. The animation begins slowly, accelerates through the middle of its duration, and then slows again before completing.
-	SCNActionTimingModeEaseInEaseOut SCNActionTimingMode = 3
+	ActionTimingModeEaseInEaseOut ActionTimingMode = 3
 )
 
-func (e SCNActionTimingMode) String() string {
+func (e ActionTimingMode) String() string {
 	switch e {
-	case SCNActionTimingModeLinear:
-		return "SCNActionTimingModeLinear"
-	case SCNActionTimingModeEaseIn:
-		return "SCNActionTimingModeEaseIn"
-	case SCNActionTimingModeEaseOut:
-		return "SCNActionTimingModeEaseOut"
-	case SCNActionTimingModeEaseInEaseOut:
-		return "SCNActionTimingModeEaseInEaseOut"
+	case ActionTimingModeLinear:
+		return "ActionTimingModeLinear"
+	case ActionTimingModeEaseIn:
+		return "ActionTimingModeEaseIn"
+	case ActionTimingModeEaseOut:
+		return "ActionTimingModeEaseOut"
+	case ActionTimingModeEaseInEaseOut:
+		return "ActionTimingModeEaseInEaseOut"
 	default:
-		return fmt.Sprintf("SCNActionTimingMode(%d)", int64(e))
+		return fmt.Sprintf("ActionTimingMode(%d)", int64(e))
 	}
 }
 
 // Modes for antialiased rendering of the view’s scene, used by the SCNView property.
-type SCNAntialiasingMode uint64
+type AntialiasingMode uint64
 
 const (
 	// Disables antialiased rendering.
-	SCNAntialiasingModeNone SCNAntialiasingMode = 0
+	AntialiasingModeNone AntialiasingMode = 0
 	// Enables multisample antialiasing, with two samples per screen pixel.
-	SCNAntialiasingModeMultisampling2X SCNAntialiasingMode = 1
+	AntialiasingModeMultisampling2X AntialiasingMode = 1
 	// Enables multisample antialiasing, with four samples per screen pixel.
-	SCNAntialiasingModeMultisampling4X SCNAntialiasingMode = 2
+	AntialiasingModeMultisampling4X AntialiasingMode = 2
 	// Enables multisample antialiasing, with eight samples per screen pixel.
-	SCNAntialiasingModeMultisampling8X SCNAntialiasingMode = 3
+	AntialiasingModeMultisampling8X AntialiasingMode = 3
 	// Enables multisample antialiasing, with sixteen samples per screen pixel.
-	SCNAntialiasingModeMultisampling16X SCNAntialiasingMode = 4
+	AntialiasingModeMultisampling16X AntialiasingMode = 4
 )
 
-func (e SCNAntialiasingMode) String() string {
+func (e AntialiasingMode) String() string {
 	switch e {
-	case SCNAntialiasingModeNone:
-		return "SCNAntialiasingModeNone"
-	case SCNAntialiasingModeMultisampling2X:
-		return "SCNAntialiasingModeMultisampling2X"
-	case SCNAntialiasingModeMultisampling4X:
-		return "SCNAntialiasingModeMultisampling4X"
-	case SCNAntialiasingModeMultisampling8X:
-		return "SCNAntialiasingModeMultisampling8X"
-	case SCNAntialiasingModeMultisampling16X:
-		return "SCNAntialiasingModeMultisampling16X"
+	case AntialiasingModeNone:
+		return "AntialiasingModeNone"
+	case AntialiasingModeMultisampling2X:
+		return "AntialiasingModeMultisampling2X"
+	case AntialiasingModeMultisampling4X:
+		return "AntialiasingModeMultisampling4X"
+	case AntialiasingModeMultisampling8X:
+		return "AntialiasingModeMultisampling8X"
+	case AntialiasingModeMultisampling16X:
+		return "AntialiasingModeMultisampling16X"
 	default:
-		return fmt.Sprintf("SCNAntialiasingMode(%d)", int64(e))
+		return fmt.Sprintf("AntialiasingMode(%d)", int64(e))
 	}
 }
 
 // Options for locking the orientation of nodes affected by a billboard constraint.
 // Bitmask — values may be combined with |.
-type SCNBillboardAxis uint64
+type BillboardAxis uint64
 
 const (
 	// Align an affected node such that its x-axis is always parallel to that of the view, leaving it free to rotate otherwise.
-	SCNBillboardAxisX SCNBillboardAxis = 1
+	BillboardAxisX BillboardAxis = 1
 	// Align an affected node such that its y-axis is always parallel to that of the view, leaving it free to rotate otherwise.
-	SCNBillboardAxisY SCNBillboardAxis = 2
+	BillboardAxisY BillboardAxis = 2
 	// Align an affected node such that its z-axis is always perpendicular to the viewing plane, leaving it free to rotate otherwise.
-	SCNBillboardAxisZ SCNBillboardAxis = 4
+	BillboardAxisZ BillboardAxis = 4
 	// Align an affected node such that its orientation always matches that of the view.
-	SCNBillboardAxisAll SCNBillboardAxis = 7
+	BillboardAxisAll BillboardAxis = 7
 )
 
-func (e SCNBillboardAxis) String() string {
+func (e BillboardAxis) String() string {
 	var parts []string
-	if e&SCNBillboardAxisX != 0 {
-		parts = append(parts, "SCNBillboardAxisX")
+	if e&BillboardAxisX != 0 {
+		parts = append(parts, "BillboardAxisX")
 	}
-	if e&SCNBillboardAxisY != 0 {
-		parts = append(parts, "SCNBillboardAxisY")
+	if e&BillboardAxisY != 0 {
+		parts = append(parts, "BillboardAxisY")
 	}
-	if e&SCNBillboardAxisZ != 0 {
-		parts = append(parts, "SCNBillboardAxisZ")
+	if e&BillboardAxisZ != 0 {
+		parts = append(parts, "BillboardAxisZ")
 	}
-	if e&SCNBillboardAxisAll != 0 {
-		parts = append(parts, "SCNBillboardAxisAll")
+	if e&BillboardAxisAll != 0 {
+		parts = append(parts, "BillboardAxisAll")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -107,144 +107,144 @@ func (e SCNBillboardAxis) String() string {
 }
 
 // Modes that describe how SceneKit blends source colors rendered using a material with destination colors already in a rendering target, used by the blendMode property.
-type SCNBlendMode int64
+type BlendMode int64
 
 const (
 	// Blend by multiplying source and destination color values by their corresponding alpha values.
-	SCNBlendModeAlpha SCNBlendMode = 0
+	BlendModeAlpha BlendMode = 0
 	// Blend by adding the source color to the destination color.
-	SCNBlendModeAdd SCNBlendMode = 1
+	BlendModeAdd BlendMode = 1
 	// Blend by subtracting the source color from the destination color.
-	SCNBlendModeSubtract SCNBlendMode = 2
+	BlendModeSubtract BlendMode = 2
 	// Blend by multiplying the source color with the background color.
-	SCNBlendModeMultiply SCNBlendMode = 3
+	BlendModeMultiply BlendMode = 3
 	// Blend by multiplying the inverse of the source color with the inverse of the destination color.
-	SCNBlendModeScreen SCNBlendMode = 4
+	BlendModeScreen BlendMode = 4
 	// Blend by replacing the destination color with the source color, ignoring alpha.
-	SCNBlendModeReplace SCNBlendMode = 5
-	SCNBlendModeMax     SCNBlendMode = 6
+	BlendModeReplace BlendMode = 5
+	BlendModeMax     BlendMode = 6
 )
 
-func (e SCNBlendMode) String() string {
+func (e BlendMode) String() string {
 	switch e {
-	case SCNBlendModeAlpha:
-		return "SCNBlendModeAlpha"
-	case SCNBlendModeAdd:
-		return "SCNBlendModeAdd"
-	case SCNBlendModeSubtract:
-		return "SCNBlendModeSubtract"
-	case SCNBlendModeMultiply:
-		return "SCNBlendModeMultiply"
-	case SCNBlendModeScreen:
-		return "SCNBlendModeScreen"
-	case SCNBlendModeReplace:
-		return "SCNBlendModeReplace"
-	case SCNBlendModeMax:
-		return "SCNBlendModeMax"
+	case BlendModeAlpha:
+		return "BlendModeAlpha"
+	case BlendModeAdd:
+		return "BlendModeAdd"
+	case BlendModeSubtract:
+		return "BlendModeSubtract"
+	case BlendModeMultiply:
+		return "BlendModeMultiply"
+	case BlendModeScreen:
+		return "BlendModeScreen"
+	case BlendModeReplace:
+		return "BlendModeReplace"
+	case BlendModeMax:
+		return "BlendModeMax"
 	default:
-		return fmt.Sprintf("SCNBlendMode(%d)", int64(e))
+		return fmt.Sprintf("BlendMode(%d)", int64(e))
 	}
 }
 
 // Options for how often SceneKit should execute the binding handler you provide with the handleBindingOfBufferNamed:frequency:usingBlock: method.
-type SCNBufferFrequency int64
+type BufferFrequency int64
 
 const (
 	// Execute the binding handler once for each frame to be rendered using the shader.
-	SCNBufferFrequencyPerFrame SCNBufferFrequency = 0
+	BufferFrequencyPerFrame BufferFrequency = 0
 	// Execute the binding handler once for each frame, for each node to be rendered using the shader.
-	SCNBufferFrequencyPerNode SCNBufferFrequency = 1
+	BufferFrequencyPerNode BufferFrequency = 1
 	// Execute the binding handler once for each frame, for each node, for each material or geometry to be rendered using the shader.
-	SCNBufferFrequencyPerShadable SCNBufferFrequency = 2
+	BufferFrequencyPerShadable BufferFrequency = 2
 )
 
-func (e SCNBufferFrequency) String() string {
+func (e BufferFrequency) String() string {
 	switch e {
-	case SCNBufferFrequencyPerFrame:
-		return "SCNBufferFrequencyPerFrame"
-	case SCNBufferFrequencyPerNode:
-		return "SCNBufferFrequencyPerNode"
-	case SCNBufferFrequencyPerShadable:
-		return "SCNBufferFrequencyPerShadable"
+	case BufferFrequencyPerFrame:
+		return "BufferFrequencyPerFrame"
+	case BufferFrequencyPerNode:
+		return "BufferFrequencyPerNode"
+	case BufferFrequencyPerShadable:
+		return "BufferFrequencyPerShadable"
 	default:
-		return fmt.Sprintf("SCNBufferFrequency(%d)", int64(e))
+		return fmt.Sprintf("BufferFrequency(%d)", int64(e))
 	}
 }
 
 // Options for the axis used to determine field of view or orthographic projection.
-type SCNCameraProjectionDirection int64
+type CameraProjectionDirection int64
 
 const (
 	// The camera’s field of view or orthographic scale are measured vertically.
-	SCNCameraProjectionDirectionVertical SCNCameraProjectionDirection = 0
+	CameraProjectionDirectionVertical CameraProjectionDirection = 0
 	// The camera’s field of view or orthographic scale are measured horizontally.
-	SCNCameraProjectionDirectionHorizontal SCNCameraProjectionDirection = 1
+	CameraProjectionDirectionHorizontal CameraProjectionDirection = 1
 )
 
-func (e SCNCameraProjectionDirection) String() string {
+func (e CameraProjectionDirection) String() string {
 	switch e {
-	case SCNCameraProjectionDirectionVertical:
-		return "SCNCameraProjectionDirectionVertical"
-	case SCNCameraProjectionDirectionHorizontal:
-		return "SCNCameraProjectionDirectionHorizontal"
+	case CameraProjectionDirectionVertical:
+		return "CameraProjectionDirectionVertical"
+	case CameraProjectionDirectionHorizontal:
+		return "CameraProjectionDirectionHorizontal"
 	default:
-		return fmt.Sprintf("SCNCameraProjectionDirection(%d)", int64(e))
+		return fmt.Sprintf("CameraProjectionDirection(%d)", int64(e))
 	}
 }
 
 // Options for which edges of an extruded shape are chamfered, used by the chamferMode property.
-type SCNChamferMode int64
+type ChamferMode int64
 
 const (
 	// Apply a chamfer to both front and back edges of the extruded shape.
-	SCNChamferModeBoth SCNChamferMode = 0
+	ChamferModeBoth ChamferMode = 0
 	// Apply a chamfer to only the front edge of the extruded shape.
-	SCNChamferModeFront SCNChamferMode = 1
+	ChamferModeFront ChamferMode = 1
 	// Apply a chamfer to only the back edge of the extruded shape.
-	SCNChamferModeBack SCNChamferMode = 2
+	ChamferModeBack ChamferMode = 2
 )
 
-func (e SCNChamferMode) String() string {
+func (e ChamferMode) String() string {
 	switch e {
-	case SCNChamferModeBoth:
-		return "SCNChamferModeBoth"
-	case SCNChamferModeFront:
-		return "SCNChamferModeFront"
-	case SCNChamferModeBack:
-		return "SCNChamferModeBack"
+	case ChamferModeBoth:
+		return "ChamferModeBoth"
+	case ChamferModeFront:
+		return "ChamferModeFront"
+	case ChamferModeBack:
+		return "ChamferModeBack"
 	default:
-		return fmt.Sprintf("SCNChamferMode(%d)", int64(e))
+		return fmt.Sprintf("ChamferMode(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type SCNColorMask int64
+type ColorMask int64
 
 const (
-	SCNColorMaskNone  SCNColorMask = 0
-	SCNColorMaskRed   SCNColorMask = 8
-	SCNColorMaskGreen SCNColorMask = 4
-	SCNColorMaskBlue  SCNColorMask = 2
-	SCNColorMaskAlpha SCNColorMask = 1
-	SCNColorMaskAll   SCNColorMask = 15
+	ColorMaskNone  ColorMask = 0
+	ColorMaskRed   ColorMask = 8
+	ColorMaskGreen ColorMask = 4
+	ColorMaskBlue  ColorMask = 2
+	ColorMaskAlpha ColorMask = 1
+	ColorMaskAll   ColorMask = 15
 )
 
-func (e SCNColorMask) String() string {
+func (e ColorMask) String() string {
 	var parts []string
-	if e&SCNColorMaskRed != 0 {
-		parts = append(parts, "SCNColorMaskRed")
+	if e&ColorMaskRed != 0 {
+		parts = append(parts, "ColorMaskRed")
 	}
-	if e&SCNColorMaskGreen != 0 {
-		parts = append(parts, "SCNColorMaskGreen")
+	if e&ColorMaskGreen != 0 {
+		parts = append(parts, "ColorMaskGreen")
 	}
-	if e&SCNColorMaskBlue != 0 {
-		parts = append(parts, "SCNColorMaskBlue")
+	if e&ColorMaskBlue != 0 {
+		parts = append(parts, "ColorMaskBlue")
 	}
-	if e&SCNColorMaskAlpha != 0 {
-		parts = append(parts, "SCNColorMaskAlpha")
+	if e&ColorMaskAlpha != 0 {
+		parts = append(parts, "ColorMaskAlpha")
 	}
-	if e&SCNColorMaskAll != 0 {
-		parts = append(parts, "SCNColorMaskAll")
+	if e&ColorMaskAll != 0 {
+		parts = append(parts, "ColorMaskAll")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -253,705 +253,672 @@ func (e SCNColorMask) String() string {
 }
 
 // The modes SceneKit uses to determine which polygons to render in a surface, used by the cullMode property.
-type SCNCullMode int64
+type CullMode int64
 
 const (
-	SCNCullModeBack  SCNCullMode = 0
-	SCNCullModeFront SCNCullMode = 1
+	CullModeBack  CullMode = 0
+	CullModeFront CullMode = 1
 )
 
-func (e SCNCullMode) String() string {
+func (e CullMode) String() string {
 	switch e {
-	case SCNCullModeBack:
-		return "SCNCullModeBack"
-	case SCNCullModeFront:
-		return "SCNCullModeFront"
+	case CullModeBack:
+		return "CullModeBack"
+	case CullModeFront:
+		return "CullModeFront"
 	default:
-		return fmt.Sprintf("SCNCullMode(%d)", int64(e))
+		return fmt.Sprintf("CullMode(%d)", int64(e))
 	}
 }
 
-type SCNFillMode uint64
+type FillMode uint64
 
 const (
-	SCNFillModeFill  SCNFillMode = 0
-	SCNFillModeLines SCNFillMode = 1
+	FillModeFill  FillMode = 0
+	FillModeLines FillMode = 1
 )
 
-func (e SCNFillMode) String() string {
+func (e FillMode) String() string {
 	switch e {
-	case SCNFillModeFill:
-		return "SCNFillModeFill"
-	case SCNFillModeLines:
-		return "SCNFillModeLines"
+	case FillModeFill:
+		return "FillModeFill"
+	case FillModeLines:
+		return "FillModeLines"
 	default:
-		return fmt.Sprintf("SCNFillMode(%d)", int64(e))
+		return fmt.Sprintf("FillMode(%d)", int64(e))
 	}
 }
 
 // Texture filtering modes, used by the minificationFilter, magnificationFilter, and mipFilter properties.
-type SCNFilterMode int64
+type FilterMode int64
 
 const (
 	// No texture filtering is applied.
-	SCNFilterModeNone SCNFilterMode = 0
+	FilterModeNone FilterMode = 0
 	// Texture filtering returns the color from only one texel, whose location is nearest to the coordinates being sampled.
-	SCNFilterModeNearest SCNFilterMode = 1
+	FilterModeNearest FilterMode = 1
 	// Texture filtering sample texels from the neighborhood of the coordinates being sampled and linearly interpolates their colors.
-	SCNFilterModeLinear SCNFilterMode = 2
+	FilterModeLinear FilterMode = 2
 )
 
-func (e SCNFilterMode) String() string {
+func (e FilterMode) String() string {
 	switch e {
-	case SCNFilterModeNone:
-		return "SCNFilterModeNone"
-	case SCNFilterModeNearest:
-		return "SCNFilterModeNearest"
-	case SCNFilterModeLinear:
-		return "SCNFilterModeLinear"
+	case FilterModeNone:
+		return "FilterModeNone"
+	case FilterModeNearest:
+		return "FilterModeNearest"
+	case FilterModeLinear:
+		return "FilterModeLinear"
 	default:
-		return fmt.Sprintf("SCNFilterMode(%d)", int64(e))
+		return fmt.Sprintf("FilterMode(%d)", int64(e))
 	}
 }
 
 // The drawing primitive that connects vertices when rendering a geometry element, used by the primitiveType property to specify how SceneKit interprets the geometry element’s data.
-type SCNGeometryPrimitiveType int64
+type GeometryPrimitiveType int64
 
 const (
 	// The geometry element’s data is a sequence of triangles, with each triangle described by three new vertices.
-	SCNGeometryPrimitiveTypeTriangles SCNGeometryPrimitiveType = 0
+	GeometryPrimitiveTypeTriangles GeometryPrimitiveType = 0
 	// The geometry element’s data is a sequence of triangles, with each triangle described by one new vertex and two vertices from the previous triangle.
-	SCNGeometryPrimitiveTypeTriangleStrip SCNGeometryPrimitiveType = 1
+	GeometryPrimitiveTypeTriangleStrip GeometryPrimitiveType = 1
 	// The geometry element’s data is a sequence of line segments, with each line segment described by two new vertices.
-	SCNGeometryPrimitiveTypeLine SCNGeometryPrimitiveType = 2
+	GeometryPrimitiveTypeLine GeometryPrimitiveType = 2
 	// The geometry element’s data is a sequence of unconnected points.
-	SCNGeometryPrimitiveTypePoint   SCNGeometryPrimitiveType = 3
-	SCNGeometryPrimitiveTypePolygon SCNGeometryPrimitiveType = 4
+	GeometryPrimitiveTypePoint   GeometryPrimitiveType = 3
+	GeometryPrimitiveTypePolygon GeometryPrimitiveType = 4
 )
 
-func (e SCNGeometryPrimitiveType) String() string {
+func (e GeometryPrimitiveType) String() string {
 	switch e {
-	case SCNGeometryPrimitiveTypeTriangles:
-		return "SCNGeometryPrimitiveTypeTriangles"
-	case SCNGeometryPrimitiveTypeTriangleStrip:
-		return "SCNGeometryPrimitiveTypeTriangleStrip"
-	case SCNGeometryPrimitiveTypeLine:
-		return "SCNGeometryPrimitiveTypeLine"
-	case SCNGeometryPrimitiveTypePoint:
-		return "SCNGeometryPrimitiveTypePoint"
-	case SCNGeometryPrimitiveTypePolygon:
-		return "SCNGeometryPrimitiveTypePolygon"
+	case GeometryPrimitiveTypeTriangles:
+		return "GeometryPrimitiveTypeTriangles"
+	case GeometryPrimitiveTypeTriangleStrip:
+		return "GeometryPrimitiveTypeTriangleStrip"
+	case GeometryPrimitiveTypeLine:
+		return "GeometryPrimitiveTypeLine"
+	case GeometryPrimitiveTypePoint:
+		return "GeometryPrimitiveTypePoint"
+	case GeometryPrimitiveTypePolygon:
+		return "GeometryPrimitiveTypePolygon"
 	default:
-		return fmt.Sprintf("SCNGeometryPrimitiveType(%d)", int64(e))
+		return fmt.Sprintf("GeometryPrimitiveType(%d)", int64(e))
 	}
 }
 
-type SCNInteractionMode int64
+type InteractionMode int64
 
 const (
-	SCNInteractionModeFly                  SCNInteractionMode = 0
-	SCNInteractionModeOrbitTurntable       SCNInteractionMode = 1
-	SCNInteractionModeOrbitAngleMapping    SCNInteractionMode = 2
-	SCNInteractionModeOrbitCenteredArcball SCNInteractionMode = 3
-	SCNInteractionModeOrbitArcball         SCNInteractionMode = 4
-	SCNInteractionModePan                  SCNInteractionMode = 5
-	SCNInteractionModeTruck                SCNInteractionMode = 6
+	InteractionModeFly                  InteractionMode = 0
+	InteractionModeOrbitTurntable       InteractionMode = 1
+	InteractionModeOrbitAngleMapping    InteractionMode = 2
+	InteractionModeOrbitCenteredArcball InteractionMode = 3
+	InteractionModeOrbitArcball         InteractionMode = 4
+	InteractionModePan                  InteractionMode = 5
+	InteractionModeTruck                InteractionMode = 6
 )
 
-func (e SCNInteractionMode) String() string {
+func (e InteractionMode) String() string {
 	switch e {
-	case SCNInteractionModeFly:
-		return "SCNInteractionModeFly"
-	case SCNInteractionModeOrbitTurntable:
-		return "SCNInteractionModeOrbitTurntable"
-	case SCNInteractionModeOrbitAngleMapping:
-		return "SCNInteractionModeOrbitAngleMapping"
-	case SCNInteractionModeOrbitCenteredArcball:
-		return "SCNInteractionModeOrbitCenteredArcball"
-	case SCNInteractionModeOrbitArcball:
-		return "SCNInteractionModeOrbitArcball"
-	case SCNInteractionModePan:
-		return "SCNInteractionModePan"
-	case SCNInteractionModeTruck:
-		return "SCNInteractionModeTruck"
+	case InteractionModeFly:
+		return "InteractionModeFly"
+	case InteractionModeOrbitTurntable:
+		return "InteractionModeOrbitTurntable"
+	case InteractionModeOrbitAngleMapping:
+		return "InteractionModeOrbitAngleMapping"
+	case InteractionModeOrbitCenteredArcball:
+		return "InteractionModeOrbitCenteredArcball"
+	case InteractionModeOrbitArcball:
+		return "InteractionModeOrbitArcball"
+	case InteractionModePan:
+		return "InteractionModePan"
+	case InteractionModeTruck:
+		return "InteractionModeTruck"
 	default:
-		return fmt.Sprintf("SCNInteractionMode(%d)", int64(e))
+		return fmt.Sprintf("InteractionMode(%d)", int64(e))
 	}
 }
 
-type SCNLightAreaType int64
+type LightAreaType int64
 
 const (
-	SCNLightAreaTypeRectangle SCNLightAreaType = 1
-	SCNLightAreaTypePolygon   SCNLightAreaType = 4
+	LightAreaTypeRectangle LightAreaType = 1
+	LightAreaTypePolygon   LightAreaType = 4
 )
 
-func (e SCNLightAreaType) String() string {
+func (e LightAreaType) String() string {
 	switch e {
-	case SCNLightAreaTypeRectangle:
-		return "SCNLightAreaTypeRectangle"
-	case SCNLightAreaTypePolygon:
-		return "SCNLightAreaTypePolygon"
+	case LightAreaTypeRectangle:
+		return "LightAreaTypeRectangle"
+	case LightAreaTypePolygon:
+		return "LightAreaTypePolygon"
 	default:
-		return fmt.Sprintf("SCNLightAreaType(%d)", int64(e))
+		return fmt.Sprintf("LightAreaType(%d)", int64(e))
 	}
 }
 
-type SCNLightProbeType int64
+type LightProbeType int64
 
 const (
-	SCNLightProbeTypeIrradiance SCNLightProbeType = 0
-	SCNLightProbeTypeRadiance   SCNLightProbeType = 1
+	LightProbeTypeIrradiance LightProbeType = 0
+	LightProbeTypeRadiance   LightProbeType = 1
 )
 
-func (e SCNLightProbeType) String() string {
+func (e LightProbeType) String() string {
 	switch e {
-	case SCNLightProbeTypeIrradiance:
-		return "SCNLightProbeTypeIrradiance"
-	case SCNLightProbeTypeRadiance:
-		return "SCNLightProbeTypeRadiance"
+	case LightProbeTypeIrradiance:
+		return "LightProbeTypeIrradiance"
+	case LightProbeTypeRadiance:
+		return "LightProbeTypeRadiance"
 	default:
-		return fmt.Sprintf("SCNLightProbeType(%d)", int64(e))
+		return fmt.Sprintf("LightProbeType(%d)", int64(e))
 	}
 }
 
-type SCNLightProbeUpdateType int64
+type LightProbeUpdateType int64
 
 const (
-	SCNLightProbeUpdateTypeNever    SCNLightProbeUpdateType = 0
-	SCNLightProbeUpdateTypeRealtime SCNLightProbeUpdateType = 1
+	LightProbeUpdateTypeNever    LightProbeUpdateType = 0
+	LightProbeUpdateTypeRealtime LightProbeUpdateType = 1
 )
 
-func (e SCNLightProbeUpdateType) String() string {
+func (e LightProbeUpdateType) String() string {
 	switch e {
-	case SCNLightProbeUpdateTypeNever:
-		return "SCNLightProbeUpdateTypeNever"
-	case SCNLightProbeUpdateTypeRealtime:
-		return "SCNLightProbeUpdateTypeRealtime"
+	case LightProbeUpdateTypeNever:
+		return "LightProbeUpdateTypeNever"
+	case LightProbeUpdateTypeRealtime:
+		return "LightProbeUpdateTypeRealtime"
 	default:
-		return fmt.Sprintf("SCNLightProbeUpdateType(%d)", int64(e))
+		return fmt.Sprintf("LightProbeUpdateType(%d)", int64(e))
 	}
 }
 
 // The interpolation formulas for blending between target geometries.
-type SCNMorpherCalculationMode int64
+type MorpherCalculationMode int64
 
 const (
 	// Target weights must be in the range between 0.0 and 1.0, and the contribution of the base geometry to the morphed surface is related to the sum of target weights. This is the default mode.
-	SCNMorpherCalculationModeNormalized SCNMorpherCalculationMode = 0
+	MorpherCalculationModeNormalized MorpherCalculationMode = 0
 	// Target weights may take on any value, and weighted contributions for each target are added to the base geometry,
-	SCNMorpherCalculationModeAdditive SCNMorpherCalculationMode = 1
+	MorpherCalculationModeAdditive MorpherCalculationMode = 1
 )
 
-func (e SCNMorpherCalculationMode) String() string {
+func (e MorpherCalculationMode) String() string {
 	switch e {
-	case SCNMorpherCalculationModeNormalized:
-		return "SCNMorpherCalculationModeNormalized"
-	case SCNMorpherCalculationModeAdditive:
-		return "SCNMorpherCalculationModeAdditive"
+	case MorpherCalculationModeNormalized:
+		return "MorpherCalculationModeNormalized"
+	case MorpherCalculationModeAdditive:
+		return "MorpherCalculationModeAdditive"
 	default:
-		return fmt.Sprintf("SCNMorpherCalculationMode(%d)", int64(e))
+		return fmt.Sprintf("MorpherCalculationMode(%d)", int64(e))
 	}
 }
 
 // Values that inform SceneKit’s rendering for movement-related effects, used by the movabilityHint property.
-type SCNMovabilityHint int64
+type MovabilityHint int64
 
 const (
 	// The node is not expected to move over time.
-	SCNMovabilityHintFixed SCNMovabilityHint = 0
+	MovabilityHintFixed MovabilityHint = 0
 	// The node is expected to move over time.
-	SCNMovabilityHintMovable SCNMovabilityHint = 1
+	MovabilityHintMovable MovabilityHint = 1
 )
 
-func (e SCNMovabilityHint) String() string {
+func (e MovabilityHint) String() string {
 	switch e {
-	case SCNMovabilityHintFixed:
-		return "SCNMovabilityHintFixed"
-	case SCNMovabilityHintMovable:
-		return "SCNMovabilityHintMovable"
+	case MovabilityHintFixed:
+		return "MovabilityHintFixed"
+	case MovabilityHintMovable:
+		return "MovabilityHintMovable"
 	default:
-		return fmt.Sprintf("SCNMovabilityHint(%d)", int64(e))
+		return fmt.Sprintf("MovabilityHint(%d)", int64(e))
 	}
 }
 
 // Options for the focusable states of a SceneKit node.
-type SCNNodeFocusBehavior int64
+type NodeFocusBehavior int64
 
 const (
 	// Node is not focusable.
-	SCNNodeFocusBehaviorNone SCNNodeFocusBehavior = 0
+	NodeFocusBehaviorNone NodeFocusBehavior = 0
 	// Node is not focusable and prevents nodes that it visually obscures from becoming focusable.
-	SCNNodeFocusBehaviorOccluding SCNNodeFocusBehavior = 1
+	NodeFocusBehaviorOccluding NodeFocusBehavior = 1
 	// Node is focusable and prevents nodes that it visually obscures from becoming focusable.
-	SCNNodeFocusBehaviorFocusable SCNNodeFocusBehavior = 2
+	NodeFocusBehaviorFocusable NodeFocusBehavior = 2
 )
 
-func (e SCNNodeFocusBehavior) String() string {
+func (e NodeFocusBehavior) String() string {
 	switch e {
-	case SCNNodeFocusBehaviorNone:
-		return "SCNNodeFocusBehaviorNone"
-	case SCNNodeFocusBehaviorOccluding:
-		return "SCNNodeFocusBehaviorOccluding"
-	case SCNNodeFocusBehaviorFocusable:
-		return "SCNNodeFocusBehaviorFocusable"
+	case NodeFocusBehaviorNone:
+		return "NodeFocusBehaviorNone"
+	case NodeFocusBehaviorOccluding:
+		return "NodeFocusBehaviorOccluding"
+	case NodeFocusBehaviorFocusable:
+		return "NodeFocusBehaviorFocusable"
 	default:
-		return fmt.Sprintf("SCNNodeFocusBehavior(%d)", int64(e))
+		return fmt.Sprintf("NodeFocusBehavior(%d)", int64(e))
 	}
 }
 
 // Options for the initial direction of each emitted particle, used by the birthDirection property.
-type SCNParticleBirthDirection int64
+type ParticleBirthDirection int64
 
 const (
 	// The emitting direction is the same for all particles.
-	SCNParticleBirthDirectionConstant SCNParticleBirthDirection = 0
+	ParticleBirthDirectionConstant ParticleBirthDirection = 0
 	// The emitting direction for each particle is along the surface normal vector at the point where the particle is emitted.
-	SCNParticleBirthDirectionSurfaceNormal SCNParticleBirthDirection = 1
+	ParticleBirthDirectionSurfaceNormal ParticleBirthDirection = 1
 	// SceneKit randomizes the emitting direction for each particle.
-	SCNParticleBirthDirectionRandom SCNParticleBirthDirection = 2
+	ParticleBirthDirectionRandom ParticleBirthDirection = 2
 )
 
-func (e SCNParticleBirthDirection) String() string {
+func (e ParticleBirthDirection) String() string {
 	switch e {
-	case SCNParticleBirthDirectionConstant:
-		return "SCNParticleBirthDirectionConstant"
-	case SCNParticleBirthDirectionSurfaceNormal:
-		return "SCNParticleBirthDirectionSurfaceNormal"
-	case SCNParticleBirthDirectionRandom:
-		return "SCNParticleBirthDirectionRandom"
+	case ParticleBirthDirectionConstant:
+		return "ParticleBirthDirectionConstant"
+	case ParticleBirthDirectionSurfaceNormal:
+		return "ParticleBirthDirectionSurfaceNormal"
+	case ParticleBirthDirectionRandom:
+		return "ParticleBirthDirectionRandom"
 	default:
-		return fmt.Sprintf("SCNParticleBirthDirection(%d)", int64(e))
+		return fmt.Sprintf("ParticleBirthDirection(%d)", int64(e))
 	}
 }
 
 // Options for the initial location of each emitted particle, used by the birthLocation property.
-type SCNParticleBirthLocation int64
+type ParticleBirthLocation int64
 
 const (
 	// New particles can be created at any location on the surface of the emitter shape.
-	SCNParticleBirthLocationSurface SCNParticleBirthLocation = 0
+	ParticleBirthLocationSurface ParticleBirthLocation = 0
 	// New particles can be created at any location within the volume of the emitter shape.
-	SCNParticleBirthLocationVolume SCNParticleBirthLocation = 1
+	ParticleBirthLocationVolume ParticleBirthLocation = 1
 	// New particles can be created at only at the locations of the vertices in the emitter shape.
-	SCNParticleBirthLocationVertex SCNParticleBirthLocation = 2
+	ParticleBirthLocationVertex ParticleBirthLocation = 2
 )
 
-func (e SCNParticleBirthLocation) String() string {
+func (e ParticleBirthLocation) String() string {
 	switch e {
-	case SCNParticleBirthLocationSurface:
-		return "SCNParticleBirthLocationSurface"
-	case SCNParticleBirthLocationVolume:
-		return "SCNParticleBirthLocationVolume"
-	case SCNParticleBirthLocationVertex:
-		return "SCNParticleBirthLocationVertex"
+	case ParticleBirthLocationSurface:
+		return "ParticleBirthLocationSurface"
+	case ParticleBirthLocationVolume:
+		return "ParticleBirthLocationVolume"
+	case ParticleBirthLocationVertex:
+		return "ParticleBirthLocationVertex"
 	default:
-		return fmt.Sprintf("SCNParticleBirthLocation(%d)", int64(e))
+		return fmt.Sprintf("ParticleBirthLocation(%d)", int64(e))
 	}
 }
 
 // Options for combining source and destination pixel colors when compositing particles during rendering, used by the blendMode property.
-type SCNParticleBlendMode int64
+type ParticleBlendMode int64
 
 const (
 	// The source and destination colors are added together.
-	SCNParticleBlendModeAdditive SCNParticleBlendMode = 0
+	ParticleBlendModeAdditive ParticleBlendMode = 0
 	// The source color is subtracted from the destination color.
-	SCNParticleBlendModeSubtract SCNParticleBlendMode = 1
+	ParticleBlendModeSubtract ParticleBlendMode = 1
 	// The source color is multiplied by the destination color.
-	SCNParticleBlendModeMultiply SCNParticleBlendMode = 2
+	ParticleBlendModeMultiply ParticleBlendMode = 2
 	// The source color is added to the destination color times the inverted source color.
-	SCNParticleBlendModeScreen SCNParticleBlendMode = 3
+	ParticleBlendModeScreen ParticleBlendMode = 3
 	// The source and destination colors are blended by multiplying the source alpha value.
-	SCNParticleBlendModeAlpha SCNParticleBlendMode = 4
+	ParticleBlendModeAlpha ParticleBlendMode = 4
 	// The source color replaces the destination color.
-	SCNParticleBlendModeReplace SCNParticleBlendMode = 5
+	ParticleBlendModeReplace ParticleBlendMode = 5
 )
 
-func (e SCNParticleBlendMode) String() string {
+func (e ParticleBlendMode) String() string {
 	switch e {
-	case SCNParticleBlendModeAdditive:
-		return "SCNParticleBlendModeAdditive"
-	case SCNParticleBlendModeSubtract:
-		return "SCNParticleBlendModeSubtract"
-	case SCNParticleBlendModeMultiply:
-		return "SCNParticleBlendModeMultiply"
-	case SCNParticleBlendModeScreen:
-		return "SCNParticleBlendModeScreen"
-	case SCNParticleBlendModeAlpha:
-		return "SCNParticleBlendModeAlpha"
-	case SCNParticleBlendModeReplace:
-		return "SCNParticleBlendModeReplace"
+	case ParticleBlendModeAdditive:
+		return "ParticleBlendModeAdditive"
+	case ParticleBlendModeSubtract:
+		return "ParticleBlendModeSubtract"
+	case ParticleBlendModeMultiply:
+		return "ParticleBlendModeMultiply"
+	case ParticleBlendModeScreen:
+		return "ParticleBlendModeScreen"
+	case ParticleBlendModeAlpha:
+		return "ParticleBlendModeAlpha"
+	case ParticleBlendModeReplace:
+		return "ParticleBlendModeReplace"
 	default:
-		return fmt.Sprintf("SCNParticleBlendMode(%d)", int64(e))
+		return fmt.Sprintf("ParticleBlendMode(%d)", int64(e))
 	}
 }
 
 // Significant events in the life spans of simulate particles, used by the handleEvent:forProperties:withBlock: method.
-type SCNParticleEvent int64
+type ParticleEvent int64
 
 const (
 	// Occurs when new particles spawn.
-	SCNParticleEventBirth SCNParticleEvent = 0
+	ParticleEventBirth ParticleEvent = 0
 	// Occurs when particles reach the end of their life span.
-	SCNParticleEventDeath SCNParticleEvent = 1
+	ParticleEventDeath ParticleEvent = 1
 	// Occurs when particles collide with scene geometry.
-	SCNParticleEventCollision SCNParticleEvent = 2
+	ParticleEventCollision ParticleEvent = 2
 )
 
-func (e SCNParticleEvent) String() string {
+func (e ParticleEvent) String() string {
 	switch e {
-	case SCNParticleEventBirth:
-		return "SCNParticleEventBirth"
-	case SCNParticleEventDeath:
-		return "SCNParticleEventDeath"
-	case SCNParticleEventCollision:
-		return "SCNParticleEventCollision"
+	case ParticleEventBirth:
+		return "ParticleEventBirth"
+	case ParticleEventDeath:
+		return "ParticleEventDeath"
+	case ParticleEventCollision:
+		return "ParticleEventCollision"
 	default:
-		return fmt.Sprintf("SCNParticleEvent(%d)", int64(e))
+		return fmt.Sprintf("ParticleEvent(%d)", int64(e))
 	}
 }
 
 // Options for animating each particle with a sequence of images, used by the imageSequenceAnimationMode property.
-type SCNParticleImageSequenceAnimationMode int64
+type ParticleImageSequenceAnimationMode int64
 
 const (
 	// The animation loops after displaying all of its images.
-	SCNParticleImageSequenceAnimationModeRepeat SCNParticleImageSequenceAnimationMode = 0
+	ParticleImageSequenceAnimationModeRepeat ParticleImageSequenceAnimationMode = 0
 	// The animation stops after displaying all of its images.
-	SCNParticleImageSequenceAnimationModeClamp SCNParticleImageSequenceAnimationMode = 1
+	ParticleImageSequenceAnimationModeClamp ParticleImageSequenceAnimationMode = 1
 	// After the animation displays all of its images, it plays again in reverse order.
-	SCNParticleImageSequenceAnimationModeAutoReverse SCNParticleImageSequenceAnimationMode = 2
+	ParticleImageSequenceAnimationModeAutoReverse ParticleImageSequenceAnimationMode = 2
 )
 
-func (e SCNParticleImageSequenceAnimationMode) String() string {
+func (e ParticleImageSequenceAnimationMode) String() string {
 	switch e {
-	case SCNParticleImageSequenceAnimationModeRepeat:
-		return "SCNParticleImageSequenceAnimationModeRepeat"
-	case SCNParticleImageSequenceAnimationModeClamp:
-		return "SCNParticleImageSequenceAnimationModeClamp"
-	case SCNParticleImageSequenceAnimationModeAutoReverse:
-		return "SCNParticleImageSequenceAnimationModeAutoReverse"
+	case ParticleImageSequenceAnimationModeRepeat:
+		return "ParticleImageSequenceAnimationModeRepeat"
+	case ParticleImageSequenceAnimationModeClamp:
+		return "ParticleImageSequenceAnimationModeClamp"
+	case ParticleImageSequenceAnimationModeAutoReverse:
+		return "ParticleImageSequenceAnimationModeAutoReverse"
 	default:
-		return fmt.Sprintf("SCNParticleImageSequenceAnimationMode(%d)", int64(e))
+		return fmt.Sprintf("ParticleImageSequenceAnimationMode(%d)", int64(e))
 	}
 }
 
 // Options for the input value of the property controller’s animation, used by the inputMode property.
-type SCNParticleInputMode int64
+type ParticleInputMode int64
 
 const (
 	// The controller’s effect on a particle property is a function of the time since the particle’s birth.
-	SCNParticleInputModeOverLife SCNParticleInputMode = 0
+	ParticleInputModeOverLife ParticleInputMode = 0
 	// The controller’s effect on a particle property is a function of the particle’s distance from the position of a specified node.
-	SCNParticleInputModeOverDistance SCNParticleInputMode = 1
+	ParticleInputModeOverDistance ParticleInputMode = 1
 	// The controller’s effect on a particle property is a function of another of the particle’s properties.
-	SCNParticleInputModeOverOtherProperty SCNParticleInputMode = 2
+	ParticleInputModeOverOtherProperty ParticleInputMode = 2
 )
 
-func (e SCNParticleInputMode) String() string {
+func (e ParticleInputMode) String() string {
 	switch e {
-	case SCNParticleInputModeOverLife:
-		return "SCNParticleInputModeOverLife"
-	case SCNParticleInputModeOverDistance:
-		return "SCNParticleInputModeOverDistance"
-	case SCNParticleInputModeOverOtherProperty:
-		return "SCNParticleInputModeOverOtherProperty"
+	case ParticleInputModeOverLife:
+		return "ParticleInputModeOverLife"
+	case ParticleInputModeOverDistance:
+		return "ParticleInputModeOverDistance"
+	case ParticleInputModeOverOtherProperty:
+		return "ParticleInputModeOverOtherProperty"
 	default:
-		return fmt.Sprintf("SCNParticleInputMode(%d)", int64(e))
+		return fmt.Sprintf("ParticleInputMode(%d)", int64(e))
 	}
 }
 
 // Stages of SceneKit’s particle simulation process into which you can insert modifier blocks, used by the addModifierForProperties:atStage:withBlock: method.
-type SCNParticleModifierStage int64
+type ParticleModifierStage int64
 
 const (
 	// The stage before SceneKit simulates the motion of particles.
-	SCNParticleModifierStagePreDynamics SCNParticleModifierStage = 0
+	ParticleModifierStagePreDynamics ParticleModifierStage = 0
 	// The stage after SceneKit simulates the motion of particles.
-	SCNParticleModifierStagePostDynamics SCNParticleModifierStage = 1
+	ParticleModifierStagePostDynamics ParticleModifierStage = 1
 	// The stage before SceneKit simulates the results of collisions between particles and scene geometry.
-	SCNParticleModifierStagePreCollision SCNParticleModifierStage = 2
+	ParticleModifierStagePreCollision ParticleModifierStage = 2
 	// The stage after SceneKit simulates the results of collisions between particles and scene geometry.
-	SCNParticleModifierStagePostCollision SCNParticleModifierStage = 3
+	ParticleModifierStagePostCollision ParticleModifierStage = 3
 )
 
-func (e SCNParticleModifierStage) String() string {
+func (e ParticleModifierStage) String() string {
 	switch e {
-	case SCNParticleModifierStagePreDynamics:
-		return "SCNParticleModifierStagePreDynamics"
-	case SCNParticleModifierStagePostDynamics:
-		return "SCNParticleModifierStagePostDynamics"
-	case SCNParticleModifierStagePreCollision:
-		return "SCNParticleModifierStagePreCollision"
-	case SCNParticleModifierStagePostCollision:
-		return "SCNParticleModifierStagePostCollision"
+	case ParticleModifierStagePreDynamics:
+		return "ParticleModifierStagePreDynamics"
+	case ParticleModifierStagePostDynamics:
+		return "ParticleModifierStagePostDynamics"
+	case ParticleModifierStagePreCollision:
+		return "ParticleModifierStagePreCollision"
+	case ParticleModifierStagePostCollision:
+		return "ParticleModifierStagePostCollision"
 	default:
-		return fmt.Sprintf("SCNParticleModifierStage(%d)", int64(e))
+		return fmt.Sprintf("ParticleModifierStage(%d)", int64(e))
 	}
 }
 
 // Options for restricting the orientation of particles, used by the orientationMode property.
-type SCNParticleOrientationMode int64
+type ParticleOrientationMode int64
 
 const (
 	// Each particle’s orientation is always fixed with respect to the point of view camera.
-	SCNParticleOrientationModeBillboardScreenAligned SCNParticleOrientationMode = 0
+	ParticleOrientationModeBillboardScreenAligned ParticleOrientationMode = 0
 	// Each particle always faces the point of view camera (but may rotate about an axis parallel to the view direction).
-	SCNParticleOrientationModeBillboardViewAligned SCNParticleOrientationMode = 1
+	ParticleOrientationModeBillboardViewAligned ParticleOrientationMode = 1
 	// Particle orientations are not restricted; they may rotate freely in all axes.
-	SCNParticleOrientationModeFree SCNParticleOrientationMode = 2
+	ParticleOrientationModeFree ParticleOrientationMode = 2
 	// The y-axis direction of each particle is always fixed with respect to the point of view camera.
-	SCNParticleOrientationModeBillboardYAligned SCNParticleOrientationMode = 3
+	ParticleOrientationModeBillboardYAligned ParticleOrientationMode = 3
 )
 
-func (e SCNParticleOrientationMode) String() string {
+func (e ParticleOrientationMode) String() string {
 	switch e {
-	case SCNParticleOrientationModeBillboardScreenAligned:
-		return "SCNParticleOrientationModeBillboardScreenAligned"
-	case SCNParticleOrientationModeBillboardViewAligned:
-		return "SCNParticleOrientationModeBillboardViewAligned"
-	case SCNParticleOrientationModeFree:
-		return "SCNParticleOrientationModeFree"
-	case SCNParticleOrientationModeBillboardYAligned:
-		return "SCNParticleOrientationModeBillboardYAligned"
+	case ParticleOrientationModeBillboardScreenAligned:
+		return "ParticleOrientationModeBillboardScreenAligned"
+	case ParticleOrientationModeBillboardViewAligned:
+		return "ParticleOrientationModeBillboardViewAligned"
+	case ParticleOrientationModeFree:
+		return "ParticleOrientationModeFree"
+	case ParticleOrientationModeBillboardYAligned:
+		return "ParticleOrientationModeBillboardYAligned"
 	default:
-		return fmt.Sprintf("SCNParticleOrientationMode(%d)", int64(e))
+		return fmt.Sprintf("ParticleOrientationMode(%d)", int64(e))
 	}
 }
 
 // Options for the rendering order of particles, used by the sortingMode property.
-type SCNParticleSortingMode int64
+type ParticleSortingMode int64
 
 const (
 	// Particles are not sorted; they may be rendered in any order.
-	SCNParticleSortingModeNone SCNParticleSortingMode = 0
+	ParticleSortingModeNone ParticleSortingMode = 0
 	// Particles farther from the point of view (as measured using projected depth) are rendered before closer particles.
-	SCNParticleSortingModeProjectedDepth SCNParticleSortingMode = 1
+	ParticleSortingModeProjectedDepth ParticleSortingMode = 1
 	// Particles farther from the point of view (as measured using distance from the camera in scene space) are rendered before closer particles.
-	SCNParticleSortingModeDistance SCNParticleSortingMode = 2
+	ParticleSortingModeDistance ParticleSortingMode = 2
 	// Particles emitted earlier are rendered before particles emitted more recently.
-	SCNParticleSortingModeOldestFirst SCNParticleSortingMode = 3
+	ParticleSortingModeOldestFirst ParticleSortingMode = 3
 	// Particles emitted more recently are rendered before particles emitted earlier.
-	SCNParticleSortingModeYoungestFirst SCNParticleSortingMode = 4
+	ParticleSortingModeYoungestFirst ParticleSortingMode = 4
 )
 
-func (e SCNParticleSortingMode) String() string {
+func (e ParticleSortingMode) String() string {
 	switch e {
-	case SCNParticleSortingModeNone:
-		return "SCNParticleSortingModeNone"
-	case SCNParticleSortingModeProjectedDepth:
-		return "SCNParticleSortingModeProjectedDepth"
-	case SCNParticleSortingModeDistance:
-		return "SCNParticleSortingModeDistance"
-	case SCNParticleSortingModeOldestFirst:
-		return "SCNParticleSortingModeOldestFirst"
-	case SCNParticleSortingModeYoungestFirst:
-		return "SCNParticleSortingModeYoungestFirst"
+	case ParticleSortingModeNone:
+		return "ParticleSortingModeNone"
+	case ParticleSortingModeProjectedDepth:
+		return "ParticleSortingModeProjectedDepth"
+	case ParticleSortingModeDistance:
+		return "ParticleSortingModeDistance"
+	case ParticleSortingModeOldestFirst:
+		return "ParticleSortingModeOldestFirst"
+	case ParticleSortingModeYoungestFirst:
+		return "ParticleSortingModeYoungestFirst"
 	default:
-		return fmt.Sprintf("SCNParticleSortingMode(%d)", int64(e))
+		return fmt.Sprintf("ParticleSortingMode(%d)", int64(e))
 	}
 }
 
 // Constants that determine how a physics body interacts with forces and other bodies, used by the type property and when creating a physics body.
-type SCNPhysicsBodyType int64
+type PhysicsBodyType int64
 
 const (
 	// A physics body that is unaffected by forces or collisions and cannot move.
-	SCNPhysicsBodyTypeStatic SCNPhysicsBodyType = 0
+	PhysicsBodyTypeStatic PhysicsBodyType = 0
 	// A physics body that can be affected by forces and collisions.
-	SCNPhysicsBodyTypeDynamic SCNPhysicsBodyType = 1
+	PhysicsBodyTypeDynamic PhysicsBodyType = 1
 	// A physics body that is unaffected by forces or collisions but that can cause collisions affecting other bodies when moved.
-	SCNPhysicsBodyTypeKinematic SCNPhysicsBodyType = 2
+	PhysicsBodyTypeKinematic PhysicsBodyType = 2
 )
 
-func (e SCNPhysicsBodyType) String() string {
+func (e PhysicsBodyType) String() string {
 	switch e {
-	case SCNPhysicsBodyTypeStatic:
-		return "SCNPhysicsBodyTypeStatic"
-	case SCNPhysicsBodyTypeDynamic:
-		return "SCNPhysicsBodyTypeDynamic"
-	case SCNPhysicsBodyTypeKinematic:
-		return "SCNPhysicsBodyTypeKinematic"
+	case PhysicsBodyTypeStatic:
+		return "PhysicsBodyTypeStatic"
+	case PhysicsBodyTypeDynamic:
+		return "PhysicsBodyTypeDynamic"
+	case PhysicsBodyTypeKinematic:
+		return "PhysicsBodyTypeKinematic"
 	default:
-		return fmt.Sprintf("SCNPhysicsBodyType(%d)", int64(e))
+		return fmt.Sprintf("PhysicsBodyType(%d)", int64(e))
 	}
 }
 
 // Options for defining the region of space affected by a physics field, used by the scope property.
-type SCNPhysicsFieldScope int64
+type PhysicsFieldScope int64
 
 const (
 	// The field’s effect applies only to objects within the region of space defined by its position and extent.
-	SCNPhysicsFieldScopeInsideExtent SCNPhysicsFieldScope = 0
+	PhysicsFieldScopeInsideExtent PhysicsFieldScope = 0
 	// The field’s effect applies only to objects outside the region of space defined by its position and extent.
-	SCNPhysicsFieldScopeOutsideExtent SCNPhysicsFieldScope = 1
+	PhysicsFieldScopeOutsideExtent PhysicsFieldScope = 1
 )
 
-func (e SCNPhysicsFieldScope) String() string {
+func (e PhysicsFieldScope) String() string {
 	switch e {
-	case SCNPhysicsFieldScopeInsideExtent:
-		return "SCNPhysicsFieldScopeInsideExtent"
-	case SCNPhysicsFieldScopeOutsideExtent:
-		return "SCNPhysicsFieldScopeOutsideExtent"
+	case PhysicsFieldScopeInsideExtent:
+		return "PhysicsFieldScopeInsideExtent"
+	case PhysicsFieldScopeOutsideExtent:
+		return "PhysicsFieldScopeOutsideExtent"
 	default:
-		return fmt.Sprintf("SCNPhysicsFieldScope(%d)", int64(e))
+		return fmt.Sprintf("PhysicsFieldScope(%d)", int64(e))
 	}
 }
 
 // Options for when to load the reference node’s content, used by the loadingPolicy property.
-type SCNReferenceLoadingPolicy int64
+type ReferenceLoadingPolicy int64
 
 const (
 	// Load the node’s external content immediately when the reference node is unarchived.
-	SCNReferenceLoadingPolicyImmediate SCNReferenceLoadingPolicy = 0
+	ReferenceLoadingPolicyImmediate ReferenceLoadingPolicy = 0
 	// Load the node’s external comment only when the load method is called.
-	SCNReferenceLoadingPolicyOnDemand SCNReferenceLoadingPolicy = 1
+	ReferenceLoadingPolicyOnDemand ReferenceLoadingPolicy = 1
 )
 
-func (e SCNReferenceLoadingPolicy) String() string {
+func (e ReferenceLoadingPolicy) String() string {
 	switch e {
-	case SCNReferenceLoadingPolicyImmediate:
-		return "SCNReferenceLoadingPolicyImmediate"
-	case SCNReferenceLoadingPolicyOnDemand:
-		return "SCNReferenceLoadingPolicyOnDemand"
+	case ReferenceLoadingPolicyImmediate:
+		return "ReferenceLoadingPolicyImmediate"
+	case ReferenceLoadingPolicyOnDemand:
+		return "ReferenceLoadingPolicyOnDemand"
 	default:
-		return fmt.Sprintf("SCNReferenceLoadingPolicy(%d)", int64(e))
-	}
-}
-
-// Constants identifying phases of SceneKit’s scene loading process, used in a SCNSceneSourceStatusHandler block.
-type SCNSceneSourceStatus int64
-
-const (
-	// An error occurred when SceneKit attempted to load the scene.
-	SCNSceneSourceStatusError SCNSceneSourceStatus = -1
-	// SceneKit has begun deserializing the source file.
-	SCNSceneSourceStatusParsing SCNSceneSourceStatus = 4
-	// SceneKit has begun validating the scene file’s format.
-	SCNSceneSourceStatusValidating SCNSceneSourceStatus = 8
-	// SceneKit has begun generating scene graph objects from the scene file’s contents.
-	SCNSceneSourceStatusProcessing SCNSceneSourceStatus = 12
-	// SceneKit has successfully finished loading the scene file’s contents.
-	SCNSceneSourceStatusComplete SCNSceneSourceStatus = 16
-)
-
-func (e SCNSceneSourceStatus) String() string {
-	switch e {
-	case SCNSceneSourceStatusError:
-		return "SCNSceneSourceStatusError"
-	case SCNSceneSourceStatusParsing:
-		return "SCNSceneSourceStatusParsing"
-	case SCNSceneSourceStatusValidating:
-		return "SCNSceneSourceStatusValidating"
-	case SCNSceneSourceStatusProcessing:
-		return "SCNSceneSourceStatusProcessing"
-	case SCNSceneSourceStatusComplete:
-		return "SCNSceneSourceStatusComplete"
-	default:
-		return fmt.Sprintf("SCNSceneSourceStatus(%d)", int64(e))
+		return fmt.Sprintf("ReferenceLoadingPolicy(%d)", int64(e))
 	}
 }
 
 // Options for SceneKit’s rendering of shadows cast by a light, used by the shadowMode property.
-type SCNShadowMode int64
+type ShadowMode int64
 
 const (
 	// SceneKit renders shadows during lighting computations.
-	SCNShadowModeForward SCNShadowMode = 0
+	ShadowModeForward ShadowMode = 0
 	// SceneKit renders shadows in a postprocessing pass.
-	SCNShadowModeDeferred SCNShadowMode = 1
+	ShadowModeDeferred ShadowMode = 1
 	// SceneKit renders shadows by projecting the light’s gobo image. The light does not illuminate the scene.
-	SCNShadowModeModulated SCNShadowMode = 2
+	ShadowModeModulated ShadowMode = 2
 )
 
-func (e SCNShadowMode) String() string {
+func (e ShadowMode) String() string {
 	switch e {
-	case SCNShadowModeForward:
-		return "SCNShadowModeForward"
-	case SCNShadowModeDeferred:
-		return "SCNShadowModeDeferred"
-	case SCNShadowModeModulated:
-		return "SCNShadowModeModulated"
+	case ShadowModeForward:
+		return "ShadowModeForward"
+	case ShadowModeDeferred:
+		return "ShadowModeDeferred"
+	case ShadowModeModulated:
+		return "ShadowModeModulated"
 	default:
-		return fmt.Sprintf("SCNShadowMode(%d)", int64(e))
+		return fmt.Sprintf("ShadowMode(%d)", int64(e))
 	}
 }
 
-type SCNTessellationSmoothingMode int64
+type TessellationSmoothingMode int64
 
 const (
-	SCNTessellationSmoothingModeNone        SCNTessellationSmoothingMode = 0
-	SCNTessellationSmoothingModePNTriangles SCNTessellationSmoothingMode = 1
-	SCNTessellationSmoothingModePhong       SCNTessellationSmoothingMode = 2
+	TessellationSmoothingModeNone        TessellationSmoothingMode = 0
+	TessellationSmoothingModePNTriangles TessellationSmoothingMode = 1
+	TessellationSmoothingModePhong       TessellationSmoothingMode = 2
 )
 
-func (e SCNTessellationSmoothingMode) String() string {
+func (e TessellationSmoothingMode) String() string {
 	switch e {
-	case SCNTessellationSmoothingModeNone:
-		return "SCNTessellationSmoothingModeNone"
-	case SCNTessellationSmoothingModePNTriangles:
-		return "SCNTessellationSmoothingModePNTriangles"
-	case SCNTessellationSmoothingModePhong:
-		return "SCNTessellationSmoothingModePhong"
+	case TessellationSmoothingModeNone:
+		return "TessellationSmoothingModeNone"
+	case TessellationSmoothingModePNTriangles:
+		return "TessellationSmoothingModePNTriangles"
+	case TessellationSmoothingModePhong:
+		return "TessellationSmoothingModePhong"
 	default:
-		return fmt.Sprintf("SCNTessellationSmoothingMode(%d)", int64(e))
+		return fmt.Sprintf("TessellationSmoothingMode(%d)", int64(e))
 	}
 }
 
 // The modes SceneKit uses to calculate the opacity of pixels rendered with a material, used by the transparencyMode property.
-type SCNTransparencyMode int64
+type TransparencyMode int64
 
 const (
 	// SceneKit derives transparency information from the alpha channel of colors. The value 1.0 is opaque.
-	SCNTransparencyModeAOne SCNTransparencyMode = 0
+	TransparencyModeAOne TransparencyMode = 0
 	// SceneKit derives transparency information from the luminance of colors. The value 0.0 is opaque.
-	SCNTransparencyModeRGBZero     SCNTransparencyMode = 1
-	SCNTransparencyModeSingleLayer SCNTransparencyMode = 2
-	SCNTransparencyModeDualLayer   SCNTransparencyMode = 3
-	SCNTransparencyModeDefault     SCNTransparencyMode = 0
+	TransparencyModeRGBZero     TransparencyMode = 1
+	TransparencyModeSingleLayer TransparencyMode = 2
+	TransparencyModeDualLayer   TransparencyMode = 3
+	TransparencyModeDefault     TransparencyMode = 0
 )
 
-func (e SCNTransparencyMode) String() string {
+func (e TransparencyMode) String() string {
 	switch e {
-	case SCNTransparencyModeAOne:
-		return "SCNTransparencyModeAOne"
-	case SCNTransparencyModeRGBZero:
-		return "SCNTransparencyModeRGBZero"
-	case SCNTransparencyModeSingleLayer:
-		return "SCNTransparencyModeSingleLayer"
-	case SCNTransparencyModeDualLayer:
-		return "SCNTransparencyModeDualLayer"
+	case TransparencyModeAOne:
+		return "TransparencyModeAOne"
+	case TransparencyModeRGBZero:
+		return "TransparencyModeRGBZero"
+	case TransparencyModeSingleLayer:
+		return "TransparencyModeSingleLayer"
+	case TransparencyModeDualLayer:
+		return "TransparencyModeDualLayer"
 	default:
-		return fmt.Sprintf("SCNTransparencyMode(%d)", int64(e))
+		return fmt.Sprintf("TransparencyMode(%d)", int64(e))
 	}
 }
 
 // Modes to apply to texture wrapping, used by the wrapT and wrapS properties.
-type SCNWrapMode int64
+type WrapMode int64
 
 const (
 	// Texture coordinates are clamped to the range from 0.0 to 1.0, inclusive.
-	SCNWrapModeClamp SCNWrapMode = 1
+	WrapModeClamp WrapMode = 1
 	// Texture sampling uses only the fractional part of texture coordinates, passing through the range from 0.0 to (but not including) 1.0.
-	SCNWrapModeRepeat SCNWrapMode = 2
+	WrapModeRepeat WrapMode = 2
 	// Texture sampling uses texture colors for coordinates in the range from 0.0 to 1.0 (inclusive) and the material property’s borderColor value otherwise.
-	SCNWrapModeClampToBorder SCNWrapMode = 3
+	WrapModeClampToBorder WrapMode = 3
 	// Texture sampling of texture coordinates outside range from 0.0 to 1.0 should behave as if the range reverses before repeating.
-	SCNWrapModeMirror SCNWrapMode = 4
+	WrapModeMirror WrapMode = 4
 )
 
-func (e SCNWrapMode) String() string {
+func (e WrapMode) String() string {
 	switch e {
-	case SCNWrapModeClamp:
-		return "SCNWrapModeClamp"
-	case SCNWrapModeRepeat:
-		return "SCNWrapModeRepeat"
-	case SCNWrapModeClampToBorder:
-		return "SCNWrapModeClampToBorder"
-	case SCNWrapModeMirror:
-		return "SCNWrapModeMirror"
+	case WrapModeClamp:
+		return "WrapModeClamp"
+	case WrapModeRepeat:
+		return "WrapModeRepeat"
+	case WrapModeClampToBorder:
+		return "WrapModeClampToBorder"
+	case WrapModeMirror:
+		return "WrapModeMirror"
 	default:
-		return fmt.Sprintf("SCNWrapMode(%d)", int64(e))
+		return fmt.Sprintf("WrapMode(%d)", int64(e))
 	}
 }

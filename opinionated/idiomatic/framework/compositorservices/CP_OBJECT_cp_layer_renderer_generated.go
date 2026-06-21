@@ -5,41 +5,68 @@
 package compositorservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/compositorservices"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that provides the Metal types and timing information you need to draw your content.
 //
-// _cp_layer_renderer wraps [raw.CP_OBJECT_cp_layer_renderer] with a fluent Go API.
+// _cp_layer_renderer is an idiomatic wrapper over the Objective-C class CP_OBJECT_cp_layer_renderer.
 type _cp_layer_renderer struct {
-	inner *raw.CP_OBJECT_cp_layer_renderer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CP_OBJECT_cp_layer_renderer].
-func (x *_cp_layer_renderer) Unwrap() *raw.CP_OBJECT_cp_layer_renderer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *_cp_layer_renderer) ID() objc.ID { return x.inner.Ptr() }
-
-// _cp_layer_rendererFromID adopts an existing object pointer as a _cp_layer_renderer (nil for 0).
+// _cp_layer_rendererFromID adopts an existing Objective-C object as a _cp_layer_renderer
+// (nil for 0), retaining it and registering a release finalizer.
 func _cp_layer_rendererFromID(id objc.ID) *_cp_layer_renderer {
 	if id == 0 {
 		return nil
 	}
-	return &_cp_layer_renderer{inner: raw.CP_OBJECT_cp_layer_rendererFromID(id)}
+	x := &_cp_layer_renderer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// New_cp_layer_renderer creates a new [_cp_layer_renderer].
+// _cp_layer_rendererAdopt wraps an Objective-C object that this code just created as a
+// _cp_layer_renderer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func _cp_layer_rendererAdopt(id objc.ID) *_cp_layer_renderer {
+	if id == 0 {
+		return nil
+	}
+	x := &_cp_layer_renderer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *_cp_layer_renderer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *_cp_layer_renderer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *_cp_layer_renderer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// New_cp_layer_renderer creates a new _cp_layer_renderer.
 func New_cp_layer_renderer() *_cp_layer_renderer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CP_OBJECT_cp_layer_renderer")), objc.RegisterName("new"))
-	return &_cp_layer_renderer{inner: raw.CP_OBJECT_cp_layer_rendererFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CP_OBJECT_cp_layer_renderer")), objc.RegisterName("new"))
+	return _cp_layer_rendererAdopt(_id)
 }
 
 // _cp_layer_rendererable is the interface implemented by [_cp_layer_renderer], for mocking and DI.
 type _cp_layer_rendererable interface {
-	Unwrap() *raw.CP_OBJECT_cp_layer_renderer
+	obj.Object
 }
 
 var _ _cp_layer_rendererable = (*_cp_layer_renderer)(nil)

@@ -5,48 +5,71 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that describes an unsent record zone deletion.
 //
-// SyncEnginePendingZoneDelete wraps [raw.CKSyncEnginePendingZoneDelete] with a fluent Go API.
+// SyncEnginePendingZoneDelete is an idiomatic wrapper over the Objective-C class CKSyncEnginePendingZoneDelete.
 type SyncEnginePendingZoneDelete struct {
-	inner *raw.CKSyncEnginePendingZoneDelete
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEnginePendingZoneDelete].
-func (x *SyncEnginePendingZoneDelete) Unwrap() *raw.CKSyncEnginePendingZoneDelete { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEnginePendingZoneDelete) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEnginePendingZoneDeleteFromID adopts an existing object pointer as a SyncEnginePendingZoneDelete (nil for 0).
+// SyncEnginePendingZoneDeleteFromID adopts an existing Objective-C object as a SyncEnginePendingZoneDelete
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEnginePendingZoneDeleteFromID(id objc.ID) *SyncEnginePendingZoneDelete {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEnginePendingZoneDelete{inner: raw.CKSyncEnginePendingZoneDeleteFromID(id)}
+	x := &SyncEnginePendingZoneDelete{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// syncEnginePendingZoneDeleteAdopt wraps an Objective-C object that this code just created as a
+// SyncEnginePendingZoneDelete (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEnginePendingZoneDeleteAdopt(id objc.ID) *SyncEnginePendingZoneDelete {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEnginePendingZoneDelete{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncEnginePendingZoneDelete) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEnginePendingZoneDelete) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEnginePendingZoneDelete) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a pending zone delete for the specified record zone identifier.
 //
-// NewSyncEnginePendingZoneDeleteWithZoneID creates a new [SyncEnginePendingZoneDelete].
-func NewSyncEnginePendingZoneDeleteWithZoneID(zoneID *raw.CKRecordZoneID) *SyncEnginePendingZoneDelete {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEnginePendingZoneDelete")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneID:"), zoneID.Ptr())
-	return &SyncEnginePendingZoneDelete{inner: raw.CKSyncEnginePendingZoneDeleteFromID(_id)}
-}
-
-func (x *SyncEnginePendingZoneDelete) asSyncEnginePendingDatabaseChange() *raw.CKSyncEnginePendingDatabaseChange {
-	return &x.inner.CKSyncEnginePendingDatabaseChange
+// NewSyncEnginePendingZoneDeleteWithZoneID creates a new SyncEnginePendingZoneDelete.
+func NewSyncEnginePendingZoneDeleteWithZoneID(zoneID *RecordZoneID) *SyncEnginePendingZoneDelete {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEnginePendingZoneDelete")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneID:"), objref.IDOf(zoneID))
+	return syncEnginePendingZoneDeleteAdopt(_id)
 }
 
 // SyncEnginePendingZoneDeleteable is the interface implemented by [SyncEnginePendingZoneDelete], for mocking and DI.
 type SyncEnginePendingZoneDeleteable interface {
-	Unwrap() *raw.CKSyncEnginePendingZoneDelete
+	obj.Object
 }
 
 var _ SyncEnginePendingZoneDeleteable = (*SyncEnginePendingZoneDelete)(nil)

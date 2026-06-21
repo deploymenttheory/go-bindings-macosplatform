@@ -5,58 +5,80 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class that represents a collection of Virtio console ports.
 //
-// VirtioConsolePortArray wraps [raw.VZVirtioConsolePortArray] with a fluent Go API.
+// VirtioConsolePortArray is an idiomatic wrapper over the Objective-C class VZVirtioConsolePortArray.
 type VirtioConsolePortArray struct {
-	inner *raw.VZVirtioConsolePortArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtioConsolePortArray].
-func (x *VirtioConsolePortArray) Unwrap() *raw.VZVirtioConsolePortArray { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioConsolePortArray) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioConsolePortArrayFromID adopts an existing object pointer as a VirtioConsolePortArray (nil for 0).
+// VirtioConsolePortArrayFromID adopts an existing Objective-C object as a VirtioConsolePortArray
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioConsolePortArrayFromID(id objc.ID) *VirtioConsolePortArray {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioConsolePortArray{inner: raw.VZVirtioConsolePortArrayFromID(id)}
+	x := &VirtioConsolePortArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVirtioConsolePortArray creates a new [VirtioConsolePortArray].
+// virtioConsolePortArrayAdopt wraps an Objective-C object that this code just created as a
+// VirtioConsolePortArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioConsolePortArrayAdopt(id objc.ID) *VirtioConsolePortArray {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioConsolePortArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtioConsolePortArray) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtioConsolePortArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtioConsolePortArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVirtioConsolePortArray creates a new VirtioConsolePortArray.
 func NewVirtioConsolePortArray() *VirtioConsolePortArray {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioConsolePortArray")), objc.RegisterName("new"))
-	return &VirtioConsolePortArray{inner: raw.VZVirtioConsolePortArrayFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioConsolePortArray")), objc.RegisterName("new"))
+	return virtioConsolePortArrayAdopt(_id)
 }
 
 // Returns the Virtio console port at the specified index.
-//
-// ObjectAtIndexedSubscript calls the underlying ObjectAtIndexedSubscript.
-func (x *VirtioConsolePortArray) ObjectAtIndexedSubscript(portIndex uint) *VirtioConsolePort {
-	_r := x.inner.ObjectAtIndexedSubscript(portIndex)
-	if _r == nil {
-		return nil
-	}
-	return &VirtioConsolePort{inner: _r}
+func (x *VirtioConsolePortArray) ObjectAtIndexedSubscript(portIndex int) *VirtioConsolePort {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectAtIndexedSubscript:"), portIndex)
+	return VirtioConsolePortFromID(_r)
 }
 
-// MaximumPortCount calls the underlying MaximumPortCount.
 func (x *VirtioConsolePortArray) MaximumPortCount() uint32 {
-	return x.inner.MaximumPortCount()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("maximumPortCount"))
+	return _r
 }
 
 // VirtioConsolePortArrayable is the interface implemented by [VirtioConsolePortArray], for mocking and DI.
 type VirtioConsolePortArrayable interface {
-	Unwrap() *raw.VZVirtioConsolePortArray
-	ObjectAtIndexedSubscript(portIndex uint) *VirtioConsolePort
+	obj.Object
+	ObjectAtIndexedSubscript(portIndex int) *VirtioConsolePort
 	MaximumPortCount() uint32
 }
 

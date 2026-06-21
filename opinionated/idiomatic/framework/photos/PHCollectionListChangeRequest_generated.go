@@ -5,127 +5,106 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A request to create, delete, or modify a Photos collection list, for use in a photo library change block.
 //
-// CollectionListChangeRequest wraps [raw.PHCollectionListChangeRequest] with a fluent Go API.
+// CollectionListChangeRequest is an idiomatic wrapper over the Objective-C class PHCollectionListChangeRequest.
 type CollectionListChangeRequest struct {
-	inner *raw.PHCollectionListChangeRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHCollectionListChangeRequest].
-func (x *CollectionListChangeRequest) Unwrap() *raw.PHCollectionListChangeRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionListChangeRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionListChangeRequestFromID adopts an existing object pointer as a CollectionListChangeRequest (nil for 0).
+// CollectionListChangeRequestFromID adopts an existing Objective-C object as a CollectionListChangeRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionListChangeRequestFromID(id objc.ID) *CollectionListChangeRequest {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionListChangeRequest{inner: raw.PHCollectionListChangeRequestFromID(id)}
+	x := &CollectionListChangeRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionListChangeRequest creates a new [CollectionListChangeRequest].
+// collectionListChangeRequestAdopt wraps an Objective-C object that this code just created as a
+// CollectionListChangeRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionListChangeRequestAdopt(id objc.ID) *CollectionListChangeRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionListChangeRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionListChangeRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionListChangeRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionListChangeRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCollectionListChangeRequest creates a new CollectionListChangeRequest.
 func NewCollectionListChangeRequest() *CollectionListChangeRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHCollectionListChangeRequest")), objc.RegisterName("new"))
-	return &CollectionListChangeRequest{inner: raw.PHCollectionListChangeRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHCollectionListChangeRequest")), objc.RegisterName("new"))
+	return collectionListChangeRequestAdopt(_id)
 }
 
 // The displayed name of the collection list.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *CollectionListChangeRequest) WithTitle(title string) *CollectionListChangeRequest {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// Adds the specified collections as children of the collection list.
-//
-// AddChildCollections calls the underlying AddChildCollections.
-func (x *CollectionListChangeRequest) AddChildCollections(collections foundation.NSFastEnumeration) {
-	x.inner.AddChildCollections(collections)
-}
-
-// Inserts the specified collections into the collection list at the specified indexes.
-//
-// InsertChildCollectionsAtIndexes calls the underlying InsertChildCollectionsAtIndexes.
-func (x *CollectionListChangeRequest) InsertChildCollectionsAtIndexes(collections foundation.NSFastEnumeration, indexes *foundation.NSIndexSet) {
-	x.inner.InsertChildCollectionsAtIndexes(collections, indexes)
-}
-
-// Removes the specified child collections from the collection list.
-//
-// RemoveChildCollections calls the underlying RemoveChildCollections.
-func (x *CollectionListChangeRequest) RemoveChildCollections(collections foundation.NSFastEnumeration) {
-	x.inner.RemoveChildCollections(collections)
-}
-
 // Removes the child collections at the specified indexes from the collection list.
-//
-// RemoveChildCollectionsAtIndexes calls the underlying RemoveChildCollectionsAtIndexes.
-func (x *CollectionListChangeRequest) RemoveChildCollectionsAtIndexes(indexes *foundation.NSIndexSet) {
-	x.inner.RemoveChildCollectionsAtIndexes(indexes)
-}
-
-// Replaces the child collections at the specified indexes in the collection list with the specified collections.
-//
-// ReplaceChildCollectionsAtIndexesWithChildCollections calls the underlying ReplaceChildCollectionsAtIndexesWithChildCollections.
-func (x *CollectionListChangeRequest) ReplaceChildCollectionsAtIndexesWithChildCollections(indexes *foundation.NSIndexSet, collections foundation.NSFastEnumeration) {
-	x.inner.ReplaceChildCollectionsAtIndexesWithChildCollections(indexes, collections)
+func (x *CollectionListChangeRequest) RemoveChildCollectionsAtIndexes(indexes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeChildCollectionsAtIndexes:"), objref.IDOf(indexes))
 }
 
 // Moves the child collections at the specified indexes in the collection list to a new index.
-//
-// MoveChildCollectionsAtIndexesToIndex calls the underlying MoveChildCollectionsAtIndexesToIndex.
-func (x *CollectionListChangeRequest) MoveChildCollectionsAtIndexesToIndex(indexes *foundation.NSIndexSet, toIndex uint) {
-	x.inner.MoveChildCollectionsAtIndexesToIndex(indexes, toIndex)
+func (x *CollectionListChangeRequest) MoveChildCollectionsAtIndexesToIndex(indexes obj.Object, toIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveChildCollectionsAtIndexes:toIndex:"), objref.IDOf(indexes), toIndex)
 }
 
-// PlaceholderForCreatedCollectionList calls the underlying PlaceholderForCreatedCollectionList.
 func (x *CollectionListChangeRequest) PlaceholderForCreatedCollectionList() *ObjectPlaceholder {
-	_r := x.inner.PlaceholderForCreatedCollectionList()
-	if _r == nil {
-		return nil
-	}
-	return &ObjectPlaceholder{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderForCreatedCollectionList"))
+	return ObjectPlaceholderFromID(_r)
 }
 
-// Title calls the underlying Title.
 func (x *CollectionListChangeRequest) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
 func (x *CollectionListChangeRequest) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
-}
-
-func (x *CollectionListChangeRequest) asChangeRequest() *raw.PHChangeRequest {
-	return &x.inner.PHChangeRequest
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // CollectionListChangeRequestable is the interface implemented by [CollectionListChangeRequest], for mocking and DI.
 type CollectionListChangeRequestable interface {
-	Unwrap() *raw.PHCollectionListChangeRequest
+	obj.Object
 	WithTitle(title string) *CollectionListChangeRequest
-	AddChildCollections(collections foundation.NSFastEnumeration)
-	InsertChildCollectionsAtIndexes(collections foundation.NSFastEnumeration, indexes *foundation.NSIndexSet)
-	RemoveChildCollections(collections foundation.NSFastEnumeration)
-	RemoveChildCollectionsAtIndexes(indexes *foundation.NSIndexSet)
-	ReplaceChildCollectionsAtIndexesWithChildCollections(indexes *foundation.NSIndexSet, collections foundation.NSFastEnumeration)
-	MoveChildCollectionsAtIndexesToIndex(indexes *foundation.NSIndexSet, toIndex uint)
+	RemoveChildCollectionsAtIndexes(indexes obj.Object)
+	MoveChildCollectionsAtIndexesToIndex(indexes obj.Object, toIndex int)
 	PlaceholderForCreatedCollectionList() *ObjectPlaceholder
 	Title() string
 	SetTitle(title string)

@@ -5,118 +5,133 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An immutable representation of the postal address for a contact.
 //
-// PostalAddress wraps [raw.CNPostalAddress] with a fluent Go API.
+// PostalAddress is an idiomatic wrapper over the Objective-C class CNPostalAddress.
 type PostalAddress struct {
-	inner *raw.CNPostalAddress
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNPostalAddress].
-func (x *PostalAddress) Unwrap() *raw.CNPostalAddress { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PostalAddress) ID() objc.ID { return x.inner.Ptr() }
-
-// PostalAddressFromID adopts an existing object pointer as a PostalAddress (nil for 0).
+// PostalAddressFromID adopts an existing Objective-C object as a PostalAddress
+// (nil for 0), retaining it and registering a release finalizer.
 func PostalAddressFromID(id objc.ID) *PostalAddress {
 	if id == 0 {
 		return nil
 	}
-	return &PostalAddress{inner: raw.CNPostalAddressFromID(id)}
+	x := &PostalAddress{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPostalAddress creates a new [PostalAddress].
+// postalAddressAdopt wraps an Objective-C object that this code just created as a
+// PostalAddress (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func postalAddressAdopt(id objc.ID) *PostalAddress {
+	if id == 0 {
+		return nil
+	}
+	x := &PostalAddress{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PostalAddress) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PostalAddress) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PostalAddress) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPostalAddress creates a new PostalAddress.
 func NewPostalAddress() *PostalAddress {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNPostalAddress")), objc.RegisterName("new"))
-	return &PostalAddress{inner: raw.CNPostalAddressFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CNPostalAddress")), objc.RegisterName("new"))
+	return postalAddressAdopt(_id)
 }
 
 // multi-street address is delimited with carriage returns “\n”
-//
-// Street calls the underlying Street.
 func (x *PostalAddress) Street() string {
-	_r := x.inner.Street()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("street"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SubLocality calls the underlying SubLocality.
 func (x *PostalAddress) SubLocality() string {
-	_r := x.inner.SubLocality()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subLocality"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// City calls the underlying City.
 func (x *PostalAddress) City() string {
-	_r := x.inner.City()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("city"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SubAdministrativeArea calls the underlying SubAdministrativeArea.
 func (x *PostalAddress) SubAdministrativeArea() string {
-	_r := x.inner.SubAdministrativeArea()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subAdministrativeArea"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// State calls the underlying State.
 func (x *PostalAddress) State() string {
-	_r := x.inner.State()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PostalCode calls the underlying PostalCode.
 func (x *PostalAddress) PostalCode() string {
-	_r := x.inner.PostalCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postalCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Country calls the underlying Country.
 func (x *PostalAddress) Country() string {
-	_r := x.inner.Country()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("country"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ISOCountryCode calls the underlying ISOCountryCode.
 func (x *PostalAddress) ISOCountryCode() string {
-	_r := x.inner.ISOCountryCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ISOCountryCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
-
-func (x *PostalAddress) asPostalAddress() *raw.CNPostalAddress { return x.inner }
 
 // PostalAddressable is the interface implemented by [PostalAddress], for mocking and DI.
 type PostalAddressable interface {
-	Unwrap() *raw.CNPostalAddress
+	obj.Object
 	Street() string
 	SubLocality() string
 	City() string

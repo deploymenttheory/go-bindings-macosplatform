@@ -5,403 +5,329 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A group of render targets that hold the results of a render pass.
 //
-// RenderPassDescriptor wraps [raw.MTLRenderPassDescriptor] with a fluent Go API.
+// RenderPassDescriptor is an idiomatic wrapper over the Objective-C class MTLRenderPassDescriptor.
 type RenderPassDescriptor struct {
-	inner *raw.MTLRenderPassDescriptor
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLRenderPassDescriptor].
-func (x *RenderPassDescriptor) Unwrap() *raw.MTLRenderPassDescriptor { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RenderPassDescriptor) ID() objc.ID { return x.inner.Ptr() }
-
-// RenderPassDescriptorFromID adopts an existing object pointer as a RenderPassDescriptor (nil for 0).
+// RenderPassDescriptorFromID adopts an existing Objective-C object as a RenderPassDescriptor
+// (nil for 0), retaining it and registering a release finalizer.
 func RenderPassDescriptorFromID(id objc.ID) *RenderPassDescriptor {
 	if id == 0 {
 		return nil
 	}
-	return &RenderPassDescriptor{inner: raw.MTLRenderPassDescriptorFromID(id)}
+	x := &RenderPassDescriptor{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRenderPassDescriptor creates a new [RenderPassDescriptor].
+// renderPassDescriptorAdopt wraps an Objective-C object that this code just created as a
+// RenderPassDescriptor (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func renderPassDescriptorAdopt(id objc.ID) *RenderPassDescriptor {
+	if id == 0 {
+		return nil
+	}
+	x := &RenderPassDescriptor{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RenderPassDescriptor) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RenderPassDescriptor) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RenderPassDescriptor) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRenderPassDescriptor creates a new RenderPassDescriptor.
 func NewRenderPassDescriptor() *RenderPassDescriptor {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLRenderPassDescriptor")), objc.RegisterName("new"))
-	return &RenderPassDescriptor{inner: raw.MTLRenderPassDescriptorFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLRenderPassDescriptor")), objc.RegisterName("new"))
+	return renderPassDescriptorAdopt(_id)
 }
 
 // State information for an attachment that stores depth data.
 //
-// WithDepthAttachment sets the depthAttachment property and returns the receiver for chaining.
+// WithDepthAttachment sets depthAttachment and returns the receiver so calls can be chained.
 func (x *RenderPassDescriptor) WithDepthAttachment(depthAttachment *RenderPassDepthAttachmentDescriptor) *RenderPassDescriptor {
-	x.inner.SetDepthAttachment(depthAttachment.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthAttachment:"), objref.IDOf(depthAttachment))
 	return x
 }
 
 // State information for an attachment that stores stencil data.
 //
-// WithStencilAttachment sets the stencilAttachment property and returns the receiver for chaining.
+// WithStencilAttachment sets stencilAttachment and returns the receiver so calls can be chained.
 func (x *RenderPassDescriptor) WithStencilAttachment(stencilAttachment *RenderPassStencilAttachmentDescriptor) *RenderPassDescriptor {
-	x.inner.SetStencilAttachment(stencilAttachment.Unwrap())
-	return x
-}
-
-// A buffer where the GPU writes visibility test results when fragments pass depth and stencil tests.
-//
-// WithVisibilityResultBuffer sets the visibilityResultBuffer property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithVisibilityResultBuffer(visibilityResultBuffer raw.MTLBuffer) *RenderPassDescriptor {
-	x.inner.SetVisibilityResultBuffer(visibilityResultBuffer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStencilAttachment:"), objref.IDOf(stencilAttachment))
 	return x
 }
 
 // The number of active layers that all attachments need to have for layered rendering.
 //
-// WithRenderTargetArrayLength sets the renderTargetArrayLength property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithRenderTargetArrayLength(renderTargetArrayLength uint) *RenderPassDescriptor {
-	x.inner.SetRenderTargetArrayLength(renderTargetArrayLength)
+// WithRenderTargetArrayLength sets renderTargetArrayLength and returns the receiver so calls can be chained.
+func (x *RenderPassDescriptor) WithRenderTargetArrayLength(renderTargetArrayLength int) *RenderPassDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderTargetArrayLength:"), renderTargetArrayLength)
 	return x
 }
 
 // The per-sample size, in bytes, of the largest explicit imageblock layout in the render pass.
 //
-// WithImageblockSampleLength sets the imageblockSampleLength property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithImageblockSampleLength(imageblockSampleLength uint) *RenderPassDescriptor {
-	x.inner.SetImageblockSampleLength(imageblockSampleLength)
+// WithImageblockSampleLength sets imageblockSampleLength and returns the receiver so calls can be chained.
+func (x *RenderPassDescriptor) WithImageblockSampleLength(imageblockSampleLength int) *RenderPassDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageblockSampleLength:"), imageblockSampleLength)
 	return x
 }
 
 // The per-tile size, in bytes, of the persistent threadgroup memory allocation.
 //
-// WithThreadgroupMemoryLength sets the threadgroupMemoryLength property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithThreadgroupMemoryLength(threadgroupMemoryLength uint) *RenderPassDescriptor {
-	x.inner.SetThreadgroupMemoryLength(threadgroupMemoryLength)
+// WithThreadgroupMemoryLength sets threadgroupMemoryLength and returns the receiver so calls can be chained.
+func (x *RenderPassDescriptor) WithThreadgroupMemoryLength(threadgroupMemoryLength int) *RenderPassDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadgroupMemoryLength:"), threadgroupMemoryLength)
 	return x
 }
 
 // The tile width, in pixels.
 //
-// WithTileWidth sets the tileWidth property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithTileWidth(tileWidth uint) *RenderPassDescriptor {
-	x.inner.SetTileWidth(tileWidth)
+// WithTileWidth sets tileWidth and returns the receiver so calls can be chained.
+func (x *RenderPassDescriptor) WithTileWidth(tileWidth int) *RenderPassDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileWidth:"), tileWidth)
 	return x
 }
 
 // The tile height, in pixels.
 //
-// WithTileHeight sets the tileHeight property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithTileHeight(tileHeight uint) *RenderPassDescriptor {
-	x.inner.SetTileHeight(tileHeight)
+// WithTileHeight sets tileHeight and returns the receiver so calls can be chained.
+func (x *RenderPassDescriptor) WithTileHeight(tileHeight int) *RenderPassDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileHeight:"), tileHeight)
 	return x
 }
 
 // The raster sample count for the render pass when the render pass doesn’t have explicit attachments.
 //
-// WithDefaultRasterSampleCount sets the defaultRasterSampleCount property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithDefaultRasterSampleCount(defaultRasterSampleCount uint) *RenderPassDescriptor {
-	x.inner.SetDefaultRasterSampleCount(defaultRasterSampleCount)
+// WithDefaultRasterSampleCount sets defaultRasterSampleCount and returns the receiver so calls can be chained.
+func (x *RenderPassDescriptor) WithDefaultRasterSampleCount(defaultRasterSampleCount int) *RenderPassDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultRasterSampleCount:"), defaultRasterSampleCount)
 	return x
 }
 
 // The width, in pixels, to constrain the render target to.
 //
-// WithRenderTargetWidth sets the renderTargetWidth property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithRenderTargetWidth(renderTargetWidth uint) *RenderPassDescriptor {
-	x.inner.SetRenderTargetWidth(renderTargetWidth)
+// WithRenderTargetWidth sets renderTargetWidth and returns the receiver so calls can be chained.
+func (x *RenderPassDescriptor) WithRenderTargetWidth(renderTargetWidth int) *RenderPassDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderTargetWidth:"), renderTargetWidth)
 	return x
 }
 
 // The height, in pixels, to constrain the render target to.
 //
-// WithRenderTargetHeight sets the renderTargetHeight property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithRenderTargetHeight(renderTargetHeight uint) *RenderPassDescriptor {
-	x.inner.SetRenderTargetHeight(renderTargetHeight)
-	return x
-}
-
-// The rasterization rate map to use when executing the render pass.
-//
-// WithRasterizationRateMap sets the rasterizationRateMap property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithRasterizationRateMap(rasterizationRateMap raw.MTLRasterizationRateMap) *RenderPassDescriptor {
-	x.inner.SetRasterizationRateMap(rasterizationRateMap)
+// WithRenderTargetHeight sets renderTargetHeight and returns the receiver so calls can be chained.
+func (x *RenderPassDescriptor) WithRenderTargetHeight(renderTargetHeight int) *RenderPassDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderTargetHeight:"), renderTargetHeight)
 	return x
 }
 
 // Specifies if Metal accumulates visibility results between render encoders or resets them.
 //
-// WithVisibilityResultType sets the visibilityResultType property and returns the receiver for chaining.
-func (x *RenderPassDescriptor) WithVisibilityResultType(visibilityResultType MTLVisibilityResultType) *RenderPassDescriptor {
-	x.inner.SetVisibilityResultType(raw.MTLVisibilityResultType(visibilityResultType))
+// WithVisibilityResultType sets visibilityResultType and returns the receiver so calls can be chained.
+func (x *RenderPassDescriptor) WithVisibilityResultType(visibilityResultType VisibilityResultType) *RenderPassDescriptor {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityResultType:"), visibilityResultType)
 	return x
 }
 
 // Specifies if the render pass should support color attachment mapping.
 //
-// WithSupportColorAttachmentMapping sets the supportColorAttachmentMapping property and returns the receiver for chaining.
+// WithSupportColorAttachmentMapping sets supportColorAttachmentMapping and returns the receiver so calls can be chained.
 func (x *RenderPassDescriptor) WithSupportColorAttachmentMapping(supportColorAttachmentMapping bool) *RenderPassDescriptor {
-	x.inner.SetSupportColorAttachmentMapping(supportColorAttachmentMapping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportColorAttachmentMapping:"), supportColorAttachmentMapping)
 	return x
 }
 
-// Sets the programmable sample positions for a render pass.
-//
-// SetSamplePositionsCount calls the underlying SetSamplePositionsCount.
-func (x *RenderPassDescriptor) SetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) {
-	x.inner.SetSamplePositionsCount(positions, count)
-}
-
-// Retrieves the programmable sample positions set for a render pass.
-//
-// GetSamplePositionsCount calls the underlying GetSamplePositionsCount.
-func (x *RenderPassDescriptor) GetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) uint {
-	return x.inner.GetSamplePositionsCount(positions, count)
-}
-
-// ColorAttachments calls the underlying ColorAttachments.
 func (x *RenderPassDescriptor) ColorAttachments() *RenderPassColorAttachmentDescriptorArray {
-	_r := x.inner.ColorAttachments()
-	if _r == nil {
-		return nil
-	}
-	return &RenderPassColorAttachmentDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("colorAttachments"))
+	return RenderPassColorAttachmentDescriptorArrayFromID(_r)
 }
 
-// DepthAttachment calls the underlying DepthAttachment.
 func (x *RenderPassDescriptor) DepthAttachment() *RenderPassDepthAttachmentDescriptor {
-	_r := x.inner.DepthAttachment()
-	if _r == nil {
-		return nil
-	}
-	return &RenderPassDepthAttachmentDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("depthAttachment"))
+	return RenderPassDepthAttachmentDescriptorFromID(_r)
 }
 
-// SetDepthAttachment calls the underlying SetDepthAttachment.
-func (x *RenderPassDescriptor) SetDepthAttachment(depthAttachment *raw.MTLRenderPassDepthAttachmentDescriptor) {
-	x.inner.SetDepthAttachment(depthAttachment)
+func (x *RenderPassDescriptor) SetDepthAttachment(depthAttachment *RenderPassDepthAttachmentDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDepthAttachment:"), objref.IDOf(depthAttachment))
 }
 
-// StencilAttachment calls the underlying StencilAttachment.
 func (x *RenderPassDescriptor) StencilAttachment() *RenderPassStencilAttachmentDescriptor {
-	_r := x.inner.StencilAttachment()
-	if _r == nil {
-		return nil
-	}
-	return &RenderPassStencilAttachmentDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stencilAttachment"))
+	return RenderPassStencilAttachmentDescriptorFromID(_r)
 }
 
-// SetStencilAttachment calls the underlying SetStencilAttachment.
-func (x *RenderPassDescriptor) SetStencilAttachment(stencilAttachment *raw.MTLRenderPassStencilAttachmentDescriptor) {
-	x.inner.SetStencilAttachment(stencilAttachment)
+func (x *RenderPassDescriptor) SetStencilAttachment(stencilAttachment *RenderPassStencilAttachmentDescriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStencilAttachment:"), objref.IDOf(stencilAttachment))
 }
 
-// @property visibilityResultBuffer: @abstract Buffer into which samples passing the depth and stencil tests are counted.
-//
-// VisibilityResultBuffer calls the underlying VisibilityResultBuffer.
-func (x *RenderPassDescriptor) VisibilityResultBuffer() raw.MTLBuffer {
-	return x.inner.VisibilityResultBuffer()
+// The number of active layers
+func (x *RenderPassDescriptor) RenderTargetArrayLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("renderTargetArrayLength"))
+	return _r
 }
 
-// SetVisibilityResultBuffer calls the underlying SetVisibilityResultBuffer.
-func (x *RenderPassDescriptor) SetVisibilityResultBuffer(visibilityResultBuffer raw.MTLBuffer) {
-	x.inner.SetVisibilityResultBuffer(visibilityResultBuffer)
+func (x *RenderPassDescriptor) SetRenderTargetArrayLength(renderTargetArrayLength int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderTargetArrayLength:"), renderTargetArrayLength)
 }
 
-// @property renderTargetArrayLength: @abstract The number of active layers
-//
-// RenderTargetArrayLength calls the underlying RenderTargetArrayLength.
-func (x *RenderPassDescriptor) RenderTargetArrayLength() uint {
-	return x.inner.RenderTargetArrayLength()
+// The per sample size in bytes of the largest explicit imageblock layout in the renderPass.
+func (x *RenderPassDescriptor) ImageblockSampleLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("imageblockSampleLength"))
+	return _r
 }
 
-// SetRenderTargetArrayLength calls the underlying SetRenderTargetArrayLength.
-func (x *RenderPassDescriptor) SetRenderTargetArrayLength(renderTargetArrayLength uint) {
-	x.inner.SetRenderTargetArrayLength(renderTargetArrayLength)
+func (x *RenderPassDescriptor) SetImageblockSampleLength(imageblockSampleLength int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImageblockSampleLength:"), imageblockSampleLength)
 }
 
-// @property imageblockSampleLength: @abstract The per sample size in bytes of the largest explicit imageblock layout in the renderPass.
-//
-// ImageblockSampleLength calls the underlying ImageblockSampleLength.
-func (x *RenderPassDescriptor) ImageblockSampleLength() uint {
-	return x.inner.ImageblockSampleLength()
+// The per tile size in bytes of the persistent threadgroup memory allocation.
+func (x *RenderPassDescriptor) ThreadgroupMemoryLength() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("threadgroupMemoryLength"))
+	return _r
 }
 
-// SetImageblockSampleLength calls the underlying SetImageblockSampleLength.
-func (x *RenderPassDescriptor) SetImageblockSampleLength(imageblockSampleLength uint) {
-	x.inner.SetImageblockSampleLength(imageblockSampleLength)
+func (x *RenderPassDescriptor) SetThreadgroupMemoryLength(threadgroupMemoryLength int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreadgroupMemoryLength:"), threadgroupMemoryLength)
 }
 
-// @property threadgroupMemoryLength: @abstract The per tile size in bytes of the persistent threadgroup memory allocation.
-//
-// ThreadgroupMemoryLength calls the underlying ThreadgroupMemoryLength.
-func (x *RenderPassDescriptor) ThreadgroupMemoryLength() uint {
-	return x.inner.ThreadgroupMemoryLength()
+// The width in pixels of the tile. Defaults to 0. Zero means Metal chooses a width that fits within the local memory.
+func (x *RenderPassDescriptor) TileWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tileWidth"))
+	return _r
 }
 
-// SetThreadgroupMemoryLength calls the underlying SetThreadgroupMemoryLength.
-func (x *RenderPassDescriptor) SetThreadgroupMemoryLength(threadgroupMemoryLength uint) {
-	x.inner.SetThreadgroupMemoryLength(threadgroupMemoryLength)
+func (x *RenderPassDescriptor) SetTileWidth(tileWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileWidth:"), tileWidth)
 }
 
-// @property tileWidth: @abstract The width in pixels of the tile. @discussion Defaults to 0. Zero means Metal chooses a width that fits within the local memory.
-//
-// TileWidth calls the underlying TileWidth.
-func (x *RenderPassDescriptor) TileWidth() uint {
-	return x.inner.TileWidth()
+// The height in pixels of the tile. Defaults to 0. Zero means Metal chooses a height that fits within the local memory.
+func (x *RenderPassDescriptor) TileHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("tileHeight"))
+	return _r
 }
 
-// SetTileWidth calls the underlying SetTileWidth.
-func (x *RenderPassDescriptor) SetTileWidth(tileWidth uint) {
-	x.inner.SetTileWidth(tileWidth)
+func (x *RenderPassDescriptor) SetTileHeight(tileHeight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTileHeight:"), tileHeight)
 }
 
-// @property tileHeight: @abstract The height in pixels of the tile. @discussion Defaults to 0. Zero means Metal chooses a height that fits within the local memory.
-//
-// TileHeight calls the underlying TileHeight.
-func (x *RenderPassDescriptor) TileHeight() uint {
-	return x.inner.TileHeight()
+// The raster sample count for the render pass when no attachments are given.
+func (x *RenderPassDescriptor) DefaultRasterSampleCount() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("defaultRasterSampleCount"))
+	return _r
 }
 
-// SetTileHeight calls the underlying SetTileHeight.
-func (x *RenderPassDescriptor) SetTileHeight(tileHeight uint) {
-	x.inner.SetTileHeight(tileHeight)
+func (x *RenderPassDescriptor) SetDefaultRasterSampleCount(defaultRasterSampleCount int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultRasterSampleCount:"), defaultRasterSampleCount)
 }
 
-// @property defaultRasterSampleCount: @abstract The raster sample count for the render pass when no attachments are given.
-//
-// DefaultRasterSampleCount calls the underlying DefaultRasterSampleCount.
-func (x *RenderPassDescriptor) DefaultRasterSampleCount() uint {
-	return x.inner.DefaultRasterSampleCount()
+// The width in pixels to constrain the render target to. Defaults to 0. If non-zero the value must be smaller than or equal to the minimum width of all attachments.
+func (x *RenderPassDescriptor) RenderTargetWidth() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("renderTargetWidth"))
+	return _r
 }
 
-// SetDefaultRasterSampleCount calls the underlying SetDefaultRasterSampleCount.
-func (x *RenderPassDescriptor) SetDefaultRasterSampleCount(defaultRasterSampleCount uint) {
-	x.inner.SetDefaultRasterSampleCount(defaultRasterSampleCount)
+func (x *RenderPassDescriptor) SetRenderTargetWidth(renderTargetWidth int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderTargetWidth:"), renderTargetWidth)
 }
 
-// @property renderTargetWidth: @abstract The width in pixels to constrain the render target to. @discussion Defaults to 0. If non-zero the value must be smaller than or equal to the minimum width of all attachments.
-//
-// RenderTargetWidth calls the underlying RenderTargetWidth.
-func (x *RenderPassDescriptor) RenderTargetWidth() uint {
-	return x.inner.RenderTargetWidth()
+// The height in pixels to constrain the render target to. Defaults to 0. If non-zero the value must be smaller than or equal to the minimum height of all attachments.
+func (x *RenderPassDescriptor) RenderTargetHeight() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("renderTargetHeight"))
+	return _r
 }
 
-// SetRenderTargetWidth calls the underlying SetRenderTargetWidth.
-func (x *RenderPassDescriptor) SetRenderTargetWidth(renderTargetWidth uint) {
-	x.inner.SetRenderTargetWidth(renderTargetWidth)
+func (x *RenderPassDescriptor) SetRenderTargetHeight(renderTargetHeight int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRenderTargetHeight:"), renderTargetHeight)
 }
 
-// @property renderTargetHeight: @abstract The height in pixels to constrain the render target to. @discussion Defaults to 0. If non-zero the value must be smaller than or equal to the minimum height of all attachments.
-//
-// RenderTargetHeight calls the underlying RenderTargetHeight.
-func (x *RenderPassDescriptor) RenderTargetHeight() uint {
-	return x.inner.RenderTargetHeight()
-}
-
-// SetRenderTargetHeight calls the underlying SetRenderTargetHeight.
-func (x *RenderPassDescriptor) SetRenderTargetHeight(renderTargetHeight uint) {
-	x.inner.SetRenderTargetHeight(renderTargetHeight)
-}
-
-// @property rasterizationRateMap @abstract The variable rasterization rate map to use when rendering this pass, or nil to not use variable rasterization rate. @discussion The default value is nil. Enabling variable rasterization rate allows for decreasing the rasterization rate in unimportant regions of screen space.
-//
-// RasterizationRateMap calls the underlying RasterizationRateMap.
-func (x *RenderPassDescriptor) RasterizationRateMap() raw.MTLRasterizationRateMap {
-	return x.inner.RasterizationRateMap()
-}
-
-// SetRasterizationRateMap calls the underlying SetRasterizationRateMap.
-func (x *RenderPassDescriptor) SetRasterizationRateMap(rasterizationRateMap raw.MTLRasterizationRateMap) {
-	x.inner.SetRasterizationRateMap(rasterizationRateMap)
-}
-
-// @property sampleBufferAttachments @abstract An array of sample buffers and associated sample indices.
-//
-// SampleBufferAttachments calls the underlying SampleBufferAttachments.
+// An array of sample buffers and associated sample indices.
 func (x *RenderPassDescriptor) SampleBufferAttachments() *RenderPassSampleBufferAttachmentDescriptorArray {
-	_r := x.inner.SampleBufferAttachments()
-	if _r == nil {
-		return nil
-	}
-	return &RenderPassSampleBufferAttachmentDescriptorArray{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sampleBufferAttachments"))
+	return RenderPassSampleBufferAttachmentDescriptorArrayFromID(_r)
 }
 
 // Specifies if Metal accumulates visibility results between render encoders or resets them.
-//
-// VisibilityResultType calls the underlying VisibilityResultType.
-func (x *RenderPassDescriptor) VisibilityResultType() MTLVisibilityResultType {
-	return MTLVisibilityResultType(x.inner.VisibilityResultType())
+func (x *RenderPassDescriptor) VisibilityResultType() VisibilityResultType {
+	_r := objc.Send[VisibilityResultType](objref.IDOf(x), objc.RegisterName("visibilityResultType"))
+	return _r
 }
 
-// SetVisibilityResultType calls the underlying SetVisibilityResultType.
-func (x *RenderPassDescriptor) SetVisibilityResultType(visibilityResultType MTLVisibilityResultType) {
-	x.inner.SetVisibilityResultType(raw.MTLVisibilityResultType(visibilityResultType))
+func (x *RenderPassDescriptor) SetVisibilityResultType(visibilityResultType VisibilityResultType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityResultType:"), visibilityResultType)
 }
 
 // Specifies if the render pass should support color attachment mapping.
-//
-// SupportColorAttachmentMapping calls the underlying SupportColorAttachmentMapping.
 func (x *RenderPassDescriptor) SupportColorAttachmentMapping() bool {
-	return x.inner.SupportColorAttachmentMapping()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportColorAttachmentMapping"))
+	return _r
 }
 
-// SetSupportColorAttachmentMapping calls the underlying SetSupportColorAttachmentMapping.
 func (x *RenderPassDescriptor) SetSupportColorAttachmentMapping(supportColorAttachmentMapping bool) {
-	x.inner.SetSupportColorAttachmentMapping(supportColorAttachmentMapping)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSupportColorAttachmentMapping:"), supportColorAttachmentMapping)
 }
 
 // RenderPassDescriptorable is the interface implemented by [RenderPassDescriptor], for mocking and DI.
 type RenderPassDescriptorable interface {
-	Unwrap() *raw.MTLRenderPassDescriptor
+	obj.Object
 	WithDepthAttachment(depthAttachment *RenderPassDepthAttachmentDescriptor) *RenderPassDescriptor
 	WithStencilAttachment(stencilAttachment *RenderPassStencilAttachmentDescriptor) *RenderPassDescriptor
-	WithVisibilityResultBuffer(visibilityResultBuffer raw.MTLBuffer) *RenderPassDescriptor
-	WithRenderTargetArrayLength(renderTargetArrayLength uint) *RenderPassDescriptor
-	WithImageblockSampleLength(imageblockSampleLength uint) *RenderPassDescriptor
-	WithThreadgroupMemoryLength(threadgroupMemoryLength uint) *RenderPassDescriptor
-	WithTileWidth(tileWidth uint) *RenderPassDescriptor
-	WithTileHeight(tileHeight uint) *RenderPassDescriptor
-	WithDefaultRasterSampleCount(defaultRasterSampleCount uint) *RenderPassDescriptor
-	WithRenderTargetWidth(renderTargetWidth uint) *RenderPassDescriptor
-	WithRenderTargetHeight(renderTargetHeight uint) *RenderPassDescriptor
-	WithRasterizationRateMap(rasterizationRateMap raw.MTLRasterizationRateMap) *RenderPassDescriptor
-	WithVisibilityResultType(visibilityResultType MTLVisibilityResultType) *RenderPassDescriptor
+	WithRenderTargetArrayLength(renderTargetArrayLength int) *RenderPassDescriptor
+	WithImageblockSampleLength(imageblockSampleLength int) *RenderPassDescriptor
+	WithThreadgroupMemoryLength(threadgroupMemoryLength int) *RenderPassDescriptor
+	WithTileWidth(tileWidth int) *RenderPassDescriptor
+	WithTileHeight(tileHeight int) *RenderPassDescriptor
+	WithDefaultRasterSampleCount(defaultRasterSampleCount int) *RenderPassDescriptor
+	WithRenderTargetWidth(renderTargetWidth int) *RenderPassDescriptor
+	WithRenderTargetHeight(renderTargetHeight int) *RenderPassDescriptor
+	WithVisibilityResultType(visibilityResultType VisibilityResultType) *RenderPassDescriptor
 	WithSupportColorAttachmentMapping(supportColorAttachmentMapping bool) *RenderPassDescriptor
-	SetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint)
-	GetSamplePositionsCount(positions *raw.MTLSamplePosition, count uint) uint
 	ColorAttachments() *RenderPassColorAttachmentDescriptorArray
 	DepthAttachment() *RenderPassDepthAttachmentDescriptor
-	SetDepthAttachment(depthAttachment *raw.MTLRenderPassDepthAttachmentDescriptor)
+	SetDepthAttachment(depthAttachment *RenderPassDepthAttachmentDescriptor)
 	StencilAttachment() *RenderPassStencilAttachmentDescriptor
-	SetStencilAttachment(stencilAttachment *raw.MTLRenderPassStencilAttachmentDescriptor)
-	VisibilityResultBuffer() raw.MTLBuffer
-	SetVisibilityResultBuffer(visibilityResultBuffer raw.MTLBuffer)
-	RenderTargetArrayLength() uint
-	SetRenderTargetArrayLength(renderTargetArrayLength uint)
-	ImageblockSampleLength() uint
-	SetImageblockSampleLength(imageblockSampleLength uint)
-	ThreadgroupMemoryLength() uint
-	SetThreadgroupMemoryLength(threadgroupMemoryLength uint)
-	TileWidth() uint
-	SetTileWidth(tileWidth uint)
-	TileHeight() uint
-	SetTileHeight(tileHeight uint)
-	DefaultRasterSampleCount() uint
-	SetDefaultRasterSampleCount(defaultRasterSampleCount uint)
-	RenderTargetWidth() uint
-	SetRenderTargetWidth(renderTargetWidth uint)
-	RenderTargetHeight() uint
-	SetRenderTargetHeight(renderTargetHeight uint)
-	RasterizationRateMap() raw.MTLRasterizationRateMap
-	SetRasterizationRateMap(rasterizationRateMap raw.MTLRasterizationRateMap)
+	SetStencilAttachment(stencilAttachment *RenderPassStencilAttachmentDescriptor)
+	RenderTargetArrayLength() int
+	SetRenderTargetArrayLength(renderTargetArrayLength int)
+	ImageblockSampleLength() int
+	SetImageblockSampleLength(imageblockSampleLength int)
+	ThreadgroupMemoryLength() int
+	SetThreadgroupMemoryLength(threadgroupMemoryLength int)
+	TileWidth() int
+	SetTileWidth(tileWidth int)
+	TileHeight() int
+	SetTileHeight(tileHeight int)
+	DefaultRasterSampleCount() int
+	SetDefaultRasterSampleCount(defaultRasterSampleCount int)
+	RenderTargetWidth() int
+	SetRenderTargetWidth(renderTargetWidth int)
+	RenderTargetHeight() int
+	SetRenderTargetHeight(renderTargetHeight int)
 	SampleBufferAttachments() *RenderPassSampleBufferAttachmentDescriptorArray
-	VisibilityResultType() MTLVisibilityResultType
-	SetVisibilityResultType(visibilityResultType MTLVisibilityResultType)
+	VisibilityResultType() VisibilityResultType
+	SetVisibilityResultType(visibilityResultType VisibilityResultType)
 	SupportColorAttachmentMapping() bool
 	SetSupportColorAttachmentMapping(supportColorAttachmentMapping bool)
 }

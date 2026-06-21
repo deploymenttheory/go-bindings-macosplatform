@@ -5,60 +5,86 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A description of a single change to make to an item in a collection view.
 //
-// CollectionViewUpdateItem wraps [raw.NSCollectionViewUpdateItem] with a fluent Go API.
+// CollectionViewUpdateItem is an idiomatic wrapper over the Objective-C class NSCollectionViewUpdateItem.
 type CollectionViewUpdateItem struct {
-	inner *raw.NSCollectionViewUpdateItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionViewUpdateItem].
-func (x *CollectionViewUpdateItem) Unwrap() *raw.NSCollectionViewUpdateItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionViewUpdateItem) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionViewUpdateItemFromID adopts an existing object pointer as a CollectionViewUpdateItem (nil for 0).
+// CollectionViewUpdateItemFromID adopts an existing Objective-C object as a CollectionViewUpdateItem
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionViewUpdateItemFromID(id objc.ID) *CollectionViewUpdateItem {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionViewUpdateItem{inner: raw.NSCollectionViewUpdateItemFromID(id)}
+	x := &CollectionViewUpdateItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCollectionViewUpdateItem creates a new [CollectionViewUpdateItem].
+// collectionViewUpdateItemAdopt wraps an Objective-C object that this code just created as a
+// CollectionViewUpdateItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionViewUpdateItemAdopt(id objc.ID) *CollectionViewUpdateItem {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionViewUpdateItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionViewUpdateItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionViewUpdateItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionViewUpdateItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCollectionViewUpdateItem creates a new CollectionViewUpdateItem.
 func NewCollectionViewUpdateItem() *CollectionViewUpdateItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionViewUpdateItem")), objc.RegisterName("new"))
-	return &CollectionViewUpdateItem{inner: raw.NSCollectionViewUpdateItemFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionViewUpdateItem")), objc.RegisterName("new"))
+	return collectionViewUpdateItemAdopt(_id)
 }
 
-// IndexPathBeforeUpdate calls the underlying IndexPathBeforeUpdate.
-func (x *CollectionViewUpdateItem) IndexPathBeforeUpdate() *foundation.NSIndexPath {
-	return x.inner.IndexPathBeforeUpdate()
+func (x *CollectionViewUpdateItem) IndexPathBeforeUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathBeforeUpdate"))
+	return obj.Wrap(_r)
 }
 
-// IndexPathAfterUpdate calls the underlying IndexPathAfterUpdate.
-func (x *CollectionViewUpdateItem) IndexPathAfterUpdate() *foundation.NSIndexPath {
-	return x.inner.IndexPathAfterUpdate()
+func (x *CollectionViewUpdateItem) IndexPathAfterUpdate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("indexPathAfterUpdate"))
+	return obj.Wrap(_r)
 }
 
-// UpdateAction calls the underlying UpdateAction.
-func (x *CollectionViewUpdateItem) UpdateAction() NSCollectionUpdateAction {
-	return NSCollectionUpdateAction(x.inner.UpdateAction())
+func (x *CollectionViewUpdateItem) UpdateAction() CollectionUpdateAction {
+	_r := objc.Send[CollectionUpdateAction](objref.IDOf(x), objc.RegisterName("updateAction"))
+	return _r
 }
 
 // CollectionViewUpdateItemable is the interface implemented by [CollectionViewUpdateItem], for mocking and DI.
 type CollectionViewUpdateItemable interface {
-	Unwrap() *raw.NSCollectionViewUpdateItem
-	IndexPathBeforeUpdate() *foundation.NSIndexPath
-	IndexPathAfterUpdate() *foundation.NSIndexPath
-	UpdateAction() NSCollectionUpdateAction
+	obj.Object
+	IndexPathBeforeUpdate() obj.Object
+	IndexPathAfterUpdate() obj.Object
+	UpdateAction() CollectionUpdateAction
 }
 
 var _ CollectionViewUpdateItemable = (*CollectionViewUpdateItem)(nil)

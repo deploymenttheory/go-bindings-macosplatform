@@ -9,26 +9,26 @@ import (
 )
 
 // Constants that indicate the preference pane’s availability to be deselected.
-type NSPreferencePaneUnselectReply uint64
+type PreferencePaneUnselectReply uint64
 
 const (
 	// Cancel the deselection.
-	NSUnselectCancel NSPreferencePaneUnselectReply = 0
+	UnselectCancel PreferencePaneUnselectReply = 0
 	// Continue the deselection.
-	NSUnselectNow NSPreferencePaneUnselectReply = 1
+	UnselectNow PreferencePaneUnselectReply = 1
 	// Delay the deselection until the preference pane invokes replyToShouldUnselect:.
-	NSUnselectLater NSPreferencePaneUnselectReply = 2
+	UnselectLater PreferencePaneUnselectReply = 2
 )
 
-func (e NSPreferencePaneUnselectReply) String() string {
+func (e PreferencePaneUnselectReply) String() string {
 	switch e {
-	case NSUnselectCancel:
-		return "NSUnselectCancel"
-	case NSUnselectNow:
-		return "NSUnselectNow"
-	case NSUnselectLater:
-		return "NSUnselectLater"
+	case UnselectCancel:
+		return "UnselectCancel"
+	case UnselectNow:
+		return "UnselectNow"
+	case UnselectLater:
+		return "UnselectLater"
 	default:
-		return fmt.Sprintf("NSPreferencePaneUnselectReply(%d)", int64(e))
+		return fmt.Sprintf("PreferencePaneUnselectReply(%d)", int64(e))
 	}
 }

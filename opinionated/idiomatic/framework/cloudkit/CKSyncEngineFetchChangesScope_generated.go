@@ -5,78 +5,101 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A scope in which the sync engine will fetch changes from the server.
 //
-// SyncEngineFetchChangesScope wraps [raw.CKSyncEngineFetchChangesScope] with a fluent Go API.
+// SyncEngineFetchChangesScope is an idiomatic wrapper over the Objective-C class CKSyncEngineFetchChangesScope.
 type SyncEngineFetchChangesScope struct {
-	inner *raw.CKSyncEngineFetchChangesScope
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineFetchChangesScope].
-func (x *SyncEngineFetchChangesScope) Unwrap() *raw.CKSyncEngineFetchChangesScope { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineFetchChangesScope) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineFetchChangesScopeFromID adopts an existing object pointer as a SyncEngineFetchChangesScope (nil for 0).
+// SyncEngineFetchChangesScopeFromID adopts an existing Objective-C object as a SyncEngineFetchChangesScope
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineFetchChangesScopeFromID(id objc.ID) *SyncEngineFetchChangesScope {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineFetchChangesScope{inner: raw.CKSyncEngineFetchChangesScopeFromID(id)}
+	x := &SyncEngineFetchChangesScope{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// syncEngineFetchChangesScopeAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineFetchChangesScope (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineFetchChangesScopeAdopt(id objc.ID) *SyncEngineFetchChangesScope {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEngineFetchChangesScope{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncEngineFetchChangesScope) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineFetchChangesScope) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineFetchChangesScope) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a scope that includes only the specified set of zones.
 //
-// NewSyncEngineFetchChangesScopeWithZoneIDs creates a new [SyncEngineFetchChangesScope].
-func NewSyncEngineFetchChangesScopeWithZoneIDs(zoneIDs *foundation.NSSet[*raw.CKRecordZoneID]) *SyncEngineFetchChangesScope {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFetchChangesScope")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneIDs:"), zoneIDs.Ptr())
-	return &SyncEngineFetchChangesScope{inner: raw.CKSyncEngineFetchChangesScopeFromID(_id)}
+// NewSyncEngineFetchChangesScopeWithZoneIDs creates a new SyncEngineFetchChangesScope.
+func NewSyncEngineFetchChangesScopeWithZoneIDs(zoneIDs obj.Object) *SyncEngineFetchChangesScope {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchChangesScope")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithZoneIDs:"), objref.IDOf(zoneIDs))
+	return syncEngineFetchChangesScopeAdopt(_id)
 }
 
 // Creates a scope that includes all zones except the specified excluded zones.
 //
-// NewSyncEngineFetchChangesScopeWithExcludedZoneIDs creates a new [SyncEngineFetchChangesScope].
-func NewSyncEngineFetchChangesScopeWithExcludedZoneIDs(zoneIDs *foundation.NSSet[*raw.CKRecordZoneID]) *SyncEngineFetchChangesScope {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineFetchChangesScope")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExcludedZoneIDs:"), zoneIDs.Ptr())
-	return &SyncEngineFetchChangesScope{inner: raw.CKSyncEngineFetchChangesScopeFromID(_id)}
+// NewSyncEngineFetchChangesScopeWithExcludedZoneIDs creates a new SyncEngineFetchChangesScope.
+func NewSyncEngineFetchChangesScopeWithExcludedZoneIDs(zoneIDs obj.Object) *SyncEngineFetchChangesScope {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineFetchChangesScope")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithExcludedZoneIDs:"), objref.IDOf(zoneIDs))
+	return syncEngineFetchChangesScopeAdopt(_id)
 }
 
 // Returns true if the specified zone ID is included in this scope.
-//
-// ContainsZoneID calls the underlying ContainsZoneID.
-func (x *SyncEngineFetchChangesScope) ContainsZoneID(zoneID *raw.CKRecordZoneID) bool {
-	return x.inner.ContainsZoneID(zoneID)
+func (x *SyncEngineFetchChangesScope) ContainsZoneID(zoneID *RecordZoneID) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsZoneID:"), objref.IDOf(zoneID))
+	return _r
 }
 
 // A specific set of zone IDs to include in the scope. For example, if you want to fetch changes for a specific set of zones, you can specify them here. If `nil`, this scope includes all zones except those in `excludedZoneIDs`.
-//
-// ZoneIDs calls the underlying ZoneIDs.
-func (x *SyncEngineFetchChangesScope) ZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID] {
-	return x.inner.ZoneIDs()
+func (x *SyncEngineFetchChangesScope) ZoneIDs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("zoneIDs"))
+	return obj.Wrap(_r)
 }
 
 // A specific set of zone IDs to exclude from this scope. If you know that you don't want to fetch changes for a particular set of zones, you can set those zones here.
-//
-// ExcludedZoneIDs calls the underlying ExcludedZoneIDs.
-func (x *SyncEngineFetchChangesScope) ExcludedZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID] {
-	return x.inner.ExcludedZoneIDs()
+func (x *SyncEngineFetchChangesScope) ExcludedZoneIDs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("excludedZoneIDs"))
+	return obj.Wrap(_r)
 }
 
 // SyncEngineFetchChangesScopeable is the interface implemented by [SyncEngineFetchChangesScope], for mocking and DI.
 type SyncEngineFetchChangesScopeable interface {
-	Unwrap() *raw.CKSyncEngineFetchChangesScope
-	ContainsZoneID(zoneID *raw.CKRecordZoneID) bool
-	ZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID]
-	ExcludedZoneIDs() *foundation.NSSet[*raw.CKRecordZoneID]
+	obj.Object
+	ContainsZoneID(zoneID *RecordZoneID) bool
+	ZoneIDs() obj.Object
+	ExcludedZoneIDs() obj.Object
 }
 
 var _ SyncEngineFetchChangesScopeable = (*SyncEngineFetchChangesScope)(nil)

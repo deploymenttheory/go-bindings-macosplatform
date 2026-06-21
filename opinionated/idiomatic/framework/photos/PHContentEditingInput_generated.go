@@ -5,138 +5,143 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/uniformtypeidentifiers"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A container that provides information about and access to the image, video, or Live Photo content of an asset to be edited.
 //
-// ContentEditingInput wraps [raw.PHContentEditingInput] with a fluent Go API.
+// ContentEditingInput is an idiomatic wrapper over the Objective-C class PHContentEditingInput.
 type ContentEditingInput struct {
-	inner *raw.PHContentEditingInput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHContentEditingInput].
-func (x *ContentEditingInput) Unwrap() *raw.PHContentEditingInput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContentEditingInput) ID() objc.ID { return x.inner.Ptr() }
-
-// ContentEditingInputFromID adopts an existing object pointer as a ContentEditingInput (nil for 0).
+// ContentEditingInputFromID adopts an existing Objective-C object as a ContentEditingInput
+// (nil for 0), retaining it and registering a release finalizer.
 func ContentEditingInputFromID(id objc.ID) *ContentEditingInput {
 	if id == 0 {
 		return nil
 	}
-	return &ContentEditingInput{inner: raw.PHContentEditingInputFromID(id)}
+	x := &ContentEditingInput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewContentEditingInput creates a new [ContentEditingInput].
+// contentEditingInputAdopt wraps an Objective-C object that this code just created as a
+// ContentEditingInput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contentEditingInputAdopt(id objc.ID) *ContentEditingInput {
+	if id == 0 {
+		return nil
+	}
+	x := &ContentEditingInput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContentEditingInput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContentEditingInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContentEditingInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewContentEditingInput creates a new ContentEditingInput.
 func NewContentEditingInput() *ContentEditingInput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHContentEditingInput")), objc.RegisterName("new"))
-	return &ContentEditingInput{inner: raw.PHContentEditingInputFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHContentEditingInput")), objc.RegisterName("new"))
+	return contentEditingInputAdopt(_id)
 }
 
-// MediaType calls the underlying MediaType.
-func (x *ContentEditingInput) MediaType() PHAssetMediaType {
-	return PHAssetMediaType(x.inner.MediaType())
+func (x *ContentEditingInput) MediaType() AssetMediaType {
+	_r := objc.Send[AssetMediaType](objref.IDOf(x), objc.RegisterName("mediaType"))
+	return _r
 }
 
-// MediaSubtypes calls the underlying MediaSubtypes.
-func (x *ContentEditingInput) MediaSubtypes() PHAssetMediaSubtype {
-	return PHAssetMediaSubtype(x.inner.MediaSubtypes())
+func (x *ContentEditingInput) MediaSubtypes() AssetMediaSubtype {
+	_r := objc.Send[AssetMediaSubtype](objref.IDOf(x), objc.RegisterName("mediaSubtypes"))
+	return _r
 }
 
-// CreationDate calls the underlying CreationDate.
-func (x *ContentEditingInput) CreationDate() *foundation.NSDate {
-	return x.inner.CreationDate()
-}
-
-// Location calls the underlying Location.
-func (x *ContentEditingInput) Location() unsafe.Pointer {
-	return x.inner.Location()
+func (x *ContentEditingInput) CreationDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("creationDate"))
+	return obj.Wrap(_r)
 }
 
 // The type of data provided as the asset's content editing input image or video.
-//
-// ContentType calls the underlying ContentType.
-func (x *ContentEditingInput) ContentType() *uniformtypeidentifiers.UTType {
-	return x.inner.ContentType()
+func (x *ContentEditingInput) ContentType() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contentType"))
+	return obj.Wrap(_r)
 }
 
-// UniformTypeIdentifier calls the underlying UniformTypeIdentifier.
 func (x *ContentEditingInput) UniformTypeIdentifier() string {
-	_r := x.inner.UniformTypeIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("uniformTypeIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PlaybackStyle calls the underlying PlaybackStyle.
-func (x *ContentEditingInput) PlaybackStyle() PHAssetPlaybackStyle {
-	return PHAssetPlaybackStyle(x.inner.PlaybackStyle())
+func (x *ContentEditingInput) PlaybackStyle() AssetPlaybackStyle {
+	_r := objc.Send[AssetPlaybackStyle](objref.IDOf(x), objc.RegisterName("playbackStyle"))
+	return _r
 }
 
-// AdjustmentData calls the underlying AdjustmentData.
 func (x *ContentEditingInput) AdjustmentData() *AdjustmentData {
-	_r := x.inner.AdjustmentData()
-	if _r == nil {
-		return nil
-	}
-	return &AdjustmentData{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("adjustmentData"))
+	return AdjustmentDataFromID(_r)
 }
 
-// DisplaySizeImage calls the underlying DisplaySizeImage.
-func (x *ContentEditingInput) DisplaySizeImage() *appkit.NSImage {
-	return x.inner.DisplaySizeImage()
+func (x *ContentEditingInput) DisplaySizeImage() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displaySizeImage"))
+	return obj.Wrap(_r)
 }
 
-// FullSizeImageURL calls the underlying FullSizeImageURL.
-func (x *ContentEditingInput) FullSizeImageURL() *foundation.NSURL {
-	return x.inner.FullSizeImageURL()
+func (x *ContentEditingInput) FullSizeImageURL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fullSizeImageURL"))
+	return obj.Wrap(_r)
 }
 
-// FullSizeImageOrientation calls the underlying FullSizeImageOrientation.
 func (x *ContentEditingInput) FullSizeImageOrientation() int {
-	return x.inner.FullSizeImageOrientation()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("fullSizeImageOrientation"))
+	return _r
 }
 
-// AudiovisualAsset calls the underlying AudiovisualAsset.
-func (x *ContentEditingInput) AudiovisualAsset() *avfoundation.AVAsset {
-	return x.inner.AudiovisualAsset()
+func (x *ContentEditingInput) AudiovisualAsset() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("audiovisualAsset"))
+	return obj.Wrap(_r)
 }
 
-// LivePhoto calls the underlying LivePhoto.
 func (x *ContentEditingInput) LivePhoto() *LivePhoto {
-	_r := x.inner.LivePhoto()
-	if _r == nil {
-		return nil
-	}
-	return &LivePhoto{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("livePhoto"))
+	return LivePhotoFromID(_r)
 }
 
 // ContentEditingInputable is the interface implemented by [ContentEditingInput], for mocking and DI.
 type ContentEditingInputable interface {
-	Unwrap() *raw.PHContentEditingInput
-	MediaType() PHAssetMediaType
-	MediaSubtypes() PHAssetMediaSubtype
-	CreationDate() *foundation.NSDate
-	Location() unsafe.Pointer
-	ContentType() *uniformtypeidentifiers.UTType
+	obj.Object
+	MediaType() AssetMediaType
+	MediaSubtypes() AssetMediaSubtype
+	CreationDate() obj.Object
+	ContentType() obj.Object
 	UniformTypeIdentifier() string
-	PlaybackStyle() PHAssetPlaybackStyle
+	PlaybackStyle() AssetPlaybackStyle
 	AdjustmentData() *AdjustmentData
-	DisplaySizeImage() *appkit.NSImage
-	FullSizeImageURL() *foundation.NSURL
+	DisplaySizeImage() obj.Object
+	FullSizeImageURL() obj.Object
 	FullSizeImageOrientation() int
-	AudiovisualAsset() *avfoundation.AVAsset
+	AudiovisualAsset() obj.Object
 	LivePhoto() *LivePhoto
 }
 

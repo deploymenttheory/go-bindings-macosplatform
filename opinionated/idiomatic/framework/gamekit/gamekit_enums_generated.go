@@ -10,686 +10,596 @@ import (
 )
 
 // Specifies the corner of the screen to display the access point.
-type GKAccessPointLocation int64
+type AccessPointLocation int64
 
 const (
-	GKAccessPointLocationTopLeading     GKAccessPointLocation = 0
-	GKAccessPointLocationTopTrailing    GKAccessPointLocation = 1
-	GKAccessPointLocationBottomLeading  GKAccessPointLocation = 2
-	GKAccessPointLocationBottomTrailing GKAccessPointLocation = 3
+	AccessPointLocationTopLeading     AccessPointLocation = 0
+	AccessPointLocationTopTrailing    AccessPointLocation = 1
+	AccessPointLocationBottomLeading  AccessPointLocation = 2
+	AccessPointLocationBottomTrailing AccessPointLocation = 3
 )
 
-func (e GKAccessPointLocation) String() string {
+func (e AccessPointLocation) String() string {
 	switch e {
-	case GKAccessPointLocationTopLeading:
-		return "GKAccessPointLocationTopLeading"
-	case GKAccessPointLocationTopTrailing:
-		return "GKAccessPointLocationTopTrailing"
-	case GKAccessPointLocationBottomLeading:
-		return "GKAccessPointLocationBottomLeading"
-	case GKAccessPointLocationBottomTrailing:
-		return "GKAccessPointLocationBottomTrailing"
+	case AccessPointLocationTopLeading:
+		return "AccessPointLocationTopLeading"
+	case AccessPointLocationTopTrailing:
+		return "AccessPointLocationTopTrailing"
+	case AccessPointLocationBottomLeading:
+		return "AccessPointLocationBottomLeading"
+	case AccessPointLocationBottomTrailing:
+		return "AccessPointLocationBottomTrailing"
 	default:
-		return fmt.Sprintf("GKAccessPointLocation(%d)", int64(e))
+		return fmt.Sprintf("AccessPointLocation(%d)", int64(e))
 	}
 }
 
 // The state of a challenge.
 //
 // Deprecated: since macOS 26.0.
-type GKChallengeState int64
+type ChallengeState int64
 
 const (
 	// The challenge isn’t valid because an error occurred.
-	GKChallengeStateInvalid GKChallengeState = 0
+	ChallengeStateInvalid ChallengeState = 0
 	// The player issued a challenge, but the other player hasn’t accepted or refused it.
-	GKChallengeStatePending GKChallengeState = 1
+	ChallengeStatePending ChallengeState = 1
 	// The player successfully completed the challenge.
-	GKChallengeStateCompleted GKChallengeState = 2
+	ChallengeStateCompleted ChallengeState = 2
 	// The player declined the challenge.
-	GKChallengeStateDeclined GKChallengeState = 3
+	ChallengeStateDeclined ChallengeState = 3
 )
 
-func (e GKChallengeState) String() string {
+func (e ChallengeState) String() string {
 	switch e {
-	case GKChallengeStateInvalid:
-		return "GKChallengeStateInvalid"
-	case GKChallengeStatePending:
-		return "GKChallengeStatePending"
-	case GKChallengeStateCompleted:
-		return "GKChallengeStateCompleted"
-	case GKChallengeStateDeclined:
-		return "GKChallengeStateDeclined"
+	case ChallengeStateInvalid:
+		return "ChallengeStateInvalid"
+	case ChallengeStatePending:
+		return "ChallengeStatePending"
+	case ChallengeStateCompleted:
+		return "ChallengeStateCompleted"
+	case ChallengeStateDeclined:
+		return "ChallengeStateDeclined"
 	default:
-		return fmt.Sprintf("GKChallengeState(%d)", int64(e))
+		return fmt.Sprintf("ChallengeState(%d)", int64(e))
 	}
 }
 
 // Possible connection states for a player
-type GKConnectionState int64
+type ConnectionState int64
 
 const (
 	// The player is not connected to the game session.
-	GKConnectionStateNotConnected GKConnectionState = 0
+	ConnectionStateNotConnected ConnectionState = 0
 	// The player is connected to the game session.
-	GKConnectionStateConnected GKConnectionState = 1
+	ConnectionStateConnected ConnectionState = 1
 )
 
-func (e GKConnectionState) String() string {
+func (e ConnectionState) String() string {
 	switch e {
-	case GKConnectionStateNotConnected:
-		return "GKConnectionStateNotConnected"
-	case GKConnectionStateConnected:
-		return "GKConnectionStateConnected"
+	case ConnectionStateNotConnected:
+		return "ConnectionStateNotConnected"
+	case ConnectionStateConnected:
+		return "ConnectionStateConnected"
 	default:
-		return fmt.Sprintf("GKConnectionState(%d)", int64(e))
+		return fmt.Sprintf("ConnectionState(%d)", int64(e))
 	}
 }
 
 // Error codes for the GameKit error domain.
-type GKErrorCode int64
+type ErrorCode int64
 
 const (
-	GKErrorUnknown                          GKErrorCode = 1
-	GKErrorCancelled                        GKErrorCode = 2
-	GKErrorCommunicationsFailure            GKErrorCode = 3
-	GKErrorUserDenied                       GKErrorCode = 4
-	GKErrorInvalidCredentials               GKErrorCode = 5
-	GKErrorNotAuthenticated                 GKErrorCode = 6
-	GKErrorAuthenticationInProgress         GKErrorCode = 7
-	GKErrorInvalidPlayer                    GKErrorCode = 8
-	GKErrorScoreNotSet                      GKErrorCode = 9
-	GKErrorParentalControlsBlocked          GKErrorCode = 10
-	GKErrorPlayerStatusExceedsMaximumLength GKErrorCode = 11
-	GKErrorPlayerStatusInvalid              GKErrorCode = 12
-	GKErrorMatchRequestInvalid              GKErrorCode = 13
-	GKErrorUnderage                         GKErrorCode = 14
-	GKErrorGameUnrecognized                 GKErrorCode = 15
-	GKErrorNotSupported                     GKErrorCode = 16
-	GKErrorInvalidParameter                 GKErrorCode = 17
-	GKErrorUnexpectedConnection             GKErrorCode = 18
+	ErrorUnknown                          ErrorCode = 1
+	ErrorCancelled                        ErrorCode = 2
+	ErrorCommunicationsFailure            ErrorCode = 3
+	ErrorUserDenied                       ErrorCode = 4
+	ErrorInvalidCredentials               ErrorCode = 5
+	ErrorNotAuthenticated                 ErrorCode = 6
+	ErrorAuthenticationInProgress         ErrorCode = 7
+	ErrorInvalidPlayer                    ErrorCode = 8
+	ErrorScoreNotSet                      ErrorCode = 9
+	ErrorParentalControlsBlocked          ErrorCode = 10
+	ErrorPlayerStatusExceedsMaximumLength ErrorCode = 11
+	ErrorPlayerStatusInvalid              ErrorCode = 12
+	ErrorMatchRequestInvalid              ErrorCode = 13
+	ErrorUnderage                         ErrorCode = 14
+	ErrorGameUnrecognized                 ErrorCode = 15
+	ErrorNotSupported                     ErrorCode = 16
+	ErrorInvalidParameter                 ErrorCode = 17
+	ErrorUnexpectedConnection             ErrorCode = 18
 	// Deprecated: since macOS 26.0.
-	GKErrorChallengeInvalid             GKErrorCode = 19
-	GKErrorTurnBasedMatchDataTooLarge   GKErrorCode = 20
-	GKErrorTurnBasedTooManySessions     GKErrorCode = 21
-	GKErrorTurnBasedInvalidParticipant  GKErrorCode = 22
-	GKErrorTurnBasedInvalidTurn         GKErrorCode = 23
-	GKErrorTurnBasedInvalidState        GKErrorCode = 24
-	GKErrorInvitationsDisabled          GKErrorCode = 25
-	GKErrorPlayerPhotoFailure           GKErrorCode = 26
-	GKErrorUbiquityContainerUnavailable GKErrorCode = 27
-	GKErrorMatchNotConnected            GKErrorCode = 28
-	GKErrorGameSessionRequestInvalid    GKErrorCode = 29
-	GKErrorRestrictedToAutomatch        GKErrorCode = 30
-	GKErrorAPINotAvailable              GKErrorCode = 31
-	GKErrorNotAuthorized                GKErrorCode = 32
-	GKErrorConnectionTimeout            GKErrorCode = 33
-	GKErrorAPIObsolete                  GKErrorCode = 34
-	GKErrorICloudUnavailable            GKErrorCode = 35
-	GKErrorLockdownMode                 GKErrorCode = 36
-	GKErrorAppUnlisted                  GKErrorCode = 37
-	GKErrorDebugMode                    GKErrorCode = 38
-	GKErrorFriendListDescriptionMissing GKErrorCode = 100
-	GKErrorFriendListRestricted         GKErrorCode = 101
-	GKErrorFriendListDenied             GKErrorCode = 102
-	GKErrorFriendRequestNotAvailable    GKErrorCode = 103
+	ErrorChallengeInvalid             ErrorCode = 19
+	ErrorTurnBasedMatchDataTooLarge   ErrorCode = 20
+	ErrorTurnBasedTooManySessions     ErrorCode = 21
+	ErrorTurnBasedInvalidParticipant  ErrorCode = 22
+	ErrorTurnBasedInvalidTurn         ErrorCode = 23
+	ErrorTurnBasedInvalidState        ErrorCode = 24
+	ErrorInvitationsDisabled          ErrorCode = 25
+	ErrorPlayerPhotoFailure           ErrorCode = 26
+	ErrorUbiquityContainerUnavailable ErrorCode = 27
+	ErrorMatchNotConnected            ErrorCode = 28
+	ErrorGameSessionRequestInvalid    ErrorCode = 29
+	ErrorRestrictedToAutomatch        ErrorCode = 30
+	ErrorAPINotAvailable              ErrorCode = 31
+	ErrorNotAuthorized                ErrorCode = 32
+	ErrorConnectionTimeout            ErrorCode = 33
+	ErrorAPIObsolete                  ErrorCode = 34
+	ErrorICloudUnavailable            ErrorCode = 35
+	ErrorLockdownMode                 ErrorCode = 36
+	ErrorAppUnlisted                  ErrorCode = 37
+	ErrorDebugMode                    ErrorCode = 38
+	ErrorFriendListDescriptionMissing ErrorCode = 100
+	ErrorFriendListRestricted         ErrorCode = 101
+	ErrorFriendListDenied             ErrorCode = 102
+	ErrorFriendRequestNotAvailable    ErrorCode = 103
 )
 
-func (e GKErrorCode) String() string {
+func (e ErrorCode) String() string {
 	switch e {
-	case GKErrorUnknown:
-		return "GKErrorUnknown"
-	case GKErrorCancelled:
-		return "GKErrorCancelled"
-	case GKErrorCommunicationsFailure:
-		return "GKErrorCommunicationsFailure"
-	case GKErrorUserDenied:
-		return "GKErrorUserDenied"
-	case GKErrorInvalidCredentials:
-		return "GKErrorInvalidCredentials"
-	case GKErrorNotAuthenticated:
-		return "GKErrorNotAuthenticated"
-	case GKErrorAuthenticationInProgress:
-		return "GKErrorAuthenticationInProgress"
-	case GKErrorInvalidPlayer:
-		return "GKErrorInvalidPlayer"
-	case GKErrorScoreNotSet:
-		return "GKErrorScoreNotSet"
-	case GKErrorParentalControlsBlocked:
-		return "GKErrorParentalControlsBlocked"
-	case GKErrorPlayerStatusExceedsMaximumLength:
-		return "GKErrorPlayerStatusExceedsMaximumLength"
-	case GKErrorPlayerStatusInvalid:
-		return "GKErrorPlayerStatusInvalid"
-	case GKErrorMatchRequestInvalid:
-		return "GKErrorMatchRequestInvalid"
-	case GKErrorUnderage:
-		return "GKErrorUnderage"
-	case GKErrorGameUnrecognized:
-		return "GKErrorGameUnrecognized"
-	case GKErrorNotSupported:
-		return "GKErrorNotSupported"
-	case GKErrorInvalidParameter:
-		return "GKErrorInvalidParameter"
-	case GKErrorUnexpectedConnection:
-		return "GKErrorUnexpectedConnection"
-	case GKErrorChallengeInvalid:
-		return "GKErrorChallengeInvalid"
-	case GKErrorTurnBasedMatchDataTooLarge:
-		return "GKErrorTurnBasedMatchDataTooLarge"
-	case GKErrorTurnBasedTooManySessions:
-		return "GKErrorTurnBasedTooManySessions"
-	case GKErrorTurnBasedInvalidParticipant:
-		return "GKErrorTurnBasedInvalidParticipant"
-	case GKErrorTurnBasedInvalidTurn:
-		return "GKErrorTurnBasedInvalidTurn"
-	case GKErrorTurnBasedInvalidState:
-		return "GKErrorTurnBasedInvalidState"
-	case GKErrorInvitationsDisabled:
-		return "GKErrorInvitationsDisabled"
-	case GKErrorPlayerPhotoFailure:
-		return "GKErrorPlayerPhotoFailure"
-	case GKErrorUbiquityContainerUnavailable:
-		return "GKErrorUbiquityContainerUnavailable"
-	case GKErrorMatchNotConnected:
-		return "GKErrorMatchNotConnected"
-	case GKErrorGameSessionRequestInvalid:
-		return "GKErrorGameSessionRequestInvalid"
-	case GKErrorRestrictedToAutomatch:
-		return "GKErrorRestrictedToAutomatch"
-	case GKErrorAPINotAvailable:
-		return "GKErrorAPINotAvailable"
-	case GKErrorNotAuthorized:
-		return "GKErrorNotAuthorized"
-	case GKErrorConnectionTimeout:
-		return "GKErrorConnectionTimeout"
-	case GKErrorAPIObsolete:
-		return "GKErrorAPIObsolete"
-	case GKErrorICloudUnavailable:
-		return "GKErrorICloudUnavailable"
-	case GKErrorLockdownMode:
-		return "GKErrorLockdownMode"
-	case GKErrorAppUnlisted:
-		return "GKErrorAppUnlisted"
-	case GKErrorDebugMode:
-		return "GKErrorDebugMode"
-	case GKErrorFriendListDescriptionMissing:
-		return "GKErrorFriendListDescriptionMissing"
-	case GKErrorFriendListRestricted:
-		return "GKErrorFriendListRestricted"
-	case GKErrorFriendListDenied:
-		return "GKErrorFriendListDenied"
-	case GKErrorFriendRequestNotAvailable:
-		return "GKErrorFriendRequestNotAvailable"
+	case ErrorUnknown:
+		return "ErrorUnknown"
+	case ErrorCancelled:
+		return "ErrorCancelled"
+	case ErrorCommunicationsFailure:
+		return "ErrorCommunicationsFailure"
+	case ErrorUserDenied:
+		return "ErrorUserDenied"
+	case ErrorInvalidCredentials:
+		return "ErrorInvalidCredentials"
+	case ErrorNotAuthenticated:
+		return "ErrorNotAuthenticated"
+	case ErrorAuthenticationInProgress:
+		return "ErrorAuthenticationInProgress"
+	case ErrorInvalidPlayer:
+		return "ErrorInvalidPlayer"
+	case ErrorScoreNotSet:
+		return "ErrorScoreNotSet"
+	case ErrorParentalControlsBlocked:
+		return "ErrorParentalControlsBlocked"
+	case ErrorPlayerStatusExceedsMaximumLength:
+		return "ErrorPlayerStatusExceedsMaximumLength"
+	case ErrorPlayerStatusInvalid:
+		return "ErrorPlayerStatusInvalid"
+	case ErrorMatchRequestInvalid:
+		return "ErrorMatchRequestInvalid"
+	case ErrorUnderage:
+		return "ErrorUnderage"
+	case ErrorGameUnrecognized:
+		return "ErrorGameUnrecognized"
+	case ErrorNotSupported:
+		return "ErrorNotSupported"
+	case ErrorInvalidParameter:
+		return "ErrorInvalidParameter"
+	case ErrorUnexpectedConnection:
+		return "ErrorUnexpectedConnection"
+	case ErrorChallengeInvalid:
+		return "ErrorChallengeInvalid"
+	case ErrorTurnBasedMatchDataTooLarge:
+		return "ErrorTurnBasedMatchDataTooLarge"
+	case ErrorTurnBasedTooManySessions:
+		return "ErrorTurnBasedTooManySessions"
+	case ErrorTurnBasedInvalidParticipant:
+		return "ErrorTurnBasedInvalidParticipant"
+	case ErrorTurnBasedInvalidTurn:
+		return "ErrorTurnBasedInvalidTurn"
+	case ErrorTurnBasedInvalidState:
+		return "ErrorTurnBasedInvalidState"
+	case ErrorInvitationsDisabled:
+		return "ErrorInvitationsDisabled"
+	case ErrorPlayerPhotoFailure:
+		return "ErrorPlayerPhotoFailure"
+	case ErrorUbiquityContainerUnavailable:
+		return "ErrorUbiquityContainerUnavailable"
+	case ErrorMatchNotConnected:
+		return "ErrorMatchNotConnected"
+	case ErrorGameSessionRequestInvalid:
+		return "ErrorGameSessionRequestInvalid"
+	case ErrorRestrictedToAutomatch:
+		return "ErrorRestrictedToAutomatch"
+	case ErrorAPINotAvailable:
+		return "ErrorAPINotAvailable"
+	case ErrorNotAuthorized:
+		return "ErrorNotAuthorized"
+	case ErrorConnectionTimeout:
+		return "ErrorConnectionTimeout"
+	case ErrorAPIObsolete:
+		return "ErrorAPIObsolete"
+	case ErrorICloudUnavailable:
+		return "ErrorICloudUnavailable"
+	case ErrorLockdownMode:
+		return "ErrorLockdownMode"
+	case ErrorAppUnlisted:
+		return "ErrorAppUnlisted"
+	case ErrorDebugMode:
+		return "ErrorDebugMode"
+	case ErrorFriendListDescriptionMissing:
+		return "ErrorFriendListDescriptionMissing"
+	case ErrorFriendListRestricted:
+		return "ErrorFriendListRestricted"
+	case ErrorFriendListDenied:
+		return "ErrorFriendListDenied"
+	case ErrorFriendRequestNotAvailable:
+		return "ErrorFriendRequestNotAvailable"
 	default:
-		return fmt.Sprintf("GKErrorCode(%d)", int64(e))
-	}
-}
-
-// Constants that indicate if the local player grants access to their friends list.
-type GKFriendsAuthorizationStatus int64
-
-const (
-	// The player hasn’t choosen whether your game may access their friends list.
-	GKFriendsAuthorizationStatusNotDetermined GKFriendsAuthorizationStatus = 0
-	// Access to the player’s list of friends restricted.
-	GKFriendsAuthorizationStatusRestricted GKFriendsAuthorizationStatus = 1
-	// Access to the player’s friends’ data denied.
-	GKFriendsAuthorizationStatusDenied GKFriendsAuthorizationStatus = 2
-	// The player authorized your game to access their list of friends.
-	GKFriendsAuthorizationStatusAuthorized GKFriendsAuthorizationStatus = 3
-)
-
-func (e GKFriendsAuthorizationStatus) String() string {
-	switch e {
-	case GKFriendsAuthorizationStatusNotDetermined:
-		return "GKFriendsAuthorizationStatusNotDetermined"
-	case GKFriendsAuthorizationStatusRestricted:
-		return "GKFriendsAuthorizationStatusRestricted"
-	case GKFriendsAuthorizationStatusDenied:
-		return "GKFriendsAuthorizationStatusDenied"
-	case GKFriendsAuthorizationStatusAuthorized:
-		return "GKFriendsAuthorizationStatusAuthorized"
-	default:
-		return fmt.Sprintf("GKFriendsAuthorizationStatus(%d)", int64(e))
+		return fmt.Sprintf("ErrorCode(%d)", int64(e))
 	}
 }
 
 // Play Style of the game activity. It can be either Asynchronous or Synchronous.
-type GKGameActivityPlayStyle int64
+type GameActivityPlayStyle int64
 
 const (
-	GKGameActivityPlayStyleUnspecified  GKGameActivityPlayStyle = 0
-	GKGameActivityPlayStyleSynchronous  GKGameActivityPlayStyle = 1
-	GKGameActivityPlayStyleAsynchronous GKGameActivityPlayStyle = 2
+	GameActivityPlayStyleUnspecified  GameActivityPlayStyle = 0
+	GameActivityPlayStyleSynchronous  GameActivityPlayStyle = 1
+	GameActivityPlayStyleAsynchronous GameActivityPlayStyle = 2
 )
 
-func (e GKGameActivityPlayStyle) String() string {
+func (e GameActivityPlayStyle) String() string {
 	switch e {
-	case GKGameActivityPlayStyleUnspecified:
-		return "GKGameActivityPlayStyleUnspecified"
-	case GKGameActivityPlayStyleSynchronous:
-		return "GKGameActivityPlayStyleSynchronous"
-	case GKGameActivityPlayStyleAsynchronous:
-		return "GKGameActivityPlayStyleAsynchronous"
+	case GameActivityPlayStyleUnspecified:
+		return "GameActivityPlayStyleUnspecified"
+	case GameActivityPlayStyleSynchronous:
+		return "GameActivityPlayStyleSynchronous"
+	case GameActivityPlayStyleAsynchronous:
+		return "GameActivityPlayStyleAsynchronous"
 	default:
-		return fmt.Sprintf("GKGameActivityPlayStyle(%d)", int64(e))
+		return fmt.Sprintf("GameActivityPlayStyle(%d)", int64(e))
 	}
 }
 
-type GKGameActivityState uint64
+type GameActivityState uint64
 
 const (
 	// The game activity is initialized but has not started.
-	GKGameActivityStateInitialized GKGameActivityState = 0
+	GameActivityStateInitialized GameActivityState = 0
 	// The game activity is active.
-	GKGameActivityStateActive GKGameActivityState = 1
+	GameActivityStateActive GameActivityState = 1
 	// The game activity is paused.
-	GKGameActivityStatePaused GKGameActivityState = 2
+	GameActivityStatePaused GameActivityState = 2
 	// The game activity has ended. This is a terminal state.
-	GKGameActivityStateEnded GKGameActivityState = 4
+	GameActivityStateEnded GameActivityState = 4
 )
 
-func (e GKGameActivityState) String() string {
+func (e GameActivityState) String() string {
 	switch e {
-	case GKGameActivityStateInitialized:
-		return "GKGameActivityStateInitialized"
-	case GKGameActivityStateActive:
-		return "GKGameActivityStateActive"
-	case GKGameActivityStatePaused:
-		return "GKGameActivityStatePaused"
-	case GKGameActivityStateEnded:
-		return "GKGameActivityStateEnded"
+	case GameActivityStateInitialized:
+		return "GameActivityStateInitialized"
+	case GameActivityStateActive:
+		return "GameActivityStateActive"
+	case GameActivityStatePaused:
+		return "GameActivityStatePaused"
+	case GameActivityStateEnded:
+		return "GameActivityStateEnded"
 	default:
-		return fmt.Sprintf("GKGameActivityState(%d)", int64(e))
+		return fmt.Sprintf("GameActivityState(%d)", int64(e))
 	}
 }
 
 // The type of content for the view controller to present.
-type GKGameCenterViewControllerState int64
+type GameCenterViewControllerState int64
 
 const (
 	// The view controller should present the default screen.
 	//
 	// Deprecated: since macOS 26.0.
-	GKGameCenterViewControllerStateDefault GKGameCenterViewControllerState = -1
+	GameCenterViewControllerStateDefault GameCenterViewControllerState = -1
 	// The view controller should present leaderboard sets or leaderboards if there are no sets.
-	GKGameCenterViewControllerStateLeaderboards GKGameCenterViewControllerState = 0
+	GameCenterViewControllerStateLeaderboards GameCenterViewControllerState = 0
 	// The view controller should present a list of achievements.
-	GKGameCenterViewControllerStateAchievements GKGameCenterViewControllerState = 1
+	GameCenterViewControllerStateAchievements GameCenterViewControllerState = 1
 	// The view controller should present a list of challenges.
 	//
 	// Deprecated: since macOS 26.0.
-	GKGameCenterViewControllerStateChallenges GKGameCenterViewControllerState = 2
+	GameCenterViewControllerStateChallenges GameCenterViewControllerState = 2
 	// The view controller should present the local player’s profile.
-	GKGameCenterViewControllerStateLocalPlayerProfile GKGameCenterViewControllerState = 3
+	GameCenterViewControllerStateLocalPlayerProfile GameCenterViewControllerState = 3
 	// The view controller should present the dashboard.
-	GKGameCenterViewControllerStateDashboard GKGameCenterViewControllerState = 4
+	GameCenterViewControllerStateDashboard GameCenterViewControllerState = 4
 	// The view controller should present the friends list.
-	GKGameCenterViewControllerStateLocalPlayerFriendsList GKGameCenterViewControllerState = 5
+	GameCenterViewControllerStateLocalPlayerFriendsList GameCenterViewControllerState = 5
 )
 
-func (e GKGameCenterViewControllerState) String() string {
+func (e GameCenterViewControllerState) String() string {
 	switch e {
-	case GKGameCenterViewControllerStateDefault:
-		return "GKGameCenterViewControllerStateDefault"
-	case GKGameCenterViewControllerStateLeaderboards:
-		return "GKGameCenterViewControllerStateLeaderboards"
-	case GKGameCenterViewControllerStateAchievements:
-		return "GKGameCenterViewControllerStateAchievements"
-	case GKGameCenterViewControllerStateChallenges:
-		return "GKGameCenterViewControllerStateChallenges"
-	case GKGameCenterViewControllerStateLocalPlayerProfile:
-		return "GKGameCenterViewControllerStateLocalPlayerProfile"
-	case GKGameCenterViewControllerStateDashboard:
-		return "GKGameCenterViewControllerStateDashboard"
-	case GKGameCenterViewControllerStateLocalPlayerFriendsList:
-		return "GKGameCenterViewControllerStateLocalPlayerFriendsList"
+	case GameCenterViewControllerStateDefault:
+		return "GameCenterViewControllerStateDefault"
+	case GameCenterViewControllerStateLeaderboards:
+		return "GameCenterViewControllerStateLeaderboards"
+	case GameCenterViewControllerStateAchievements:
+		return "GameCenterViewControllerStateAchievements"
+	case GameCenterViewControllerStateChallenges:
+		return "GameCenterViewControllerStateChallenges"
+	case GameCenterViewControllerStateLocalPlayerProfile:
+		return "GameCenterViewControllerStateLocalPlayerProfile"
+	case GameCenterViewControllerStateDashboard:
+		return "GameCenterViewControllerStateDashboard"
+	case GameCenterViewControllerStateLocalPlayerFriendsList:
+		return "GameCenterViewControllerStateLocalPlayerFriendsList"
 	default:
-		return fmt.Sprintf("GKGameCenterViewControllerState(%d)", int64(e))
+		return fmt.Sprintf("GameCenterViewControllerState(%d)", int64(e))
 	}
 }
 
 // Error codes for the game session domain.
 //
 // Deprecated: GKGameSession is deprecated, use real-time and turn-based matchmaking APIs instead.
-type GKGameSessionErrorCode int64
+type GameSessionErrorCode int64
 
 const (
 	// Deprecated: GKGameSession is deprecated, use real-time and turn-based matchmaking APIs instead.
-	GKGameSessionErrorUnknown GKGameSessionErrorCode = 1
+	GameSessionErrorUnknown GameSessionErrorCode = 1
 	// Deprecated: GKGameSession is deprecated, use real-time and turn-based matchmaking APIs instead.
-	GKGameSessionErrorNotAuthenticated              GKGameSessionErrorCode = 2
-	GKGameSessionErrorSessionConflict               GKGameSessionErrorCode = 3
-	GKGameSessionErrorSessionNotShared              GKGameSessionErrorCode = 4
-	GKGameSessionErrorConnectionCancelledByUser     GKGameSessionErrorCode = 5
-	GKGameSessionErrorConnectionFailed              GKGameSessionErrorCode = 6
-	GKGameSessionErrorSessionHasMaxConnectedPlayers GKGameSessionErrorCode = 7
-	GKGameSessionErrorSendDataNotConnected          GKGameSessionErrorCode = 8
-	GKGameSessionErrorSendDataNoRecipients          GKGameSessionErrorCode = 9
-	GKGameSessionErrorSendDataNotReachable          GKGameSessionErrorCode = 10
-	GKGameSessionErrorSendRateLimitReached          GKGameSessionErrorCode = 11
-	GKGameSessionErrorBadContainer                  GKGameSessionErrorCode = 12
-	GKGameSessionErrorCloudQuotaExceeded            GKGameSessionErrorCode = 13
-	GKGameSessionErrorNetworkFailure                GKGameSessionErrorCode = 14
-	GKGameSessionErrorCloudDriveDisabled            GKGameSessionErrorCode = 15
-	GKGameSessionErrorInvalidSession                GKGameSessionErrorCode = 16
+	GameSessionErrorNotAuthenticated              GameSessionErrorCode = 2
+	GameSessionErrorSessionConflict               GameSessionErrorCode = 3
+	GameSessionErrorSessionNotShared              GameSessionErrorCode = 4
+	GameSessionErrorConnectionCancelledByUser     GameSessionErrorCode = 5
+	GameSessionErrorConnectionFailed              GameSessionErrorCode = 6
+	GameSessionErrorSessionHasMaxConnectedPlayers GameSessionErrorCode = 7
+	GameSessionErrorSendDataNotConnected          GameSessionErrorCode = 8
+	GameSessionErrorSendDataNoRecipients          GameSessionErrorCode = 9
+	GameSessionErrorSendDataNotReachable          GameSessionErrorCode = 10
+	GameSessionErrorSendRateLimitReached          GameSessionErrorCode = 11
+	GameSessionErrorBadContainer                  GameSessionErrorCode = 12
+	GameSessionErrorCloudQuotaExceeded            GameSessionErrorCode = 13
+	GameSessionErrorNetworkFailure                GameSessionErrorCode = 14
+	GameSessionErrorCloudDriveDisabled            GameSessionErrorCode = 15
+	GameSessionErrorInvalidSession                GameSessionErrorCode = 16
 )
 
-func (e GKGameSessionErrorCode) String() string {
+func (e GameSessionErrorCode) String() string {
 	switch e {
-	case GKGameSessionErrorUnknown:
-		return "GKGameSessionErrorUnknown"
-	case GKGameSessionErrorNotAuthenticated:
-		return "GKGameSessionErrorNotAuthenticated"
-	case GKGameSessionErrorSessionConflict:
-		return "GKGameSessionErrorSessionConflict"
-	case GKGameSessionErrorSessionNotShared:
-		return "GKGameSessionErrorSessionNotShared"
-	case GKGameSessionErrorConnectionCancelledByUser:
-		return "GKGameSessionErrorConnectionCancelledByUser"
-	case GKGameSessionErrorConnectionFailed:
-		return "GKGameSessionErrorConnectionFailed"
-	case GKGameSessionErrorSessionHasMaxConnectedPlayers:
-		return "GKGameSessionErrorSessionHasMaxConnectedPlayers"
-	case GKGameSessionErrorSendDataNotConnected:
-		return "GKGameSessionErrorSendDataNotConnected"
-	case GKGameSessionErrorSendDataNoRecipients:
-		return "GKGameSessionErrorSendDataNoRecipients"
-	case GKGameSessionErrorSendDataNotReachable:
-		return "GKGameSessionErrorSendDataNotReachable"
-	case GKGameSessionErrorSendRateLimitReached:
-		return "GKGameSessionErrorSendRateLimitReached"
-	case GKGameSessionErrorBadContainer:
-		return "GKGameSessionErrorBadContainer"
-	case GKGameSessionErrorCloudQuotaExceeded:
-		return "GKGameSessionErrorCloudQuotaExceeded"
-	case GKGameSessionErrorNetworkFailure:
-		return "GKGameSessionErrorNetworkFailure"
-	case GKGameSessionErrorCloudDriveDisabled:
-		return "GKGameSessionErrorCloudDriveDisabled"
-	case GKGameSessionErrorInvalidSession:
-		return "GKGameSessionErrorInvalidSession"
+	case GameSessionErrorUnknown:
+		return "GameSessionErrorUnknown"
+	case GameSessionErrorNotAuthenticated:
+		return "GameSessionErrorNotAuthenticated"
+	case GameSessionErrorSessionConflict:
+		return "GameSessionErrorSessionConflict"
+	case GameSessionErrorSessionNotShared:
+		return "GameSessionErrorSessionNotShared"
+	case GameSessionErrorConnectionCancelledByUser:
+		return "GameSessionErrorConnectionCancelledByUser"
+	case GameSessionErrorConnectionFailed:
+		return "GameSessionErrorConnectionFailed"
+	case GameSessionErrorSessionHasMaxConnectedPlayers:
+		return "GameSessionErrorSessionHasMaxConnectedPlayers"
+	case GameSessionErrorSendDataNotConnected:
+		return "GameSessionErrorSendDataNotConnected"
+	case GameSessionErrorSendDataNoRecipients:
+		return "GameSessionErrorSendDataNoRecipients"
+	case GameSessionErrorSendDataNotReachable:
+		return "GameSessionErrorSendDataNotReachable"
+	case GameSessionErrorSendRateLimitReached:
+		return "GameSessionErrorSendRateLimitReached"
+	case GameSessionErrorBadContainer:
+		return "GameSessionErrorBadContainer"
+	case GameSessionErrorCloudQuotaExceeded:
+		return "GameSessionErrorCloudQuotaExceeded"
+	case GameSessionErrorNetworkFailure:
+		return "GameSessionErrorNetworkFailure"
+	case GameSessionErrorCloudDriveDisabled:
+		return "GameSessionErrorCloudDriveDisabled"
+	case GameSessionErrorInvalidSession:
+		return "GameSessionErrorInvalidSession"
 	default:
-		return fmt.Sprintf("GKGameSessionErrorCode(%d)", int64(e))
-	}
-}
-
-// A player’s response to an invitation to join a match.
-type GKInviteRecipientResponse int64
-
-const (
-	// A response when the player accepts the invitation.
-	GKInviteRecipientResponseAccepted GKInviteRecipientResponse = 0
-	// A response when the player rejects the invitation.
-	GKInviteRecipientResponseDeclined GKInviteRecipientResponse = 1
-	// A response when the system fails to deliver the invitation to the player.
-	GKInviteRecipientResponseFailed GKInviteRecipientResponse = 2
-	// A response when the player isn’t running a compatible version of the game.
-	GKInviteRecipientResponseIncompatible GKInviteRecipientResponse = 3
-	// A response when the system can’t contact the player.
-	GKInviteRecipientResponseUnableToConnect GKInviteRecipientResponse = 4
-	// A response when the invitation times out because the player doesn’t answer it.
-	GKInviteRecipientResponseNoAnswer GKInviteRecipientResponse = 5
-	// The player accepted the invitation.
-	//
-	// Deprecated: since macOS 15.4.
-	GKInviteeResponseAccepted GKInviteRecipientResponse = 0
-	// The player rejected the invitation.
-	//
-	// Deprecated: since macOS 15.4.
-	GKInviteeResponseDeclined GKInviteRecipientResponse = 1
-	// The invitation was unable to be delivered.
-	//
-	// Deprecated: since macOS 15.4.
-	GKInviteeResponseFailed GKInviteRecipientResponse = 2
-	// The invitee isn’t running a compatible version of your game.
-	//
-	// Deprecated: since macOS 15.4.
-	GKInviteeResponseIncompatible GKInviteRecipientResponse = 3
-	// The invitee couldn’t be contacted.
-	//
-	// Deprecated: since macOS 15.4.
-	GKInviteeResponseUnableToConnect GKInviteRecipientResponse = 4
-	// The invitation timed out without an answer.
-	//
-	// Deprecated: since macOS 15.4.
-	GKInviteeResponseNoAnswer GKInviteRecipientResponse = 5
-)
-
-func (e GKInviteRecipientResponse) String() string {
-	switch e {
-	case GKInviteRecipientResponseAccepted:
-		return "GKInviteRecipientResponseAccepted"
-	case GKInviteRecipientResponseDeclined:
-		return "GKInviteRecipientResponseDeclined"
-	case GKInviteRecipientResponseFailed:
-		return "GKInviteRecipientResponseFailed"
-	case GKInviteRecipientResponseIncompatible:
-		return "GKInviteRecipientResponseIncompatible"
-	case GKInviteRecipientResponseUnableToConnect:
-		return "GKInviteRecipientResponseUnableToConnect"
-	case GKInviteRecipientResponseNoAnswer:
-		return "GKInviteRecipientResponseNoAnswer"
-	default:
-		return fmt.Sprintf("GKInviteRecipientResponse(%d)", int64(e))
+		return fmt.Sprintf("GameSessionErrorCode(%d)", int64(e))
 	}
 }
 
 // Specifies the type of players for filtering data.
-type GKLeaderboardPlayerScope int64
+type LeaderboardPlayerScope int64
 
 const (
-	GKLeaderboardPlayerScopeGlobal      GKLeaderboardPlayerScope = 0
-	GKLeaderboardPlayerScopeFriendsOnly GKLeaderboardPlayerScope = 1
+	LeaderboardPlayerScopeGlobal      LeaderboardPlayerScope = 0
+	LeaderboardPlayerScopeFriendsOnly LeaderboardPlayerScope = 1
 )
 
-func (e GKLeaderboardPlayerScope) String() string {
+func (e LeaderboardPlayerScope) String() string {
 	switch e {
-	case GKLeaderboardPlayerScopeGlobal:
-		return "GKLeaderboardPlayerScopeGlobal"
-	case GKLeaderboardPlayerScopeFriendsOnly:
-		return "GKLeaderboardPlayerScopeFriendsOnly"
+	case LeaderboardPlayerScopeGlobal:
+		return "LeaderboardPlayerScopeGlobal"
+	case LeaderboardPlayerScopeFriendsOnly:
+		return "LeaderboardPlayerScopeFriendsOnly"
 	default:
-		return fmt.Sprintf("GKLeaderboardPlayerScope(%d)", int64(e))
+		return fmt.Sprintf("LeaderboardPlayerScope(%d)", int64(e))
 	}
 }
 
 // Specifies the time period for filtering data.
-type GKLeaderboardTimeScope int64
+type LeaderboardTimeScope int64
 
 const (
-	GKLeaderboardTimeScopeToday   GKLeaderboardTimeScope = 0
-	GKLeaderboardTimeScopeWeek    GKLeaderboardTimeScope = 1
-	GKLeaderboardTimeScopeAllTime GKLeaderboardTimeScope = 2
+	LeaderboardTimeScopeToday   LeaderboardTimeScope = 0
+	LeaderboardTimeScopeWeek    LeaderboardTimeScope = 1
+	LeaderboardTimeScopeAllTime LeaderboardTimeScope = 2
 )
 
-func (e GKLeaderboardTimeScope) String() string {
+func (e LeaderboardTimeScope) String() string {
 	switch e {
-	case GKLeaderboardTimeScopeToday:
-		return "GKLeaderboardTimeScopeToday"
-	case GKLeaderboardTimeScopeWeek:
-		return "GKLeaderboardTimeScopeWeek"
-	case GKLeaderboardTimeScopeAllTime:
-		return "GKLeaderboardTimeScopeAllTime"
+	case LeaderboardTimeScopeToday:
+		return "LeaderboardTimeScopeToday"
+	case LeaderboardTimeScopeWeek:
+		return "LeaderboardTimeScopeWeek"
+	case LeaderboardTimeScopeAllTime:
+		return "LeaderboardTimeScopeAllTime"
 	default:
-		return fmt.Sprintf("GKLeaderboardTimeScope(%d)", int64(e))
+		return fmt.Sprintf("LeaderboardTimeScope(%d)", int64(e))
 	}
 }
 
 // Specifies whether a leaderboard is recurring.
-type GKLeaderboardType int64
+type LeaderboardType int64
 
 const (
-	GKLeaderboardTypeClassic   GKLeaderboardType = 0
-	GKLeaderboardTypeRecurring GKLeaderboardType = 1
+	LeaderboardTypeClassic   LeaderboardType = 0
+	LeaderboardTypeRecurring LeaderboardType = 1
 )
 
-func (e GKLeaderboardType) String() string {
+func (e LeaderboardType) String() string {
 	switch e {
-	case GKLeaderboardTypeClassic:
-		return "GKLeaderboardTypeClassic"
-	case GKLeaderboardTypeRecurring:
-		return "GKLeaderboardTypeRecurring"
+	case LeaderboardTypeClassic:
+		return "LeaderboardTypeClassic"
+	case LeaderboardTypeRecurring:
+		return "LeaderboardTypeRecurring"
 	default:
-		return fmt.Sprintf("GKLeaderboardType(%d)", int64(e))
+		return fmt.Sprintf("LeaderboardType(%d)", int64(e))
 	}
 }
 
 // The mechanism used to transmit data to other players.
-type GKMatchSendDataMode int64
+type MatchSendDataMode int64
 
 const (
-	GKMatchSendDataReliable   GKMatchSendDataMode = 0
-	GKMatchSendDataUnreliable GKMatchSendDataMode = 1
+	MatchSendDataReliable   MatchSendDataMode = 0
+	MatchSendDataUnreliable MatchSendDataMode = 1
 )
 
-func (e GKMatchSendDataMode) String() string {
+func (e MatchSendDataMode) String() string {
 	switch e {
-	case GKMatchSendDataReliable:
-		return "GKMatchSendDataReliable"
-	case GKMatchSendDataUnreliable:
-		return "GKMatchSendDataUnreliable"
+	case MatchSendDataReliable:
+		return "MatchSendDataReliable"
+	case MatchSendDataUnreliable:
+		return "MatchSendDataUnreliable"
 	default:
-		return fmt.Sprintf("GKMatchSendDataMode(%d)", int64(e))
+		return fmt.Sprintf("MatchSendDataMode(%d)", int64(e))
 	}
 }
 
 // The kind of match managed by Game Center.
-type GKMatchType uint64
+type MatchType uint64
 
 const (
 	// A peer-to-peer match hosted by Game Center.
 	//
 	// Deprecated: since macOS 10.10.
-	GKMatchTypePeerToPeer GKMatchType = 0
+	MatchTypePeerToPeer MatchType = 0
 	// A match hosted on your private server.
 	//
 	// Deprecated: since macOS 10.10.
-	GKMatchTypeHosted GKMatchType = 1
+	MatchTypeHosted MatchType = 1
 	// A turn-based match hosted by Game Center.
-	GKMatchTypeTurnBased GKMatchType = 2
+	MatchTypeTurnBased MatchType = 2
 )
 
-func (e GKMatchType) String() string {
+func (e MatchType) String() string {
 	switch e {
-	case GKMatchTypePeerToPeer:
-		return "GKMatchTypePeerToPeer"
-	case GKMatchTypeHosted:
-		return "GKMatchTypeHosted"
-	case GKMatchTypeTurnBased:
-		return "GKMatchTypeTurnBased"
+	case MatchTypePeerToPeer:
+		return "MatchTypePeerToPeer"
+	case MatchTypeHosted:
+		return "MatchTypeHosted"
+	case MatchTypeTurnBased:
+		return "MatchTypeTurnBased"
 	default:
-		return fmt.Sprintf("GKMatchType(%d)", int64(e))
+		return fmt.Sprintf("MatchType(%d)", int64(e))
 	}
 }
 
 // Possible modes that a multiplayer game uses to find matches.
-type GKMatchmakingMode int64
+type MatchmakingMode int64
 
 const (
 	// The default matchmaking mode.
-	GKMatchmakingModeDefault GKMatchmakingMode = 0
+	MatchmakingModeDefault MatchmakingMode = 0
 	// A mode that matches the local player only with nearby players.
-	GKMatchmakingModeNearbyOnly GKMatchmakingMode = 1
+	MatchmakingModeNearbyOnly MatchmakingMode = 1
 	// A mode that matches the local player only with players who are also actively looking for a match.
-	GKMatchmakingModeAutomatchOnly GKMatchmakingMode = 2
+	MatchmakingModeAutomatchOnly MatchmakingMode = 2
 	// A mode that matches the local player only with players who they invite, and doesn’t use automatch to fill empty slots.
-	GKMatchmakingModeInviteOnly GKMatchmakingMode = 3
+	MatchmakingModeInviteOnly MatchmakingMode = 3
 )
 
-func (e GKMatchmakingMode) String() string {
+func (e MatchmakingMode) String() string {
 	switch e {
-	case GKMatchmakingModeDefault:
-		return "GKMatchmakingModeDefault"
-	case GKMatchmakingModeNearbyOnly:
-		return "GKMatchmakingModeNearbyOnly"
-	case GKMatchmakingModeAutomatchOnly:
-		return "GKMatchmakingModeAutomatchOnly"
-	case GKMatchmakingModeInviteOnly:
-		return "GKMatchmakingModeInviteOnly"
+	case MatchmakingModeDefault:
+		return "MatchmakingModeDefault"
+	case MatchmakingModeNearbyOnly:
+		return "MatchmakingModeNearbyOnly"
+	case MatchmakingModeAutomatchOnly:
+		return "MatchmakingModeAutomatchOnly"
+	case MatchmakingModeInviteOnly:
+		return "MatchmakingModeInviteOnly"
 	default:
-		return fmt.Sprintf("GKMatchmakingMode(%d)", int64(e))
+		return fmt.Sprintf("MatchmakingMode(%d)", int64(e))
 	}
 }
 
 // The state of a peer known to the session.
 //
 // Deprecated: No longer supported
-type GKPeerConnectionState int32
+type PeerConnectionState int32
 
 const (
 	// A peer not connected to the session, but one that the session can connect to.
-	GKPeerStateAvailable GKPeerConnectionState = 0
+	PeerStateAvailable PeerConnectionState = 0
 	// A peer that is no longer interested in receiving connections.
-	GKPeerStateUnavailable GKPeerConnectionState = 1
+	PeerStateUnavailable PeerConnectionState = 1
 	// A peer connected to the session.
-	GKPeerStateConnected GKPeerConnectionState = 2
+	PeerStateConnected PeerConnectionState = 2
 	// A peer that disconnected from the session.
-	GKPeerStateDisconnected GKPeerConnectionState = 3
+	PeerStateDisconnected PeerConnectionState = 3
 	// A peer attempting to connect to the session.
-	GKPeerStateConnecting     GKPeerConnectionState = 4
-	GKPeerStateConnectedRelay GKPeerConnectionState = 5
+	PeerStateConnecting     PeerConnectionState = 4
+	PeerStateConnectedRelay PeerConnectionState = 5
 )
 
-func (e GKPeerConnectionState) String() string {
+func (e PeerConnectionState) String() string {
 	switch e {
-	case GKPeerStateAvailable:
-		return "GKPeerStateAvailable"
-	case GKPeerStateUnavailable:
-		return "GKPeerStateUnavailable"
-	case GKPeerStateConnected:
-		return "GKPeerStateConnected"
-	case GKPeerStateDisconnected:
-		return "GKPeerStateDisconnected"
-	case GKPeerStateConnecting:
-		return "GKPeerStateConnecting"
-	case GKPeerStateConnectedRelay:
-		return "GKPeerStateConnectedRelay"
+	case PeerStateAvailable:
+		return "PeerStateAvailable"
+	case PeerStateUnavailable:
+		return "PeerStateUnavailable"
+	case PeerStateConnected:
+		return "PeerStateConnected"
+	case PeerStateDisconnected:
+		return "PeerStateDisconnected"
+	case PeerStateConnecting:
+		return "PeerStateConnecting"
+	case PeerStateConnectedRelay:
+		return "PeerStateConnectedRelay"
 	default:
-		return fmt.Sprintf("GKPeerConnectionState(%d)", int64(e))
+		return fmt.Sprintf("PeerConnectionState(%d)", int64(e))
 	}
 }
 
 // The size of a photo that Game Center loads.
-type GKPhotoSize int64
+type PhotoSize int64
 
 const (
-	GKPhotoSizeSmall  GKPhotoSize = 0
-	GKPhotoSizeNormal GKPhotoSize = 1
+	PhotoSizeSmall  PhotoSize = 0
+	PhotoSizeNormal PhotoSize = 1
 )
 
-func (e GKPhotoSize) String() string {
+func (e PhotoSize) String() string {
 	switch e {
-	case GKPhotoSizeSmall:
-		return "GKPhotoSizeSmall"
-	case GKPhotoSizeNormal:
-		return "GKPhotoSizeNormal"
+	case PhotoSizeSmall:
+		return "PhotoSizeSmall"
+	case PhotoSizeNormal:
+		return "PhotoSizeNormal"
 	default:
-		return fmt.Sprintf("GKPhotoSize(%d)", int64(e))
+		return fmt.Sprintf("PhotoSize(%d)", int64(e))
 	}
 }
 
 // Describes the release state of an App Store Connect resource, such as an Achievement or Leaderboard.
 // Bitmask — values may be combined with |.
-type GKReleaseState uint64
+type ReleaseState uint64
 
 const (
 	// The system can’t determine the release state of the resource.
-	GKReleaseStateUnknown GKReleaseState = 0
+	ReleaseStateUnknown ReleaseState = 0
 	// The resource is associated with a release in App Store Connect. This has no relationship with the “archived” state of a resource (i.e., A resource can be release and archived).
-	GKReleaseStateReleased GKReleaseState = 1
+	ReleaseStateReleased ReleaseState = 1
 	// The resource has been created in App Store Connect but isn’t yet associated with a released version of an App.
-	GKReleaseStatePrereleased GKReleaseState = 2
+	ReleaseStatePrereleased ReleaseState = 2
 )
 
-func (e GKReleaseState) String() string {
+func (e ReleaseState) String() string {
 	var parts []string
-	if e&GKReleaseStateReleased != 0 {
-		parts = append(parts, "GKReleaseStateReleased")
+	if e&ReleaseStateReleased != 0 {
+		parts = append(parts, "ReleaseStateReleased")
 	}
-	if e&GKReleaseStatePrereleased != 0 {
-		parts = append(parts, "GKReleaseStatePrereleased")
+	if e&ReleaseStatePrereleased != 0 {
+		parts = append(parts, "ReleaseStatePrereleased")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -700,235 +610,205 @@ func (e GKReleaseState) String() string {
 // The mechanism used to transmit data to other peers.
 //
 // Deprecated: No longer supported
-type GKSendDataMode int32
+type SendDataMode int32
 
 const (
 	// The data is sent continuously until it is successfully received by the intended recipients or the connection times out.
-	GKSendDataReliable GKSendDataMode = 0
+	SendDataReliable SendDataMode = 0
 	// The data is sent once and is not sent again if a transmission error occurred.
-	GKSendDataUnreliable GKSendDataMode = 1
+	SendDataUnreliable SendDataMode = 1
 )
 
-func (e GKSendDataMode) String() string {
+func (e SendDataMode) String() string {
 	switch e {
-	case GKSendDataReliable:
-		return "GKSendDataReliable"
-	case GKSendDataUnreliable:
-		return "GKSendDataUnreliable"
+	case SendDataReliable:
+		return "SendDataReliable"
+	case SendDataUnreliable:
+		return "SendDataUnreliable"
 	default:
-		return fmt.Sprintf("GKSendDataMode(%d)", int64(e))
+		return fmt.Sprintf("SendDataMode(%d)", int64(e))
 	}
 }
 
 // Modes that determine how a session interacts with other peers.
 //
 // Deprecated: No longer supported
-type GKSessionMode int32
+type SessionMode int32
 
 const (
 	// A server advertises itself to local devices using its sessionID property.
-	GKSessionModeServer GKSessionMode = 0
+	SessionModeServer SessionMode = 0
 	// A client searches for servers advertising the same sessionID property.
-	GKSessionModeClient GKSessionMode = 1
+	SessionModeClient SessionMode = 1
 	// A peer advertises like a server and searches like a client.
-	GKSessionModePeer GKSessionMode = 2
+	SessionModePeer SessionMode = 2
 )
 
-func (e GKSessionMode) String() string {
+func (e SessionMode) String() string {
 	switch e {
-	case GKSessionModeServer:
-		return "GKSessionModeServer"
-	case GKSessionModeClient:
-		return "GKSessionModeClient"
-	case GKSessionModePeer:
-		return "GKSessionModePeer"
+	case SessionModeServer:
+		return "SessionModeServer"
+	case SessionModeClient:
+		return "SessionModeClient"
+	case SessionModePeer:
+		return "SessionModePeer"
 	default:
-		return fmt.Sprintf("GKSessionMode(%d)", int64(e))
+		return fmt.Sprintf("SessionMode(%d)", int64(e))
 	}
 }
 
 // The mechanism used to send messages to other players in a game session.
-type GKTransportType int64
+type TransportType int64
 
 const (
 	// The data is sent once and is not sent again if a transmission error occurs.
-	GKTransportTypeUnreliable GKTransportType = 0
+	TransportTypeUnreliable TransportType = 0
 	// The data is sent continuously until it is successfully received by the intended recipients or the connection times out.
-	GKTransportTypeReliable GKTransportType = 1
+	TransportTypeReliable TransportType = 1
 )
 
-func (e GKTransportType) String() string {
+func (e TransportType) String() string {
 	switch e {
-	case GKTransportTypeUnreliable:
-		return "GKTransportTypeUnreliable"
-	case GKTransportTypeReliable:
-		return "GKTransportTypeReliable"
+	case TransportTypeUnreliable:
+		return "TransportTypeUnreliable"
+	case TransportTypeReliable:
+		return "TransportTypeReliable"
 	default:
-		return fmt.Sprintf("GKTransportType(%d)", int64(e))
+		return fmt.Sprintf("TransportType(%d)", int64(e))
 	}
 }
 
 // The status of an exchange or reply.
-type GKTurnBasedExchangeStatus int64
+type TurnBasedExchangeStatus int64
 
 const (
 	// The state of the exchange request is unknown.
-	GKTurnBasedExchangeStatusUnknown GKTurnBasedExchangeStatus = 0
+	TurnBasedExchangeStatusUnknown TurnBasedExchangeStatus = 0
 	// GameKit sent the exchange request to recipients but not all recipients replied.
-	GKTurnBasedExchangeStatusActive GKTurnBasedExchangeStatus = 1
+	TurnBasedExchangeStatusActive TurnBasedExchangeStatus = 1
 	// All recipients of the exchange request replied.
-	GKTurnBasedExchangeStatusComplete GKTurnBasedExchangeStatus = 2
+	TurnBasedExchangeStatusComplete TurnBasedExchangeStatus = 2
 	// The current participant saved the exchange request.
-	GKTurnBasedExchangeStatusResolved GKTurnBasedExchangeStatus = 3
+	TurnBasedExchangeStatusResolved TurnBasedExchangeStatus = 3
 	// The sender canceled the exchange request.
-	GKTurnBasedExchangeStatusCanceled GKTurnBasedExchangeStatus = 4
+	TurnBasedExchangeStatusCanceled TurnBasedExchangeStatus = 4
 )
 
-func (e GKTurnBasedExchangeStatus) String() string {
+func (e TurnBasedExchangeStatus) String() string {
 	switch e {
-	case GKTurnBasedExchangeStatusUnknown:
-		return "GKTurnBasedExchangeStatusUnknown"
-	case GKTurnBasedExchangeStatusActive:
-		return "GKTurnBasedExchangeStatusActive"
-	case GKTurnBasedExchangeStatusComplete:
-		return "GKTurnBasedExchangeStatusComplete"
-	case GKTurnBasedExchangeStatusResolved:
-		return "GKTurnBasedExchangeStatusResolved"
-	case GKTurnBasedExchangeStatusCanceled:
-		return "GKTurnBasedExchangeStatusCanceled"
+	case TurnBasedExchangeStatusUnknown:
+		return "TurnBasedExchangeStatusUnknown"
+	case TurnBasedExchangeStatusActive:
+		return "TurnBasedExchangeStatusActive"
+	case TurnBasedExchangeStatusComplete:
+		return "TurnBasedExchangeStatusComplete"
+	case TurnBasedExchangeStatusResolved:
+		return "TurnBasedExchangeStatusResolved"
+	case TurnBasedExchangeStatusCanceled:
+		return "TurnBasedExchangeStatusCanceled"
 	default:
-		return fmt.Sprintf("GKTurnBasedExchangeStatus(%d)", int64(e))
+		return fmt.Sprintf("TurnBasedExchangeStatus(%d)", int64(e))
 	}
 }
 
 // The state of a participant when they forfeit a match or when a match ends.
-type GKTurnBasedMatchOutcome int64
+type TurnBasedMatchOutcome int64
 
 const (
-	GKTurnBasedMatchOutcomeNone        GKTurnBasedMatchOutcome = 0
-	GKTurnBasedMatchOutcomeQuit        GKTurnBasedMatchOutcome = 1
-	GKTurnBasedMatchOutcomeWon         GKTurnBasedMatchOutcome = 2
-	GKTurnBasedMatchOutcomeLost        GKTurnBasedMatchOutcome = 3
-	GKTurnBasedMatchOutcomeTied        GKTurnBasedMatchOutcome = 4
-	GKTurnBasedMatchOutcomeTimeExpired GKTurnBasedMatchOutcome = 5
-	GKTurnBasedMatchOutcomeFirst       GKTurnBasedMatchOutcome = 6
-	GKTurnBasedMatchOutcomeSecond      GKTurnBasedMatchOutcome = 7
-	GKTurnBasedMatchOutcomeThird       GKTurnBasedMatchOutcome = 8
-	GKTurnBasedMatchOutcomeFourth      GKTurnBasedMatchOutcome = 9
-	GKTurnBasedMatchOutcomeCustomRange GKTurnBasedMatchOutcome = 16711680
+	TurnBasedMatchOutcomeNone        TurnBasedMatchOutcome = 0
+	TurnBasedMatchOutcomeQuit        TurnBasedMatchOutcome = 1
+	TurnBasedMatchOutcomeWon         TurnBasedMatchOutcome = 2
+	TurnBasedMatchOutcomeLost        TurnBasedMatchOutcome = 3
+	TurnBasedMatchOutcomeTied        TurnBasedMatchOutcome = 4
+	TurnBasedMatchOutcomeTimeExpired TurnBasedMatchOutcome = 5
+	TurnBasedMatchOutcomeFirst       TurnBasedMatchOutcome = 6
+	TurnBasedMatchOutcomeSecond      TurnBasedMatchOutcome = 7
+	TurnBasedMatchOutcomeThird       TurnBasedMatchOutcome = 8
+	TurnBasedMatchOutcomeFourth      TurnBasedMatchOutcome = 9
+	TurnBasedMatchOutcomeCustomRange TurnBasedMatchOutcome = 16711680
 )
 
-func (e GKTurnBasedMatchOutcome) String() string {
+func (e TurnBasedMatchOutcome) String() string {
 	switch e {
-	case GKTurnBasedMatchOutcomeNone:
-		return "GKTurnBasedMatchOutcomeNone"
-	case GKTurnBasedMatchOutcomeQuit:
-		return "GKTurnBasedMatchOutcomeQuit"
-	case GKTurnBasedMatchOutcomeWon:
-		return "GKTurnBasedMatchOutcomeWon"
-	case GKTurnBasedMatchOutcomeLost:
-		return "GKTurnBasedMatchOutcomeLost"
-	case GKTurnBasedMatchOutcomeTied:
-		return "GKTurnBasedMatchOutcomeTied"
-	case GKTurnBasedMatchOutcomeTimeExpired:
-		return "GKTurnBasedMatchOutcomeTimeExpired"
-	case GKTurnBasedMatchOutcomeFirst:
-		return "GKTurnBasedMatchOutcomeFirst"
-	case GKTurnBasedMatchOutcomeSecond:
-		return "GKTurnBasedMatchOutcomeSecond"
-	case GKTurnBasedMatchOutcomeThird:
-		return "GKTurnBasedMatchOutcomeThird"
-	case GKTurnBasedMatchOutcomeFourth:
-		return "GKTurnBasedMatchOutcomeFourth"
-	case GKTurnBasedMatchOutcomeCustomRange:
-		return "GKTurnBasedMatchOutcomeCustomRange"
+	case TurnBasedMatchOutcomeNone:
+		return "TurnBasedMatchOutcomeNone"
+	case TurnBasedMatchOutcomeQuit:
+		return "TurnBasedMatchOutcomeQuit"
+	case TurnBasedMatchOutcomeWon:
+		return "TurnBasedMatchOutcomeWon"
+	case TurnBasedMatchOutcomeLost:
+		return "TurnBasedMatchOutcomeLost"
+	case TurnBasedMatchOutcomeTied:
+		return "TurnBasedMatchOutcomeTied"
+	case TurnBasedMatchOutcomeTimeExpired:
+		return "TurnBasedMatchOutcomeTimeExpired"
+	case TurnBasedMatchOutcomeFirst:
+		return "TurnBasedMatchOutcomeFirst"
+	case TurnBasedMatchOutcomeSecond:
+		return "TurnBasedMatchOutcomeSecond"
+	case TurnBasedMatchOutcomeThird:
+		return "TurnBasedMatchOutcomeThird"
+	case TurnBasedMatchOutcomeFourth:
+		return "TurnBasedMatchOutcomeFourth"
+	case TurnBasedMatchOutcomeCustomRange:
+		return "TurnBasedMatchOutcomeCustomRange"
 	default:
-		return fmt.Sprintf("GKTurnBasedMatchOutcome(%d)", int64(e))
+		return fmt.Sprintf("TurnBasedMatchOutcome(%d)", int64(e))
 	}
 }
 
 // The states of a match from when it’s created to when it ends.
-type GKTurnBasedMatchStatus int64
+type TurnBasedMatchStatus int64
 
 const (
-	GKTurnBasedMatchStatusUnknown  GKTurnBasedMatchStatus = 0
-	GKTurnBasedMatchStatusOpen     GKTurnBasedMatchStatus = 1
-	GKTurnBasedMatchStatusEnded    GKTurnBasedMatchStatus = 2
-	GKTurnBasedMatchStatusMatching GKTurnBasedMatchStatus = 3
+	TurnBasedMatchStatusUnknown  TurnBasedMatchStatus = 0
+	TurnBasedMatchStatusOpen     TurnBasedMatchStatus = 1
+	TurnBasedMatchStatusEnded    TurnBasedMatchStatus = 2
+	TurnBasedMatchStatusMatching TurnBasedMatchStatus = 3
 )
 
-func (e GKTurnBasedMatchStatus) String() string {
+func (e TurnBasedMatchStatus) String() string {
 	switch e {
-	case GKTurnBasedMatchStatusUnknown:
-		return "GKTurnBasedMatchStatusUnknown"
-	case GKTurnBasedMatchStatusOpen:
-		return "GKTurnBasedMatchStatusOpen"
-	case GKTurnBasedMatchStatusEnded:
-		return "GKTurnBasedMatchStatusEnded"
-	case GKTurnBasedMatchStatusMatching:
-		return "GKTurnBasedMatchStatusMatching"
+	case TurnBasedMatchStatusUnknown:
+		return "TurnBasedMatchStatusUnknown"
+	case TurnBasedMatchStatusOpen:
+		return "TurnBasedMatchStatusOpen"
+	case TurnBasedMatchStatusEnded:
+		return "TurnBasedMatchStatusEnded"
+	case TurnBasedMatchStatusMatching:
+		return "TurnBasedMatchStatusMatching"
 	default:
-		return fmt.Sprintf("GKTurnBasedMatchStatus(%d)", int64(e))
+		return fmt.Sprintf("TurnBasedMatchStatus(%d)", int64(e))
 	}
 }
 
 // The state the participant is in during the match.
-type GKTurnBasedParticipantStatus int64
+type TurnBasedParticipantStatus int64
 
 const (
-	GKTurnBasedParticipantStatusUnknown  GKTurnBasedParticipantStatus = 0
-	GKTurnBasedParticipantStatusInvited  GKTurnBasedParticipantStatus = 1
-	GKTurnBasedParticipantStatusDeclined GKTurnBasedParticipantStatus = 2
-	GKTurnBasedParticipantStatusMatching GKTurnBasedParticipantStatus = 3
-	GKTurnBasedParticipantStatusActive   GKTurnBasedParticipantStatus = 4
-	GKTurnBasedParticipantStatusDone     GKTurnBasedParticipantStatus = 5
+	TurnBasedParticipantStatusUnknown  TurnBasedParticipantStatus = 0
+	TurnBasedParticipantStatusInvited  TurnBasedParticipantStatus = 1
+	TurnBasedParticipantStatusDeclined TurnBasedParticipantStatus = 2
+	TurnBasedParticipantStatusMatching TurnBasedParticipantStatus = 3
+	TurnBasedParticipantStatusActive   TurnBasedParticipantStatus = 4
+	TurnBasedParticipantStatusDone     TurnBasedParticipantStatus = 5
 )
 
-func (e GKTurnBasedParticipantStatus) String() string {
+func (e TurnBasedParticipantStatus) String() string {
 	switch e {
-	case GKTurnBasedParticipantStatusUnknown:
-		return "GKTurnBasedParticipantStatusUnknown"
-	case GKTurnBasedParticipantStatusInvited:
-		return "GKTurnBasedParticipantStatusInvited"
-	case GKTurnBasedParticipantStatusDeclined:
-		return "GKTurnBasedParticipantStatusDeclined"
-	case GKTurnBasedParticipantStatusMatching:
-		return "GKTurnBasedParticipantStatusMatching"
-	case GKTurnBasedParticipantStatusActive:
-		return "GKTurnBasedParticipantStatusActive"
-	case GKTurnBasedParticipantStatusDone:
-		return "GKTurnBasedParticipantStatusDone"
+	case TurnBasedParticipantStatusUnknown:
+		return "TurnBasedParticipantStatusUnknown"
+	case TurnBasedParticipantStatusInvited:
+		return "TurnBasedParticipantStatusInvited"
+	case TurnBasedParticipantStatusDeclined:
+		return "TurnBasedParticipantStatusDeclined"
+	case TurnBasedParticipantStatusMatching:
+		return "TurnBasedParticipantStatusMatching"
+	case TurnBasedParticipantStatusActive:
+		return "TurnBasedParticipantStatusActive"
+	case TurnBasedParticipantStatusDone:
+		return "TurnBasedParticipantStatusDone"
 	default:
-		return fmt.Sprintf("GKTurnBasedParticipantStatus(%d)", int64(e))
-	}
-}
-
-// The state of a player in a voice chat.
-//
-// Deprecated: No longer supported
-type GKVoiceChatPlayerState int64
-
-const (
-	GKVoiceChatPlayerConnected    GKVoiceChatPlayerState = 0
-	GKVoiceChatPlayerDisconnected GKVoiceChatPlayerState = 1
-	GKVoiceChatPlayerSpeaking     GKVoiceChatPlayerState = 2
-	GKVoiceChatPlayerSilent       GKVoiceChatPlayerState = 3
-	GKVoiceChatPlayerConnecting   GKVoiceChatPlayerState = 4
-)
-
-func (e GKVoiceChatPlayerState) String() string {
-	switch e {
-	case GKVoiceChatPlayerConnected:
-		return "GKVoiceChatPlayerConnected"
-	case GKVoiceChatPlayerDisconnected:
-		return "GKVoiceChatPlayerDisconnected"
-	case GKVoiceChatPlayerSpeaking:
-		return "GKVoiceChatPlayerSpeaking"
-	case GKVoiceChatPlayerSilent:
-		return "GKVoiceChatPlayerSilent"
-	case GKVoiceChatPlayerConnecting:
-		return "GKVoiceChatPlayerConnecting"
-	default:
-		return fmt.Sprintf("GKVoiceChatPlayerState(%d)", int64(e))
+		return fmt.Sprintf("TurnBasedParticipantStatus(%d)", int64(e))
 	}
 }

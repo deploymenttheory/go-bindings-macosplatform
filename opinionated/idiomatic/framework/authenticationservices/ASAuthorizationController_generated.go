@@ -5,142 +5,98 @@
 package authenticationservices
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/authenticationservices"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A controller that manages authorization requests that a provider creates.
 //
-// AuthorizationController wraps [raw.ASAuthorizationController] with a fluent Go API.
+// AuthorizationController is an idiomatic wrapper over the Objective-C class ASAuthorizationController.
 type AuthorizationController struct {
-	inner *raw.ASAuthorizationController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ASAuthorizationController].
-func (x *AuthorizationController) Unwrap() *raw.ASAuthorizationController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AuthorizationController) ID() objc.ID { return x.inner.Ptr() }
-
-// AuthorizationControllerFromID adopts an existing object pointer as a AuthorizationController (nil for 0).
+// AuthorizationControllerFromID adopts an existing Objective-C object as a AuthorizationController
+// (nil for 0), retaining it and registering a release finalizer.
 func AuthorizationControllerFromID(id objc.ID) *AuthorizationController {
 	if id == 0 {
 		return nil
 	}
-	return &AuthorizationController{inner: raw.ASAuthorizationControllerFromID(id)}
+	x := &AuthorizationController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// authorizationControllerAdopt wraps an Objective-C object that this code just created as a
+// AuthorizationController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func authorizationControllerAdopt(id objc.ID) *AuthorizationController {
+	if id == 0 {
+		return nil
+	}
+	x := &AuthorizationController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AuthorizationController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AuthorizationController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AuthorizationController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a controller from a collection of authorization requests.
 //
-// NewAuthorizationControllerWithAuthorizationRequests creates a new [AuthorizationController].
-func NewAuthorizationControllerWithAuthorizationRequests(authorizationRequests ...AuthorizationRequestProvider) *AuthorizationController {
-	_ptrs := make([]objc.ID, len(authorizationRequests))
-	for _i, _v := range authorizationRequests {
-		_ptrs[_i] = _v.asAuthorizationRequest().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.ASAuthorizationRequest]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.ASAuthorizationRequest](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.ASAuthorizationRequest](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("ASAuthorizationController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthorizationRequests:"), _arg0.Ptr())
-	return &AuthorizationController{inner: raw.ASAuthorizationControllerFromID(_id)}
-}
-
-// A delegate that the authorization controller informs about the success or failure of an authorization attempt.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *AuthorizationController) WithDelegate(delegate raw.ASAuthorizationControllerDelegate) *AuthorizationController {
-	x.inner.SetDelegate(delegate)
-	return x
-}
-
-// A delegate that provides a display context in which the system can present an authorization interface to the user.
-//
-// WithPresentationContextProvider sets the presentationContextProvider property and returns the receiver for chaining.
-func (x *AuthorizationController) WithPresentationContextProvider(presentationContextProvider raw.ASAuthorizationControllerPresentationContextProviding) *AuthorizationController {
-	x.inner.SetPresentationContextProvider(presentationContextProvider)
-	return x
+// NewAuthorizationControllerWithAuthorizationRequests creates a new AuthorizationController.
+func NewAuthorizationControllerWithAuthorizationRequests(authorizationRequests []*AuthorizationRequest) *AuthorizationController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("ASAuthorizationController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAuthorizationRequests:"), purego.SliceToNSArray(authorizationRequests, func(_v *AuthorizationRequest) objc.ID { return objref.IDOf(_v) }))
+	return authorizationControllerAdopt(_id)
 }
 
 // Starts the specified authorization flows during controller initialization.
-//
-// PerformRequests calls the underlying PerformRequests.
 func (x *AuthorizationController) PerformRequests() {
-	x.inner.PerformRequests()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performRequests"))
 }
 
 // Starts the specified authorization flows during controller initialization.
-//
-// PerformRequestsWithOptions calls the underlying PerformRequestsWithOptions.
-func (x *AuthorizationController) PerformRequestsWithOptions(options ASAuthorizationControllerRequestOptions) {
-	x.inner.PerformRequestsWithOptions(raw.ASAuthorizationControllerRequestOptions(options))
+func (x *AuthorizationController) PerformRequestsWithOptions(options AuthorizationControllerRequestOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("performRequestsWithOptions:"), options)
 }
 
 // Cancels any active authorization requests.
-//
-// Cancel calls the underlying Cancel.
 func (x *AuthorizationController) Cancel() {
-	x.inner.Cancel()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cancel"))
 }
 
-// @abstract Authorization requests that are being serviced by this controller
+// Authorization requests that are being serviced by this controller
 //
 // AuthorizationRequests returns the collection as a Go slice.
 func (x *AuthorizationController) AuthorizationRequests() []*AuthorizationRequest {
-	arr := x.inner.AuthorizationRequests()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *AuthorizationRequest {
-		return &AuthorizationRequest{inner: raw.ASAuthorizationRequestFromID(purego.Retain(_id))}
-	})
-}
-
-// @abstract This delegate will be invoked upon completion of the authorization indicating success or failure. Delegate is required to receive the results of authorization.
-//
-// Delegate calls the underlying Delegate.
-func (x *AuthorizationController) Delegate() raw.ASAuthorizationControllerDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *AuthorizationController) SetDelegate(delegate raw.ASAuthorizationControllerDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @abstract This delegate will be invoked upon needing a presentation context to display authorization UI.
-//
-// PresentationContextProvider calls the underlying PresentationContextProvider.
-func (x *AuthorizationController) PresentationContextProvider() raw.ASAuthorizationControllerPresentationContextProviding {
-	return x.inner.PresentationContextProvider()
-}
-
-// SetPresentationContextProvider calls the underlying SetPresentationContextProvider.
-func (x *AuthorizationController) SetPresentationContextProvider(presentationContextProvider raw.ASAuthorizationControllerPresentationContextProviding) {
-	x.inner.SetPresentationContextProvider(presentationContextProvider)
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authorizationRequests"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *AuthorizationRequest { return AuthorizationRequestFromID(_id) })
 }
 
 // AuthorizationControllerable is the interface implemented by [AuthorizationController], for mocking and DI.
 type AuthorizationControllerable interface {
-	Unwrap() *raw.ASAuthorizationController
-	WithDelegate(delegate raw.ASAuthorizationControllerDelegate) *AuthorizationController
-	WithPresentationContextProvider(presentationContextProvider raw.ASAuthorizationControllerPresentationContextProviding) *AuthorizationController
+	obj.Object
 	PerformRequests()
-	PerformRequestsWithOptions(options ASAuthorizationControllerRequestOptions)
+	PerformRequestsWithOptions(options AuthorizationControllerRequestOptions)
 	Cancel()
 	AuthorizationRequests() []*AuthorizationRequest
-	Delegate() raw.ASAuthorizationControllerDelegate
-	SetDelegate(delegate raw.ASAuthorizationControllerDelegate)
-	PresentationContextProvider() raw.ASAuthorizationControllerPresentationContextProviding
-	SetPresentationContextProvider(presentationContextProvider raw.ASAuthorizationControllerPresentationContextProviding)
 }
 
 var _ AuthorizationControllerable = (*AuthorizationController)(nil)

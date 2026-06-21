@@ -5,85 +5,108 @@
 package modelio
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A lightweight reference to a URL from which to load texture data.
 //
-// URLTexture wraps [raw.MDLURLTexture] with a fluent Go API.
+// URLTexture is an idiomatic wrapper over the Objective-C class MDLURLTexture.
 type URLTexture struct {
-	inner *raw.MDLURLTexture
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MDLURLTexture].
-func (x *URLTexture) Unwrap() *raw.MDLURLTexture { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLTexture) ID() objc.ID { return x.inner.Ptr() }
-
-// URLTextureFromID adopts an existing object pointer as a URLTexture (nil for 0).
+// URLTextureFromID adopts an existing Objective-C object as a URLTexture
+// (nil for 0), retaining it and registering a release finalizer.
 func URLTextureFromID(id objc.ID) *URLTexture {
 	if id == 0 {
 		return nil
 	}
-	return &URLTexture{inner: raw.MDLURLTextureFromID(id)}
+	x := &URLTexture{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// uRLTextureAdopt wraps an Objective-C object that this code just created as a
+// URLTexture (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLTextureAdopt(id objc.ID) *URLTexture {
+	if id == 0 {
+		return nil
+	}
+	x := &URLTexture{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *URLTexture) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLTexture) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLTexture) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a texture that loads its texel data from a file at the specified URL.
 //
-// NewURLTextureWithURLName creates a new [URLTexture].
+// NewURLTextureWithURLName creates a new URLTexture.
 func NewURLTextureWithURLName(uRL string, name string) *URLTexture {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MDLURLTexture")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:name:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), foundation.NSStringStringWithUTF8String(name).Ptr())
-	return &URLTexture{inner: raw.MDLURLTextureFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MDLURLTexture")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:name:"), rt.FileURL(uRL), purego.NSString(name))
+	return uRLTextureAdopt(_id)
 }
 
 // The URL from which to load texture data.
 //
-// WithURL sets the uRL property and returns the receiver for chaining.
+// WithURL sets uRL and returns the receiver so calls can be chained.
 func (x *URLTexture) WithURL(uRL string) *URLTexture {
-	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 	return x
 }
 
 // A Boolean value that indicates whether the texture is a cube textures.
 //
-// WithIsCube sets the isCube property and returns the receiver for chaining.
+// WithIsCube sets isCube and returns the receiver so calls can be chained.
 func (x *URLTexture) WithIsCube(isCube bool) *URLTexture {
-	x.inner.MDLTexture.SetIsCube(isCube)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsCube:"), isCube)
 	return x
 }
 
-// hasAlphaValues @summary Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
+// hasAlphaValues Can be overridden. If not overridden, hasAlpha will be NO if the texture does not have an alpha channel. It wil be YES if the texture has an alpha channel and there is at least one non-opaque texel in it.
 //
-// WithHasAlphaValues sets the hasAlphaValues property and returns the receiver for chaining.
+// WithHasAlphaValues sets hasAlphaValues and returns the receiver so calls can be chained.
 func (x *URLTexture) WithHasAlphaValues(hasAlphaValues bool) *URLTexture {
-	x.inner.MDLTexture.SetHasAlphaValues(hasAlphaValues)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHasAlphaValues:"), hasAlphaValues)
 	return x
 }
 
-// URL calls the underlying URL.
-func (x *URLTexture) URL() *foundation.NSURL {
-	return x.inner.URL()
+func (x *URLTexture) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// SetURL calls the underlying SetURL.
 func (x *URLTexture) SetURL(uRL string) {
-	x.inner.SetURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setURL:"), rt.FileURL(uRL))
 }
-
-func (x *URLTexture) asTexture() *raw.MDLTexture { return &x.inner.MDLTexture }
 
 // URLTextureable is the interface implemented by [URLTexture], for mocking and DI.
 type URLTextureable interface {
-	Unwrap() *raw.MDLURLTexture
+	obj.Object
 	WithURL(uRL string) *URLTexture
 	WithIsCube(isCube bool) *URLTexture
 	WithHasAlphaValues(hasAlphaValues bool) *URLTexture
-	URL() *foundation.NSURL
+	URL() obj.Object
 	SetURL(uRL string)
 }
 

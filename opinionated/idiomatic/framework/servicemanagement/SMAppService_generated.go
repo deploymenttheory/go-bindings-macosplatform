@@ -6,54 +6,89 @@ package servicemanagement
 
 import (
 	"context"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/servicemanagement"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object the framework uses to control helper executables that live inside an app’s main bundle.
 //
-// AppService wraps [raw.SMAppService] with a fluent Go API.
+// AppService is an idiomatic wrapper over the Objective-C class SMAppService.
 type AppService struct {
-	inner *raw.SMAppService
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SMAppService].
-func (x *AppService) Unwrap() *raw.SMAppService { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AppService) ID() objc.ID { return x.inner.Ptr() }
-
-// AppServiceFromID adopts an existing object pointer as a AppService (nil for 0).
+// AppServiceFromID adopts an existing Objective-C object as a AppService
+// (nil for 0), retaining it and registering a release finalizer.
 func AppServiceFromID(id objc.ID) *AppService {
 	if id == 0 {
 		return nil
 	}
-	return &AppService{inner: raw.SMAppServiceFromID(id)}
+	x := &AppService{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAppService creates a new [AppService].
+// appServiceAdopt wraps an Objective-C object that this code just created as a
+// AppService (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func appServiceAdopt(id objc.ID) *AppService {
+	if id == 0 {
+		return nil
+	}
+	x := &AppService{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AppService) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AppService) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AppService) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAppService creates a new AppService.
 func NewAppService() *AppService {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SMAppService")), objc.RegisterName("new"))
-	return &AppService{inner: raw.SMAppServiceFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SMAppService")), objc.RegisterName("new"))
+	return appServiceAdopt(_id)
 }
 
 // Registers the service so it can begin launching subject to user approval.
 //
-// RegisterAndReturnError returns any validation error.
+// RegisterAndReturnError returns an error if the operation did not succeed.
 func (x *AppService) RegisterAndReturnError() error {
-	_, err := x.inner.RegisterAndReturnError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Unregisters the service so the system no longer launches it.
 //
-// UnregisterAndReturnError returns any validation error.
+// UnregisterAndReturnError returns an error if the operation did not succeed.
 func (x *AppService) UnregisterAndReturnError() error {
-	_, err := x.inner.UnregisterAndReturnError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("unregisterAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Unregisters the service so the system no longer launches it and calls a completion handler you provide with the resulting error value.
@@ -61,13 +96,12 @@ func (x *AppService) UnregisterAndReturnError() error {
 // Unregister blocks until the operation completes or ctx is cancelled.
 func (x *AppService) Unregister(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.UnregisterWithCompletionHandler(func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unregisterWithCompletionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -76,20 +110,19 @@ func (x *AppService) Unregister(ctx context.Context) error {
 	}
 }
 
-// @property status @abstract Returns the status for the service @discussion The status API can be used to check what selection a user has made regarding allowing the service to launch. If the user has denied execution, the return value will be SMAppServiceRequiresApproval. If the service has been unregistered, the return value will be SMAppServiceNotRegistered
-//
-// Status calls the underlying Status.
-func (x *AppService) Status() SMAppServiceStatus {
-	return SMAppServiceStatus(x.inner.Status())
+// Returns the status for the service The status API can be used to check what selection a user has made regarding allowing the service to launch. If the user has denied execution, the return value will be SMAppServiceRequiresApproval. If the service has been unregistered, the return value will be SMAppServiceNotRegistered
+func (x *AppService) Status() AppServiceStatus {
+	_r := objc.Send[AppServiceStatus](objref.IDOf(x), objc.RegisterName("status"))
+	return _r
 }
 
 // AppServiceable is the interface implemented by [AppService], for mocking and DI.
 type AppServiceable interface {
-	Unwrap() *raw.SMAppService
+	obj.Object
 	RegisterAndReturnError() error
 	UnregisterAndReturnError() error
 	Unregister(ctx context.Context) error
-	Status() SMAppServiceStatus
+	Status() AppServiceStatus
 }
 
 var _ AppServiceable = (*AppService)(nil)

@@ -5,132 +5,150 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A command that creates a scriptable object.
 //
-// CreateCommand wraps [raw.NSCreateCommand] with a fluent Go API.
+// CreateCommand is an idiomatic wrapper over the Objective-C class NSCreateCommand.
 type CreateCommand struct {
-	inner *raw.NSCreateCommand
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCreateCommand].
-func (x *CreateCommand) Unwrap() *raw.NSCreateCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CreateCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// CreateCommandFromID adopts an existing object pointer as a CreateCommand (nil for 0).
+// CreateCommandFromID adopts an existing Objective-C object as a CreateCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func CreateCommandFromID(id objc.ID) *CreateCommand {
 	if id == 0 {
 		return nil
 	}
-	return &CreateCommand{inner: raw.NSCreateCommandFromID(id)}
+	x := &CreateCommand{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCreateCommand creates a new [CreateCommand].
+// createCommandAdopt wraps an Objective-C object that this code just created as a
+// CreateCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func createCommandAdopt(id objc.ID) *CreateCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &CreateCommand{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CreateCommand) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CreateCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CreateCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCreateCommand creates a new CreateCommand.
 func NewCreateCommand() *CreateCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCreateCommand")), objc.RegisterName("new"))
-	return &CreateCommand{inner: raw.NSCreateCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCreateCommand")), objc.RegisterName("new"))
+	return createCommandAdopt(_id)
 }
 
 // Sets the object that corresponds to the direct parameter of the Apple event from which the receiver derives.
 //
-// WithDirectParameter sets the directParameter property and returns the receiver for chaining.
-func (x *CreateCommand) WithDirectParameter(directParameter objc.ID) *CreateCommand {
-	x.inner.NSScriptCommand.SetDirectParameter(directParameter)
+// WithDirectParameter sets directParameter and returns the receiver so calls can be chained.
+func (x *CreateCommand) WithDirectParameter(directParameter obj.Object) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDirectParameter:"), objref.IDOf(directParameter))
 	return x
 }
 
 // Sets the object specifier to receiversSpec that, when evaluated, indicates the receiver or receivers of the command.
 //
-// WithReceiversSpecifier sets the receiversSpecifier property and returns the receiver for chaining.
+// WithReceiversSpecifier sets receiversSpecifier and returns the receiver so calls can be chained.
 func (x *CreateCommand) WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CreateCommand {
-	x.inner.NSScriptCommand.SetReceiversSpecifier(receiversSpecifier.asScriptObjectSpecifier())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setReceiversSpecifier:"), objref.IDOf(receiversSpecifier))
 	return x
 }
 
 // Sets the arguments of the command to args.
 //
-// WithArguments sets the arguments property and returns the receiver for chaining.
-func (x *CreateCommand) WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *CreateCommand {
-	x.inner.NSScriptCommand.SetArguments(arguments)
+// WithArguments sets arguments and returns the receiver so calls can be chained.
+func (x *CreateCommand) WithArguments(arguments obj.Object) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setArguments:"), objref.IDOf(arguments))
 	return x
 }
 
 // Sets a script error number that is associated with the execution of the command and is returned in the reply Apple event, if a reply was requested by the sender.
 //
-// WithScriptErrorNumber sets the scriptErrorNumber property and returns the receiver for chaining.
+// WithScriptErrorNumber sets scriptErrorNumber and returns the receiver so calls can be chained.
 func (x *CreateCommand) WithScriptErrorNumber(scriptErrorNumber int) *CreateCommand {
-	x.inner.NSScriptCommand.SetScriptErrorNumber(scriptErrorNumber)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorNumber:"), scriptErrorNumber)
 	return x
 }
 
 // Sets a descriptor for an object that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 //
-// WithScriptErrorOffendingObjectDescriptor sets the scriptErrorOffendingObjectDescriptor property and returns the receiver for chaining.
+// WithScriptErrorOffendingObjectDescriptor sets scriptErrorOffendingObjectDescriptor and returns the receiver so calls can be chained.
 func (x *CreateCommand) WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *CreateCommand {
-	x.inner.NSScriptCommand.SetScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorOffendingObjectDescriptor:"), objref.IDOf(scriptErrorOffendingObjectDescriptor))
 	return x
 }
 
 // Sets a descriptor for the expected type that will be put in the reply Apple event if the sender requested a reply, execution of the receiver completes, and an error number was set.
 //
-// WithScriptErrorExpectedTypeDescriptor sets the scriptErrorExpectedTypeDescriptor property and returns the receiver for chaining.
+// WithScriptErrorExpectedTypeDescriptor sets scriptErrorExpectedTypeDescriptor and returns the receiver so calls can be chained.
 func (x *CreateCommand) WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CreateCommand {
-	x.inner.NSScriptCommand.SetScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorExpectedTypeDescriptor:"), objref.IDOf(scriptErrorExpectedTypeDescriptor))
 	return x
 }
 
 // Sets a script error string that is associated with execution of the command.
 //
-// WithScriptErrorString sets the scriptErrorString property and returns the receiver for chaining.
-func (x *CreateCommand) WithScriptErrorString(scriptErrorString string) *CreateCommand {
-	x.inner.NSScriptCommand.SetScriptErrorString(foundation.NSStringStringWithUTF8String(scriptErrorString))
+// WithScriptErrorString sets scriptErrorString and returns the receiver so calls can be chained.
+func (x *CreateCommand) WithScriptErrorString(scriptErrorString StringProvider) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptErrorString:"), objref.IDOf(scriptErrorString))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *CreateCommand) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CreateCommand {
-	x.inner.NSScriptCommand.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *CreateCommand) WithScriptingProperties(scriptingProperties obj.Object) *CreateCommand {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// CreateClassDescription calls the underlying CreateClassDescription.
 func (x *CreateCommand) CreateClassDescription() *ScriptClassDescription {
-	_r := x.inner.CreateClassDescription()
-	if _r == nil {
-		return nil
-	}
-	return &ScriptClassDescription{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("createClassDescription"))
+	return ScriptClassDescriptionFromID(_r)
 }
 
-// ResolvedKeyDictionary calls the underlying ResolvedKeyDictionary.
-func (x *CreateCommand) ResolvedKeyDictionary() *raw.NSDictionary[*raw.NSString, objc.ID] {
-	return x.inner.ResolvedKeyDictionary()
+func (x *CreateCommand) ResolvedKeyDictionary() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resolvedKeyDictionary"))
+	return obj.Wrap(_r)
 }
-
-func (x *CreateCommand) asScriptCommand() *raw.NSScriptCommand { return &x.inner.NSScriptCommand }
-
-func (x *CreateCommand) asObject() *raw.NSObject { return &x.inner.NSScriptCommand.NSObject }
 
 // CreateCommandable is the interface implemented by [CreateCommand], for mocking and DI.
 type CreateCommandable interface {
-	Unwrap() *raw.NSCreateCommand
-	WithDirectParameter(directParameter objc.ID) *CreateCommand
+	obj.Object
+	WithDirectParameter(directParameter obj.Object) *CreateCommand
 	WithReceiversSpecifier(receiversSpecifier ScriptObjectSpecifierProvider) *CreateCommand
-	WithArguments(arguments *raw.NSDictionary[*raw.NSString, objc.ID]) *CreateCommand
+	WithArguments(arguments obj.Object) *CreateCommand
 	WithScriptErrorNumber(scriptErrorNumber int) *CreateCommand
 	WithScriptErrorOffendingObjectDescriptor(scriptErrorOffendingObjectDescriptor *AppleEventDescriptor) *CreateCommand
 	WithScriptErrorExpectedTypeDescriptor(scriptErrorExpectedTypeDescriptor *AppleEventDescriptor) *CreateCommand
-	WithScriptErrorString(scriptErrorString string) *CreateCommand
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *CreateCommand
+	WithScriptErrorString(scriptErrorString StringProvider) *CreateCommand
+	WithScriptingProperties(scriptingProperties obj.Object) *CreateCommand
 	CreateClassDescription() *ScriptClassDescription
-	ResolvedKeyDictionary() *raw.NSDictionary[*raw.NSString, objc.ID]
+	ResolvedKeyDictionary() obj.Object
 }
 
 var _ CreateCommandable = (*CreateCommand)(nil)

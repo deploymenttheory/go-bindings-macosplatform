@@ -5,62 +5,68 @@
 package videotoolbox
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that wraps video frames to send to the processor, as source, reference, or output frames.
 //
-// FrameProcessorFrame wraps [raw.VTFrameProcessorFrame] with a fluent Go API.
+// FrameProcessorFrame is an idiomatic wrapper over the Objective-C class VTFrameProcessorFrame.
 type FrameProcessorFrame struct {
-	inner *raw.VTFrameProcessorFrame
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VTFrameProcessorFrame].
-func (x *FrameProcessorFrame) Unwrap() *raw.VTFrameProcessorFrame { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *FrameProcessorFrame) ID() objc.ID { return x.inner.Ptr() }
-
-// FrameProcessorFrameFromID adopts an existing object pointer as a FrameProcessorFrame (nil for 0).
+// FrameProcessorFrameFromID adopts an existing Objective-C object as a FrameProcessorFrame
+// (nil for 0), retaining it and registering a release finalizer.
 func FrameProcessorFrameFromID(id objc.ID) *FrameProcessorFrame {
 	if id == 0 {
 		return nil
 	}
-	return &FrameProcessorFrame{inner: raw.VTFrameProcessorFrameFromID(id)}
+	x := &FrameProcessorFrame{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a frame object with a pixel buffer and presentation time.
-//
-// NewFrameProcessorFrameWithBufferPresentationTimeStamp creates a new [FrameProcessorFrame].
-func NewFrameProcessorFrameWithBufferPresentationTimeStamp(buffer unsafe.Pointer, presentationTimeStamp coremedia.CMTime) *FrameProcessorFrame {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTFrameProcessorFrame")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBuffer:presentationTimeStamp:"), buffer, presentationTimeStamp)
-	return &FrameProcessorFrame{inner: raw.VTFrameProcessorFrameFromID(_id)}
+// frameProcessorFrameAdopt wraps an Objective-C object that this code just created as a
+// FrameProcessorFrame (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func frameProcessorFrameAdopt(id objc.ID) *FrameProcessorFrame {
+	if id == 0 {
+		return nil
+	}
+	x := &FrameProcessorFrame{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Pixel buffer that you provided when you initialized the object.
-//
-// Buffer calls the underlying Buffer.
-func (x *FrameProcessorFrame) Buffer() unsafe.Pointer {
-	return x.inner.Buffer()
+// Description returns the object's -description text.
+func (x *FrameProcessorFrame) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// Presentation timestamp that you provided when you initialized the object.
-//
-// PresentationTimeStamp calls the underlying PresentationTimeStamp.
-func (x *FrameProcessorFrame) PresentationTimeStamp() coremedia.CMTime {
-	return x.inner.PresentationTimeStamp()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *FrameProcessorFrame) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *FrameProcessorFrame) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewFrameProcessorFrame creates a new FrameProcessorFrame.
+func NewFrameProcessorFrame() *FrameProcessorFrame {
+	_id := objc.Send[objc.ID](objc.ID(_class("VTFrameProcessorFrame")), objc.RegisterName("new"))
+	return frameProcessorFrameAdopt(_id)
 }
 
 // FrameProcessorFrameable is the interface implemented by [FrameProcessorFrame], for mocking and DI.
 type FrameProcessorFrameable interface {
-	Unwrap() *raw.VTFrameProcessorFrame
-	Buffer() unsafe.Pointer
-	PresentationTimeStamp() coremedia.CMTime
+	obj.Object
 }
 
 var _ FrameProcessorFrameable = (*FrameProcessorFrame)(nil)

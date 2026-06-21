@@ -5,72 +5,95 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing an important event during a workout.
 //
-// WorkoutEvent wraps [raw.HKWorkoutEvent] with a fluent Go API.
+// WorkoutEvent is an idiomatic wrapper over the Objective-C class HKWorkoutEvent.
 type WorkoutEvent struct {
-	inner *raw.HKWorkoutEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKWorkoutEvent].
-func (x *WorkoutEvent) Unwrap() *raw.HKWorkoutEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WorkoutEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// WorkoutEventFromID adopts an existing object pointer as a WorkoutEvent (nil for 0).
+// WorkoutEventFromID adopts an existing Objective-C object as a WorkoutEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func WorkoutEventFromID(id objc.ID) *WorkoutEvent {
 	if id == 0 {
 		return nil
 	}
-	return &WorkoutEvent{inner: raw.HKWorkoutEventFromID(id)}
+	x := &WorkoutEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWorkoutEvent creates a new [WorkoutEvent].
+// workoutEventAdopt wraps an Objective-C object that this code just created as a
+// WorkoutEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func workoutEventAdopt(id objc.ID) *WorkoutEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &WorkoutEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WorkoutEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WorkoutEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WorkoutEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWorkoutEvent creates a new WorkoutEvent.
 func NewWorkoutEvent() *WorkoutEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKWorkoutEvent")), objc.RegisterName("new"))
-	return &WorkoutEvent{inner: raw.HKWorkoutEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKWorkoutEvent")), objc.RegisterName("new"))
+	return workoutEventAdopt(_id)
 }
 
-// @property      workoutEventType @abstract      Represents the type of event that occurred during a workout.
-//
-// Type calls the underlying Type.
-func (x *WorkoutEvent) Type() HKWorkoutEventType {
-	return HKWorkoutEventType(x.inner.Type())
+// Represents the type of event that occurred during a workout.
+func (x *WorkoutEvent) Type() WorkoutEventType {
+	_r := objc.Send[WorkoutEventType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
-// Date calls the underlying Date.
-func (x *WorkoutEvent) Date() *foundation.NSDate {
-	return x.inner.Date()
+func (x *WorkoutEvent) Date() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("date"))
+	return obj.Wrap(_r)
 }
 
-// @property      dateInterval @abstract      Date interval representing the time period for which the event is valid. @discussion    Most event types only support date intervals with zero duration. Events of type HKWorkoutEventTypeLap and HKWorkoutEventTypeSegment are currently the only events that support a nonzero duration.
-//
-// DateInterval calls the underlying DateInterval.
-func (x *WorkoutEvent) DateInterval() *foundation.NSDateInterval {
-	return x.inner.DateInterval()
+// Date interval representing the time period for which the event is valid. Most event types only support date intervals with zero duration. Events of type HKWorkoutEventTypeLap and HKWorkoutEventTypeSegment are currently the only events that support a nonzero duration.
+func (x *WorkoutEvent) DateInterval() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dateInterval"))
+	return obj.Wrap(_r)
 }
 
-// @property      metadata @abstract      Extra information describing properties of the receiver. @discussion    Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
-//
-// Metadata calls the underlying Metadata.
-func (x *WorkoutEvent) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Metadata()
+// Extra information describing properties of the receiver. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
+func (x *WorkoutEvent) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return obj.Wrap(_r)
 }
 
 // WorkoutEventable is the interface implemented by [WorkoutEvent], for mocking and DI.
 type WorkoutEventable interface {
-	Unwrap() *raw.HKWorkoutEvent
-	Type() HKWorkoutEventType
-	Date() *foundation.NSDate
-	DateInterval() *foundation.NSDateInterval
-	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	Type() WorkoutEventType
+	Date() obj.Object
+	DateInterval() obj.Object
+	Metadata() obj.Object
 }
 
 var _ WorkoutEventable = (*WorkoutEvent)(nil)

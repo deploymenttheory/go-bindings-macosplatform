@@ -5,62 +5,68 @@
 package replaykit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/replaykit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that displays a user interface where users preview and edit a screen recording that you create with ReplayKit.
 //
-// PreviewViewController wraps [raw.RPPreviewViewController] with a fluent Go API.
+// PreviewViewController is an idiomatic wrapper over the Objective-C class RPPreviewViewController.
 type PreviewViewController struct {
-	inner *raw.RPPreviewViewController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.RPPreviewViewController].
-func (x *PreviewViewController) Unwrap() *raw.RPPreviewViewController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PreviewViewController) ID() objc.ID { return x.inner.Ptr() }
-
-// PreviewViewControllerFromID adopts an existing object pointer as a PreviewViewController (nil for 0).
+// PreviewViewControllerFromID adopts an existing Objective-C object as a PreviewViewController
+// (nil for 0), retaining it and registering a release finalizer.
 func PreviewViewControllerFromID(id objc.ID) *PreviewViewController {
 	if id == 0 {
 		return nil
 	}
-	return &PreviewViewController{inner: raw.RPPreviewViewControllerFromID(id)}
-}
-
-// NewPreviewViewController creates a new [PreviewViewController].
-func NewPreviewViewController() *PreviewViewController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("RPPreviewViewController")), objc.RegisterName("new"))
-	return &PreviewViewController{inner: raw.RPPreviewViewControllerFromID(_id)}
-}
-
-// The preview view controller’s delegate.
-//
-// WithPreviewControllerDelegate sets the previewControllerDelegate property and returns the receiver for chaining.
-func (x *PreviewViewController) WithPreviewControllerDelegate(previewControllerDelegate raw.RPPreviewViewControllerDelegate) *PreviewViewController {
-	x.inner.SetPreviewControllerDelegate(previewControllerDelegate)
+	x := &PreviewViewController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// PreviewControllerDelegate calls the underlying PreviewControllerDelegate.
-func (x *PreviewViewController) PreviewControllerDelegate() raw.RPPreviewViewControllerDelegate {
-	return x.inner.PreviewControllerDelegate()
+// previewViewControllerAdopt wraps an Objective-C object that this code just created as a
+// PreviewViewController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func previewViewControllerAdopt(id objc.ID) *PreviewViewController {
+	if id == 0 {
+		return nil
+	}
+	x := &PreviewViewController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetPreviewControllerDelegate calls the underlying SetPreviewControllerDelegate.
-func (x *PreviewViewController) SetPreviewControllerDelegate(previewControllerDelegate raw.RPPreviewViewControllerDelegate) {
-	x.inner.SetPreviewControllerDelegate(previewControllerDelegate)
+// Description returns the object's -description text.
+func (x *PreviewViewController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PreviewViewController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PreviewViewController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPreviewViewController creates a new PreviewViewController.
+func NewPreviewViewController() *PreviewViewController {
+	_id := objc.Send[objc.ID](objc.ID(_class("RPPreviewViewController")), objc.RegisterName("new"))
+	return previewViewControllerAdopt(_id)
 }
 
 // PreviewViewControllerable is the interface implemented by [PreviewViewController], for mocking and DI.
 type PreviewViewControllerable interface {
-	Unwrap() *raw.RPPreviewViewController
-	WithPreviewControllerDelegate(previewControllerDelegate raw.RPPreviewViewControllerDelegate) *PreviewViewController
-	PreviewControllerDelegate() raw.RPPreviewViewControllerDelegate
-	SetPreviewControllerDelegate(previewControllerDelegate raw.RPPreviewViewControllerDelegate)
+	obj.Object
 }
 
 var _ PreviewViewControllerable = (*PreviewViewController)(nil)

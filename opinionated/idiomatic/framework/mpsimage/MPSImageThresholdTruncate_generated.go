@@ -5,101 +5,73 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageThresholdTruncate wraps [raw.MPSImageThresholdTruncate] with a fluent Go API.
+// ImageThresholdTruncate is an idiomatic wrapper over the Objective-C class MPSImageThresholdTruncate.
 type ImageThresholdTruncate struct {
-	inner *raw.MPSImageThresholdTruncate
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageThresholdTruncate].
-func (x *ImageThresholdTruncate) Unwrap() *raw.MPSImageThresholdTruncate { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageThresholdTruncate) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageThresholdTruncateFromID adopts an existing object pointer as a ImageThresholdTruncate (nil for 0).
+// ImageThresholdTruncateFromID adopts an existing Objective-C object as a ImageThresholdTruncate
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageThresholdTruncateFromID(id objc.ID) *ImageThresholdTruncate {
 	if id == 0 {
 		return nil
 	}
-	return &ImageThresholdTruncate{inner: raw.MPSImageThresholdTruncateFromID(id)}
-}
-
-// @abstract   initialize a MPSImageThresholdTruncate filter @param      device          The device the filter will run on @param      thresholdValue The threshold value to use @param      transform       This matrix is an array of 3 floats. The default if no transform is specifed is BT.601/JPEG: {0.299f, 0.587f, 0.114f};
-//
-// NewImageThresholdTruncateWithDeviceThresholdValueLinearGrayColorTransform creates a new [ImageThresholdTruncate].
-func NewImageThresholdTruncateWithDeviceThresholdValueLinearGrayColorTransform(device metal.MTLDevice, thresholdValue float32, transform *float32) *ImageThresholdTruncate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageThresholdTruncate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:thresholdValue:linearGrayColorTransform:"), device, thresholdValue, transform)
-	return &ImageThresholdTruncate{inner: raw.MPSImageThresholdTruncateFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageThresholdTruncateWithCoderDevice creates a new [ImageThresholdTruncate].
-func NewImageThresholdTruncateWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageThresholdTruncate {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageThresholdTruncate")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageThresholdTruncate{inner: raw.MPSImageThresholdTruncateFromID(_id)}
-}
-
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageThresholdTruncate) WithOffset(offset mpscore.MPSOffset) *ImageThresholdTruncate {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	x := &ImageThresholdTruncate{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageThresholdTruncate) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdTruncate {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+// imageThresholdTruncateAdopt wraps an Objective-C object that this code just created as a
+// ImageThresholdTruncate (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageThresholdTruncateAdopt(id objc.ID) *ImageThresholdTruncate {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageThresholdTruncate{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageThresholdTruncate) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdTruncate {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// Description returns the object's -description text.
+func (x *ImageThresholdTruncate) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property thresholdValue @discussion The threshold value used to init the threshold filter
-//
-// ThresholdValue calls the underlying ThresholdValue.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageThresholdTruncate) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageThresholdTruncate) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageThresholdTruncate creates a new ImageThresholdTruncate.
+func NewImageThresholdTruncate() *ImageThresholdTruncate {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageThresholdTruncate")), objc.RegisterName("new"))
+	return imageThresholdTruncateAdopt(_id)
+}
+
+// The threshold value used to init the threshold filter
 func (x *ImageThresholdTruncate) ThresholdValue() float32 {
-	return x.inner.ThresholdValue()
-}
-
-// @property transform @discussion The color transform used to init the threshold filter
-//
-// Transform calls the underlying Transform.
-func (x *ImageThresholdTruncate) Transform() *float32 {
-	return x.inner.Transform()
-}
-
-func (x *ImageThresholdTruncate) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("thresholdValue"))
+	return _r
 }
 
 // ImageThresholdTruncateable is the interface implemented by [ImageThresholdTruncate], for mocking and DI.
 type ImageThresholdTruncateable interface {
-	Unwrap() *raw.MPSImageThresholdTruncate
-	WithOffset(offset mpscore.MPSOffset) *ImageThresholdTruncate
-	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdTruncate
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdTruncate
+	obj.Object
 	ThresholdValue() float32
-	Transform() *float32
 }
 
 var _ ImageThresholdTruncateable = (*ImageThresholdTruncate)(nil)

@@ -5,113 +5,112 @@
 package videotoolbox
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videotoolbox"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains both input and output parameters that the super-resolution processor needs to run on a frame.
 //
-// SuperResolutionScalerParameters wraps [raw.VTSuperResolutionScalerParameters] with a fluent Go API.
+// SuperResolutionScalerParameters is an idiomatic wrapper over the Objective-C class VTSuperResolutionScalerParameters.
 type SuperResolutionScalerParameters struct {
-	inner *raw.VTSuperResolutionScalerParameters
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VTSuperResolutionScalerParameters].
-func (x *SuperResolutionScalerParameters) Unwrap() *raw.VTSuperResolutionScalerParameters {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SuperResolutionScalerParameters) ID() objc.ID { return x.inner.Ptr() }
-
-// SuperResolutionScalerParametersFromID adopts an existing object pointer as a SuperResolutionScalerParameters (nil for 0).
+// SuperResolutionScalerParametersFromID adopts an existing Objective-C object as a SuperResolutionScalerParameters
+// (nil for 0), retaining it and registering a release finalizer.
 func SuperResolutionScalerParametersFromID(id objc.ID) *SuperResolutionScalerParameters {
 	if id == 0 {
 		return nil
 	}
-	return &SuperResolutionScalerParameters{inner: raw.VTSuperResolutionScalerParametersFromID(id)}
+	x := &SuperResolutionScalerParameters{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// superResolutionScalerParametersAdopt wraps an Objective-C object that this code just created as a
+// SuperResolutionScalerParameters (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func superResolutionScalerParametersAdopt(id objc.ID) *SuperResolutionScalerParameters {
+	if id == 0 {
+		return nil
+	}
+	x := &SuperResolutionScalerParameters{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SuperResolutionScalerParameters) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SuperResolutionScalerParameters) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SuperResolutionScalerParameters) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new super-resolution scaler parameters instance.
 //
-// NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame creates a new [SuperResolutionScalerParameters].
-func NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame(sourceFrame *raw.VTFrameProcessorFrame, previousFrame *raw.VTFrameProcessorFrame, previousOutputFrame *raw.VTFrameProcessorFrame, opticalFlow *raw.VTFrameProcessorOpticalFlow, submissionMode VTSuperResolutionScalerParametersSubmissionMode, destinationFrame *raw.VTFrameProcessorFrame) *SuperResolutionScalerParameters {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VTSuperResolutionScalerParameters")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:previousFrame:previousOutputFrame:opticalFlow:submissionMode:destinationFrame:"), sourceFrame.Ptr(), previousFrame.Ptr(), previousOutputFrame.Ptr(), opticalFlow.Ptr(), raw.VTSuperResolutionScalerParametersSubmissionMode(submissionMode), destinationFrame.Ptr())
-	return &SuperResolutionScalerParameters{inner: raw.VTSuperResolutionScalerParametersFromID(_id)}
+// NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame creates a new SuperResolutionScalerParameters.
+func NewSuperResolutionScalerParametersWithSourceFramePreviousFramePreviousOutputFrameOpticalFlowSubmissionModeDestinationFrame(sourceFrame *FrameProcessorFrame, previousFrame *FrameProcessorFrame, previousOutputFrame *FrameProcessorFrame, opticalFlow *FrameProcessorOpticalFlow, submissionMode SuperResolutionScalerParametersSubmissionMode, destinationFrame *FrameProcessorFrame) *SuperResolutionScalerParameters {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VTSuperResolutionScalerParameters")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSourceFrame:previousFrame:previousOutputFrame:opticalFlow:submissionMode:destinationFrame:"), objref.IDOf(sourceFrame), objref.IDOf(previousFrame), objref.IDOf(previousOutputFrame), objref.IDOf(opticalFlow), submissionMode, objref.IDOf(destinationFrame))
+	return superResolutionScalerParametersAdopt(_id)
 }
 
 // Current source frame, which must be non `nil`.
-//
-// SourceFrame calls the underlying SourceFrame.
 func (x *SuperResolutionScalerParameters) SourceFrame() *FrameProcessorFrame {
-	_r := x.inner.SourceFrame()
-	if _r == nil {
-		return nil
-	}
-	return &FrameProcessorFrame{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceFrame"))
+	return FrameProcessorFrameFromID(_r)
 }
 
 // Previous source frame in presentation time order, which is `nil` for the first frame.
-//
-// PreviousFrame calls the underlying PreviousFrame.
 func (x *SuperResolutionScalerParameters) PreviousFrame() *FrameProcessorFrame {
-	_r := x.inner.PreviousFrame()
-	if _r == nil {
-		return nil
-	}
-	return &FrameProcessorFrame{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousFrame"))
+	return FrameProcessorFrameFromID(_r)
 }
 
 // Previous output frame in presentation time order, which is `nil` for the first frame.
-//
-// PreviousOutputFrame calls the underlying PreviousOutputFrame.
 func (x *SuperResolutionScalerParameters) PreviousOutputFrame() *FrameProcessorFrame {
-	_r := x.inner.PreviousOutputFrame()
-	if _r == nil {
-		return nil
-	}
-	return &FrameProcessorFrame{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("previousOutputFrame"))
+	return FrameProcessorFrameFromID(_r)
 }
 
 // Optional object that contains forward and backward optical flow with the previous frame. You only need this if optical flow is pre-computed. For the first frame this is `nil`.
-//
-// OpticalFlow calls the underlying OpticalFlow.
 func (x *SuperResolutionScalerParameters) OpticalFlow() *FrameProcessorOpticalFlow {
-	_r := x.inner.OpticalFlow()
-	if _r == nil {
-		return nil
-	}
-	return &FrameProcessorOpticalFlow{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("opticalFlow"))
+	return FrameProcessorOpticalFlowFromID(_r)
 }
 
 // Ordering of the input frames in this submission relative to the previous submission.
-//
-// SubmissionMode calls the underlying SubmissionMode.
-func (x *SuperResolutionScalerParameters) SubmissionMode() VTSuperResolutionScalerParametersSubmissionMode {
-	return VTSuperResolutionScalerParametersSubmissionMode(x.inner.SubmissionMode())
+func (x *SuperResolutionScalerParameters) SubmissionMode() SuperResolutionScalerParametersSubmissionMode {
+	_r := objc.Send[SuperResolutionScalerParametersSubmissionMode](objref.IDOf(x), objc.RegisterName("submissionMode"))
+	return _r
 }
 
 // Destination frame that contains user-allocated pixel buffer that receives the results.
-//
-// DestinationFrame calls the underlying DestinationFrame.
 func (x *SuperResolutionScalerParameters) DestinationFrame() *FrameProcessorFrame {
-	_r := x.inner.DestinationFrame()
-	if _r == nil {
-		return nil
-	}
-	return &FrameProcessorFrame{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationFrame"))
+	return FrameProcessorFrameFromID(_r)
 }
 
 // SuperResolutionScalerParametersable is the interface implemented by [SuperResolutionScalerParameters], for mocking and DI.
 type SuperResolutionScalerParametersable interface {
-	Unwrap() *raw.VTSuperResolutionScalerParameters
+	obj.Object
 	SourceFrame() *FrameProcessorFrame
 	PreviousFrame() *FrameProcessorFrame
 	PreviousOutputFrame() *FrameProcessorFrame
 	OpticalFlow() *FrameProcessorOpticalFlow
-	SubmissionMode() VTSuperResolutionScalerParametersSubmissionMode
+	SubmissionMode() SuperResolutionScalerParametersSubmissionMode
 	DestinationFrame() *FrameProcessorFrame
 }
 

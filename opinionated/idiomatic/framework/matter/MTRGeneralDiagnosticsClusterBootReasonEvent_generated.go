@@ -5,61 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRGeneralDiagnosticsClusterBootReasonEvent wraps [raw.MTRGeneralDiagnosticsClusterBootReasonEvent] with a fluent Go API.
+// MTRGeneralDiagnosticsClusterBootReasonEvent is an idiomatic wrapper over the Objective-C class MTRGeneralDiagnosticsClusterBootReasonEvent.
 type MTRGeneralDiagnosticsClusterBootReasonEvent struct {
-	inner *raw.MTRGeneralDiagnosticsClusterBootReasonEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGeneralDiagnosticsClusterBootReasonEvent].
-func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) Unwrap() *raw.MTRGeneralDiagnosticsClusterBootReasonEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGeneralDiagnosticsClusterBootReasonEventFromID adopts an existing object pointer as a MTRGeneralDiagnosticsClusterBootReasonEvent (nil for 0).
+// MTRGeneralDiagnosticsClusterBootReasonEventFromID adopts an existing Objective-C object as a MTRGeneralDiagnosticsClusterBootReasonEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGeneralDiagnosticsClusterBootReasonEventFromID(id objc.ID) *MTRGeneralDiagnosticsClusterBootReasonEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGeneralDiagnosticsClusterBootReasonEvent{inner: raw.MTRGeneralDiagnosticsClusterBootReasonEventFromID(id)}
-}
-
-// NewMTRGeneralDiagnosticsClusterBootReasonEvent creates a new [MTRGeneralDiagnosticsClusterBootReasonEvent].
-func NewMTRGeneralDiagnosticsClusterBootReasonEvent() *MTRGeneralDiagnosticsClusterBootReasonEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGeneralDiagnosticsClusterBootReasonEvent")), objc.RegisterName("new"))
-	return &MTRGeneralDiagnosticsClusterBootReasonEvent{inner: raw.MTRGeneralDiagnosticsClusterBootReasonEventFromID(_id)}
-}
-
-// WithBootReason sets the bootReason property and returns the receiver for chaining.
-func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) WithBootReason(bootReason *foundation.NSNumber) *MTRGeneralDiagnosticsClusterBootReasonEvent {
-	x.inner.SetBootReason(bootReason)
+	x := &MTRGeneralDiagnosticsClusterBootReasonEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// BootReason calls the underlying BootReason.
-func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) BootReason() *foundation.NSNumber {
-	return x.inner.BootReason()
+// mTRGeneralDiagnosticsClusterBootReasonEventAdopt wraps an Objective-C object that this code just created as a
+// MTRGeneralDiagnosticsClusterBootReasonEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGeneralDiagnosticsClusterBootReasonEventAdopt(id objc.ID) *MTRGeneralDiagnosticsClusterBootReasonEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGeneralDiagnosticsClusterBootReasonEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetBootReason calls the underlying SetBootReason.
-func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) SetBootReason(bootReason *foundation.NSNumber) {
-	x.inner.SetBootReason(bootReason)
+// Description returns the object's -description text.
+func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRGeneralDiagnosticsClusterBootReasonEvent creates a new MTRGeneralDiagnosticsClusterBootReasonEvent.
+func NewMTRGeneralDiagnosticsClusterBootReasonEvent() *MTRGeneralDiagnosticsClusterBootReasonEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRGeneralDiagnosticsClusterBootReasonEvent")), objc.RegisterName("new"))
+	return mTRGeneralDiagnosticsClusterBootReasonEventAdopt(_id)
+}
+
+// WithBootReason sets bootReason and returns the receiver so calls can be chained.
+func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) WithBootReason(bootReason obj.Object) *MTRGeneralDiagnosticsClusterBootReasonEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBootReason:"), objref.IDOf(bootReason))
+	return x
+}
+
+func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) BootReason() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bootReason"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRGeneralDiagnosticsClusterBootReasonEvent) SetBootReason(bootReason obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBootReason:"), objref.IDOf(bootReason))
 }
 
 // MTRGeneralDiagnosticsClusterBootReasonEventable is the interface implemented by [MTRGeneralDiagnosticsClusterBootReasonEvent], for mocking and DI.
 type MTRGeneralDiagnosticsClusterBootReasonEventable interface {
-	Unwrap() *raw.MTRGeneralDiagnosticsClusterBootReasonEvent
-	WithBootReason(bootReason *foundation.NSNumber) *MTRGeneralDiagnosticsClusterBootReasonEvent
-	BootReason() *foundation.NSNumber
-	SetBootReason(bootReason *foundation.NSNumber)
+	obj.Object
+	WithBootReason(bootReason obj.Object) *MTRGeneralDiagnosticsClusterBootReasonEvent
+	BootReason() obj.Object
+	SetBootReason(bootReason obj.Object)
 }
 
 var _ MTRGeneralDiagnosticsClusterBootReasonEventable = (*MTRGeneralDiagnosticsClusterBootReasonEvent)(nil)

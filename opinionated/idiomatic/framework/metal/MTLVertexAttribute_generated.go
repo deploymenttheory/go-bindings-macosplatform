@@ -5,79 +5,104 @@
 package metal
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An instance that represents an attribute of a vertex function.
 //
-// VertexAttribute wraps [raw.MTLVertexAttribute] with a fluent Go API.
+// VertexAttribute is an idiomatic wrapper over the Objective-C class MTLVertexAttribute.
 type VertexAttribute struct {
-	inner *raw.MTLVertexAttribute
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTLVertexAttribute].
-func (x *VertexAttribute) Unwrap() *raw.MTLVertexAttribute { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VertexAttribute) ID() objc.ID { return x.inner.Ptr() }
-
-// VertexAttributeFromID adopts an existing object pointer as a VertexAttribute (nil for 0).
+// VertexAttributeFromID adopts an existing Objective-C object as a VertexAttribute
+// (nil for 0), retaining it and registering a release finalizer.
 func VertexAttributeFromID(id objc.ID) *VertexAttribute {
 	if id == 0 {
 		return nil
 	}
-	return &VertexAttribute{inner: raw.MTLVertexAttributeFromID(id)}
+	x := &VertexAttribute{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVertexAttribute creates a new [VertexAttribute].
+// vertexAttributeAdopt wraps an Objective-C object that this code just created as a
+// VertexAttribute (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func vertexAttributeAdopt(id objc.ID) *VertexAttribute {
+	if id == 0 {
+		return nil
+	}
+	x := &VertexAttribute{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VertexAttribute) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VertexAttribute) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VertexAttribute) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVertexAttribute creates a new VertexAttribute.
 func NewVertexAttribute() *VertexAttribute {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTLVertexAttribute")), objc.RegisterName("new"))
-	return &VertexAttribute{inner: raw.MTLVertexAttributeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTLVertexAttribute")), objc.RegisterName("new"))
+	return vertexAttributeAdopt(_id)
 }
 
-// Name calls the underlying Name.
 func (x *VertexAttribute) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// AttributeIndex calls the underlying AttributeIndex.
-func (x *VertexAttribute) AttributeIndex() uint {
-	return x.inner.AttributeIndex()
+func (x *VertexAttribute) AttributeIndex() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("attributeIndex"))
+	return _r
 }
 
-// AttributeType calls the underlying AttributeType.
-func (x *VertexAttribute) AttributeType() MTLDataType {
-	return MTLDataType(x.inner.AttributeType())
+func (x *VertexAttribute) AttributeType() DataType {
+	_r := objc.Send[DataType](objref.IDOf(x), objc.RegisterName("attributeType"))
+	return _r
 }
 
-// IsActive calls the underlying IsActive.
 func (x *VertexAttribute) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
-// IsPatchData calls the underlying IsPatchData.
 func (x *VertexAttribute) IsPatchData() bool {
-	return x.inner.IsPatchData()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPatchData"))
+	return _r
 }
 
-// IsPatchControlPointData calls the underlying IsPatchControlPointData.
 func (x *VertexAttribute) IsPatchControlPointData() bool {
-	return x.inner.IsPatchControlPointData()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPatchControlPointData"))
+	return _r
 }
 
 // VertexAttributeable is the interface implemented by [VertexAttribute], for mocking and DI.
 type VertexAttributeable interface {
-	Unwrap() *raw.MTLVertexAttribute
+	obj.Object
 	Name() string
-	AttributeIndex() uint
-	AttributeType() MTLDataType
+	AttributeIndex() int
+	AttributeType() DataType
 	IsActive() bool
 	IsPatchData() bool
 	IsPatchControlPointData() bool

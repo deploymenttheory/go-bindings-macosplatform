@@ -5,81 +5,104 @@
 package spritekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object used to perform an animated transition to a new scene.
 //
-// Transition wraps [raw.SKTransition] with a fluent Go API.
+// Transition is an idiomatic wrapper over the Objective-C class SKTransition.
 type Transition struct {
-	inner *raw.SKTransition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKTransition].
-func (x *Transition) Unwrap() *raw.SKTransition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Transition) ID() objc.ID { return x.inner.Ptr() }
-
-// TransitionFromID adopts an existing object pointer as a Transition (nil for 0).
+// TransitionFromID adopts an existing Objective-C object as a Transition
+// (nil for 0), retaining it and registering a release finalizer.
 func TransitionFromID(id objc.ID) *Transition {
 	if id == 0 {
 		return nil
 	}
-	return &Transition{inner: raw.SKTransitionFromID(id)}
+	x := &Transition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTransition creates a new [Transition].
+// transitionAdopt wraps an Objective-C object that this code just created as a
+// Transition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func transitionAdopt(id objc.ID) *Transition {
+	if id == 0 {
+		return nil
+	}
+	x := &Transition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Transition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Transition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Transition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTransition creates a new Transition.
 func NewTransition() *Transition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SKTransition")), objc.RegisterName("new"))
-	return &Transition{inner: raw.SKTransitionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SKTransition")), objc.RegisterName("new"))
+	return transitionAdopt(_id)
 }
 
 // A Boolean value that determines whether the incoming scene is paused during the transition.
 //
-// WithPausesIncomingScene sets the pausesIncomingScene property and returns the receiver for chaining.
+// WithPausesIncomingScene sets pausesIncomingScene and returns the receiver so calls can be chained.
 func (x *Transition) WithPausesIncomingScene(pausesIncomingScene bool) *Transition {
-	x.inner.SetPausesIncomingScene(pausesIncomingScene)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesIncomingScene:"), pausesIncomingScene)
 	return x
 }
 
 // A Boolean value that determines whether the outgoing scene is paused during the transition.
 //
-// WithPausesOutgoingScene sets the pausesOutgoingScene property and returns the receiver for chaining.
+// WithPausesOutgoingScene sets pausesOutgoingScene and returns the receiver so calls can be chained.
 func (x *Transition) WithPausesOutgoingScene(pausesOutgoingScene bool) *Transition {
-	x.inner.SetPausesOutgoingScene(pausesOutgoingScene)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesOutgoingScene:"), pausesOutgoingScene)
 	return x
 }
 
 // Pause the incoming Scene during the transition, defaults to YES.
-//
-// PausesIncomingScene calls the underlying PausesIncomingScene.
 func (x *Transition) PausesIncomingScene() bool {
-	return x.inner.PausesIncomingScene()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pausesIncomingScene"))
+	return _r
 }
 
-// SetPausesIncomingScene calls the underlying SetPausesIncomingScene.
 func (x *Transition) SetPausesIncomingScene(pausesIncomingScene bool) {
-	x.inner.SetPausesIncomingScene(pausesIncomingScene)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesIncomingScene:"), pausesIncomingScene)
 }
 
 // Pause the outgoing Scene during the transition, defaults to YES.
-//
-// PausesOutgoingScene calls the underlying PausesOutgoingScene.
 func (x *Transition) PausesOutgoingScene() bool {
-	return x.inner.PausesOutgoingScene()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("pausesOutgoingScene"))
+	return _r
 }
 
-// SetPausesOutgoingScene calls the underlying SetPausesOutgoingScene.
 func (x *Transition) SetPausesOutgoingScene(pausesOutgoingScene bool) {
-	x.inner.SetPausesOutgoingScene(pausesOutgoingScene)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPausesOutgoingScene:"), pausesOutgoingScene)
 }
 
 // Transitionable is the interface implemented by [Transition], for mocking and DI.
 type Transitionable interface {
-	Unwrap() *raw.SKTransition
+	obj.Object
 	WithPausesIncomingScene(pausesIncomingScene bool) *Transition
 	WithPausesOutgoingScene(pausesOutgoingScene bool) *Transition
 	PausesIncomingScene() bool

@@ -5,72 +5,87 @@
 package screentime
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screentime"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The object you use to observe changes to the current configuration.
 //
-// ScreenTimeConfigurationObserver wraps [raw.STScreenTimeConfigurationObserver] with a fluent Go API.
+// ScreenTimeConfigurationObserver is an idiomatic wrapper over the Objective-C class STScreenTimeConfigurationObserver.
 type ScreenTimeConfigurationObserver struct {
-	inner *raw.STScreenTimeConfigurationObserver
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.STScreenTimeConfigurationObserver].
-func (x *ScreenTimeConfigurationObserver) Unwrap() *raw.STScreenTimeConfigurationObserver {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScreenTimeConfigurationObserver) ID() objc.ID { return x.inner.Ptr() }
-
-// ScreenTimeConfigurationObserverFromID adopts an existing object pointer as a ScreenTimeConfigurationObserver (nil for 0).
+// ScreenTimeConfigurationObserverFromID adopts an existing Objective-C object as a ScreenTimeConfigurationObserver
+// (nil for 0), retaining it and registering a release finalizer.
 func ScreenTimeConfigurationObserverFromID(id objc.ID) *ScreenTimeConfigurationObserver {
 	if id == 0 {
 		return nil
 	}
-	return &ScreenTimeConfigurationObserver{inner: raw.STScreenTimeConfigurationObserverFromID(id)}
+	x := &ScreenTimeConfigurationObserver{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// screenTimeConfigurationObserverAdopt wraps an Objective-C object that this code just created as a
+// ScreenTimeConfigurationObserver (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func screenTimeConfigurationObserverAdopt(id objc.ID) *ScreenTimeConfigurationObserver {
+	if id == 0 {
+		return nil
+	}
+	x := &ScreenTimeConfigurationObserver{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScreenTimeConfigurationObserver) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScreenTimeConfigurationObserver) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScreenTimeConfigurationObserver) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a configuration observer that reports updates on the queue you specify.
 //
-// NewScreenTimeConfigurationObserverWithUpdateQueue creates a new [ScreenTimeConfigurationObserver].
-func NewScreenTimeConfigurationObserverWithUpdateQueue(updateQueue *foundation.NSObject) *ScreenTimeConfigurationObserver {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("STScreenTimeConfigurationObserver")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpdateQueue:"), updateQueue.Ptr())
-	return &ScreenTimeConfigurationObserver{inner: raw.STScreenTimeConfigurationObserverFromID(_id)}
+// NewScreenTimeConfigurationObserverWithUpdateQueue creates a new ScreenTimeConfigurationObserver.
+func NewScreenTimeConfigurationObserverWithUpdateQueue(updateQueue obj.Object) *ScreenTimeConfigurationObserver {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("STScreenTimeConfigurationObserver")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithUpdateQueue:"), objref.IDOf(updateQueue))
+	return screenTimeConfigurationObserverAdopt(_id)
 }
 
 // Starts observing changes to the current configuration.
-//
-// StartObserving calls the underlying StartObserving.
 func (x *ScreenTimeConfigurationObserver) StartObserving() {
-	x.inner.StartObserving()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("startObserving"))
 }
 
 // Stops observing changes to the current configuration.
-//
-// StopObserving calls the underlying StopObserving.
 func (x *ScreenTimeConfigurationObserver) StopObserving() {
-	x.inner.StopObserving()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopObserving"))
 }
 
 // The configuration being observed.
-//
-// Configuration calls the underlying Configuration.
 func (x *ScreenTimeConfigurationObserver) Configuration() *ScreenTimeConfiguration {
-	_r := x.inner.Configuration()
-	if _r == nil {
-		return nil
-	}
-	return &ScreenTimeConfiguration{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configuration"))
+	return ScreenTimeConfigurationFromID(_r)
 }
 
 // ScreenTimeConfigurationObserverable is the interface implemented by [ScreenTimeConfigurationObserver], for mocking and DI.
 type ScreenTimeConfigurationObserverable interface {
-	Unwrap() *raw.STScreenTimeConfigurationObserver
+	obj.Object
 	StartObserving()
 	StopObserving()
 	Configuration() *ScreenTimeConfiguration

@@ -5,59 +5,84 @@
 package securityinterface
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityinterface"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ChooseIdentityTableCellView wraps [raw.SFChooseIdentityTableCellView] with a fluent Go API.
+// ChooseIdentityTableCellView is an idiomatic wrapper over the Objective-C class SFChooseIdentityTableCellView.
 type ChooseIdentityTableCellView struct {
-	inner *raw.SFChooseIdentityTableCellView
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SFChooseIdentityTableCellView].
-func (x *ChooseIdentityTableCellView) Unwrap() *raw.SFChooseIdentityTableCellView { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ChooseIdentityTableCellView) ID() objc.ID { return x.inner.Ptr() }
-
-// ChooseIdentityTableCellViewFromID adopts an existing object pointer as a ChooseIdentityTableCellView (nil for 0).
+// ChooseIdentityTableCellViewFromID adopts an existing Objective-C object as a ChooseIdentityTableCellView
+// (nil for 0), retaining it and registering a release finalizer.
 func ChooseIdentityTableCellViewFromID(id objc.ID) *ChooseIdentityTableCellView {
 	if id == 0 {
 		return nil
 	}
-	return &ChooseIdentityTableCellView{inner: raw.SFChooseIdentityTableCellViewFromID(id)}
-}
-
-// NewChooseIdentityTableCellView creates a new [ChooseIdentityTableCellView].
-func NewChooseIdentityTableCellView() *ChooseIdentityTableCellView {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SFChooseIdentityTableCellView")), objc.RegisterName("new"))
-	return &ChooseIdentityTableCellView{inner: raw.SFChooseIdentityTableCellViewFromID(_id)}
-}
-
-// WithIssuerTextField sets the issuerTextField property and returns the receiver for chaining.
-func (x *ChooseIdentityTableCellView) WithIssuerTextField(issuerTextField *appkit.NSTextField) *ChooseIdentityTableCellView {
-	x.inner.SetIssuerTextField(issuerTextField)
+	x := &ChooseIdentityTableCellView{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// IssuerTextField calls the underlying IssuerTextField.
-func (x *ChooseIdentityTableCellView) IssuerTextField() *appkit.NSTextField {
-	return x.inner.IssuerTextField()
+// chooseIdentityTableCellViewAdopt wraps an Objective-C object that this code just created as a
+// ChooseIdentityTableCellView (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func chooseIdentityTableCellViewAdopt(id objc.ID) *ChooseIdentityTableCellView {
+	if id == 0 {
+		return nil
+	}
+	x := &ChooseIdentityTableCellView{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetIssuerTextField calls the underlying SetIssuerTextField.
-func (x *ChooseIdentityTableCellView) SetIssuerTextField(issuerTextField *appkit.NSTextField) {
-	x.inner.SetIssuerTextField(issuerTextField)
+// Description returns the object's -description text.
+func (x *ChooseIdentityTableCellView) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ChooseIdentityTableCellView) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ChooseIdentityTableCellView) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewChooseIdentityTableCellView creates a new ChooseIdentityTableCellView.
+func NewChooseIdentityTableCellView() *ChooseIdentityTableCellView {
+	_id := objc.Send[objc.ID](objc.ID(_class("SFChooseIdentityTableCellView")), objc.RegisterName("new"))
+	return chooseIdentityTableCellViewAdopt(_id)
+}
+
+// WithIssuerTextField sets issuerTextField and returns the receiver so calls can be chained.
+func (x *ChooseIdentityTableCellView) WithIssuerTextField(issuerTextField obj.Object) *ChooseIdentityTableCellView {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerTextField:"), objref.IDOf(issuerTextField))
+	return x
+}
+
+func (x *ChooseIdentityTableCellView) IssuerTextField() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("issuerTextField"))
+	return obj.Wrap(_r)
+}
+
+func (x *ChooseIdentityTableCellView) SetIssuerTextField(issuerTextField obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIssuerTextField:"), objref.IDOf(issuerTextField))
 }
 
 // ChooseIdentityTableCellViewable is the interface implemented by [ChooseIdentityTableCellView], for mocking and DI.
 type ChooseIdentityTableCellViewable interface {
-	Unwrap() *raw.SFChooseIdentityTableCellView
-	WithIssuerTextField(issuerTextField *appkit.NSTextField) *ChooseIdentityTableCellView
-	IssuerTextField() *appkit.NSTextField
-	SetIssuerTextField(issuerTextField *appkit.NSTextField)
+	obj.Object
+	WithIssuerTextField(issuerTextField obj.Object) *ChooseIdentityTableCellView
+	IssuerTextField() obj.Object
+	SetIssuerTextField(issuerTextField obj.Object)
 }
 
 var _ ChooseIdentityTableCellViewable = (*ChooseIdentityTableCellView)(nil)

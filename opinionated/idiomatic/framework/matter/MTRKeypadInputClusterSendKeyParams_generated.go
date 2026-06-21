@@ -5,107 +5,126 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRKeypadInputClusterSendKeyParams wraps [raw.MTRKeypadInputClusterSendKeyParams] with a fluent Go API.
+// MTRKeypadInputClusterSendKeyParams is an idiomatic wrapper over the Objective-C class MTRKeypadInputClusterSendKeyParams.
 type MTRKeypadInputClusterSendKeyParams struct {
-	inner *raw.MTRKeypadInputClusterSendKeyParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRKeypadInputClusterSendKeyParams].
-func (x *MTRKeypadInputClusterSendKeyParams) Unwrap() *raw.MTRKeypadInputClusterSendKeyParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRKeypadInputClusterSendKeyParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRKeypadInputClusterSendKeyParamsFromID adopts an existing object pointer as a MTRKeypadInputClusterSendKeyParams (nil for 0).
+// MTRKeypadInputClusterSendKeyParamsFromID adopts an existing Objective-C object as a MTRKeypadInputClusterSendKeyParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRKeypadInputClusterSendKeyParamsFromID(id objc.ID) *MTRKeypadInputClusterSendKeyParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRKeypadInputClusterSendKeyParams{inner: raw.MTRKeypadInputClusterSendKeyParamsFromID(id)}
+	x := &MTRKeypadInputClusterSendKeyParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRKeypadInputClusterSendKeyParams creates a new [MTRKeypadInputClusterSendKeyParams].
+// mTRKeypadInputClusterSendKeyParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRKeypadInputClusterSendKeyParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRKeypadInputClusterSendKeyParamsAdopt(id objc.ID) *MTRKeypadInputClusterSendKeyParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRKeypadInputClusterSendKeyParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRKeypadInputClusterSendKeyParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRKeypadInputClusterSendKeyParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRKeypadInputClusterSendKeyParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRKeypadInputClusterSendKeyParams creates a new MTRKeypadInputClusterSendKeyParams.
 func NewMTRKeypadInputClusterSendKeyParams() *MTRKeypadInputClusterSendKeyParams {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRKeypadInputClusterSendKeyParams")), objc.RegisterName("new"))
-	return &MTRKeypadInputClusterSendKeyParams{inner: raw.MTRKeypadInputClusterSendKeyParamsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRKeypadInputClusterSendKeyParams")), objc.RegisterName("new"))
+	return mTRKeypadInputClusterSendKeyParamsAdopt(_id)
 }
 
-// WithKeyCode sets the keyCode property and returns the receiver for chaining.
-func (x *MTRKeypadInputClusterSendKeyParams) WithKeyCode(keyCode *foundation.NSNumber) *MTRKeypadInputClusterSendKeyParams {
-	x.inner.SetKeyCode(keyCode)
+// WithKeyCode sets keyCode and returns the receiver so calls can be chained.
+func (x *MTRKeypadInputClusterSendKeyParams) WithKeyCode(keyCode obj.Object) *MTRKeypadInputClusterSendKeyParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyCode:"), objref.IDOf(keyCode))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRKeypadInputClusterSendKeyParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRKeypadInputClusterSendKeyParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRKeypadInputClusterSendKeyParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRKeypadInputClusterSendKeyParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
 //
-// WithServerSideProcessingTimeout sets the serverSideProcessingTimeout property and returns the receiver for chaining.
-func (x *MTRKeypadInputClusterSendKeyParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRKeypadInputClusterSendKeyParams {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+// WithServerSideProcessingTimeout sets serverSideProcessingTimeout and returns the receiver so calls can be chained.
+func (x *MTRKeypadInputClusterSendKeyParams) WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRKeypadInputClusterSendKeyParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 	return x
 }
 
-// KeyCode calls the underlying KeyCode.
-func (x *MTRKeypadInputClusterSendKeyParams) KeyCode() *foundation.NSNumber {
-	return x.inner.KeyCode()
+func (x *MTRKeypadInputClusterSendKeyParams) KeyCode() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("keyCode"))
+	return obj.Wrap(_r)
 }
 
-// SetKeyCode calls the underlying SetKeyCode.
-func (x *MTRKeypadInputClusterSendKeyParams) SetKeyCode(keyCode *foundation.NSNumber) {
-	x.inner.SetKeyCode(keyCode)
+func (x *MTRKeypadInputClusterSendKeyParams) SetKeyCode(keyCode obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setKeyCode:"), objref.IDOf(keyCode))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRKeypadInputClusterSendKeyParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRKeypadInputClusterSendKeyParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRKeypadInputClusterSendKeyParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRKeypadInputClusterSendKeyParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // Controls how much time, in seconds, we will allow for the server to process the command. The command will then time out if that much time, plus an allowance for retransmits due to network failures, passes. If nil, the framework will try to select an appropriate timeout value itself.
-//
-// ServerSideProcessingTimeout calls the underlying ServerSideProcessingTimeout.
-func (x *MTRKeypadInputClusterSendKeyParams) ServerSideProcessingTimeout() *foundation.NSNumber {
-	return x.inner.ServerSideProcessingTimeout()
+func (x *MTRKeypadInputClusterSendKeyParams) ServerSideProcessingTimeout() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serverSideProcessingTimeout"))
+	return obj.Wrap(_r)
 }
 
-// SetServerSideProcessingTimeout calls the underlying SetServerSideProcessingTimeout.
-func (x *MTRKeypadInputClusterSendKeyParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) {
-	x.inner.SetServerSideProcessingTimeout(serverSideProcessingTimeout)
+func (x *MTRKeypadInputClusterSendKeyParams) SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setServerSideProcessingTimeout:"), objref.IDOf(serverSideProcessingTimeout))
 }
 
 // MTRKeypadInputClusterSendKeyParamsable is the interface implemented by [MTRKeypadInputClusterSendKeyParams], for mocking and DI.
 type MTRKeypadInputClusterSendKeyParamsable interface {
-	Unwrap() *raw.MTRKeypadInputClusterSendKeyParams
-	WithKeyCode(keyCode *foundation.NSNumber) *MTRKeypadInputClusterSendKeyParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRKeypadInputClusterSendKeyParams
-	WithServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber) *MTRKeypadInputClusterSendKeyParams
-	KeyCode() *foundation.NSNumber
-	SetKeyCode(keyCode *foundation.NSNumber)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
-	ServerSideProcessingTimeout() *foundation.NSNumber
-	SetServerSideProcessingTimeout(serverSideProcessingTimeout *foundation.NSNumber)
+	obj.Object
+	WithKeyCode(keyCode obj.Object) *MTRKeypadInputClusterSendKeyParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRKeypadInputClusterSendKeyParams
+	WithServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object) *MTRKeypadInputClusterSendKeyParams
+	KeyCode() obj.Object
+	SetKeyCode(keyCode obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
+	ServerSideProcessingTimeout() obj.Object
+	SetServerSideProcessingTimeout(serverSideProcessingTimeout obj.Object)
 }
 
 var _ MTRKeypadInputClusterSendKeyParamsable = (*MTRKeypadInputClusterSendKeyParams)(nil)

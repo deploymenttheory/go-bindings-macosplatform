@@ -5,392 +5,397 @@
 package opendirectory
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/securityfoundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// Configuration wraps [raw.ODConfiguration] with a fluent Go API.
+// Configuration is an idiomatic wrapper over the Objective-C class ODConfiguration.
 type Configuration struct {
-	inner *raw.ODConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ODConfiguration].
-func (x *Configuration) Unwrap() *raw.ODConfiguration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Configuration) ID() objc.ID { return x.inner.Ptr() }
-
-// ConfigurationFromID adopts an existing object pointer as a Configuration (nil for 0).
+// ConfigurationFromID adopts an existing Objective-C object as a Configuration
+// (nil for 0), retaining it and registering a release finalizer.
 func ConfigurationFromID(id objc.ID) *Configuration {
 	if id == 0 {
 		return nil
 	}
-	return &Configuration{inner: raw.ODConfigurationFromID(id)}
-}
-
-// NewConfiguration creates a new [Configuration].
-func NewConfiguration() *Configuration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ODConfiguration")), objc.RegisterName("new"))
-	return &Configuration{inner: raw.ODConfigurationFromID(_id)}
-}
-
-// WithNodeName sets the nodeName property and returns the receiver for chaining.
-func (x *Configuration) WithNodeName(nodeName string) *Configuration {
-	x.inner.SetNodeName(foundation.NSStringStringWithUTF8String(nodeName))
+	x := &Configuration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// WithComment sets the comment property and returns the receiver for chaining.
-func (x *Configuration) WithComment(comment string) *Configuration {
-	x.inner.SetComment(foundation.NSStringStringWithUTF8String(comment))
-	return x
-}
-
-// WithDefaultMappings sets the defaultMappings property and returns the receiver for chaining.
-func (x *Configuration) WithDefaultMappings(defaultMappings *Mappings) *Configuration {
-	x.inner.SetDefaultMappings(defaultMappings.Unwrap())
-	return x
-}
-
-// WithTemplateName sets the templateName property and returns the receiver for chaining.
-func (x *Configuration) WithTemplateName(templateName string) *Configuration {
-	x.inner.SetTemplateName(foundation.NSStringStringWithUTF8String(templateName))
-	return x
-}
-
-// WithHideRegistration sets the hideRegistration property and returns the receiver for chaining.
-func (x *Configuration) WithHideRegistration(hideRegistration bool) *Configuration {
-	x.inner.SetHideRegistration(hideRegistration)
-	return x
-}
-
-// WithPreferredDestinationHostName sets the preferredDestinationHostName property and returns the receiver for chaining.
-func (x *Configuration) WithPreferredDestinationHostName(preferredDestinationHostName string) *Configuration {
-	x.inner.SetPreferredDestinationHostName(foundation.NSStringStringWithUTF8String(preferredDestinationHostName))
-	return x
-}
-
-// WithPreferredDestinationHostPort sets the preferredDestinationHostPort property and returns the receiver for chaining.
-func (x *Configuration) WithPreferredDestinationHostPort(preferredDestinationHostPort uint16) *Configuration {
-	x.inner.SetPreferredDestinationHostPort(preferredDestinationHostPort)
-	return x
-}
-
-// WithPacketSigning sets the packetSigning property and returns the receiver for chaining.
-func (x *Configuration) WithPacketSigning(packetSigning int) *Configuration {
-	x.inner.SetPacketSigning(packetSigning)
-	return x
-}
-
-// WithPacketEncryption sets the packetEncryption property and returns the receiver for chaining.
-func (x *Configuration) WithPacketEncryption(packetEncryption int) *Configuration {
-	x.inner.SetPacketEncryption(packetEncryption)
-	return x
-}
-
-// WithManInTheMiddleProtection sets the manInTheMiddleProtection property and returns the receiver for chaining.
-func (x *Configuration) WithManInTheMiddleProtection(manInTheMiddleProtection bool) *Configuration {
-	x.inner.SetManInTheMiddleProtection(manInTheMiddleProtection)
-	return x
-}
-
-// WithQueryTimeoutInSeconds sets the queryTimeoutInSeconds property and returns the receiver for chaining.
-func (x *Configuration) WithQueryTimeoutInSeconds(queryTimeoutInSeconds int) *Configuration {
-	x.inner.SetQueryTimeoutInSeconds(queryTimeoutInSeconds)
-	return x
-}
-
-// WithConnectionSetupTimeoutInSeconds sets the connectionSetupTimeoutInSeconds property and returns the receiver for chaining.
-func (x *Configuration) WithConnectionSetupTimeoutInSeconds(connectionSetupTimeoutInSeconds int) *Configuration {
-	x.inner.SetConnectionSetupTimeoutInSeconds(connectionSetupTimeoutInSeconds)
-	return x
-}
-
-// WithConnectionIdleTimeoutInSeconds sets the connectionIdleTimeoutInSeconds property and returns the receiver for chaining.
-func (x *Configuration) WithConnectionIdleTimeoutInSeconds(connectionIdleTimeoutInSeconds int) *Configuration {
-	x.inner.SetConnectionIdleTimeoutInSeconds(connectionIdleTimeoutInSeconds)
-	return x
-}
-
-// @method saveUsingAuthorization:error: @abstract Saves the configuration using the provided authorization. @discussion Saves the configuration using the provided authorization.
-//
-// SaveUsingAuthorizationError calls the underlying SaveUsingAuthorizationError.
-func (x *Configuration) SaveUsingAuthorizationError(authorization *securityfoundation.SFAuthorization) (bool, error) {
-	return x.inner.SaveUsingAuthorizationError(authorization)
-}
-
-// @method addTrustType:trustAccount:trustPassword:username:password:joinExisting:error: @abstract Adds a trust account with the provided name and password using the credentials provided by the user. @discussion Adds a trust account with the provided name and password using the credentials provided by the user.  User can request that the trust be forcibly created (replacing existing trust if found in directory).  A trust should be established only after enough configuration is available and the configuration been saved.  If the trust is required, then the configuration can be deleted if necessary upon failure.
-//
-// AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExistingError calls the underlying AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExistingError.
-func (x *Configuration) AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExistingError(trustType string, account string, accountPassword string, username string, password string, join bool) (bool, error) {
-	return x.inner.AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExistingError(foundation.NSStringStringWithUTF8String(trustType), foundation.NSStringStringWithUTF8String(account), foundation.NSStringStringWithUTF8String(accountPassword), foundation.NSStringStringWithUTF8String(username), foundation.NSStringStringWithUTF8String(password), join)
-}
-
-// @method removeTrustUsingUsername:password:deleteTrustAccount:error: @abstract Removes trust using the provided username and password. @discussion Removes trust using the provided username and password.  The trust account will be removed from the directory only if requested.
-//
-// RemoveTrustUsingUsernamePasswordDeleteTrustAccountError calls the underlying RemoveTrustUsingUsernamePasswordDeleteTrustAccountError.
-func (x *Configuration) RemoveTrustUsingUsernamePasswordDeleteTrustAccountError(username string, password string, deleteAccount bool) (bool, error) {
-	return x.inner.RemoveTrustUsingUsernamePasswordDeleteTrustAccountError(foundation.NSStringStringWithUTF8String(username), foundation.NSStringStringWithUTF8String(password), deleteAccount)
-}
-
-// NodeName calls the underlying NodeName.
-func (x *Configuration) NodeName() string {
-	_r := x.inner.NodeName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetNodeName calls the underlying SetNodeName.
-func (x *Configuration) SetNodeName(nodeName string) {
-	x.inner.SetNodeName(foundation.NSStringStringWithUTF8String(nodeName))
-}
-
-// Comment calls the underlying Comment.
-func (x *Configuration) Comment() string {
-	_r := x.inner.Comment()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetComment calls the underlying SetComment.
-func (x *Configuration) SetComment(comment string) {
-	x.inner.SetComment(foundation.NSStringStringWithUTF8String(comment))
-}
-
-// DefaultMappings calls the underlying DefaultMappings.
-func (x *Configuration) DefaultMappings() *Mappings {
-	_r := x.inner.DefaultMappings()
-	if _r == nil {
+// configurationAdopt wraps an Objective-C object that this code just created as a
+// Configuration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func configurationAdopt(id objc.ID) *Configuration {
+	if id == 0 {
 		return nil
 	}
-	return &Mappings{inner: _r}
+	x := &Configuration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetDefaultMappings calls the underlying SetDefaultMappings.
-func (x *Configuration) SetDefaultMappings(defaultMappings *raw.ODMappings) {
-	x.inner.SetDefaultMappings(defaultMappings)
+// Description returns the object's -description text.
+func (x *Configuration) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// TemplateName calls the underlying TemplateName.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Configuration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Configuration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewConfiguration creates a new Configuration.
+func NewConfiguration() *Configuration {
+	_id := objc.Send[objc.ID](objc.ID(_class("ODConfiguration")), objc.RegisterName("new"))
+	return configurationAdopt(_id)
+}
+
+// WithNodeName sets nodeName and returns the receiver so calls can be chained.
+func (x *Configuration) WithNodeName(nodeName string) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeName:"), purego.NSString(nodeName))
+	return x
+}
+
+// WithComment sets comment and returns the receiver so calls can be chained.
+func (x *Configuration) WithComment(comment string) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComment:"), purego.NSString(comment))
+	return x
+}
+
+// WithDefaultMappings sets defaultMappings and returns the receiver so calls can be chained.
+func (x *Configuration) WithDefaultMappings(defaultMappings *Mappings) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultMappings:"), objref.IDOf(defaultMappings))
+	return x
+}
+
+// WithTemplateName sets templateName and returns the receiver so calls can be chained.
+func (x *Configuration) WithTemplateName(templateName string) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplateName:"), purego.NSString(templateName))
+	return x
+}
+
+// WithHideRegistration sets hideRegistration and returns the receiver so calls can be chained.
+func (x *Configuration) WithHideRegistration(hideRegistration bool) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHideRegistration:"), hideRegistration)
+	return x
+}
+
+// WithPreferredDestinationHostName sets preferredDestinationHostName and returns the receiver so calls can be chained.
+func (x *Configuration) WithPreferredDestinationHostName(preferredDestinationHostName string) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDestinationHostName:"), purego.NSString(preferredDestinationHostName))
+	return x
+}
+
+// WithPreferredDestinationHostPort sets preferredDestinationHostPort and returns the receiver so calls can be chained.
+func (x *Configuration) WithPreferredDestinationHostPort(preferredDestinationHostPort uint16) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDestinationHostPort:"), preferredDestinationHostPort)
+	return x
+}
+
+// WithPacketSigning sets packetSigning and returns the receiver so calls can be chained.
+func (x *Configuration) WithPacketSigning(packetSigning int) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPacketSigning:"), packetSigning)
+	return x
+}
+
+// WithPacketEncryption sets packetEncryption and returns the receiver so calls can be chained.
+func (x *Configuration) WithPacketEncryption(packetEncryption int) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPacketEncryption:"), packetEncryption)
+	return x
+}
+
+// WithManInTheMiddleProtection sets manInTheMiddleProtection and returns the receiver so calls can be chained.
+func (x *Configuration) WithManInTheMiddleProtection(manInTheMiddleProtection bool) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManInTheMiddleProtection:"), manInTheMiddleProtection)
+	return x
+}
+
+// WithQueryTimeoutInSeconds sets queryTimeoutInSeconds and returns the receiver so calls can be chained.
+func (x *Configuration) WithQueryTimeoutInSeconds(queryTimeoutInSeconds int) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryTimeoutInSeconds:"), queryTimeoutInSeconds)
+	return x
+}
+
+// WithConnectionSetupTimeoutInSeconds sets connectionSetupTimeoutInSeconds and returns the receiver so calls can be chained.
+func (x *Configuration) WithConnectionSetupTimeoutInSeconds(connectionSetupTimeoutInSeconds int) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionSetupTimeoutInSeconds:"), connectionSetupTimeoutInSeconds)
+	return x
+}
+
+// WithConnectionIdleTimeoutInSeconds sets connectionIdleTimeoutInSeconds and returns the receiver so calls can be chained.
+func (x *Configuration) WithConnectionIdleTimeoutInSeconds(connectionIdleTimeoutInSeconds int) *Configuration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionIdleTimeoutInSeconds:"), connectionIdleTimeoutInSeconds)
+	return x
+}
+
+// Saves the configuration using the provided authorization. Saves the configuration using the provided authorization.
+func (x *Configuration) SaveUsingAuthorization(authorization obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("saveUsingAuthorization:error:"), objref.IDOf(authorization), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// Adds a trust account with the provided name and password using the credentials provided by the user. Adds a trust account with the provided name and password using the credentials provided by the user.  User can request that the trust be forcibly created (replacing existing trust if found in directory).  A trust should be established only after enough configuration is available and the configuration been saved.  If the trust is required, then the configuration can be deleted if necessary upon failure.
+func (x *Configuration) AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExisting(trustType string, account string, accountPassword string, username string, password string, join bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addTrustType:trustAccount:trustPassword:username:password:joinExisting:error:"), purego.NSString(trustType), purego.NSString(account), purego.NSString(accountPassword), purego.NSString(username), purego.NSString(password), join, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// Removes trust using the provided username and password. Removes trust using the provided username and password.  The trust account will be removed from the directory only if requested.
+func (x *Configuration) RemoveTrustUsingUsernamePasswordDeleteTrustAccount(username string, password string, deleteAccount bool) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeTrustUsingUsername:password:deleteTrustAccount:error:"), purego.NSString(username), purego.NSString(password), deleteAccount, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+func (x *Configuration) NodeName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodeName"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *Configuration) SetNodeName(nodeName string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeName:"), purego.NSString(nodeName))
+}
+
+func (x *Configuration) Comment() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("comment"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *Configuration) SetComment(comment string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setComment:"), purego.NSString(comment))
+}
+
+func (x *Configuration) DefaultMappings() *Mappings {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultMappings"))
+	return MappingsFromID(_r)
+}
+
+func (x *Configuration) SetDefaultMappings(defaultMappings *Mappings) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultMappings:"), objref.IDOf(defaultMappings))
+}
+
 func (x *Configuration) TemplateName() string {
-	_r := x.inner.TemplateName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("templateName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTemplateName calls the underlying SetTemplateName.
 func (x *Configuration) SetTemplateName(templateName string) {
-	x.inner.SetTemplateName(foundation.NSStringStringWithUTF8String(templateName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemplateName:"), purego.NSString(templateName))
 }
 
-// VirtualSubnodes calls the underlying VirtualSubnodes.
-func (x *Configuration) VirtualSubnodes() *foundation.NSArray[objc.ID] {
-	return x.inner.VirtualSubnodes()
+func (x *Configuration) VirtualSubnodes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("virtualSubnodes"))
+	return obj.Wrap(_r)
 }
 
-// SetVirtualSubnodes calls the underlying SetVirtualSubnodes.
-func (x *Configuration) SetVirtualSubnodes(virtualSubnodes *foundation.NSArray[objc.ID]) {
-	x.inner.SetVirtualSubnodes(virtualSubnodes)
+func (x *Configuration) SetVirtualSubnodes(virtualSubnodes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVirtualSubnodes:"), objref.IDOf(virtualSubnodes))
 }
 
-// HideRegistration calls the underlying HideRegistration.
 func (x *Configuration) HideRegistration() bool {
-	return x.inner.HideRegistration()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hideRegistration"))
+	return _r
 }
 
-// SetHideRegistration calls the underlying SetHideRegistration.
 func (x *Configuration) SetHideRegistration(hideRegistration bool) {
-	x.inner.SetHideRegistration(hideRegistration)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHideRegistration:"), hideRegistration)
 }
 
-// PreferredDestinationHostName calls the underlying PreferredDestinationHostName.
 func (x *Configuration) PreferredDestinationHostName() string {
-	_r := x.inner.PreferredDestinationHostName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("preferredDestinationHostName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetPreferredDestinationHostName calls the underlying SetPreferredDestinationHostName.
 func (x *Configuration) SetPreferredDestinationHostName(preferredDestinationHostName string) {
-	x.inner.SetPreferredDestinationHostName(foundation.NSStringStringWithUTF8String(preferredDestinationHostName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDestinationHostName:"), purego.NSString(preferredDestinationHostName))
 }
 
-// PreferredDestinationHostPort calls the underlying PreferredDestinationHostPort.
 func (x *Configuration) PreferredDestinationHostPort() uint16 {
-	return x.inner.PreferredDestinationHostPort()
+	_r := objc.Send[uint16](objref.IDOf(x), objc.RegisterName("preferredDestinationHostPort"))
+	return _r
 }
 
-// SetPreferredDestinationHostPort calls the underlying SetPreferredDestinationHostPort.
 func (x *Configuration) SetPreferredDestinationHostPort(preferredDestinationHostPort uint16) {
-	x.inner.SetPreferredDestinationHostPort(preferredDestinationHostPort)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredDestinationHostPort:"), preferredDestinationHostPort)
 }
 
-// TrustAccount calls the underlying TrustAccount.
 func (x *Configuration) TrustAccount() string {
-	_r := x.inner.TrustAccount()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trustAccount"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// TrustMetaAccount calls the underlying TrustMetaAccount.
 func (x *Configuration) TrustMetaAccount() string {
-	_r := x.inner.TrustMetaAccount()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trustMetaAccount"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// TrustKerberosPrincipal calls the underlying TrustKerberosPrincipal.
 func (x *Configuration) TrustKerberosPrincipal() string {
-	_r := x.inner.TrustKerberosPrincipal()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trustKerberosPrincipal"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// TrustType calls the underlying TrustType.
 func (x *Configuration) TrustType() string {
-	_r := x.inner.TrustType()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("trustType"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// TrustUsesMutualAuthentication calls the underlying TrustUsesMutualAuthentication.
 func (x *Configuration) TrustUsesMutualAuthentication() bool {
-	return x.inner.TrustUsesMutualAuthentication()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("trustUsesMutualAuthentication"))
+	return _r
 }
 
-// TrustUsesKerberosKeytab calls the underlying TrustUsesKerberosKeytab.
 func (x *Configuration) TrustUsesKerberosKeytab() bool {
-	return x.inner.TrustUsesKerberosKeytab()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("trustUsesKerberosKeytab"))
+	return _r
 }
 
-// TrustUsesSystemKeychain calls the underlying TrustUsesSystemKeychain.
 func (x *Configuration) TrustUsesSystemKeychain() bool {
-	return x.inner.TrustUsesSystemKeychain()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("trustUsesSystemKeychain"))
+	return _r
 }
 
-// PacketSigning calls the underlying PacketSigning.
 func (x *Configuration) PacketSigning() int {
-	return x.inner.PacketSigning()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("packetSigning"))
+	return _r
 }
 
-// SetPacketSigning calls the underlying SetPacketSigning.
 func (x *Configuration) SetPacketSigning(packetSigning int) {
-	x.inner.SetPacketSigning(packetSigning)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPacketSigning:"), packetSigning)
 }
 
-// PacketEncryption calls the underlying PacketEncryption.
 func (x *Configuration) PacketEncryption() int {
-	return x.inner.PacketEncryption()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("packetEncryption"))
+	return _r
 }
 
-// SetPacketEncryption calls the underlying SetPacketEncryption.
 func (x *Configuration) SetPacketEncryption(packetEncryption int) {
-	x.inner.SetPacketEncryption(packetEncryption)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPacketEncryption:"), packetEncryption)
 }
 
-// ManInTheMiddleProtection calls the underlying ManInTheMiddleProtection.
 func (x *Configuration) ManInTheMiddleProtection() bool {
-	return x.inner.ManInTheMiddleProtection()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("manInTheMiddleProtection"))
+	return _r
 }
 
-// SetManInTheMiddleProtection calls the underlying SetManInTheMiddleProtection.
 func (x *Configuration) SetManInTheMiddleProtection(manInTheMiddleProtection bool) {
-	x.inner.SetManInTheMiddleProtection(manInTheMiddleProtection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setManInTheMiddleProtection:"), manInTheMiddleProtection)
 }
 
-// QueryTimeoutInSeconds calls the underlying QueryTimeoutInSeconds.
 func (x *Configuration) QueryTimeoutInSeconds() int {
-	return x.inner.QueryTimeoutInSeconds()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("queryTimeoutInSeconds"))
+	return _r
 }
 
-// SetQueryTimeoutInSeconds calls the underlying SetQueryTimeoutInSeconds.
 func (x *Configuration) SetQueryTimeoutInSeconds(queryTimeoutInSeconds int) {
-	x.inner.SetQueryTimeoutInSeconds(queryTimeoutInSeconds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryTimeoutInSeconds:"), queryTimeoutInSeconds)
 }
 
-// ConnectionSetupTimeoutInSeconds calls the underlying ConnectionSetupTimeoutInSeconds.
 func (x *Configuration) ConnectionSetupTimeoutInSeconds() int {
-	return x.inner.ConnectionSetupTimeoutInSeconds()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("connectionSetupTimeoutInSeconds"))
+	return _r
 }
 
-// SetConnectionSetupTimeoutInSeconds calls the underlying SetConnectionSetupTimeoutInSeconds.
 func (x *Configuration) SetConnectionSetupTimeoutInSeconds(connectionSetupTimeoutInSeconds int) {
-	x.inner.SetConnectionSetupTimeoutInSeconds(connectionSetupTimeoutInSeconds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionSetupTimeoutInSeconds:"), connectionSetupTimeoutInSeconds)
 }
 
-// ConnectionIdleTimeoutInSeconds calls the underlying ConnectionIdleTimeoutInSeconds.
 func (x *Configuration) ConnectionIdleTimeoutInSeconds() int {
-	return x.inner.ConnectionIdleTimeoutInSeconds()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("connectionIdleTimeoutInSeconds"))
+	return _r
 }
 
-// SetConnectionIdleTimeoutInSeconds calls the underlying SetConnectionIdleTimeoutInSeconds.
 func (x *Configuration) SetConnectionIdleTimeoutInSeconds(connectionIdleTimeoutInSeconds int) {
-	x.inner.SetConnectionIdleTimeoutInSeconds(connectionIdleTimeoutInSeconds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConnectionIdleTimeoutInSeconds:"), connectionIdleTimeoutInSeconds)
 }
 
-// DefaultModuleEntries calls the underlying DefaultModuleEntries.
-func (x *Configuration) DefaultModuleEntries() *foundation.NSArray[objc.ID] {
-	return x.inner.DefaultModuleEntries()
+func (x *Configuration) DefaultModuleEntries() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultModuleEntries"))
+	return obj.Wrap(_r)
 }
 
-// SetDefaultModuleEntries calls the underlying SetDefaultModuleEntries.
-func (x *Configuration) SetDefaultModuleEntries(defaultModuleEntries *foundation.NSArray[objc.ID]) {
-	x.inner.SetDefaultModuleEntries(defaultModuleEntries)
+func (x *Configuration) SetDefaultModuleEntries(defaultModuleEntries obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDefaultModuleEntries:"), objref.IDOf(defaultModuleEntries))
 }
 
-// AuthenticationModuleEntries calls the underlying AuthenticationModuleEntries.
-func (x *Configuration) AuthenticationModuleEntries() *foundation.NSArray[objc.ID] {
-	return x.inner.AuthenticationModuleEntries()
+func (x *Configuration) AuthenticationModuleEntries() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("authenticationModuleEntries"))
+	return obj.Wrap(_r)
 }
 
-// SetAuthenticationModuleEntries calls the underlying SetAuthenticationModuleEntries.
-func (x *Configuration) SetAuthenticationModuleEntries(authenticationModuleEntries *foundation.NSArray[objc.ID]) {
-	x.inner.SetAuthenticationModuleEntries(authenticationModuleEntries)
+func (x *Configuration) SetAuthenticationModuleEntries(authenticationModuleEntries obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAuthenticationModuleEntries:"), objref.IDOf(authenticationModuleEntries))
 }
 
-// DiscoveryModuleEntries calls the underlying DiscoveryModuleEntries.
-func (x *Configuration) DiscoveryModuleEntries() *foundation.NSArray[objc.ID] {
-	return x.inner.DiscoveryModuleEntries()
+func (x *Configuration) DiscoveryModuleEntries() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoveryModuleEntries"))
+	return obj.Wrap(_r)
 }
 
-// SetDiscoveryModuleEntries calls the underlying SetDiscoveryModuleEntries.
-func (x *Configuration) SetDiscoveryModuleEntries(discoveryModuleEntries *foundation.NSArray[objc.ID]) {
-	x.inner.SetDiscoveryModuleEntries(discoveryModuleEntries)
+func (x *Configuration) SetDiscoveryModuleEntries(discoveryModuleEntries obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDiscoveryModuleEntries:"), objref.IDOf(discoveryModuleEntries))
 }
 
-// GeneralModuleEntries calls the underlying GeneralModuleEntries.
-func (x *Configuration) GeneralModuleEntries() *foundation.NSArray[objc.ID] {
-	return x.inner.GeneralModuleEntries()
+func (x *Configuration) GeneralModuleEntries() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("generalModuleEntries"))
+	return obj.Wrap(_r)
 }
 
-// SetGeneralModuleEntries calls the underlying SetGeneralModuleEntries.
-func (x *Configuration) SetGeneralModuleEntries(generalModuleEntries *foundation.NSArray[objc.ID]) {
-	x.inner.SetGeneralModuleEntries(generalModuleEntries)
+func (x *Configuration) SetGeneralModuleEntries(generalModuleEntries obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGeneralModuleEntries:"), objref.IDOf(generalModuleEntries))
 }
 
 // Configurationable is the interface implemented by [Configuration], for mocking and DI.
 type Configurationable interface {
-	Unwrap() *raw.ODConfiguration
+	obj.Object
 	WithNodeName(nodeName string) *Configuration
 	WithComment(comment string) *Configuration
 	WithDefaultMappings(defaultMappings *Mappings) *Configuration
@@ -404,19 +409,19 @@ type Configurationable interface {
 	WithQueryTimeoutInSeconds(queryTimeoutInSeconds int) *Configuration
 	WithConnectionSetupTimeoutInSeconds(connectionSetupTimeoutInSeconds int) *Configuration
 	WithConnectionIdleTimeoutInSeconds(connectionIdleTimeoutInSeconds int) *Configuration
-	SaveUsingAuthorizationError(authorization *securityfoundation.SFAuthorization) (bool, error)
-	AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExistingError(trustType string, account string, accountPassword string, username string, password string, join bool) (bool, error)
-	RemoveTrustUsingUsernamePasswordDeleteTrustAccountError(username string, password string, deleteAccount bool) (bool, error)
+	SaveUsingAuthorization(authorization obj.Object) error
+	AddTrustTypeTrustAccountTrustPasswordUsernamePasswordJoinExisting(trustType string, account string, accountPassword string, username string, password string, join bool) error
+	RemoveTrustUsingUsernamePasswordDeleteTrustAccount(username string, password string, deleteAccount bool) error
 	NodeName() string
 	SetNodeName(nodeName string)
 	Comment() string
 	SetComment(comment string)
 	DefaultMappings() *Mappings
-	SetDefaultMappings(defaultMappings *raw.ODMappings)
+	SetDefaultMappings(defaultMappings *Mappings)
 	TemplateName() string
 	SetTemplateName(templateName string)
-	VirtualSubnodes() *foundation.NSArray[objc.ID]
-	SetVirtualSubnodes(virtualSubnodes *foundation.NSArray[objc.ID])
+	VirtualSubnodes() obj.Object
+	SetVirtualSubnodes(virtualSubnodes obj.Object)
 	HideRegistration() bool
 	SetHideRegistration(hideRegistration bool)
 	PreferredDestinationHostName() string
@@ -442,14 +447,14 @@ type Configurationable interface {
 	SetConnectionSetupTimeoutInSeconds(connectionSetupTimeoutInSeconds int)
 	ConnectionIdleTimeoutInSeconds() int
 	SetConnectionIdleTimeoutInSeconds(connectionIdleTimeoutInSeconds int)
-	DefaultModuleEntries() *foundation.NSArray[objc.ID]
-	SetDefaultModuleEntries(defaultModuleEntries *foundation.NSArray[objc.ID])
-	AuthenticationModuleEntries() *foundation.NSArray[objc.ID]
-	SetAuthenticationModuleEntries(authenticationModuleEntries *foundation.NSArray[objc.ID])
-	DiscoveryModuleEntries() *foundation.NSArray[objc.ID]
-	SetDiscoveryModuleEntries(discoveryModuleEntries *foundation.NSArray[objc.ID])
-	GeneralModuleEntries() *foundation.NSArray[objc.ID]
-	SetGeneralModuleEntries(generalModuleEntries *foundation.NSArray[objc.ID])
+	DefaultModuleEntries() obj.Object
+	SetDefaultModuleEntries(defaultModuleEntries obj.Object)
+	AuthenticationModuleEntries() obj.Object
+	SetAuthenticationModuleEntries(authenticationModuleEntries obj.Object)
+	DiscoveryModuleEntries() obj.Object
+	SetDiscoveryModuleEntries(discoveryModuleEntries obj.Object)
+	GeneralModuleEntries() obj.Object
+	SetGeneralModuleEntries(generalModuleEntries obj.Object)
 }
 
 var _ Configurationable = (*Configuration)(nil)

@@ -5,109 +5,80 @@
 package mpsimage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ImageThresholdBinaryInverse wraps [raw.MPSImageThresholdBinaryInverse] with a fluent Go API.
+// ImageThresholdBinaryInverse is an idiomatic wrapper over the Objective-C class MPSImageThresholdBinaryInverse.
 type ImageThresholdBinaryInverse struct {
-	inner *raw.MPSImageThresholdBinaryInverse
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageThresholdBinaryInverse].
-func (x *ImageThresholdBinaryInverse) Unwrap() *raw.MPSImageThresholdBinaryInverse { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageThresholdBinaryInverse) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageThresholdBinaryInverseFromID adopts an existing object pointer as a ImageThresholdBinaryInverse (nil for 0).
+// ImageThresholdBinaryInverseFromID adopts an existing Objective-C object as a ImageThresholdBinaryInverse
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageThresholdBinaryInverseFromID(id objc.ID) *ImageThresholdBinaryInverse {
 	if id == 0 {
 		return nil
 	}
-	return &ImageThresholdBinaryInverse{inner: raw.MPSImageThresholdBinaryInverseFromID(id)}
-}
-
-// @abstract   initialize a MPSImageThresholdBinaryInverse filter @param      device          The device the filter will run on @param      thresholdValue  The threshold value to use @param      maximumValue    The maximum value to use @param      transform       This matrix is an array of 3 floats. The default if no transform is specifed is BT.601/JPEG: {0.299f, 0.587f, 0.114f};
-//
-// NewImageThresholdBinaryInverseWithDeviceThresholdValueMaximumValueLinearGrayColorTransform creates a new [ImageThresholdBinaryInverse].
-func NewImageThresholdBinaryInverseWithDeviceThresholdValueMaximumValueLinearGrayColorTransform(device metal.MTLDevice, thresholdValue float32, maximumValue float32, transform *float32) *ImageThresholdBinaryInverse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageThresholdBinaryInverse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:thresholdValue:maximumValue:linearGrayColorTransform:"), device, thresholdValue, maximumValue, transform)
-	return &ImageThresholdBinaryInverse{inner: raw.MPSImageThresholdBinaryInverseFromID(_id)}
-}
-
-// @abstract NSSecureCoding compatability @discussion While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly.  To avoid that problem, use initWithCoder:device instead. @param      aDecoder    The NSCoder subclass with your serialized MPSKernel @param      device      The MTLDevice on which to make the MPSKernel @return     A new MPSKernel object, or nil if failure.
-//
-// NewImageThresholdBinaryInverseWithCoderDevice creates a new [ImageThresholdBinaryInverse].
-func NewImageThresholdBinaryInverseWithCoderDevice(aDecoder *foundation.NSCoder, device metal.MTLDevice) *ImageThresholdBinaryInverse {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageThresholdBinaryInverse")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithCoder:device:"), aDecoder.Ptr(), device)
-	return &ImageThresholdBinaryInverse{inner: raw.MPSImageThresholdBinaryInverseFromID(_id)}
-}
-
-// @property   offset @abstract   The position of the destination clip rectangle origin relative to the source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align. See Also: @ref MetalPerformanceShaders.h subsubsection_mpsoffset
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageThresholdBinaryInverse) WithOffset(offset mpscore.MPSOffset) *ImageThresholdBinaryInverse {
-	x.inner.MPSUnaryImageKernel.SetOffset(offset)
+	x := &ImageThresholdBinaryInverse{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. See Also: @ref MetalPerformanceShaders.h subsubsection_clipRect
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageThresholdBinaryInverse) WithClipRect(clipRect metal.MTLRegion) *ImageThresholdBinaryInverse {
-	x.inner.MPSUnaryImageKernel.SetClipRect(clipRect)
+// imageThresholdBinaryInverseAdopt wraps an Objective-C object that this code just created as a
+// ImageThresholdBinaryInverse (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageThresholdBinaryInverseAdopt(id objc.ID) *ImageThresholdBinaryInverse {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageThresholdBinaryInverse{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// @property   edgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of an image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter.   Default: usually MPSImageEdgeModeZero. (Some MPSKernel types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results.) See Also: @ref MetalPerformanceShaders.h subsubsection_edgemode
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageThresholdBinaryInverse) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdBinaryInverse {
-	x.inner.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// Description returns the object's -description text.
+func (x *ImageThresholdBinaryInverse) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @property thresholdValue @discussion The threshold value used to init the threshold filter
-//
-// ThresholdValue calls the underlying ThresholdValue.
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageThresholdBinaryInverse) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageThresholdBinaryInverse) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageThresholdBinaryInverse creates a new ImageThresholdBinaryInverse.
+func NewImageThresholdBinaryInverse() *ImageThresholdBinaryInverse {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageThresholdBinaryInverse")), objc.RegisterName("new"))
+	return imageThresholdBinaryInverseAdopt(_id)
+}
+
+// The threshold value used to init the threshold filter
 func (x *ImageThresholdBinaryInverse) ThresholdValue() float32 {
-	return x.inner.ThresholdValue()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("thresholdValue"))
+	return _r
 }
 
-// @property maximumValue @discussion The maximum value used to init the threshold filter
-//
-// MaximumValue calls the underlying MaximumValue.
+// The maximum value used to init the threshold filter
 func (x *ImageThresholdBinaryInverse) MaximumValue() float32 {
-	return x.inner.MaximumValue()
-}
-
-// @property transform @discussion The color transform used to init the threshold filter
-//
-// Transform calls the underlying Transform.
-func (x *ImageThresholdBinaryInverse) Transform() *float32 {
-	return x.inner.Transform()
-}
-
-func (x *ImageThresholdBinaryInverse) asUnaryImageKernel() *raw.MPSUnaryImageKernel {
-	return &x.inner.MPSUnaryImageKernel
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumValue"))
+	return _r
 }
 
 // ImageThresholdBinaryInverseable is the interface implemented by [ImageThresholdBinaryInverse], for mocking and DI.
 type ImageThresholdBinaryInverseable interface {
-	Unwrap() *raw.MPSImageThresholdBinaryInverse
-	WithOffset(offset mpscore.MPSOffset) *ImageThresholdBinaryInverse
-	WithClipRect(clipRect metal.MTLRegion) *ImageThresholdBinaryInverse
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageThresholdBinaryInverse
+	obj.Object
 	ThresholdValue() float32
 	MaximumValue() float32
-	Transform() *float32
 }
 
 var _ ImageThresholdBinaryInverseable = (*ImageThresholdBinaryInverse)(nil)

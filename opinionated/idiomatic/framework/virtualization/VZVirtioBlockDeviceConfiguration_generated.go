@@ -5,74 +5,91 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The configuration object that requests the creation of a virtual storage device in the guest system.
 //
-// VirtioBlockDeviceConfiguration wraps [raw.VZVirtioBlockDeviceConfiguration] with a fluent Go API.
+// VirtioBlockDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioBlockDeviceConfiguration.
 type VirtioBlockDeviceConfiguration struct {
-	inner *raw.VZVirtioBlockDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtioBlockDeviceConfiguration].
-func (x *VirtioBlockDeviceConfiguration) Unwrap() *raw.VZVirtioBlockDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioBlockDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioBlockDeviceConfigurationFromID adopts an existing object pointer as a VirtioBlockDeviceConfiguration (nil for 0).
+// VirtioBlockDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioBlockDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioBlockDeviceConfigurationFromID(id objc.ID) *VirtioBlockDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioBlockDeviceConfiguration{inner: raw.VZVirtioBlockDeviceConfigurationFromID(id)}
+	x := &VirtioBlockDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// virtioBlockDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioBlockDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioBlockDeviceConfigurationAdopt(id objc.ID) *VirtioBlockDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioBlockDeviceConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtioBlockDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtioBlockDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtioBlockDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a block device configuration object that uses the specified storage medium.
 //
-// NewVirtioBlockDeviceConfigurationWithAttachment creates a new [VirtioBlockDeviceConfiguration].
-func NewVirtioBlockDeviceConfigurationWithAttachment(attachment *raw.VZStorageDeviceAttachment) *VirtioBlockDeviceConfiguration {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioBlockDeviceConfiguration")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), attachment.Ptr())
-	return &VirtioBlockDeviceConfiguration{inner: raw.VZVirtioBlockDeviceConfigurationFromID(_id)}
+// NewVirtioBlockDeviceConfigurationWithAttachment creates a new VirtioBlockDeviceConfiguration.
+func NewVirtioBlockDeviceConfigurationWithAttachment(attachment *StorageDeviceAttachment) *VirtioBlockDeviceConfiguration {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("VZVirtioBlockDeviceConfiguration")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithAttachment:"), objref.IDOf(attachment))
+	return virtioBlockDeviceConfigurationAdopt(_id)
 }
 
 // The string that identifies the VIRTIO block device.
 //
-// WithBlockDeviceIdentifier sets the blockDeviceIdentifier property and returns the receiver for chaining.
+// WithBlockDeviceIdentifier sets blockDeviceIdentifier and returns the receiver so calls can be chained.
 func (x *VirtioBlockDeviceConfiguration) WithBlockDeviceIdentifier(blockDeviceIdentifier string) *VirtioBlockDeviceConfiguration {
-	x.inner.SetBlockDeviceIdentifier(foundation.NSStringStringWithUTF8String(blockDeviceIdentifier))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlockDeviceIdentifier:"), purego.NSString(blockDeviceIdentifier))
 	return x
 }
 
-// BlockDeviceIdentifier calls the underlying BlockDeviceIdentifier.
 func (x *VirtioBlockDeviceConfiguration) BlockDeviceIdentifier() string {
-	_r := x.inner.BlockDeviceIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("blockDeviceIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetBlockDeviceIdentifier calls the underlying SetBlockDeviceIdentifier.
 func (x *VirtioBlockDeviceConfiguration) SetBlockDeviceIdentifier(blockDeviceIdentifier string) {
-	x.inner.SetBlockDeviceIdentifier(foundation.NSStringStringWithUTF8String(blockDeviceIdentifier))
-}
-
-func (x *VirtioBlockDeviceConfiguration) asStorageDeviceConfiguration() *raw.VZStorageDeviceConfiguration {
-	return &x.inner.VZStorageDeviceConfiguration
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBlockDeviceIdentifier:"), purego.NSString(blockDeviceIdentifier))
 }
 
 // VirtioBlockDeviceConfigurationable is the interface implemented by [VirtioBlockDeviceConfiguration], for mocking and DI.
 type VirtioBlockDeviceConfigurationable interface {
-	Unwrap() *raw.VZVirtioBlockDeviceConfiguration
+	obj.Object
 	WithBlockDeviceIdentifier(blockDeviceIdentifier string) *VirtioBlockDeviceConfiguration
 	BlockDeviceIdentifier() string
 	SetBlockDeviceIdentifier(blockDeviceIdentifier string)

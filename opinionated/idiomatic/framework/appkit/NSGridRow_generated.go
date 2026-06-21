@@ -5,180 +5,186 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A row within a grid view.
 //
-// GridRow wraps [raw.NSGridRow] with a fluent Go API.
+// GridRow is an idiomatic wrapper over the Objective-C class NSGridRow.
 type GridRow struct {
-	inner *raw.NSGridRow
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSGridRow].
-func (x *GridRow) Unwrap() *raw.NSGridRow { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *GridRow) ID() objc.ID { return x.inner.Ptr() }
-
-// GridRowFromID adopts an existing object pointer as a GridRow (nil for 0).
+// GridRowFromID adopts an existing Objective-C object as a GridRow
+// (nil for 0), retaining it and registering a release finalizer.
 func GridRowFromID(id objc.ID) *GridRow {
 	if id == 0 {
 		return nil
 	}
-	return &GridRow{inner: raw.NSGridRowFromID(id)}
+	x := &GridRow{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewGridRow creates a new [GridRow].
+// gridRowAdopt wraps an Objective-C object that this code just created as a
+// GridRow (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func gridRowAdopt(id objc.ID) *GridRow {
+	if id == 0 {
+		return nil
+	}
+	x := &GridRow{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *GridRow) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *GridRow) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *GridRow) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewGridRow creates a new GridRow.
 func NewGridRow() *GridRow {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSGridRow")), objc.RegisterName("new"))
-	return &GridRow{inner: raw.NSGridRowFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSGridRow")), objc.RegisterName("new"))
+	return gridRowAdopt(_id)
 }
 
-// WithYPlacement sets the yPlacement property and returns the receiver for chaining.
-func (x *GridRow) WithYPlacement(yPlacement NSGridCellPlacement) *GridRow {
-	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
+// WithYPlacement sets yPlacement and returns the receiver so calls can be chained.
+func (x *GridRow) WithYPlacement(yPlacement GridCellPlacement) *GridRow {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYPlacement:"), yPlacement)
 	return x
 }
 
-// WithRowAlignment sets the rowAlignment property and returns the receiver for chaining.
-func (x *GridRow) WithRowAlignment(rowAlignment NSGridRowAlignment) *GridRow {
-	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
+// WithRowAlignment sets rowAlignment and returns the receiver so calls can be chained.
+func (x *GridRow) WithRowAlignment(rowAlignment GridRowAlignment) *GridRow {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowAlignment:"), rowAlignment)
 	return x
 }
 
-// WithHeight sets the height property and returns the receiver for chaining.
+// WithHeight sets height and returns the receiver so calls can be chained.
 func (x *GridRow) WithHeight(height float64) *GridRow {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 	return x
 }
 
-// WithTopPadding sets the topPadding property and returns the receiver for chaining.
+// WithTopPadding sets topPadding and returns the receiver so calls can be chained.
 func (x *GridRow) WithTopPadding(topPadding float64) *GridRow {
-	x.inner.SetTopPadding(topPadding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopPadding:"), topPadding)
 	return x
 }
 
-// WithBottomPadding sets the bottomPadding property and returns the receiver for chaining.
+// WithBottomPadding sets bottomPadding and returns the receiver so calls can be chained.
 func (x *GridRow) WithBottomPadding(bottomPadding float64) *GridRow {
-	x.inner.SetBottomPadding(bottomPadding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBottomPadding:"), bottomPadding)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *GridRow) WithHidden(hidden bool) *GridRow {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// CellAtIndex calls the underlying CellAtIndex.
 func (x *GridRow) CellAtIndex(index int) *GridCell {
-	_r := x.inner.CellAtIndex(index)
-	if _r == nil {
-		return nil
-	}
-	return &GridCell{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("cellAtIndex:"), index)
+	return GridCellFromID(_r)
 }
 
-// MergeCellsInRange calls the underlying MergeCellsInRange.
-func (x *GridRow) MergeCellsInRange(range_ foundation.NSRange) {
-	x.inner.MergeCellsInRange(range_)
-}
-
-// GridView calls the underlying GridView.
 func (x *GridRow) GridView() *GridView {
-	_r := x.inner.GridView()
-	if _r == nil {
-		return nil
-	}
-	return &GridView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("gridView"))
+	return GridViewFromID(_r)
 }
 
-// NumberOfCells calls the underlying NumberOfCells.
 func (x *GridRow) NumberOfCells() int {
-	return x.inner.NumberOfCells()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfCells"))
+	return _r
 }
 
-// YPlacement calls the underlying YPlacement.
-func (x *GridRow) YPlacement() NSGridCellPlacement {
-	return NSGridCellPlacement(x.inner.YPlacement())
+func (x *GridRow) YPlacement() GridCellPlacement {
+	_r := objc.Send[GridCellPlacement](objref.IDOf(x), objc.RegisterName("yPlacement"))
+	return _r
 }
 
-// SetYPlacement calls the underlying SetYPlacement.
-func (x *GridRow) SetYPlacement(yPlacement NSGridCellPlacement) {
-	x.inner.SetYPlacement(raw.NSGridCellPlacement(yPlacement))
+func (x *GridRow) SetYPlacement(yPlacement GridCellPlacement) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setYPlacement:"), yPlacement)
 }
 
-// RowAlignment calls the underlying RowAlignment.
-func (x *GridRow) RowAlignment() NSGridRowAlignment {
-	return NSGridRowAlignment(x.inner.RowAlignment())
+func (x *GridRow) RowAlignment() GridRowAlignment {
+	_r := objc.Send[GridRowAlignment](objref.IDOf(x), objc.RegisterName("rowAlignment"))
+	return _r
 }
 
-// SetRowAlignment calls the underlying SetRowAlignment.
-func (x *GridRow) SetRowAlignment(rowAlignment NSGridRowAlignment) {
-	x.inner.SetRowAlignment(raw.NSGridRowAlignment(rowAlignment))
+func (x *GridRow) SetRowAlignment(rowAlignment GridRowAlignment) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRowAlignment:"), rowAlignment)
 }
 
-// Height calls the underlying Height.
 func (x *GridRow) Height() float64 {
-	return x.inner.Height()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("height"))
+	return _r
 }
 
-// SetHeight calls the underlying SetHeight.
 func (x *GridRow) SetHeight(height float64) {
-	x.inner.SetHeight(height)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHeight:"), height)
 }
 
-// TopPadding calls the underlying TopPadding.
 func (x *GridRow) TopPadding() float64 {
-	return x.inner.TopPadding()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("topPadding"))
+	return _r
 }
 
-// SetTopPadding calls the underlying SetTopPadding.
 func (x *GridRow) SetTopPadding(topPadding float64) {
-	x.inner.SetTopPadding(topPadding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTopPadding:"), topPadding)
 }
 
-// BottomPadding calls the underlying BottomPadding.
 func (x *GridRow) BottomPadding() float64 {
-	return x.inner.BottomPadding()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("bottomPadding"))
+	return _r
 }
 
-// SetBottomPadding calls the underlying SetBottomPadding.
 func (x *GridRow) SetBottomPadding(bottomPadding float64) {
-	x.inner.SetBottomPadding(bottomPadding)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBottomPadding:"), bottomPadding)
 }
 
-// IsHidden calls the underlying IsHidden.
 func (x *GridRow) IsHidden() bool {
-	return x.inner.IsHidden()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isHidden"))
+	return _r
 }
 
-// SetHidden calls the underlying SetHidden.
 func (x *GridRow) SetHidden(hidden bool) {
-	x.inner.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 }
 
 // GridRowable is the interface implemented by [GridRow], for mocking and DI.
 type GridRowable interface {
-	Unwrap() *raw.NSGridRow
-	WithYPlacement(yPlacement NSGridCellPlacement) *GridRow
-	WithRowAlignment(rowAlignment NSGridRowAlignment) *GridRow
+	obj.Object
+	WithYPlacement(yPlacement GridCellPlacement) *GridRow
+	WithRowAlignment(rowAlignment GridRowAlignment) *GridRow
 	WithHeight(height float64) *GridRow
 	WithTopPadding(topPadding float64) *GridRow
 	WithBottomPadding(bottomPadding float64) *GridRow
 	WithHidden(hidden bool) *GridRow
 	CellAtIndex(index int) *GridCell
-	MergeCellsInRange(range_ foundation.NSRange)
 	GridView() *GridView
 	NumberOfCells() int
-	YPlacement() NSGridCellPlacement
-	SetYPlacement(yPlacement NSGridCellPlacement)
-	RowAlignment() NSGridRowAlignment
-	SetRowAlignment(rowAlignment NSGridRowAlignment)
+	YPlacement() GridCellPlacement
+	SetYPlacement(yPlacement GridCellPlacement)
+	RowAlignment() GridRowAlignment
+	SetRowAlignment(rowAlignment GridRowAlignment)
 	Height() float64
 	SetHeight(height float64)
 	TopPadding() float64

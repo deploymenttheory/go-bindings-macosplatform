@@ -5,27 +5,34 @@
 package servicemanagement
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/servicemanagement"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KSMErrorDomainIPC returns the value of the CoreFoundation reference constant kSMErrorDomainIPC as an objc.ID.
-func KSMErrorDomainIPC() objc.ID { return purego.CFConstant(raw.KSMErrorDomainIPC()) }
+// KSMErrorDomainIPC returns the value of the constant kSMErrorDomainIPC.
+func KSMErrorDomainIPC() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kSMErrorDomainIPC"))) }
 
-// KSMErrorDomainFramework returns the value of the CoreFoundation reference constant kSMErrorDomainFramework as an objc.ID.
-func KSMErrorDomainFramework() objc.ID { return purego.CFConstant(raw.KSMErrorDomainFramework()) }
+// KSMErrorDomainFramework returns the value of the constant kSMErrorDomainFramework.
+func KSMErrorDomainFramework() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSMErrorDomainFramework")))
+}
 
-// KSMErrorDomainLaunchd returns the value of the CoreFoundation reference constant kSMErrorDomainLaunchd as an objc.ID.
-func KSMErrorDomainLaunchd() objc.ID { return purego.CFConstant(raw.KSMErrorDomainLaunchd()) }
+// KSMErrorDomainLaunchd returns the value of the constant kSMErrorDomainLaunchd.
+func KSMErrorDomainLaunchd() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSMErrorDomainLaunchd")))
+}
 
-// KSMDomainSystemLaunchd returns the value of the CoreFoundation reference constant kSMDomainSystemLaunchd as an objc.ID.
-func KSMDomainSystemLaunchd() objc.ID { return purego.CFConstant(raw.KSMDomainSystemLaunchd()) }
+// KSMDomainSystemLaunchd returns the value of the constant kSMDomainSystemLaunchd.
+func KSMDomainSystemLaunchd() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSMDomainSystemLaunchd")))
+}
 
-// KSMDomainUserLaunchd returns the value of the CoreFoundation reference constant kSMDomainUserLaunchd as an objc.ID.
-func KSMDomainUserLaunchd() objc.ID { return purego.CFConstant(raw.KSMDomainUserLaunchd()) }
+// KSMDomainUserLaunchd returns the value of the constant kSMDomainUserLaunchd.
+func KSMDomainUserLaunchd() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kSMDomainUserLaunchd")))
+}
 
-// SMAppServiceErrorDomain returns the string constant SMAppServiceErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func SMAppServiceErrorDomain() objc.ID {
-	return purego.CFConstant(raw.SMAppServiceErrorDomain())
+// SMAppServiceErrorDomain returns the string constant SMAppServiceErrorDomain, for use as a dictionary key or argument.
+func SMAppServiceErrorDomain() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SMAppServiceErrorDomain")))
 }

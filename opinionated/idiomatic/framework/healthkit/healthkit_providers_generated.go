@@ -5,75 +5,75 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// CumulativeQuantitySampleProvider is implemented by CumulativeQuantitySample and any idiomatic type wrapping a HKCumulativeQuantitySample subclass.
+// CumulativeQuantitySampleProvider is accepted wherever a HKCumulativeQuantitySample (or one of its subclasses) is expected.
 type CumulativeQuantitySampleProvider interface {
-	asCumulativeQuantitySample() *raw.HKCumulativeQuantitySample
+	objref.Object
 }
 
-// DocumentSampleProvider is implemented by DocumentSample and any idiomatic type wrapping a HKDocumentSample subclass.
+// DocumentSampleProvider is accepted wherever a HKDocumentSample (or one of its subclasses) is expected.
 type DocumentSampleProvider interface {
-	asDocumentSample() *raw.HKDocumentSample
+	objref.Object
 }
 
-// LensSpecificationProvider is implemented by LensSpecification and any idiomatic type wrapping a HKLensSpecification subclass.
+// LensSpecificationProvider is accepted wherever a HKLensSpecification (or one of its subclasses) is expected.
 type LensSpecificationProvider interface {
-	asLensSpecification() *raw.HKLensSpecification
+	objref.Object
 }
 
-// ObjectProvider is implemented by Object and any idiomatic type wrapping a HKObject subclass.
+// ObjectProvider is accepted wherever a HKObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
-	asObject() *raw.HKObject
+	objref.Object
 }
 
-// ObjectTypeProvider is implemented by ObjectType and any idiomatic type wrapping a HKObjectType subclass.
+// ObjectTypeProvider is accepted wherever a HKObjectType (or one of its subclasses) is expected.
 type ObjectTypeProvider interface {
-	asObjectType() *raw.HKObjectType
+	objref.Object
 }
 
-// QuantitySampleProvider is implemented by QuantitySample and any idiomatic type wrapping a HKQuantitySample subclass.
+// QuantitySampleProvider is accepted wherever a HKQuantitySample (or one of its subclasses) is expected.
 type QuantitySampleProvider interface {
-	asQuantitySample() *raw.HKQuantitySample
+	objref.Object
 }
 
-// QueryProvider is implemented by Query and any idiomatic type wrapping a HKQuery subclass.
+// QueryProvider is accepted wherever a HKQuery (or one of its subclasses) is expected.
 type QueryProvider interface {
-	asQuery() *raw.HKQuery
+	objref.Object
 }
 
-// SampleProvider is implemented by Sample and any idiomatic type wrapping a HKSample subclass.
+// SampleProvider is accepted wherever a HKSample (or one of its subclasses) is expected.
 type SampleProvider interface {
-	asSample() *raw.HKSample
+	objref.Object
 }
 
-// SampleTypeProvider is implemented by SampleType and any idiomatic type wrapping a HKSampleType subclass.
+// SampleTypeProvider is accepted wherever a HKSampleType (or one of its subclasses) is expected.
 type SampleTypeProvider interface {
-	asSampleType() *raw.HKSampleType
+	objref.Object
 }
 
-// ScoredAssessmentProvider is implemented by ScoredAssessment and any idiomatic type wrapping a HKScoredAssessment subclass.
+// ScoredAssessmentProvider is accepted wherever a HKScoredAssessment (or one of its subclasses) is expected.
 type ScoredAssessmentProvider interface {
-	asScoredAssessment() *raw.HKScoredAssessment
+	objref.Object
 }
 
-// SeriesBuilderProvider is implemented by SeriesBuilder and any idiomatic type wrapping a HKSeriesBuilder subclass.
+// SeriesBuilderProvider is accepted wherever a HKSeriesBuilder (or one of its subclasses) is expected.
 type SeriesBuilderProvider interface {
-	asSeriesBuilder() *raw.HKSeriesBuilder
+	objref.Object
 }
 
-// SeriesSampleProvider is implemented by SeriesSample and any idiomatic type wrapping a HKSeriesSample subclass.
+// SeriesSampleProvider is accepted wherever a HKSeriesSample (or one of its subclasses) is expected.
 type SeriesSampleProvider interface {
-	asSeriesSample() *raw.HKSeriesSample
+	objref.Object
 }
 
-// VisionPrescriptionProvider is implemented by VisionPrescription and any idiomatic type wrapping a HKVisionPrescription subclass.
+// VisionPrescriptionProvider is accepted wherever a HKVisionPrescription (or one of its subclasses) is expected.
 type VisionPrescriptionProvider interface {
-	asVisionPrescription() *raw.HKVisionPrescription
+	objref.Object
 }
 
-// WorkoutBuilderProvider is implemented by WorkoutBuilder and any idiomatic type wrapping a HKWorkoutBuilder subclass.
+// WorkoutBuilderProvider is accepted wherever a HKWorkoutBuilder (or one of its subclasses) is expected.
 type WorkoutBuilderProvider interface {
-	asWorkoutBuilder() *raw.HKWorkoutBuilder
+	objref.Object
 }

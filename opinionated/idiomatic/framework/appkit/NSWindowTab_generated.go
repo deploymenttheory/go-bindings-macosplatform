@@ -5,139 +5,154 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A tab associated with a window that is part of a tabbing group.
 //
-// WindowTab wraps [raw.NSWindowTab] with a fluent Go API.
+// WindowTab is an idiomatic wrapper over the Objective-C class NSWindowTab.
 type WindowTab struct {
-	inner *raw.NSWindowTab
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSWindowTab].
-func (x *WindowTab) Unwrap() *raw.NSWindowTab { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *WindowTab) ID() objc.ID { return x.inner.Ptr() }
-
-// WindowTabFromID adopts an existing object pointer as a WindowTab (nil for 0).
+// WindowTabFromID adopts an existing Objective-C object as a WindowTab
+// (nil for 0), retaining it and registering a release finalizer.
 func WindowTabFromID(id objc.ID) *WindowTab {
 	if id == 0 {
 		return nil
 	}
-	return &WindowTab{inner: raw.NSWindowTabFromID(id)}
+	x := &WindowTab{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewWindowTab creates a new [WindowTab].
+// windowTabAdopt wraps an Objective-C object that this code just created as a
+// WindowTab (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func windowTabAdopt(id objc.ID) *WindowTab {
+	if id == 0 {
+		return nil
+	}
+	x := &WindowTab{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *WindowTab) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *WindowTab) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *WindowTab) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewWindowTab creates a new WindowTab.
 func NewWindowTab() *WindowTab {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSWindowTab")), objc.RegisterName("new"))
-	return &WindowTab{inner: raw.NSWindowTabFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSWindowTab")), objc.RegisterName("new"))
+	return windowTabAdopt(_id)
 }
 
 // The title for the window tab.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *WindowTab) WithTitle(title string) *WindowTab {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
 // The title for the window tab, specified as an attributed string.
 //
-// WithAttributedTitle sets the attributedTitle property and returns the receiver for chaining.
-func (x *WindowTab) WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *WindowTab {
-	x.inner.SetAttributedTitle(attributedTitle)
+// WithAttributedTitle sets attributedTitle and returns the receiver so calls can be chained.
+func (x *WindowTab) WithAttributedTitle(attributedTitle obj.Object) *WindowTab {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 	return x
 }
 
 // The tooltip for this window tab.
 //
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets toolTip and returns the receiver so calls can be chained.
 func (x *WindowTab) WithToolTip(toolTip string) *WindowTab {
-	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
 // An optional accessory view for the tab.
 //
-// WithAccessoryView sets the accessoryView property and returns the receiver for chaining.
+// WithAccessoryView sets accessoryView and returns the receiver so calls can be chained.
 func (x *WindowTab) WithAccessoryView(accessoryView ViewProvider) *WindowTab {
-	x.inner.SetAccessoryView(accessoryView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 	return x
 }
 
-// Title calls the underlying Title.
 func (x *WindowTab) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
 func (x *WindowTab) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
-// AttributedTitle calls the underlying AttributedTitle.
-func (x *WindowTab) AttributedTitle() *foundation.NSAttributedString {
-	return x.inner.AttributedTitle()
+func (x *WindowTab) AttributedTitle() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("attributedTitle"))
+	return obj.Wrap(_r)
 }
 
-// SetAttributedTitle calls the underlying SetAttributedTitle.
-func (x *WindowTab) SetAttributedTitle(attributedTitle *foundation.NSAttributedString) {
-	x.inner.SetAttributedTitle(attributedTitle)
+func (x *WindowTab) SetAttributedTitle(attributedTitle obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedTitle:"), objref.IDOf(attributedTitle))
 }
 
-// ToolTip calls the underlying ToolTip.
 func (x *WindowTab) ToolTip() string {
-	_r := x.inner.ToolTip()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("toolTip"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetToolTip calls the underlying SetToolTip.
 func (x *WindowTab) SetToolTip(toolTip string) {
-	x.inner.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 }
 
-// AccessoryView calls the underlying AccessoryView.
 func (x *WindowTab) AccessoryView() *View {
-	_r := x.inner.AccessoryView()
-	if _r == nil {
-		return nil
-	}
-	return &View{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accessoryView"))
+	return ViewFromID(_r)
 }
 
-// SetAccessoryView calls the underlying SetAccessoryView.
-func (x *WindowTab) SetAccessoryView(accessoryView *raw.NSView) {
-	x.inner.SetAccessoryView(accessoryView)
+func (x *WindowTab) SetAccessoryView(accessoryView *View) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAccessoryView:"), objref.IDOf(accessoryView))
 }
 
 // WindowTabable is the interface implemented by [WindowTab], for mocking and DI.
 type WindowTabable interface {
-	Unwrap() *raw.NSWindowTab
+	obj.Object
 	WithTitle(title string) *WindowTab
-	WithAttributedTitle(attributedTitle *foundation.NSAttributedString) *WindowTab
+	WithAttributedTitle(attributedTitle obj.Object) *WindowTab
 	WithToolTip(toolTip string) *WindowTab
 	WithAccessoryView(accessoryView ViewProvider) *WindowTab
 	Title() string
 	SetTitle(title string)
-	AttributedTitle() *foundation.NSAttributedString
-	SetAttributedTitle(attributedTitle *foundation.NSAttributedString)
+	AttributedTitle() obj.Object
+	SetAttributedTitle(attributedTitle obj.Object)
 	ToolTip() string
 	SetToolTip(toolTip string)
 	AccessoryView() *View
-	SetAccessoryView(accessoryView *raw.NSView)
+	SetAccessoryView(accessoryView *View)
 }
 
 var _ WindowTabable = (*WindowTab)(nil)

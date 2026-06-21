@@ -5,54 +5,75 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that combines and arranges media from multiple assets into a single composite asset that you can play or process.
 //
-// Composition wraps [raw.AVComposition] with a fluent Go API.
+// Composition is an idiomatic wrapper over the Objective-C class AVComposition.
 type Composition struct {
-	inner *raw.AVComposition
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVComposition].
-func (x *Composition) Unwrap() *raw.AVComposition { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Composition) ID() objc.ID { return x.inner.Ptr() }
-
-// CompositionFromID adopts an existing object pointer as a Composition (nil for 0).
+// CompositionFromID adopts an existing Objective-C object as a Composition
+// (nil for 0), retaining it and registering a release finalizer.
 func CompositionFromID(id objc.ID) *Composition {
 	if id == 0 {
 		return nil
 	}
-	return &Composition{inner: raw.AVCompositionFromID(id)}
+	x := &Composition{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewComposition creates a new [Composition].
+// compositionAdopt wraps an Objective-C object that this code just created as a
+// Composition (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func compositionAdopt(id objc.ID) *Composition {
+	if id == 0 {
+		return nil
+	}
+	x := &Composition{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Composition) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Composition) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Composition) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewComposition creates a new Composition.
 func NewComposition() *Composition {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVComposition")), objc.RegisterName("new"))
-	return &Composition{inner: raw.AVCompositionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVComposition")), objc.RegisterName("new"))
+	return compositionAdopt(_id)
 }
 
-// @property       URLAssetInitializationOptions @abstract       Specifies the initialization options for the creation of AVURLAssets by the receiver, e.g. AVURLAssetPreferPreciseDurationAndTimingKey. The default behavior for creation of AVURLAssets by an AVComposition is equivalent to the behavior of +[AVURLAsset URLAssetWithURL:options:] when specifying no initialization options. @discussion AVCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVCompositionTracks, as needed, whenever AVCompositionTrackSegments were originally added to a track via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks. The value of URLAssetInitializationOptions can be specified at the time an AVMutableComposition is created via +compositionWithURLAssetInitializationOptions:.
-//
-// URLAssetInitializationOptions calls the underlying URLAssetInitializationOptions.
-func (x *Composition) URLAssetInitializationOptions() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.URLAssetInitializationOptions()
+// Specifies the initialization options for the creation of AVURLAssets by the receiver, e.g. AVURLAssetPreferPreciseDurationAndTimingKey. The default behavior for creation of AVURLAssets by an AVComposition is equivalent to the behavior of +[AVURLAsset URLAssetWithURL:options:] when specifying no initialization options. AVCompositions create AVURLAssets internally for URLs specified by AVCompositionTrackSegments of AVCompositionTracks, as needed, whenever AVCompositionTrackSegments were originally added to a track via -[AVMutableCompositionTrack setSegments:] rather than by inserting timeranges of already existing AVAssets or AVAssetTracks. The value of URLAssetInitializationOptions can be specified at the time an AVMutableComposition is created via +compositionWithURLAssetInitializationOptions:.
+func (x *Composition) URLAssetInitializationOptions() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLAssetInitializationOptions"))
+	return obj.Wrap(_r)
 }
-
-func (x *Composition) asComposition() *raw.AVComposition { return x.inner }
-
-func (x *Composition) asAsset() *raw.AVAsset { return &x.inner.AVAsset }
 
 // Compositionable is the interface implemented by [Composition], for mocking and DI.
 type Compositionable interface {
-	Unwrap() *raw.AVComposition
-	URLAssetInitializationOptions() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	URLAssetInitializationOptions() obj.Object
 }
 
 var _ Compositionable = (*Composition)(nil)

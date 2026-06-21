@@ -5,73 +5,90 @@
 package intents
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A shortcut the user added to Siri.
 //
-// VoiceShortcut wraps [raw.INVoiceShortcut] with a fluent Go API.
+// VoiceShortcut is an idiomatic wrapper over the Objective-C class INVoiceShortcut.
 type VoiceShortcut struct {
-	inner *raw.INVoiceShortcut
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INVoiceShortcut].
-func (x *VoiceShortcut) Unwrap() *raw.INVoiceShortcut { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VoiceShortcut) ID() objc.ID { return x.inner.Ptr() }
-
-// VoiceShortcutFromID adopts an existing object pointer as a VoiceShortcut (nil for 0).
+// VoiceShortcutFromID adopts an existing Objective-C object as a VoiceShortcut
+// (nil for 0), retaining it and registering a release finalizer.
 func VoiceShortcutFromID(id objc.ID) *VoiceShortcut {
 	if id == 0 {
 		return nil
 	}
-	return &VoiceShortcut{inner: raw.INVoiceShortcutFromID(id)}
+	x := &VoiceShortcut{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVoiceShortcut creates a new [VoiceShortcut].
-func NewVoiceShortcut() *VoiceShortcut {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INVoiceShortcut")), objc.RegisterName("new"))
-	return &VoiceShortcut{inner: raw.INVoiceShortcutFromID(_id)}
-}
-
-// @abstract The unique identifier for this voice shortcut
-//
-// Identifier calls the underlying Identifier.
-func (x *VoiceShortcut) Identifier() *foundation.NSUUID {
-	return x.inner.Identifier()
-}
-
-// @abstract The phrase the user speaks to invoke this shortcut; set by the user when they add it to Siri.
-//
-// InvocationPhrase calls the underlying InvocationPhrase.
-func (x *VoiceShortcut) InvocationPhrase() string {
-	_r := x.inner.InvocationPhrase()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// @abstract The shortcut that will be performed when this voice shortcut is invoked via Siri.
-//
-// Shortcut calls the underlying Shortcut.
-func (x *VoiceShortcut) Shortcut() *Shortcut {
-	_r := x.inner.Shortcut()
-	if _r == nil {
+// voiceShortcutAdopt wraps an Objective-C object that this code just created as a
+// VoiceShortcut (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func voiceShortcutAdopt(id objc.ID) *VoiceShortcut {
+	if id == 0 {
 		return nil
 	}
-	return &Shortcut{inner: _r}
+	x := &VoiceShortcut{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VoiceShortcut) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VoiceShortcut) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VoiceShortcut) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVoiceShortcut creates a new VoiceShortcut.
+func NewVoiceShortcut() *VoiceShortcut {
+	_id := objc.Send[objc.ID](objc.ID(_class("INVoiceShortcut")), objc.RegisterName("new"))
+	return voiceShortcutAdopt(_id)
+}
+
+// The unique identifier for this voice shortcut
+func (x *VoiceShortcut) Identifier() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	return obj.Wrap(_r)
+}
+
+// The phrase the user speaks to invoke this shortcut; set by the user when they add it to Siri.
+func (x *VoiceShortcut) InvocationPhrase() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invocationPhrase"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+// The shortcut that will be performed when this voice shortcut is invoked via Siri.
+func (x *VoiceShortcut) Shortcut() *Shortcut {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shortcut"))
+	return ShortcutFromID(_r)
 }
 
 // VoiceShortcutable is the interface implemented by [VoiceShortcut], for mocking and DI.
 type VoiceShortcutable interface {
-	Unwrap() *raw.INVoiceShortcut
-	Identifier() *foundation.NSUUID
+	obj.Object
+	Identifier() obj.Object
 	InvocationPhrase() string
 	Shortcut() *Shortcut
 }

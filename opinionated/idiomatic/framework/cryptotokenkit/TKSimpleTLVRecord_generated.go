@@ -5,47 +5,71 @@
 package cryptotokenkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cryptotokenkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that implements encoding using Simple-TLV encoding according to ISO 7816-4.
 //
-// SimpleTLVRecord wraps [raw.TKSimpleTLVRecord] with a fluent Go API.
+// SimpleTLVRecord is an idiomatic wrapper over the Objective-C class TKSimpleTLVRecord.
 type SimpleTLVRecord struct {
-	inner *raw.TKSimpleTLVRecord
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.TKSimpleTLVRecord].
-func (x *SimpleTLVRecord) Unwrap() *raw.TKSimpleTLVRecord { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SimpleTLVRecord) ID() objc.ID { return x.inner.Ptr() }
-
-// SimpleTLVRecordFromID adopts an existing object pointer as a SimpleTLVRecord (nil for 0).
+// SimpleTLVRecordFromID adopts an existing Objective-C object as a SimpleTLVRecord
+// (nil for 0), retaining it and registering a release finalizer.
 func SimpleTLVRecordFromID(id objc.ID) *SimpleTLVRecord {
 	if id == 0 {
 		return nil
 	}
-	return &SimpleTLVRecord{inner: raw.TKSimpleTLVRecordFromID(id)}
+	x := &SimpleTLVRecord{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// simpleTLVRecordAdopt wraps an Objective-C object that this code just created as a
+// SimpleTLVRecord (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func simpleTLVRecordAdopt(id objc.ID) *SimpleTLVRecord {
+	if id == 0 {
+		return nil
+	}
+	x := &SimpleTLVRecord{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SimpleTLVRecord) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SimpleTLVRecord) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SimpleTLVRecord) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a TLV record with the specified tag and value.
 //
-// NewSimpleTLVRecordWithTagValue creates a new [SimpleTLVRecord].
-func NewSimpleTLVRecordWithTagValue(tag uint8, value *foundation.NSData) *SimpleTLVRecord {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("TKSimpleTLVRecord")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:value:"), tag, value.Ptr())
-	return &SimpleTLVRecord{inner: raw.TKSimpleTLVRecordFromID(_id)}
+// NewSimpleTLVRecordWithTagValue creates a new SimpleTLVRecord.
+func NewSimpleTLVRecordWithTagValue(tag uint8, value obj.Object) *SimpleTLVRecord {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("TKSimpleTLVRecord")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithTag:value:"), tag, objref.IDOf(value))
+	return simpleTLVRecordAdopt(_id)
 }
-
-func (x *SimpleTLVRecord) asTLVRecord() *raw.TKTLVRecord { return &x.inner.TKTLVRecord }
 
 // SimpleTLVRecordable is the interface implemented by [SimpleTLVRecord], for mocking and DI.
 type SimpleTLVRecordable interface {
-	Unwrap() *raw.TKSimpleTLVRecord
+	obj.Object
 }
 
 var _ SimpleTLVRecordable = (*SimpleTLVRecord)(nil)

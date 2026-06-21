@@ -5,691 +5,569 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // An object that represents the location of a resource, such as an item on a remote server or the path to a local file.
 //
-// URL wraps [raw.NSURL] with a fluent Go API.
+// URL is an idiomatic wrapper over the Objective-C class NSURL.
 type URL struct {
-	inner *raw.NSURL
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURL].
-func (x *URL) Unwrap() *raw.NSURL { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URL) ID() objc.ID { return x.inner.Ptr() }
-
-// URLFromID adopts an existing object pointer as a URL (nil for 0).
+// URLFromID adopts an existing Objective-C object as a URL
+// (nil for 0), retaining it and registering a release finalizer.
 func URLFromID(id objc.ID) *URL {
 	if id == 0 {
 		return nil
 	}
-	return &URL{inner: raw.NSURLFromID(id)}
+	x := &URL{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// uRLAdopt wraps an Objective-C object that this code just created as a
+// URL (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLAdopt(id objc.ID) *URL {
+	if id == 0 {
+		return nil
+	}
+	x := &URL{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *URL) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URL) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URL) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a newly created NSURL with a specified scheme, host, and path.
 //
-// NewURLWithSchemeHostPath creates a new [URL].
+// NewURLWithSchemeHostPath creates a new URL.
 func NewURLWithSchemeHostPath(scheme string, host string, path string) *URL {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScheme:host:path:"), foundation.NSStringStringWithUTF8String(scheme).Ptr(), foundation.NSStringStringWithUTF8String(host).Ptr(), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &URL{inner: raw.NSURLFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithScheme:host:path:"), purego.NSString(scheme), purego.NSString(host), purego.NSString(path))
+	return uRLAdopt(_id)
 }
 
 // Initializes a newly created file NSURL referencing the local file or directory at path, relative to a base URL.
 //
-// NewURLFileURLWithPathIsDirectoryRelativeToURL creates a new [URL].
+// NewURLFileURLWithPathIsDirectoryRelativeToURL creates a new URL.
 func NewURLFileURLWithPathIsDirectoryRelativeToURL(path string, isDir bool, baseURL string) *URL {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFileURLWithPath:isDirectory:relativeToURL:"), foundation.NSStringStringWithUTF8String(path).Ptr(), isDir, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)).Ptr())
-	return &URL{inner: raw.NSURLFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFileURLWithPath:isDirectory:relativeToURL:"), purego.NSString(path), isDir, rt.FileURL(baseURL))
+	return uRLAdopt(_id)
 }
 
 // Initializes a newly created file NSURL referencing the local file or directory at path, relative to a base URL.
 //
-// NewURLFileURLWithPathRelativeToURL creates a new [URL].
+// NewURLFileURLWithPathRelativeToURL creates a new URL.
 func NewURLFileURLWithPathRelativeToURL(path string, baseURL string) *URL {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFileURLWithPath:relativeToURL:"), foundation.NSStringStringWithUTF8String(path).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)).Ptr())
-	return &URL{inner: raw.NSURLFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFileURLWithPath:relativeToURL:"), purego.NSString(path), rt.FileURL(baseURL))
+	return uRLAdopt(_id)
 }
 
 // Initializes a newly created NSURL referencing the local file or directory at path.
 //
-// NewURLFileURLWithPathIsDirectory creates a new [URL].
+// NewURLFileURLWithPathIsDirectory creates a new URL.
 func NewURLFileURLWithPathIsDirectory(path string, isDir bool) *URL {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFileURLWithPath:isDirectory:"), foundation.NSStringStringWithUTF8String(path).Ptr(), isDir)
-	return &URL{inner: raw.NSURLFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFileURLWithPath:isDirectory:"), purego.NSString(path), isDir)
+	return uRLAdopt(_id)
 }
 
 // Initializes a newly created NSURL referencing the local file or directory at path.
 //
-// NewURLFileURLWithPath creates a new [URL].
+// NewURLFileURLWithPath creates a new URL.
 func NewURLFileURLWithPath(path string) *URL {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFileURLWithPath:"), foundation.NSStringStringWithUTF8String(path).Ptr())
-	return &URL{inner: raw.NSURLFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFileURLWithPath:"), purego.NSString(path))
+	return uRLAdopt(_id)
 }
 
 // Initializes a URL object with a C string representing a local file system path.
 //
-// NewURLFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL creates a new [URL].
+// NewURLFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL creates a new URL.
 func NewURLFileURLWithFileSystemRepresentationIsDirectoryRelativeToURL(path string, isDir bool, baseURL string) *URL {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFileURLWithFileSystemRepresentation:isDirectory:relativeToURL:"), path, isDir, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)).Ptr())
-	return &URL{inner: raw.NSURLFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initFileURLWithFileSystemRepresentation:isDirectory:relativeToURL:"), path, isDir, rt.FileURL(baseURL))
+	return uRLAdopt(_id)
 }
 
 // Initializes an NSURL object with a provided URL string.
 //
-// NewURLWithString creates a new [URL].
+// NewURLWithString creates a new URL.
 func NewURLWithString(uRLString string) *URL {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(uRLString).Ptr())
-	return &URL{inner: raw.NSURLFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(uRLString))
+	return uRLAdopt(_id)
 }
 
 // Initializes an NSURL object with a base URL and a relative string.
 //
-// NewURLWithStringRelativeToURL creates a new [URL].
+// NewURLWithStringRelativeToURL creates a new URL.
 func NewURLWithStringRelativeToURL(uRLString string, baseURL string) *URL {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:relativeToURL:"), foundation.NSStringStringWithUTF8String(uRLString).Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)).Ptr())
-	return &URL{inner: raw.NSURLFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:relativeToURL:"), purego.NSString(uRLString), rt.FileURL(baseURL))
+	return uRLAdopt(_id)
 }
 
 // Creates an instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
 //
-// NewURLWithStringEncodingInvalidCharacters creates a new [URL].
+// NewURLWithStringEncodingInvalidCharacters creates a new URL.
 func NewURLWithStringEncodingInvalidCharacters(uRLString string, encodingInvalidCharacters bool) *URL {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:encodingInvalidCharacters:"), foundation.NSStringStringWithUTF8String(uRLString).Ptr(), encodingInvalidCharacters)
-	return &URL{inner: raw.NSURLFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:encodingInvalidCharacters:"), purego.NSString(uRLString), encodingInvalidCharacters)
+	return uRLAdopt(_id)
 }
 
 // Initializes a newly created NSURL using the contents of the given data, relative to a base URL.
 //
-// NewURLWithDataRepresentationRelativeToURL creates a new [URL].
-func NewURLWithDataRepresentationRelativeToURL(data *raw.NSData, baseURL string) *URL {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:relativeToURL:"), data.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)).Ptr())
-	return &URL{inner: raw.NSURLFromID(_id)}
+// NewURLWithDataRepresentationRelativeToURL creates a new URL.
+func NewURLWithDataRepresentationRelativeToURL(data *Data, baseURL string) *URL {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataRepresentation:relativeToURL:"), objref.IDOf(data), rt.FileURL(baseURL))
+	return uRLAdopt(_id)
 }
 
 // Initializes a newly created absolute NSURL using the contents of the given data, relative to a base URL.
 //
-// NewURLAbsoluteURLWithDataRepresentationRelativeToURL creates a new [URL].
-func NewURLAbsoluteURLWithDataRepresentationRelativeToURL(data *raw.NSData, baseURL string) *URL {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initAbsoluteURLWithDataRepresentation:relativeToURL:"), data.Ptr(), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)).Ptr())
-	return &URL{inner: raw.NSURLFromID(_id)}
+// NewURLAbsoluteURLWithDataRepresentationRelativeToURL creates a new URL.
+func NewURLAbsoluteURLWithDataRepresentationRelativeToURL(data *Data, baseURL string) *URL {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURL")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initAbsoluteURLWithDataRepresentation:relativeToURL:"), objref.IDOf(data), rt.FileURL(baseURL))
+	return uRLAdopt(_id)
 }
 
-// Initializes a newly created NSURL that points to a location specified by resolving bookmark data.
-//
-// NewURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError creates a new [URL].
-func NewURLByResolvingBookmarkDataOptionsRelativeToURLBookmarkDataIsStaleError(bookmarkData *raw.NSData, options NSURLBookmarkResolutionOptions, relativeURL string, isStale *bool) (*URL, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURL")), objc.RegisterName("alloc"))
-	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initByResolvingBookmarkData:options:relativeToURL:bookmarkDataIsStale:error:"), bookmarkData.Ptr(), raw.NSURLBookmarkResolutionOptions(options), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(relativeURL)).Ptr(), isStale, unsafe.Pointer(&_nsErr))
-	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
-	}
-	return &URL{inner: raw.NSURLFromID(_id)}, nil
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URL) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URL {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *URL) WithScriptingProperties(scriptingProperties obj.Object) *URL {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Fills the provided buffer with a C string representing a local file system path.
-//
-// GetFileSystemRepresentationMaxLength calls the underlying GetFileSystemRepresentationMaxLength.
-func (x *URL) GetFileSystemRepresentationMaxLength(buffer string, maxBufferLength uint) bool {
-	return x.inner.GetFileSystemRepresentationMaxLength(buffer, maxBufferLength)
+func (x *URL) GetFileSystemRepresentationMaxLength(buffer string, maxBufferLength int) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("getFileSystemRepresentation:maxLength:"), buffer, maxBufferLength)
+	return _r
 }
 
 // Returns whether the URL is a file reference URL.
-//
-// IsFileReferenceURL calls the underlying IsFileReferenceURL.
 func (x *URL) IsFileReferenceURL() bool {
-	return x.inner.IsFileReferenceURL()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFileReferenceURL"))
+	return _r
 }
 
 // Returns a new file reference URL that points to the same resource as the receiver.
-//
-// FileReferenceURL calls the underlying FileReferenceURL.
 func (x *URL) FileReferenceURL() *URL {
-	_r := x.inner.FileReferenceURL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
-}
-
-// Returns the value of the resource property for the specified key.
-//
-// GetResourceValueForKeyError calls the underlying GetResourceValueForKeyError.
-func (x *URL) GetResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSString) (bool, error) {
-	return x.inner.GetResourceValueForKeyError(value, key)
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fileReferenceURL"))
+	return URLFromID(_r)
 }
 
 // Returns the resource values for the properties identified by specified array of keys.
-//
-// ResourceValuesForKeysError calls the underlying ResourceValuesForKeysError.
-func (x *URL) ResourceValuesForKeysError(keys ...StringProvider) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
-	_ptrs := make([]objc.ID, len(keys))
-	for _i, _v := range keys {
-		_ptrs[_i] = _v.asString().Ptr()
+func (x *URL) ResourceValuesForKeysError(keys []*String) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resourceValuesForKeys:error:"), purego.SliceToNSArray(keys, func(_v *String) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.ResourceValuesForKeysError(_arg0)
+	return obj.Wrap(_r), nil
 }
 
 // Sets the URL’s resource property for a given key to a given value.
-//
-// SetResourceValueForKeyError calls the underlying SetResourceValueForKeyError.
-func (x *URL) SetResourceValueForKeyError(value objc.ID, key *raw.NSString) (bool, error) {
-	return x.inner.SetResourceValueForKeyError(value, key)
+func (x *URL) SetResourceValueForKey(value obj.Object, key *String) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setResourceValue:forKey:error:"), objref.IDOf(value), objref.IDOf(key), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Sets the URL’s resource properties for a given set of keys to a given set of values.
-//
-// SetResourceValuesError calls the underlying SetResourceValuesError.
-func (x *URL) SetResourceValuesError(keyedValues *raw.NSDictionary[*raw.NSString, objc.ID]) (bool, error) {
-	return x.inner.SetResourceValuesError(keyedValues)
+func (x *URL) SetResourceValues(keyedValues obj.Object) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("setResourceValues:error:"), objref.IDOf(keyedValues), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Removes the cached resource value identified by a given key from the URL object.
-//
-// RemoveCachedResourceValueForKey calls the underlying RemoveCachedResourceValueForKey.
-func (x *URL) RemoveCachedResourceValueForKey(key *raw.NSString) {
-	x.inner.RemoveCachedResourceValueForKey(key)
+func (x *URL) RemoveCachedResourceValueForKey(key *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeCachedResourceValueForKey:"), objref.IDOf(key))
 }
 
 // Removes all cached resource values and temporary resource values from the URL object.
-//
-// RemoveAllCachedResourceValues calls the underlying RemoveAllCachedResourceValues.
 func (x *URL) RemoveAllCachedResourceValues() {
-	x.inner.RemoveAllCachedResourceValues()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAllCachedResourceValues"))
 }
 
 // Sets a temporary resource value on the URL object.
-//
-// SetTemporaryResourceValueForKey calls the underlying SetTemporaryResourceValueForKey.
-func (x *URL) SetTemporaryResourceValueForKey(value objc.ID, key *raw.NSString) {
-	x.inner.SetTemporaryResourceValueForKey(value, key)
+func (x *URL) SetTemporaryResourceValueForKey(value obj.Object, key *String) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTemporaryResourceValue:forKey:"), objref.IDOf(value), objref.IDOf(key))
 }
 
 // Returns a bookmark for the URL, created with specified options and resource values.
-//
-// BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError calls the underlying BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError.
-func (x *URL) BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options NSURLBookmarkCreationOptions, keys *raw.NSArray[*raw.NSString], relativeURL string) (*Data, error) {
-	_r, _err := x.inner.BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(raw.NSURLBookmarkCreationOptions(options), keys, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(relativeURL)))
-	if _err != nil {
-		return nil, _err
+func (x *URL) BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options URLBookmarkCreationOptions, keys []*String, relativeURL string) (*Data, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bookmarkDataWithOptions:includingResourceValuesForKeys:relativeToURL:error:"), options, purego.SliceToNSArray(keys, func(_v *String) objc.ID { return objref.IDOf(_v) }), rt.FileURL(relativeURL), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Data{inner: _r}, nil
+	return DataFromID(_r), nil
 }
 
 // In an app that has adopted App Sandbox, makes the resource pointed to by a security-scoped URL available to the app.
-//
-// StartAccessingSecurityScopedResource calls the underlying StartAccessingSecurityScopedResource.
 func (x *URL) StartAccessingSecurityScopedResource() bool {
-	return x.inner.StartAccessingSecurityScopedResource()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("startAccessingSecurityScopedResource"))
+	return _r
 }
 
 // In an app that adopts App Sandbox, revokes access to the resource pointed to by a security-scoped URL.
-//
-// StopAccessingSecurityScopedResource calls the underlying StopAccessingSecurityScopedResource.
 func (x *URL) StopAccessingSecurityScopedResource() {
-	x.inner.StopAccessingSecurityScopedResource()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopAccessingSecurityScopedResource"))
 }
 
-// DataRepresentation calls the underlying DataRepresentation.
 func (x *URL) DataRepresentation() *Data {
-	_r := x.inner.DataRepresentation()
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("dataRepresentation"))
+	return DataFromID(_r)
 }
 
-// AbsoluteString calls the underlying AbsoluteString.
-func (x *URL) AbsoluteString() *String {
-	_r := x.inner.AbsoluteString()
-	if _r == nil {
-		return nil
+func (x *URL) AbsoluteString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteString"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// RelativeString calls the underlying RelativeString.
-func (x *URL) RelativeString() *String {
-	_r := x.inner.RelativeString()
-	if _r == nil {
-		return nil
+func (x *URL) RelativeString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relativeString"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// BaseURL calls the underlying BaseURL.
 func (x *URL) BaseURL() *URL {
-	_r := x.inner.BaseURL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("baseURL"))
+	return URLFromID(_r)
 }
 
-// AbsoluteURL calls the underlying AbsoluteURL.
 func (x *URL) AbsoluteURL() *URL {
-	_r := x.inner.AbsoluteURL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("absoluteURL"))
+	return URLFromID(_r)
 }
 
-// Scheme calls the underlying Scheme.
-func (x *URL) Scheme() *String {
-	_r := x.inner.Scheme()
-	if _r == nil {
-		return nil
+func (x *URL) Scheme() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheme"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// ResourceSpecifier calls the underlying ResourceSpecifier.
-func (x *URL) ResourceSpecifier() *String {
-	_r := x.inner.ResourceSpecifier()
-	if _r == nil {
-		return nil
+func (x *URL) ResourceSpecifier() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resourceSpecifier"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Host calls the underlying Host.
-func (x *URL) Host() *String {
-	_r := x.inner.Host()
-	if _r == nil {
-		return nil
+func (x *URL) Host() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Port calls the underlying Port.
 func (x *URL) Port() *Number {
-	_r := x.inner.Port()
-	if _r == nil {
-		return nil
-	}
-	return &Number{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("port"))
+	return NumberFromID(_r)
 }
 
-// User calls the underlying User.
-func (x *URL) User() *String {
-	_r := x.inner.User()
-	if _r == nil {
-		return nil
+func (x *URL) User() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Password calls the underlying Password.
-func (x *URL) Password() *String {
-	_r := x.inner.Password()
-	if _r == nil {
-		return nil
+func (x *URL) Password() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("password"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Path calls the underlying Path.
-func (x *URL) Path() *String {
-	_r := x.inner.Path()
-	if _r == nil {
-		return nil
+func (x *URL) Path() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Fragment calls the underlying Fragment.
-func (x *URL) Fragment() *String {
-	_r := x.inner.Fragment()
-	if _r == nil {
-		return nil
+func (x *URL) Fragment() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragment"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// ParameterString calls the underlying ParameterString.
-func (x *URL) ParameterString() *String {
-	_r := x.inner.ParameterString()
-	if _r == nil {
-		return nil
+func (x *URL) ParameterString() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parameterString"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Query calls the underlying Query.
-func (x *URL) Query() *String {
-	_r := x.inner.Query()
-	if _r == nil {
-		return nil
+func (x *URL) Query() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("query"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// RelativePath calls the underlying RelativePath.
-func (x *URL) RelativePath() *String {
-	_r := x.inner.RelativePath()
-	if _r == nil {
-		return nil
+func (x *URL) RelativePath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("relativePath"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// HasDirectoryPath calls the underlying HasDirectoryPath.
 func (x *URL) HasDirectoryPath() bool {
-	return x.inner.HasDirectoryPath()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasDirectoryPath"))
+	return _r
 }
 
-// FileSystemRepresentation calls the underlying FileSystemRepresentation.
-func (x *URL) FileSystemRepresentation() unsafe.Pointer {
-	return x.inner.FileSystemRepresentation()
-}
-
-// IsFileURL calls the underlying IsFileURL.
 func (x *URL) IsFileURL() bool {
-	return x.inner.IsFileURL()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isFileURL"))
+	return _r
 }
 
-// StandardizedURL calls the underlying StandardizedURL.
 func (x *URL) StandardizedURL() *URL {
-	_r := x.inner.StandardizedURL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("standardizedURL"))
+	return URLFromID(_r)
 }
 
-// FilePathURL calls the underlying FilePathURL.
 func (x *URL) FilePathURL() *URL {
-	_r := x.inner.FilePathURL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
-}
-
-// Returns the value of the resource property for the specified key.
-//
-// GetPromisedItemResourceValueForKeyError calls the underlying GetPromisedItemResourceValueForKeyError.
-func (x *URL) GetPromisedItemResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSString) (bool, error) {
-	return x.inner.GetPromisedItemResourceValueForKeyError(value, key)
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("filePathURL"))
+	return URLFromID(_r)
 }
 
 // Returns the resource values for the properties identified by specified array of keys.
-//
-// PromisedItemResourceValuesForKeysError calls the underlying PromisedItemResourceValuesForKeysError.
-func (x *URL) PromisedItemResourceValuesForKeysError(keys ...StringProvider) (*raw.NSDictionary[*raw.NSString, objc.ID], error) {
-	_ptrs := make([]objc.ID, len(keys))
-	for _i, _v := range keys {
-		_ptrs[_i] = _v.asString().Ptr()
+func (x *URL) PromisedItemResourceValuesForKeysError(keys []*String) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("promisedItemResourceValuesForKeys:error:"), purego.SliceToNSArray(keys, func(_v *String) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	var _arg0 *raw.NSArray[*raw.NSString]
-	if len(_ptrs) > 0 {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = raw.NSArrayFromID[*raw.NSString](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.PromisedItemResourceValuesForKeysError(_arg0)
+	return obj.Wrap(_r), nil
 }
 
 // Returns whether the promised item can be reached.
 //
-// CheckPromisedItemIsReachableAndReturnError returns any validation error.
+// CheckPromisedItemIsReachableAndReturnError returns an error if the operation did not succeed.
 func (x *URL) CheckPromisedItemIsReachableAndReturnError() error {
-	_, err := x.inner.CheckPromisedItemIsReachableAndReturnError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("checkPromisedItemIsReachableAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Returns a new URL by appending a path component to the original URL.
-//
-// URLByAppendingPathComponent calls the underlying URLByAppendingPathComponent.
 func (x *URL) URLByAppendingPathComponent(pathComponent string) *URL {
-	_r := x.inner.URLByAppendingPathComponent(foundation.NSStringStringWithUTF8String(pathComponent))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLByAppendingPathComponent:"), purego.NSString(pathComponent))
+	return URLFromID(_r)
 }
 
 // Returns a new URL by appending a path component to the original URL, along with a trailing slash if the component is a directory.
-//
-// URLByAppendingPathComponentIsDirectory calls the underlying URLByAppendingPathComponentIsDirectory.
 func (x *URL) URLByAppendingPathComponentIsDirectory(pathComponent string, isDirectory bool) *URL {
-	_r := x.inner.URLByAppendingPathComponentIsDirectory(foundation.NSStringStringWithUTF8String(pathComponent), isDirectory)
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLByAppendingPathComponent:isDirectory:"), purego.NSString(pathComponent), isDirectory)
+	return URLFromID(_r)
 }
 
 // Returns a new URL by appending a path extension to the original URL.
-//
-// URLByAppendingPathExtension calls the underlying URLByAppendingPathExtension.
 func (x *URL) URLByAppendingPathExtension(pathExtension string) *URL {
-	_r := x.inner.URLByAppendingPathExtension(foundation.NSStringStringWithUTF8String(pathExtension))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLByAppendingPathExtension:"), purego.NSString(pathExtension))
+	return URLFromID(_r)
 }
 
 // Returns whether the resource pointed to by a file URL can be reached.
 //
-// CheckResourceIsReachableAndReturnError returns any validation error.
+// CheckResourceIsReachableAndReturnError returns an error if the operation did not succeed.
 func (x *URL) CheckResourceIsReachableAndReturnError() error {
-	_, err := x.inner.CheckResourceIsReachableAndReturnError()
-	return err
+	var _nsErr uintptr
+	objc.Send[bool](objref.IDOf(x), objc.RegisterName("checkResourceIsReachableAndReturnError:"), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // PathComponents returns the collection as a Go slice.
 func (x *URL) PathComponents() []string {
-	arr := x.inner.PathComponents()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathComponents"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// LastPathComponent calls the underlying LastPathComponent.
-func (x *URL) LastPathComponent() *String {
-	_r := x.inner.LastPathComponent()
-	if _r == nil {
-		return nil
+func (x *URL) LastPathComponent() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lastPathComponent"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// PathExtension calls the underlying PathExtension.
-func (x *URL) PathExtension() *String {
-	_r := x.inner.PathExtension()
-	if _r == nil {
-		return nil
+func (x *URL) PathExtension() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("pathExtension"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// URLByDeletingLastPathComponent calls the underlying URLByDeletingLastPathComponent.
 func (x *URL) URLByDeletingLastPathComponent() *URL {
-	_r := x.inner.URLByDeletingLastPathComponent()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLByDeletingLastPathComponent"))
+	return URLFromID(_r)
 }
 
-// URLByDeletingPathExtension calls the underlying URLByDeletingPathExtension.
 func (x *URL) URLByDeletingPathExtension() *URL {
-	_r := x.inner.URLByDeletingPathExtension()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLByDeletingPathExtension"))
+	return URLFromID(_r)
 }
 
-// URLByStandardizingPath calls the underlying URLByStandardizingPath.
 func (x *URL) URLByStandardizingPath() *URL {
-	_r := x.inner.URLByStandardizingPath()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLByStandardizingPath"))
+	return URLFromID(_r)
 }
 
-// URLByResolvingSymlinksInPath calls the underlying URLByResolvingSymlinksInPath.
 func (x *URL) URLByResolvingSymlinksInPath() *URL {
-	_r := x.inner.URLByResolvingSymlinksInPath()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLByResolvingSymlinksInPath"))
+	return URLFromID(_r)
 }
 
 // Returns the receiver’s resource data, loading it if necessary.
-//
-// ResourceDataUsingCache calls the underlying ResourceDataUsingCache.
 func (x *URL) ResourceDataUsingCache(shouldUseCache bool) *Data {
-	_r := x.inner.ResourceDataUsingCache(shouldUseCache)
-	if _r == nil {
-		return nil
-	}
-	return &Data{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resourceDataUsingCache:"), shouldUseCache)
+	return DataFromID(_r)
 }
 
 // Loads the receiver’s resource data in the background.
-//
-// LoadResourceDataNotifyingClientUsingCache calls the underlying LoadResourceDataNotifyingClientUsingCache.
-func (x *URL) LoadResourceDataNotifyingClientUsingCache(client objc.ID, shouldUseCache bool) {
-	x.inner.LoadResourceDataNotifyingClientUsingCache(client, shouldUseCache)
+func (x *URL) LoadResourceDataNotifyingClientUsingCache(client obj.Object, shouldUseCache bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("loadResourceDataNotifyingClient:usingCache:"), objref.IDOf(client), shouldUseCache)
 }
 
 // Returns the specified property of the receiver’s resource.
-//
-// PropertyForKey calls the underlying PropertyForKey.
-func (x *URL) PropertyForKey(propertyKey string) objc.ID {
-	return x.inner.PropertyForKey(foundation.NSStringStringWithUTF8String(propertyKey))
+func (x *URL) PropertyForKey(propertyKey string) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("propertyForKey:"), purego.NSString(propertyKey))
+	return obj.Wrap(_r)
 }
 
 // Attempts to set the resource data for the receiver.
-//
-// SetResourceData calls the underlying SetResourceData.
-func (x *URL) SetResourceData(data *raw.NSData) bool {
-	return x.inner.SetResourceData(data)
+func (x *URL) SetResourceData(data *Data) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setResourceData:"), objref.IDOf(data))
+	return _r
 }
 
 // Changes the specified property of the receiver’s resource.
-//
-// SetPropertyForKey calls the underlying SetPropertyForKey.
-func (x *URL) SetPropertyForKey(property objc.ID, propertyKey string) bool {
-	return x.inner.SetPropertyForKey(property, foundation.NSStringStringWithUTF8String(propertyKey))
+func (x *URL) SetPropertyForKey(property obj.Object, propertyKey string) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("setProperty:forKey:"), objref.IDOf(property), purego.NSString(propertyKey))
+	return _r
 }
 
 // Returns a URL handle to service the receiver.
-//
-// URLHandleUsingCache calls the underlying URLHandleUsingCache.
 func (x *URL) URLHandleUsingCache(shouldUseCache bool) *URLHandle {
-	_r := x.inner.URLHandleUsingCache(shouldUseCache)
-	if _r == nil {
-		return nil
-	}
-	return &URLHandle{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLHandleUsingCache:"), shouldUseCache)
+	return URLHandleFromID(_r)
 }
-
-func (x *URL) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // URLable is the interface implemented by [URL], for mocking and DI.
 type URLable interface {
-	Unwrap() *raw.NSURL
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URL
-	GetFileSystemRepresentationMaxLength(buffer string, maxBufferLength uint) bool
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *URL
+	GetFileSystemRepresentationMaxLength(buffer string, maxBufferLength int) bool
 	IsFileReferenceURL() bool
 	FileReferenceURL() *URL
-	GetResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSString) (bool, error)
-	ResourceValuesForKeysError(keys ...StringProvider) (*raw.NSDictionary[*raw.NSString, objc.ID], error)
-	SetResourceValueForKeyError(value objc.ID, key *raw.NSString) (bool, error)
-	SetResourceValuesError(keyedValues *raw.NSDictionary[*raw.NSString, objc.ID]) (bool, error)
-	RemoveCachedResourceValueForKey(key *raw.NSString)
+	ResourceValuesForKeysError(keys []*String) (obj.Object, error)
+	SetResourceValueForKey(value obj.Object, key *String) error
+	SetResourceValues(keyedValues obj.Object) error
+	RemoveCachedResourceValueForKey(key *String)
 	RemoveAllCachedResourceValues()
-	SetTemporaryResourceValueForKey(value objc.ID, key *raw.NSString)
-	BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options NSURLBookmarkCreationOptions, keys *raw.NSArray[*raw.NSString], relativeURL string) (*Data, error)
+	SetTemporaryResourceValueForKey(value obj.Object, key *String)
+	BookmarkDataWithOptionsIncludingResourceValuesForKeysRelativeToURLError(options URLBookmarkCreationOptions, keys []*String, relativeURL string) (*Data, error)
 	StartAccessingSecurityScopedResource() bool
 	StopAccessingSecurityScopedResource()
 	DataRepresentation() *Data
-	AbsoluteString() *String
-	RelativeString() *String
+	AbsoluteString() string
+	RelativeString() string
 	BaseURL() *URL
 	AbsoluteURL() *URL
-	Scheme() *String
-	ResourceSpecifier() *String
-	Host() *String
+	Scheme() string
+	ResourceSpecifier() string
+	Host() string
 	Port() *Number
-	User() *String
-	Password() *String
-	Path() *String
-	Fragment() *String
-	ParameterString() *String
-	Query() *String
-	RelativePath() *String
+	User() string
+	Password() string
+	Path() string
+	Fragment() string
+	ParameterString() string
+	Query() string
+	RelativePath() string
 	HasDirectoryPath() bool
-	FileSystemRepresentation() unsafe.Pointer
 	IsFileURL() bool
 	StandardizedURL() *URL
 	FilePathURL() *URL
-	GetPromisedItemResourceValueForKeyError(value **raw.ObjcObject, key *raw.NSString) (bool, error)
-	PromisedItemResourceValuesForKeysError(keys ...StringProvider) (*raw.NSDictionary[*raw.NSString, objc.ID], error)
+	PromisedItemResourceValuesForKeysError(keys []*String) (obj.Object, error)
 	CheckPromisedItemIsReachableAndReturnError() error
 	URLByAppendingPathComponent(pathComponent string) *URL
 	URLByAppendingPathComponentIsDirectory(pathComponent string, isDirectory bool) *URL
 	URLByAppendingPathExtension(pathExtension string) *URL
 	CheckResourceIsReachableAndReturnError() error
 	PathComponents() []string
-	LastPathComponent() *String
-	PathExtension() *String
+	LastPathComponent() string
+	PathExtension() string
 	URLByDeletingLastPathComponent() *URL
 	URLByDeletingPathExtension() *URL
 	URLByStandardizingPath() *URL
 	URLByResolvingSymlinksInPath() *URL
 	ResourceDataUsingCache(shouldUseCache bool) *Data
-	LoadResourceDataNotifyingClientUsingCache(client objc.ID, shouldUseCache bool)
-	PropertyForKey(propertyKey string) objc.ID
-	SetResourceData(data *raw.NSData) bool
-	SetPropertyForKey(property objc.ID, propertyKey string) bool
+	LoadResourceDataNotifyingClientUsingCache(client obj.Object, shouldUseCache bool)
+	PropertyForKey(propertyKey string) obj.Object
+	SetResourceData(data *Data) bool
+	SetPropertyForKey(property obj.Object, propertyKey string) bool
 	URLHandleUsingCache(shouldUseCache bool) *URLHandle
 }
 

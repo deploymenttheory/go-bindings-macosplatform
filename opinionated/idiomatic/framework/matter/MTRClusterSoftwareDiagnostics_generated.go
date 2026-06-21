@@ -5,137 +5,130 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// MTRClusterSoftwareDiagnostics wraps [raw.MTRClusterSoftwareDiagnostics] with a fluent Go API.
+// MTRClusterSoftwareDiagnostics is an idiomatic wrapper over the Objective-C class MTRClusterSoftwareDiagnostics.
 type MTRClusterSoftwareDiagnostics struct {
-	inner *raw.MTRClusterSoftwareDiagnostics
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterSoftwareDiagnostics].
-func (x *MTRClusterSoftwareDiagnostics) Unwrap() *raw.MTRClusterSoftwareDiagnostics { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterSoftwareDiagnostics) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterSoftwareDiagnosticsFromID adopts an existing object pointer as a MTRClusterSoftwareDiagnostics (nil for 0).
+// MTRClusterSoftwareDiagnosticsFromID adopts an existing Objective-C object as a MTRClusterSoftwareDiagnostics
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterSoftwareDiagnosticsFromID(id objc.ID) *MTRClusterSoftwareDiagnostics {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterSoftwareDiagnostics{inner: raw.MTRClusterSoftwareDiagnosticsFromID(id)}
+	x := &MTRClusterSoftwareDiagnostics{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterSoftwareDiagnosticsAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterSoftwareDiagnostics (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterSoftwareDiagnosticsAdopt(id objc.ID) *MTRClusterSoftwareDiagnostics {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterSoftwareDiagnostics{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterSoftwareDiagnostics) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterSoftwareDiagnostics) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterSoftwareDiagnostics) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue creates a new [MTRClusterSoftwareDiagnostics].
-func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterSoftwareDiagnostics {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterSoftwareDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterSoftwareDiagnostics{inner: raw.MTRClusterSoftwareDiagnosticsFromID(_id)}
+// NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue creates a new MTRClusterSoftwareDiagnostics.
+func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterSoftwareDiagnostics {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterSoftwareDiagnostics")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterSoftwareDiagnosticsAdopt(_id)
 }
 
-// NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointQueue creates a new [MTRClusterSoftwareDiagnostics].
-func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointQueue(device *raw.MTRDevice, endpoint uint16, queue *foundation.NSObject) *MTRClusterSoftwareDiagnostics {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterSoftwareDiagnostics")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), device.Ptr(), endpoint, queue.Ptr())
-	return &MTRClusterSoftwareDiagnostics{inner: raw.MTRClusterSoftwareDiagnosticsFromID(_id)}
+// NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointQueue creates a new MTRClusterSoftwareDiagnostics.
+func NewMTRClusterSoftwareDiagnosticsWithDeviceEndpointQueue(device *MTRDevice, endpoint uint16, queue obj.Object) *MTRClusterSoftwareDiagnostics {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterSoftwareDiagnostics")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpoint:queue:"), objref.IDOf(device), endpoint, objref.IDOf(queue))
+	return mTRClusterSoftwareDiagnosticsAdopt(_id)
 }
 
-// ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterSoftwareDiagnostics) ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRSoftwareDiagnosticsClusterResetWatermarksParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+func (x *MTRClusterSoftwareDiagnostics) ReadAttributeThreadMetricsWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeThreadMetricsWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletion calls the underlying ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterSoftwareDiagnostics) ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletion(expectedValues, expectedValueIntervalMs, completion)
+func (x *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapFreeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentHeapFreeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeThreadMetricsWithParams calls the underlying ReadAttributeThreadMetricsWithParams.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeThreadMetricsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeThreadMetricsWithParams(params)
+func (x *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapUsedWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentHeapUsedWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentHeapFreeWithParams calls the underlying ReadAttributeCurrentHeapFreeWithParams.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapFreeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentHeapFreeWithParams(params)
+func (x *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapHighWatermarkWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeCurrentHeapHighWatermarkWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentHeapUsedWithParams calls the underlying ReadAttributeCurrentHeapUsedWithParams.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapUsedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentHeapUsedWithParams(params)
+func (x *MTRClusterSoftwareDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeCurrentHeapHighWatermarkWithParams calls the underlying ReadAttributeCurrentHeapHighWatermarkWithParams.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeCurrentHeapHighWatermarkWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeCurrentHeapHighWatermarkWithParams(params)
+func (x *MTRClusterSoftwareDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterSoftwareDiagnostics) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterSoftwareDiagnostics) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
-}
-
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
-}
-
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterSoftwareDiagnostics) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-// ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterSoftwareDiagnostics) ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRSoftwareDiagnosticsClusterResetWatermarksParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params, expectedDataValueDictionaries, expectedValueIntervalMs, completionHandler)
-}
-
-// ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletionHandler calls the underlying ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletionHandler.
-func (x *MTRClusterSoftwareDiagnostics) ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer)) {
-	x.inner.ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues, expectedValueIntervalMs, completionHandler)
-}
-
-func (x *MTRClusterSoftwareDiagnostics) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterSoftwareDiagnostics) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterSoftwareDiagnostics) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterSoftwareDiagnosticsable is the interface implemented by [MTRClusterSoftwareDiagnostics], for mocking and DI.
 type MTRClusterSoftwareDiagnosticsable interface {
-	Unwrap() *raw.MTRClusterSoftwareDiagnostics
-	ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRSoftwareDiagnosticsClusterResetWatermarksParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletion(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	ReadAttributeThreadMetricsWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentHeapFreeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentHeapUsedWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeCurrentHeapHighWatermarkWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ResetWatermarksWithParamsExpectedValuesExpectedValueIntervalCompletionHandler(params *raw.MTRSoftwareDiagnosticsClusterResetWatermarksParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
-	ResetWatermarksWithExpectedValuesExpectedValueIntervalCompletionHandler(expectedValues *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completionHandler func(unsafe.Pointer))
+	obj.Object
+	ReadAttributeThreadMetricsWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentHeapFreeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentHeapUsedWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeCurrentHeapHighWatermarkWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterSoftwareDiagnosticsable = (*MTRClusterSoftwareDiagnostics)(nil)

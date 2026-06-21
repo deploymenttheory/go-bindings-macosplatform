@@ -5,137 +5,110 @@
 package opendirectory
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/opendirectory"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// AttributeMapWithValue calls the underlying ODAttributeMapAttributeMapWithValue.
+// Returns an initialized and autoreleased ODAttributeMap object with the given value mapped. Returns an initialized and autoreleased ODAttributeMap object with the given value mapped.
 func AttributeMapWithValue(value string) *AttributeMap {
-	_r := raw.ODAttributeMapAttributeMapWithValue(foundation.NSStringStringWithUTF8String(value))
-	if _r == nil {
-		return nil
-	}
-	return &AttributeMap{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ODAttributeMap")), objc.RegisterName("attributeMapWithValue:"), purego.NSString(value))
+	return AttributeMapFromID(_r)
 }
 
-// AttributeMapWithStaticValue calls the underlying ODAttributeMapAttributeMapWithStaticValue.
+// Returns an initialized and autoreleased ODAttributeMap object with the given static value. Returns an initialized and autoreleased ODAttributeMap object with the given static value.
 func AttributeMapWithStaticValue(staticValue string) *AttributeMap {
-	_r := raw.ODAttributeMapAttributeMapWithStaticValue(foundation.NSStringStringWithUTF8String(staticValue))
-	if _r == nil {
-		return nil
-	}
-	return &AttributeMap{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ODAttributeMap")), objc.RegisterName("attributeMapWithStaticValue:"), purego.NSString(staticValue))
+	return AttributeMapFromID(_r)
 }
 
-// ODConfigurationConfiguration calls the underlying ODConfigurationConfiguration.
+// Returns an initialized and autoreleased ODConfiguration object. Returns an initialized and autoreleased ODConfiguration object.
 func ODConfigurationConfiguration() *Configuration {
-	_r := raw.ODConfigurationConfiguration()
-	if _r == nil {
-		return nil
-	}
-	return &Configuration{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ODConfiguration")), objc.RegisterName("configuration"))
+	return ConfigurationFromID(_r)
 }
 
-// SuggestedTrustAccount calls the underlying ODConfigurationSuggestedTrustAccount.
+// Returns a suggested name to use for the trust account. Returns a suggested name to use for a trust account.  This name will be derived from the hostname (if provided), otherwise it will be derived from the local hostname removing special characters that may not be allowed by many systems.
 func SuggestedTrustAccount(hostname string) string {
-	_r := raw.ODConfigurationSuggestedTrustAccount(foundation.NSStringStringWithUTF8String(hostname))
-	if _r == nil {
+	_r := objc.Send[objc.ID](objc.ID(_class("ODConfiguration")), objc.RegisterName("suggestedTrustAccount:"), purego.NSString(hostname))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SuggestedTrustPassword calls the underlying ODConfigurationSuggestedTrustPassword.
-func SuggestedTrustPassword(length uint) string {
-	_r := raw.ODConfigurationSuggestedTrustPassword(length)
-	if _r == nil {
+// Returns a suggested password to be used for trust account with the requested length. Returns a suggested password to be used for trust account with the requested length.
+func SuggestedTrustPassword(length int) string {
+	_r := objc.Send[objc.ID](objc.ID(_class("ODConfiguration")), objc.RegisterName("suggestedTrustPassword:"), length)
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// ODMappingsMappings calls the underlying ODMappingsMappings.
+// Returns an initialized and autoreleased ODMappings object. Returns an initialized and autoreleased ODMappings object.
 func ODMappingsMappings() *Mappings {
-	_r := raw.ODMappingsMappings()
-	if _r == nil {
-		return nil
-	}
-	return &Mappings{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ODMappings")), objc.RegisterName("mappings"))
+	return MappingsFromID(_r)
 }
 
-// ModuleEntryWithNameXpcServiceName calls the underlying ODModuleEntryModuleEntryWithNameXpcServiceName.
+// Creates a new module entry with a given name and service. Creates a new module entry with a given name and service.
 func ModuleEntryWithNameXpcServiceName(name string, xpcServiceName string) *ModuleEntry {
-	_r := raw.ODModuleEntryModuleEntryWithNameXpcServiceName(foundation.NSStringStringWithUTF8String(name), foundation.NSStringStringWithUTF8String(xpcServiceName))
-	if _r == nil {
-		return nil
-	}
-	return &ModuleEntry{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ODModuleEntry")), objc.RegisterName("moduleEntryWithName:xpcServiceName:"), purego.NSString(name), purego.NSString(xpcServiceName))
+	return ModuleEntryFromID(_r)
 }
 
-// NodeWithSessionTypeError calls the underlying ODNodeNodeWithSessionTypeError.
-func NodeWithSessionTypeError(inSession *raw.ODSession, inType uint32) (*Node, error) {
-	_r, _err := raw.ODNodeNodeWithSessionTypeError(inSession, inType)
-	if _err != nil {
-		return nil, _err
+// Returns an autoreleased node object with a specified session and type.
+func NodeWithSessionTypeError(inSession *Session, inType uint32) (*Node, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("ODNode")), objc.RegisterName("nodeWithSession:type:error:"), objref.IDOf(inSession), inType, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Node{inner: _r}, nil
+	return NodeFromID(_r), nil
 }
 
-// NodeWithSessionNameError calls the underlying ODNodeNodeWithSessionNameError.
-func NodeWithSessionNameError(inSession *raw.ODSession, inName string) (*Node, error) {
-	_r, _err := raw.ODNodeNodeWithSessionNameError(inSession, foundation.NSStringStringWithUTF8String(inName))
-	if _err != nil {
-		return nil, _err
+// Returns an autoreleased node object with a specified session and name.
+func NodeWithSessionNameError(inSession *Session, inName string) (*Node, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("ODNode")), objc.RegisterName("nodeWithSession:name:error:"), objref.IDOf(inSession), purego.NSString(inName), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Node{inner: _r}, nil
+	return NodeFromID(_r), nil
 }
 
-// QueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError calls the underlying ODQueryQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError.
-func QueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *raw.ODNode, inRecordTypeOrList objc.ID, inAttribute *foundation.NSString, inMatchType uint32, inQueryValueOrList objc.ID, inReturnAttributeOrList objc.ID, inMaximumResults int) (*Query, error) {
-	_r, _err := raw.ODQueryQueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode, inRecordTypeOrList, inAttribute, inMatchType, inQueryValueOrList, inReturnAttributeOrList, inMaximumResults)
-	if _err != nil {
-		return nil, _err
+// Returns an autoreleased query object created with provided parameters.
+func QueryWithNodeForRecordTypesAttributeMatchTypeQueryValuesReturnAttributesMaximumResultsError(inNode *Node, inRecordTypeOrList obj.Object, inAttribute obj.Object, inMatchType uint32, inQueryValueOrList obj.Object, inReturnAttributeOrList obj.Object, inMaximumResults int) (*Query, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("ODQuery")), objc.RegisterName("queryWithNode:forRecordTypes:attribute:matchType:queryValues:returnAttributes:maximumResults:error:"), objref.IDOf(inNode), objref.IDOf(inRecordTypeOrList), objref.IDOf(inAttribute), inMatchType, objref.IDOf(inQueryValueOrList), objref.IDOf(inReturnAttributeOrList), inMaximumResults, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Query{inner: _r}, nil
+	return QueryFromID(_r), nil
 }
 
-// ODRecordMapRecordMap calls the underlying ODRecordMapRecordMap.
+// Returns an initialized and autoreleased ODRecordMap object. Returns an initialized and autoreleased ODRecordMap object.
 func ODRecordMapRecordMap() *RecordMap {
-	_r := raw.ODRecordMapRecordMap()
-	if _r == nil {
-		return nil
-	}
-	return &RecordMap{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ODRecordMap")), objc.RegisterName("recordMap"))
+	return RecordMapFromID(_r)
 }
 
-// DefaultSession calls the underlying ODSessionDefaultSession.
+// Returns a shared instance of the local session.
 func DefaultSession() *Session {
-	_r := raw.ODSessionDefaultSession()
-	if _r == nil {
-		return nil
-	}
-	return &Session{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("ODSession")), objc.RegisterName("defaultSession"))
+	return SessionFromID(_r)
 }
 
-// SessionWithOptionsError calls the underlying ODSessionSessionWithOptionsError.
-func SessionWithOptionsError(inOptions *foundation.NSDictionary[objc.ID, objc.ID]) (*Session, error) {
-	_r, _err := raw.ODSessionSessionWithOptionsError(inOptions)
-	if _err != nil {
-		return nil, _err
+// Returns an autoreleased session object directed over proxy to another host.
+func SessionWithOptionsError(inOptions obj.Object) (*Session, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("ODSession")), objc.RegisterName("sessionWithOptions:error:"), objref.IDOf(inOptions), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Session{inner: _r}, nil
+	return SessionFromID(_r), nil
 }

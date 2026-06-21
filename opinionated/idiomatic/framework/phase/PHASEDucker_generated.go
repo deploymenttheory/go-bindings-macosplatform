@@ -5,137 +5,148 @@
 package phase
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/phase"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that manages competing sounds.
 //
-// Ducker wraps [raw.PHASEDucker] with a fluent Go API.
+// Ducker is an idiomatic wrapper over the Objective-C class PHASEDucker.
 type Ducker struct {
-	inner *raw.PHASEDucker
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHASEDucker].
-func (x *Ducker) Unwrap() *raw.PHASEDucker { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Ducker) ID() objc.ID { return x.inner.Ptr() }
-
-// DuckerFromID adopts an existing object pointer as a Ducker (nil for 0).
+// DuckerFromID adopts an existing Objective-C object as a Ducker
+// (nil for 0), retaining it and registering a release finalizer.
 func DuckerFromID(id objc.ID) *Ducker {
 	if id == 0 {
 		return nil
 	}
-	return &Ducker{inner: raw.PHASEDuckerFromID(id)}
+	x := &Ducker{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// duckerAdopt wraps an Objective-C object that this code just created as a
+// Ducker (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func duckerAdopt(id objc.ID) *Ducker {
+	if id == 0 {
+		return nil
+	}
+	x := &Ducker{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Ducker) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Ducker) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Ducker) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates an object that manages competing sounds.
 //
-// NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackCurveReleaseCurve creates a new [Ducker].
-func NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackCurveReleaseCurve(engine *raw.PHASEEngine, sourceGroups *foundation.NSSet[*raw.PHASEGroup], targetGroups *foundation.NSSet[*raw.PHASEGroup], gain float64, attackTime float64, releaseTime float64, attackCurve PHASECurveType, releaseCurve PHASECurveType) *Ducker {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("PHASEDucker")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:sourceGroups:targetGroups:gain:attackTime:releaseTime:attackCurve:releaseCurve:"), engine.Ptr(), sourceGroups.Ptr(), targetGroups.Ptr(), gain, attackTime, releaseTime, raw.PHASECurveType(attackCurve), raw.PHASECurveType(releaseCurve))
-	return &Ducker{inner: raw.PHASEDuckerFromID(_id)}
+// NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackCurveReleaseCurve creates a new Ducker.
+func NewDuckerWithEngineSourceGroupsTargetGroupsGainAttackTimeReleaseTimeAttackCurveReleaseCurve(engine *Engine, sourceGroups obj.Object, targetGroups obj.Object, gain float64, attackTime float64, releaseTime float64, attackCurve CurveType, releaseCurve CurveType) *Ducker {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("PHASEDucker")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEngine:sourceGroups:targetGroups:gain:attackTime:releaseTime:attackCurve:releaseCurve:"), objref.IDOf(engine), objref.IDOf(sourceGroups), objref.IDOf(targetGroups), gain, attackTime, releaseTime, attackCurve, releaseCurve)
+	return duckerAdopt(_id)
 }
 
 // Instructs the ducker to begin altering sound.
-//
-// Activate calls the underlying Activate.
 func (x *Ducker) Activate() {
-	x.inner.Activate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
 }
 
 // Stops the ducker from altering sound.
-//
-// Deactivate calls the underlying Deactivate.
 func (x *Ducker) Deactivate() {
-	x.inner.Deactivate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deactivate"))
 }
 
-// @property sourceGroups @abstract The source groups that will trigger the ducker when a sound in one of the source groups starts playback.
-//
-// SourceGroups calls the underlying SourceGroups.
-func (x *Ducker) SourceGroups() *foundation.NSSet[*raw.PHASEGroup] {
-	return x.inner.SourceGroups()
+// The source groups that will trigger the ducker when a sound in one of the source groups starts playback.
+func (x *Ducker) SourceGroups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceGroups"))
+	return obj.Wrap(_r)
 }
 
-// @property targetGroups @abstract The target groups that will be ducked when a sound in one of the source groups triggers the ducker.
-//
-// TargetGroups calls the underlying TargetGroups.
-func (x *Ducker) TargetGroups() *foundation.NSSet[*raw.PHASEGroup] {
-	return x.inner.TargetGroups()
+// The target groups that will be ducked when a sound in one of the source groups triggers the ducker.
+func (x *Ducker) TargetGroups() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("targetGroups"))
+	return obj.Wrap(_r)
 }
 
-// @property active @abstract YES if the ducker is active; otherwise, NO.
-//
-// IsActive calls the underlying IsActive.
+// YES if the ducker is active; otherwise, NO.
 func (x *Ducker) IsActive() bool {
-	return x.inner.IsActive()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isActive"))
+	return _r
 }
 
-// @property gain @abstract Linear gain scalar. @note Values are clamped to the range [0, 1]. Default value is 1.
-//
-// Gain calls the underlying Gain.
+// Linear gain scalar.
 func (x *Ducker) Gain() float64 {
-	return x.inner.Gain()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("gain"))
+	return _r
 }
 
-// @property attackTime @abstract The time for the attenuation gain to ramp into effect. @note The attack time is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
-//
-// AttackTime calls the underlying AttackTime.
+// The time for the attenuation gain to ramp into effect.
 func (x *Ducker) AttackTime() float64 {
-	return x.inner.AttackTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("attackTime"))
+	return _r
 }
 
-// @property releaseTime @abstract The time for the ducked sounds to ramp back to their original level. @note The release time is scaled by unitsPerSecond internally, so can be provided at the client's native time scale.
-//
-// ReleaseTime calls the underlying ReleaseTime.
+// The time for the ducked sounds to ramp back to their original level.
 func (x *Ducker) ReleaseTime() float64 {
-	return x.inner.ReleaseTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("releaseTime"))
+	return _r
 }
 
-// @property attackCurve @abstract The type of curve function to use during the attack phase of gain reduction.
-//
-// AttackCurve calls the underlying AttackCurve.
-func (x *Ducker) AttackCurve() PHASECurveType {
-	return PHASECurveType(x.inner.AttackCurve())
+// The type of curve function to use during the attack phase of gain reduction.
+func (x *Ducker) AttackCurve() CurveType {
+	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("attackCurve"))
+	return _r
 }
 
-// @property releaseCurve @abstract The type of curve function to use during the release phase of gain reduction.
-//
-// ReleaseCurve calls the underlying ReleaseCurve.
-func (x *Ducker) ReleaseCurve() PHASECurveType {
-	return PHASECurveType(x.inner.ReleaseCurve())
+// The type of curve function to use during the release phase of gain reduction.
+func (x *Ducker) ReleaseCurve() CurveType {
+	_r := objc.Send[CurveType](objref.IDOf(x), objc.RegisterName("releaseCurve"))
+	return _r
 }
 
-// @property identifier @abstract The identifier that uniquely represents this ducker.
-//
-// Identifier calls the underlying Identifier.
+// The identifier that uniquely represents this ducker.
 func (x *Ducker) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Duckerable is the interface implemented by [Ducker], for mocking and DI.
 type Duckerable interface {
-	Unwrap() *raw.PHASEDucker
+	obj.Object
 	Activate()
 	Deactivate()
-	SourceGroups() *foundation.NSSet[*raw.PHASEGroup]
-	TargetGroups() *foundation.NSSet[*raw.PHASEGroup]
+	SourceGroups() obj.Object
+	TargetGroups() obj.Object
 	IsActive() bool
 	Gain() float64
 	AttackTime() float64
 	ReleaseTime() float64
-	AttackCurve() PHASECurveType
-	ReleaseCurve() PHASECurveType
+	AttackCurve() CurveType
+	ReleaseCurve() CurveType
 	Identifier() string
 }
 

@@ -5,1031 +5,844 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/quartzcore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A text field optimized for performing text-based searches.
 //
-// SearchField wraps [raw.NSSearchField] with a fluent Go API.
+// SearchField is an idiomatic wrapper over the Objective-C class NSSearchField.
 type SearchField struct {
-	inner *raw.NSSearchField
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSearchField].
-func (x *SearchField) Unwrap() *raw.NSSearchField { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SearchField) ID() objc.ID { return x.inner.Ptr() }
-
-// SearchFieldFromID adopts an existing object pointer as a SearchField (nil for 0).
+// SearchFieldFromID adopts an existing Objective-C object as a SearchField
+// (nil for 0), retaining it and registering a release finalizer.
 func SearchFieldFromID(id objc.ID) *SearchField {
 	if id == 0 {
 		return nil
 	}
-	return &SearchField{inner: raw.NSSearchFieldFromID(id)}
+	x := &SearchField{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSearchField creates a new [SearchField].
+// searchFieldAdopt wraps an Objective-C object that this code just created as a
+// SearchField (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func searchFieldAdopt(id objc.ID) *SearchField {
+	if id == 0 {
+		return nil
+	}
+	x := &SearchField{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SearchField) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SearchField) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SearchField) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSearchField creates a new SearchField.
 func NewSearchField() *SearchField {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSearchField")), objc.RegisterName("new"))
-	return &SearchField{inner: raw.NSSearchFieldFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSearchField")), objc.RegisterName("new"))
+	return searchFieldAdopt(_id)
 }
 
 // The list of recent search strings for the control.
 //
-// WithRecentSearches sets the collection, converting the Go slice to an NSArray.
-func (x *SearchField) WithRecentSearches(items ...*foundation.NSString) *SearchField {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetRecentSearches(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetRecentSearches(_arr)
+// WithRecentSearches sets the collection and returns the receiver so calls can be chained.
+func (x *SearchField) WithRecentSearches(items ...obj.Object) *SearchField {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecentSearches:"), _arr)
 	return x
 }
 
 // The name under which the search field automatically archives the list of recent search strings.
 //
-// WithRecentsAutosaveName sets the recentsAutosaveName property and returns the receiver for chaining.
-func (x *SearchField) WithRecentsAutosaveName(recentsAutosaveName *foundation.NSString) *SearchField {
-	x.inner.SetRecentsAutosaveName(recentsAutosaveName)
+// WithRecentsAutosaveName sets recentsAutosaveName and returns the receiver so calls can be chained.
+func (x *SearchField) WithRecentsAutosaveName(recentsAutosaveName obj.Object) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecentsAutosaveName:"), objref.IDOf(recentsAutosaveName))
 	return x
 }
 
 // The menu object used to dynamically construct the search field’s pop-up icon menu.
 //
-// WithSearchMenuTemplate sets the searchMenuTemplate property and returns the receiver for chaining.
+// WithSearchMenuTemplate sets searchMenuTemplate and returns the receiver so calls can be chained.
 func (x *SearchField) WithSearchMenuTemplate(searchMenuTemplate *Menu) *SearchField {
-	x.inner.SetSearchMenuTemplate(searchMenuTemplate.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchMenuTemplate:"), objref.IDOf(searchMenuTemplate))
 	return x
 }
 
 // A Boolean value indicating whether the cell calls its search action method when the user clicks the search button or presses Return, or after each keystroke.
 //
-// WithSendsWholeSearchString sets the sendsWholeSearchString property and returns the receiver for chaining.
+// WithSendsWholeSearchString sets sendsWholeSearchString and returns the receiver so calls can be chained.
 func (x *SearchField) WithSendsWholeSearchString(sendsWholeSearchString bool) *SearchField {
-	x.inner.SetSendsWholeSearchString(sendsWholeSearchString)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsWholeSearchString:"), sendsWholeSearchString)
 	return x
 }
 
 // The maximum number of search strings that can appear in the search menu.
 //
-// WithMaximumRecents sets the maximumRecents property and returns the receiver for chaining.
+// WithMaximumRecents sets maximumRecents and returns the receiver so calls can be chained.
 func (x *SearchField) WithMaximumRecents(maximumRecents int) *SearchField {
-	x.inner.SetMaximumRecents(maximumRecents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumRecents:"), maximumRecents)
 	return x
 }
 
 // A Boolean value indicating whether the cell calls its action method immediately when an appropriate action occurs.
 //
-// WithSendsSearchStringImmediately sets the sendsSearchStringImmediately property and returns the receiver for chaining.
+// WithSendsSearchStringImmediately sets sendsSearchStringImmediately and returns the receiver so calls can be chained.
 func (x *SearchField) WithSendsSearchStringImmediately(sendsSearchStringImmediately bool) *SearchField {
-	x.inner.SetSendsSearchStringImmediately(sendsSearchStringImmediately)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsSearchStringImmediately:"), sendsSearchStringImmediately)
 	return x
 }
 
 // A Boolean value that determines whether the search field’s components are centered within the control.
 //
-// WithCentersPlaceholder sets the centersPlaceholder property and returns the receiver for chaining.
+// WithCentersPlaceholder sets centersPlaceholder and returns the receiver so calls can be chained.
 func (x *SearchField) WithCentersPlaceholder(centersPlaceholder bool) *SearchField {
-	x.inner.SetCentersPlaceholder(centersPlaceholder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCentersPlaceholder:"), centersPlaceholder)
 	return x
 }
 
 // The string the text field displays when empty to help the user understand the text field’s purpose.
 //
-// WithPlaceholderString sets the placeholderString property and returns the receiver for chaining.
+// WithPlaceholderString sets placeholderString and returns the receiver so calls can be chained.
 func (x *SearchField) WithPlaceholderString(placeholderString string) *SearchField {
-	x.inner.NSTextField.SetPlaceholderString(foundation.NSStringStringWithUTF8String(placeholderString))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderString:"), purego.NSString(placeholderString))
 	return x
 }
 
 // The attributed string the text field displays when empty to help the user understand the text field’s purpose.
 //
-// WithPlaceholderAttributedString sets the placeholderAttributedString property and returns the receiver for chaining.
-func (x *SearchField) WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *SearchField {
-	x.inner.NSTextField.SetPlaceholderAttributedString(placeholderAttributedString)
+// WithPlaceholderAttributedString sets placeholderAttributedString and returns the receiver so calls can be chained.
+func (x *SearchField) WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedString:"), objref.IDOf(placeholderAttributedString))
 	return x
 }
 
 // The color of the background the text field’s cell draws behind the text.
 //
-// WithBackgroundColor sets the backgroundColor property and returns the receiver for chaining.
+// WithBackgroundColor sets backgroundColor and returns the receiver so calls can be chained.
 func (x *SearchField) WithBackgroundColor(backgroundColor *Color) *SearchField {
-	x.inner.NSTextField.SetBackgroundColor(backgroundColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundColor:"), objref.IDOf(backgroundColor))
 	return x
 }
 
 // A Boolean value that controls whether the text field’s cell draws a background color behind the text.
 //
-// WithDrawsBackground sets the drawsBackground property and returns the receiver for chaining.
+// WithDrawsBackground sets drawsBackground and returns the receiver so calls can be chained.
 func (x *SearchField) WithDrawsBackground(drawsBackground bool) *SearchField {
-	x.inner.NSTextField.SetDrawsBackground(drawsBackground)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDrawsBackground:"), drawsBackground)
 	return x
 }
 
 // The color of the text field’s content.
 //
-// WithTextColor sets the textColor property and returns the receiver for chaining.
+// WithTextColor sets textColor and returns the receiver so calls can be chained.
 func (x *SearchField) WithTextColor(textColor *Color) *SearchField {
-	x.inner.NSTextField.SetTextColor(textColor.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextColor:"), objref.IDOf(textColor))
 	return x
 }
 
 // A Boolean value that controls whether the text field draws a solid black border around its contents.
 //
-// WithBordered sets the bordered property and returns the receiver for chaining.
+// WithBordered sets bordered and returns the receiver so calls can be chained.
 func (x *SearchField) WithBordered(bordered bool) *SearchField {
-	x.inner.NSTextField.SetBordered(bordered)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBordered:"), bordered)
 	return x
 }
 
 // A Boolean value that controls whether the text field draws a bezeled background around its contents.
 //
-// WithBezeled sets the bezeled property and returns the receiver for chaining.
+// WithBezeled sets bezeled and returns the receiver so calls can be chained.
 func (x *SearchField) WithBezeled(bezeled bool) *SearchField {
-	x.inner.NSTextField.SetBezeled(bezeled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezeled:"), bezeled)
 	return x
 }
 
 // A Boolean value that controls whether the user can edit the value in the text field.
 //
-// WithEditable sets the editable property and returns the receiver for chaining.
+// WithEditable sets editable and returns the receiver so calls can be chained.
 func (x *SearchField) WithEditable(editable bool) *SearchField {
-	x.inner.NSTextField.SetEditable(editable)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEditable:"), editable)
 	return x
 }
 
 // A Boolean value that determines whether the user can select the content of the text field.
 //
-// WithSelectable sets the selectable property and returns the receiver for chaining.
+// WithSelectable sets selectable and returns the receiver so calls can be chained.
 func (x *SearchField) WithSelectable(selectable bool) *SearchField {
-	x.inner.NSTextField.SetSelectable(selectable)
-	return x
-}
-
-// The text field’s delegate.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SearchField) WithDelegate(delegate raw.NSTextFieldDelegate) *SearchField {
-	x.inner.NSTextField.SetDelegate(delegate)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSelectable:"), selectable)
 	return x
 }
 
 // The text field’s bezel style, square or rounded.
 //
-// WithBezelStyle sets the bezelStyle property and returns the receiver for chaining.
-func (x *SearchField) WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *SearchField {
-	x.inner.NSTextField.SetBezelStyle(raw.NSTextFieldBezelStyle(bezelStyle))
+// WithBezelStyle sets bezelStyle and returns the receiver so calls can be chained.
+func (x *SearchField) WithBezelStyle(bezelStyle TextFieldBezelStyle) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBezelStyle:"), bezelStyle)
 	return x
 }
 
 // The maximum width of the text field’s intrinsic content size.
 //
-// WithPreferredMaxLayoutWidth sets the preferredMaxLayoutWidth property and returns the receiver for chaining.
+// WithPreferredMaxLayoutWidth sets preferredMaxLayoutWidth and returns the receiver so calls can be chained.
 func (x *SearchField) WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *SearchField {
-	x.inner.NSTextField.SetPreferredMaxLayoutWidth(preferredMaxLayoutWidth)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredMaxLayoutWidth:"), preferredMaxLayoutWidth)
 	return x
 }
 
 // The maximum number of lines a wrapping text field displays before clipping or truncating the text.
 //
-// WithMaximumNumberOfLines sets the maximumNumberOfLines property and returns the receiver for chaining.
+// WithMaximumNumberOfLines sets maximumNumberOfLines and returns the receiver so calls can be chained.
 func (x *SearchField) WithMaximumNumberOfLines(maximumNumberOfLines int) *SearchField {
-	x.inner.NSTextField.SetMaximumNumberOfLines(maximumNumberOfLines)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumNumberOfLines:"), maximumNumberOfLines)
 	return x
 }
 
 // A Boolean value that controls whether single-line text fields tighten intercharacter spacing before truncating the text.
 //
-// WithAllowsDefaultTighteningForTruncation sets the allowsDefaultTighteningForTruncation property and returns the receiver for chaining.
+// WithAllowsDefaultTighteningForTruncation sets allowsDefaultTighteningForTruncation and returns the receiver so calls can be chained.
 func (x *SearchField) WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *SearchField {
-	x.inner.NSTextField.SetAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsDefaultTighteningForTruncation:"), allowsDefaultTighteningForTruncation)
 	return x
 }
 
 // The strategy that the system uses to break lines when laying out multiple lines of text.
 //
-// WithLineBreakStrategy sets the lineBreakStrategy property and returns the receiver for chaining.
-func (x *SearchField) WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *SearchField {
-	x.inner.NSTextField.SetLineBreakStrategy(raw.NSLineBreakStrategy(lineBreakStrategy))
+// WithLineBreakStrategy sets lineBreakStrategy and returns the receiver so calls can be chained.
+func (x *SearchField) WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakStrategy:"), lineBreakStrategy)
 	return x
 }
 
-// WithAllowsWritingTools sets the allowsWritingTools property and returns the receiver for chaining.
+// WithAllowsWritingTools sets allowsWritingTools and returns the receiver so calls can be chained.
 func (x *SearchField) WithAllowsWritingTools(allowsWritingTools bool) *SearchField {
-	x.inner.NSTextField.SetAllowsWritingTools(allowsWritingTools)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsWritingTools:"), allowsWritingTools)
 	return x
 }
 
-// WithAllowsWritingToolsAffordance sets the allowsWritingToolsAffordance property and returns the receiver for chaining.
+// WithAllowsWritingToolsAffordance sets allowsWritingToolsAffordance and returns the receiver so calls can be chained.
 func (x *SearchField) WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *SearchField {
-	x.inner.NSTextField.SetAllowsWritingToolsAffordance(allowsWritingToolsAffordance)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsWritingToolsAffordance:"), allowsWritingToolsAffordance)
 	return x
 }
 
-// WithPlaceholderStrings sets the collection, converting the Go slice to an NSArray.
-func (x *SearchField) WithPlaceholderStrings(items ...*foundation.NSString) *SearchField {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSTextField.SetPlaceholderStrings(foundation.NSArrayFromID[*foundation.NSString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSTextField.SetPlaceholderStrings(_arr)
+// WithPlaceholderStrings sets the collection and returns the receiver so calls can be chained.
+func (x *SearchField) WithPlaceholderStrings(items ...obj.Object) *SearchField {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderStrings:"), _arr)
 	return x
 }
 
-// WithPlaceholderAttributedStrings sets the collection, converting the Go slice to an NSArray.
-func (x *SearchField) WithPlaceholderAttributedStrings(items ...*foundation.NSAttributedString) *SearchField {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSTextField.SetPlaceholderAttributedStrings(foundation.NSArrayFromID[*foundation.NSAttributedString](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*foundation.NSAttributedString](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSTextField.SetPlaceholderAttributedStrings(_arr)
+// WithPlaceholderAttributedStrings sets the collection and returns the receiver so calls can be chained.
+func (x *SearchField) WithPlaceholderAttributedStrings(items ...obj.Object) *SearchField {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPlaceholderAttributedStrings:"), _arr)
 	return x
 }
 
 // Specifies the behavior for resolving NSTextAlignmentNatural to the visual alignment.
 //
-// WithResolvesNaturalAlignmentWithBaseWritingDirection sets the resolvesNaturalAlignmentWithBaseWritingDirection property and returns the receiver for chaining.
+// WithResolvesNaturalAlignmentWithBaseWritingDirection sets resolvesNaturalAlignmentWithBaseWritingDirection and returns the receiver so calls can be chained.
 func (x *SearchField) WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *SearchField {
-	x.inner.NSTextField.SetResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResolvesNaturalAlignmentWithBaseWritingDirection:"), resolvesNaturalAlignmentWithBaseWritingDirection)
 	return x
 }
 
 // A Boolean value that indicates whether the text field automatically completes text as the user types.
 //
-// WithAutomaticTextCompletionEnabled sets the automaticTextCompletionEnabled property and returns the receiver for chaining.
+// WithAutomaticTextCompletionEnabled sets automaticTextCompletionEnabled and returns the receiver so calls can be chained.
 func (x *SearchField) WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *SearchField {
-	x.inner.NSTextField.SetAutomaticTextCompletionEnabled(automaticTextCompletionEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutomaticTextCompletionEnabled:"), automaticTextCompletionEnabled)
 	return x
 }
 
 // A Boolean value that controls whether the Touch Bar displays the character picker item for rich text fields.
 //
-// WithAllowsCharacterPickerTouchBarItem sets the allowsCharacterPickerTouchBarItem property and returns the receiver for chaining.
+// WithAllowsCharacterPickerTouchBarItem sets allowsCharacterPickerTouchBarItem and returns the receiver so calls can be chained.
 func (x *SearchField) WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *SearchField {
-	x.inner.NSTextField.SetAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsCharacterPickerTouchBarItem:"), allowsCharacterPickerTouchBarItem)
 	return x
 }
 
 // A Boolean value that controls whether the user can change font attributes of the text field’s string.
 //
-// WithAllowsEditingTextAttributes sets the allowsEditingTextAttributes property and returns the receiver for chaining.
+// WithAllowsEditingTextAttributes sets allowsEditingTextAttributes and returns the receiver so calls can be chained.
 func (x *SearchField) WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SearchField {
-	x.inner.NSTextField.SetAllowsEditingTextAttributes(allowsEditingTextAttributes)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsEditingTextAttributes:"), allowsEditingTextAttributes)
 	return x
 }
 
 // A Boolean value that controls whether the user can drag image files into the text field.
 //
-// WithImportsGraphics sets the importsGraphics property and returns the receiver for chaining.
+// WithImportsGraphics sets importsGraphics and returns the receiver so calls can be chained.
 func (x *SearchField) WithImportsGraphics(importsGraphics bool) *SearchField {
-	x.inner.NSTextField.SetImportsGraphics(importsGraphics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setImportsGraphics:"), importsGraphics)
 	return x
 }
 
 // The target object that receives action messages from the cell.
 //
-// WithTarget sets the target property and returns the receiver for chaining.
-func (x *SearchField) WithTarget(target objc.ID) *SearchField {
-	x.inner.NSTextField.NSControl.SetTarget(target)
-	return x
-}
-
-// The default action-message selector associated with the control.
-//
-// WithAction sets the action property and returns the receiver for chaining.
-func (x *SearchField) WithAction(action objc.SEL) *SearchField {
-	x.inner.NSTextField.NSControl.SetAction(action)
+// WithTarget sets target and returns the receiver so calls can be chained.
+func (x *SearchField) WithTarget(target obj.Object) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTarget:"), objref.IDOf(target))
 	return x
 }
 
 // The tag identifying the receiver (not the tag of the receiver’s cell).
 //
-// WithTag sets the tag property and returns the receiver for chaining.
+// WithTag sets tag and returns the receiver so calls can be chained.
 func (x *SearchField) WithTag(tag int) *SearchField {
-	x.inner.NSTextField.NSControl.SetTag(tag)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTag:"), tag)
 	return x
 }
 
 // A Boolean value indicating whether the receiver ignores multiple clicks made in rapid succession.
 //
-// WithIgnoresMultiClick sets the ignoresMultiClick property and returns the receiver for chaining.
+// WithIgnoresMultiClick sets ignoresMultiClick and returns the receiver so calls can be chained.
 func (x *SearchField) WithIgnoresMultiClick(ignoresMultiClick bool) *SearchField {
-	x.inner.NSTextField.NSControl.SetIgnoresMultiClick(ignoresMultiClick)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIgnoresMultiClick:"), ignoresMultiClick)
 	return x
 }
 
 // A Boolean value indicating whether the receiver’s cell sends its action message continuously to its target during mouse tracking.
 //
-// WithContinuous sets the continuous property and returns the receiver for chaining.
+// WithContinuous sets continuous and returns the receiver so calls can be chained.
 func (x *SearchField) WithContinuous(continuous bool) *SearchField {
-	x.inner.NSTextField.NSControl.SetContinuous(continuous)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContinuous:"), continuous)
 	return x
 }
 
 // A Boolean value that indicates whether the receiver reacts to mouse events.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *SearchField) WithEnabled(enabled bool) *SearchField {
-	x.inner.NSTextField.NSControl.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // A Boolean value indicating whether the receiver refuses the first responder role.
 //
-// WithRefusesFirstResponder sets the refusesFirstResponder property and returns the receiver for chaining.
+// WithRefusesFirstResponder sets refusesFirstResponder and returns the receiver so calls can be chained.
 func (x *SearchField) WithRefusesFirstResponder(refusesFirstResponder bool) *SearchField {
-	x.inner.NSTextField.NSControl.SetRefusesFirstResponder(refusesFirstResponder)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRefusesFirstResponder:"), refusesFirstResponder)
 	return x
 }
 
 // A Boolean value that indicates whether the cell is highlighted.
 //
-// WithHighlighted sets the highlighted property and returns the receiver for chaining.
+// WithHighlighted sets highlighted and returns the receiver so calls can be chained.
 func (x *SearchField) WithHighlighted(highlighted bool) *SearchField {
-	x.inner.NSTextField.NSControl.SetHighlighted(highlighted)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHighlighted:"), highlighted)
 	return x
 }
 
 // The size of the control.
 //
-// WithControlSize sets the controlSize property and returns the receiver for chaining.
-func (x *SearchField) WithControlSize(controlSize NSControlSize) *SearchField {
-	x.inner.NSTextField.NSControl.SetControlSize(raw.NSControlSize(controlSize))
+// WithControlSize sets controlSize and returns the receiver so calls can be chained.
+func (x *SearchField) WithControlSize(controlSize ControlSize) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setControlSize:"), controlSize)
 	return x
 }
 
 // The receiver’s formatter.
 //
-// WithFormatter sets the formatter property and returns the receiver for chaining.
-func (x *SearchField) WithFormatter(formatter *foundation.NSFormatter) *SearchField {
-	x.inner.NSTextField.NSControl.SetFormatter(formatter)
+// WithFormatter sets formatter and returns the receiver so calls can be chained.
+func (x *SearchField) WithFormatter(formatter obj.Object) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFormatter:"), objref.IDOf(formatter))
 	return x
 }
 
 // The value of the receiver’s cell as an Objective-C object.
 //
-// WithObjectValue sets the objectValue property and returns the receiver for chaining.
-func (x *SearchField) WithObjectValue(objectValue objc.ID) *SearchField {
-	x.inner.NSTextField.NSControl.SetObjectValue(objectValue)
+// WithObjectValue sets objectValue and returns the receiver so calls can be chained.
+func (x *SearchField) WithObjectValue(objectValue obj.Object) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setObjectValue:"), objref.IDOf(objectValue))
 	return x
 }
 
 // The value of the receiver’s cell as an NSString object.
 //
-// WithStringValue sets the stringValue property and returns the receiver for chaining.
+// WithStringValue sets stringValue and returns the receiver so calls can be chained.
 func (x *SearchField) WithStringValue(stringValue string) *SearchField {
-	x.inner.NSTextField.NSControl.SetStringValue(foundation.NSStringStringWithUTF8String(stringValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStringValue:"), purego.NSString(stringValue))
 	return x
 }
 
 // The value of the receiver’s cell as an attributed string.
 //
-// WithAttributedStringValue sets the attributedStringValue property and returns the receiver for chaining.
-func (x *SearchField) WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SearchField {
-	x.inner.NSTextField.NSControl.SetAttributedStringValue(attributedStringValue)
+// WithAttributedStringValue sets attributedStringValue and returns the receiver so calls can be chained.
+func (x *SearchField) WithAttributedStringValue(attributedStringValue obj.Object) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAttributedStringValue:"), objref.IDOf(attributedStringValue))
 	return x
 }
 
 // The value of the receiver’s cell as an integer.
 //
-// WithIntValue sets the intValue property and returns the receiver for chaining.
+// WithIntValue sets intValue and returns the receiver so calls can be chained.
 func (x *SearchField) WithIntValue(intValue int) *SearchField {
-	x.inner.NSTextField.NSControl.SetIntValue(intValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntValue:"), intValue)
 	return x
 }
 
 // The value of the receiver’s cell as an integer value.
 //
-// WithIntegerValue sets the integerValue property and returns the receiver for chaining.
+// WithIntegerValue sets integerValue and returns the receiver so calls can be chained.
 func (x *SearchField) WithIntegerValue(integerValue int) *SearchField {
-	x.inner.NSTextField.NSControl.SetIntegerValue(integerValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIntegerValue:"), integerValue)
 	return x
 }
 
 // The value of the receiver’s cell as a single-precision floating-point number.
 //
-// WithFloatValue sets the floatValue property and returns the receiver for chaining.
+// WithFloatValue sets floatValue and returns the receiver so calls can be chained.
 func (x *SearchField) WithFloatValue(floatValue float32) *SearchField {
-	x.inner.NSTextField.NSControl.SetFloatValue(floatValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFloatValue:"), floatValue)
 	return x
 }
 
 // The value of the receiver’s cell as a double-precision floating-point number.
 //
-// WithDoubleValue sets the doubleValue property and returns the receiver for chaining.
+// WithDoubleValue sets doubleValue and returns the receiver so calls can be chained.
 func (x *SearchField) WithDoubleValue(doubleValue float64) *SearchField {
-	x.inner.NSTextField.NSControl.SetDoubleValue(doubleValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDoubleValue:"), doubleValue)
 	return x
 }
 
 // The font used to draw text in the receiver’s cell.
 //
-// WithFont sets the font property and returns the receiver for chaining.
+// WithFont sets font and returns the receiver so calls can be chained.
 func (x *SearchField) WithFont(font *Font) *SearchField {
-	x.inner.NSTextField.NSControl.SetFont(font.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFont:"), objref.IDOf(font))
 	return x
 }
 
 // A Boolean value that indicates whether the text in the control’s cell uses single line mode.
 //
-// WithUsesSingleLineMode sets the usesSingleLineMode property and returns the receiver for chaining.
+// WithUsesSingleLineMode sets usesSingleLineMode and returns the receiver so calls can be chained.
 func (x *SearchField) WithUsesSingleLineMode(usesSingleLineMode bool) *SearchField {
-	x.inner.NSTextField.NSControl.SetUsesSingleLineMode(usesSingleLineMode)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUsesSingleLineMode:"), usesSingleLineMode)
 	return x
 }
 
 // The line break mode to use for text in the control’s cell.
 //
-// WithLineBreakMode sets the lineBreakMode property and returns the receiver for chaining.
-func (x *SearchField) WithLineBreakMode(lineBreakMode NSLineBreakMode) *SearchField {
-	x.inner.NSTextField.NSControl.SetLineBreakMode(raw.NSLineBreakMode(lineBreakMode))
+// WithLineBreakMode sets lineBreakMode and returns the receiver so calls can be chained.
+func (x *SearchField) WithLineBreakMode(lineBreakMode LineBreakMode) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLineBreakMode:"), lineBreakMode)
 	return x
 }
 
 // The alignment mode of the text in the receiver’s cell.
 //
-// WithAlignment sets the alignment property and returns the receiver for chaining.
-func (x *SearchField) WithAlignment(alignment NSTextAlignment) *SearchField {
-	x.inner.NSTextField.NSControl.SetAlignment(raw.NSTextAlignment(alignment))
+// WithAlignment sets alignment and returns the receiver so calls can be chained.
+func (x *SearchField) WithAlignment(alignment TextAlignment) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlignment:"), alignment)
 	return x
 }
 
 // The initial writing direction used to determine the actual writing direction for text.
 //
-// WithBaseWritingDirection sets the baseWritingDirection property and returns the receiver for chaining.
-func (x *SearchField) WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SearchField {
-	x.inner.NSTextField.NSControl.SetBaseWritingDirection(raw.NSWritingDirection(baseWritingDirection))
+// WithBaseWritingDirection sets baseWritingDirection and returns the receiver so calls can be chained.
+func (x *SearchField) WithBaseWritingDirection(baseWritingDirection WritingDirection) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBaseWritingDirection:"), baseWritingDirection)
 	return x
 }
 
 // A Boolean value that indicates whether expansion tool tips are shown when the control is hovered over.
 //
-// WithAllowsExpansionToolTips sets the allowsExpansionToolTips property and returns the receiver for chaining.
+// WithAllowsExpansionToolTips sets allowsExpansionToolTips and returns the receiver so calls can be chained.
 func (x *SearchField) WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *SearchField {
-	x.inner.NSTextField.NSControl.SetAllowsExpansionToolTips(allowsExpansionToolTips)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsExpansionToolTips:"), allowsExpansionToolTips)
 	return x
 }
 
-// WithCell sets the cell property and returns the receiver for chaining.
+// WithCell sets cell and returns the receiver so calls can be chained.
 func (x *SearchField) WithCell(cell CellProvider) *SearchField {
-	x.inner.NSTextField.NSControl.SetCell(cell.asCell())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCell:"), objref.IDOf(cell))
 	return x
 }
 
-// WithSubviews sets the collection, converting the Go slice to an NSArray.
+// WithSubviews sets the collection and returns the receiver so calls can be chained.
 func (x *SearchField) WithSubviews(items ...ViewProvider) *SearchField {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSTextField.NSControl.NSView.SetSubviews(foundation.NSArrayFromID[*raw.NSView](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asView().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSView](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSTextField.NSControl.NSView.SetSubviews(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v ViewProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSubviews:"), _arr)
 	return x
 }
 
-// WithHidden sets the hidden property and returns the receiver for chaining.
+// WithHidden sets hidden and returns the receiver so calls can be chained.
 func (x *SearchField) WithHidden(hidden bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetHidden(hidden)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHidden:"), hidden)
 	return x
 }
 
-// WithPostsFrameChangedNotifications sets the postsFrameChangedNotifications property and returns the receiver for chaining.
+// WithPostsFrameChangedNotifications sets postsFrameChangedNotifications and returns the receiver so calls can be chained.
 func (x *SearchField) WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetPostsFrameChangedNotifications(postsFrameChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsFrameChangedNotifications:"), postsFrameChangedNotifications)
 	return x
 }
 
-// WithAutoresizesSubviews sets the autoresizesSubviews property and returns the receiver for chaining.
+// WithAutoresizesSubviews sets autoresizesSubviews and returns the receiver so calls can be chained.
 func (x *SearchField) WithAutoresizesSubviews(autoresizesSubviews bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetAutoresizesSubviews(autoresizesSubviews)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizesSubviews:"), autoresizesSubviews)
 	return x
 }
 
-// WithAutoresizingMask sets the autoresizingMask property and returns the receiver for chaining.
-func (x *SearchField) WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetAutoresizingMask(raw.NSAutoresizingMaskOptions(autoresizingMask))
+// WithAutoresizingMask sets autoresizingMask and returns the receiver so calls can be chained.
+func (x *SearchField) WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAutoresizingMask:"), autoresizingMask)
 	return x
 }
 
-// The view’s frame rectangle, which defines its position and size in its superview’s coordinate system.
-//
-// WithFrame sets the frame property and returns the receiver for chaining.
-func (x *SearchField) WithFrame(frame corefoundation.CGRect) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetFrame(frame)
-	return x
-}
-
-// WithFrameRotation sets the frameRotation property and returns the receiver for chaining.
+// WithFrameRotation sets frameRotation and returns the receiver so calls can be chained.
 func (x *SearchField) WithFrameRotation(frameRotation float64) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetFrameRotation(frameRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameRotation:"), frameRotation)
 	return x
 }
 
-// WithFrameCenterRotation sets the frameCenterRotation property and returns the receiver for chaining.
+// WithFrameCenterRotation sets frameCenterRotation and returns the receiver so calls can be chained.
 func (x *SearchField) WithFrameCenterRotation(frameCenterRotation float64) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetFrameCenterRotation(frameCenterRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFrameCenterRotation:"), frameCenterRotation)
 	return x
 }
 
-// WithBoundsRotation sets the boundsRotation property and returns the receiver for chaining.
+// WithBoundsRotation sets boundsRotation and returns the receiver so calls can be chained.
 func (x *SearchField) WithBoundsRotation(boundsRotation float64) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetBoundsRotation(boundsRotation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBoundsRotation:"), boundsRotation)
 	return x
 }
 
-// The view’s bounds rectangle, which expresses its location and size in its own coordinate system.
-//
-// WithBounds sets the bounds property and returns the receiver for chaining.
-func (x *SearchField) WithBounds(bounds corefoundation.CGRect) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetBounds(bounds)
-	return x
-}
-
-// WithCanDrawConcurrently sets the canDrawConcurrently property and returns the receiver for chaining.
+// WithCanDrawConcurrently sets canDrawConcurrently and returns the receiver so calls can be chained.
 func (x *SearchField) WithCanDrawConcurrently(canDrawConcurrently bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetCanDrawConcurrently(canDrawConcurrently)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawConcurrently:"), canDrawConcurrently)
 	return x
 }
 
 // A Boolean value that determines whether the view needs to be redrawn before being displayed.
 //
-// WithNeedsDisplay sets the needsDisplay property and returns the receiver for chaining.
+// WithNeedsDisplay sets needsDisplay and returns the receiver so calls can be chained.
 func (x *SearchField) WithNeedsDisplay(needsDisplay bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetNeedsDisplay(needsDisplay)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsDisplay:"), needsDisplay)
 	return x
 }
 
-// WithAcceptsTouchEvents sets the acceptsTouchEvents property and returns the receiver for chaining.
+// WithAcceptsTouchEvents sets acceptsTouchEvents and returns the receiver so calls can be chained.
 func (x *SearchField) WithAcceptsTouchEvents(acceptsTouchEvents bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetAcceptsTouchEvents(acceptsTouchEvents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAcceptsTouchEvents:"), acceptsTouchEvents)
 	return x
 }
 
-// WithWantsRestingTouches sets the wantsRestingTouches property and returns the receiver for chaining.
+// WithWantsRestingTouches sets wantsRestingTouches and returns the receiver so calls can be chained.
 func (x *SearchField) WithWantsRestingTouches(wantsRestingTouches bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetWantsRestingTouches(wantsRestingTouches)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsRestingTouches:"), wantsRestingTouches)
 	return x
 }
 
-// WithLayerContentsRedrawPolicy sets the layerContentsRedrawPolicy property and returns the receiver for chaining.
-func (x *SearchField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetLayerContentsRedrawPolicy(raw.NSViewLayerContentsRedrawPolicy(layerContentsRedrawPolicy))
+// WithLayerContentsRedrawPolicy sets layerContentsRedrawPolicy and returns the receiver so calls can be chained.
+func (x *SearchField) WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsRedrawPolicy:"), layerContentsRedrawPolicy)
 	return x
 }
 
-// WithLayerContentsPlacement sets the layerContentsPlacement property and returns the receiver for chaining.
-func (x *SearchField) WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetLayerContentsPlacement(raw.NSViewLayerContentsPlacement(layerContentsPlacement))
+// WithLayerContentsPlacement sets layerContentsPlacement and returns the receiver so calls can be chained.
+func (x *SearchField) WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerContentsPlacement:"), layerContentsPlacement)
 	return x
 }
 
-// WithWantsLayer sets the wantsLayer property and returns the receiver for chaining.
+// WithWantsLayer sets wantsLayer and returns the receiver so calls can be chained.
 func (x *SearchField) WithWantsLayer(wantsLayer bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetWantsLayer(wantsLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsLayer:"), wantsLayer)
 	return x
 }
 
-// WithLayer sets the layer property and returns the receiver for chaining.
-func (x *SearchField) WithLayer(layer *quartzcore.CALayer) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetLayer(layer)
+// WithLayer sets layer and returns the receiver so calls can be chained.
+func (x *SearchField) WithLayer(layer obj.Object) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayer:"), objref.IDOf(layer))
 	return x
 }
 
-// WithCanDrawSubviewsIntoLayer sets the canDrawSubviewsIntoLayer property and returns the receiver for chaining.
+// WithCanDrawSubviewsIntoLayer sets canDrawSubviewsIntoLayer and returns the receiver so calls can be chained.
 func (x *SearchField) WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCanDrawSubviewsIntoLayer:"), canDrawSubviewsIntoLayer)
 	return x
 }
 
-// WithNeedsLayout sets the needsLayout property and returns the receiver for chaining.
+// WithNeedsLayout sets needsLayout and returns the receiver so calls can be chained.
 func (x *SearchField) WithNeedsLayout(needsLayout bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetNeedsLayout(needsLayout)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsLayout:"), needsLayout)
 	return x
 }
 
-// WithAlphaValue sets the alphaValue property and returns the receiver for chaining.
+// WithAlphaValue sets alphaValue and returns the receiver so calls can be chained.
 func (x *SearchField) WithAlphaValue(alphaValue float64) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetAlphaValue(alphaValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlphaValue:"), alphaValue)
 	return x
 }
 
-// WithLayerUsesCoreImageFilters sets the layerUsesCoreImageFilters property and returns the receiver for chaining.
+// WithLayerUsesCoreImageFilters sets layerUsesCoreImageFilters and returns the receiver so calls can be chained.
 func (x *SearchField) WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetLayerUsesCoreImageFilters(layerUsesCoreImageFilters)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLayerUsesCoreImageFilters:"), layerUsesCoreImageFilters)
 	return x
 }
 
-// WithBackgroundFilters sets the collection, converting the Go slice to an NSArray.
-func (x *SearchField) WithBackgroundFilters(items ...*coreimage.CIFilter) *SearchField {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSTextField.NSControl.NSView.SetBackgroundFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSTextField.NSControl.NSView.SetBackgroundFilters(_arr)
+// WithBackgroundFilters sets the collection and returns the receiver so calls can be chained.
+func (x *SearchField) WithBackgroundFilters(items ...obj.Object) *SearchField {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBackgroundFilters:"), _arr)
 	return x
 }
 
-// WithCompositingFilter sets the compositingFilter property and returns the receiver for chaining.
-func (x *SearchField) WithCompositingFilter(compositingFilter *coreimage.CIFilter) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetCompositingFilter(compositingFilter)
+// WithCompositingFilter sets compositingFilter and returns the receiver so calls can be chained.
+func (x *SearchField) WithCompositingFilter(compositingFilter obj.Object) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCompositingFilter:"), objref.IDOf(compositingFilter))
 	return x
 }
 
-// WithContentFilters sets the collection, converting the Go slice to an NSArray.
-func (x *SearchField) WithContentFilters(items ...*coreimage.CIFilter) *SearchField {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSTextField.NSControl.NSView.SetContentFilters(foundation.NSArrayFromID[*coreimage.CIFilter](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*coreimage.CIFilter](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSTextField.NSControl.NSView.SetContentFilters(_arr)
+// WithContentFilters sets the collection and returns the receiver so calls can be chained.
+func (x *SearchField) WithContentFilters(items ...obj.Object) *SearchField {
+	_arr := purego.SliceToNSArray(items, func(_v obj.Object) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContentFilters:"), _arr)
 	return x
 }
 
-// WithShadow sets the shadow property and returns the receiver for chaining.
+// WithShadow sets shadow and returns the receiver so calls can be chained.
 func (x *SearchField) WithShadow(shadow *Shadow) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetShadow(shadow.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setShadow:"), objref.IDOf(shadow))
 	return x
 }
 
-// WithClipsToBounds sets the clipsToBounds property and returns the receiver for chaining.
+// WithClipsToBounds sets clipsToBounds and returns the receiver so calls can be chained.
 func (x *SearchField) WithClipsToBounds(clipsToBounds bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetClipsToBounds(clipsToBounds)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setClipsToBounds:"), clipsToBounds)
 	return x
 }
 
-// WithPostsBoundsChangedNotifications sets the postsBoundsChangedNotifications property and returns the receiver for chaining.
+// WithPostsBoundsChangedNotifications sets postsBoundsChangedNotifications and returns the receiver so calls can be chained.
 func (x *SearchField) WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetPostsBoundsChangedNotifications(postsBoundsChangedNotifications)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPostsBoundsChangedNotifications:"), postsBoundsChangedNotifications)
 	return x
 }
 
-// WithToolTip sets the toolTip property and returns the receiver for chaining.
+// WithToolTip sets toolTip and returns the receiver so calls can be chained.
 func (x *SearchField) WithToolTip(toolTip string) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetToolTip(foundation.NSStringStringWithUTF8String(toolTip))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setToolTip:"), purego.NSString(toolTip))
 	return x
 }
 
-// WithUserInterfaceLayoutDirection sets the userInterfaceLayoutDirection property and returns the receiver for chaining.
-func (x *SearchField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetUserInterfaceLayoutDirection(raw.NSUserInterfaceLayoutDirection(userInterfaceLayoutDirection))
+// WithUserInterfaceLayoutDirection sets userInterfaceLayoutDirection and returns the receiver so calls can be chained.
+func (x *SearchField) WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserInterfaceLayoutDirection:"), userInterfaceLayoutDirection)
 	return x
 }
 
-// WithPreparedContentRect sets the preparedContentRect property and returns the receiver for chaining.
-func (x *SearchField) WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetPreparedContentRect(preparedContentRect)
-	return x
-}
-
-// WithNextKeyView sets the nextKeyView property and returns the receiver for chaining.
+// WithNextKeyView sets nextKeyView and returns the receiver so calls can be chained.
 func (x *SearchField) WithNextKeyView(nextKeyView ViewProvider) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetNextKeyView(nextKeyView.asView())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextKeyView:"), objref.IDOf(nextKeyView))
 	return x
 }
 
-// WithFocusRingType sets the focusRingType property and returns the receiver for chaining.
-func (x *SearchField) WithFocusRingType(focusRingType NSFocusRingType) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetFocusRingType(raw.NSFocusRingType(focusRingType))
+// WithFocusRingType sets focusRingType and returns the receiver so calls can be chained.
+func (x *SearchField) WithFocusRingType(focusRingType FocusRingType) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFocusRingType:"), focusRingType)
 	return x
 }
 
-// WithGestureRecognizers sets the collection, converting the Go slice to an NSArray.
+// WithGestureRecognizers sets the collection and returns the receiver so calls can be chained.
 func (x *SearchField) WithGestureRecognizers(items ...GestureRecognizerProvider) *SearchField {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.NSTextField.NSControl.NSView.SetGestureRecognizers(foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.asGestureRecognizer().Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.NSGestureRecognizer](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.NSTextField.NSControl.NSView.SetGestureRecognizers(_arr)
+	_arr := purego.SliceToNSArray(items, func(_v GestureRecognizerProvider) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGestureRecognizers:"), _arr)
 	return x
 }
 
-// WithAllowedTouchTypes sets the allowedTouchTypes property and returns the receiver for chaining.
-func (x *SearchField) WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetAllowedTouchTypes(raw.NSTouchTypeMask(allowedTouchTypes))
-	return x
-}
-
-// WithAdditionalSafeAreaInsets sets the additionalSafeAreaInsets property and returns the receiver for chaining.
-func (x *SearchField) WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetAdditionalSafeAreaInsets(additionalSafeAreaInsets)
+// WithAllowedTouchTypes sets allowedTouchTypes and returns the receiver so calls can be chained.
+func (x *SearchField) WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowedTouchTypes:"), allowedTouchTypes)
 	return x
 }
 
 // When this property is YES, any NSControls in the view or its descendants will be sized with compact metrics compatible with macOS 15.0 and earlier. Defaults to NO.
 //
-// WithPrefersCompactControlSizeMetrics sets the prefersCompactControlSizeMetrics property and returns the receiver for chaining.
+// WithPrefersCompactControlSizeMetrics sets prefersCompactControlSizeMetrics and returns the receiver so calls can be chained.
 func (x *SearchField) WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefersCompactControlSizeMetrics:"), prefersCompactControlSizeMetrics)
 	return x
 }
 
-// WithWritingToolsCoordinator sets the writingToolsCoordinator property and returns the receiver for chaining.
+// WithWritingToolsCoordinator sets writingToolsCoordinator and returns the receiver so calls can be chained.
 func (x *SearchField) WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetWritingToolsCoordinator(writingToolsCoordinator.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWritingToolsCoordinator:"), objref.IDOf(writingToolsCoordinator))
 	return x
 }
 
-// WithNeedsUpdateConstraints sets the needsUpdateConstraints property and returns the receiver for chaining.
+// WithNeedsUpdateConstraints sets needsUpdateConstraints and returns the receiver so calls can be chained.
 func (x *SearchField) WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetNeedsUpdateConstraints(needsUpdateConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNeedsUpdateConstraints:"), needsUpdateConstraints)
 	return x
 }
 
-// WithTranslatesAutoresizingMaskIntoConstraints sets the translatesAutoresizingMaskIntoConstraints property and returns the receiver for chaining.
+// WithTranslatesAutoresizingMaskIntoConstraints sets translatesAutoresizingMaskIntoConstraints and returns the receiver so calls can be chained.
 func (x *SearchField) WithTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetTranslatesAutoresizingMaskIntoConstraints(translatesAutoresizingMaskIntoConstraints)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTranslatesAutoresizingMaskIntoConstraints:"), translatesAutoresizingMaskIntoConstraints)
 	return x
 }
 
-// WithHorizontalContentSizeConstraintActive sets the horizontalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithHorizontalContentSizeConstraintActive sets horizontalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *SearchField) WithHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetHorizontalContentSizeConstraintActive(horizontalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHorizontalContentSizeConstraintActive:"), horizontalContentSizeConstraintActive)
 	return x
 }
 
-// WithVerticalContentSizeConstraintActive sets the verticalContentSizeConstraintActive property and returns the receiver for chaining.
+// WithVerticalContentSizeConstraintActive sets verticalContentSizeConstraintActive and returns the receiver so calls can be chained.
 func (x *SearchField) WithVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetVerticalContentSizeConstraintActive(verticalContentSizeConstraintActive)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVerticalContentSizeConstraintActive:"), verticalContentSizeConstraintActive)
 	return x
 }
 
-// WithWantsBestResolutionOpenGLSurface sets the wantsBestResolutionOpenGLSurface property and returns the receiver for chaining.
+// WithWantsBestResolutionOpenGLSurface sets wantsBestResolutionOpenGLSurface and returns the receiver so calls can be chained.
 func (x *SearchField) WithWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetWantsBestResolutionOpenGLSurface(wantsBestResolutionOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsBestResolutionOpenGLSurface:"), wantsBestResolutionOpenGLSurface)
 	return x
 }
 
-// WithWantsExtendedDynamicRangeOpenGLSurface sets the wantsExtendedDynamicRangeOpenGLSurface property and returns the receiver for chaining.
+// WithWantsExtendedDynamicRangeOpenGLSurface sets wantsExtendedDynamicRangeOpenGLSurface and returns the receiver so calls can be chained.
 func (x *SearchField) WithWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface bool) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetWantsExtendedDynamicRangeOpenGLSurface(wantsExtendedDynamicRangeOpenGLSurface)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setWantsExtendedDynamicRangeOpenGLSurface:"), wantsExtendedDynamicRangeOpenGLSurface)
 	return x
 }
 
-// WithPressureConfiguration sets the pressureConfiguration property and returns the receiver for chaining.
+// WithPressureConfiguration sets pressureConfiguration and returns the receiver so calls can be chained.
 func (x *SearchField) WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.SetPressureConfiguration(pressureConfiguration.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPressureConfiguration:"), objref.IDOf(pressureConfiguration))
 	return x
 }
 
 // The next responder after this one, or nil if it has none.
 //
-// WithNextResponder sets the nextResponder property and returns the receiver for chaining.
+// WithNextResponder sets nextResponder and returns the receiver so calls can be chained.
 func (x *SearchField) WithNextResponder(nextResponder ResponderProvider) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.NSResponder.SetNextResponder(nextResponder.asResponder())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNextResponder:"), objref.IDOf(nextResponder))
 	return x
 }
 
 // Returns the responder’s menu.
 //
-// WithMenu sets the menu property and returns the receiver for chaining.
+// WithMenu sets menu and returns the receiver so calls can be chained.
 func (x *SearchField) WithMenu(menu *Menu) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.NSResponder.SetMenu(menu.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMenu:"), objref.IDOf(menu))
 	return x
 }
 
 // An object encapsulating a user activity supported by this responder.
 //
-// WithUserActivity sets the userActivity property and returns the receiver for chaining.
-func (x *SearchField) WithUserActivity(userActivity *foundation.NSUserActivity) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.NSResponder.SetUserActivity(userActivity)
+// WithUserActivity sets userActivity and returns the receiver so calls can be chained.
+func (x *SearchField) WithUserActivity(userActivity obj.Object) *SearchField {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUserActivity:"), objref.IDOf(userActivity))
 	return x
 }
 
 // The NSTouchBar object associated with the responder.
 //
-// WithTouchBar sets the touchBar property and returns the receiver for chaining.
+// WithTouchBar sets touchBar and returns the receiver so calls can be chained.
 func (x *SearchField) WithTouchBar(touchBar *TouchBar) *SearchField {
-	x.inner.NSTextField.NSControl.NSView.NSResponder.SetTouchBar(touchBar.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTouchBar:"), objref.IDOf(touchBar))
 	return x
-}
-
-// SearchTextBounds calls the underlying SearchTextBounds.
-func (x *SearchField) SearchTextBounds() corefoundation.CGRect {
-	return x.inner.SearchTextBounds()
-}
-
-// SearchButtonBounds calls the underlying SearchButtonBounds.
-func (x *SearchField) SearchButtonBounds() corefoundation.CGRect {
-	return x.inner.SearchButtonBounds()
-}
-
-// CancelButtonBounds calls the underlying CancelButtonBounds.
-func (x *SearchField) CancelButtonBounds() corefoundation.CGRect {
-	return x.inner.CancelButtonBounds()
 }
 
 // RecentSearches returns the collection as a Go slice.
 func (x *SearchField) RecentSearches() []string {
-	arr := x.inner.RecentSearches()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recentSearches"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// SetRecentSearches calls the underlying SetRecentSearches.
-func (x *SearchField) SetRecentSearches(recentSearches *foundation.NSArray[*foundation.NSString]) {
-	x.inner.SetRecentSearches(recentSearches)
+func (x *SearchField) SetRecentSearches(recentSearches []string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecentSearches:"), purego.SliceToNSArray(recentSearches, func(_v string) objc.ID { return purego.NSString(_v) }))
 }
 
-// RecentsAutosaveName calls the underlying RecentsAutosaveName.
-func (x *SearchField) RecentsAutosaveName() string {
-	_r := x.inner.RecentsAutosaveName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
+func (x *SearchField) RecentsAutosaveName() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recentsAutosaveName"))
+	return obj.Wrap(_r)
 }
 
-// SetRecentsAutosaveName calls the underlying SetRecentsAutosaveName.
-func (x *SearchField) SetRecentsAutosaveName(recentsAutosaveName *foundation.NSString) {
-	x.inner.SetRecentsAutosaveName(recentsAutosaveName)
+func (x *SearchField) SetRecentsAutosaveName(recentsAutosaveName obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRecentsAutosaveName:"), objref.IDOf(recentsAutosaveName))
 }
 
-// SearchMenuTemplate calls the underlying SearchMenuTemplate.
 func (x *SearchField) SearchMenuTemplate() *Menu {
-	_r := x.inner.SearchMenuTemplate()
-	if _r == nil {
-		return nil
-	}
-	return &Menu{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("searchMenuTemplate"))
+	return MenuFromID(_r)
 }
 
-// SetSearchMenuTemplate calls the underlying SetSearchMenuTemplate.
-func (x *SearchField) SetSearchMenuTemplate(searchMenuTemplate *raw.NSMenu) {
-	x.inner.SetSearchMenuTemplate(searchMenuTemplate)
+func (x *SearchField) SetSearchMenuTemplate(searchMenuTemplate *Menu) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSearchMenuTemplate:"), objref.IDOf(searchMenuTemplate))
 }
 
-// SendsWholeSearchString calls the underlying SendsWholeSearchString.
 func (x *SearchField) SendsWholeSearchString() bool {
-	return x.inner.SendsWholeSearchString()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendsWholeSearchString"))
+	return _r
 }
 
-// SetSendsWholeSearchString calls the underlying SetSendsWholeSearchString.
 func (x *SearchField) SetSendsWholeSearchString(sendsWholeSearchString bool) {
-	x.inner.SetSendsWholeSearchString(sendsWholeSearchString)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsWholeSearchString:"), sendsWholeSearchString)
 }
 
-// MaximumRecents calls the underlying MaximumRecents.
 func (x *SearchField) MaximumRecents() int {
-	return x.inner.MaximumRecents()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumRecents"))
+	return _r
 }
 
-// SetMaximumRecents calls the underlying SetMaximumRecents.
 func (x *SearchField) SetMaximumRecents(maximumRecents int) {
-	x.inner.SetMaximumRecents(maximumRecents)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumRecents:"), maximumRecents)
 }
 
-// SendsSearchStringImmediately calls the underlying SendsSearchStringImmediately.
 func (x *SearchField) SendsSearchStringImmediately() bool {
-	return x.inner.SendsSearchStringImmediately()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("sendsSearchStringImmediately"))
+	return _r
 }
 
-// SetSendsSearchStringImmediately calls the underlying SetSendsSearchStringImmediately.
 func (x *SearchField) SetSendsSearchStringImmediately(sendsSearchStringImmediately bool) {
-	x.inner.SetSendsSearchStringImmediately(sendsSearchStringImmediately)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSendsSearchStringImmediately:"), sendsSearchStringImmediately)
 }
 
-// The rectangle for the search text within the bounds of the field.
-//
-// RectForSearchTextWhenCentered calls the underlying RectForSearchTextWhenCentered.
-func (x *SearchField) RectForSearchTextWhenCentered(isCentered bool) corefoundation.CGRect {
-	return x.inner.RectForSearchTextWhenCentered(isCentered)
-}
-
-// The rectangle for the search button within the bounds of the search field.
-//
-// RectForSearchButtonWhenCentered calls the underlying RectForSearchButtonWhenCentered.
-func (x *SearchField) RectForSearchButtonWhenCentered(isCentered bool) corefoundation.CGRect {
-	return x.inner.RectForSearchButtonWhenCentered(isCentered)
-}
-
-// The rectangle for the cancel button within the bounds of the search field.
-//
-// RectForCancelButtonWhenCentered calls the underlying RectForCancelButtonWhenCentered.
-func (x *SearchField) RectForCancelButtonWhenCentered(isCentered bool) corefoundation.CGRect {
-	return x.inner.RectForCancelButtonWhenCentered(isCentered)
-}
-
-// CentersPlaceholder calls the underlying CentersPlaceholder.
 func (x *SearchField) CentersPlaceholder() bool {
-	return x.inner.CentersPlaceholder()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("centersPlaceholder"))
+	return _r
 }
 
-// SetCentersPlaceholder calls the underlying SetCentersPlaceholder.
 func (x *SearchField) SetCentersPlaceholder(centersPlaceholder bool) {
-	x.inner.SetCentersPlaceholder(centersPlaceholder)
-}
-
-func (x *SearchField) asTextField() *raw.NSTextField { return &x.inner.NSTextField }
-
-func (x *SearchField) asControl() *raw.NSControl { return &x.inner.NSTextField.NSControl }
-
-func (x *SearchField) asView() *raw.NSView { return &x.inner.NSTextField.NSControl.NSView }
-
-func (x *SearchField) asResponder() *raw.NSResponder {
-	return &x.inner.NSTextField.NSControl.NSView.NSResponder
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCentersPlaceholder:"), centersPlaceholder)
 }
 
 // SearchFieldable is the interface implemented by [SearchField], for mocking and DI.
 type SearchFieldable interface {
-	Unwrap() *raw.NSSearchField
-	WithRecentSearches(items ...*foundation.NSString) *SearchField
-	WithRecentsAutosaveName(recentsAutosaveName *foundation.NSString) *SearchField
+	obj.Object
+	WithRecentSearches(items ...obj.Object) *SearchField
+	WithRecentsAutosaveName(recentsAutosaveName obj.Object) *SearchField
 	WithSearchMenuTemplate(searchMenuTemplate *Menu) *SearchField
 	WithSendsWholeSearchString(sendsWholeSearchString bool) *SearchField
 	WithMaximumRecents(maximumRecents int) *SearchField
 	WithSendsSearchStringImmediately(sendsSearchStringImmediately bool) *SearchField
 	WithCentersPlaceholder(centersPlaceholder bool) *SearchField
 	WithPlaceholderString(placeholderString string) *SearchField
-	WithPlaceholderAttributedString(placeholderAttributedString *foundation.NSAttributedString) *SearchField
+	WithPlaceholderAttributedString(placeholderAttributedString obj.Object) *SearchField
 	WithBackgroundColor(backgroundColor *Color) *SearchField
 	WithDrawsBackground(drawsBackground bool) *SearchField
 	WithTextColor(textColor *Color) *SearchField
@@ -1037,81 +850,75 @@ type SearchFieldable interface {
 	WithBezeled(bezeled bool) *SearchField
 	WithEditable(editable bool) *SearchField
 	WithSelectable(selectable bool) *SearchField
-	WithDelegate(delegate raw.NSTextFieldDelegate) *SearchField
-	WithBezelStyle(bezelStyle NSTextFieldBezelStyle) *SearchField
+	WithBezelStyle(bezelStyle TextFieldBezelStyle) *SearchField
 	WithPreferredMaxLayoutWidth(preferredMaxLayoutWidth float64) *SearchField
 	WithMaximumNumberOfLines(maximumNumberOfLines int) *SearchField
 	WithAllowsDefaultTighteningForTruncation(allowsDefaultTighteningForTruncation bool) *SearchField
-	WithLineBreakStrategy(lineBreakStrategy NSLineBreakStrategy) *SearchField
+	WithLineBreakStrategy(lineBreakStrategy LineBreakStrategy) *SearchField
 	WithAllowsWritingTools(allowsWritingTools bool) *SearchField
 	WithAllowsWritingToolsAffordance(allowsWritingToolsAffordance bool) *SearchField
-	WithPlaceholderStrings(items ...*foundation.NSString) *SearchField
-	WithPlaceholderAttributedStrings(items ...*foundation.NSAttributedString) *SearchField
+	WithPlaceholderStrings(items ...obj.Object) *SearchField
+	WithPlaceholderAttributedStrings(items ...obj.Object) *SearchField
 	WithResolvesNaturalAlignmentWithBaseWritingDirection(resolvesNaturalAlignmentWithBaseWritingDirection bool) *SearchField
 	WithAutomaticTextCompletionEnabled(automaticTextCompletionEnabled bool) *SearchField
 	WithAllowsCharacterPickerTouchBarItem(allowsCharacterPickerTouchBarItem bool) *SearchField
 	WithAllowsEditingTextAttributes(allowsEditingTextAttributes bool) *SearchField
 	WithImportsGraphics(importsGraphics bool) *SearchField
-	WithTarget(target objc.ID) *SearchField
-	WithAction(action objc.SEL) *SearchField
+	WithTarget(target obj.Object) *SearchField
 	WithTag(tag int) *SearchField
 	WithIgnoresMultiClick(ignoresMultiClick bool) *SearchField
 	WithContinuous(continuous bool) *SearchField
 	WithEnabled(enabled bool) *SearchField
 	WithRefusesFirstResponder(refusesFirstResponder bool) *SearchField
 	WithHighlighted(highlighted bool) *SearchField
-	WithControlSize(controlSize NSControlSize) *SearchField
-	WithFormatter(formatter *foundation.NSFormatter) *SearchField
-	WithObjectValue(objectValue objc.ID) *SearchField
+	WithControlSize(controlSize ControlSize) *SearchField
+	WithFormatter(formatter obj.Object) *SearchField
+	WithObjectValue(objectValue obj.Object) *SearchField
 	WithStringValue(stringValue string) *SearchField
-	WithAttributedStringValue(attributedStringValue *foundation.NSAttributedString) *SearchField
+	WithAttributedStringValue(attributedStringValue obj.Object) *SearchField
 	WithIntValue(intValue int) *SearchField
 	WithIntegerValue(integerValue int) *SearchField
 	WithFloatValue(floatValue float32) *SearchField
 	WithDoubleValue(doubleValue float64) *SearchField
 	WithFont(font *Font) *SearchField
 	WithUsesSingleLineMode(usesSingleLineMode bool) *SearchField
-	WithLineBreakMode(lineBreakMode NSLineBreakMode) *SearchField
-	WithAlignment(alignment NSTextAlignment) *SearchField
-	WithBaseWritingDirection(baseWritingDirection NSWritingDirection) *SearchField
+	WithLineBreakMode(lineBreakMode LineBreakMode) *SearchField
+	WithAlignment(alignment TextAlignment) *SearchField
+	WithBaseWritingDirection(baseWritingDirection WritingDirection) *SearchField
 	WithAllowsExpansionToolTips(allowsExpansionToolTips bool) *SearchField
 	WithCell(cell CellProvider) *SearchField
 	WithSubviews(items ...ViewProvider) *SearchField
 	WithHidden(hidden bool) *SearchField
 	WithPostsFrameChangedNotifications(postsFrameChangedNotifications bool) *SearchField
 	WithAutoresizesSubviews(autoresizesSubviews bool) *SearchField
-	WithAutoresizingMask(autoresizingMask NSAutoresizingMaskOptions) *SearchField
-	WithFrame(frame corefoundation.CGRect) *SearchField
+	WithAutoresizingMask(autoresizingMask AutoresizingMaskOptions) *SearchField
 	WithFrameRotation(frameRotation float64) *SearchField
 	WithFrameCenterRotation(frameCenterRotation float64) *SearchField
 	WithBoundsRotation(boundsRotation float64) *SearchField
-	WithBounds(bounds corefoundation.CGRect) *SearchField
 	WithCanDrawConcurrently(canDrawConcurrently bool) *SearchField
 	WithNeedsDisplay(needsDisplay bool) *SearchField
 	WithAcceptsTouchEvents(acceptsTouchEvents bool) *SearchField
 	WithWantsRestingTouches(wantsRestingTouches bool) *SearchField
-	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy NSViewLayerContentsRedrawPolicy) *SearchField
-	WithLayerContentsPlacement(layerContentsPlacement NSViewLayerContentsPlacement) *SearchField
+	WithLayerContentsRedrawPolicy(layerContentsRedrawPolicy ViewLayerContentsRedrawPolicy) *SearchField
+	WithLayerContentsPlacement(layerContentsPlacement ViewLayerContentsPlacement) *SearchField
 	WithWantsLayer(wantsLayer bool) *SearchField
-	WithLayer(layer *quartzcore.CALayer) *SearchField
+	WithLayer(layer obj.Object) *SearchField
 	WithCanDrawSubviewsIntoLayer(canDrawSubviewsIntoLayer bool) *SearchField
 	WithNeedsLayout(needsLayout bool) *SearchField
 	WithAlphaValue(alphaValue float64) *SearchField
 	WithLayerUsesCoreImageFilters(layerUsesCoreImageFilters bool) *SearchField
-	WithBackgroundFilters(items ...*coreimage.CIFilter) *SearchField
-	WithCompositingFilter(compositingFilter *coreimage.CIFilter) *SearchField
-	WithContentFilters(items ...*coreimage.CIFilter) *SearchField
+	WithBackgroundFilters(items ...obj.Object) *SearchField
+	WithCompositingFilter(compositingFilter obj.Object) *SearchField
+	WithContentFilters(items ...obj.Object) *SearchField
 	WithShadow(shadow *Shadow) *SearchField
 	WithClipsToBounds(clipsToBounds bool) *SearchField
 	WithPostsBoundsChangedNotifications(postsBoundsChangedNotifications bool) *SearchField
 	WithToolTip(toolTip string) *SearchField
-	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection NSUserInterfaceLayoutDirection) *SearchField
-	WithPreparedContentRect(preparedContentRect corefoundation.CGRect) *SearchField
+	WithUserInterfaceLayoutDirection(userInterfaceLayoutDirection UserInterfaceLayoutDirection) *SearchField
 	WithNextKeyView(nextKeyView ViewProvider) *SearchField
-	WithFocusRingType(focusRingType NSFocusRingType) *SearchField
+	WithFocusRingType(focusRingType FocusRingType) *SearchField
 	WithGestureRecognizers(items ...GestureRecognizerProvider) *SearchField
-	WithAllowedTouchTypes(allowedTouchTypes NSTouchTypeMask) *SearchField
-	WithAdditionalSafeAreaInsets(additionalSafeAreaInsets foundation.NSEdgeInsets) *SearchField
+	WithAllowedTouchTypes(allowedTouchTypes TouchTypeMask) *SearchField
 	WithPrefersCompactControlSizeMetrics(prefersCompactControlSizeMetrics bool) *SearchField
 	WithWritingToolsCoordinator(writingToolsCoordinator *WritingToolsCoordinator) *SearchField
 	WithNeedsUpdateConstraints(needsUpdateConstraints bool) *SearchField
@@ -1123,26 +930,20 @@ type SearchFieldable interface {
 	WithPressureConfiguration(pressureConfiguration *PressureConfiguration) *SearchField
 	WithNextResponder(nextResponder ResponderProvider) *SearchField
 	WithMenu(menu *Menu) *SearchField
-	WithUserActivity(userActivity *foundation.NSUserActivity) *SearchField
+	WithUserActivity(userActivity obj.Object) *SearchField
 	WithTouchBar(touchBar *TouchBar) *SearchField
-	SearchTextBounds() corefoundation.CGRect
-	SearchButtonBounds() corefoundation.CGRect
-	CancelButtonBounds() corefoundation.CGRect
 	RecentSearches() []string
-	SetRecentSearches(recentSearches *foundation.NSArray[*foundation.NSString])
-	RecentsAutosaveName() string
-	SetRecentsAutosaveName(recentsAutosaveName *foundation.NSString)
+	SetRecentSearches(recentSearches []string)
+	RecentsAutosaveName() obj.Object
+	SetRecentsAutosaveName(recentsAutosaveName obj.Object)
 	SearchMenuTemplate() *Menu
-	SetSearchMenuTemplate(searchMenuTemplate *raw.NSMenu)
+	SetSearchMenuTemplate(searchMenuTemplate *Menu)
 	SendsWholeSearchString() bool
 	SetSendsWholeSearchString(sendsWholeSearchString bool)
 	MaximumRecents() int
 	SetMaximumRecents(maximumRecents int)
 	SendsSearchStringImmediately() bool
 	SetSendsSearchStringImmediately(sendsSearchStringImmediately bool)
-	RectForSearchTextWhenCentered(isCentered bool) corefoundation.CGRect
-	RectForSearchButtonWhenCentered(isCentered bool) corefoundation.CGRect
-	RectForCancelButtonWhenCentered(isCentered bool) corefoundation.CGRect
 	CentersPlaceholder() bool
 	SetCentersPlaceholder(centersPlaceholder bool)
 }

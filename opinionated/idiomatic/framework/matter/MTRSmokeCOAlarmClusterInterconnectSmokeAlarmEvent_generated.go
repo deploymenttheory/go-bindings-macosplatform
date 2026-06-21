@@ -5,61 +5,84 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent wraps [raw.MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent] with a fluent Go API.
+// MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent is an idiomatic wrapper over the Objective-C class MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent.
 type MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent struct {
-	inner *raw.MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent].
-func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) Unwrap() *raw.MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventFromID adopts an existing object pointer as a MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent (nil for 0).
+// MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventFromID adopts an existing Objective-C object as a MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventFromID(id objc.ID) *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent{inner: raw.MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventFromID(id)}
-}
-
-// NewMTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent creates a new [MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent].
-func NewMTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent() *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent")), objc.RegisterName("new"))
-	return &MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent{inner: raw.MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventFromID(_id)}
-}
-
-// WithAlarmSeverityLevel sets the alarmSeverityLevel property and returns the receiver for chaining.
-func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) WithAlarmSeverityLevel(alarmSeverityLevel *foundation.NSNumber) *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent {
-	x.inner.SetAlarmSeverityLevel(alarmSeverityLevel)
+	x := &MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// AlarmSeverityLevel calls the underlying AlarmSeverityLevel.
-func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) AlarmSeverityLevel() *foundation.NSNumber {
-	return x.inner.AlarmSeverityLevel()
+// mTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventAdopt wraps an Objective-C object that this code just created as a
+// MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventAdopt(id objc.ID) *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetAlarmSeverityLevel calls the underlying SetAlarmSeverityLevel.
-func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) SetAlarmSeverityLevel(alarmSeverityLevel *foundation.NSNumber) {
-	x.inner.SetAlarmSeverityLevel(alarmSeverityLevel)
+// Description returns the object's -description text.
+func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent creates a new MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent.
+func NewMTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent() *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent")), objc.RegisterName("new"))
+	return mTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventAdopt(_id)
+}
+
+// WithAlarmSeverityLevel sets alarmSeverityLevel and returns the receiver so calls can be chained.
+func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) WithAlarmSeverityLevel(alarmSeverityLevel obj.Object) *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmSeverityLevel:"), objref.IDOf(alarmSeverityLevel))
+	return x
+}
+
+func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) AlarmSeverityLevel() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("alarmSeverityLevel"))
+	return obj.Wrap(_r)
+}
+
+func (x *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent) SetAlarmSeverityLevel(alarmSeverityLevel obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAlarmSeverityLevel:"), objref.IDOf(alarmSeverityLevel))
 }
 
 // MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventable is the interface implemented by [MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent], for mocking and DI.
 type MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventable interface {
-	Unwrap() *raw.MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent
-	WithAlarmSeverityLevel(alarmSeverityLevel *foundation.NSNumber) *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent
-	AlarmSeverityLevel() *foundation.NSNumber
-	SetAlarmSeverityLevel(alarmSeverityLevel *foundation.NSNumber)
+	obj.Object
+	WithAlarmSeverityLevel(alarmSeverityLevel obj.Object) *MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent
+	AlarmSeverityLevel() obj.Object
+	SetAlarmSeverityLevel(alarmSeverityLevel obj.Object)
 }
 
 var _ MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEventable = (*MTRSmokeCOAlarmClusterInterconnectSmokeAlarmEvent)(nil)

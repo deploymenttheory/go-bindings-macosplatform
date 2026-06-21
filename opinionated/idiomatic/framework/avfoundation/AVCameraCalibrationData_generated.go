@@ -5,100 +5,89 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Information about the camera characteristics used to capture images and depth data.
 //
-// CameraCalibrationData wraps [raw.AVCameraCalibrationData] with a fluent Go API.
+// CameraCalibrationData is an idiomatic wrapper over the Objective-C class AVCameraCalibrationData.
 type CameraCalibrationData struct {
-	inner *raw.AVCameraCalibrationData
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVCameraCalibrationData].
-func (x *CameraCalibrationData) Unwrap() *raw.AVCameraCalibrationData { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CameraCalibrationData) ID() objc.ID { return x.inner.Ptr() }
-
-// CameraCalibrationDataFromID adopts an existing object pointer as a CameraCalibrationData (nil for 0).
+// CameraCalibrationDataFromID adopts an existing Objective-C object as a CameraCalibrationData
+// (nil for 0), retaining it and registering a release finalizer.
 func CameraCalibrationDataFromID(id objc.ID) *CameraCalibrationData {
 	if id == 0 {
 		return nil
 	}
-	return &CameraCalibrationData{inner: raw.AVCameraCalibrationDataFromID(id)}
+	x := &CameraCalibrationData{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCameraCalibrationData creates a new [CameraCalibrationData].
+// cameraCalibrationDataAdopt wraps an Objective-C object that this code just created as a
+// CameraCalibrationData (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func cameraCalibrationDataAdopt(id objc.ID) *CameraCalibrationData {
+	if id == 0 {
+		return nil
+	}
+	x := &CameraCalibrationData{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CameraCalibrationData) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CameraCalibrationData) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CameraCalibrationData) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCameraCalibrationData creates a new CameraCalibrationData.
 func NewCameraCalibrationData() *CameraCalibrationData {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AVCameraCalibrationData")), objc.RegisterName("new"))
-	return &CameraCalibrationData{inner: raw.AVCameraCalibrationDataFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AVCameraCalibrationData")), objc.RegisterName("new"))
+	return cameraCalibrationDataAdopt(_id)
 }
 
-// @property intrinsicMatrix @abstract A camera's intrinsic (K) matrix describes its geometric properties. @discussion The intrinsic matrix allows one to transform 3D coordinates to 2D coordinates on an image plane using the pinhole camera model. All values are expressed in pixels. The elements in the matrix are: /           \ | fx 0   ox | | 0  fy  oy | | 0  0   1  | \           / where fx and fy describe the focal length. For square pixels, their values are identical. ox and oy are the offset of the principal point. The origin is the upper left of the frame.
-//
-// IntrinsicMatrix calls the underlying IntrinsicMatrix.
-func (x *CameraCalibrationData) IntrinsicMatrix() unsafe.Pointer {
-	return x.inner.IntrinsicMatrix()
-}
-
-// @property intrinsicMatrixReferenceDimensions @abstract The reference frame dimensions used in calculating a camera's principal point. @discussion A camera's intrinsic matrix expresses values in pixels with respect to a frame of this width and height.
-//
-// IntrinsicMatrixReferenceDimensions calls the underlying IntrinsicMatrixReferenceDimensions.
-func (x *CameraCalibrationData) IntrinsicMatrixReferenceDimensions() corefoundation.CGSize {
-	return x.inner.IntrinsicMatrixReferenceDimensions()
-}
-
-// @property extrinsicMatrix @abstract A camera's extrinsic matrix describes its pose (position and direction) in world coordinates. @discussion The extrinsic matrix consists of a unitless 3x3 rotation matrix (R) on the left and a translation (t) 3x1 column vector on the right. The translation vector's units are millimeters. The camera's pose is expressed with respect to a reference camera (camera-to-world view). If the rotation matrix is an identity matrix, then this camera is the reference camera. Note that a matrix_float4x3 matrix is column major with 3 rows and 4 columns. /                       \ /   \   | r1,1  r1,2  r1,3 | t1 | |R|t| = | r2,1  r2,2  r2,3 | t2 | \   /   | r3,1  r3,2  r3,3 | t3 | \                       /
-//
-// ExtrinsicMatrix calls the underlying ExtrinsicMatrix.
-func (x *CameraCalibrationData) ExtrinsicMatrix() unsafe.Pointer {
-	return x.inner.ExtrinsicMatrix()
-}
-
-// @property pixelSize @abstract The size of one pixel at intrinsicMatrixReferenceDimensions in millimeters.
-//
-// PixelSize calls the underlying PixelSize.
+// The size of one pixel at intrinsicMatrixReferenceDimensions in millimeters.
 func (x *CameraCalibrationData) PixelSize() float32 {
-	return x.inner.PixelSize()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("pixelSize"))
+	return _r
 }
 
-// @property lensDistortionLookupTable @abstract An NSData of floats describing the camera lens' radial distortions. @discussion Images captured by a camera are geometrically warped by radial distortions in the lens. In order to project from the 2D image plane back into the 3D world, the images must be distortion corrected, or made rectilinear. Lens distortion is modeled using a one-dimensional lookup table of 32-bit float values evenly distributed along a radius from the center of the distortion to the farthest corner, with each value representing an elongation or compression of the radius (0.0 for any given point indicates no elongation). This model assumes radially symmetric lens distortion. When dealing with AVDepthData, the disparity / depth map representations are geometrically distorted to align with images produced by the camera. For more information, see the reference implementation below. If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is nil.
-//
-// LensDistortionLookupTable calls the underlying LensDistortionLookupTable.
-func (x *CameraCalibrationData) LensDistortionLookupTable() *foundation.NSData {
-	return x.inner.LensDistortionLookupTable()
+// An NSData of floats describing the camera lens' radial distortions. Images captured by a camera are geometrically warped by radial distortions in the lens. In order to project from the 2D image plane back into the 3D world, the images must be distortion corrected, or made rectilinear. Lens distortion is modeled using a one-dimensional lookup table of 32-bit float values evenly distributed along a radius from the center of the distortion to the farthest corner, with each value representing an elongation or compression of the radius (0.0 for any given point indicates no elongation). This model assumes radially symmetric lens distortion. When dealing with AVDepthData, the disparity / depth map representations are geometrically distorted to align with images produced by the camera. For more information, see the reference implementation below. If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is nil.
+func (x *CameraCalibrationData) LensDistortionLookupTable() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("lensDistortionLookupTable"))
+	return obj.Wrap(_r)
 }
 
-// @property inverseLensDistortionLookupTable @abstract An NSData of floats describing the inverse lookup table required to reapply the camera lens' radial distortions to a rectified image. @discussion See lensDistortionLookupTable. If you've rectified an image by removing the distortions characterized by the lensDistortionLookupTable, and now wish to go back to geometrically distorted, you may use the inverseLensDistortionLookupTable. For more information, see the reference implementation below. If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is nil.
-//
-// InverseLensDistortionLookupTable calls the underlying InverseLensDistortionLookupTable.
-func (x *CameraCalibrationData) InverseLensDistortionLookupTable() *foundation.NSData {
-	return x.inner.InverseLensDistortionLookupTable()
-}
-
-// @property lensDistortionCenter @abstract A CGPoint describing the offset of the lens’ distortion center from the top left in intrinsicMatrixReferenceDimensions. @discussion Due to geometric distortions in the image, the center of the distortion may not be equal to the optical center (principal point) of the lens. When making an image rectilinear, the distortion center should be used rather than the optical center of the image. For more information, see the reference implementation below. If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is set to CGPointZero and should not be used.
-//
-// LensDistortionCenter calls the underlying LensDistortionCenter.
-func (x *CameraCalibrationData) LensDistortionCenter() corefoundation.CGPoint {
-	return x.inner.LensDistortionCenter()
+// An NSData of floats describing the inverse lookup table required to reapply the camera lens' radial distortions to a rectified image. See lensDistortionLookupTable. If you've rectified an image by removing the distortions characterized by the lensDistortionLookupTable, and now wish to go back to geometrically distorted, you may use the inverseLensDistortionLookupTable. For more information, see the reference implementation below. If the camera lacks the calibration data needed to accurately characterize lens distortions, this property's value is nil.
+func (x *CameraCalibrationData) InverseLensDistortionLookupTable() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("inverseLensDistortionLookupTable"))
+	return obj.Wrap(_r)
 }
 
 // CameraCalibrationDataable is the interface implemented by [CameraCalibrationData], for mocking and DI.
 type CameraCalibrationDataable interface {
-	Unwrap() *raw.AVCameraCalibrationData
-	IntrinsicMatrix() unsafe.Pointer
-	IntrinsicMatrixReferenceDimensions() corefoundation.CGSize
-	ExtrinsicMatrix() unsafe.Pointer
+	obj.Object
 	PixelSize() float32
-	LensDistortionLookupTable() *foundation.NSData
-	InverseLensDistortionLookupTable() *foundation.NSData
-	LensDistortionCenter() corefoundation.CGPoint
+	LensDistortionLookupTable() obj.Object
+	InverseLensDistortionLookupTable() obj.Object
 }
 
 var _ CameraCalibrationDataable = (*CameraCalibrationData)(nil)

@@ -5,99 +5,106 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object for displaying online help for an app.
 //
-// HelpManager wraps [raw.NSHelpManager] with a fluent Go API.
+// HelpManager is an idiomatic wrapper over the Objective-C class NSHelpManager.
 type HelpManager struct {
-	inner *raw.NSHelpManager
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSHelpManager].
-func (x *HelpManager) Unwrap() *raw.NSHelpManager { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HelpManager) ID() objc.ID { return x.inner.Ptr() }
-
-// HelpManagerFromID adopts an existing object pointer as a HelpManager (nil for 0).
+// HelpManagerFromID adopts an existing Objective-C object as a HelpManager
+// (nil for 0), retaining it and registering a release finalizer.
 func HelpManagerFromID(id objc.ID) *HelpManager {
 	if id == 0 {
 		return nil
 	}
-	return &HelpManager{inner: raw.NSHelpManagerFromID(id)}
+	x := &HelpManager{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHelpManager creates a new [HelpManager].
+// helpManagerAdopt wraps an Objective-C object that this code just created as a
+// HelpManager (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func helpManagerAdopt(id objc.ID) *HelpManager {
+	if id == 0 {
+		return nil
+	}
+	x := &HelpManager{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *HelpManager) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HelpManager) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HelpManager) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHelpManager creates a new HelpManager.
 func NewHelpManager() *HelpManager {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSHelpManager")), objc.RegisterName("new"))
-	return &HelpManager{inner: raw.NSHelpManagerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSHelpManager")), objc.RegisterName("new"))
+	return helpManagerAdopt(_id)
 }
 
 // Associates help content with an object.
-//
-// SetContextHelpForObject calls the underlying SetContextHelpForObject.
-func (x *HelpManager) SetContextHelpForObject(attrString *foundation.NSAttributedString, object objc.ID) {
-	x.inner.SetContextHelpForObject(attrString, object)
+func (x *HelpManager) SetContextHelpForObject(attrString obj.Object, object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setContextHelp:forObject:"), objref.IDOf(attrString), objref.IDOf(object))
 }
 
 // Removes the association between an object and its context-sensitive help.
-//
-// RemoveContextHelpForObject calls the underlying RemoveContextHelpForObject.
-func (x *HelpManager) RemoveContextHelpForObject(object objc.ID) {
-	x.inner.RemoveContextHelpForObject(object)
+func (x *HelpManager) RemoveContextHelpForObject(object obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeContextHelpForObject:"), objref.IDOf(object))
 }
 
 // Returns context-sensitive help for an object.
-//
-// ContextHelpForObject calls the underlying ContextHelpForObject.
-func (x *HelpManager) ContextHelpForObject(object objc.ID) *foundation.NSAttributedString {
-	return x.inner.ContextHelpForObject(object)
-}
-
-// Displays the context-sensitive help for a given object at or near the point on the screen specified by a given point.
-//
-// ShowContextHelpForObjectLocationHint calls the underlying ShowContextHelpForObjectLocationHint.
-func (x *HelpManager) ShowContextHelpForObjectLocationHint(object objc.ID, pt corefoundation.CGPoint) bool {
-	return x.inner.ShowContextHelpForObjectLocationHint(object, pt)
+func (x *HelpManager) ContextHelpForObject(object obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("contextHelpForObject:"), objref.IDOf(object))
+	return obj.Wrap(_r)
 }
 
 // Finds and displays the text at the given anchor location in the given book.
-//
-// OpenHelpAnchorInBook calls the underlying OpenHelpAnchorInBook.
-func (x *HelpManager) OpenHelpAnchorInBook(anchor *foundation.NSString, book *foundation.NSString) {
-	x.inner.OpenHelpAnchorInBook(anchor, book)
+func (x *HelpManager) OpenHelpAnchorInBook(anchor obj.Object, book obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openHelpAnchor:inBook:"), objref.IDOf(anchor), objref.IDOf(book))
 }
 
 // Performs a search for the specified string in the specified book.
-//
-// FindStringInBook calls the underlying FindStringInBook.
-func (x *HelpManager) FindStringInBook(query string, book *foundation.NSString) {
-	x.inner.FindStringInBook(foundation.NSStringStringWithUTF8String(query), book)
+func (x *HelpManager) FindStringInBook(query string, book obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findString:inBook:"), purego.NSString(query), objref.IDOf(book))
 }
 
 // Registers one or more help books in the given bundle.
-//
-// RegisterBooksInBundle calls the underlying RegisterBooksInBundle.
-func (x *HelpManager) RegisterBooksInBundle(bundle *foundation.NSBundle) bool {
-	return x.inner.RegisterBooksInBundle(bundle)
+func (x *HelpManager) RegisterBooksInBundle(bundle obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("registerBooksInBundle:"), objref.IDOf(bundle))
+	return _r
 }
 
 // HelpManagerable is the interface implemented by [HelpManager], for mocking and DI.
 type HelpManagerable interface {
-	Unwrap() *raw.NSHelpManager
-	SetContextHelpForObject(attrString *foundation.NSAttributedString, object objc.ID)
-	RemoveContextHelpForObject(object objc.ID)
-	ContextHelpForObject(object objc.ID) *foundation.NSAttributedString
-	ShowContextHelpForObjectLocationHint(object objc.ID, pt corefoundation.CGPoint) bool
-	OpenHelpAnchorInBook(anchor *foundation.NSString, book *foundation.NSString)
-	FindStringInBook(query string, book *foundation.NSString)
-	RegisterBooksInBundle(bundle *foundation.NSBundle) bool
+	obj.Object
+	SetContextHelpForObject(attrString obj.Object, object obj.Object)
+	RemoveContextHelpForObject(object obj.Object)
+	ContextHelpForObject(object obj.Object) obj.Object
+	OpenHelpAnchorInBook(anchor obj.Object, book obj.Object)
+	FindStringInBook(query string, book obj.Object)
+	RegisterBooksInBundle(bundle obj.Object) bool
 }
 
 var _ HelpManagerable = (*HelpManager)(nil)

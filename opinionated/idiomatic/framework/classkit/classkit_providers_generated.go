@@ -5,15 +5,15 @@
 package classkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/classkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
 )
 
-// ActivityItemProvider is implemented by ActivityItem and any idiomatic type wrapping a CLSActivityItem subclass.
+// ActivityItemProvider is accepted wherever a CLSActivityItem (or one of its subclasses) is expected.
 type ActivityItemProvider interface {
-	asActivityItem() *raw.CLSActivityItem
+	objref.Object
 }
 
-// ObjectProvider is implemented by Object and any idiomatic type wrapping a CLSObject subclass.
+// ObjectProvider is accepted wherever a CLSObject (or one of its subclasses) is expected.
 type ObjectProvider interface {
-	asObject() *raw.CLSObject
+	objref.Object
 }

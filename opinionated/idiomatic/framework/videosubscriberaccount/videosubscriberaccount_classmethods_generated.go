@@ -5,23 +5,16 @@
 package videosubscriberaccount
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/videosubscriberaccount"
+	"github.com/ebitengine/purego/objc"
 )
 
-// DefaultSubscriptionRegistrationCenter calls the underlying VSSubscriptionRegistrationCenterDefaultSubscriptionRegistrationCenter.
+// Returns the default subscription registration center object.
 func DefaultSubscriptionRegistrationCenter() *VSSubscriptionRegistrationCenter {
-	_r := raw.VSSubscriptionRegistrationCenterDefaultSubscriptionRegistrationCenter()
-	if _r == nil {
-		return nil
-	}
-	return &VSSubscriptionRegistrationCenter{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("VSSubscriptionRegistrationCenter")), objc.RegisterName("defaultSubscriptionRegistrationCenter"))
+	return VSSubscriptionRegistrationCenterFromID(_r)
 }
 
-// SharedUserAccountManager calls the underlying VSUserAccountManagerSharedUserAccountManager.
 func SharedUserAccountManager() *VSUserAccountManager {
-	_r := raw.VSUserAccountManagerSharedUserAccountManager()
-	if _r == nil {
-		return nil
-	}
-	return &VSUserAccountManager{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("VSUserAccountManager")), objc.RegisterName("sharedUserAccountManager"))
+	return VSUserAccountManagerFromID(_r)
 }

@@ -5,87 +5,100 @@
 package mapkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A fully formed string that completes a partial string.
 //
-// LocalSearchCompletion wraps [raw.MKLocalSearchCompletion] with a fluent Go API.
+// LocalSearchCompletion is an idiomatic wrapper over the Objective-C class MKLocalSearchCompletion.
 type LocalSearchCompletion struct {
-	inner *raw.MKLocalSearchCompletion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKLocalSearchCompletion].
-func (x *LocalSearchCompletion) Unwrap() *raw.MKLocalSearchCompletion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LocalSearchCompletion) ID() objc.ID { return x.inner.Ptr() }
-
-// LocalSearchCompletionFromID adopts an existing object pointer as a LocalSearchCompletion (nil for 0).
+// LocalSearchCompletionFromID adopts an existing Objective-C object as a LocalSearchCompletion
+// (nil for 0), retaining it and registering a release finalizer.
 func LocalSearchCompletionFromID(id objc.ID) *LocalSearchCompletion {
 	if id == 0 {
 		return nil
 	}
-	return &LocalSearchCompletion{inner: raw.MKLocalSearchCompletionFromID(id)}
+	x := &LocalSearchCompletion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLocalSearchCompletion creates a new [LocalSearchCompletion].
+// localSearchCompletionAdopt wraps an Objective-C object that this code just created as a
+// LocalSearchCompletion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func localSearchCompletionAdopt(id objc.ID) *LocalSearchCompletion {
+	if id == 0 {
+		return nil
+	}
+	x := &LocalSearchCompletion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LocalSearchCompletion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LocalSearchCompletion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LocalSearchCompletion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLocalSearchCompletion creates a new LocalSearchCompletion.
 func NewLocalSearchCompletion() *LocalSearchCompletion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKLocalSearchCompletion")), objc.RegisterName("new"))
-	return &LocalSearchCompletion{inner: raw.MKLocalSearchCompletionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKLocalSearchCompletion")), objc.RegisterName("new"))
+	return localSearchCompletionAdopt(_id)
 }
 
-// Title calls the underlying Title.
 func (x *LocalSearchCompletion) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // TitleHighlightRanges returns the collection as a Go slice.
-func (x *LocalSearchCompletion) TitleHighlightRanges() []*foundation.NSValue {
-	arr := x.inner.TitleHighlightRanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+func (x *LocalSearchCompletion) TitleHighlightRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("titleHighlightRanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
-// Subtitle calls the underlying Subtitle.
 func (x *LocalSearchCompletion) Subtitle() string {
-	_r := x.inner.Subtitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // SubtitleHighlightRanges returns the collection as a Go slice.
-func (x *LocalSearchCompletion) SubtitleHighlightRanges() []*foundation.NSValue {
-	arr := x.inner.SubtitleHighlightRanges()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSValue {
-		return foundation.NSValueFromID(purego.Retain(_id))
-	})
+func (x *LocalSearchCompletion) SubtitleHighlightRanges() []obj.Object {
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subtitleHighlightRanges"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
 
 // LocalSearchCompletionable is the interface implemented by [LocalSearchCompletion], for mocking and DI.
 type LocalSearchCompletionable interface {
-	Unwrap() *raw.MKLocalSearchCompletion
+	obj.Object
 	Title() string
-	TitleHighlightRanges() []*foundation.NSValue
+	TitleHighlightRanges() []obj.Object
 	Subtitle() string
-	SubtitleHighlightRanges() []*foundation.NSValue
+	SubtitleHighlightRanges() []obj.Object
 }
 
 var _ LocalSearchCompletionable = (*LocalSearchCompletion)(nil)

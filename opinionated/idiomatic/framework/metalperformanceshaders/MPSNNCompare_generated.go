@@ -5,321 +5,232 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNCompare wraps [raw.MPSNNCompare] with a fluent Go API.
+// NNCompare is an idiomatic wrapper over the Objective-C class MPSNNCompare.
 type NNCompare struct {
-	inner *raw.MPSNNCompare
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNCompare].
-func (x *NNCompare) Unwrap() *raw.MPSNNCompare { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNCompare) ID() objc.ID { return x.inner.Ptr() }
-
-// NNCompareFromID adopts an existing object pointer as a NNCompare (nil for 0).
+// NNCompareFromID adopts an existing Objective-C object as a NNCompare
+// (nil for 0), retaining it and registering a release finalizer.
 func NNCompareFromID(id objc.ID) *NNCompare {
 	if id == 0 {
 		return nil
 	}
-	return &NNCompare{inner: raw.MPSNNCompareFromID(id)}
-}
-
-// @abstract  Initialize the comparison operator @param     device           The device the filter will run on. @return    A valid MPSNNCompare object or nil, if failure.
-//
-// NewNNCompareWithDevice creates a new [NNCompare].
-func NewNNCompareWithDevice(device metal.MTLDevice) *NNCompare {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNCompare")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &NNCompare{inner: raw.MPSNNCompareFromID(_id)}
-}
-
-// @property   comparisonType @abstract   The comparison type to use
-//
-// WithComparisonType sets the comparisonType property and returns the receiver for chaining.
-func (x *NNCompare) WithComparisonType(comparisonType mpsneuralnetwork.MPSNNComparisonType) *NNCompare {
-	x.inner.SetComparisonType(comparisonType)
+	x := &NNCompare{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property   threshold @abstract   The threshold to use when comparing for equality.  Two values will be considered to be equal if the absolute value of their difference is less than, or equal, to the specified threshold: result = |b - a| <= threshold
+// nNCompareAdopt wraps an Objective-C object that this code just created as a
+// NNCompare (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNCompareAdopt(id objc.ID) *NNCompare {
+	if id == 0 {
+		return nil
+	}
+	x := &NNCompare{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNCompare) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNCompare) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNCompare) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNCompare creates a new NNCompare.
+func NewNNCompare() *NNCompare {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNCompare")), objc.RegisterName("new"))
+	return nNCompareAdopt(_id)
+}
+
+// The threshold to use when comparing for equality.  Two values will be considered to be equal if the absolute value of their difference is less than, or equal, to the specified threshold: result = |b - a| <= threshold
 //
-// WithThreshold sets the threshold property and returns the receiver for chaining.
+// WithThreshold sets threshold and returns the receiver so calls can be chained.
 func (x *NNCompare) WithThreshold(threshold float32) *NNCompare {
-	x.inner.SetThreshold(threshold)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreshold:"), threshold)
 	return x
 }
 
-// WithPrimaryScale sets the primaryScale property and returns the receiver for chaining.
+// WithPrimaryScale sets primaryScale and returns the receiver so calls can be chained.
 func (x *NNCompare) WithPrimaryScale(primaryScale float32) *NNCompare {
-	x.inner.MPSCNNArithmetic.SetPrimaryScale(primaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryScale:"), primaryScale)
 	return x
 }
 
-// WithSecondaryScale sets the secondaryScale property and returns the receiver for chaining.
+// WithSecondaryScale sets secondaryScale and returns the receiver so calls can be chained.
 func (x *NNCompare) WithSecondaryScale(secondaryScale float32) *NNCompare {
-	x.inner.MPSCNNArithmetic.SetSecondaryScale(secondaryScale)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryScale:"), secondaryScale)
 	return x
 }
 
-// WithBias sets the bias property and returns the receiver for chaining.
+// WithBias sets bias and returns the receiver so calls can be chained.
 func (x *NNCompare) WithBias(bias float32) *NNCompare {
-	x.inner.MPSCNNArithmetic.SetBias(bias)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setBias:"), bias)
 	return x
 }
 
-// @property   primaryStrideInPixels @abstract   The primarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
+// The primarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
 //
-// WithPrimaryStrideInFeatureChannels sets the primaryStrideInFeatureChannels property and returns the receiver for chaining.
-func (x *NNCompare) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNCompare {
-	x.inner.MPSCNNArithmetic.SetPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels)
+// WithPrimaryStrideInFeatureChannels sets primaryStrideInFeatureChannels and returns the receiver so calls can be chained.
+func (x *NNCompare) WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNCompare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInFeatureChannels:"), primaryStrideInFeatureChannels)
 	return x
 }
 
-// @property   secondaryStrideInPixels @abstract   The secondarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
+// The secondarySource stride in the feature channel dimension. The only supported values are 0 or 1. The default value for each dimension is 1.
 //
-// WithSecondaryStrideInFeatureChannels sets the secondaryStrideInFeatureChannels property and returns the receiver for chaining.
-func (x *NNCompare) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNCompare {
-	x.inner.MPSCNNArithmetic.SetSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels)
+// WithSecondaryStrideInFeatureChannels sets secondaryStrideInFeatureChannels and returns the receiver so calls can be chained.
+func (x *NNCompare) WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNCompare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInFeatureChannels:"), secondaryStrideInFeatureChannels)
 	return x
 }
 
-// @property   minimumValue @abstract   minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
+// minimumValue is to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of minimumValue is -FLT_MAX.
 //
-// WithMinimumValue sets the minimumValue property and returns the receiver for chaining.
+// WithMinimumValue sets minimumValue and returns the receiver so calls can be chained.
 func (x *NNCompare) WithMinimumValue(minimumValue float32) *NNCompare {
-	x.inner.MPSCNNArithmetic.SetMinimumValue(minimumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumValue:"), minimumValue)
 	return x
 }
 
-// @property   maximumValue @abstract   maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
+// maximumValue is used to clamp the result of an arithmetic operation: result = clamp(result, minimumValue, maximumValue). The default value of maximumValue is FLT_MAX.
 //
-// WithMaximumValue sets the maximumValue property and returns the receiver for chaining.
+// WithMaximumValue sets maximumValue and returns the receiver so calls can be chained.
 func (x *NNCompare) WithMaximumValue(maximumValue float32) *NNCompare {
-	x.inner.MPSCNNArithmetic.SetMaximumValue(maximumValue)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumValue:"), maximumValue)
 	return x
 }
 
-// @property   primaryOffset @abstract   The position of the destination clip rectangle origin relative to the primary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and primary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
+// The number of channels in the destination MPSImage to skip before writing output. This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
 //
-// WithPrimaryOffset sets the primaryOffset property and returns the receiver for chaining.
-func (x *NNCompare) WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryOffset(primaryOffset)
+// WithDestinationFeatureChannelOffset sets destinationFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *NNCompare) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNCompare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setDestinationFeatureChannelOffset:"), destinationFeatureChannelOffset)
 	return x
 }
 
-// @property   secondaryOffset @abstract   The position of the destination clip rectangle origin relative to the secondary source buffer. @discussion The offset is defined to be the position of clipRect.origin in source coordinates. Default: {0,0,0}, indicating that the top left corners of the clipRect and secondary source image align. offset.z is the index of starting source image in batch processing mode. See Also: @ref subsubsection_mpsoffset
+// The number of channels in the primary source MPSImage to skip before reading the input. This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
 //
-// WithSecondaryOffset sets the secondaryOffset property and returns the receiver for chaining.
-func (x *NNCompare) WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryOffset(secondaryOffset)
+// WithPrimarySourceFeatureChannelOffset sets primarySourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *NNCompare) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNCompare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelOffset:"), primarySourceFeatureChannelOffset)
 	return x
 }
 
-// @property   clipRect @abstract   An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten. @discussion A MTLRegion that indicates which part of the destination to overwrite. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used.   Default: MPSRectNoClip (MPSKernel::MPSRectNoClip) indicating the entire image. clipRect.origin.z is the index of starting destination image in batch processing mode. clipRect.size.depth is the number of images to process in batch processing mode. See Also: @ref subsubsection_clipRect
+// The number of channels in the secondary source MPSImage to skip before reading the input. This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
 //
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *NNCompare) WithClipRect(clipRect metal.MTLRegion) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetClipRect(clipRect)
+// WithSecondarySourceFeatureChannelOffset sets secondarySourceFeatureChannelOffset and returns the receiver so calls can be chained.
+func (x *NNCompare) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNCompare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelOffset:"), secondarySourceFeatureChannelOffset)
 	return x
 }
 
-// @property   destinationFeatureChannelOffset @abstract   The number of channels in the destination MPSImage to skip before writing output. @discussion This is the starting offset into the destination image in the feature channel dimension at which destination data is written. This allows an application to pass a subset of all the channels in MPSImage as output of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel outputs 8 channels. If we want channels 8 to 15 of this MPSImage to be used as output, we can set destinationFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel outputs N channels, destination image MUST have at least destinationFeatureChannelOffset + N channels. Using a destination image with insufficient number of feature channels result in an error. E.g. if the MPSCNNConvolution outputs 32 channels, and destination has 64 channels, then it is an error to set destinationFeatureChannelOffset > 32.
+// The maximum number of channels in the primary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithDestinationFeatureChannelOffset sets the destinationFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNCompare) WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetDestinationFeatureChannelOffset(destinationFeatureChannelOffset)
+// WithPrimarySourceFeatureChannelMaxCount sets primarySourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *NNCompare) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *NNCompare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimarySourceFeatureChannelMaxCount:"), primarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   primarySourceFeatureChannelOffset @abstract   The number of channels in the primary source MPSImage to skip before reading the input. @discussion This is the starting offset into the primary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set primarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+// The maximum number of channels in the secondary source MPSImage to use Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
 //
-// WithPrimarySourceFeatureChannelOffset sets the primarySourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNCompare) WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset)
+// WithSecondarySourceFeatureChannelMaxCount sets secondarySourceFeatureChannelMaxCount and returns the receiver so calls can be chained.
+func (x *NNCompare) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *NNCompare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondarySourceFeatureChannelMaxCount:"), secondarySourceFeatureChannelMaxCount)
 	return x
 }
 
-// @property   secondarySourceFeatureChannelOffset @abstract   The number of channels in the secondary source MPSImage to skip before reading the input. @discussion This is the starting offset into the secondary source image in the feature channel dimension at which source data is read. Unit: feature channels This allows an application to read a subset of all the channels in MPSImage as input of MPSKernel. E.g. Suppose MPSImage has 24 channels and a MPSKernel needs to read 8 channels. If we want channels 8 to 15 of this MPSImage to be used as input, we can set secondarySourceFeatureChannelOffset = 8. Note that this offset applies independently to each image when the MPSImage is a container for multiple images and the MPSCNNKernel is processing multiple images (clipRect.size.depth > 1). The default value is 0 and any value specifed shall be a multiple of 4. If MPSKernel inputs N channels, the source image MUST have at least primarySourceFeatureChannelOffset + N channels. Using a source image with insufficient number of feature channels will result in an error. E.g. if the MPSCNNConvolution inputs 32 channels, and the source has 64 channels, then it is an error to set primarySourceFeatureChannelOffset > 32.
+// The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
 //
-// WithSecondarySourceFeatureChannelOffset sets the secondarySourceFeatureChannelOffset property and returns the receiver for chaining.
-func (x *NNCompare) WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset)
+// WithPrimaryStrideInPixelsX sets primaryStrideInPixelsX and returns the receiver so calls can be chained.
+func (x *NNCompare) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNCompare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsX:"), primaryStrideInPixelsX)
 	return x
 }
 
-// @property   primarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the primary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image If the filter does not do up or downsampling, 1 is returned.
 //
-// WithPrimarySourceFeatureChannelMaxCount sets the primarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNCompare) WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount)
+// WithPrimaryStrideInPixelsY sets primaryStrideInPixelsY and returns the receiver so calls can be chained.
+func (x *NNCompare) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNCompare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrimaryStrideInPixelsY:"), primaryStrideInPixelsY)
 	return x
 }
 
-// @property   secondarySourceFeatureChannelMaxCount @abstract   The maximum number of channels in the secondary source MPSImage to use @discussion Most filters can insert a slice operation into the filter for free. Use this to limit the size of the feature channel slice taken from the input image. If the value is too large, it is truncated to be the remaining size in the image after the sourceFeatureChannelOffset is taken into account.  Default: ULONG_MAX
+// The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
 //
-// WithSecondarySourceFeatureChannelMaxCount sets the secondarySourceFeatureChannelMaxCount property and returns the receiver for chaining.
-func (x *NNCompare) WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount)
+// WithSecondaryStrideInPixelsX sets secondaryStrideInPixelsX and returns the receiver so calls can be chained.
+func (x *NNCompare) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNCompare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsX:"), secondaryStrideInPixelsX)
 	return x
 }
 
-// @property   primaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
+// The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image If the filter does not do up or downsampling, 1 is returned.
 //
-// WithPrimaryEdgeMode sets the primaryEdgeMode property and returns the receiver for chaining.
-func (x *NNCompare) WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryEdgeMode(primaryEdgeMode)
-	return x
-}
-
-// @property   secondaryEdgeMode @abstract   The MPSImageEdgeMode to use when texture reads stray off the edge of the primary source image @discussion Most MPSKernel objects can read off the edge of the source image. This can happen because of a negative offset property, because the offset + clipRect.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution filter.   Default:  MPSImageEdgeModeZero. See Also: @ref subsubsection_edgemode
-//
-// WithSecondaryEdgeMode sets the secondaryEdgeMode property and returns the receiver for chaining.
-func (x *NNCompare) WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryEdgeMode(secondaryEdgeMode)
-	return x
-}
-
-// @property   primaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsX sets the primaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *NNCompare) WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsX(primaryStrideInPixelsX)
-	return x
-}
-
-// @property   primaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the primary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithPrimaryStrideInPixelsY sets the primaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *NNCompare) WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPrimaryStrideInPixelsY(primaryStrideInPixelsY)
-	return x
-}
-
-// @property   secondaryStrideInPixelsX @abstract   The downsampling (or upsampling if a backwards filter) factor in the horizontal dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsX sets the secondaryStrideInPixelsX property and returns the receiver for chaining.
-func (x *NNCompare) WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsX(secondaryStrideInPixelsX)
-	return x
-}
-
-// @property   secondaryStrideInPixelsY @abstract   The downsampling (or upsampling if a backwards filter) factor in the vertical dimension for the secondary source image @discussion If the filter does not do up or downsampling, 1 is returned.
-//
-// WithSecondaryStrideInPixelsY sets the secondaryStrideInPixelsY property and returns the receiver for chaining.
-func (x *NNCompare) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetSecondaryStrideInPixelsY(secondaryStrideInPixelsY)
-	return x
-}
-
-// @property   padding @abstract   The padding method used by the filter @discussion This influences how strideInPixelsX/Y should be interpreted. Default:  MPSNNPaddingMethodAlignCentered | MPSNNPaddingMethodAddRemainderToTopLeft | MPSNNPaddingMethodSizeSame Some object types (e.g. MPSCNNFullyConnected) may override this default with something appropriate to its operation.
-//
-// WithPadding sets the padding property and returns the receiver for chaining.
-func (x *NNCompare) WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetPadding(padding)
-	return x
-}
-
-// @abstract   Method to allocate the result image for -encodeToCommandBuffer:sourceImage: @discussion Default: MPSTemporaryImage.defaultAllocator
-//
-// WithDestinationImageAllocator sets the destinationImageAllocator property and returns the receiver for chaining.
-func (x *NNCompare) WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.SetDestinationImageAllocator(destinationImageAllocator)
-	return x
-}
-
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *NNCompare) WithOptions(options mpscore.MPSKernelOptions) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel.SetOptions(options)
+// WithSecondaryStrideInPixelsY sets secondaryStrideInPixelsY and returns the receiver so calls can be chained.
+func (x *NNCompare) WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNCompare {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSecondaryStrideInPixelsY:"), secondaryStrideInPixelsY)
 	return x
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *NNCompare) WithLabel(label string) *NNCompare {
-	x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
-// @property   comparisonType @abstract   The comparison type to use
-//
-// ComparisonType calls the underlying ComparisonType.
-func (x *NNCompare) ComparisonType() mpsneuralnetwork.MPSNNComparisonType {
-	return x.inner.ComparisonType()
-}
-
-// SetComparisonType calls the underlying SetComparisonType.
-func (x *NNCompare) SetComparisonType(comparisonType mpsneuralnetwork.MPSNNComparisonType) {
-	x.inner.SetComparisonType(comparisonType)
-}
-
-// @property   threshold @abstract   The threshold to use when comparing for equality.  Two values will be considered to be equal if the absolute value of their difference is less than, or equal, to the specified threshold: result = |b - a| <= threshold
-//
-// Threshold calls the underlying Threshold.
+// The threshold to use when comparing for equality.  Two values will be considered to be equal if the absolute value of their difference is less than, or equal, to the specified threshold: result = |b - a| <= threshold
 func (x *NNCompare) Threshold() float32 {
-	return x.inner.Threshold()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("threshold"))
+	return _r
 }
 
-// SetThreshold calls the underlying SetThreshold.
 func (x *NNCompare) SetThreshold(threshold float32) {
-	x.inner.SetThreshold(threshold)
-}
-
-func (x *NNCompare) asCNNArithmetic() *mpsneuralnetwork.MPSCNNArithmetic {
-	return &x.inner.MPSCNNArithmetic
-}
-
-func (x *NNCompare) asCNNBinaryKernel() *mpsneuralnetwork.MPSCNNBinaryKernel {
-	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel
-}
-
-func (x *NNCompare) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSCNNArithmetic.MPSCNNBinaryKernel.MPSKernel
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setThreshold:"), threshold)
 }
 
 // NNCompareable is the interface implemented by [NNCompare], for mocking and DI.
 type NNCompareable interface {
-	Unwrap() *raw.MPSNNCompare
-	WithComparisonType(comparisonType mpsneuralnetwork.MPSNNComparisonType) *NNCompare
+	obj.Object
 	WithThreshold(threshold float32) *NNCompare
 	WithPrimaryScale(primaryScale float32) *NNCompare
 	WithSecondaryScale(secondaryScale float32) *NNCompare
 	WithBias(bias float32) *NNCompare
-	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels uint) *NNCompare
-	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels uint) *NNCompare
+	WithPrimaryStrideInFeatureChannels(primaryStrideInFeatureChannels int) *NNCompare
+	WithSecondaryStrideInFeatureChannels(secondaryStrideInFeatureChannels int) *NNCompare
 	WithMinimumValue(minimumValue float32) *NNCompare
 	WithMaximumValue(maximumValue float32) *NNCompare
-	WithPrimaryOffset(primaryOffset mpscore.MPSOffset) *NNCompare
-	WithSecondaryOffset(secondaryOffset mpscore.MPSOffset) *NNCompare
-	WithClipRect(clipRect metal.MTLRegion) *NNCompare
-	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset uint) *NNCompare
-	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset uint) *NNCompare
-	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset uint) *NNCompare
-	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount uint) *NNCompare
-	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount uint) *NNCompare
-	WithPrimaryEdgeMode(primaryEdgeMode mpscore.MPSImageEdgeMode) *NNCompare
-	WithSecondaryEdgeMode(secondaryEdgeMode mpscore.MPSImageEdgeMode) *NNCompare
-	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX uint) *NNCompare
-	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY uint) *NNCompare
-	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX uint) *NNCompare
-	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY uint) *NNCompare
-	WithPadding(padding mpsneuralnetwork.MPSNNPadding) *NNCompare
-	WithDestinationImageAllocator(destinationImageAllocator mpscore.MPSImageAllocator) *NNCompare
-	WithOptions(options mpscore.MPSKernelOptions) *NNCompare
+	WithDestinationFeatureChannelOffset(destinationFeatureChannelOffset int) *NNCompare
+	WithPrimarySourceFeatureChannelOffset(primarySourceFeatureChannelOffset int) *NNCompare
+	WithSecondarySourceFeatureChannelOffset(secondarySourceFeatureChannelOffset int) *NNCompare
+	WithPrimarySourceFeatureChannelMaxCount(primarySourceFeatureChannelMaxCount int) *NNCompare
+	WithSecondarySourceFeatureChannelMaxCount(secondarySourceFeatureChannelMaxCount int) *NNCompare
+	WithPrimaryStrideInPixelsX(primaryStrideInPixelsX int) *NNCompare
+	WithPrimaryStrideInPixelsY(primaryStrideInPixelsY int) *NNCompare
+	WithSecondaryStrideInPixelsX(secondaryStrideInPixelsX int) *NNCompare
+	WithSecondaryStrideInPixelsY(secondaryStrideInPixelsY int) *NNCompare
 	WithLabel(label string) *NNCompare
-	ComparisonType() mpsneuralnetwork.MPSNNComparisonType
-	SetComparisonType(comparisonType mpsneuralnetwork.MPSNNComparisonType)
 	Threshold() float32
 	SetThreshold(threshold float32)
 }

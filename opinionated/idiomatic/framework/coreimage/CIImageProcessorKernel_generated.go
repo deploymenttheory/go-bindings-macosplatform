@@ -5,41 +5,68 @@
 package coreimage
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The abstract class you extend to create custom image processors that can integrate with Core Image workflows.
 //
-// ImageProcessorKernel wraps [raw.CIImageProcessorKernel] with a fluent Go API.
+// ImageProcessorKernel is an idiomatic wrapper over the Objective-C class CIImageProcessorKernel.
 type ImageProcessorKernel struct {
-	inner *raw.CIImageProcessorKernel
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CIImageProcessorKernel].
-func (x *ImageProcessorKernel) Unwrap() *raw.CIImageProcessorKernel { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageProcessorKernel) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageProcessorKernelFromID adopts an existing object pointer as a ImageProcessorKernel (nil for 0).
+// ImageProcessorKernelFromID adopts an existing Objective-C object as a ImageProcessorKernel
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageProcessorKernelFromID(id objc.ID) *ImageProcessorKernel {
 	if id == 0 {
 		return nil
 	}
-	return &ImageProcessorKernel{inner: raw.CIImageProcessorKernelFromID(id)}
+	x := &ImageProcessorKernel{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewImageProcessorKernel creates a new [ImageProcessorKernel].
+// imageProcessorKernelAdopt wraps an Objective-C object that this code just created as a
+// ImageProcessorKernel (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageProcessorKernelAdopt(id objc.ID) *ImageProcessorKernel {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageProcessorKernel{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ImageProcessorKernel) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageProcessorKernel) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageProcessorKernel) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageProcessorKernel creates a new ImageProcessorKernel.
 func NewImageProcessorKernel() *ImageProcessorKernel {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CIImageProcessorKernel")), objc.RegisterName("new"))
-	return &ImageProcessorKernel{inner: raw.CIImageProcessorKernelFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CIImageProcessorKernel")), objc.RegisterName("new"))
+	return imageProcessorKernelAdopt(_id)
 }
 
 // ImageProcessorKernelable is the interface implemented by [ImageProcessorKernel], for mocking and DI.
 type ImageProcessorKernelable interface {
-	Unwrap() *raw.CIImageProcessorKernel
+	obj.Object
 }
 
 var _ ImageProcessorKernelable = (*ImageProcessorKernel)(nil)

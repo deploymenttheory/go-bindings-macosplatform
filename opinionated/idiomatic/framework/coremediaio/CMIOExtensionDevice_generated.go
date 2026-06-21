@@ -5,123 +5,133 @@
 package coremediaio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremediaio"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
 // An object that represents a physical or virtual device.
 //
-// ExtensionDevice wraps [raw.CMIOExtensionDevice] with a fluent Go API.
+// ExtensionDevice is an idiomatic wrapper over the Objective-C class CMIOExtensionDevice.
 type ExtensionDevice struct {
-	inner *raw.CMIOExtensionDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CMIOExtensionDevice].
-func (x *ExtensionDevice) Unwrap() *raw.CMIOExtensionDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ExtensionDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// ExtensionDeviceFromID adopts an existing object pointer as a ExtensionDevice (nil for 0).
+// ExtensionDeviceFromID adopts an existing Objective-C object as a ExtensionDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func ExtensionDeviceFromID(id objc.ID) *ExtensionDevice {
 	if id == 0 {
 		return nil
 	}
-	return &ExtensionDevice{inner: raw.CMIOExtensionDeviceFromID(id)}
+	x := &ExtensionDevice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates an extension device with an optional legacy device identifier.
-//
-// NewExtensionDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource creates a new [ExtensionDevice].
-func NewExtensionDeviceWithLocalizedNameDeviceIDLegacyDeviceIDSource(localizedName string, deviceID *foundation.NSUUID, legacyDeviceID string, source raw.CMIOExtensionDeviceSource) *ExtensionDevice {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("CMIOExtensionDevice")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLocalizedName:deviceID:legacyDeviceID:source:"), foundation.NSStringStringWithUTF8String(localizedName).Ptr(), deviceID.Ptr(), foundation.NSStringStringWithUTF8String(legacyDeviceID).Ptr(), source)
-	return &ExtensionDevice{inner: raw.CMIOExtensionDeviceFromID(_id)}
+// extensionDeviceAdopt wraps an Objective-C object that this code just created as a
+// ExtensionDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func extensionDeviceAdopt(id objc.ID) *ExtensionDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &ExtensionDevice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ExtensionDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ExtensionDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ExtensionDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewExtensionDevice creates a new ExtensionDevice.
+func NewExtensionDevice() *ExtensionDevice {
+	_id := objc.Send[objc.ID](objc.ID(_class("CMIOExtensionDevice")), objc.RegisterName("new"))
+	return extensionDeviceAdopt(_id)
 }
 
 // Adds a stream to a device.
-//
-// AddStreamError calls the underlying AddStreamError.
-func (x *ExtensionDevice) AddStreamError(stream *raw.CMIOExtensionStream) (bool, error) {
-	return x.inner.AddStreamError(stream)
+func (x *ExtensionDevice) AddStream(stream *ExtensionStream) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addStream:error:"), objref.IDOf(stream), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Removes a stream from the device.
-//
-// RemoveStreamError calls the underlying RemoveStreamError.
-func (x *ExtensionDevice) RemoveStreamError(stream *raw.CMIOExtensionStream) (bool, error) {
-	return x.inner.RemoveStreamError(stream)
+func (x *ExtensionDevice) RemoveStream(stream *ExtensionStream) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeStream:error:"), objref.IDOf(stream), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Notifies clients of property changes.
-//
-// NotifyPropertiesChanged calls the underlying NotifyPropertiesChanged.
-func (x *ExtensionDevice) NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.NotifyPropertiesChanged(propertyStates)
+func (x *ExtensionDevice) NotifyPropertiesChanged(propertyStates obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("notifyPropertiesChanged:"), objref.IDOf(propertyStates))
 }
 
-// @property localizedName @abstract The localized name of the device.
-//
-// LocalizedName calls the underlying LocalizedName.
+// The localized name of the device.
 func (x *ExtensionDevice) LocalizedName() string {
-	_r := x.inner.LocalizedName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("localizedName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property deviceID @abstract The device identifier as UUID.
-//
-// DeviceID calls the underlying DeviceID.
-func (x *ExtensionDevice) DeviceID() *foundation.NSUUID {
-	return x.inner.DeviceID()
+// The device identifier as UUID.
+func (x *ExtensionDevice) DeviceID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceID"))
+	return obj.Wrap(_r)
 }
 
-// @property legacyDeviceID @abstract The device identifier as a string (for backward compatibility with AVCaptureDevice.uniqueIdentifier)
-//
-// LegacyDeviceID calls the underlying LegacyDeviceID.
+// The device identifier as a string (for backward compatibility with AVCaptureDevice.uniqueIdentifier)
 func (x *ExtensionDevice) LegacyDeviceID() string {
-	_r := x.inner.LegacyDeviceID()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("legacyDeviceID"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property source @abstract The device source.
-//
-// Source calls the underlying Source.
-func (x *ExtensionDevice) Source() raw.CMIOExtensionDeviceSource {
-	return x.inner.Source()
-}
-
-// @property streams @abstract The streams array of the device. @discussion This property is not key-value observable.
+// The streams array of the device. This property is not key-value observable.
 //
 // Streams returns the collection as a Go slice.
 func (x *ExtensionDevice) Streams() []*ExtensionStream {
-	arr := x.inner.Streams()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ExtensionStream {
-		return &ExtensionStream{inner: raw.CMIOExtensionStreamFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("streams"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ExtensionStream { return ExtensionStreamFromID(_id) })
 }
 
 // ExtensionDeviceable is the interface implemented by [ExtensionDevice], for mocking and DI.
 type ExtensionDeviceable interface {
-	Unwrap() *raw.CMIOExtensionDevice
-	AddStreamError(stream *raw.CMIOExtensionStream) (bool, error)
-	RemoveStreamError(stream *raw.CMIOExtensionStream) (bool, error)
-	NotifyPropertiesChanged(propertyStates *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	obj.Object
+	AddStream(stream *ExtensionStream) error
+	RemoveStream(stream *ExtensionStream) error
+	NotifyPropertiesChanged(propertyStates obj.Object)
 	LocalizedName() string
-	DeviceID() *foundation.NSUUID
+	DeviceID() obj.Object
 	LegacyDeviceID() string
-	Source() raw.CMIOExtensionDeviceSource
 	Streams() []*ExtensionStream
 }
 

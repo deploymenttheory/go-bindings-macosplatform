@@ -5,248 +5,139 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
-// NDArray wraps [raw.MPSNDArray] with a fluent Go API.
+// NDArray is an idiomatic wrapper over the Objective-C class MPSNDArray.
 type NDArray struct {
-	inner *raw.MPSNDArray
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNDArray].
-func (x *NDArray) Unwrap() *raw.MPSNDArray { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NDArray) ID() objc.ID { return x.inner.Ptr() }
-
-// NDArrayFromID adopts an existing object pointer as a NDArray (nil for 0).
+// NDArrayFromID adopts an existing Objective-C object as a NDArray
+// (nil for 0), retaining it and registering a release finalizer.
 func NDArrayFromID(id objc.ID) *NDArray {
 	if id == 0 {
 		return nil
 	}
-	return &NDArray{inner: raw.MPSNDArrayFromID(id)}
-}
-
-// @abstract   Initialize an MPSNDArrayDescriptor object on a device for given dimension sizes in descriptor. @param      device          The device on which the data type will be created. @param      descriptor      The MPSNDArrayDescriptor used for initializing the the NDArray @return     A valid MPSNDArray object or nil, if failure.
-//
-// NewNDArrayWithDeviceDescriptor creates a new [NDArray].
-func NewNDArrayWithDeviceDescriptor(device metal.MTLDevice, descriptor *mpscore.MPSNDArrayDescriptor) *NDArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:descriptor:"), device, descriptor.Ptr())
-	return &NDArray{inner: raw.MPSNDArrayFromID(_id)}
-}
-
-// @abstract   Create a 1-Dimensional length=1 NDArray to hold a scalar
-//
-// NewNDArrayWithDeviceScalar creates a new [NDArray].
-func NewNDArrayWithDeviceScalar(device metal.MTLDevice, value float64) *NDArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:scalar:"), device, value)
-	return &NDArray{inner: raw.MPSNDArrayFromID(_id)}
-}
-
-// NewNDArrayWithBufferOffsetDescriptor creates a new [NDArray].
-func NewNDArrayWithBufferOffsetDescriptor(buffer metal.MTLBuffer, offset uint, descriptor *mpscore.MPSNDArrayDescriptor) *NDArray {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNDArray")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithBuffer:offset:descriptor:"), buffer, offset, descriptor.Ptr())
-	return &NDArray{inner: raw.MPSNDArrayFromID(_id)}
-}
-
-// @abstract   A used specified string to help identify the array during debugging. @discussion May be externally visible to tools like Instruments
-//
-// WithLabel sets the label property and returns the receiver for chaining.
-func (x *NDArray) WithLabel(label string) *NDArray {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	x := &NDArray{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @abstract    The number of elements in the dimension at dimensionIndex @discussion     The dimension length is at least as large as the existing slice length.  Views of this MPSNDArray may have differing dimension lengths.
-//
-// LengthOfDimension calls the underlying LengthOfDimension.
-func (x *NDArray) LengthOfDimension(dimensionIndex uint) uint {
-	return x.inner.LengthOfDimension(dimensionIndex)
+// nDArrayAdopt wraps an Objective-C object that this code just created as a
+// NDArray (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nDArrayAdopt(id objc.ID) *NDArray {
+	if id == 0 {
+		return nil
+	}
+	x := &NDArray{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @abstract  Create a MPSNDArrayDescriptor that describes this MPSNDArray @discussion The descriptor will describe the shape of the MPSNDArray after all deferred slicing and transposes have completed. A new descriptor is created each time to allow for further customization of the descriptor by the application. @return     A new autoreleased MPSNDArrayDescriptor that matches the shape of the MPSNDArray, suitable for introduction of slice, cast and transpose operations.
-//
-// Descriptor calls the underlying Descriptor.
-func (x *NDArray) Descriptor() *mpscore.MPSNDArrayDescriptor {
-	return x.inner.Descriptor()
+// Description returns the object's -description text.
+func (x *NDArray) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @abstract   Returns the user buffer in case the NDArray was initialized with an MTLBuffer. @return    The user-provided MTLBuffer that was used to initialize this MPSNDArray or nil, in case it was not..
-//
-// UserBuffer calls the underlying UserBuffer.
-func (x *NDArray) UserBuffer() metal.MTLBuffer {
-	return x.inner.UserBuffer()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NDArray) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// @abstract       Get the number of bytes used to allocate underyling MTLResources @discussion     This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSNDArray instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the MPSNDArray data in the MTLBuffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSNDArrays are allocated initiallly without a backing store. The backing store is allocated lazily when it is needed, typically when the MPSNDArray is written to the first time. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large.
-//
-// ResourceSize calls the underlying ResourceSize.
-func (x *NDArray) ResourceSize() uint {
-	return x.inner.ResourceSize()
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NDArray) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
-// @abstract   Make a new representation of a MPSNDArray with a slice, transpose or other change in property @discussion If possible, the views will merely record the slice or transpose without performing the operation. Many MPSKernels are able to operate on subregions of a MPSNDArray or operate on transposed data, so making a new copy of the data for these operations would be wasteful.  A copy may be forced by a change in dataType, rowBytes, or when using a view with a MPSKernel that does not support the deferred operation. To force an operation to occur immediately, use MPSAliasingStrategyShallNotAlias Otherwise, it is likely that the new MPSNDArray will share a MTLBuffer with the parent and alias its memory. @param      cmdBuf      The command buffer on which to perform physical copies if any are required @param      descriptor  A MPSNDArrayDescriptor describing the shape of the new view of the data @param      aliasing    A aliasing strategy to direct MPS how to respond to cases when aliasing can or can not be performed. @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased.
-//
-// ArrayViewWithCommandBufferDescriptorAliasing calls the underlying ArrayViewWithCommandBufferDescriptorAliasing.
-func (x *NDArray) ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf metal.MTLCommandBuffer, descriptor *mpscore.MPSNDArrayDescriptor, aliasing mpscore.MPSAliasingStrategy) *mpscore.MPSNDArray {
-	return x.inner.ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf, descriptor, aliasing)
+// NewNDArray creates a new NDArray.
+func NewNDArray() *NDArray {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNDArray")), objc.RegisterName("new"))
+	return nDArrayAdopt(_id)
 }
 
-// @abstract   Make a new representation of a MPSNDArray with a slice, transpose or other change in property, trying to alias to result. @discussion The same as `arrayViewWithCommandBuffer`, except that tries to always alias, and therefore does not require a commanbuffer. If aliasing is not possible nil is returned. This method is useful in making aliasing transposes and slices, that are guaranteed to be able to alias. For reshapes it is recommended to use the `MPSNDArrayIdentity` methods. @param      descriptor  A MPSNDArrayDescriptor describing the shape of the new view of the data @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased.
+// A used specified string to help identify the array during debugging. May be externally visible to tools like Instruments
 //
-// ArrayViewWithDescriptor calls the underlying ArrayViewWithDescriptor.
-func (x *NDArray) ArrayViewWithDescriptor(descriptor *mpscore.MPSNDArrayDescriptor) *mpscore.MPSNDArray {
-	return x.inner.ArrayViewWithDescriptor(descriptor)
+// WithLabel sets label and returns the receiver so calls can be chained.
+func (x *NDArray) WithLabel(label string) *NDArray {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
+	return x
 }
 
-// @abstract   Make a new representation of a MPSNDArray with given strides and a new shape. @discussion This operation always returns a new view of the same underlying MTLBuffer, but works only with contiguous buffers. @param      shape             The new shape for the NDArray. Fastest running dimension last. If nil then current shape is used. @param      strides           The strides for each dimension. Must be at least length of new shape. Last number must be one. Must be non-increasing. @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased.
-//
-// ArrayViewWithShapeStrides calls the underlying ArrayViewWithShapeStrides.
-func (x *NDArray) ArrayViewWithShapeStrides(shape unsafe.Pointer, strides unsafe.Pointer) *mpscore.MPSNDArray {
-	return x.inner.ArrayViewWithShapeStrides(shape, strides)
+// The number of elements in the dimension at dimensionIndex The dimension length is at least as large as the existing slice length.  Views of this MPSNDArray may have differing dimension lengths.
+func (x *NDArray) LengthOfDimension(dimensionIndex int) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("lengthOfDimension:"), dimensionIndex)
+	return _r
 }
 
-// @abstract   Make a new representation of a MPSNDArray with given strides and a new shape. @discussion This operation always returns a new view of the same underlying MTLBuffer, but works only with contiguous buffers. @param      numberOfDimensions          Number of dimensions in the new view. @param      dimensionSizes              Size of each new dimension. Fastest running dimension first. Must be of length numberOfDimensions. @param      dimStrides                  The strides for each dimension. First number must be one. Must be non-decreasing.  Must be of length numberOfDimensions. @return     A new MPSNDArray, if it is possible to make one. Otherwise nil is returned. The MPSNDArray is autoreleased.
-//
-// ArrayViewWithDimensionCountDimensionSizesStrides calls the underlying ArrayViewWithDimensionCountDimensionSizesStrides.
-func (x *NDArray) ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions uint, dimensionSizes *uint, dimStrides *uint) *mpscore.MPSNDArray {
-	return x.inner.ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions, dimensionSizes, dimStrides)
+// Create a MPSNDArrayDescriptor that describes this MPSNDArray The descriptor will describe the shape of the MPSNDArray after all deferred slicing and transposes have completed. A new descriptor is created each time to allow for further customization of the descriptor by the application.
+func (x *NDArray) Descriptor() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+	return obj.Wrap(_r)
 }
 
-// @abstract   Do a GPU side copy of the contents of a MPSNDArray to a MTLBuffer @discussion To do a transpose or slice as part of the operation, make a MPSNDArray view first that encodes that operation. @param      cmdBuf      The command buffer on which to encode the operation @param      buffer      The destination to overwrite @param      destinationDataType The destination data type. @param      offset      The byte offset to where the {0,0,0...}th element will be written @param      rowStrides  An optional array of (numberOfDimensions-1) byte counts which describe the byte offset from position 0 of the respective dimension to position 1.
-//
-// ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides calls the underlying ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides.
-func (x *NDArray) ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, destinationDataType mpscore.MPSDataType, offset uint, rowStrides *int64) {
-	x.inner.ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides(cmdBuf, buffer, destinationDataType, offset, rowStrides)
+// Get the number of bytes used to allocate underyling MTLResources This is the size of the backing store of underlying MTLResources. It does not include all storage used by the object, for example the storage used to hold the MPSNDArray instantiation and MTLBuffer is not included. It only measures the size of the allocation used to hold the MPSNDArray data in the MTLBuffer. This value is subject to change between different devices and operating systems. Except when -initWithBuffer:descriptor: is used, most MPSNDArrays are allocated initiallly without a backing store. The backing store is allocated lazily when it is needed, typically when the MPSNDArray is written to the first time. Consequently, in most cases, it should be inexpensive to make a MPSImage to see how much memory it will need, and release it if it is too large.
+func (x *NDArray) ResourceSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("resourceSize"))
+	return _r
 }
 
-// @abstract   Do a GPU side copy of the contents of a MTLBuffer into a MPSNDArray @discussion Copy data from provided buffer to the NDArray. Implicit transposes and slicing shall be honored. @param      cmdBuf      The command buffer on which to encode the operation @param      buffer      The destination to read from @param      sourceDataType  The source data type. @param      offset      The byte offset in the buffer from where the {0,0,0...}th element is to be read. @param      rowStrides  An optional array of (numberOfDimensions-1) byte counts which describe the byte offset from position 0 of the respective dimension to position 1.
-//
-// ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides calls the underlying ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides.
-func (x *NDArray) ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, sourceDataType mpscore.MPSDataType, offset uint, rowStrides *int64) {
-	x.inner.ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides(cmdBuf, buffer, sourceDataType, offset, rowStrides)
+// Make a new representation of a MPSNDArray with a slice, transpose or other change in property, trying to alias to result. The same as `arrayViewWithCommandBuffer`, except that tries to always alias, and therefore does not require a commanbuffer. If aliasing is not possible nil is returned. This method is useful in making aliasing transposes and slices, that are guaranteed to be able to alias. For reshapes it is recommended to use the `MPSNDArrayIdentity` methods.
+func (x *NDArray) ArrayViewWithDescriptor(descriptor obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("arrayViewWithDescriptor:"), objref.IDOf(descriptor))
+	return obj.Wrap(_r)
 }
 
-// ExportDataWithCommandBufferToImagesOffset calls the underlying ExportDataWithCommandBufferToImagesOffset.
-func (x *NDArray) ExportDataWithCommandBufferToImagesOffset(cmdBuf metal.MTLCommandBuffer, images unsafe.Pointer, offset mpscore.MPSImageCoordinate) {
-	x.inner.ExportDataWithCommandBufferToImagesOffset(cmdBuf, images, offset)
-}
-
-// @abstract   Do a GPU side copy of the contents of a MPSImageBatch into a MPSNDArray. @discussion This reverses exportDataWithCommandBuffer:toImages: function. @param      cmdBuf      The command buffer on which to encode the operation. @param      images      The source images. NOTE: you can use [images subarrayWithRange:...] to get a sub-batch of images. @param      offset      The offset to the image where to read - the size of the operation is defined by the destination array.
-//
-// ImportDataWithCommandBufferFromImagesOffset calls the underlying ImportDataWithCommandBufferFromImagesOffset.
-func (x *NDArray) ImportDataWithCommandBufferFromImagesOffset(cmdBuf metal.MTLCommandBuffer, images unsafe.Pointer, offset mpscore.MPSImageCoordinate) {
-	x.inner.ImportDataWithCommandBufferFromImagesOffset(cmdBuf, images, offset)
-}
-
-// @abstract       Copy bytes from MPSNDArray into buffer @discussion     The dimensionality and size of the copy region is given by the size of the MPSNDArray For subregions, use a MPSNDArray view. @param          buffer                  A pointer to memory where to write the data @param          strideBytesPerDimension An optional array of numberOfDimensions sizes, which gives the distance in bytes from one element to the next in that dimension in buffer. The first value is typically dataTypeSize. The next is a row bytes. The next is 2d matrix bytes, and so forth.  If the value is nil, these are calculated for you assuming that the data is packed without additional space in between elements, rows, etc. 0 and negative values are permitted.
-//
-// ReadBytesStrideBytes calls the underlying ReadBytesStrideBytes.
-func (x *NDArray) ReadBytesStrideBytes(buffer unsafe.Pointer, strideBytesPerDimension *int64) {
-	x.inner.ReadBytesStrideBytes(buffer, strideBytesPerDimension)
-}
-
-// @abstract       Copy bytes from a buffer into the MPSNDArray @discussion     The dimensionality and size of the copy region is given by the size of the MPSNDArray For subregions, use a MPSNDArray view. @param          buffer                  A pointer to memory where to read the data @param          strideBytesPerDimension An optional array of numberOfDimensions sizes, which gives the distance in bytes from one element to the next in that dimension in buffer. The first value is typically dataTypeSize. The next is a row bytes. The next is 2d matrix bytes, and so forth.  If strideBytesPerDimension is nil, these are calculated for you assuming that the data is packed without additional space in between elements, rows, etc. 0 and negative values are permitted.
-//
-// WriteBytesStrideBytes calls the underlying WriteBytesStrideBytes.
-func (x *NDArray) WriteBytesStrideBytes(buffer unsafe.Pointer, strideBytesPerDimension *int64) {
-	x.inner.WriteBytesStrideBytes(buffer, strideBytesPerDimension)
-}
-
-// @abstract   Use a blit encoder if a discrete device to update CPU contents of underlying buffer with latest GPU value @param      commandBuffer     The commandBuffer on which we transfer the contents.
-//
-// SynchronizeOnCommandBuffer calls the underlying SynchronizeOnCommandBuffer.
-func (x *NDArray) SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer) {
-	x.inner.SynchronizeOnCommandBuffer(commandBuffer)
-}
-
-// @abstract   A used specified string to help identify the array during debugging. @discussion May be externally visible to tools like Instruments
-//
-// Label calls the underlying Label.
+// A used specified string to help identify the array during debugging. May be externally visible to tools like Instruments
 func (x *NDArray) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetLabel calls the underlying SetLabel.
 func (x *NDArray) SetLabel(label string) {
-	x.inner.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 }
 
-// @abstract  The type of data stored by each element in the array
-//
-// DataType calls the underlying DataType.
-func (x *NDArray) DataType() mpscore.MPSDataType {
-	return x.inner.DataType()
+// The size of one element in the MPSNDArray
+func (x *NDArray) DataTypeSize() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("dataTypeSize"))
+	return _r
 }
 
-// @abstract  The size of one element in the MPSNDArray
-//
-// DataTypeSize calls the underlying DataTypeSize.
-func (x *NDArray) DataTypeSize() uint {
-	return x.inner.DataTypeSize()
+// Number of dimensions in the NDArray
+func (x *NDArray) NumberOfDimensions() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("numberOfDimensions"))
+	return _r
 }
 
-// @abstract  Number of dimensions in the NDArray
-//
-// NumberOfDimensions calls the underlying NumberOfDimensions.
-func (x *NDArray) NumberOfDimensions() uint {
-	return x.inner.NumberOfDimensions()
-}
-
-// @property device @abstract The device on which the MSPNDArray may be used
-//
-// Device calls the underlying Device.
-func (x *NDArray) Device() metal.MTLDevice {
-	return x.inner.Device()
-}
-
-// @abstract   The parent MPSNDArray that this object aliases @discussion If the MPSNDArray was createrd as a array view of another MPSNDArray object, and aliases content in the same MTLBuffer, the original MPSNDArray will be retained as the parent here. Two MPSNDArrays alias if they share a common ancestor. Note that the parent may itself have a parent, and so forth.
-//
-// Parent calls the underlying Parent.
-func (x *NDArray) Parent() *mpscore.MPSNDArray {
-	return x.inner.Parent()
+// The parent MPSNDArray that this object aliases If the MPSNDArray was createrd as a array view of another MPSNDArray object, and aliases content in the same MTLBuffer, the original MPSNDArray will be retained as the parent here. Two MPSNDArrays alias if they share a common ancestor. Note that the parent may itself have a parent, and so forth.
+func (x *NDArray) Parent() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parent"))
+	return obj.Wrap(_r)
 }
 
 // NDArrayable is the interface implemented by [NDArray], for mocking and DI.
 type NDArrayable interface {
-	Unwrap() *raw.MPSNDArray
+	obj.Object
 	WithLabel(label string) *NDArray
-	LengthOfDimension(dimensionIndex uint) uint
-	Descriptor() *mpscore.MPSNDArrayDescriptor
-	UserBuffer() metal.MTLBuffer
-	ResourceSize() uint
-	ArrayViewWithCommandBufferDescriptorAliasing(cmdBuf metal.MTLCommandBuffer, descriptor *mpscore.MPSNDArrayDescriptor, aliasing mpscore.MPSAliasingStrategy) *mpscore.MPSNDArray
-	ArrayViewWithDescriptor(descriptor *mpscore.MPSNDArrayDescriptor) *mpscore.MPSNDArray
-	ArrayViewWithShapeStrides(shape unsafe.Pointer, strides unsafe.Pointer) *mpscore.MPSNDArray
-	ArrayViewWithDimensionCountDimensionSizesStrides(numberOfDimensions uint, dimensionSizes *uint, dimStrides *uint) *mpscore.MPSNDArray
-	ExportDataWithCommandBufferToBufferDestinationDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, destinationDataType mpscore.MPSDataType, offset uint, rowStrides *int64)
-	ImportDataWithCommandBufferFromBufferSourceDataTypeOffsetRowStrides(cmdBuf metal.MTLCommandBuffer, buffer metal.MTLBuffer, sourceDataType mpscore.MPSDataType, offset uint, rowStrides *int64)
-	ExportDataWithCommandBufferToImagesOffset(cmdBuf metal.MTLCommandBuffer, images unsafe.Pointer, offset mpscore.MPSImageCoordinate)
-	ImportDataWithCommandBufferFromImagesOffset(cmdBuf metal.MTLCommandBuffer, images unsafe.Pointer, offset mpscore.MPSImageCoordinate)
-	ReadBytesStrideBytes(buffer unsafe.Pointer, strideBytesPerDimension *int64)
-	WriteBytesStrideBytes(buffer unsafe.Pointer, strideBytesPerDimension *int64)
-	SynchronizeOnCommandBuffer(commandBuffer metal.MTLCommandBuffer)
+	LengthOfDimension(dimensionIndex int) int
+	Descriptor() obj.Object
+	ResourceSize() int
+	ArrayViewWithDescriptor(descriptor obj.Object) obj.Object
 	Label() string
 	SetLabel(label string)
-	DataType() mpscore.MPSDataType
-	DataTypeSize() uint
-	NumberOfDimensions() uint
-	Device() metal.MTLDevice
-	Parent() *mpscore.MPSNDArray
+	DataTypeSize() int
+	NumberOfDimensions() int
+	Parent() obj.Object
 }
 
 var _ NDArrayable = (*NDArray)(nil)

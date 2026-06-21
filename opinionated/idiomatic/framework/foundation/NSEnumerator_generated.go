@@ -5,66 +5,88 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An abstract class whose subclasses enumerate collections of objects, such as arrays and dictionaries.
 //
-// Enumerator wraps [raw.NSEnumerator] with a fluent Go API.
+// Enumerator is an idiomatic wrapper over the Objective-C class NSEnumerator.
 type Enumerator struct {
-	inner *raw.NSEnumerator[objc.ID]
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSEnumerator].
-func (x *Enumerator) Unwrap() *raw.NSEnumerator[objc.ID] { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Enumerator) ID() objc.ID { return x.inner.Ptr() }
-
-// EnumeratorFromID adopts an existing object pointer as a Enumerator (nil for 0).
+// EnumeratorFromID adopts an existing Objective-C object as a Enumerator
+// (nil for 0), retaining it and registering a release finalizer.
 func EnumeratorFromID(id objc.ID) *Enumerator {
 	if id == 0 {
 		return nil
 	}
-	return &Enumerator{inner: raw.NSEnumeratorFromID[objc.ID](id)}
+	x := &Enumerator{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEnumerator creates a new [Enumerator].
+// enumeratorAdopt wraps an Objective-C object that this code just created as a
+// Enumerator (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func enumeratorAdopt(id objc.ID) *Enumerator {
+	if id == 0 {
+		return nil
+	}
+	x := &Enumerator{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Enumerator) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Enumerator) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Enumerator) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEnumerator creates a new Enumerator.
 func NewEnumerator() *Enumerator {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSEnumerator")), objc.RegisterName("new"))
-	return &Enumerator{inner: raw.NSEnumeratorFromID[objc.ID](_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSEnumerator")), objc.RegisterName("new"))
+	return enumeratorAdopt(_id)
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *Enumerator) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Enumerator {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *Enumerator) WithScriptingProperties(scriptingProperties obj.Object) *Enumerator {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Returns the next object from the collection being enumerated.
-//
-// NextObject calls the underlying NextObject.
-func (x *Enumerator) NextObject() objc.ID {
-	return x.inner.NextObject()
+func (x *Enumerator) NextObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nextObject"))
+	return obj.Wrap(_r)
 }
 
-// AllObjects calls the underlying AllObjects.
-func (x *Enumerator) AllObjects() *raw.NSArray[objc.ID] {
-	return x.inner.AllObjects()
+func (x *Enumerator) AllObjects() []obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("allObjects"))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }
-
-func (x *Enumerator) asEnumerator() *raw.NSEnumerator[objc.ID] { return x.inner }
-
-func (x *Enumerator) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // Enumeratorable is the interface implemented by [Enumerator], for mocking and DI.
 type Enumeratorable interface {
-	Unwrap() *raw.NSEnumerator[objc.ID]
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *Enumerator
-	NextObject() objc.ID
-	AllObjects() *raw.NSArray[objc.ID]
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *Enumerator
+	NextObject() obj.Object
+	AllObjects() []obj.Object
 }
 
 var _ Enumeratorable = (*Enumerator)(nil)

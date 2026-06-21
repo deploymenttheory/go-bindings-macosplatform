@@ -5,497 +5,558 @@
 package coremidi
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremidi"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	ebipurego "github.com/ebitengine/purego"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MIDIBluetoothDriverActivateAllConnections wraps [raw.MIDIBluetoothDriverActivateAllConnections], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+var _fnMIDIBluetoothDriverActivateAllConnections func() int32
+
+// MIDIBluetoothDriverActivateAllConnections reports an error if the CoreMIDI framework function MIDIBluetoothDriverActivateAllConnections fails.
 func MIDIBluetoothDriverActivateAllConnections() error {
-	if _err := purego.NewOSStatus(raw.MIDIBluetoothDriverActivateAllConnections()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIBluetoothDriverActivateAllConnections == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIBluetoothDriverActivateAllConnections, _lib, "MIDIBluetoothDriverActivateAllConnections")
+	}
+	_rc := _fnMIDIBluetoothDriverActivateAllConnections()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIBluetoothDriverDisconnect wraps [raw.MIDIBluetoothDriverDisconnect], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIBluetoothDriverDisconnect(uuid objc.ID) error {
-	if _err := purego.NewOSStatus(raw.MIDIBluetoothDriverDisconnect(purego.CFRef(uuid))).Err(); _err != nil {
+var _fnMIDIBluetoothDriverDisconnect func(objc.ID) int32
+
+// MIDIBluetoothDriverDisconnect reports an error if the CoreMIDI framework function MIDIBluetoothDriverDisconnect fails.
+func MIDIBluetoothDriverDisconnect(uuid obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIBluetoothDriverDisconnect == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIBluetoothDriverDisconnect, _lib, "MIDIBluetoothDriverDisconnect")
+	}
+	_rc := _fnMIDIBluetoothDriverDisconnect(objref.IDOf(uuid))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIClientDispose wraps [raw.MIDIClientDispose], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIClientDispose(client uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIClientDispose(client)).Err(); _err != nil {
+var _fnMIDIClientDispose func(int) int32
+
+// MIDIClientDispose reports an error if the CoreMIDI framework function MIDIClientDispose fails.
+func MIDIClientDispose(client int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIClientDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIClientDispose, _lib, "MIDIClientDispose")
+	}
+	_rc := _fnMIDIClientDispose(client)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIDeviceAddEntity wraps [raw.MIDIDeviceAddEntity], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIDeviceAddEntity(device uint, name objc.ID, embedded uint8, numSourceEndpoints uint, numDestinationEndpoints uint, newEntity *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIDeviceAddEntity(device, purego.CFRef(name), embedded, numSourceEndpoints, numDestinationEndpoints, newEntity)).Err(); _err != nil {
+var _fnMIDIDeviceDispose func(int) int32
+
+// MIDIDeviceDispose reports an error if the CoreMIDI framework function MIDIDeviceDispose fails.
+func MIDIDeviceDispose(device int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIDeviceDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIDeviceDispose, _lib, "MIDIDeviceDispose")
+	}
+	_rc := _fnMIDIDeviceDispose(device)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIDeviceCreate wraps [raw.MIDIDeviceCreate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIDeviceCreate(owner *raw.MIDIDriverInterface, name objc.ID, manufacturer objc.ID, model objc.ID, outDevice *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIDeviceCreate(owner, purego.CFRef(name), purego.CFRef(manufacturer), purego.CFRef(model), outDevice)).Err(); _err != nil {
+var _fnMIDIDeviceListAddDevice func(int, int) int32
+
+// MIDIDeviceListAddDevice reports an error if the CoreMIDI framework function MIDIDeviceListAddDevice fails.
+func MIDIDeviceListAddDevice(devList int, dev int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIDeviceListAddDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIDeviceListAddDevice, _lib, "MIDIDeviceListAddDevice")
+	}
+	_rc := _fnMIDIDeviceListAddDevice(devList, dev)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIDeviceDispose wraps [raw.MIDIDeviceDispose], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIDeviceDispose(device uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIDeviceDispose(device)).Err(); _err != nil {
+var _fnMIDIDeviceListDispose func(int) int32
+
+// MIDIDeviceListDispose reports an error if the CoreMIDI framework function MIDIDeviceListDispose fails.
+func MIDIDeviceListDispose(devList int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIDeviceListDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIDeviceListDispose, _lib, "MIDIDeviceListDispose")
+	}
+	_rc := _fnMIDIDeviceListDispose(devList)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIDeviceListAddDevice wraps [raw.MIDIDeviceListAddDevice], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIDeviceListAddDevice(devList uint, dev uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIDeviceListAddDevice(devList, dev)).Err(); _err != nil {
+var _fnMIDIDeviceRemoveEntity func(int, int) int32
+
+// MIDIDeviceRemoveEntity reports an error if the CoreMIDI framework function MIDIDeviceRemoveEntity fails.
+func MIDIDeviceRemoveEntity(device int, entity int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIDeviceRemoveEntity == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIDeviceRemoveEntity, _lib, "MIDIDeviceRemoveEntity")
+	}
+	_rc := _fnMIDIDeviceRemoveEntity(device, entity)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIDeviceListDispose wraps [raw.MIDIDeviceListDispose], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIDeviceListDispose(devList uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIDeviceListDispose(devList)).Err(); _err != nil {
+var _fnMIDIEndpointDispose func(int) int32
+
+// MIDIEndpointDispose reports an error if the CoreMIDI framework function MIDIEndpointDispose fails.
+func MIDIEndpointDispose(endpt int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIEndpointDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIEndpointDispose, _lib, "MIDIEndpointDispose")
+	}
+	_rc := _fnMIDIEndpointDispose(endpt)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIDeviceNewEntity wraps [raw.MIDIDeviceNewEntity], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIDeviceNewEntity(device uint, name objc.ID, protocol MIDIProtocolID, embedded uint8, numSourceEndpoints uint, numDestinationEndpoints uint, newEntity *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIDeviceNewEntity(device, purego.CFRef(name), raw.MIDIProtocolID(protocol), embedded, numSourceEndpoints, numDestinationEndpoints, newEntity)).Err(); _err != nil {
+var _fnMIDIEntityAddOrRemoveEndpoints func(int, int, int) int32
+
+// MIDIEntityAddOrRemoveEndpoints reports an error if the CoreMIDI framework function MIDIEntityAddOrRemoveEndpoints fails.
+func MIDIEntityAddOrRemoveEndpoints(entity int, numSourceEndpoints int, numDestinationEndpoints int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIEntityAddOrRemoveEndpoints == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIEntityAddOrRemoveEndpoints, _lib, "MIDIEntityAddOrRemoveEndpoints")
+	}
+	_rc := _fnMIDIEntityAddOrRemoveEndpoints(entity, numSourceEndpoints, numDestinationEndpoints)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIDeviceRemoveEntity wraps [raw.MIDIDeviceRemoveEntity], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIDeviceRemoveEntity(device uint, entity uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIDeviceRemoveEntity(device, entity)).Err(); _err != nil {
+var _fnMIDIFlushOutput func(int) int32
+
+// MIDIFlushOutput reports an error if the CoreMIDI framework function MIDIFlushOutput fails.
+func MIDIFlushOutput(dest int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIFlushOutput == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIFlushOutput, _lib, "MIDIFlushOutput")
+	}
+	_rc := _fnMIDIFlushOutput(dest)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIDriverEnableMonitoring wraps [raw.MIDIDriverEnableMonitoring], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIDriverEnableMonitoring(driver *raw.MIDIDriverInterface, enabled uint8) error {
-	if _err := purego.NewOSStatus(raw.MIDIDriverEnableMonitoring(driver, enabled)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMIDIGetSerialPortDrivers func(unsafe.Pointer) int32
 
-// MIDIEndpointDispose wraps [raw.MIDIEndpointDispose], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIEndpointDispose(endpt uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIEndpointDispose(endpt)).Err(); _err != nil {
-		return _err
+// MIDIGetSerialPortDrivers reports an error if the CoreMIDI framework function MIDIGetSerialPortDrivers fails.
+func MIDIGetSerialPortDrivers() (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIGetSerialPortDrivers == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIGetSerialPortDrivers, _lib, "MIDIGetSerialPortDrivers")
 	}
-	return nil
-}
-
-// MIDIEndpointGetEntity wraps [raw.MIDIEndpointGetEntity], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIEndpointGetEntity(inEndpoint uint, outEntity *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIEndpointGetEntity(inEndpoint, outEntity)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// MIDIEntityAddOrRemoveEndpoints wraps [raw.MIDIEntityAddOrRemoveEndpoints], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIEntityAddOrRemoveEndpoints(entity uint, numSourceEndpoints uint, numDestinationEndpoints uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIEntityAddOrRemoveEndpoints(entity, numSourceEndpoints, numDestinationEndpoints)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// MIDIEntityGetDevice wraps [raw.MIDIEntityGetDevice], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIEntityGetDevice(inEntity uint, outDevice *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIEntityGetDevice(inEntity, outDevice)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// MIDIEventPacketSysexBytesForGroup wraps [raw.MIDIEventPacketSysexBytesForGroup], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIEventPacketSysexBytesForGroup(pkt *raw.MIDIEventPacket, groupIndex uint8) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.MIDIEventPacketSysexBytesForGroup(pkt, groupIndex, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnMIDIGetSerialPortDrivers(unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// MIDIExternalDeviceCreate wraps [raw.MIDIExternalDeviceCreate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIExternalDeviceCreate(name objc.ID, manufacturer objc.ID, model objc.ID, outDevice *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIExternalDeviceCreate(purego.CFRef(name), purego.CFRef(manufacturer), purego.CFRef(model), outDevice)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMIDIGetSerialPortOwner func(objc.ID, unsafe.Pointer) int32
 
-// MIDIFlushOutput wraps [raw.MIDIFlushOutput], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIFlushOutput(dest uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIFlushOutput(dest)).Err(); _err != nil {
-		return _err
+// MIDIGetSerialPortOwner reports an error if the CoreMIDI framework function MIDIGetSerialPortOwner fails.
+func MIDIGetSerialPortOwner(portName obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIGetSerialPortOwner == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIGetSerialPortOwner, _lib, "MIDIGetSerialPortOwner")
 	}
-	return nil
-}
-
-// MIDIGetSerialPortDrivers wraps [raw.MIDIGetSerialPortDrivers], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIGetSerialPortDrivers() (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.MIDIGetSerialPortDrivers(unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnMIDIGetSerialPortOwner(objref.IDOf(portName), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// MIDIGetSerialPortOwner wraps [raw.MIDIGetSerialPortOwner], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIGetSerialPortOwner(portName objc.ID) (objc.ID, error) {
+var _fnMIDIObjectGetDataProperty func(int, objc.ID, unsafe.Pointer) int32
+
+// MIDIObjectGetDataProperty reports an error if the CoreMIDI framework function MIDIObjectGetDataProperty fails.
+func MIDIObjectGetDataProperty(obj_ int, propertyID obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIObjectGetDataProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetDataProperty, _lib, "MIDIObjectGetDataProperty")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.MIDIGetSerialPortOwner(purego.CFRef(portName), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnMIDIObjectGetDataProperty(obj_, objref.IDOf(propertyID), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// MIDIObjectFindByUniqueID wraps [raw.MIDIObjectFindByUniqueID], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIObjectFindByUniqueID(inUniqueID int, outObject *uint, outObjectType *raw.MIDIObjectType) error {
-	if _err := purego.NewOSStatus(raw.MIDIObjectFindByUniqueID(inUniqueID, outObject, outObjectType)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMIDIObjectGetDictionaryProperty func(int, objc.ID, unsafe.Pointer) int32
 
-// MIDIObjectGetDataProperty wraps [raw.MIDIObjectGetDataProperty], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIObjectGetDataProperty(obj uint, propertyID objc.ID) (objc.ID, error) {
+// MIDIObjectGetDictionaryProperty reports an error if the CoreMIDI framework function MIDIObjectGetDictionaryProperty fails.
+func MIDIObjectGetDictionaryProperty(obj_ int, propertyID obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIObjectGetDictionaryProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetDictionaryProperty, _lib, "MIDIObjectGetDictionaryProperty")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.MIDIObjectGetDataProperty(obj, purego.CFRef(propertyID), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnMIDIObjectGetDictionaryProperty(obj_, objref.IDOf(propertyID), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// MIDIObjectGetDictionaryProperty wraps [raw.MIDIObjectGetDictionaryProperty], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIObjectGetDictionaryProperty(obj uint, propertyID objc.ID) (objc.ID, error) {
+var _fnMIDIObjectGetProperties func(int, unsafe.Pointer, uint8) int32
+
+// MIDIObjectGetProperties reports an error if the CoreMIDI framework function MIDIObjectGetProperties fails.
+func MIDIObjectGetProperties(obj_ int, deep uint8) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIObjectGetProperties == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetProperties, _lib, "MIDIObjectGetProperties")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.MIDIObjectGetDictionaryProperty(obj, purego.CFRef(propertyID), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnMIDIObjectGetProperties(obj_, unsafe.Pointer(&_out0), deep)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// MIDIObjectGetIntegerProperty wraps [raw.MIDIObjectGetIntegerProperty], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIObjectGetIntegerProperty(obj uint, propertyID objc.ID, outValue *int) error {
-	if _err := purego.NewOSStatus(raw.MIDIObjectGetIntegerProperty(obj, purego.CFRef(propertyID), outValue)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMIDIObjectGetStringProperty func(int, objc.ID, unsafe.Pointer) int32
 
-// MIDIObjectGetProperties wraps [raw.MIDIObjectGetProperties], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIObjectGetProperties(obj uint, deep uint8) (objc.ID, error) {
+// MIDIObjectGetStringProperty reports an error if the CoreMIDI framework function MIDIObjectGetStringProperty fails.
+func MIDIObjectGetStringProperty(obj_ int, propertyID obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIObjectGetStringProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIObjectGetStringProperty, _lib, "MIDIObjectGetStringProperty")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.MIDIObjectGetProperties(obj, unsafe.Pointer(&_out0), deep)).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnMIDIObjectGetStringProperty(obj_, objref.IDOf(propertyID), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// MIDIObjectGetStringProperty wraps [raw.MIDIObjectGetStringProperty], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIObjectGetStringProperty(obj uint, propertyID objc.ID) (objc.ID, error) {
-	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.MIDIObjectGetStringProperty(obj, purego.CFRef(propertyID), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
-	}
-	return objc.ID(_out0), nil
-}
+var _fnMIDIObjectRemoveProperty func(int, objc.ID) int32
 
-// MIDIObjectRemoveProperty wraps [raw.MIDIObjectRemoveProperty], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIObjectRemoveProperty(obj uint, propertyID objc.ID) error {
-	if _err := purego.NewOSStatus(raw.MIDIObjectRemoveProperty(obj, purego.CFRef(propertyID))).Err(); _err != nil {
+// MIDIObjectRemoveProperty reports an error if the CoreMIDI framework function MIDIObjectRemoveProperty fails.
+func MIDIObjectRemoveProperty(obj_ int, propertyID obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIObjectRemoveProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIObjectRemoveProperty, _lib, "MIDIObjectRemoveProperty")
+	}
+	_rc := _fnMIDIObjectRemoveProperty(obj_, objref.IDOf(propertyID))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIObjectSetDataProperty wraps [raw.MIDIObjectSetDataProperty], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIObjectSetDataProperty(obj uint, propertyID objc.ID, data objc.ID) error {
-	if _err := purego.NewOSStatus(raw.MIDIObjectSetDataProperty(obj, purego.CFRef(propertyID), purego.CFRef(data))).Err(); _err != nil {
+var _fnMIDIObjectSetDataProperty func(int, objc.ID, objc.ID) int32
+
+// MIDIObjectSetDataProperty reports an error if the CoreMIDI framework function MIDIObjectSetDataProperty fails.
+func MIDIObjectSetDataProperty(obj_ int, propertyID obj.Object, data obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIObjectSetDataProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetDataProperty, _lib, "MIDIObjectSetDataProperty")
+	}
+	_rc := _fnMIDIObjectSetDataProperty(obj_, objref.IDOf(propertyID), objref.IDOf(data))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIObjectSetDictionaryProperty wraps [raw.MIDIObjectSetDictionaryProperty], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIObjectSetDictionaryProperty(obj uint, propertyID objc.ID, dict objc.ID) error {
-	if _err := purego.NewOSStatus(raw.MIDIObjectSetDictionaryProperty(obj, purego.CFRef(propertyID), purego.CFRef(dict))).Err(); _err != nil {
+var _fnMIDIObjectSetDictionaryProperty func(int, objc.ID, objc.ID) int32
+
+// MIDIObjectSetDictionaryProperty reports an error if the CoreMIDI framework function MIDIObjectSetDictionaryProperty fails.
+func MIDIObjectSetDictionaryProperty(obj_ int, propertyID obj.Object, dict obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIObjectSetDictionaryProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetDictionaryProperty, _lib, "MIDIObjectSetDictionaryProperty")
+	}
+	_rc := _fnMIDIObjectSetDictionaryProperty(obj_, objref.IDOf(propertyID), objref.IDOf(dict))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIObjectSetIntegerProperty wraps [raw.MIDIObjectSetIntegerProperty], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIObjectSetIntegerProperty(obj uint, propertyID objc.ID, value int) error {
-	if _err := purego.NewOSStatus(raw.MIDIObjectSetIntegerProperty(obj, purego.CFRef(propertyID), value)).Err(); _err != nil {
+var _fnMIDIObjectSetIntegerProperty func(int, objc.ID, int) int32
+
+// MIDIObjectSetIntegerProperty reports an error if the CoreMIDI framework function MIDIObjectSetIntegerProperty fails.
+func MIDIObjectSetIntegerProperty(obj_ int, propertyID obj.Object, value int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIObjectSetIntegerProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetIntegerProperty, _lib, "MIDIObjectSetIntegerProperty")
+	}
+	_rc := _fnMIDIObjectSetIntegerProperty(obj_, objref.IDOf(propertyID), value)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIObjectSetStringProperty wraps [raw.MIDIObjectSetStringProperty], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIObjectSetStringProperty(obj uint, propertyID objc.ID, str objc.ID) error {
-	if _err := purego.NewOSStatus(raw.MIDIObjectSetStringProperty(obj, purego.CFRef(propertyID), purego.CFRef(str))).Err(); _err != nil {
+var _fnMIDIObjectSetStringProperty func(int, objc.ID, objc.ID) int32
+
+// MIDIObjectSetStringProperty reports an error if the CoreMIDI framework function MIDIObjectSetStringProperty fails.
+func MIDIObjectSetStringProperty(obj_ int, propertyID obj.Object, str obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIObjectSetStringProperty == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIObjectSetStringProperty, _lib, "MIDIObjectSetStringProperty")
+	}
+	_rc := _fnMIDIObjectSetStringProperty(obj_, objref.IDOf(propertyID), objref.IDOf(str))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIOutputPortCreate wraps [raw.MIDIOutputPortCreate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIOutputPortCreate(client uint, portName objc.ID, outPort *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIOutputPortCreate(client, purego.CFRef(portName), outPort)).Err(); _err != nil {
+var _fnMIDIPortDisconnectSource func(int, int) int32
+
+// MIDIPortDisconnectSource reports an error if the CoreMIDI framework function MIDIPortDisconnectSource fails.
+func MIDIPortDisconnectSource(port int, source int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIPortDisconnectSource == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIPortDisconnectSource, _lib, "MIDIPortDisconnectSource")
+	}
+	_rc := _fnMIDIPortDisconnectSource(port, source)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIPortDisconnectSource wraps [raw.MIDIPortDisconnectSource], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIPortDisconnectSource(port uint, source uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIPortDisconnectSource(port, source)).Err(); _err != nil {
+var _fnMIDIPortDispose func(int) int32
+
+// MIDIPortDispose reports an error if the CoreMIDI framework function MIDIPortDispose fails.
+func MIDIPortDispose(port int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIPortDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIPortDispose, _lib, "MIDIPortDispose")
+	}
+	_rc := _fnMIDIPortDispose(port)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDIPortDispose wraps [raw.MIDIPortDispose], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIPortDispose(port uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIPortDispose(port)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMIDIRestart func() int32
 
-// MIDIReceived wraps [raw.MIDIReceived], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIReceived(src uint, pktlist *raw.MIDIPacketList) error {
-	if _err := purego.NewOSStatus(raw.MIDIReceived(src, pktlist)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// MIDIReceivedEventList wraps [raw.MIDIReceivedEventList], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIReceivedEventList(src uint, evtlist *raw.MIDIEventList) error {
-	if _err := purego.NewOSStatus(raw.MIDIReceivedEventList(src, evtlist)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// MIDIRestart wraps [raw.MIDIRestart], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
+// MIDIRestart reports an error if the CoreMIDI framework function MIDIRestart fails.
 func MIDIRestart() error {
-	if _err := purego.NewOSStatus(raw.MIDIRestart()).Err(); _err != nil {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIRestart == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIRestart, _lib, "MIDIRestart")
+	}
+	_rc := _fnMIDIRestart()
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDISend wraps [raw.MIDISend], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISend(port uint, dest uint, pktlist *raw.MIDIPacketList) error {
-	if _err := purego.NewOSStatus(raw.MIDISend(port, dest, pktlist)).Err(); _err != nil {
+var _fnMIDISetSerialPortOwner func(objc.ID, objc.ID) int32
+
+// MIDISetSerialPortOwner reports an error if the CoreMIDI framework function MIDISetSerialPortOwner fails.
+func MIDISetSerialPortOwner(portName obj.Object, driverName obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISetSerialPortOwner == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISetSerialPortOwner, _lib, "MIDISetSerialPortOwner")
+	}
+	_rc := _fnMIDISetSerialPortOwner(objref.IDOf(portName), objref.IDOf(driverName))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDISendEventList wraps [raw.MIDISendEventList], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISendEventList(port uint, dest uint, evtlist *raw.MIDIEventList) error {
-	if _err := purego.NewOSStatus(raw.MIDISendEventList(port, dest, evtlist)).Err(); _err != nil {
+var _fnMIDISetupAddDevice func(int) int32
+
+// MIDISetupAddDevice reports an error if the CoreMIDI framework function MIDISetupAddDevice fails.
+func MIDISetupAddDevice(device int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISetupAddDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISetupAddDevice, _lib, "MIDISetupAddDevice")
+	}
+	_rc := _fnMIDISetupAddDevice(device)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDISendSysex wraps [raw.MIDISendSysex], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISendSysex(request *raw.MIDISysexSendRequest) error {
-	if _err := purego.NewOSStatus(raw.MIDISendSysex(request)).Err(); _err != nil {
+var _fnMIDISetupAddExternalDevice func(int) int32
+
+// MIDISetupAddExternalDevice reports an error if the CoreMIDI framework function MIDISetupAddExternalDevice fails.
+func MIDISetupAddExternalDevice(device int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISetupAddExternalDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISetupAddExternalDevice, _lib, "MIDISetupAddExternalDevice")
+	}
+	_rc := _fnMIDISetupAddExternalDevice(device)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDISendUMPSysex wraps [raw.MIDISendUMPSysex], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISendUMPSysex(umpRequest *raw.MIDISysexSendRequestUMP) error {
-	if _err := purego.NewOSStatus(raw.MIDISendUMPSysex(umpRequest)).Err(); _err != nil {
+var _fnMIDISetupDispose func(int) int32
+
+// MIDISetupDispose reports an error if the CoreMIDI framework function MIDISetupDispose fails.
+func MIDISetupDispose(setup int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISetupDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISetupDispose, _lib, "MIDISetupDispose")
+	}
+	_rc := _fnMIDISetupDispose(setup)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDISendUMPSysex8 wraps [raw.MIDISendUMPSysex8], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISendUMPSysex8(umpRequest *raw.MIDISysexSendRequestUMP) error {
-	if _err := purego.NewOSStatus(raw.MIDISendUMPSysex8(umpRequest)).Err(); _err != nil {
+var _fnMIDISetupInstall func(int) int32
+
+// MIDISetupInstall reports an error if the CoreMIDI framework function MIDISetupInstall fails.
+func MIDISetupInstall(setup int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISetupInstall == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISetupInstall, _lib, "MIDISetupInstall")
+	}
+	_rc := _fnMIDISetupInstall(setup)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDISetSerialPortOwner wraps [raw.MIDISetSerialPortOwner], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISetSerialPortOwner(portName objc.ID, driverName objc.ID) error {
-	if _err := purego.NewOSStatus(raw.MIDISetSerialPortOwner(purego.CFRef(portName), purego.CFRef(driverName))).Err(); _err != nil {
+var _fnMIDISetupRemoveDevice func(int) int32
+
+// MIDISetupRemoveDevice reports an error if the CoreMIDI framework function MIDISetupRemoveDevice fails.
+func MIDISetupRemoveDevice(device int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISetupRemoveDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISetupRemoveDevice, _lib, "MIDISetupRemoveDevice")
+	}
+	_rc := _fnMIDISetupRemoveDevice(device)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDISetupAddDevice wraps [raw.MIDISetupAddDevice], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISetupAddDevice(device uint) error {
-	if _err := purego.NewOSStatus(raw.MIDISetupAddDevice(device)).Err(); _err != nil {
+var _fnMIDISetupRemoveExternalDevice func(int) int32
+
+// MIDISetupRemoveExternalDevice reports an error if the CoreMIDI framework function MIDISetupRemoveExternalDevice fails.
+func MIDISetupRemoveExternalDevice(device int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISetupRemoveExternalDevice == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISetupRemoveExternalDevice, _lib, "MIDISetupRemoveExternalDevice")
+	}
+	_rc := _fnMIDISetupRemoveExternalDevice(device)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDISetupAddExternalDevice wraps [raw.MIDISetupAddExternalDevice], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISetupAddExternalDevice(device uint) error {
-	if _err := purego.NewOSStatus(raw.MIDISetupAddExternalDevice(device)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMIDISetupToData func(int, unsafe.Pointer) int32
 
-// MIDISetupCreate wraps [raw.MIDISetupCreate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISetupCreate(outSetup *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDISetupCreate(outSetup)).Err(); _err != nil {
-		return _err
+// MIDISetupToData reports an error if the CoreMIDI framework function MIDISetupToData fails.
+func MIDISetupToData(setup int) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDISetupToData == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDISetupToData, _lib, "MIDISetupToData")
 	}
-	return nil
-}
-
-// MIDISetupDispose wraps [raw.MIDISetupDispose], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISetupDispose(setup uint) error {
-	if _err := purego.NewOSStatus(raw.MIDISetupDispose(setup)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// MIDISetupFromData wraps [raw.MIDISetupFromData], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISetupFromData(data objc.ID, outSetup *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDISetupFromData(purego.CFRef(data), outSetup)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// MIDISetupGetCurrent wraps [raw.MIDISetupGetCurrent], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISetupGetCurrent(outSetup *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDISetupGetCurrent(outSetup)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// MIDISetupInstall wraps [raw.MIDISetupInstall], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISetupInstall(setup uint) error {
-	if _err := purego.NewOSStatus(raw.MIDISetupInstall(setup)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// MIDISetupRemoveDevice wraps [raw.MIDISetupRemoveDevice], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISetupRemoveDevice(device uint) error {
-	if _err := purego.NewOSStatus(raw.MIDISetupRemoveDevice(device)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// MIDISetupRemoveExternalDevice wraps [raw.MIDISetupRemoveExternalDevice], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISetupRemoveExternalDevice(device uint) error {
-	if _err := purego.NewOSStatus(raw.MIDISetupRemoveExternalDevice(device)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// MIDISetupToData wraps [raw.MIDISetupToData], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISetupToData(setup uint) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.MIDISetupToData(setup, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnMIDISetupToData(setup, unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// MIDISourceCreate wraps [raw.MIDISourceCreate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISourceCreate(client uint, name objc.ID, outSrc *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDISourceCreate(client, purego.CFRef(name), outSrc)).Err(); _err != nil {
+var _fnMIDIThruConnectionDispose func(int) int32
+
+// MIDIThruConnectionDispose reports an error if the CoreMIDI framework function MIDIThruConnectionDispose fails.
+func MIDIThruConnectionDispose(connection int) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIThruConnectionDispose == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIThruConnectionDispose, _lib, "MIDIThruConnectionDispose")
+	}
+	_rc := _fnMIDIThruConnectionDispose(connection)
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil
 }
 
-// MIDISourceCreateWithProtocol wraps [raw.MIDISourceCreateWithProtocol], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDISourceCreateWithProtocol(client uint, name objc.ID, protocol MIDIProtocolID, outSrc *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDISourceCreateWithProtocol(client, purego.CFRef(name), raw.MIDIProtocolID(protocol), outSrc)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
+var _fnMIDIThruConnectionFind func(objc.ID, unsafe.Pointer) int32
 
-// MIDIThruConnectionCreate wraps [raw.MIDIThruConnectionCreate], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIThruConnectionCreate(inPersistentOwnerID objc.ID, inConnectionParams objc.ID, outConnection *uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIThruConnectionCreate(purego.CFRef(inPersistentOwnerID), purego.CFRef(inConnectionParams), outConnection)).Err(); _err != nil {
-		return _err
+// MIDIThruConnectionFind reports an error if the CoreMIDI framework function MIDIThruConnectionFind fails.
+func MIDIThruConnectionFind(inPersistentOwnerID obj.Object) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIThruConnectionFind == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIThruConnectionFind, _lib, "MIDIThruConnectionFind")
 	}
-	return nil
-}
-
-// MIDIThruConnectionDispose wraps [raw.MIDIThruConnectionDispose], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIThruConnectionDispose(connection uint) error {
-	if _err := purego.NewOSStatus(raw.MIDIThruConnectionDispose(connection)).Err(); _err != nil {
-		return _err
-	}
-	return nil
-}
-
-// MIDIThruConnectionFind wraps [raw.MIDIThruConnectionFind], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIThruConnectionFind(inPersistentOwnerID objc.ID) (objc.ID, error) {
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.MIDIThruConnectionFind(purego.CFRef(inPersistentOwnerID), unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnMIDIThruConnectionFind(objref.IDOf(inPersistentOwnerID), unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// MIDIThruConnectionGetParams wraps [raw.MIDIThruConnectionGetParams], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIThruConnectionGetParams(connection uint) (objc.ID, error) {
+var _fnMIDIThruConnectionGetParams func(int, unsafe.Pointer) int32
+
+// MIDIThruConnectionGetParams reports an error if the CoreMIDI framework function MIDIThruConnectionGetParams fails.
+func MIDIThruConnectionGetParams(connection int) (obj.Object, error) {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIThruConnectionGetParams == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIThruConnectionGetParams, _lib, "MIDIThruConnectionGetParams")
+	}
 	var _out0 uintptr
-	if _err := purego.NewOSStatus(raw.MIDIThruConnectionGetParams(connection, unsafe.Pointer(&_out0))).Err(); _err != nil {
-		return 0, _err
+	_rc := _fnMIDIThruConnectionGetParams(connection, unsafe.Pointer(&_out0))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
+		return nil, _err
 	}
-	return objc.ID(_out0), nil
+	return obj.Wrap(objc.ID(_out0)), nil
 }
 
-// MIDIThruConnectionSetParams wraps [raw.MIDIThruConnectionSetParams], bridging its CoreFoundation reference arguments and returning the OSStatus result as an error.
-func MIDIThruConnectionSetParams(connection uint, inConnectionParams objc.ID) error {
-	if _err := purego.NewOSStatus(raw.MIDIThruConnectionSetParams(connection, purego.CFRef(inConnectionParams))).Err(); _err != nil {
+var _fnMIDIThruConnectionSetParams func(int, objc.ID) int32
+
+// MIDIThruConnectionSetParams reports an error if the CoreMIDI framework function MIDIThruConnectionSetParams fails.
+func MIDIThruConnectionSetParams(connection int, inConnectionParams obj.Object) error {
+	_loadOnce.Do(_loadLibrary)
+	if _fnMIDIThruConnectionSetParams == nil {
+		ebipurego.RegisterLibFunc(&_fnMIDIThruConnectionSetParams, _lib, "MIDIThruConnectionSetParams")
+	}
+	_rc := _fnMIDIThruConnectionSetParams(connection, objref.IDOf(inConnectionParams))
+	if _err := purego.NewOSStatus(int(_rc)).Err(); _err != nil {
 		return _err
 	}
 	return nil

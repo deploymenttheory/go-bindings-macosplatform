@@ -5,54 +5,75 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A unit of measure for acceleration.
 //
-// UnitAcceleration wraps [raw.NSUnitAcceleration] with a fluent Go API.
+// UnitAcceleration is an idiomatic wrapper over the Objective-C class NSUnitAcceleration.
 type UnitAcceleration struct {
-	inner *raw.NSUnitAcceleration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSUnitAcceleration].
-func (x *UnitAcceleration) Unwrap() *raw.NSUnitAcceleration { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitAcceleration) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitAccelerationFromID adopts an existing object pointer as a UnitAcceleration (nil for 0).
+// UnitAccelerationFromID adopts an existing Objective-C object as a UnitAcceleration
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitAccelerationFromID(id objc.ID) *UnitAcceleration {
 	if id == 0 {
 		return nil
 	}
-	return &UnitAcceleration{inner: raw.NSUnitAccelerationFromID(id)}
-}
-
-// NewUnitAcceleration creates a new [UnitAcceleration].
-func NewUnitAcceleration() *UnitAcceleration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitAcceleration")), objc.RegisterName("new"))
-	return &UnitAcceleration{inner: raw.NSUnitAccelerationFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitAcceleration) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitAcceleration {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitAcceleration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitAcceleration) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitAccelerationAdopt wraps an Objective-C object that this code just created as a
+// UnitAcceleration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitAccelerationAdopt(id objc.ID) *UnitAcceleration {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitAcceleration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitAcceleration) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// Description returns the object's -description text.
+func (x *UnitAcceleration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
 
-func (x *UnitAcceleration) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UnitAcceleration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UnitAcceleration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUnitAcceleration creates a new UnitAcceleration.
+func NewUnitAcceleration() *UnitAcceleration {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitAcceleration")), objc.RegisterName("new"))
+	return unitAccelerationAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *UnitAcceleration) WithScriptingProperties(scriptingProperties obj.Object) *UnitAcceleration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitAccelerationable is the interface implemented by [UnitAcceleration], for mocking and DI.
 type UnitAccelerationable interface {
-	Unwrap() *raw.NSUnitAcceleration
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitAcceleration
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitAcceleration
 }
 
 var _ UnitAccelerationable = (*UnitAcceleration)(nil)

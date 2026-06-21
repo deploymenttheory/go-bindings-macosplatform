@@ -5,163 +5,169 @@
 package osakit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osakit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ScriptController wraps [raw.OSAScriptController] with a fluent Go API.
+// ScriptController is an idiomatic wrapper over the Objective-C class OSAScriptController.
 type ScriptController struct {
-	inner *raw.OSAScriptController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSAScriptController].
-func (x *ScriptController) Unwrap() *raw.OSAScriptController { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScriptController) ID() objc.ID { return x.inner.Ptr() }
-
-// ScriptControllerFromID adopts an existing object pointer as a ScriptController (nil for 0).
+// ScriptControllerFromID adopts an existing Objective-C object as a ScriptController
+// (nil for 0), retaining it and registering a release finalizer.
 func ScriptControllerFromID(id objc.ID) *ScriptController {
 	if id == 0 {
 		return nil
 	}
-	return &ScriptController{inner: raw.OSAScriptControllerFromID(id)}
+	x := &ScriptController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScriptController creates a new [ScriptController].
+// scriptControllerAdopt wraps an Objective-C object that this code just created as a
+// ScriptController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scriptControllerAdopt(id objc.ID) *ScriptController {
+	if id == 0 {
+		return nil
+	}
+	x := &ScriptController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScriptController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScriptController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScriptController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScriptController creates a new ScriptController.
 func NewScriptController() *ScriptController {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSAScriptController")), objc.RegisterName("new"))
-	return &ScriptController{inner: raw.OSAScriptControllerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("OSAScriptController")), objc.RegisterName("new"))
+	return scriptControllerAdopt(_id)
 }
 
-// WithScriptView sets the scriptView property and returns the receiver for chaining.
+// WithScriptView sets scriptView and returns the receiver so calls can be chained.
 func (x *ScriptController) WithScriptView(scriptView *ScriptView) *ScriptController {
-	x.inner.SetScriptView(scriptView.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptView:"), objref.IDOf(scriptView))
 	return x
 }
 
-// WithResultView sets the resultView property and returns the receiver for chaining.
-func (x *ScriptController) WithResultView(resultView *appkit.NSTextView) *ScriptController {
-	x.inner.SetResultView(resultView)
+// WithResultView sets resultView and returns the receiver so calls can be chained.
+func (x *ScriptController) WithResultView(resultView obj.Object) *ScriptController {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultView:"), objref.IDOf(resultView))
 	return x
 }
 
-// WithScript sets the script property and returns the receiver for chaining.
+// WithScript sets script and returns the receiver so calls can be chained.
 func (x *ScriptController) WithScript(script *Script) *ScriptController {
-	x.inner.SetScript(script.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScript:"), objref.IDOf(script))
 	return x
 }
 
-// WithLanguage sets the language property and returns the receiver for chaining.
+// WithLanguage sets language and returns the receiver so calls can be chained.
 func (x *ScriptController) WithLanguage(language *Language) *ScriptController {
-	x.inner.SetLanguage(language.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguage:"), objref.IDOf(language))
 	return x
 }
 
-// CompileScript calls the underlying CompileScript.
-func (x *ScriptController) CompileScript(sender objc.ID) {
-	x.inner.CompileScript(sender)
+func (x *ScriptController) CompileScript(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("compileScript:"), objref.IDOf(sender))
 }
 
-// RecordScript calls the underlying RecordScript.
-func (x *ScriptController) RecordScript(sender objc.ID) {
-	x.inner.RecordScript(sender)
+func (x *ScriptController) RecordScript(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("recordScript:"), objref.IDOf(sender))
 }
 
-// RunScript calls the underlying RunScript.
-func (x *ScriptController) RunScript(sender objc.ID) {
-	x.inner.RunScript(sender)
+func (x *ScriptController) RunScript(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runScript:"), objref.IDOf(sender))
 }
 
-// StopScript calls the underlying StopScript.
-func (x *ScriptController) StopScript(sender objc.ID) {
-	x.inner.StopScript(sender)
+func (x *ScriptController) StopScript(sender obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stopScript:"), objref.IDOf(sender))
 }
 
-// ScriptView calls the underlying ScriptView.
 func (x *ScriptController) ScriptView() *ScriptView {
-	_r := x.inner.ScriptView()
-	if _r == nil {
-		return nil
-	}
-	return &ScriptView{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scriptView"))
+	return ScriptViewFromID(_r)
 }
 
-// SetScriptView calls the underlying SetScriptView.
-func (x *ScriptController) SetScriptView(scriptView *raw.OSAScriptView) {
-	x.inner.SetScriptView(scriptView)
+func (x *ScriptController) SetScriptView(scriptView *ScriptView) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptView:"), objref.IDOf(scriptView))
 }
 
-// ResultView calls the underlying ResultView.
-func (x *ScriptController) ResultView() *appkit.NSTextView {
-	return x.inner.ResultView()
+func (x *ScriptController) ResultView() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resultView"))
+	return obj.Wrap(_r)
 }
 
-// SetResultView calls the underlying SetResultView.
-func (x *ScriptController) SetResultView(resultView *appkit.NSTextView) {
-	x.inner.SetResultView(resultView)
+func (x *ScriptController) SetResultView(resultView obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setResultView:"), objref.IDOf(resultView))
 }
 
-// Script calls the underlying Script.
 func (x *ScriptController) Script() *Script {
-	_r := x.inner.Script()
-	if _r == nil {
-		return nil
-	}
-	return &Script{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("script"))
+	return ScriptFromID(_r)
 }
 
-// SetScript calls the underlying SetScript.
-func (x *ScriptController) SetScript(script *raw.OSAScript) {
-	x.inner.SetScript(script)
+func (x *ScriptController) SetScript(script *Script) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScript:"), objref.IDOf(script))
 }
 
-// Language calls the underlying Language.
 func (x *ScriptController) Language() *Language {
-	_r := x.inner.Language()
-	if _r == nil {
-		return nil
-	}
-	return &Language{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("language"))
+	return LanguageFromID(_r)
 }
 
-// SetLanguage calls the underlying SetLanguage.
-func (x *ScriptController) SetLanguage(language *raw.OSALanguage) {
-	x.inner.SetLanguage(language)
+func (x *ScriptController) SetLanguage(language *Language) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLanguage:"), objref.IDOf(language))
 }
 
-// ScriptState calls the underlying ScriptState.
-func (x *ScriptController) ScriptState() OSAScriptState {
-	return OSAScriptState(x.inner.ScriptState())
+func (x *ScriptController) ScriptState() ScriptState {
+	_r := objc.Send[ScriptState](objref.IDOf(x), objc.RegisterName("scriptState"))
+	return _r
 }
 
-// IsCompiling calls the underlying IsCompiling.
 func (x *ScriptController) IsCompiling() bool {
-	return x.inner.IsCompiling()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isCompiling"))
+	return _r
 }
 
 // ScriptControllerable is the interface implemented by [ScriptController], for mocking and DI.
 type ScriptControllerable interface {
-	Unwrap() *raw.OSAScriptController
+	obj.Object
 	WithScriptView(scriptView *ScriptView) *ScriptController
-	WithResultView(resultView *appkit.NSTextView) *ScriptController
+	WithResultView(resultView obj.Object) *ScriptController
 	WithScript(script *Script) *ScriptController
 	WithLanguage(language *Language) *ScriptController
-	CompileScript(sender objc.ID)
-	RecordScript(sender objc.ID)
-	RunScript(sender objc.ID)
-	StopScript(sender objc.ID)
+	CompileScript(sender obj.Object)
+	RecordScript(sender obj.Object)
+	RunScript(sender obj.Object)
+	StopScript(sender obj.Object)
 	ScriptView() *ScriptView
-	SetScriptView(scriptView *raw.OSAScriptView)
-	ResultView() *appkit.NSTextView
-	SetResultView(resultView *appkit.NSTextView)
+	SetScriptView(scriptView *ScriptView)
+	ResultView() obj.Object
+	SetResultView(resultView obj.Object)
 	Script() *Script
-	SetScript(script *raw.OSAScript)
+	SetScript(script *Script)
 	Language() *Language
-	SetLanguage(language *raw.OSALanguage)
-	ScriptState() OSAScriptState
+	SetLanguage(language *Language)
+	ScriptState() ScriptState
 	IsCompiling() bool
 }
 

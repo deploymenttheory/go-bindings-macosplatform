@@ -5,52 +5,72 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// ScoredAssessment wraps [raw.HKScoredAssessment] with a fluent Go API.
+// ScoredAssessment is an idiomatic wrapper over the Objective-C class HKScoredAssessment.
 type ScoredAssessment struct {
-	inner *raw.HKScoredAssessment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKScoredAssessment].
-func (x *ScoredAssessment) Unwrap() *raw.HKScoredAssessment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScoredAssessment) ID() objc.ID { return x.inner.Ptr() }
-
-// ScoredAssessmentFromID adopts an existing object pointer as a ScoredAssessment (nil for 0).
+// ScoredAssessmentFromID adopts an existing Objective-C object as a ScoredAssessment
+// (nil for 0), retaining it and registering a release finalizer.
 func ScoredAssessmentFromID(id objc.ID) *ScoredAssessment {
 	if id == 0 {
 		return nil
 	}
-	return &ScoredAssessment{inner: raw.HKScoredAssessmentFromID(id)}
+	x := &ScoredAssessment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewScoredAssessment creates a new [ScoredAssessment].
+// scoredAssessmentAdopt wraps an Objective-C object that this code just created as a
+// ScoredAssessment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scoredAssessmentAdopt(id objc.ID) *ScoredAssessment {
+	if id == 0 {
+		return nil
+	}
+	x := &ScoredAssessment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ScoredAssessment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScoredAssessment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScoredAssessment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScoredAssessment creates a new ScoredAssessment.
 func NewScoredAssessment() *ScoredAssessment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKScoredAssessment")), objc.RegisterName("new"))
-	return &ScoredAssessment{inner: raw.HKScoredAssessmentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKScoredAssessment")), objc.RegisterName("new"))
+	return scoredAssessmentAdopt(_id)
 }
 
 // The score determined by the answers on an assessment
-//
-// Score calls the underlying Score.
 func (x *ScoredAssessment) Score() int {
-	return x.inner.Score()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("score"))
+	return _r
 }
-
-func (x *ScoredAssessment) asScoredAssessment() *raw.HKScoredAssessment { return x.inner }
-
-func (x *ScoredAssessment) asSample() *raw.HKSample { return &x.inner.HKSample }
-
-func (x *ScoredAssessment) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
 
 // ScoredAssessmentable is the interface implemented by [ScoredAssessment], for mocking and DI.
 type ScoredAssessmentable interface {
-	Unwrap() *raw.HKScoredAssessment
+	obj.Object
 	Score() int
 }
 

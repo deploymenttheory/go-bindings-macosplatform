@@ -5,68 +5,84 @@
 package coreml
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A class representing the structure of a Pipeline model.
 //
-// ModelStructurePipeline wraps [raw.MLModelStructurePipeline] with a fluent Go API.
+// ModelStructurePipeline is an idiomatic wrapper over the Objective-C class MLModelStructurePipeline.
 type ModelStructurePipeline struct {
-	inner *raw.MLModelStructurePipeline
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLModelStructurePipeline].
-func (x *ModelStructurePipeline) Unwrap() *raw.MLModelStructurePipeline { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ModelStructurePipeline) ID() objc.ID { return x.inner.Ptr() }
-
-// ModelStructurePipelineFromID adopts an existing object pointer as a ModelStructurePipeline (nil for 0).
+// ModelStructurePipelineFromID adopts an existing Objective-C object as a ModelStructurePipeline
+// (nil for 0), retaining it and registering a release finalizer.
 func ModelStructurePipelineFromID(id objc.ID) *ModelStructurePipeline {
 	if id == 0 {
 		return nil
 	}
-	return &ModelStructurePipeline{inner: raw.MLModelStructurePipelineFromID(id)}
+	x := &ModelStructurePipeline{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewModelStructurePipeline creates a new [ModelStructurePipeline].
+// modelStructurePipelineAdopt wraps an Objective-C object that this code just created as a
+// ModelStructurePipeline (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func modelStructurePipelineAdopt(id objc.ID) *ModelStructurePipeline {
+	if id == 0 {
+		return nil
+	}
+	x := &ModelStructurePipeline{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ModelStructurePipeline) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ModelStructurePipeline) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ModelStructurePipeline) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewModelStructurePipeline creates a new ModelStructurePipeline.
 func NewModelStructurePipeline() *ModelStructurePipeline {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLModelStructurePipeline")), objc.RegisterName("new"))
-	return &ModelStructurePipeline{inner: raw.MLModelStructurePipelineFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLModelStructurePipeline")), objc.RegisterName("new"))
+	return modelStructurePipelineAdopt(_id)
 }
 
 // The names of the sub models in the pipeline.
 //
 // SubModelNames returns the collection as a Go slice.
 func (x *ModelStructurePipeline) SubModelNames() []string {
-	arr := x.inner.SubModelNames()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subModelNames"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
 // The structure of the sub models in the pipeline.
 //
 // SubModels returns the collection as a Go slice.
 func (x *ModelStructurePipeline) SubModels() []*ModelStructure {
-	arr := x.inner.SubModels()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *ModelStructure {
-		return &ModelStructure{inner: raw.MLModelStructureFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("subModels"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *ModelStructure { return ModelStructureFromID(_id) })
 }
 
 // ModelStructurePipelineable is the interface implemented by [ModelStructurePipeline], for mocking and DI.
 type ModelStructurePipelineable interface {
-	Unwrap() *raw.MLModelStructurePipeline
+	obj.Object
 	SubModelNames() []string
 	SubModels() []*ModelStructure
 }

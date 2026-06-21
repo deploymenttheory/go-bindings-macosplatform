@@ -5,54 +5,71 @@
 package avfoundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coremedia"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that receives video data from a player object.
 //
-// PlayerVideoOutput wraps [raw.AVPlayerVideoOutput] with a fluent Go API.
+// PlayerVideoOutput is an idiomatic wrapper over the Objective-C class AVPlayerVideoOutput.
 type PlayerVideoOutput struct {
-	inner *raw.AVPlayerVideoOutput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVPlayerVideoOutput].
-func (x *PlayerVideoOutput) Unwrap() *raw.AVPlayerVideoOutput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PlayerVideoOutput) ID() objc.ID { return x.inner.Ptr() }
-
-// PlayerVideoOutputFromID adopts an existing object pointer as a PlayerVideoOutput (nil for 0).
+// PlayerVideoOutputFromID adopts an existing Objective-C object as a PlayerVideoOutput
+// (nil for 0), retaining it and registering a release finalizer.
 func PlayerVideoOutputFromID(id objc.ID) *PlayerVideoOutput {
 	if id == 0 {
 		return nil
 	}
-	return &PlayerVideoOutput{inner: raw.AVPlayerVideoOutputFromID(id)}
+	x := &PlayerVideoOutput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// playerVideoOutputAdopt wraps an Objective-C object that this code just created as a
+// PlayerVideoOutput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func playerVideoOutputAdopt(id objc.ID) *PlayerVideoOutput {
+	if id == 0 {
+		return nil
+	}
+	x := &PlayerVideoOutput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PlayerVideoOutput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PlayerVideoOutput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PlayerVideoOutput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a video output from a specification.
 //
-// NewPlayerVideoOutputWithSpecification creates a new [PlayerVideoOutput].
-func NewPlayerVideoOutputWithSpecification(specification *raw.AVVideoOutputSpecification) *PlayerVideoOutput {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVPlayerVideoOutput")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpecification:"), specification.Ptr())
-	return &PlayerVideoOutput{inner: raw.AVPlayerVideoOutputFromID(_id)}
-}
-
-// @method 	copyTaggedBufferGroupForHostTime:presentationTimeStamp:activeConfiguration @abstract	Retrieves a tagged buffer group that is appropriate for display at the specified host time. @param		hostTime A CMTime that expresses a desired host time. @param		presentationTimeStamp On return points to a CMTime whose value is the presentation time in terms of the corresponding AVPlayerItem's timebase for the copied tagged buffer group, or kCMTimeInvalid if no sample is available for the provided hostTime. Note: This timestamp is in terms of the timebase of the AVPlayerItem for which this sample is associated. @param		activeConfiguration On return points to the active configuration associated with the copied tagged buffer group, or nil, if no sample is available for the provided hostTime. @result		A tagged buffer group for the specified host time if a sample is available, and NULL otherwise. @discussion The client is responsible for releasing the returned CMTaggedBufferGroup.
-//
-// CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration calls the underlying CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration.
-func (x *PlayerVideoOutput) CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration(hostTime coremedia.CMTime, presentationTimeStampOut *coremedia.CMTime, activeConfigurationOut *raw.AVPlayerVideoOutputConfiguration) unsafe.Pointer {
-	return x.inner.CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration(hostTime, presentationTimeStampOut, activeConfigurationOut)
+// NewPlayerVideoOutputWithSpecification creates a new PlayerVideoOutput.
+func NewPlayerVideoOutputWithSpecification(specification *VideoOutputSpecification) *PlayerVideoOutput {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVPlayerVideoOutput")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithSpecification:"), objref.IDOf(specification))
+	return playerVideoOutputAdopt(_id)
 }
 
 // PlayerVideoOutputable is the interface implemented by [PlayerVideoOutput], for mocking and DI.
 type PlayerVideoOutputable interface {
-	Unwrap() *raw.AVPlayerVideoOutput
-	CopyTaggedBufferGroupForHostTimePresentationTimeStampActiveConfiguration(hostTime coremedia.CMTime, presentationTimeStampOut *coremedia.CMTime, activeConfigurationOut *raw.AVPlayerVideoOutputConfiguration) unsafe.Pointer
+	obj.Object
 }
 
 var _ PlayerVideoOutputable = (*PlayerVideoOutput)(nil)

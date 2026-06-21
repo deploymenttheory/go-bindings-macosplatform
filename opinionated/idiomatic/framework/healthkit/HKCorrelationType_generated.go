@@ -5,45 +5,68 @@
 package healthkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A type that identifies samples that group multiple subsamples.
 //
-// CorrelationType wraps [raw.HKCorrelationType] with a fluent Go API.
+// CorrelationType is an idiomatic wrapper over the Objective-C class HKCorrelationType.
 type CorrelationType struct {
-	inner *raw.HKCorrelationType
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKCorrelationType].
-func (x *CorrelationType) Unwrap() *raw.HKCorrelationType { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CorrelationType) ID() objc.ID { return x.inner.Ptr() }
-
-// CorrelationTypeFromID adopts an existing object pointer as a CorrelationType (nil for 0).
+// CorrelationTypeFromID adopts an existing Objective-C object as a CorrelationType
+// (nil for 0), retaining it and registering a release finalizer.
 func CorrelationTypeFromID(id objc.ID) *CorrelationType {
 	if id == 0 {
 		return nil
 	}
-	return &CorrelationType{inner: raw.HKCorrelationTypeFromID(id)}
+	x := &CorrelationType{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCorrelationType creates a new [CorrelationType].
+// correlationTypeAdopt wraps an Objective-C object that this code just created as a
+// CorrelationType (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func correlationTypeAdopt(id objc.ID) *CorrelationType {
+	if id == 0 {
+		return nil
+	}
+	x := &CorrelationType{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CorrelationType) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CorrelationType) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CorrelationType) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCorrelationType creates a new CorrelationType.
 func NewCorrelationType() *CorrelationType {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKCorrelationType")), objc.RegisterName("new"))
-	return &CorrelationType{inner: raw.HKCorrelationTypeFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKCorrelationType")), objc.RegisterName("new"))
+	return correlationTypeAdopt(_id)
 }
-
-func (x *CorrelationType) asSampleType() *raw.HKSampleType { return &x.inner.HKSampleType }
-
-func (x *CorrelationType) asObjectType() *raw.HKObjectType { return &x.inner.HKSampleType.HKObjectType }
 
 // CorrelationTypeable is the interface implemented by [CorrelationType], for mocking and DI.
 type CorrelationTypeable interface {
-	Unwrap() *raw.HKCorrelationType
+	obj.Object
 }
 
 var _ CorrelationTypeable = (*CorrelationType)(nil)

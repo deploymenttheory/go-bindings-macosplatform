@@ -5,68 +5,88 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The boot loader configuration the system uses to boot guest-operating systems that expect an Extensible Firmware Interface (EFI) ROM.
 //
-// EFIBootLoader wraps [raw.VZEFIBootLoader] with a fluent Go API.
+// EFIBootLoader is an idiomatic wrapper over the Objective-C class VZEFIBootLoader.
 type EFIBootLoader struct {
-	inner *raw.VZEFIBootLoader
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZEFIBootLoader].
-func (x *EFIBootLoader) Unwrap() *raw.VZEFIBootLoader { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *EFIBootLoader) ID() objc.ID { return x.inner.Ptr() }
-
-// EFIBootLoaderFromID adopts an existing object pointer as a EFIBootLoader (nil for 0).
+// EFIBootLoaderFromID adopts an existing Objective-C object as a EFIBootLoader
+// (nil for 0), retaining it and registering a release finalizer.
 func EFIBootLoaderFromID(id objc.ID) *EFIBootLoader {
 	if id == 0 {
 		return nil
 	}
-	return &EFIBootLoader{inner: raw.VZEFIBootLoaderFromID(id)}
+	x := &EFIBootLoader{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEFIBootLoader creates a new [EFIBootLoader].
+// eFIBootLoaderAdopt wraps an Objective-C object that this code just created as a
+// EFIBootLoader (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func eFIBootLoaderAdopt(id objc.ID) *EFIBootLoader {
+	if id == 0 {
+		return nil
+	}
+	x := &EFIBootLoader{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *EFIBootLoader) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *EFIBootLoader) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *EFIBootLoader) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEFIBootLoader creates a new EFIBootLoader.
 func NewEFIBootLoader() *EFIBootLoader {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZEFIBootLoader")), objc.RegisterName("new"))
-	return &EFIBootLoader{inner: raw.VZEFIBootLoaderFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZEFIBootLoader")), objc.RegisterName("new"))
+	return eFIBootLoaderAdopt(_id)
 }
 
 // The boot loader’s EFI variable store.
 //
-// WithVariableStore sets the variableStore property and returns the receiver for chaining.
+// WithVariableStore sets variableStore and returns the receiver so calls can be chained.
 func (x *EFIBootLoader) WithVariableStore(variableStore *EFIVariableStore) *EFIBootLoader {
-	x.inner.SetVariableStore(variableStore.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariableStore:"), objref.IDOf(variableStore))
 	return x
 }
 
-// VariableStore calls the underlying VariableStore.
 func (x *EFIBootLoader) VariableStore() *EFIVariableStore {
-	_r := x.inner.VariableStore()
-	if _r == nil {
-		return nil
-	}
-	return &EFIVariableStore{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("variableStore"))
+	return EFIVariableStoreFromID(_r)
 }
 
-// SetVariableStore calls the underlying SetVariableStore.
-func (x *EFIBootLoader) SetVariableStore(variableStore *raw.VZEFIVariableStore) {
-	x.inner.SetVariableStore(variableStore)
+func (x *EFIBootLoader) SetVariableStore(variableStore *EFIVariableStore) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVariableStore:"), objref.IDOf(variableStore))
 }
-
-func (x *EFIBootLoader) asBootLoader() *raw.VZBootLoader { return &x.inner.VZBootLoader }
 
 // EFIBootLoaderable is the interface implemented by [EFIBootLoader], for mocking and DI.
 type EFIBootLoaderable interface {
-	Unwrap() *raw.VZEFIBootLoader
+	obj.Object
 	WithVariableStore(variableStore *EFIVariableStore) *EFIBootLoader
 	VariableStore() *EFIVariableStore
-	SetVariableStore(variableStore *raw.VZEFIVariableStore)
+	SetVariableStore(variableStore *EFIVariableStore)
 }
 
 var _ EFIBootLoaderable = (*EFIBootLoader)(nil)

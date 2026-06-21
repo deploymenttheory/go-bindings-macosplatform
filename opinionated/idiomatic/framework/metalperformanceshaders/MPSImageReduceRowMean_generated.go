@@ -5,111 +5,76 @@
 package metalperformanceshaders
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metal"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metalperformanceshaders"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpscore"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsimage"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A filter that returns the mean value for each row in an image.
 //
-// ImageReduceRowMean wraps [raw.MPSImageReduceRowMean] with a fluent Go API.
+// ImageReduceRowMean is an idiomatic wrapper over the Objective-C class MPSImageReduceRowMean.
 type ImageReduceRowMean struct {
-	inner *raw.MPSImageReduceRowMean
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSImageReduceRowMean].
-func (x *ImageReduceRowMean) Unwrap() *raw.MPSImageReduceRowMean { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ImageReduceRowMean) ID() objc.ID { return x.inner.Ptr() }
-
-// ImageReduceRowMeanFromID adopts an existing object pointer as a ImageReduceRowMean (nil for 0).
+// ImageReduceRowMeanFromID adopts an existing Objective-C object as a ImageReduceRowMean
+// (nil for 0), retaining it and registering a release finalizer.
 func ImageReduceRowMeanFromID(id objc.ID) *ImageReduceRowMean {
 	if id == 0 {
 		return nil
 	}
-	return &ImageReduceRowMean{inner: raw.MPSImageReduceRowMeanFromID(id)}
-}
-
-// NewImageReduceRowMeanWithDevice creates a new [ImageReduceRowMean].
-func NewImageReduceRowMeanWithDevice(device metal.MTLDevice) *ImageReduceRowMean {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSImageReduceRowMean")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:"), device)
-	return &ImageReduceRowMean{inner: raw.MPSImageReduceRowMeanFromID(_id)}
-}
-
-// @property   clipRectSource @abstract   The source rectangle to use when reading data. @discussion A MTLRegion that indicates which part of the source to read. If the clipRectSource does not lie completely within the source image, the intersection of the image bounds and clipRectSource will be used. The clipRectSource replaces the MPSUnaryImageKernel offset parameter for this filter. The latter is ignored.   Default: MPSRectNoClip, use the entire source texture. The clipRect specified in MPSUnaryImageKernel is used to control the origin in the destination texture where the min, max values are written.  The clipRect.width must be >=2.  The clipRect.height must be >= 1.
-//
-// WithClipRectSource sets the clipRectSource property and returns the receiver for chaining.
-func (x *ImageReduceRowMean) WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMean {
-	x.inner.MPSImageReduceUnary.SetClipRectSource(clipRectSource)
+	x := &ImageReduceRowMean{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// The position of the destination clip rectangle origin relative to the source buffer.
-//
-// WithOffset sets the offset property and returns the receiver for chaining.
-func (x *ImageReduceRowMean) WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMean {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetOffset(offset)
+// imageReduceRowMeanAdopt wraps an Objective-C object that this code just created as a
+// ImageReduceRowMean (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func imageReduceRowMeanAdopt(id objc.ID) *ImageReduceRowMean {
+	if id == 0 {
+		return nil
+	}
+	x := &ImageReduceRowMean{Handle: objref.Wrap(id)}
+	objref.Track(x)
 	return x
 }
 
-// An optional clip rectangle to use when writing data. Only the pixels in the rectangle will be overwritten.
-//
-// WithClipRect sets the clipRect property and returns the receiver for chaining.
-func (x *ImageReduceRowMean) WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMean {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetClipRect(clipRect)
-	return x
+// Description returns the object's -description text.
+func (x *ImageReduceRowMean) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// The edge mode to use when texture reads stray off the edge of an image.
-//
-// WithEdgeMode sets the edgeMode property and returns the receiver for chaining.
-func (x *ImageReduceRowMean) WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMean {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.SetEdgeMode(edgeMode)
-	return x
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ImageReduceRowMean) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
 }
 
-// The set of options used to run the kernel.
-//
-// WithOptions sets the options property and returns the receiver for chaining.
-func (x *ImageReduceRowMean) WithOptions(options mpscore.MPSKernelOptions) *ImageReduceRowMean {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetOptions(options)
-	return x
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ImageReduceRowMean) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewImageReduceRowMean creates a new ImageReduceRowMean.
+func NewImageReduceRowMean() *ImageReduceRowMean {
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSImageReduceRowMean")), objc.RegisterName("new"))
+	return imageReduceRowMeanAdopt(_id)
 }
 
 // The string that identifies the kernel.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ImageReduceRowMean) WithLabel(label string) *ImageReduceRowMean {
-	x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
-}
-
-func (x *ImageReduceRowMean) asImageReduceUnary() *mpsimage.MPSImageReduceUnary {
-	return &x.inner.MPSImageReduceUnary
-}
-
-func (x *ImageReduceRowMean) asUnaryImageKernel() *mpsimage.MPSUnaryImageKernel {
-	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel
-}
-
-func (x *ImageReduceRowMean) asKernel() *mpscore.MPSKernel {
-	return &x.inner.MPSImageReduceUnary.MPSUnaryImageKernel.MPSKernel
 }
 
 // ImageReduceRowMeanable is the interface implemented by [ImageReduceRowMean], for mocking and DI.
 type ImageReduceRowMeanable interface {
-	Unwrap() *raw.MPSImageReduceRowMean
-	WithClipRectSource(clipRectSource metal.MTLRegion) *ImageReduceRowMean
-	WithOffset(offset mpscore.MPSOffset) *ImageReduceRowMean
-	WithClipRect(clipRect metal.MTLRegion) *ImageReduceRowMean
-	WithEdgeMode(edgeMode mpscore.MPSImageEdgeMode) *ImageReduceRowMean
-	WithOptions(options mpscore.MPSKernelOptions) *ImageReduceRowMean
+	obj.Object
 	WithLabel(label string) *ImageReduceRowMean
 }
 

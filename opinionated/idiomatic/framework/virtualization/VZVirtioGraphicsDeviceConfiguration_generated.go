@@ -5,92 +5,92 @@
 package virtualization
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Configuration that represents the configuration of a Virtio graphics device for a Linux VM.
 //
-// VirtioGraphicsDeviceConfiguration wraps [raw.VZVirtioGraphicsDeviceConfiguration] with a fluent Go API.
+// VirtioGraphicsDeviceConfiguration is an idiomatic wrapper over the Objective-C class VZVirtioGraphicsDeviceConfiguration.
 type VirtioGraphicsDeviceConfiguration struct {
-	inner *raw.VZVirtioGraphicsDeviceConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZVirtioGraphicsDeviceConfiguration].
-func (x *VirtioGraphicsDeviceConfiguration) Unwrap() *raw.VZVirtioGraphicsDeviceConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *VirtioGraphicsDeviceConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// VirtioGraphicsDeviceConfigurationFromID adopts an existing object pointer as a VirtioGraphicsDeviceConfiguration (nil for 0).
+// VirtioGraphicsDeviceConfigurationFromID adopts an existing Objective-C object as a VirtioGraphicsDeviceConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func VirtioGraphicsDeviceConfigurationFromID(id objc.ID) *VirtioGraphicsDeviceConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &VirtioGraphicsDeviceConfiguration{inner: raw.VZVirtioGraphicsDeviceConfigurationFromID(id)}
+	x := &VirtioGraphicsDeviceConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewVirtioGraphicsDeviceConfiguration creates a new [VirtioGraphicsDeviceConfiguration].
+// virtioGraphicsDeviceConfigurationAdopt wraps an Objective-C object that this code just created as a
+// VirtioGraphicsDeviceConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func virtioGraphicsDeviceConfigurationAdopt(id objc.ID) *VirtioGraphicsDeviceConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &VirtioGraphicsDeviceConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *VirtioGraphicsDeviceConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *VirtioGraphicsDeviceConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *VirtioGraphicsDeviceConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewVirtioGraphicsDeviceConfiguration creates a new VirtioGraphicsDeviceConfiguration.
 func NewVirtioGraphicsDeviceConfiguration() *VirtioGraphicsDeviceConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZVirtioGraphicsDeviceConfiguration")), objc.RegisterName("new"))
-	return &VirtioGraphicsDeviceConfiguration{inner: raw.VZVirtioGraphicsDeviceConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("VZVirtioGraphicsDeviceConfiguration")), objc.RegisterName("new"))
+	return virtioGraphicsDeviceConfigurationAdopt(_id)
 }
 
 // The array of output devices.
 //
-// WithScanouts sets the collection, converting the Go slice to an NSArray.
-func (x *VirtioGraphicsDeviceConfiguration) WithScanouts(items ...*raw.VZVirtioGraphicsScanoutConfiguration) *VirtioGraphicsDeviceConfiguration {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetScanouts(foundation.NSArrayFromID[*raw.VZVirtioGraphicsScanoutConfiguration](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := foundation.NSArrayFromID[*raw.VZVirtioGraphicsScanoutConfiguration](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetScanouts(_arr)
+// WithScanouts sets the collection and returns the receiver so calls can be chained.
+func (x *VirtioGraphicsDeviceConfiguration) WithScanouts(items ...*VirtioGraphicsScanoutConfiguration) *VirtioGraphicsDeviceConfiguration {
+	_arr := purego.SliceToNSArray(items, func(_v *VirtioGraphicsScanoutConfiguration) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanouts:"), _arr)
 	return x
 }
 
 // Scanouts returns the collection as a Go slice.
 func (x *VirtioGraphicsDeviceConfiguration) Scanouts() []*VirtioGraphicsScanoutConfiguration {
-	arr := x.inner.Scanouts()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *VirtioGraphicsScanoutConfiguration {
-		return &VirtioGraphicsScanoutConfiguration{inner: raw.VZVirtioGraphicsScanoutConfigurationFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scanouts"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *VirtioGraphicsScanoutConfiguration {
+		return VirtioGraphicsScanoutConfigurationFromID(_id)
 	})
 }
 
-// SetScanouts calls the underlying SetScanouts.
-func (x *VirtioGraphicsDeviceConfiguration) SetScanouts(scanouts *foundation.NSArray[*raw.VZVirtioGraphicsScanoutConfiguration]) {
-	x.inner.SetScanouts(scanouts)
-}
-
-func (x *VirtioGraphicsDeviceConfiguration) asGraphicsDeviceConfiguration() *raw.VZGraphicsDeviceConfiguration {
-	return &x.inner.VZGraphicsDeviceConfiguration
+func (x *VirtioGraphicsDeviceConfiguration) SetScanouts(scanouts []*VirtioGraphicsScanoutConfiguration) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScanouts:"), purego.SliceToNSArray(scanouts, func(_v *VirtioGraphicsScanoutConfiguration) objc.ID { return objref.IDOf(_v) }))
 }
 
 // VirtioGraphicsDeviceConfigurationable is the interface implemented by [VirtioGraphicsDeviceConfiguration], for mocking and DI.
 type VirtioGraphicsDeviceConfigurationable interface {
-	Unwrap() *raw.VZVirtioGraphicsDeviceConfiguration
-	WithScanouts(items ...*raw.VZVirtioGraphicsScanoutConfiguration) *VirtioGraphicsDeviceConfiguration
+	obj.Object
+	WithScanouts(items ...*VirtioGraphicsScanoutConfiguration) *VirtioGraphicsDeviceConfiguration
 	Scanouts() []*VirtioGraphicsScanoutConfiguration
-	SetScanouts(scanouts *foundation.NSArray[*raw.VZVirtioGraphicsScanoutConfiguration])
+	SetScanouts(scanouts []*VirtioGraphicsScanoutConfiguration)
 }
 
 var _ VirtioGraphicsDeviceConfigurationable = (*VirtioGraphicsDeviceConfiguration)(nil)

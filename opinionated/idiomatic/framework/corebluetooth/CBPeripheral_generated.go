@@ -5,212 +5,179 @@
 package corebluetooth
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corebluetooth"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A remote peripheral device.
 //
-// Peripheral wraps [raw.CBPeripheral] with a fluent Go API.
+// Peripheral is an idiomatic wrapper over the Objective-C class CBPeripheral.
 type Peripheral struct {
-	inner *raw.CBPeripheral
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CBPeripheral].
-func (x *Peripheral) Unwrap() *raw.CBPeripheral { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Peripheral) ID() objc.ID { return x.inner.Ptr() }
-
-// PeripheralFromID adopts an existing object pointer as a Peripheral (nil for 0).
+// PeripheralFromID adopts an existing Objective-C object as a Peripheral
+// (nil for 0), retaining it and registering a release finalizer.
 func PeripheralFromID(id objc.ID) *Peripheral {
 	if id == 0 {
 		return nil
 	}
-	return &Peripheral{inner: raw.CBPeripheralFromID(id)}
-}
-
-// NewPeripheral creates a new [Peripheral].
-func NewPeripheral() *Peripheral {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CBPeripheral")), objc.RegisterName("new"))
-	return &Peripheral{inner: raw.CBPeripheralFromID(_id)}
-}
-
-// The delegate object specified to receive peripheral events.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *Peripheral) WithDelegate(delegate raw.CBPeripheralDelegate) *Peripheral {
-	x.inner.SetDelegate(delegate)
+	x := &Peripheral{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
+// peripheralAdopt wraps an Objective-C object that this code just created as a
+// Peripheral (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func peripheralAdopt(id objc.ID) *Peripheral {
+	if id == 0 {
+		return nil
+	}
+	x := &Peripheral{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Peripheral) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Peripheral) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Peripheral) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPeripheral creates a new Peripheral.
+func NewPeripheral() *Peripheral {
+	_id := objc.Send[objc.ID](objc.ID(_class("CBPeripheral")), objc.RegisterName("new"))
+	return peripheralAdopt(_id)
+}
+
 // Retrieves the current RSSI value for the peripheral while connected to the central manager.
-//
-// ReadRSSI calls the underlying ReadRSSI.
 func (x *Peripheral) ReadRSSI() {
-	x.inner.ReadRSSI()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readRSSI"))
 }
 
 // Discovers the specified services of the peripheral.
-//
-// DiscoverServices calls the underlying DiscoverServices.
-func (x *Peripheral) DiscoverServices(serviceUUIDs *foundation.NSArray[*raw.CBUUID]) {
-	x.inner.DiscoverServices(serviceUUIDs)
+func (x *Peripheral) DiscoverServices(serviceUUIDs []*UUID) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoverServices:"), purego.SliceToNSArray(serviceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Discovers the specified included services of a previously-discovered service.
-//
-// DiscoverIncludedServicesForService calls the underlying DiscoverIncludedServicesForService.
-func (x *Peripheral) DiscoverIncludedServicesForService(includedServiceUUIDs *foundation.NSArray[*raw.CBUUID], service *raw.CBService) {
-	x.inner.DiscoverIncludedServicesForService(includedServiceUUIDs, service)
+func (x *Peripheral) DiscoverIncludedServicesForService(includedServiceUUIDs []*UUID, service *Service) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoverIncludedServices:forService:"), purego.SliceToNSArray(includedServiceUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }), objref.IDOf(service))
 }
 
 // Discovers the specified characteristics of a service.
-//
-// DiscoverCharacteristicsForService calls the underlying DiscoverCharacteristicsForService.
-func (x *Peripheral) DiscoverCharacteristicsForService(characteristicUUIDs *foundation.NSArray[*raw.CBUUID], service *raw.CBService) {
-	x.inner.DiscoverCharacteristicsForService(characteristicUUIDs, service)
+func (x *Peripheral) DiscoverCharacteristicsForService(characteristicUUIDs []*UUID, service *Service) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoverCharacteristics:forService:"), purego.SliceToNSArray(characteristicUUIDs, func(_v *UUID) objc.ID { return objref.IDOf(_v) }), objref.IDOf(service))
 }
 
 // Retrieves the value of a specified characteristic.
-//
-// ReadValueForCharacteristic calls the underlying ReadValueForCharacteristic.
-func (x *Peripheral) ReadValueForCharacteristic(characteristic *raw.CBCharacteristic) {
-	x.inner.ReadValueForCharacteristic(characteristic)
+func (x *Peripheral) ReadValueForCharacteristic(characteristic *Characteristic) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readValueForCharacteristic:"), objref.IDOf(characteristic))
 }
 
 // The maximum amount of data, in bytes, you can send to a characteristic in a single write type.
-//
-// MaximumWriteValueLengthForType calls the underlying MaximumWriteValueLengthForType.
-func (x *Peripheral) MaximumWriteValueLengthForType(type_ CBCharacteristicWriteType) uint {
-	return x.inner.MaximumWriteValueLengthForType(raw.CBCharacteristicWriteType(type_))
+func (x *Peripheral) MaximumWriteValueLengthForType(type_ CharacteristicWriteType) int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("maximumWriteValueLengthForType:"), type_)
+	return _r
 }
 
 // Writes the value of a characteristic.
-//
-// WriteValueForCharacteristicType calls the underlying WriteValueForCharacteristicType.
-func (x *Peripheral) WriteValueForCharacteristicType(data *foundation.NSData, characteristic *raw.CBCharacteristic, type_ CBCharacteristicWriteType) {
-	x.inner.WriteValueForCharacteristicType(data, characteristic, raw.CBCharacteristicWriteType(type_))
+func (x *Peripheral) WriteValueForCharacteristicType(data obj.Object, characteristic *Characteristic, type_ CharacteristicWriteType) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeValue:forCharacteristic:type:"), objref.IDOf(data), objref.IDOf(characteristic), type_)
 }
 
 // Sets notifications or indications for the value of a specified characteristic.
-//
-// SetNotifyValueForCharacteristic calls the underlying SetNotifyValueForCharacteristic.
-func (x *Peripheral) SetNotifyValueForCharacteristic(enabled bool, characteristic *raw.CBCharacteristic) {
-	x.inner.SetNotifyValueForCharacteristic(enabled, characteristic)
+func (x *Peripheral) SetNotifyValueForCharacteristic(enabled bool, characteristic *Characteristic) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNotifyValue:forCharacteristic:"), enabled, objref.IDOf(characteristic))
 }
 
 // Discovers the descriptors of a characteristic.
-//
-// DiscoverDescriptorsForCharacteristic calls the underlying DiscoverDescriptorsForCharacteristic.
-func (x *Peripheral) DiscoverDescriptorsForCharacteristic(characteristic *raw.CBCharacteristic) {
-	x.inner.DiscoverDescriptorsForCharacteristic(characteristic)
+func (x *Peripheral) DiscoverDescriptorsForCharacteristic(characteristic *Characteristic) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("discoverDescriptorsForCharacteristic:"), objref.IDOf(characteristic))
 }
 
 // Retrieves the value of a specified characteristic descriptor.
-//
-// ReadValueForDescriptor calls the underlying ReadValueForDescriptor.
-func (x *Peripheral) ReadValueForDescriptor(descriptor *raw.CBDescriptor) {
-	x.inner.ReadValueForDescriptor(descriptor)
+func (x *Peripheral) ReadValueForDescriptor(descriptor *Descriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readValueForDescriptor:"), objref.IDOf(descriptor))
 }
 
 // Writes the value of a characteristic descriptor.
-//
-// WriteValueForDescriptor calls the underlying WriteValueForDescriptor.
-func (x *Peripheral) WriteValueForDescriptor(data *foundation.NSData, descriptor *raw.CBDescriptor) {
-	x.inner.WriteValueForDescriptor(data, descriptor)
+func (x *Peripheral) WriteValueForDescriptor(data obj.Object, descriptor *Descriptor) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeValue:forDescriptor:"), objref.IDOf(data), objref.IDOf(descriptor))
 }
 
 // Attempts to open an L2CAP channel to the peripheral using the supplied Protocol/Service Multiplexer (PSM).
-//
-// OpenL2CAPChannel calls the underlying OpenL2CAPChannel.
 func (x *Peripheral) OpenL2CAPChannel(pSM uint16) {
-	x.inner.OpenL2CAPChannel(pSM)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("openL2CAPChannel:"), pSM)
 }
 
-// @property delegate @discussion The delegate object that will receive peripheral events.
-//
-// Delegate calls the underlying Delegate.
-func (x *Peripheral) Delegate() raw.CBPeripheralDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *Peripheral) SetDelegate(delegate raw.CBPeripheralDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// @property name @discussion The name of the peripheral.
-//
-// Name calls the underlying Name.
+// The name of the peripheral.
 func (x *Peripheral) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property RSSI @discussion The most recently read RSSI, in decibels. @deprecated Use {@link peripheral:didReadRSSI:error:} instead.
-//
-// RSSI calls the underlying RSSI.
-func (x *Peripheral) RSSI() *foundation.NSNumber {
-	return x.inner.RSSI()
+// The most recently read RSSI, in decibels.
+func (x *Peripheral) RSSI() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("RSSI"))
+	return obj.Wrap(_r)
 }
 
-// @property state @discussion The current connection state of the peripheral.
-//
-// State calls the underlying State.
-func (x *Peripheral) State() CBPeripheralState {
-	return CBPeripheralState(x.inner.State())
+// The current connection state of the peripheral.
+func (x *Peripheral) State() PeripheralState {
+	_r := objc.Send[PeripheralState](objref.IDOf(x), objc.RegisterName("state"))
+	return _r
 }
 
-// @property services @discussion A list of <code>CBService</code> objects that have been discovered on the peripheral.
+// A list of <code>CBService</code> objects that have been discovered on the peripheral.
 //
 // Services returns the collection as a Go slice.
 func (x *Peripheral) Services() []*Service {
-	arr := x.inner.Services()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Service {
-		return &Service{inner: raw.CBServiceFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("services"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Service { return ServiceFromID(_id) })
 }
 
-// @property canSendWriteWithoutResponse @discussion YES if the remote device has space to send a write without response. If this value is NO, the value will be set to YES after the current writes have been flushed, and <link>peripheralIsReadyToSendWriteWithoutResponse:</link> will be called.
-//
-// CanSendWriteWithoutResponse calls the underlying CanSendWriteWithoutResponse.
+// YES if the remote device has space to send a write without response. If this value is NO, the value will be set to YES after the current writes have been flushed, and <link>peripheralIsReadyToSendWriteWithoutResponse:</link> will be called.
 func (x *Peripheral) CanSendWriteWithoutResponse() bool {
-	return x.inner.CanSendWriteWithoutResponse()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("canSendWriteWithoutResponse"))
+	return _r
 }
-
-func (x *Peripheral) asPeer() *raw.CBPeer { return &x.inner.CBPeer }
 
 // Peripheralable is the interface implemented by [Peripheral], for mocking and DI.
 type Peripheralable interface {
-	Unwrap() *raw.CBPeripheral
-	WithDelegate(delegate raw.CBPeripheralDelegate) *Peripheral
+	obj.Object
 	ReadRSSI()
-	DiscoverServices(serviceUUIDs *foundation.NSArray[*raw.CBUUID])
-	DiscoverIncludedServicesForService(includedServiceUUIDs *foundation.NSArray[*raw.CBUUID], service *raw.CBService)
-	DiscoverCharacteristicsForService(characteristicUUIDs *foundation.NSArray[*raw.CBUUID], service *raw.CBService)
-	ReadValueForCharacteristic(characteristic *raw.CBCharacteristic)
-	MaximumWriteValueLengthForType(type_ CBCharacteristicWriteType) uint
-	WriteValueForCharacteristicType(data *foundation.NSData, characteristic *raw.CBCharacteristic, type_ CBCharacteristicWriteType)
-	SetNotifyValueForCharacteristic(enabled bool, characteristic *raw.CBCharacteristic)
-	DiscoverDescriptorsForCharacteristic(characteristic *raw.CBCharacteristic)
-	ReadValueForDescriptor(descriptor *raw.CBDescriptor)
-	WriteValueForDescriptor(data *foundation.NSData, descriptor *raw.CBDescriptor)
+	DiscoverServices(serviceUUIDs []*UUID)
+	DiscoverIncludedServicesForService(includedServiceUUIDs []*UUID, service *Service)
+	DiscoverCharacteristicsForService(characteristicUUIDs []*UUID, service *Service)
+	ReadValueForCharacteristic(characteristic *Characteristic)
+	MaximumWriteValueLengthForType(type_ CharacteristicWriteType) int
+	WriteValueForCharacteristicType(data obj.Object, characteristic *Characteristic, type_ CharacteristicWriteType)
+	SetNotifyValueForCharacteristic(enabled bool, characteristic *Characteristic)
+	DiscoverDescriptorsForCharacteristic(characteristic *Characteristic)
+	ReadValueForDescriptor(descriptor *Descriptor)
+	WriteValueForDescriptor(data obj.Object, descriptor *Descriptor)
 	OpenL2CAPChannel(pSM uint16)
-	Delegate() raw.CBPeripheralDelegate
-	SetDelegate(delegate raw.CBPeripheralDelegate)
 	Name() string
-	RSSI() *foundation.NSNumber
-	State() CBPeripheralState
+	RSSI() obj.Object
+	State() PeripheralState
 	Services() []*Service
 	CanSendWriteWithoutResponse() bool
 }

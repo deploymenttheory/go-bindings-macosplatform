@@ -5,71 +5,90 @@
 package mlcompute
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mlcompute"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A layer that applies an activation function to the source tensor and produces an output.
 //
-// ActivationLayer wraps [raw.MLCActivationLayer] with a fluent Go API.
+// ActivationLayer is an idiomatic wrapper over the Objective-C class MLCActivationLayer.
 type ActivationLayer struct {
-	inner *raw.MLCActivationLayer
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MLCActivationLayer].
-func (x *ActivationLayer) Unwrap() *raw.MLCActivationLayer { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ActivationLayer) ID() objc.ID { return x.inner.Ptr() }
-
-// ActivationLayerFromID adopts an existing object pointer as a ActivationLayer (nil for 0).
+// ActivationLayerFromID adopts an existing Objective-C object as a ActivationLayer
+// (nil for 0), retaining it and registering a release finalizer.
 func ActivationLayerFromID(id objc.ID) *ActivationLayer {
 	if id == 0 {
 		return nil
 	}
-	return &ActivationLayer{inner: raw.MLCActivationLayerFromID(id)}
+	x := &ActivationLayer{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewActivationLayer creates a new [ActivationLayer].
+// activationLayerAdopt wraps an Objective-C object that this code just created as a
+// ActivationLayer (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func activationLayerAdopt(id objc.ID) *ActivationLayer {
+	if id == 0 {
+		return nil
+	}
+	x := &ActivationLayer{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ActivationLayer) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ActivationLayer) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ActivationLayer) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewActivationLayer creates a new ActivationLayer.
 func NewActivationLayer() *ActivationLayer {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MLCActivationLayer")), objc.RegisterName("new"))
-	return &ActivationLayer{inner: raw.MLCActivationLayerFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MLCActivationLayer")), objc.RegisterName("new"))
+	return activationLayerAdopt(_id)
 }
 
 // A string that helps identify this layer.
 //
-// WithLabel sets the label property and returns the receiver for chaining.
+// WithLabel sets label and returns the receiver so calls can be chained.
 func (x *ActivationLayer) WithLabel(label string) *ActivationLayer {
-	x.inner.MLCLayer.SetLabel(foundation.NSStringStringWithUTF8String(label))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLabel:"), purego.NSString(label))
 	return x
 }
 
 // A Boolean that indicates whether you choose to debug the layer when executing a graph that includes it.
 //
-// WithIsDebuggingEnabled sets the isDebuggingEnabled property and returns the receiver for chaining.
+// WithIsDebuggingEnabled sets isDebuggingEnabled and returns the receiver so calls can be chained.
 func (x *ActivationLayer) WithIsDebuggingEnabled(isDebuggingEnabled bool) *ActivationLayer {
-	x.inner.MLCLayer.SetIsDebuggingEnabled(isDebuggingEnabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIsDebuggingEnabled:"), isDebuggingEnabled)
 	return x
 }
 
-// @property   descriptor @abstract   The activation descriptor
-//
-// Descriptor calls the underlying Descriptor.
+// The activation descriptor
 func (x *ActivationLayer) Descriptor() *ActivationDescriptor {
-	_r := x.inner.Descriptor()
-	if _r == nil {
-		return nil
-	}
-	return &ActivationDescriptor{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("descriptor"))
+	return ActivationDescriptorFromID(_r)
 }
-
-func (x *ActivationLayer) asLayer() *raw.MLCLayer { return &x.inner.MLCLayer }
 
 // ActivationLayerable is the interface implemented by [ActivationLayer], for mocking and DI.
 type ActivationLayerable interface {
-	Unwrap() *raw.MLCActivationLayer
+	obj.Object
 	WithLabel(label string) *ActivationLayer
 	WithIsDebuggingEnabled(isDebuggingEnabled bool) *ActivationLayer
 	Descriptor() *ActivationDescriptor

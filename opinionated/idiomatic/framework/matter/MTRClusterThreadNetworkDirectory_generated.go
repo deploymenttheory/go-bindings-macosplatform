@@ -6,73 +6,83 @@ package matter
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // Cluster Thread Network Directory Manages the names and credentials of Thread networks visible to the user.
 //
-// MTRClusterThreadNetworkDirectory wraps [raw.MTRClusterThreadNetworkDirectory] with a fluent Go API.
+// MTRClusterThreadNetworkDirectory is an idiomatic wrapper over the Objective-C class MTRClusterThreadNetworkDirectory.
 type MTRClusterThreadNetworkDirectory struct {
-	inner *raw.MTRClusterThreadNetworkDirectory
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRClusterThreadNetworkDirectory].
-func (x *MTRClusterThreadNetworkDirectory) Unwrap() *raw.MTRClusterThreadNetworkDirectory {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRClusterThreadNetworkDirectory) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRClusterThreadNetworkDirectoryFromID adopts an existing object pointer as a MTRClusterThreadNetworkDirectory (nil for 0).
+// MTRClusterThreadNetworkDirectoryFromID adopts an existing Objective-C object as a MTRClusterThreadNetworkDirectory
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRClusterThreadNetworkDirectoryFromID(id objc.ID) *MTRClusterThreadNetworkDirectory {
 	if id == 0 {
 		return nil
 	}
-	return &MTRClusterThreadNetworkDirectory{inner: raw.MTRClusterThreadNetworkDirectoryFromID(id)}
+	x := &MTRClusterThreadNetworkDirectory{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRClusterThreadNetworkDirectoryAdopt wraps an Objective-C object that this code just created as a
+// MTRClusterThreadNetworkDirectory (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRClusterThreadNetworkDirectoryAdopt(id objc.ID) *MTRClusterThreadNetworkDirectory {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRClusterThreadNetworkDirectory{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRClusterThreadNetworkDirectory) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRClusterThreadNetworkDirectory) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRClusterThreadNetworkDirectory) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // For all instance methods that take a completion (i.e. command invocations), the completion will be called on the provided queue.
 //
-// NewMTRClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue creates a new [MTRClusterThreadNetworkDirectory].
-func NewMTRClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue(device *raw.MTRDevice, endpointID *foundation.NSNumber, queue *foundation.NSObject) *MTRClusterThreadNetworkDirectory {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRClusterThreadNetworkDirectory")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), device.Ptr(), endpointID.Ptr(), queue.Ptr())
-	return &MTRClusterThreadNetworkDirectory{inner: raw.MTRClusterThreadNetworkDirectoryFromID(_id)}
-}
-
-// AddNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying AddNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterThreadNetworkDirectory) AddNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRThreadNetworkDirectoryClusterAddNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.AddNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
-}
-
-// RemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion calls the underlying RemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion.
-func (x *MTRClusterThreadNetworkDirectory) RemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer)) {
-	x.inner.RemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, completion)
+// NewMTRClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue creates a new MTRClusterThreadNetworkDirectory.
+func NewMTRClusterThreadNetworkDirectoryWithDeviceEndpointIDQueue(device *MTRDevice, endpointID obj.Object, queue obj.Object) *MTRClusterThreadNetworkDirectory {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRClusterThreadNetworkDirectory")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDevice:endpointID:queue:"), objref.IDOf(device), objref.IDOf(endpointID), objref.IDOf(queue))
+	return mTRClusterThreadNetworkDirectoryAdopt(_id)
 }
 
 // GetOperationalDatasetWithParamsExpectedValuesExpectedValueIntervalCompletion blocks until the operation completes or ctx is cancelled.
-func (x *MTRClusterThreadNetworkDirectory) GetOperationalDatasetWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error) {
+func (x *MTRClusterThreadNetworkDirectory) GetOperationalDatasetWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error) {
 	type _result struct {
 		val *MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams
 		err error
 	}
 	_ch := make(chan _result, 1)
-	x.inner.GetOperationalDatasetWithParamsExpectedValuesExpectedValueIntervalCompletion(params, expectedDataValueDictionaries, expectedValueIntervalMs, func(_p0 *raw.MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParamsFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getOperationalDatasetWithParams:expectedValues:expectedValueInterval:completion:"), objref.IDOf(params), purego.SliceToNSArray(expectedDataValueDictionaries, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), objref.IDOf(expectedValueIntervalMs), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -82,80 +92,68 @@ func (x *MTRClusterThreadNetworkDirectory) GetOperationalDatasetWithParamsExpect
 	}
 }
 
-// ReadAttributePreferredExtendedPanIDWithParams calls the underlying ReadAttributePreferredExtendedPanIDWithParams.
-func (x *MTRClusterThreadNetworkDirectory) ReadAttributePreferredExtendedPanIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributePreferredExtendedPanIDWithParams(params)
+func (x *MTRClusterThreadNetworkDirectory) ReadAttributePreferredExtendedPanIDWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributePreferredExtendedPanIDWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval calls the underlying WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval.
-func (x *MTRClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber) {
-	x.inner.WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval(dataValueDictionary, expectedValueIntervalMs)
+func (x *MTRClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:expectedValueInterval:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs))
 }
 
-// WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams calls the underlying WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams.
-func (x *MTRClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams) {
-	x.inner.WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams(dataValueDictionary, expectedValueIntervalMs, params)
+func (x *MTRClusterThreadNetworkDirectory) WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("writeAttributePreferredExtendedPanIDWithValue:expectedValueInterval:params:"), objref.IDOf(dataValueDictionary), objref.IDOf(expectedValueIntervalMs), objref.IDOf(params))
 }
 
-// ReadAttributeThreadNetworksWithParams calls the underlying ReadAttributeThreadNetworksWithParams.
-func (x *MTRClusterThreadNetworkDirectory) ReadAttributeThreadNetworksWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeThreadNetworksWithParams(params)
+func (x *MTRClusterThreadNetworkDirectory) ReadAttributeThreadNetworksWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeThreadNetworksWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeThreadNetworkTableSizeWithParams calls the underlying ReadAttributeThreadNetworkTableSizeWithParams.
-func (x *MTRClusterThreadNetworkDirectory) ReadAttributeThreadNetworkTableSizeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeThreadNetworkTableSizeWithParams(params)
+func (x *MTRClusterThreadNetworkDirectory) ReadAttributeThreadNetworkTableSizeWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeThreadNetworkTableSizeWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeGeneratedCommandListWithParams calls the underlying ReadAttributeGeneratedCommandListWithParams.
-func (x *MTRClusterThreadNetworkDirectory) ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeGeneratedCommandListWithParams(params)
+func (x *MTRClusterThreadNetworkDirectory) ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeGeneratedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAcceptedCommandListWithParams calls the underlying ReadAttributeAcceptedCommandListWithParams.
-func (x *MTRClusterThreadNetworkDirectory) ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAcceptedCommandListWithParams(params)
+func (x *MTRClusterThreadNetworkDirectory) ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAcceptedCommandListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeAttributeListWithParams calls the underlying ReadAttributeAttributeListWithParams.
-func (x *MTRClusterThreadNetworkDirectory) ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeAttributeListWithParams(params)
+func (x *MTRClusterThreadNetworkDirectory) ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeAttributeListWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeFeatureMapWithParams calls the underlying ReadAttributeFeatureMapWithParams.
-func (x *MTRClusterThreadNetworkDirectory) ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeFeatureMapWithParams(params)
+func (x *MTRClusterThreadNetworkDirectory) ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeFeatureMapWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
-// ReadAttributeClusterRevisionWithParams calls the underlying ReadAttributeClusterRevisionWithParams.
-func (x *MTRClusterThreadNetworkDirectory) ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ReadAttributeClusterRevisionWithParams(params)
-}
-
-func (x *MTRClusterThreadNetworkDirectory) asMTRGenericCluster() *raw.MTRGenericCluster {
-	return &x.inner.MTRGenericCluster
-}
-
-func (x *MTRClusterThreadNetworkDirectory) asMTRCluster() *raw.MTRCluster {
-	return &x.inner.MTRGenericCluster.MTRCluster
+func (x *MTRClusterThreadNetworkDirectory) ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("readAttributeClusterRevisionWithParams:"), objref.IDOf(params))
+	return obj.Wrap(_r)
 }
 
 // MTRClusterThreadNetworkDirectoryable is the interface implemented by [MTRClusterThreadNetworkDirectory], for mocking and DI.
 type MTRClusterThreadNetworkDirectoryable interface {
-	Unwrap() *raw.MTRClusterThreadNetworkDirectory
-	AddNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRThreadNetworkDirectoryClusterAddNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	RemoveNetworkWithParamsExpectedValuesExpectedValueIntervalCompletion(params *raw.MTRThreadNetworkDirectoryClusterRemoveNetworkParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber, completion func(unsafe.Pointer))
-	GetOperationalDatasetWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *raw.MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams, expectedDataValueDictionaries *foundation.NSArray[objc.ID], expectedValueIntervalMs *foundation.NSNumber) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error)
-	ReadAttributePreferredExtendedPanIDWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber)
-	WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams(dataValueDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], expectedValueIntervalMs *foundation.NSNumber, params *raw.MTRWriteParams)
-	ReadAttributeThreadNetworksWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeThreadNetworkTableSizeWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeGeneratedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAcceptedCommandListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeAttributeListWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeFeatureMapWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	ReadAttributeClusterRevisionWithParams(params *raw.MTRReadParams) *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	obj.Object
+	GetOperationalDatasetWithParamsExpectedValuesExpectedValueIntervalCompletion(ctx context.Context, params *MTRThreadNetworkDirectoryClusterGetOperationalDatasetParams, expectedDataValueDictionaries []obj.Object, expectedValueIntervalMs obj.Object) (*MTRThreadNetworkDirectoryClusterOperationalDatasetResponseParams, error)
+	ReadAttributePreferredExtendedPanIDWithParams(params *MTRReadParams) obj.Object
+	WriteAttributePreferredExtendedPanIDWithValueExpectedValueInterval(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object)
+	WriteAttributePreferredExtendedPanIDWithValueExpectedValueIntervalParams(dataValueDictionary obj.Object, expectedValueIntervalMs obj.Object, params *MTRWriteParams)
+	ReadAttributeThreadNetworksWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeThreadNetworkTableSizeWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeGeneratedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAcceptedCommandListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeAttributeListWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeFeatureMapWithParams(params *MTRReadParams) obj.Object
+	ReadAttributeClusterRevisionWithParams(params *MTRReadParams) obj.Object
 }
 
 var _ MTRClusterThreadNetworkDirectoryable = (*MTRClusterThreadNetworkDirectory)(nil)

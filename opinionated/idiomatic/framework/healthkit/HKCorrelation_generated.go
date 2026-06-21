@@ -5,72 +5,88 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A sample that groups multiple related samples into a single entry.
 //
-// Correlation wraps [raw.HKCorrelation] with a fluent Go API.
+// Correlation is an idiomatic wrapper over the Objective-C class HKCorrelation.
 type Correlation struct {
-	inner *raw.HKCorrelation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKCorrelation].
-func (x *Correlation) Unwrap() *raw.HKCorrelation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Correlation) ID() objc.ID { return x.inner.Ptr() }
-
-// CorrelationFromID adopts an existing object pointer as a Correlation (nil for 0).
+// CorrelationFromID adopts an existing Objective-C object as a Correlation
+// (nil for 0), retaining it and registering a release finalizer.
 func CorrelationFromID(id objc.ID) *Correlation {
 	if id == 0 {
 		return nil
 	}
-	return &Correlation{inner: raw.HKCorrelationFromID(id)}
+	x := &Correlation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewCorrelation creates a new [Correlation].
+// correlationAdopt wraps an Objective-C object that this code just created as a
+// Correlation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func correlationAdopt(id objc.ID) *Correlation {
+	if id == 0 {
+		return nil
+	}
+	x := &Correlation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Correlation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Correlation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Correlation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCorrelation creates a new Correlation.
 func NewCorrelation() *Correlation {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKCorrelation")), objc.RegisterName("new"))
-	return &Correlation{inner: raw.HKCorrelationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKCorrelation")), objc.RegisterName("new"))
+	return correlationAdopt(_id)
 }
 
 // Returns a set containing all the objects of the specified type in the correlation.
-//
-// ObjectsForType calls the underlying ObjectsForType.
-func (x *Correlation) ObjectsForType(objectType *raw.HKObjectType) *foundation.NSSet[*raw.HKSample] {
-	return x.inner.ObjectsForType(objectType)
+func (x *Correlation) ObjectsForType(objectType *ObjectType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objectsForType:"), objref.IDOf(objectType))
+	return obj.Wrap(_r)
 }
 
-// CorrelationType calls the underlying CorrelationType.
 func (x *Correlation) CorrelationType() *CorrelationType {
-	_r := x.inner.CorrelationType()
-	if _r == nil {
-		return nil
-	}
-	return &CorrelationType{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("correlationType"))
+	return CorrelationTypeFromID(_r)
 }
 
-// @property  objects @abstract  A set of HKSamples containing all of the objects that were saved with the receiver.
-//
-// Objects calls the underlying Objects.
-func (x *Correlation) Objects() *foundation.NSSet[*raw.HKSample] {
-	return x.inner.Objects()
+// A set of HKSamples containing all of the objects that were saved with the receiver.
+func (x *Correlation) Objects() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("objects"))
+	return obj.Wrap(_r)
 }
-
-func (x *Correlation) asSample() *raw.HKSample { return &x.inner.HKSample }
-
-func (x *Correlation) asObject() *raw.HKObject { return &x.inner.HKSample.HKObject }
 
 // Correlationable is the interface implemented by [Correlation], for mocking and DI.
 type Correlationable interface {
-	Unwrap() *raw.HKCorrelation
-	ObjectsForType(objectType *raw.HKObjectType) *foundation.NSSet[*raw.HKSample]
+	obj.Object
+	ObjectsForType(objectType *ObjectType) obj.Object
 	CorrelationType() *CorrelationType
-	Objects() *foundation.NSSet[*raw.HKSample]
+	Objects() obj.Object
 }
 
 var _ Correlationable = (*Correlation)(nil)

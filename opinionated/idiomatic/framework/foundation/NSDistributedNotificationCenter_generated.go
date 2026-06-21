@@ -5,92 +5,101 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A notification dispatch mechanism that enables the broadcast of notifications across task boundaries.
 //
-// DistributedNotificationCenter wraps [raw.NSDistributedNotificationCenter] with a fluent Go API.
+// DistributedNotificationCenter is an idiomatic wrapper over the Objective-C class NSDistributedNotificationCenter.
 type DistributedNotificationCenter struct {
-	inner *raw.NSDistributedNotificationCenter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSDistributedNotificationCenter].
-func (x *DistributedNotificationCenter) Unwrap() *raw.NSDistributedNotificationCenter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DistributedNotificationCenter) ID() objc.ID { return x.inner.Ptr() }
-
-// DistributedNotificationCenterFromID adopts an existing object pointer as a DistributedNotificationCenter (nil for 0).
+// DistributedNotificationCenterFromID adopts an existing Objective-C object as a DistributedNotificationCenter
+// (nil for 0), retaining it and registering a release finalizer.
 func DistributedNotificationCenterFromID(id objc.ID) *DistributedNotificationCenter {
 	if id == 0 {
 		return nil
 	}
-	return &DistributedNotificationCenter{inner: raw.NSDistributedNotificationCenterFromID(id)}
+	x := &DistributedNotificationCenter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDistributedNotificationCenter creates a new [DistributedNotificationCenter].
+// distributedNotificationCenterAdopt wraps an Objective-C object that this code just created as a
+// DistributedNotificationCenter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func distributedNotificationCenterAdopt(id objc.ID) *DistributedNotificationCenter {
+	if id == 0 {
+		return nil
+	}
+	x := &DistributedNotificationCenter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DistributedNotificationCenter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DistributedNotificationCenter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DistributedNotificationCenter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDistributedNotificationCenter creates a new DistributedNotificationCenter.
 func NewDistributedNotificationCenter() *DistributedNotificationCenter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSDistributedNotificationCenter")), objc.RegisterName("new"))
-	return &DistributedNotificationCenter{inner: raw.NSDistributedNotificationCenterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSDistributedNotificationCenter")), objc.RegisterName("new"))
+	return distributedNotificationCenterAdopt(_id)
 }
 
-// WithSuspended sets the suspended property and returns the receiver for chaining.
+// WithSuspended sets suspended and returns the receiver so calls can be chained.
 func (x *DistributedNotificationCenter) WithSuspended(suspended bool) *DistributedNotificationCenter {
-	x.inner.SetSuspended(suspended)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspended:"), suspended)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *DistributedNotificationCenter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DistributedNotificationCenter {
-	x.inner.NSNotificationCenter.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *DistributedNotificationCenter) WithScriptingProperties(scriptingProperties obj.Object) *DistributedNotificationCenter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// AddObserverSelectorNameObjectSuspensionBehavior calls the underlying AddObserverSelectorNameObjectSuspensionBehavior.
-func (x *DistributedNotificationCenter) AddObserverSelectorNameObjectSuspensionBehavior(observer objc.ID, selector objc.SEL, name *raw.NSString, object string, suspensionBehavior NSNotificationSuspensionBehavior) {
-	x.inner.AddObserverSelectorNameObjectSuspensionBehavior(observer, selector, name, foundation.NSStringStringWithUTF8String(object), raw.NSNotificationSuspensionBehavior(suspensionBehavior))
+func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoDeliverImmediately(name *String, object string, userInfo obj.Object, deliverImmediately bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postNotificationName:object:userInfo:deliverImmediately:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), deliverImmediately)
 }
 
-// PostNotificationNameObjectUserInfoDeliverImmediately calls the underlying PostNotificationNameObjectUserInfoDeliverImmediately.
-func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoDeliverImmediately(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], deliverImmediately bool) {
-	x.inner.PostNotificationNameObjectUserInfoDeliverImmediately(name, foundation.NSStringStringWithUTF8String(object), userInfo, deliverImmediately)
+func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoOptions(name *String, object string, userInfo obj.Object, options DistributedNotificationOptions) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("postNotificationName:object:userInfo:options:"), objref.IDOf(name), purego.NSString(object), objref.IDOf(userInfo), options)
 }
 
-// PostNotificationNameObjectUserInfoOptions calls the underlying PostNotificationNameObjectUserInfoOptions.
-func (x *DistributedNotificationCenter) PostNotificationNameObjectUserInfoOptions(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], options NSDistributedNotificationOptions) {
-	x.inner.PostNotificationNameObjectUserInfoOptions(name, foundation.NSStringStringWithUTF8String(object), userInfo, raw.NSDistributedNotificationOptions(options))
-}
-
-// Suspended calls the underlying Suspended.
 func (x *DistributedNotificationCenter) Suspended() bool {
-	return x.inner.Suspended()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("suspended"))
+	return _r
 }
 
-// SetSuspended calls the underlying SetSuspended.
 func (x *DistributedNotificationCenter) SetSuspended(suspended bool) {
-	x.inner.SetSuspended(suspended)
-}
-
-func (x *DistributedNotificationCenter) asNotificationCenter() *raw.NSNotificationCenter {
-	return &x.inner.NSNotificationCenter
-}
-
-func (x *DistributedNotificationCenter) asObject() *raw.NSObject {
-	return &x.inner.NSNotificationCenter.NSObject
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSuspended:"), suspended)
 }
 
 // DistributedNotificationCenterable is the interface implemented by [DistributedNotificationCenter], for mocking and DI.
 type DistributedNotificationCenterable interface {
-	Unwrap() *raw.NSDistributedNotificationCenter
+	obj.Object
 	WithSuspended(suspended bool) *DistributedNotificationCenter
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *DistributedNotificationCenter
-	AddObserverSelectorNameObjectSuspensionBehavior(observer objc.ID, selector objc.SEL, name *raw.NSString, object string, suspensionBehavior NSNotificationSuspensionBehavior)
-	PostNotificationNameObjectUserInfoDeliverImmediately(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], deliverImmediately bool)
-	PostNotificationNameObjectUserInfoOptions(name *raw.NSString, object string, userInfo *raw.NSDictionary[objc.ID, objc.ID], options NSDistributedNotificationOptions)
+	WithScriptingProperties(scriptingProperties obj.Object) *DistributedNotificationCenter
+	PostNotificationNameObjectUserInfoDeliverImmediately(name *String, object string, userInfo obj.Object, deliverImmediately bool)
+	PostNotificationNameObjectUserInfoOptions(name *String, object string, userInfo obj.Object, options DistributedNotificationOptions)
 	Suspended() bool
 	SetSuspended(suspended bool)
 }

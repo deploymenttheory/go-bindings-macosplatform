@@ -5,113 +5,117 @@
 package mapkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mapkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A single route between a requested start and end point.
 //
-// Route wraps [raw.MKRoute] with a fluent Go API.
+// Route is an idiomatic wrapper over the Objective-C class MKRoute.
 type Route struct {
-	inner *raw.MKRoute
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MKRoute].
-func (x *Route) Unwrap() *raw.MKRoute { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Route) ID() objc.ID { return x.inner.Ptr() }
-
-// RouteFromID adopts an existing object pointer as a Route (nil for 0).
+// RouteFromID adopts an existing Objective-C object as a Route
+// (nil for 0), retaining it and registering a release finalizer.
 func RouteFromID(id objc.ID) *Route {
 	if id == 0 {
 		return nil
 	}
-	return &Route{inner: raw.MKRouteFromID(id)}
+	x := &Route{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRoute creates a new [Route].
+// routeAdopt wraps an Objective-C object that this code just created as a
+// Route (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func routeAdopt(id objc.ID) *Route {
+	if id == 0 {
+		return nil
+	}
+	x := &Route{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Route) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Route) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Route) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRoute creates a new Route.
 func NewRoute() *Route {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MKRoute")), objc.RegisterName("new"))
-	return &Route{inner: raw.MKRouteFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MKRoute")), objc.RegisterName("new"))
+	return routeAdopt(_id)
 }
 
-// Name calls the underlying Name.
 func (x *Route) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // AdvisoryNotices returns the collection as a Go slice.
 func (x *Route) AdvisoryNotices() []string {
-	arr := x.inner.AdvisoryNotices()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) string {
-		return purego.GoString(_id)
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("advisoryNotices"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) string { return purego.GoString(_id) })
 }
 
-// Distance calls the underlying Distance.
-func (x *Route) Distance() unsafe.Pointer {
-	return x.inner.Distance()
-}
-
-// ExpectedTravelTime calls the underlying ExpectedTravelTime.
 func (x *Route) ExpectedTravelTime() float64 {
-	return x.inner.ExpectedTravelTime()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("expectedTravelTime"))
+	return _r
 }
 
-// TransportType calls the underlying TransportType.
-func (x *Route) TransportType() MKDirectionsTransportType {
-	return MKDirectionsTransportType(x.inner.TransportType())
+func (x *Route) TransportType() DirectionsTransportType {
+	_r := objc.Send[DirectionsTransportType](objref.IDOf(x), objc.RegisterName("transportType"))
+	return _r
 }
 
-// Polyline calls the underlying Polyline.
 func (x *Route) Polyline() *Polyline {
-	_r := x.inner.Polyline()
-	if _r == nil {
-		return nil
-	}
-	return &Polyline{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("polyline"))
+	return PolylineFromID(_r)
 }
 
 // Steps returns the collection as a Go slice.
 func (x *Route) Steps() []*RouteStep {
-	arr := x.inner.Steps()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RouteStep {
-		return &RouteStep{inner: raw.MKRouteStepFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("steps"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RouteStep { return RouteStepFromID(_id) })
 }
 
-// HasTolls calls the underlying HasTolls.
 func (x *Route) HasTolls() bool {
-	return x.inner.HasTolls()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasTolls"))
+	return _r
 }
 
-// HasHighways calls the underlying HasHighways.
 func (x *Route) HasHighways() bool {
-	return x.inner.HasHighways()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("hasHighways"))
+	return _r
 }
 
 // Routeable is the interface implemented by [Route], for mocking and DI.
 type Routeable interface {
-	Unwrap() *raw.MKRoute
+	obj.Object
 	Name() string
 	AdvisoryNotices() []string
-	Distance() unsafe.Pointer
 	ExpectedTravelTime() float64
-	TransportType() MKDirectionsTransportType
+	TransportType() DirectionsTransportType
 	Polyline() *Polyline
 	Steps() []*RouteStep
 	HasTolls() bool

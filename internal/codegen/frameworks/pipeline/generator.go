@@ -619,6 +619,15 @@ func GenerateIdiomatic(cfg IdiomaticConfig) error {
 	reg := cfg.Registry
 	mapper := buildMapper(reg)
 
+	// Emit the layer's support packages (objref, errkit, rt) first so the whole
+	// idiomatic tree is regenerable from scratch on every run. They are
+	// framework-independent and live at the idiomatic root (the parent of the
+	// per-framework out dir, e.g. opinionated/idiomatic), matching their fixed
+	// import paths opinionated/idiomatic/{errkit,rt,internal/objref}.
+	if err := idiomatic.EmitSupportPackages(filepath.Dir(cfg.OutDir)); err != nil {
+		return fmt.Errorf("idiomatic support packages: %w", err)
+	}
+
 	filterSet := make(map[string]bool, len(cfg.Frameworks))
 	for _, fw := range cfg.Frameworks {
 		filterSet[strings.ToLower(fw)] = true

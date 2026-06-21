@@ -5,91 +5,96 @@
 package healthkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/healthkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A piece of data that can be stored inside the HealthKit store.
 //
-// Object wraps [raw.HKObject] with a fluent Go API.
+// Object is an idiomatic wrapper over the Objective-C class HKObject.
 type Object struct {
-	inner *raw.HKObject
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.HKObject].
-func (x *Object) Unwrap() *raw.HKObject { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Object) ID() objc.ID { return x.inner.Ptr() }
-
-// ObjectFromID adopts an existing object pointer as a Object (nil for 0).
+// ObjectFromID adopts an existing Objective-C object as a Object
+// (nil for 0), retaining it and registering a release finalizer.
 func ObjectFromID(id objc.ID) *Object {
 	if id == 0 {
 		return nil
 	}
-	return &Object{inner: raw.HKObjectFromID(id)}
+	x := &Object{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewObject creates a new [Object].
+// objectAdopt wraps an Objective-C object that this code just created as a
+// Object (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func objectAdopt(id objc.ID) *Object {
+	if id == 0 {
+		return nil
+	}
+	x := &Object{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Object) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Object) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Object) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewObject creates a new Object.
 func NewObject() *Object {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("HKObject")), objc.RegisterName("new"))
-	return &Object{inner: raw.HKObjectFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("HKObject")), objc.RegisterName("new"))
+	return objectAdopt(_id)
 }
 
-// @property      UUID @abstract      A unique identifier of the receiver in the HealthKit database.
-//
-// UUID calls the underlying UUID.
-func (x *Object) UUID() *foundation.NSUUID {
-	return x.inner.UUID()
+// A unique identifier of the receiver in the HealthKit database.
+func (x *Object) UUID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("UUID"))
+	return obj.Wrap(_r)
 }
 
-// Source calls the underlying Source.
-func (x *Object) Source() unsafe.Pointer {
-	return x.inner.Source()
-}
-
-// @property      sourceRevision @abstract      Represents the revision of the source responsible for saving the receiver.
-//
-// SourceRevision calls the underlying SourceRevision.
+// Represents the revision of the source responsible for saving the receiver.
 func (x *Object) SourceRevision() *SourceRevision {
-	_r := x.inner.SourceRevision()
-	if _r == nil {
-		return nil
-	}
-	return &SourceRevision{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sourceRevision"))
+	return SourceRevisionFromID(_r)
 }
 
-// @property      device @abstract      Represents the device that generated the data of the receiver.
-//
-// Device calls the underlying Device.
+// Represents the device that generated the data of the receiver.
 func (x *Object) Device() *Device {
-	_r := x.inner.Device()
-	if _r == nil {
-		return nil
-	}
-	return &Device{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("device"))
+	return DeviceFromID(_r)
 }
 
-// @property      metadata @abstract      Extra information describing properties of the receiver. @discussion    Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
-//
-// Metadata calls the underlying Metadata.
-func (x *Object) Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.Metadata()
+// Extra information describing properties of the receiver. Keys must be NSString and values must be either NSString, NSNumber, NSDate, or HKQuantity. See HKMetadata.h for potential metadata keys and values.
+func (x *Object) Metadata() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("metadata"))
+	return obj.Wrap(_r)
 }
-
-func (x *Object) asObject() *raw.HKObject { return x.inner }
 
 // Objectable is the interface implemented by [Object], for mocking and DI.
 type Objectable interface {
-	Unwrap() *raw.HKObject
-	UUID() *foundation.NSUUID
-	Source() unsafe.Pointer
+	obj.Object
+	UUID() obj.Object
 	SourceRevision() *SourceRevision
 	Device() *Device
-	Metadata() *foundation.NSDictionary[*foundation.NSString, objc.ID]
+	Metadata() obj.Object
 }
 
 var _ Objectable = (*Object)(nil)

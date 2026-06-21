@@ -5,64 +5,82 @@
 package metrickit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/metrickit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object representing a diagnostic report for an app that is too busy to handle user input responsively.
 //
-// HangDiagnostic wraps [raw.MXHangDiagnostic] with a fluent Go API.
+// HangDiagnostic is an idiomatic wrapper over the Objective-C class MXHangDiagnostic.
 type HangDiagnostic struct {
-	inner *raw.MXHangDiagnostic
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MXHangDiagnostic].
-func (x *HangDiagnostic) Unwrap() *raw.MXHangDiagnostic { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *HangDiagnostic) ID() objc.ID { return x.inner.Ptr() }
-
-// HangDiagnosticFromID adopts an existing object pointer as a HangDiagnostic (nil for 0).
+// HangDiagnosticFromID adopts an existing Objective-C object as a HangDiagnostic
+// (nil for 0), retaining it and registering a release finalizer.
 func HangDiagnosticFromID(id objc.ID) *HangDiagnostic {
 	if id == 0 {
 		return nil
 	}
-	return &HangDiagnostic{inner: raw.MXHangDiagnosticFromID(id)}
+	x := &HangDiagnostic{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewHangDiagnostic creates a new [HangDiagnostic].
-func NewHangDiagnostic() *HangDiagnostic {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MXHangDiagnostic")), objc.RegisterName("new"))
-	return &HangDiagnostic{inner: raw.MXHangDiagnosticFromID(_id)}
-}
-
-// @property      callStackTree @abstract      The application call stack tree associated with the hang.
-//
-// CallStackTree calls the underlying CallStackTree.
-func (x *HangDiagnostic) CallStackTree() *CallStackTree {
-	_r := x.inner.CallStackTree()
-	if _r == nil {
+// hangDiagnosticAdopt wraps an Objective-C object that this code just created as a
+// HangDiagnostic (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func hangDiagnosticAdopt(id objc.ID) *HangDiagnostic {
+	if id == 0 {
 		return nil
 	}
-	return &CallStackTree{inner: _r}
+	x := &HangDiagnostic{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property      hangDuration @abstract      Total hang duration for this diagnostic. @discussion    Dimensioned as NSUnitDuration.
-//
-// HangDuration calls the underlying HangDuration.
-func (x *HangDiagnostic) HangDuration() *foundation.NSMeasurement[*foundation.NSUnitDuration] {
-	return x.inner.HangDuration()
+// Description returns the object's -description text.
+func (x *HangDiagnostic) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *HangDiagnostic) asDiagnostic() *raw.MXDiagnostic { return &x.inner.MXDiagnostic }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *HangDiagnostic) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *HangDiagnostic) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewHangDiagnostic creates a new HangDiagnostic.
+func NewHangDiagnostic() *HangDiagnostic {
+	_id := objc.Send[objc.ID](objc.ID(_class("MXHangDiagnostic")), objc.RegisterName("new"))
+	return hangDiagnosticAdopt(_id)
+}
+
+// The application call stack tree associated with the hang.
+func (x *HangDiagnostic) CallStackTree() *CallStackTree {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("callStackTree"))
+	return CallStackTreeFromID(_r)
+}
+
+// Total hang duration for this diagnostic. Dimensioned as NSUnitDuration.
+func (x *HangDiagnostic) HangDuration() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("hangDuration"))
+	return obj.Wrap(_r)
+}
 
 // HangDiagnosticable is the interface implemented by [HangDiagnostic], for mocking and DI.
 type HangDiagnosticable interface {
-	Unwrap() *raw.MXHangDiagnostic
+	obj.Object
 	CallStackTree() *CallStackTree
-	HangDuration() *foundation.NSMeasurement[*foundation.NSUnitDuration]
+	HangDuration() obj.Object
 }
 
 var _ HangDiagnosticable = (*HangDiagnostic)(nil)

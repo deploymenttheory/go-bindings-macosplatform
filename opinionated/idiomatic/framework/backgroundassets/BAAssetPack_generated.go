@@ -5,95 +5,106 @@
 package backgroundassets
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/backgroundassets"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An archive of assets that the system downloads together.
 //
-// AssetPack wraps [raw.BAAssetPack] with a fluent Go API.
+// AssetPack is an idiomatic wrapper over the Objective-C class BAAssetPack.
 type AssetPack struct {
-	inner *raw.BAAssetPack
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.BAAssetPack].
-func (x *AssetPack) Unwrap() *raw.BAAssetPack { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetPack) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetPackFromID adopts an existing object pointer as a AssetPack (nil for 0).
+// AssetPackFromID adopts an existing Objective-C object as a AssetPack
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetPackFromID(id objc.ID) *AssetPack {
 	if id == 0 {
 		return nil
 	}
-	return &AssetPack{inner: raw.BAAssetPackFromID(id)}
+	x := &AssetPack{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetPack creates a new [AssetPack].
+// assetPackAdopt wraps an Objective-C object that this code just created as a
+// AssetPack (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetPackAdopt(id objc.ID) *AssetPack {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetPack{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetPack) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetPack) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetPack) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetPack creates a new AssetPack.
 func NewAssetPack() *AssetPack {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("BAAssetPack")), objc.RegisterName("new"))
-	return &AssetPack{inner: raw.BAAssetPackFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("BAAssetPack")), objc.RegisterName("new"))
+	return assetPackAdopt(_id)
 }
 
 // Creates a download object for the asset pack that you schedule using a download manager.
-//
-// Download calls the underlying Download.
 func (x *AssetPack) Download() *Download {
-	_r := x.inner.Download()
-	if _r == nil {
-		return nil
-	}
-	return &Download{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("download"))
+	return DownloadFromID(_r)
 }
 
 // Creates a download object for the asset pack that you schedule using a download manager.
-//
-// DownloadForContentRequest calls the underlying DownloadForContentRequest.
-func (x *AssetPack) DownloadForContentRequest(contentRequest BAContentRequest) *Download {
-	_r := x.inner.DownloadForContentRequest(raw.BAContentRequest(contentRequest))
-	if _r == nil {
-		return nil
-	}
-	return &Download{inner: _r}
+func (x *AssetPack) DownloadForContentRequest(contentRequest ContentRequest) *Download {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("downloadForContentRequest:"), contentRequest)
+	return DownloadFromID(_r)
 }
 
 // A unique identifier for the asset pack.
-//
-// Identifier calls the underlying Identifier.
 func (x *AssetPack) Identifier() string {
-	_r := x.inner.Identifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("identifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // The size of the download file containing the asset pack in bytes. This is different than the installation size, which could be larger.
-//
-// DownloadSize calls the underlying DownloadSize.
 func (x *AssetPack) DownloadSize() int {
-	return x.inner.DownloadSize()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("downloadSize"))
+	return _r
 }
 
 // JSON-encoded custom information that’s associated with the asset pack. This property is `nil` for Apple-hosted asset packs.
-//
-// UserInfo calls the underlying UserInfo.
-func (x *AssetPack) UserInfo() *foundation.NSData {
-	return x.inner.UserInfo()
+func (x *AssetPack) UserInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("userInfo"))
+	return obj.Wrap(_r)
 }
 
 // AssetPackable is the interface implemented by [AssetPack], for mocking and DI.
 type AssetPackable interface {
-	Unwrap() *raw.BAAssetPack
+	obj.Object
 	Download() *Download
-	DownloadForContentRequest(contentRequest BAContentRequest) *Download
+	DownloadForContentRequest(contentRequest ContentRequest) *Download
 	Identifier() string
 	DownloadSize() int
-	UserInfo() *foundation.NSData
+	UserInfo() obj.Object
 }
 
 var _ AssetPackable = (*AssetPack)(nil)

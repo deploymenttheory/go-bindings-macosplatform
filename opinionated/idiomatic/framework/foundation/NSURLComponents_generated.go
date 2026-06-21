@@ -5,617 +5,508 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that parses URLs into and constructs URLs from their constituent parts.
 //
-// URLComponents wraps [raw.NSURLComponents] with a fluent Go API.
+// URLComponents is an idiomatic wrapper over the Objective-C class NSURLComponents.
 type URLComponents struct {
-	inner *raw.NSURLComponents
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSURLComponents].
-func (x *URLComponents) Unwrap() *raw.NSURLComponents { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *URLComponents) ID() objc.ID { return x.inner.Ptr() }
-
-// URLComponentsFromID adopts an existing object pointer as a URLComponents (nil for 0).
+// URLComponentsFromID adopts an existing Objective-C object as a URLComponents
+// (nil for 0), retaining it and registering a release finalizer.
 func URLComponentsFromID(id objc.ID) *URLComponents {
 	if id == 0 {
 		return nil
 	}
-	return &URLComponents{inner: raw.NSURLComponentsFromID(id)}
+	x := &URLComponents{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewURLComponents creates a new [URLComponents].
+// uRLComponentsAdopt wraps an Objective-C object that this code just created as a
+// URLComponents (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func uRLComponentsAdopt(id objc.ID) *URLComponents {
+	if id == 0 {
+		return nil
+	}
+	x := &URLComponents{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *URLComponents) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *URLComponents) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *URLComponents) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewURLComponents creates a new URLComponents.
 func NewURLComponents() *URLComponents {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLComponents")), objc.RegisterName("new"))
-	return &URLComponents{inner: raw.NSURLComponentsFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSURLComponents")), objc.RegisterName("new"))
+	return uRLComponentsAdopt(_id)
 }
 
 // Creates a URL components object by parsing the URL from an NSURL object.
 //
-// NewURLComponentsWithURLResolvingAgainstBaseURL creates a new [URLComponents].
+// NewURLComponentsWithURLResolvingAgainstBaseURL creates a new URLComponents.
 func NewURLComponentsWithURLResolvingAgainstBaseURL(url string, resolve bool) *URLComponents {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLComponents")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:resolvingAgainstBaseURL:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)).Ptr(), resolve)
-	return &URLComponents{inner: raw.NSURLComponentsFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLComponents")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:resolvingAgainstBaseURL:"), rt.FileURL(url), resolve)
+	return uRLComponentsAdopt(_id)
 }
 
 // Creates a URL components object by parsing a URL in string form.
 //
-// NewURLComponentsWithString creates a new [URLComponents].
+// NewURLComponentsWithString creates a new URLComponents.
 func NewURLComponentsWithString(uRLString string) *URLComponents {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLComponents")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), foundation.NSStringStringWithUTF8String(uRLString).Ptr())
-	return &URLComponents{inner: raw.NSURLComponentsFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLComponents")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:"), purego.NSString(uRLString))
+	return uRLComponentsAdopt(_id)
 }
 
 // Creates a URL components instance from the provided string, optionally IDNA- and percent-encoding any invalid characters.
 //
-// NewURLComponentsWithStringEncodingInvalidCharacters creates a new [URLComponents].
+// NewURLComponentsWithStringEncodingInvalidCharacters creates a new URLComponents.
 func NewURLComponentsWithStringEncodingInvalidCharacters(uRLString string, encodingInvalidCharacters bool) *URLComponents {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSURLComponents")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:encodingInvalidCharacters:"), foundation.NSStringStringWithUTF8String(uRLString).Ptr(), encodingInvalidCharacters)
-	return &URLComponents{inner: raw.NSURLComponentsFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSURLComponents")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithString:encodingInvalidCharacters:"), purego.NSString(uRLString), encodingInvalidCharacters)
+	return uRLComponentsAdopt(_id)
 }
 
 // The scheme URL component, or nil if not present.
 //
-// WithScheme sets the scheme property and returns the receiver for chaining.
-func (x *URLComponents) WithScheme(scheme string) *URLComponents {
-	x.inner.SetScheme(foundation.NSStringStringWithUTF8String(scheme))
+// WithScheme sets scheme and returns the receiver so calls can be chained.
+func (x *URLComponents) WithScheme(scheme StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScheme:"), objref.IDOf(scheme))
 	return x
 }
 
 // The username URL subcomponent, or nil if not present.
 //
-// WithUser sets the user property and returns the receiver for chaining.
-func (x *URLComponents) WithUser(user string) *URLComponents {
-	x.inner.SetUser(foundation.NSStringStringWithUTF8String(user))
+// WithUser sets user and returns the receiver so calls can be chained.
+func (x *URLComponents) WithUser(user StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUser:"), objref.IDOf(user))
 	return x
 }
 
 // The password URL subcomponent, or nil if not present.
 //
-// WithPassword sets the password property and returns the receiver for chaining.
-func (x *URLComponents) WithPassword(password string) *URLComponents {
-	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
+// WithPassword sets password and returns the receiver so calls can be chained.
+func (x *URLComponents) WithPassword(password StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), objref.IDOf(password))
 	return x
 }
 
 // The host URL subcomponent, or nil if not present.
 //
-// WithHost sets the host property and returns the receiver for chaining.
-func (x *URLComponents) WithHost(host string) *URLComponents {
-	x.inner.SetHost(foundation.NSStringStringWithUTF8String(host))
+// WithHost sets host and returns the receiver so calls can be chained.
+func (x *URLComponents) WithHost(host StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHost:"), objref.IDOf(host))
 	return x
 }
 
 // The port number URL component, or nil if not present.
 //
-// WithPort sets the port property and returns the receiver for chaining.
+// WithPort sets port and returns the receiver so calls can be chained.
 func (x *URLComponents) WithPort(port NumberProvider) *URLComponents {
-	x.inner.SetPort(port.asNumber())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPort:"), objref.IDOf(port))
 	return x
 }
 
 // The path URL component, or nil if not present.
 //
-// WithPath sets the path property and returns the receiver for chaining.
-func (x *URLComponents) WithPath(path string) *URLComponents {
-	x.inner.SetPath(foundation.NSStringStringWithUTF8String(path))
+// WithPath sets path and returns the receiver so calls can be chained.
+func (x *URLComponents) WithPath(path StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), objref.IDOf(path))
 	return x
 }
 
 // The query URL component as a string, or nil if not present.
 //
-// WithQuery sets the query property and returns the receiver for chaining.
-func (x *URLComponents) WithQuery(query string) *URLComponents {
-	x.inner.SetQuery(foundation.NSStringStringWithUTF8String(query))
+// WithQuery sets query and returns the receiver so calls can be chained.
+func (x *URLComponents) WithQuery(query StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuery:"), objref.IDOf(query))
 	return x
 }
 
 // The fragment URL component (the part after a # symbol), or nil if not present.
 //
-// WithFragment sets the fragment property and returns the receiver for chaining.
-func (x *URLComponents) WithFragment(fragment string) *URLComponents {
-	x.inner.SetFragment(foundation.NSStringStringWithUTF8String(fragment))
+// WithFragment sets fragment and returns the receiver so calls can be chained.
+func (x *URLComponents) WithFragment(fragment StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragment:"), objref.IDOf(fragment))
 	return x
 }
 
 // The username URL subcomponent expressed as a URL-encoded string, or nil if not present.
 //
-// WithPercentEncodedUser sets the percentEncodedUser property and returns the receiver for chaining.
-func (x *URLComponents) WithPercentEncodedUser(percentEncodedUser string) *URLComponents {
-	x.inner.SetPercentEncodedUser(foundation.NSStringStringWithUTF8String(percentEncodedUser))
+// WithPercentEncodedUser sets percentEncodedUser and returns the receiver so calls can be chained.
+func (x *URLComponents) WithPercentEncodedUser(percentEncodedUser StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedUser:"), objref.IDOf(percentEncodedUser))
 	return x
 }
 
 // The password URL subcomponent expressed as a URL-encoded string, or nil if not present.
 //
-// WithPercentEncodedPassword sets the percentEncodedPassword property and returns the receiver for chaining.
-func (x *URLComponents) WithPercentEncodedPassword(percentEncodedPassword string) *URLComponents {
-	x.inner.SetPercentEncodedPassword(foundation.NSStringStringWithUTF8String(percentEncodedPassword))
+// WithPercentEncodedPassword sets percentEncodedPassword and returns the receiver so calls can be chained.
+func (x *URLComponents) WithPercentEncodedPassword(percentEncodedPassword StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedPassword:"), objref.IDOf(percentEncodedPassword))
 	return x
 }
 
 // The host URL subcomponent expressed as a URL-encoded string, or nil if not present.
 //
-// WithPercentEncodedHost sets the percentEncodedHost property and returns the receiver for chaining.
-func (x *URLComponents) WithPercentEncodedHost(percentEncodedHost string) *URLComponents {
-	x.inner.SetPercentEncodedHost(foundation.NSStringStringWithUTF8String(percentEncodedHost))
+// WithPercentEncodedHost sets percentEncodedHost and returns the receiver so calls can be chained.
+func (x *URLComponents) WithPercentEncodedHost(percentEncodedHost StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedHost:"), objref.IDOf(percentEncodedHost))
 	return x
 }
 
 // The path URL component expressed as a URL-encoded string, or nil if not present.
 //
-// WithPercentEncodedPath sets the percentEncodedPath property and returns the receiver for chaining.
-func (x *URLComponents) WithPercentEncodedPath(percentEncodedPath string) *URLComponents {
-	x.inner.SetPercentEncodedPath(foundation.NSStringStringWithUTF8String(percentEncodedPath))
+// WithPercentEncodedPath sets percentEncodedPath and returns the receiver so calls can be chained.
+func (x *URLComponents) WithPercentEncodedPath(percentEncodedPath StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedPath:"), objref.IDOf(percentEncodedPath))
 	return x
 }
 
 // The query URL component expressed as a URL-encoded string, or nil if not present.
 //
-// WithPercentEncodedQuery sets the percentEncodedQuery property and returns the receiver for chaining.
-func (x *URLComponents) WithPercentEncodedQuery(percentEncodedQuery string) *URLComponents {
-	x.inner.SetPercentEncodedQuery(foundation.NSStringStringWithUTF8String(percentEncodedQuery))
+// WithPercentEncodedQuery sets percentEncodedQuery and returns the receiver so calls can be chained.
+func (x *URLComponents) WithPercentEncodedQuery(percentEncodedQuery StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedQuery:"), objref.IDOf(percentEncodedQuery))
 	return x
 }
 
 // The fragment URL component (the part after a # symbol) expressed as a URL-encoded string, or nil if not present.
 //
-// WithPercentEncodedFragment sets the percentEncodedFragment property and returns the receiver for chaining.
-func (x *URLComponents) WithPercentEncodedFragment(percentEncodedFragment string) *URLComponents {
-	x.inner.SetPercentEncodedFragment(foundation.NSStringStringWithUTF8String(percentEncodedFragment))
+// WithPercentEncodedFragment sets percentEncodedFragment and returns the receiver so calls can be chained.
+func (x *URLComponents) WithPercentEncodedFragment(percentEncodedFragment StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedFragment:"), objref.IDOf(percentEncodedFragment))
 	return x
 }
 
 // The host subcomponent, percent-encoded.
 //
-// WithEncodedHost sets the encodedHost property and returns the receiver for chaining.
-func (x *URLComponents) WithEncodedHost(encodedHost string) *URLComponents {
-	x.inner.SetEncodedHost(foundation.NSStringStringWithUTF8String(encodedHost))
+// WithEncodedHost sets encodedHost and returns the receiver so calls can be chained.
+func (x *URLComponents) WithEncodedHost(encodedHost StringProvider) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncodedHost:"), objref.IDOf(encodedHost))
 	return x
 }
 
 // The query URL component as an array of name/value pairs.
 //
-// WithQueryItems sets the collection, converting the Go slice to an NSArray.
-func (x *URLComponents) WithQueryItems(items ...*raw.NSURLQueryItem) *URLComponents {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetQueryItems(raw.NSArrayFromID[*raw.NSURLQueryItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSURLQueryItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetQueryItems(_arr)
+// WithQueryItems sets the collection and returns the receiver so calls can be chained.
+func (x *URLComponents) WithQueryItems(items ...*URLQueryItem) *URLComponents {
+	_arr := purego.SliceToNSArray(items, func(_v *URLQueryItem) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryItems:"), _arr)
 	return x
 }
 
-// WithPercentEncodedQueryItems sets the collection, converting the Go slice to an NSArray.
-func (x *URLComponents) WithPercentEncodedQueryItems(items ...*raw.NSURLQueryItem) *URLComponents {
-	if len(items) == 0 {
-		// An empty (not nil) array: some raw setters dereference the argument.
-		x.inner.SetPercentEncodedQueryItems(raw.NSArrayFromID[*raw.NSURLQueryItem](
-			objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-				objc.RegisterName("array"))))
-		return x
-	}
-	_ptrs := make([]objc.ID, len(items))
-	for _i, _v := range items {
-		_ptrs[_i] = _v.Ptr()
-	}
-	_arr := raw.NSArrayFromID[*raw.NSURLQueryItem](
-		objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")),
-			objc.RegisterName("arrayWithObjects:count:"),
-			unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	x.inner.SetPercentEncodedQueryItems(_arr)
+// WithPercentEncodedQueryItems sets the collection and returns the receiver so calls can be chained.
+func (x *URLComponents) WithPercentEncodedQueryItems(items ...*URLQueryItem) *URLComponents {
+	_arr := purego.SliceToNSArray(items, func(_v *URLQueryItem) objc.ID { return objref.IDOf(_v) })
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedQueryItems:"), _arr)
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *URLComponents) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLComponents {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *URLComponents) WithScriptingProperties(scriptingProperties obj.Object) *URLComponents {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
 // Returns a URL object derived from the components object.
-//
-// URLRelativeToURL calls the underlying URLRelativeToURL.
 func (x *URLComponents) URLRelativeToURL(baseURL string) *URL {
-	_r := x.inner.URLRelativeToURL(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(baseURL)))
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URLRelativeToURL:"), rt.FileURL(baseURL))
+	return URLFromID(_r)
 }
 
-// URL calls the underlying URL.
 func (x *URLComponents) URL() *URL {
-	_r := x.inner.URL()
-	if _r == nil {
-		return nil
-	}
-	return &URL{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return URLFromID(_r)
 }
 
-// String calls the underlying String.
-func (x *URLComponents) String() *String {
-	_r := x.inner.String()
-	if _r == nil {
-		return nil
+func (x *URLComponents) String() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("string"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Scheme calls the underlying Scheme.
-func (x *URLComponents) Scheme() *String {
-	_r := x.inner.Scheme()
-	if _r == nil {
-		return nil
+func (x *URLComponents) Scheme() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheme"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetScheme calls the underlying SetScheme.
 func (x *URLComponents) SetScheme(scheme string) {
-	x.inner.SetScheme(foundation.NSStringStringWithUTF8String(scheme))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScheme:"), purego.NSString(scheme))
 }
 
-// User calls the underlying User.
-func (x *URLComponents) User() *String {
-	_r := x.inner.User()
-	if _r == nil {
-		return nil
+func (x *URLComponents) User() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("user"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetUser calls the underlying SetUser.
 func (x *URLComponents) SetUser(user string) {
-	x.inner.SetUser(foundation.NSStringStringWithUTF8String(user))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUser:"), purego.NSString(user))
 }
 
-// Password calls the underlying Password.
-func (x *URLComponents) Password() *String {
-	_r := x.inner.Password()
-	if _r == nil {
-		return nil
+func (x *URLComponents) Password() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("password"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetPassword calls the underlying SetPassword.
 func (x *URLComponents) SetPassword(password string) {
-	x.inner.SetPassword(foundation.NSStringStringWithUTF8String(password))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPassword:"), purego.NSString(password))
 }
 
-// Host calls the underlying Host.
-func (x *URLComponents) Host() *String {
-	_r := x.inner.Host()
-	if _r == nil {
-		return nil
+func (x *URLComponents) Host() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("host"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetHost calls the underlying SetHost.
 func (x *URLComponents) SetHost(host string) {
-	x.inner.SetHost(foundation.NSStringStringWithUTF8String(host))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setHost:"), purego.NSString(host))
 }
 
-// Port calls the underlying Port.
 func (x *URLComponents) Port() *Number {
-	_r := x.inner.Port()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("port"))
+	return NumberFromID(_r)
+}
+
+func (x *URLComponents) SetPort(port *Number) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPort:"), objref.IDOf(port))
+}
+
+func (x *URLComponents) Path() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("path"))
+	if _r == 0 {
+		return ""
 	}
-	return &Number{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetPort calls the underlying SetPort.
-func (x *URLComponents) SetPort(port *raw.NSNumber) {
-	x.inner.SetPort(port)
-}
-
-// Path calls the underlying Path.
-func (x *URLComponents) Path() *String {
-	_r := x.inner.Path()
-	if _r == nil {
-		return nil
-	}
-	return &String{inner: _r}
-}
-
-// SetPath calls the underlying SetPath.
 func (x *URLComponents) SetPath(path string) {
-	x.inner.SetPath(foundation.NSStringStringWithUTF8String(path))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPath:"), purego.NSString(path))
 }
 
-// Query calls the underlying Query.
-func (x *URLComponents) Query() *String {
-	_r := x.inner.Query()
-	if _r == nil {
-		return nil
+func (x *URLComponents) Query() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("query"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetQuery calls the underlying SetQuery.
 func (x *URLComponents) SetQuery(query string) {
-	x.inner.SetQuery(foundation.NSStringStringWithUTF8String(query))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQuery:"), purego.NSString(query))
 }
 
-// Fragment calls the underlying Fragment.
-func (x *URLComponents) Fragment() *String {
-	_r := x.inner.Fragment()
-	if _r == nil {
-		return nil
+func (x *URLComponents) Fragment() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fragment"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetFragment calls the underlying SetFragment.
 func (x *URLComponents) SetFragment(fragment string) {
-	x.inner.SetFragment(foundation.NSStringStringWithUTF8String(fragment))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setFragment:"), purego.NSString(fragment))
 }
 
-// PercentEncodedUser calls the underlying PercentEncodedUser.
-func (x *URLComponents) PercentEncodedUser() *String {
-	_r := x.inner.PercentEncodedUser()
-	if _r == nil {
-		return nil
+func (x *URLComponents) PercentEncodedUser() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("percentEncodedUser"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetPercentEncodedUser calls the underlying SetPercentEncodedUser.
 func (x *URLComponents) SetPercentEncodedUser(percentEncodedUser string) {
-	x.inner.SetPercentEncodedUser(foundation.NSStringStringWithUTF8String(percentEncodedUser))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedUser:"), purego.NSString(percentEncodedUser))
 }
 
-// PercentEncodedPassword calls the underlying PercentEncodedPassword.
-func (x *URLComponents) PercentEncodedPassword() *String {
-	_r := x.inner.PercentEncodedPassword()
-	if _r == nil {
-		return nil
+func (x *URLComponents) PercentEncodedPassword() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("percentEncodedPassword"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetPercentEncodedPassword calls the underlying SetPercentEncodedPassword.
 func (x *URLComponents) SetPercentEncodedPassword(percentEncodedPassword string) {
-	x.inner.SetPercentEncodedPassword(foundation.NSStringStringWithUTF8String(percentEncodedPassword))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedPassword:"), purego.NSString(percentEncodedPassword))
 }
 
-// PercentEncodedHost calls the underlying PercentEncodedHost.
-func (x *URLComponents) PercentEncodedHost() *String {
-	_r := x.inner.PercentEncodedHost()
-	if _r == nil {
-		return nil
+func (x *URLComponents) PercentEncodedHost() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("percentEncodedHost"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetPercentEncodedHost calls the underlying SetPercentEncodedHost.
 func (x *URLComponents) SetPercentEncodedHost(percentEncodedHost string) {
-	x.inner.SetPercentEncodedHost(foundation.NSStringStringWithUTF8String(percentEncodedHost))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedHost:"), purego.NSString(percentEncodedHost))
 }
 
-// PercentEncodedPath calls the underlying PercentEncodedPath.
-func (x *URLComponents) PercentEncodedPath() *String {
-	_r := x.inner.PercentEncodedPath()
-	if _r == nil {
-		return nil
+func (x *URLComponents) PercentEncodedPath() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("percentEncodedPath"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetPercentEncodedPath calls the underlying SetPercentEncodedPath.
 func (x *URLComponents) SetPercentEncodedPath(percentEncodedPath string) {
-	x.inner.SetPercentEncodedPath(foundation.NSStringStringWithUTF8String(percentEncodedPath))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedPath:"), purego.NSString(percentEncodedPath))
 }
 
-// PercentEncodedQuery calls the underlying PercentEncodedQuery.
-func (x *URLComponents) PercentEncodedQuery() *String {
-	_r := x.inner.PercentEncodedQuery()
-	if _r == nil {
-		return nil
+func (x *URLComponents) PercentEncodedQuery() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("percentEncodedQuery"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetPercentEncodedQuery calls the underlying SetPercentEncodedQuery.
 func (x *URLComponents) SetPercentEncodedQuery(percentEncodedQuery string) {
-	x.inner.SetPercentEncodedQuery(foundation.NSStringStringWithUTF8String(percentEncodedQuery))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedQuery:"), purego.NSString(percentEncodedQuery))
 }
 
-// PercentEncodedFragment calls the underlying PercentEncodedFragment.
-func (x *URLComponents) PercentEncodedFragment() *String {
-	_r := x.inner.PercentEncodedFragment()
-	if _r == nil {
-		return nil
+func (x *URLComponents) PercentEncodedFragment() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("percentEncodedFragment"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetPercentEncodedFragment calls the underlying SetPercentEncodedFragment.
 func (x *URLComponents) SetPercentEncodedFragment(percentEncodedFragment string) {
-	x.inner.SetPercentEncodedFragment(foundation.NSStringStringWithUTF8String(percentEncodedFragment))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedFragment:"), purego.NSString(percentEncodedFragment))
 }
 
-// EncodedHost calls the underlying EncodedHost.
-func (x *URLComponents) EncodedHost() *String {
-	_r := x.inner.EncodedHost()
-	if _r == nil {
-		return nil
+func (x *URLComponents) EncodedHost() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodedHost"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// SetEncodedHost calls the underlying SetEncodedHost.
 func (x *URLComponents) SetEncodedHost(encodedHost string) {
-	x.inner.SetEncodedHost(foundation.NSStringStringWithUTF8String(encodedHost))
-}
-
-// RangeOfScheme calls the underlying RangeOfScheme.
-func (x *URLComponents) RangeOfScheme() raw.NSRange {
-	return x.inner.RangeOfScheme()
-}
-
-// RangeOfUser calls the underlying RangeOfUser.
-func (x *URLComponents) RangeOfUser() raw.NSRange {
-	return x.inner.RangeOfUser()
-}
-
-// RangeOfPassword calls the underlying RangeOfPassword.
-func (x *URLComponents) RangeOfPassword() raw.NSRange {
-	return x.inner.RangeOfPassword()
-}
-
-// RangeOfHost calls the underlying RangeOfHost.
-func (x *URLComponents) RangeOfHost() raw.NSRange {
-	return x.inner.RangeOfHost()
-}
-
-// RangeOfPort calls the underlying RangeOfPort.
-func (x *URLComponents) RangeOfPort() raw.NSRange {
-	return x.inner.RangeOfPort()
-}
-
-// RangeOfPath calls the underlying RangeOfPath.
-func (x *URLComponents) RangeOfPath() raw.NSRange {
-	return x.inner.RangeOfPath()
-}
-
-// RangeOfQuery calls the underlying RangeOfQuery.
-func (x *URLComponents) RangeOfQuery() raw.NSRange {
-	return x.inner.RangeOfQuery()
-}
-
-// RangeOfFragment calls the underlying RangeOfFragment.
-func (x *URLComponents) RangeOfFragment() raw.NSRange {
-	return x.inner.RangeOfFragment()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEncodedHost:"), purego.NSString(encodedHost))
 }
 
 // QueryItems returns the collection as a Go slice.
 func (x *URLComponents) QueryItems() []*URLQueryItem {
-	arr := x.inner.QueryItems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *URLQueryItem {
-		return &URLQueryItem{inner: raw.NSURLQueryItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("queryItems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *URLQueryItem { return URLQueryItemFromID(_id) })
 }
 
-// SetQueryItems calls the underlying SetQueryItems.
-func (x *URLComponents) SetQueryItems(queryItems *raw.NSArray[*raw.NSURLQueryItem]) {
-	x.inner.SetQueryItems(queryItems)
+func (x *URLComponents) SetQueryItems(queryItems []*URLQueryItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setQueryItems:"), purego.SliceToNSArray(queryItems, func(_v *URLQueryItem) objc.ID { return objref.IDOf(_v) }))
 }
 
 // PercentEncodedQueryItems returns the collection as a Go slice.
 func (x *URLComponents) PercentEncodedQueryItems() []*URLQueryItem {
-	arr := x.inner.PercentEncodedQueryItems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *URLQueryItem {
-		return &URLQueryItem{inner: raw.NSURLQueryItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("percentEncodedQueryItems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *URLQueryItem { return URLQueryItemFromID(_id) })
 }
 
-// SetPercentEncodedQueryItems calls the underlying SetPercentEncodedQueryItems.
-func (x *URLComponents) SetPercentEncodedQueryItems(percentEncodedQueryItems *raw.NSArray[*raw.NSURLQueryItem]) {
-	x.inner.SetPercentEncodedQueryItems(percentEncodedQueryItems)
+func (x *URLComponents) SetPercentEncodedQueryItems(percentEncodedQueryItems []*URLQueryItem) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPercentEncodedQueryItems:"), purego.SliceToNSArray(percentEncodedQueryItems, func(_v *URLQueryItem) objc.ID { return objref.IDOf(_v) }))
 }
-
-func (x *URLComponents) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // URLComponentsable is the interface implemented by [URLComponents], for mocking and DI.
 type URLComponentsable interface {
-	Unwrap() *raw.NSURLComponents
-	WithScheme(scheme string) *URLComponents
-	WithUser(user string) *URLComponents
-	WithPassword(password string) *URLComponents
-	WithHost(host string) *URLComponents
+	obj.Object
+	WithScheme(scheme StringProvider) *URLComponents
+	WithUser(user StringProvider) *URLComponents
+	WithPassword(password StringProvider) *URLComponents
+	WithHost(host StringProvider) *URLComponents
 	WithPort(port NumberProvider) *URLComponents
-	WithPath(path string) *URLComponents
-	WithQuery(query string) *URLComponents
-	WithFragment(fragment string) *URLComponents
-	WithPercentEncodedUser(percentEncodedUser string) *URLComponents
-	WithPercentEncodedPassword(percentEncodedPassword string) *URLComponents
-	WithPercentEncodedHost(percentEncodedHost string) *URLComponents
-	WithPercentEncodedPath(percentEncodedPath string) *URLComponents
-	WithPercentEncodedQuery(percentEncodedQuery string) *URLComponents
-	WithPercentEncodedFragment(percentEncodedFragment string) *URLComponents
-	WithEncodedHost(encodedHost string) *URLComponents
-	WithQueryItems(items ...*raw.NSURLQueryItem) *URLComponents
-	WithPercentEncodedQueryItems(items ...*raw.NSURLQueryItem) *URLComponents
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *URLComponents
+	WithPath(path StringProvider) *URLComponents
+	WithQuery(query StringProvider) *URLComponents
+	WithFragment(fragment StringProvider) *URLComponents
+	WithPercentEncodedUser(percentEncodedUser StringProvider) *URLComponents
+	WithPercentEncodedPassword(percentEncodedPassword StringProvider) *URLComponents
+	WithPercentEncodedHost(percentEncodedHost StringProvider) *URLComponents
+	WithPercentEncodedPath(percentEncodedPath StringProvider) *URLComponents
+	WithPercentEncodedQuery(percentEncodedQuery StringProvider) *URLComponents
+	WithPercentEncodedFragment(percentEncodedFragment StringProvider) *URLComponents
+	WithEncodedHost(encodedHost StringProvider) *URLComponents
+	WithQueryItems(items ...*URLQueryItem) *URLComponents
+	WithPercentEncodedQueryItems(items ...*URLQueryItem) *URLComponents
+	WithScriptingProperties(scriptingProperties obj.Object) *URLComponents
 	URLRelativeToURL(baseURL string) *URL
 	URL() *URL
-	String() *String
-	Scheme() *String
+	String() string
+	Scheme() string
 	SetScheme(scheme string)
-	User() *String
+	User() string
 	SetUser(user string)
-	Password() *String
+	Password() string
 	SetPassword(password string)
-	Host() *String
+	Host() string
 	SetHost(host string)
 	Port() *Number
-	SetPort(port *raw.NSNumber)
-	Path() *String
+	SetPort(port *Number)
+	Path() string
 	SetPath(path string)
-	Query() *String
+	Query() string
 	SetQuery(query string)
-	Fragment() *String
+	Fragment() string
 	SetFragment(fragment string)
-	PercentEncodedUser() *String
+	PercentEncodedUser() string
 	SetPercentEncodedUser(percentEncodedUser string)
-	PercentEncodedPassword() *String
+	PercentEncodedPassword() string
 	SetPercentEncodedPassword(percentEncodedPassword string)
-	PercentEncodedHost() *String
+	PercentEncodedHost() string
 	SetPercentEncodedHost(percentEncodedHost string)
-	PercentEncodedPath() *String
+	PercentEncodedPath() string
 	SetPercentEncodedPath(percentEncodedPath string)
-	PercentEncodedQuery() *String
+	PercentEncodedQuery() string
 	SetPercentEncodedQuery(percentEncodedQuery string)
-	PercentEncodedFragment() *String
+	PercentEncodedFragment() string
 	SetPercentEncodedFragment(percentEncodedFragment string)
-	EncodedHost() *String
+	EncodedHost() string
 	SetEncodedHost(encodedHost string)
-	RangeOfScheme() raw.NSRange
-	RangeOfUser() raw.NSRange
-	RangeOfPassword() raw.NSRange
-	RangeOfHost() raw.NSRange
-	RangeOfPort() raw.NSRange
-	RangeOfPath() raw.NSRange
-	RangeOfQuery() raw.NSRange
-	RangeOfFragment() raw.NSRange
 	QueryItems() []*URLQueryItem
-	SetQueryItems(queryItems *raw.NSArray[*raw.NSURLQueryItem])
+	SetQueryItems(queryItems []*URLQueryItem)
 	PercentEncodedQueryItems() []*URLQueryItem
-	SetPercentEncodedQueryItems(percentEncodedQueryItems *raw.NSArray[*raw.NSURLQueryItem])
+	SetPercentEncodedQueryItems(percentEncodedQueryItems []*URLQueryItem)
 }
 
 var _ URLComponentsable = (*URLComponents)(nil)

@@ -5,112 +5,86 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 )
 
-// StandardOptions calls the underlying CKAllowedSharingOptionsStandardOptions.
+// An object set to the most permissive sharing options. The `standardOptions` has “CKAllowedSharingOptions/allowedParticipantPermissionOptions“ set to “CKSharingParticipantPermissionOption/any“ and “CKAllowedSharingOptions/allowedParticipantAccessOptions“ set to “CKSharingParticipantAccessOption/any“.
 func StandardOptions() *AllowedSharingOptions {
-	_r := raw.CKAllowedSharingOptionsStandardOptions()
-	if _r == nil {
-		return nil
-	}
-	return &AllowedSharingOptions{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CKAllowedSharingOptions")), objc.RegisterName("standardOptions"))
+	return AllowedSharingOptionsFromID(_r)
 }
 
-// DefaultContainer calls the underlying CKContainerDefaultContainer.
+// Returns the app’s default container.
 func DefaultContainer() *Container {
-	_r := raw.CKContainerDefaultContainer()
-	if _r == nil {
-		return nil
-	}
-	return &Container{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CKContainer")), objc.RegisterName("defaultContainer"))
+	return ContainerFromID(_r)
 }
 
-// ContainerWithIdentifier calls the underlying CKContainerContainerWithIdentifier.
+// Creates a container for the specified identifier.
 func ContainerWithIdentifier(containerIdentifier string) *Container {
-	_r := raw.CKContainerContainerWithIdentifier(foundation.NSStringStringWithUTF8String(containerIdentifier))
-	if _r == nil {
-		return nil
-	}
-	return &Container{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CKContainer")), objc.RegisterName("containerWithIdentifier:"), purego.NSString(containerIdentifier))
+	return ContainerFromID(_r)
 }
 
-// New calls the underlying CKDatabaseSubscriptionNew.
+// Creates an empty database subscription.
 func New() *DatabaseSubscription {
-	_r := raw.CKDatabaseSubscriptionNew()
-	if _r == nil {
-		return nil
-	}
-	return &DatabaseSubscription{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CKDatabaseSubscription")), objc.RegisterName("new"))
+	return DatabaseSubscriptionFromID(_r)
 }
 
-// FetchAllRecordZonesOperation calls the underlying CKFetchRecordZonesOperationFetchAllRecordZonesOperation.
+// Returns an operation for fetching all record zones in the current database.
 func FetchAllRecordZonesOperation() *FetchRecordZonesOperation {
-	_r := raw.CKFetchRecordZonesOperationFetchAllRecordZonesOperation()
-	if _r == nil {
-		return nil
-	}
-	return &FetchRecordZonesOperation{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordZonesOperation")), objc.RegisterName("fetchAllRecordZonesOperation"))
+	return FetchRecordZonesOperationFromID(_r)
 }
 
-// FetchCurrentUserRecordOperation calls the underlying CKFetchRecordsOperationFetchCurrentUserRecordOperation.
+// Returns a fetch operation for retrieving the current user record.
 func FetchCurrentUserRecordOperation() *FetchRecordsOperation {
-	_r := raw.CKFetchRecordsOperationFetchCurrentUserRecordOperation()
-	if _r == nil {
-		return nil
-	}
-	return &FetchRecordsOperation{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CKFetchRecordsOperation")), objc.RegisterName("fetchCurrentUserRecordOperation"))
+	return FetchRecordsOperationFromID(_r)
 }
 
-// FetchAllSubscriptionsOperation calls the underlying CKFetchSubscriptionsOperationFetchAllSubscriptionsOperation.
+// Returns an operation that fetches all of the user’s subscriptions.
 func FetchAllSubscriptionsOperation() *FetchSubscriptionsOperation {
-	_r := raw.CKFetchSubscriptionsOperationFetchAllSubscriptionsOperation()
-	if _r == nil {
-		return nil
-	}
-	return &FetchSubscriptionsOperation{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CKFetchSubscriptionsOperation")), objc.RegisterName("fetchAllSubscriptionsOperation"))
+	return FetchSubscriptionsOperationFromID(_r)
 }
 
-// NotificationFromRemoteNotificationDictionary calls the underlying CKNotificationNotificationFromRemoteNotificationDictionary.
-func NotificationFromRemoteNotificationDictionary(notificationDictionary *foundation.NSDictionary[objc.ID, objc.ID]) *Notification {
-	_r := raw.CKNotificationNotificationFromRemoteNotificationDictionary(notificationDictionary)
-	if _r == nil {
-		return nil
-	}
-	return &Notification{inner: _r}
+// Creates a new notification using the specified payload data.
+func NotificationFromRemoteNotificationDictionary(notificationDictionary obj.Object) *Notification {
+	_r := objc.Send[objc.ID](objc.ID(_class("CKNotification")), objc.RegisterName("notificationFromRemoteNotificationDictionary:"), objref.IDOf(notificationDictionary))
+	return NotificationFromID(_r)
 }
 
-// DefaultRecordZone calls the underlying CKRecordZoneDefaultRecordZone.
+// Returns the default record zone.
 func DefaultRecordZone() *RecordZone {
-	_r := raw.CKRecordZoneDefaultRecordZone()
-	if _r == nil {
-		return nil
-	}
-	return &RecordZone{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CKRecordZone")), objc.RegisterName("defaultRecordZone"))
+	return RecordZoneFromID(_r)
 }
 
-// OneTimeURLParticipant calls the underlying CKShareParticipantOneTimeURLParticipant.
+// Generate a unique URL for inviting a participant without knowing their handle When a participant's email address / phone number / userRecordID isn't known up-front, you can add a “CKShareParticipant/oneTimeURLParticipant“ to the share. Once you save the share, you can get a custom invitation link or one-time URL for the added participant via “CKShare/oneTimeURL(for:)“. Any recipient user can use this custom link to fetch share metadata and accept the share. Note that a one-time URL participant in the “ParticipantAcceptanceStatus/pending“ state has empty “CKUserIdentity/nameComponents“ and a nil “CKUserIdentity/lookupInfo“.
 func OneTimeURLParticipant() *ShareParticipant {
-	_r := raw.CKShareParticipantOneTimeURLParticipant()
-	if _r == nil {
-		return nil
-	}
-	return &ShareParticipant{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("CKShareParticipant")), objc.RegisterName("oneTimeURLParticipant"))
+	return ShareParticipantFromID(_r)
 }
 
-// LookupInfosWithEmails calls the underlying CKUserIdentityLookupInfoLookupInfosWithEmails.
-func LookupInfosWithEmails(emails *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*raw.CKUserIdentityLookupInfo] {
-	return raw.CKUserIdentityLookupInfoLookupInfosWithEmails(emails)
+// Returns an array of lookup infos for the specified email addresses. - Parameters: - emails: The email addresses for looking up the user identities. Use the values that this method returns in an “CKDiscoverUserIdentitiesOperation“ operation or an  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identities.
+func LookupInfosWithEmails(emails []string) []*UserIdentityLookupInfo {
+	_r := objc.Send[objc.ID](objc.ID(_class("CKUserIdentityLookupInfo")), objc.RegisterName("lookupInfosWithEmails:"), purego.SliceToNSArray(emails, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *UserIdentityLookupInfo { return UserIdentityLookupInfoFromID(_id) })
 }
 
-// LookupInfosWithPhoneNumbers calls the underlying CKUserIdentityLookupInfoLookupInfosWithPhoneNumbers.
-func LookupInfosWithPhoneNumbers(phoneNumbers *foundation.NSArray[*foundation.NSString]) *foundation.NSArray[*raw.CKUserIdentityLookupInfo] {
-	return raw.CKUserIdentityLookupInfoLookupInfosWithPhoneNumbers(phoneNumbers)
+// Returns an array of lookup infos for the specified phone numbers. - Parameters: - phoneNumbers: The phone numbers for looking up the user identities. Use the values that this method returns in an “CKDiscoverUserIdentitiesOperation“ operation or an  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identities.
+func LookupInfosWithPhoneNumbers(phoneNumbers []string) []*UserIdentityLookupInfo {
+	_r := objc.Send[objc.ID](objc.ID(_class("CKUserIdentityLookupInfo")), objc.RegisterName("lookupInfosWithPhoneNumbers:"), purego.SliceToNSArray(phoneNumbers, func(_v string) objc.ID { return purego.NSString(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *UserIdentityLookupInfo { return UserIdentityLookupInfoFromID(_id) })
 }
 
-// LookupInfosWithRecordIDs calls the underlying CKUserIdentityLookupInfoLookupInfosWithRecordIDs.
-func LookupInfosWithRecordIDs(recordIDs *foundation.NSArray[*raw.CKRecordID]) *foundation.NSArray[*raw.CKUserIdentityLookupInfo] {
-	return raw.CKUserIdentityLookupInfoLookupInfosWithRecordIDs(recordIDs)
+// Returns an array of lookup infos for the specified user record IDs. - Parameters: - recordIDs: The user record IDs for looking up the user identities. Use the values that this method returns in an “CKDiscoverUserIdentitiesOperation“ operation or an  “CKFetchShareParticipantsOperation“ operation to retrieve the corresponding user identities.
+func LookupInfosWithRecordIDs(recordIDs []*RecordID) []*UserIdentityLookupInfo {
+	_r := objc.Send[objc.ID](objc.ID(_class("CKUserIdentityLookupInfo")), objc.RegisterName("lookupInfosWithRecordIDs:"), purego.SliceToNSArray(recordIDs, func(_v *RecordID) objc.ID { return objref.IDOf(_v) }))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *UserIdentityLookupInfo { return UserIdentityLookupInfoFromID(_id) })
 }

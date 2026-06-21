@@ -5,160 +5,165 @@
 package corewlan
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corewlan"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Encapsulates an IEEE 802.11 network, providing read-only accessors to various properties of the network.
 //
-// Network wraps [raw.CWNetwork] with a fluent Go API.
+// Network is an idiomatic wrapper over the Objective-C class CWNetwork.
 type Network struct {
-	inner *raw.CWNetwork
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CWNetwork].
-func (x *Network) Unwrap() *raw.CWNetwork { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Network) ID() objc.ID { return x.inner.Ptr() }
-
-// NetworkFromID adopts an existing object pointer as a Network (nil for 0).
+// NetworkFromID adopts an existing Objective-C object as a Network
+// (nil for 0), retaining it and registering a release finalizer.
 func NetworkFromID(id objc.ID) *Network {
 	if id == 0 {
 		return nil
 	}
-	return &Network{inner: raw.CWNetworkFromID(id)}
+	x := &Network{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNetwork creates a new [Network].
+// networkAdopt wraps an Objective-C object that this code just created as a
+// Network (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func networkAdopt(id objc.ID) *Network {
+	if id == 0 {
+		return nil
+	}
+	x := &Network{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Network) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Network) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Network) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNetwork creates a new Network.
 func NewNetwork() *Network {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CWNetwork")), objc.RegisterName("new"))
-	return &Network{inner: raw.CWNetworkFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CWNetwork")), objc.RegisterName("new"))
+	return networkAdopt(_id)
 }
 
 // Method for determining CWNetwork object equality.
-//
-// IsEqualToNetwork calls the underlying IsEqualToNetwork.
-func (x *Network) IsEqualToNetwork(network *raw.CWNetwork) bool {
-	return x.inner.IsEqualToNetwork(network)
+func (x *Network) IsEqualToNetwork(network *Network) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEqualToNetwork:"), objref.IDOf(network))
+	return _r
 }
 
 // Method for determining which security types a network supports.
-//
-// SupportsSecurity calls the underlying SupportsSecurity.
-func (x *Network) SupportsSecurity(security CWSecurity) bool {
-	return x.inner.SupportsSecurity(raw.CWSecurity(security))
+func (x *Network) SupportsSecurity(security Security) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsSecurity:"), security)
+	return _r
 }
 
 // Method for determining which PHY modes a network supports.
-//
-// SupportsPHYMode calls the underlying SupportsPHYMode.
-func (x *Network) SupportsPHYMode(phyMode CWPHYMode) bool {
-	return x.inner.SupportsPHYMode(raw.CWPHYMode(phyMode))
+func (x *Network) SupportsPHYMode(phyMode PHYMode) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("supportsPHYMode:"), phyMode)
+	return _r
 }
 
-// @property @abstract Returns the service set identifier (SSID) for the Wi-Fi network device, encoded as a string. @discussion Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string. @note SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
-//
-// Ssid calls the underlying Ssid.
+// Returns the service set identifier (SSID) for the Wi-Fi network device, encoded as a string. Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
 func (x *Network) Ssid() string {
-	_r := x.inner.Ssid()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssid"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property @abstract Returns the service set identifier (SSID) for the Wi-Fi network device, encapsulated in an NSData object. @discussion The SSID is defined as 1-32 octets. @note SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
-//
-// SsidData calls the underlying SsidData.
-func (x *Network) SsidData() *foundation.NSData {
-	return x.inner.SsidData()
+// Returns the service set identifier (SSID) for the Wi-Fi network device, encapsulated in an NSData object. The SSID is defined as 1-32 octets.
+func (x *Network) SsidData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("ssidData"))
+	return obj.Wrap(_r)
 }
 
-// @property @abstract Returns the basic service set identifier (BSSID) for the Wi-Fi network device, returned as UTF-8 string. @discussion Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX. @note BSSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
-//
-// Bssid calls the underlying Bssid.
+// Returns the basic service set identifier (BSSID) for the Wi-Fi network device, returned as UTF-8 string. Returns a UTF-8 string using hexadecimal characters formatted as XX:XX:XX:XX:XX:XX.
 func (x *Network) Bssid() string {
-	_r := x.inner.Bssid()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bssid"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property @abstract The operating channel of the Wi-Fi device.
-//
-// WlanChannel calls the underlying WlanChannel.
+// The operating channel of the Wi-Fi device.
 func (x *Network) WlanChannel() *Channel {
-	_r := x.inner.WlanChannel()
-	if _r == nil {
-		return nil
-	}
-	return &Channel{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wlanChannel"))
+	return ChannelFromID(_r)
 }
 
-// @property @abstract Returns the received signal strength indication (RSSI) measurement (dBm) for the Wi-Fi device.
-//
-// RssiValue calls the underlying RssiValue.
+// Returns the received signal strength indication (RSSI) measurement (dBm) for the Wi-Fi device.
 func (x *Network) RssiValue() int {
-	return x.inner.RssiValue()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("rssiValue"))
+	return _r
 }
 
-// @property @abstract Returns the noise measurement (dBm) for the Wi-Fi device.
-//
-// NoiseMeasurement calls the underlying NoiseMeasurement.
+// Returns the noise measurement (dBm) for the Wi-Fi device.
 func (x *Network) NoiseMeasurement() int {
-	return x.inner.NoiseMeasurement()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("noiseMeasurement"))
+	return _r
 }
 
-// @property @abstract Returns information element data included in beacon or probe response frames.
-//
-// InformationElementData calls the underlying InformationElementData.
-func (x *Network) InformationElementData() *foundation.NSData {
-	return x.inner.InformationElementData()
+// Returns information element data included in beacon or probe response frames.
+func (x *Network) InformationElementData() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("informationElementData"))
+	return obj.Wrap(_r)
 }
 
-// @property @abstract Returns the advertised country code (ISO/IEC 3166-1:1997) for the Wi-Fi device. @note Country code information is not available unless Location Services is enabled and the user has authorized the calling app to use location services. @seealso CLLocationManager
-//
-// CountryCode calls the underlying CountryCode.
+// Returns the advertised country code (ISO/IEC 3166-1:1997) for the Wi-Fi device.
 func (x *Network) CountryCode() string {
-	_r := x.inner.CountryCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("countryCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @property @abstract Returns the beacon interval (ms) for the Wi-Fi device.
-//
-// BeaconInterval calls the underlying BeaconInterval.
+// Returns the beacon interval (ms) for the Wi-Fi device.
 func (x *Network) BeaconInterval() int {
-	return x.inner.BeaconInterval()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("beaconInterval"))
+	return _r
 }
 
-// @property @result YES if the Wi-Fi device is part of an IBSS network, NO otherwise. @abstract Indicates whether or not the Wi-Fi device is participating in an independent basic service set (IBSS), or ad-hoc Wi-Fi network.
-//
-// Ibss calls the underlying Ibss.
+// Indicates whether or not the Wi-Fi device is participating in an independent basic service set (IBSS), or ad-hoc Wi-Fi network.
 func (x *Network) Ibss() bool {
-	return x.inner.Ibss()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("ibss"))
+	return _r
 }
 
 // Networkable is the interface implemented by [Network], for mocking and DI.
 type Networkable interface {
-	Unwrap() *raw.CWNetwork
-	IsEqualToNetwork(network *raw.CWNetwork) bool
-	SupportsSecurity(security CWSecurity) bool
-	SupportsPHYMode(phyMode CWPHYMode) bool
+	obj.Object
+	IsEqualToNetwork(network *Network) bool
+	SupportsSecurity(security Security) bool
+	SupportsPHYMode(phyMode PHYMode) bool
 	Ssid() string
-	SsidData() *foundation.NSData
+	SsidData() obj.Object
 	Bssid() string
 	WlanChannel() *Channel
 	RssiValue() int
 	NoiseMeasurement() int
-	InformationElementData() *foundation.NSData
+	InformationElementData() obj.Object
 	CountryCode() string
 	BeaconInterval() int
 	Ibss() bool

@@ -5,41 +5,66 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTRSmokeCOAlarmClusterSelfTestCompleteEvent wraps [raw.MTRSmokeCOAlarmClusterSelfTestCompleteEvent] with a fluent Go API.
+// MTRSmokeCOAlarmClusterSelfTestCompleteEvent is an idiomatic wrapper over the Objective-C class MTRSmokeCOAlarmClusterSelfTestCompleteEvent.
 type MTRSmokeCOAlarmClusterSelfTestCompleteEvent struct {
-	inner *raw.MTRSmokeCOAlarmClusterSelfTestCompleteEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRSmokeCOAlarmClusterSelfTestCompleteEvent].
-func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) Unwrap() *raw.MTRSmokeCOAlarmClusterSelfTestCompleteEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRSmokeCOAlarmClusterSelfTestCompleteEventFromID adopts an existing object pointer as a MTRSmokeCOAlarmClusterSelfTestCompleteEvent (nil for 0).
+// MTRSmokeCOAlarmClusterSelfTestCompleteEventFromID adopts an existing Objective-C object as a MTRSmokeCOAlarmClusterSelfTestCompleteEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRSmokeCOAlarmClusterSelfTestCompleteEventFromID(id objc.ID) *MTRSmokeCOAlarmClusterSelfTestCompleteEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTRSmokeCOAlarmClusterSelfTestCompleteEvent{inner: raw.MTRSmokeCOAlarmClusterSelfTestCompleteEventFromID(id)}
+	x := &MTRSmokeCOAlarmClusterSelfTestCompleteEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewMTRSmokeCOAlarmClusterSelfTestCompleteEvent creates a new [MTRSmokeCOAlarmClusterSelfTestCompleteEvent].
+// mTRSmokeCOAlarmClusterSelfTestCompleteEventAdopt wraps an Objective-C object that this code just created as a
+// MTRSmokeCOAlarmClusterSelfTestCompleteEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRSmokeCOAlarmClusterSelfTestCompleteEventAdopt(id objc.ID) *MTRSmokeCOAlarmClusterSelfTestCompleteEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRSmokeCOAlarmClusterSelfTestCompleteEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRSmokeCOAlarmClusterSelfTestCompleteEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTRSmokeCOAlarmClusterSelfTestCompleteEvent creates a new MTRSmokeCOAlarmClusterSelfTestCompleteEvent.
 func NewMTRSmokeCOAlarmClusterSelfTestCompleteEvent() *MTRSmokeCOAlarmClusterSelfTestCompleteEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRSmokeCOAlarmClusterSelfTestCompleteEvent")), objc.RegisterName("new"))
-	return &MTRSmokeCOAlarmClusterSelfTestCompleteEvent{inner: raw.MTRSmokeCOAlarmClusterSelfTestCompleteEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MTRSmokeCOAlarmClusterSelfTestCompleteEvent")), objc.RegisterName("new"))
+	return mTRSmokeCOAlarmClusterSelfTestCompleteEventAdopt(_id)
 }
 
 // MTRSmokeCOAlarmClusterSelfTestCompleteEventable is the interface implemented by [MTRSmokeCOAlarmClusterSelfTestCompleteEvent], for mocking and DI.
 type MTRSmokeCOAlarmClusterSelfTestCompleteEventable interface {
-	Unwrap() *raw.MTRSmokeCOAlarmClusterSelfTestCompleteEvent
+	obj.Object
 }
 
 var _ MTRSmokeCOAlarmClusterSelfTestCompleteEventable = (*MTRSmokeCOAlarmClusterSelfTestCompleteEvent)(nil)

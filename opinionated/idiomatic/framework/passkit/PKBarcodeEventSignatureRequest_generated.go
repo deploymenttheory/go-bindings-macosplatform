@@ -5,129 +5,147 @@
 package passkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/passkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// BarcodeEventSignatureRequest wraps [raw.PKBarcodeEventSignatureRequest] with a fluent Go API.
+// BarcodeEventSignatureRequest is an idiomatic wrapper over the Objective-C class PKBarcodeEventSignatureRequest.
 type BarcodeEventSignatureRequest struct {
-	inner *raw.PKBarcodeEventSignatureRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PKBarcodeEventSignatureRequest].
-func (x *BarcodeEventSignatureRequest) Unwrap() *raw.PKBarcodeEventSignatureRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BarcodeEventSignatureRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// BarcodeEventSignatureRequestFromID adopts an existing object pointer as a BarcodeEventSignatureRequest (nil for 0).
+// BarcodeEventSignatureRequestFromID adopts an existing Objective-C object as a BarcodeEventSignatureRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func BarcodeEventSignatureRequestFromID(id objc.ID) *BarcodeEventSignatureRequest {
 	if id == 0 {
 		return nil
 	}
-	return &BarcodeEventSignatureRequest{inner: raw.PKBarcodeEventSignatureRequestFromID(id)}
+	x := &BarcodeEventSignatureRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewBarcodeEventSignatureRequest creates a new [BarcodeEventSignatureRequest].
+// barcodeEventSignatureRequestAdopt wraps an Objective-C object that this code just created as a
+// BarcodeEventSignatureRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func barcodeEventSignatureRequestAdopt(id objc.ID) *BarcodeEventSignatureRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &BarcodeEventSignatureRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BarcodeEventSignatureRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BarcodeEventSignatureRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BarcodeEventSignatureRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewBarcodeEventSignatureRequest creates a new BarcodeEventSignatureRequest.
 func NewBarcodeEventSignatureRequest() *BarcodeEventSignatureRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PKBarcodeEventSignatureRequest")), objc.RegisterName("new"))
-	return &BarcodeEventSignatureRequest{inner: raw.PKBarcodeEventSignatureRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PKBarcodeEventSignatureRequest")), objc.RegisterName("new"))
+	return barcodeEventSignatureRequestAdopt(_id)
 }
 
-// DeviceAccountIdentifier calls the underlying DeviceAccountIdentifier.
 func (x *BarcodeEventSignatureRequest) DeviceAccountIdentifier() string {
-	_r := x.inner.DeviceAccountIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deviceAccountIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// TransactionIdentifier calls the underlying TransactionIdentifier.
 func (x *BarcodeEventSignatureRequest) TransactionIdentifier() string {
-	_r := x.inner.TransactionIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// BarcodeIdentifier calls the underlying BarcodeIdentifier.
 func (x *BarcodeEventSignatureRequest) BarcodeIdentifier() string {
-	_r := x.inner.BarcodeIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("barcodeIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// RawMerchantName calls the underlying RawMerchantName.
 func (x *BarcodeEventSignatureRequest) RawMerchantName() string {
-	_r := x.inner.RawMerchantName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("rawMerchantName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// MerchantName calls the underlying MerchantName.
 func (x *BarcodeEventSignatureRequest) MerchantName() string {
-	_r := x.inner.MerchantName()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("merchantName"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// TransactionDate calls the underlying TransactionDate.
-func (x *BarcodeEventSignatureRequest) TransactionDate() *foundation.NSDate {
-	return x.inner.TransactionDate()
+func (x *BarcodeEventSignatureRequest) TransactionDate() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionDate"))
+	return obj.Wrap(_r)
 }
 
-// CurrencyCode calls the underlying CurrencyCode.
 func (x *BarcodeEventSignatureRequest) CurrencyCode() string {
-	_r := x.inner.CurrencyCode()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currencyCode"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// Amount calls the underlying Amount.
-func (x *BarcodeEventSignatureRequest) Amount() *foundation.NSNumber {
-	return x.inner.Amount()
+func (x *BarcodeEventSignatureRequest) Amount() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("amount"))
+	return obj.Wrap(_r)
 }
 
-// TransactionStatus calls the underlying TransactionStatus.
 func (x *BarcodeEventSignatureRequest) TransactionStatus() string {
-	_r := x.inner.TransactionStatus()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("transactionStatus"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// PartialSignature calls the underlying PartialSignature.
-func (x *BarcodeEventSignatureRequest) PartialSignature() *foundation.NSData {
-	return x.inner.PartialSignature()
+func (x *BarcodeEventSignatureRequest) PartialSignature() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("partialSignature"))
+	return obj.Wrap(_r)
 }
 
 // BarcodeEventSignatureRequestable is the interface implemented by [BarcodeEventSignatureRequest], for mocking and DI.
 type BarcodeEventSignatureRequestable interface {
-	Unwrap() *raw.PKBarcodeEventSignatureRequest
+	obj.Object
 	DeviceAccountIdentifier() string
 	TransactionIdentifier() string
 	BarcodeIdentifier() string
 	RawMerchantName() string
 	MerchantName() string
-	TransactionDate() *foundation.NSDate
+	TransactionDate() obj.Object
 	CurrencyCode() string
-	Amount() *foundation.NSNumber
+	Amount() obj.Object
 	TransactionStatus() string
-	PartialSignature() *foundation.NSData
+	PartialSignature() obj.Object
 }
 
 var _ BarcodeEventSignatureRequestable = (*BarcodeEventSignatureRequest)(nil)

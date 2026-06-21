@@ -5,64 +5,87 @@
 package localauthentication
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DomainStateCompanion wraps [raw.LADomainStateCompanion] with a fluent Go API.
+// DomainStateCompanion is an idiomatic wrapper over the Objective-C class LADomainStateCompanion.
 type DomainStateCompanion struct {
-	inner *raw.LADomainStateCompanion
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LADomainStateCompanion].
-func (x *DomainStateCompanion) Unwrap() *raw.LADomainStateCompanion { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DomainStateCompanion) ID() objc.ID { return x.inner.Ptr() }
-
-// DomainStateCompanionFromID adopts an existing object pointer as a DomainStateCompanion (nil for 0).
+// DomainStateCompanionFromID adopts an existing Objective-C object as a DomainStateCompanion
+// (nil for 0), retaining it and registering a release finalizer.
 func DomainStateCompanionFromID(id objc.ID) *DomainStateCompanion {
 	if id == 0 {
 		return nil
 	}
-	return &DomainStateCompanion{inner: raw.LADomainStateCompanionFromID(id)}
+	x := &DomainStateCompanion{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDomainStateCompanion creates a new [DomainStateCompanion].
+// domainStateCompanionAdopt wraps an Objective-C object that this code just created as a
+// DomainStateCompanion (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func domainStateCompanionAdopt(id objc.ID) *DomainStateCompanion {
+	if id == 0 {
+		return nil
+	}
+	x := &DomainStateCompanion{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DomainStateCompanion) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DomainStateCompanion) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DomainStateCompanion) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDomainStateCompanion creates a new DomainStateCompanion.
 func NewDomainStateCompanion() *DomainStateCompanion {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LADomainStateCompanion")), objc.RegisterName("new"))
-	return &DomainStateCompanion{inner: raw.LADomainStateCompanionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("LADomainStateCompanion")), objc.RegisterName("new"))
+	return domainStateCompanionAdopt(_id)
 }
 
 // Returns state hash data for the given companion type.
-//
-// StateHashForCompanionType calls the underlying StateHashForCompanionType.
-func (x *DomainStateCompanion) StateHashForCompanionType(companionType LACompanionType) *foundation.NSData {
-	return x.inner.StateHashForCompanionType(raw.LACompanionType(companionType))
+func (x *DomainStateCompanion) StateHashForCompanionType(companionType CompanionType) obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHashForCompanionType:"), companionType)
+	return obj.Wrap(_r)
 }
 
-// Indicates types of companions paired with the device. The elements are NSNumber-wrapped instances of @c `LACompanionType`.
-//
-// AvailableCompanionTypes calls the underlying AvailableCompanionTypes.
-func (x *DomainStateCompanion) AvailableCompanionTypes() *foundation.NSSet[*foundation.NSNumber] {
-	return x.inner.AvailableCompanionTypes()
+// Indicates types of companions paired with the device. The elements are NSNumber-wrapped instances of
+func (x *DomainStateCompanion) AvailableCompanionTypes() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("availableCompanionTypes"))
+	return obj.Wrap(_r)
 }
 
-// Contains combined state hash data for all available companion types. . Returns `nil` if no companion devices are paired. @discussion  As long as database of paired companion devices doesn't change, `stateHash` stays the same for the same set of `availableCompanions`. If database of paired companion devices was modified, `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different policy evaluation will reveal the fact database was changed between calls. If you are interested in a state hash for a specific companion type you can use `stateHashForCompanionType` method. @warning Please note that the value returned by this property can change exceptionally between major OS versions even if the list of paired companions has not changed.
-//
-// StateHash calls the underlying StateHash.
-func (x *DomainStateCompanion) StateHash() *foundation.NSData {
-	return x.inner.StateHash()
+// Contains combined state hash data for all available companion types. . Returns `nil` if no companion devices are paired. As long as database of paired companion devices doesn't change, `stateHash` stays the same for the same set of `availableCompanions`. If database of paired companion devices was modified, `stateHash` data will change. Nature of such database changes cannot be determined but comparing data of `stateHash` after different policy evaluation will reveal the fact database was changed between calls. If you are interested in a state hash for a specific companion type you can use `stateHashForCompanionType` method.
+func (x *DomainStateCompanion) StateHash() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateHash"))
+	return obj.Wrap(_r)
 }
 
 // DomainStateCompanionable is the interface implemented by [DomainStateCompanion], for mocking and DI.
 type DomainStateCompanionable interface {
-	Unwrap() *raw.LADomainStateCompanion
-	StateHashForCompanionType(companionType LACompanionType) *foundation.NSData
-	AvailableCompanionTypes() *foundation.NSSet[*foundation.NSNumber]
-	StateHash() *foundation.NSData
+	obj.Object
+	StateHashForCompanionType(companionType CompanionType) obj.Object
+	AvailableCompanionTypes() obj.Object
+	StateHash() obj.Object
 }
 
 var _ DomainStateCompanionable = (*DomainStateCompanion)(nil)

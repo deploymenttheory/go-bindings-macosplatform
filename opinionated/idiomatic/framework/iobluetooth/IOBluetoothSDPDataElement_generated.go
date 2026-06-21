@@ -5,160 +5,167 @@
 package iobluetooth
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An instance of this class represents a single SDP data element as defined by the Bluetooth SDP spec.
 //
-// IOBluetoothSDPDataElement wraps [raw.IOBluetoothSDPDataElement] with a fluent Go API.
+// IOBluetoothSDPDataElement is an idiomatic wrapper over the Objective-C class IOBluetoothSDPDataElement.
 type IOBluetoothSDPDataElement struct {
-	inner *raw.IOBluetoothSDPDataElement
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOBluetoothSDPDataElement].
-func (x *IOBluetoothSDPDataElement) Unwrap() *raw.IOBluetoothSDPDataElement { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IOBluetoothSDPDataElement) ID() objc.ID { return x.inner.Ptr() }
-
-// IOBluetoothSDPDataElementFromID adopts an existing object pointer as a IOBluetoothSDPDataElement (nil for 0).
+// IOBluetoothSDPDataElementFromID adopts an existing Objective-C object as a IOBluetoothSDPDataElement
+// (nil for 0), retaining it and registering a release finalizer.
 func IOBluetoothSDPDataElementFromID(id objc.ID) *IOBluetoothSDPDataElement {
 	if id == 0 {
 		return nil
 	}
-	return &IOBluetoothSDPDataElement{inner: raw.IOBluetoothSDPDataElementFromID(id)}
+	x := &IOBluetoothSDPDataElement{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// iOBluetoothSDPDataElementAdopt wraps an Objective-C object that this code just created as a
+// IOBluetoothSDPDataElement (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func iOBluetoothSDPDataElementAdopt(id objc.ID) *IOBluetoothSDPDataElement {
+	if id == 0 {
+		return nil
+	}
+	x := &IOBluetoothSDPDataElement{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IOBluetoothSDPDataElement) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IOBluetoothSDPDataElement) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IOBluetoothSDPDataElement) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a new IOBluetoothSDPDataElement with the given value.
 //
-// NewIOBluetoothSDPDataElementWithElementValue creates a new [IOBluetoothSDPDataElement].
-func NewIOBluetoothSDPDataElementWithElementValue(element *foundation.NSObject) *IOBluetoothSDPDataElement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothSDPDataElement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElementValue:"), element.Ptr())
-	return &IOBluetoothSDPDataElement{inner: raw.IOBluetoothSDPDataElementFromID(_id)}
+// NewIOBluetoothSDPDataElementWithElementValue creates a new IOBluetoothSDPDataElement.
+func NewIOBluetoothSDPDataElementWithElementValue(element obj.Object) *IOBluetoothSDPDataElement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPDataElement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithElementValue:"), objref.IDOf(element))
+	return iOBluetoothSDPDataElementAdopt(_id)
 }
 
 // Initializes a new IOBluetoothSDPDataElement with the given attributes.
 //
-// NewIOBluetoothSDPDataElementWithTypeSizeDescriptorSizeValue creates a new [IOBluetoothSDPDataElement].
-func NewIOBluetoothSDPDataElementWithTypeSizeDescriptorSizeValue(newType uint8, newSizeDescriptor uint8, newSize uint32, newValue *foundation.NSObject) *IOBluetoothSDPDataElement {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothSDPDataElement")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:sizeDescriptor:size:value:"), newType, newSizeDescriptor, newSize, newValue.Ptr())
-	return &IOBluetoothSDPDataElement{inner: raw.IOBluetoothSDPDataElementFromID(_id)}
+// NewIOBluetoothSDPDataElementWithTypeSizeDescriptorSizeValue creates a new IOBluetoothSDPDataElement.
+func NewIOBluetoothSDPDataElementWithTypeSizeDescriptorSizeValue(newType uint8, newSizeDescriptor uint8, newSize uint32, newValue obj.Object) *IOBluetoothSDPDataElement {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothSDPDataElement")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithType:sizeDescriptor:size:value:"), newType, newSizeDescriptor, newSize, objref.IDOf(newValue))
+	return iOBluetoothSDPDataElementAdopt(_id)
 }
 
 // Returns an IOBluetoothSDPDataElementRef representation of the target IOBluetoothSDPDataElement object.
-//
-// GetSDPDataElementRef calls the underlying GetSDPDataElementRef.
-func (x *IOBluetoothSDPDataElement) GetSDPDataElementRef() unsafe.Pointer {
-	return x.inner.GetSDPDataElementRef()
+func (x *IOBluetoothSDPDataElement) GetSDPDataElementRef() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getSDPDataElementRef"))
+	return obj.Wrap(_r)
 }
 
 // Returns the SDP spec defined data element type descriptor for the target data element.
-//
-// GetTypeDescriptor calls the underlying GetTypeDescriptor.
 func (x *IOBluetoothSDPDataElement) GetTypeDescriptor() uint8 {
-	return x.inner.GetTypeDescriptor()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getTypeDescriptor"))
+	return _r
 }
 
 // Returns the SDP spec defined data element size descriptor for the target data element.
-//
-// GetSizeDescriptor calls the underlying GetSizeDescriptor.
 func (x *IOBluetoothSDPDataElement) GetSizeDescriptor() uint8 {
-	return x.inner.GetSizeDescriptor()
+	_r := objc.Send[uint8](objref.IDOf(x), objc.RegisterName("getSizeDescriptor"))
+	return _r
 }
 
 // Returns the size in bytes of the target data element.
-//
-// GetSize calls the underlying GetSize.
 func (x *IOBluetoothSDPDataElement) GetSize() uint32 {
-	return x.inner.GetSize()
+	_r := objc.Send[uint32](objref.IDOf(x), objc.RegisterName("getSize"))
+	return _r
 }
 
 // If the data element is represented by a number, it returns the value as an NSNumber.
-//
-// GetNumberValue calls the underlying GetNumberValue.
-func (x *IOBluetoothSDPDataElement) GetNumberValue() *foundation.NSNumber {
-	return x.inner.GetNumberValue()
+func (x *IOBluetoothSDPDataElement) GetNumberValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getNumberValue"))
+	return obj.Wrap(_r)
 }
 
 // If the data element is represented by a data object, it returns the value as an NSData.
-//
-// GetDataValue calls the underlying GetDataValue.
-func (x *IOBluetoothSDPDataElement) GetDataValue() *foundation.NSData {
-	return x.inner.GetDataValue()
+func (x *IOBluetoothSDPDataElement) GetDataValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDataValue"))
+	return obj.Wrap(_r)
 }
 
 // If the data element is represented by a string object, it returns the value as an NSString.
-//
-// GetStringValue calls the underlying GetStringValue.
 func (x *IOBluetoothSDPDataElement) GetStringValue() string {
-	_r := x.inner.GetStringValue()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getStringValue"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // If the data element is represented by an array object, it returns the value as an NSArray.
-//
-// GetArrayValue calls the underlying GetArrayValue.
-func (x *IOBluetoothSDPDataElement) GetArrayValue() *foundation.NSArray[objc.ID] {
-	return x.inner.GetArrayValue()
+func (x *IOBluetoothSDPDataElement) GetArrayValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getArrayValue"))
+	return obj.Wrap(_r)
 }
 
 // If the data element is a UUID (type 3), it returns the value as an IOBluetoothSDPUUID.
-//
-// GetUUIDValue calls the underlying GetUUIDValue.
 func (x *IOBluetoothSDPDataElement) GetUUIDValue() *IOBluetoothSDPUUID {
-	_r := x.inner.GetUUIDValue()
-	if _r == nil {
-		return nil
-	}
-	return &IOBluetoothSDPUUID{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getUUIDValue"))
+	return IOBluetoothSDPUUIDFromID(_r)
 }
 
 // Returns the object value of the data element.
-//
-// GetValue calls the underlying GetValue.
-func (x *IOBluetoothSDPDataElement) GetValue() *foundation.NSObject {
-	return x.inner.GetValue()
+func (x *IOBluetoothSDPDataElement) GetValue() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getValue"))
+	return obj.Wrap(_r)
 }
 
 // Checks to see if the target data element is the same as the dataElement parameter or if it contains the dataElement parameter (if its a sequence type).
-//
-// ContainsDataElement calls the underlying ContainsDataElement.
-func (x *IOBluetoothSDPDataElement) ContainsDataElement(dataElement *raw.IOBluetoothSDPDataElement) bool {
-	return x.inner.ContainsDataElement(dataElement)
+func (x *IOBluetoothSDPDataElement) ContainsDataElement(dataElement *IOBluetoothSDPDataElement) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsDataElement:"), objref.IDOf(dataElement))
+	return _r
 }
 
 // Checks to see if the target data element’s value is the same as the value parameter or if it contains the value parameter.
-//
-// ContainsValue calls the underlying ContainsValue.
-func (x *IOBluetoothSDPDataElement) ContainsValue(cmpValue *foundation.NSObject) bool {
-	return x.inner.ContainsValue(cmpValue)
+func (x *IOBluetoothSDPDataElement) ContainsValue(cmpValue obj.Object) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("containsValue:"), objref.IDOf(cmpValue))
+	return _r
 }
 
 // IOBluetoothSDPDataElementable is the interface implemented by [IOBluetoothSDPDataElement], for mocking and DI.
 type IOBluetoothSDPDataElementable interface {
-	Unwrap() *raw.IOBluetoothSDPDataElement
-	GetSDPDataElementRef() unsafe.Pointer
+	obj.Object
+	GetSDPDataElementRef() obj.Object
 	GetTypeDescriptor() uint8
 	GetSizeDescriptor() uint8
 	GetSize() uint32
-	GetNumberValue() *foundation.NSNumber
-	GetDataValue() *foundation.NSData
+	GetNumberValue() obj.Object
+	GetDataValue() obj.Object
 	GetStringValue() string
-	GetArrayValue() *foundation.NSArray[objc.ID]
+	GetArrayValue() obj.Object
 	GetUUIDValue() *IOBluetoothSDPUUID
-	GetValue() *foundation.NSObject
-	ContainsDataElement(dataElement *raw.IOBluetoothSDPDataElement) bool
-	ContainsValue(cmpValue *foundation.NSObject) bool
+	GetValue() obj.Object
+	ContainsDataElement(dataElement *IOBluetoothSDPDataElement) bool
+	ContainsValue(cmpValue obj.Object) bool
 }
 
 var _ IOBluetoothSDPDataElementable = (*IOBluetoothSDPDataElement)(nil)

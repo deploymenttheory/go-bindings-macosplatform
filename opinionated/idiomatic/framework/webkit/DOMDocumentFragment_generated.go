@@ -5,66 +5,84 @@
 package webkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/webkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// DOMDocumentFragment wraps [raw.DOMDocumentFragment] with a fluent Go API.
+// DOMDocumentFragment is an idiomatic wrapper over the Objective-C class DOMDocumentFragment.
 type DOMDocumentFragment struct {
-	inner *raw.DOMDocumentFragment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.DOMDocumentFragment].
-func (x *DOMDocumentFragment) Unwrap() *raw.DOMDocumentFragment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DOMDocumentFragment) ID() objc.ID { return x.inner.Ptr() }
-
-// DOMDocumentFragmentFromID adopts an existing object pointer as a DOMDocumentFragment (nil for 0).
+// DOMDocumentFragmentFromID adopts an existing Objective-C object as a DOMDocumentFragment
+// (nil for 0), retaining it and registering a release finalizer.
 func DOMDocumentFragmentFromID(id objc.ID) *DOMDocumentFragment {
 	if id == 0 {
 		return nil
 	}
-	return &DOMDocumentFragment{inner: raw.DOMDocumentFragmentFromID(id)}
+	x := &DOMDocumentFragment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDOMDocumentFragment creates a new [DOMDocumentFragment].
+// dOMDocumentFragmentAdopt wraps an Objective-C object that this code just created as a
+// DOMDocumentFragment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func dOMDocumentFragmentAdopt(id objc.ID) *DOMDocumentFragment {
+	if id == 0 {
+		return nil
+	}
+	x := &DOMDocumentFragment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DOMDocumentFragment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DOMDocumentFragment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DOMDocumentFragment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDOMDocumentFragment creates a new DOMDocumentFragment.
 func NewDOMDocumentFragment() *DOMDocumentFragment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("DOMDocumentFragment")), objc.RegisterName("new"))
-	return &DOMDocumentFragment{inner: raw.DOMDocumentFragmentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("DOMDocumentFragment")), objc.RegisterName("new"))
+	return dOMDocumentFragmentAdopt(_id)
 }
 
-// WithNodeValue sets the nodeValue property and returns the receiver for chaining.
+// WithNodeValue sets nodeValue and returns the receiver so calls can be chained.
 func (x *DOMDocumentFragment) WithNodeValue(nodeValue string) *DOMDocumentFragment {
-	x.inner.DOMNode.SetNodeValue(foundation.NSStringStringWithUTF8String(nodeValue))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setNodeValue:"), purego.NSString(nodeValue))
 	return x
 }
 
-// WithPrefix sets the prefix property and returns the receiver for chaining.
+// WithPrefix sets prefix and returns the receiver so calls can be chained.
 func (x *DOMDocumentFragment) WithPrefix(prefix string) *DOMDocumentFragment {
-	x.inner.DOMNode.SetPrefix(foundation.NSStringStringWithUTF8String(prefix))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPrefix:"), purego.NSString(prefix))
 	return x
 }
 
-// WithTextContent sets the textContent property and returns the receiver for chaining.
+// WithTextContent sets textContent and returns the receiver so calls can be chained.
 func (x *DOMDocumentFragment) WithTextContent(textContent string) *DOMDocumentFragment {
-	x.inner.DOMNode.SetTextContent(foundation.NSStringStringWithUTF8String(textContent))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTextContent:"), purego.NSString(textContent))
 	return x
-}
-
-func (x *DOMDocumentFragment) asDOMNode() *raw.DOMNode { return &x.inner.DOMNode }
-
-func (x *DOMDocumentFragment) asDOMObject() *raw.DOMObject { return &x.inner.DOMNode.DOMObject }
-
-func (x *DOMDocumentFragment) asWebScriptObject() *raw.WebScriptObject {
-	return &x.inner.DOMNode.DOMObject.WebScriptObject
 }
 
 // DOMDocumentFragmentable is the interface implemented by [DOMDocumentFragment], for mocking and DI.
 type DOMDocumentFragmentable interface {
-	Unwrap() *raw.DOMDocumentFragment
+	obj.Object
 	WithNodeValue(nodeValue string) *DOMDocumentFragment
 	WithPrefix(prefix string) *DOMDocumentFragment
 	WithTextContent(textContent string) *DOMDocumentFragment

@@ -5,73 +5,75 @@
 package mailkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An object that contains a signed or encrypted message, or errors that indicate failure to encode the message.
 //
-// MessageEncodingResult wraps [raw.MEMessageEncodingResult] with a fluent Go API.
+// MessageEncodingResult is an idiomatic wrapper over the Objective-C class MEMessageEncodingResult.
 type MessageEncodingResult struct {
-	inner *raw.MEMessageEncodingResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEMessageEncodingResult].
-func (x *MessageEncodingResult) Unwrap() *raw.MEMessageEncodingResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MessageEncodingResult) ID() objc.ID { return x.inner.Ptr() }
-
-// MessageEncodingResultFromID adopts an existing object pointer as a MessageEncodingResult (nil for 0).
+// MessageEncodingResultFromID adopts an existing Objective-C object as a MessageEncodingResult
+// (nil for 0), retaining it and registering a release finalizer.
 func MessageEncodingResultFromID(id objc.ID) *MessageEncodingResult {
 	if id == 0 {
 		return nil
 	}
-	return &MessageEncodingResult{inner: raw.MEMessageEncodingResultFromID(id)}
+	x := &MessageEncodingResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates an encoding result object with a signed or encrypted message, or errors if the message encoder fails to encode the message.
-//
-// NewMessageEncodingResultWithEncodedMessageSigningErrorEncryptionError creates a new [MessageEncodingResult].
-func NewMessageEncodingResultWithEncodedMessageSigningErrorEncryptionError(encodedMessage *raw.MEEncodedOutgoingMessage, signingError unsafe.Pointer, encryptionError unsafe.Pointer) *MessageEncodingResult {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEMessageEncodingResult")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEncodedMessage:signingError:encryptionError:"), encodedMessage.Ptr(), signingError, encryptionError)
-	return &MessageEncodingResult{inner: raw.MEMessageEncodingResultFromID(_id)}
-}
-
-// @brief The encoded message. Nil if no need to encode or an error occured while encoding
-//
-// EncodedMessage calls the underlying EncodedMessage.
-func (x *MessageEncodingResult) EncodedMessage() *EncodedOutgoingMessage {
-	_r := x.inner.EncodedMessage()
-	if _r == nil {
+// messageEncodingResultAdopt wraps an Objective-C object that this code just created as a
+// MessageEncodingResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func messageEncodingResultAdopt(id objc.ID) *MessageEncodingResult {
+	if id == 0 {
 		return nil
 	}
-	return &EncodedOutgoingMessage{inner: _r}
+	x := &MessageEncodingResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @brief Any error that occured while attempting to sign the outgoing message.
-//
-// SigningError calls the underlying SigningError.
-func (x *MessageEncodingResult) SigningError() unsafe.Pointer {
-	return x.inner.SigningError()
+// Description returns the object's -description text.
+func (x *MessageEncodingResult) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-// @brief Any error that occured while attempting to encrypt the outgoing message.
-//
-// EncryptionError calls the underlying EncryptionError.
-func (x *MessageEncodingResult) EncryptionError() unsafe.Pointer {
-	return x.inner.EncryptionError()
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MessageEncodingResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MessageEncodingResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMessageEncodingResult creates a new MessageEncodingResult.
+func NewMessageEncodingResult() *MessageEncodingResult {
+	_id := objc.Send[objc.ID](objc.ID(_class("MEMessageEncodingResult")), objc.RegisterName("new"))
+	return messageEncodingResultAdopt(_id)
+}
+
+// The encoded message. Nil if no need to encode or an error occured while encoding
+func (x *MessageEncodingResult) EncodedMessage() *EncodedOutgoingMessage {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("encodedMessage"))
+	return EncodedOutgoingMessageFromID(_r)
 }
 
 // MessageEncodingResultable is the interface implemented by [MessageEncodingResult], for mocking and DI.
 type MessageEncodingResultable interface {
-	Unwrap() *raw.MEMessageEncodingResult
+	obj.Object
 	EncodedMessage() *EncodedOutgoingMessage
-	SigningError() unsafe.Pointer
-	EncryptionError() unsafe.Pointer
 }
 
 var _ MessageEncodingResultable = (*MessageEncodingResult)(nil)

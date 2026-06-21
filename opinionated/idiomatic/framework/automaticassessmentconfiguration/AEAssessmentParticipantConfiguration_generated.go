@@ -5,103 +5,124 @@
 package automaticassessmentconfiguration
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/automaticassessmentconfiguration"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Configuration information for an app that’s available during an assessment.
 //
-// AssessmentParticipantConfiguration wraps [raw.AEAssessmentParticipantConfiguration] with a fluent Go API.
+// AssessmentParticipantConfiguration is an idiomatic wrapper over the Objective-C class AEAssessmentParticipantConfiguration.
 type AssessmentParticipantConfiguration struct {
-	inner *raw.AEAssessmentParticipantConfiguration
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AEAssessmentParticipantConfiguration].
-func (x *AssessmentParticipantConfiguration) Unwrap() *raw.AEAssessmentParticipantConfiguration {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssessmentParticipantConfiguration) ID() objc.ID { return x.inner.Ptr() }
-
-// AssessmentParticipantConfigurationFromID adopts an existing object pointer as a AssessmentParticipantConfiguration (nil for 0).
+// AssessmentParticipantConfigurationFromID adopts an existing Objective-C object as a AssessmentParticipantConfiguration
+// (nil for 0), retaining it and registering a release finalizer.
 func AssessmentParticipantConfigurationFromID(id objc.ID) *AssessmentParticipantConfiguration {
 	if id == 0 {
 		return nil
 	}
-	return &AssessmentParticipantConfiguration{inner: raw.AEAssessmentParticipantConfigurationFromID(id)}
+	x := &AssessmentParticipantConfiguration{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssessmentParticipantConfiguration creates a new [AssessmentParticipantConfiguration].
+// assessmentParticipantConfigurationAdopt wraps an Objective-C object that this code just created as a
+// AssessmentParticipantConfiguration (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assessmentParticipantConfigurationAdopt(id objc.ID) *AssessmentParticipantConfiguration {
+	if id == 0 {
+		return nil
+	}
+	x := &AssessmentParticipantConfiguration{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssessmentParticipantConfiguration) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssessmentParticipantConfiguration) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssessmentParticipantConfiguration) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssessmentParticipantConfiguration creates a new AssessmentParticipantConfiguration.
 func NewAssessmentParticipantConfiguration() *AssessmentParticipantConfiguration {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("AEAssessmentParticipantConfiguration")), objc.RegisterName("new"))
-	return &AssessmentParticipantConfiguration{inner: raw.AEAssessmentParticipantConfigurationFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("AEAssessmentParticipantConfiguration")), objc.RegisterName("new"))
+	return assessmentParticipantConfigurationAdopt(_id)
 }
 
 // A Boolean that indicates whether an app can access network resources during an assessment.
 //
-// WithAllowsNetworkAccess sets the allowsNetworkAccess property and returns the receiver for chaining.
+// WithAllowsNetworkAccess sets allowsNetworkAccess and returns the receiver so calls can be chained.
 func (x *AssessmentParticipantConfiguration) WithAllowsNetworkAccess(allowsNetworkAccess bool) *AssessmentParticipantConfiguration {
-	x.inner.SetAllowsNetworkAccess(allowsNetworkAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNetworkAccess:"), allowsNetworkAccess)
 	return x
 }
 
-// WithRequired sets the required property and returns the receiver for chaining.
+// WithRequired sets required and returns the receiver so calls can be chained.
 func (x *AssessmentParticipantConfiguration) WithRequired(required bool) *AssessmentParticipantConfiguration {
-	x.inner.SetRequired(required)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequired:"), required)
 	return x
 }
 
-// WithConfigurationInfo sets the configurationInfo property and returns the receiver for chaining.
-func (x *AssessmentParticipantConfiguration) WithConfigurationInfo(configurationInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssessmentParticipantConfiguration {
-	x.inner.SetConfigurationInfo(configurationInfo)
+// WithConfigurationInfo sets configurationInfo and returns the receiver so calls can be chained.
+func (x *AssessmentParticipantConfiguration) WithConfigurationInfo(configurationInfo obj.Object) *AssessmentParticipantConfiguration {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationInfo:"), objref.IDOf(configurationInfo))
 	return x
 }
 
-// AllowsNetworkAccess calls the underlying AllowsNetworkAccess.
 func (x *AssessmentParticipantConfiguration) AllowsNetworkAccess() bool {
-	return x.inner.AllowsNetworkAccess()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsNetworkAccess"))
+	return _r
 }
 
-// SetAllowsNetworkAccess calls the underlying SetAllowsNetworkAccess.
 func (x *AssessmentParticipantConfiguration) SetAllowsNetworkAccess(allowsNetworkAccess bool) {
-	x.inner.SetAllowsNetworkAccess(allowsNetworkAccess)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNetworkAccess:"), allowsNetworkAccess)
 }
 
-// IsRequired calls the underlying IsRequired.
 func (x *AssessmentParticipantConfiguration) IsRequired() bool {
-	return x.inner.IsRequired()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isRequired"))
+	return _r
 }
 
-// SetRequired calls the underlying SetRequired.
 func (x *AssessmentParticipantConfiguration) SetRequired(required bool) {
-	x.inner.SetRequired(required)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRequired:"), required)
 }
 
-// ConfigurationInfo calls the underlying ConfigurationInfo.
-func (x *AssessmentParticipantConfiguration) ConfigurationInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID] {
-	return x.inner.ConfigurationInfo()
+func (x *AssessmentParticipantConfiguration) ConfigurationInfo() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("configurationInfo"))
+	return obj.Wrap(_r)
 }
 
-// SetConfigurationInfo calls the underlying SetConfigurationInfo.
-func (x *AssessmentParticipantConfiguration) SetConfigurationInfo(configurationInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) {
-	x.inner.SetConfigurationInfo(configurationInfo)
+func (x *AssessmentParticipantConfiguration) SetConfigurationInfo(configurationInfo obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setConfigurationInfo:"), objref.IDOf(configurationInfo))
 }
 
 // AssessmentParticipantConfigurationable is the interface implemented by [AssessmentParticipantConfiguration], for mocking and DI.
 type AssessmentParticipantConfigurationable interface {
-	Unwrap() *raw.AEAssessmentParticipantConfiguration
+	obj.Object
 	WithAllowsNetworkAccess(allowsNetworkAccess bool) *AssessmentParticipantConfiguration
 	WithRequired(required bool) *AssessmentParticipantConfiguration
-	WithConfigurationInfo(configurationInfo *foundation.NSDictionary[*foundation.NSString, objc.ID]) *AssessmentParticipantConfiguration
+	WithConfigurationInfo(configurationInfo obj.Object) *AssessmentParticipantConfiguration
 	AllowsNetworkAccess() bool
 	SetAllowsNetworkAccess(allowsNetworkAccess bool)
 	IsRequired() bool
 	SetRequired(required bool)
-	ConfigurationInfo() *foundation.NSDictionary[*foundation.NSString, objc.ID]
-	SetConfigurationInfo(configurationInfo *foundation.NSDictionary[*foundation.NSString, objc.ID])
+	ConfigurationInfo() obj.Object
+	SetConfigurationInfo(configurationInfo obj.Object)
 }
 
 var _ AssessmentParticipantConfigurationable = (*AssessmentParticipantConfiguration)(nil)

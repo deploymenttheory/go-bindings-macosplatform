@@ -5,54 +5,75 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A unit of measure for length.
 //
-// UnitLength wraps [raw.NSUnitLength] with a fluent Go API.
+// UnitLength is an idiomatic wrapper over the Objective-C class NSUnitLength.
 type UnitLength struct {
-	inner *raw.NSUnitLength
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSUnitLength].
-func (x *UnitLength) Unwrap() *raw.NSUnitLength { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *UnitLength) ID() objc.ID { return x.inner.Ptr() }
-
-// UnitLengthFromID adopts an existing object pointer as a UnitLength (nil for 0).
+// UnitLengthFromID adopts an existing Objective-C object as a UnitLength
+// (nil for 0), retaining it and registering a release finalizer.
 func UnitLengthFromID(id objc.ID) *UnitLength {
 	if id == 0 {
 		return nil
 	}
-	return &UnitLength{inner: raw.NSUnitLengthFromID(id)}
-}
-
-// NewUnitLength creates a new [UnitLength].
-func NewUnitLength() *UnitLength {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSUnitLength")), objc.RegisterName("new"))
-	return &UnitLength{inner: raw.NSUnitLengthFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *UnitLength) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitLength {
-	x.inner.NSDimension.NSUnit.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &UnitLength{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-func (x *UnitLength) asDimension() *raw.NSDimension { return &x.inner.NSDimension }
+// unitLengthAdopt wraps an Objective-C object that this code just created as a
+// UnitLength (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func unitLengthAdopt(id objc.ID) *UnitLength {
+	if id == 0 {
+		return nil
+	}
+	x := &UnitLength{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
 
-func (x *UnitLength) asUnit() *raw.NSUnit { return &x.inner.NSDimension.NSUnit }
+// Description returns the object's -description text.
+func (x *UnitLength) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
 
-func (x *UnitLength) asObject() *raw.NSObject { return &x.inner.NSDimension.NSUnit.NSObject }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *UnitLength) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *UnitLength) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewUnitLength creates a new UnitLength.
+func NewUnitLength() *UnitLength {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSUnitLength")), objc.RegisterName("new"))
+	return unitLengthAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *UnitLength) WithScriptingProperties(scriptingProperties obj.Object) *UnitLength {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // UnitLengthable is the interface implemented by [UnitLength], for mocking and DI.
 type UnitLengthable interface {
-	Unwrap() *raw.NSUnitLength
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *UnitLength
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *UnitLength
 }
 
 var _ UnitLengthable = (*UnitLength)(nil)

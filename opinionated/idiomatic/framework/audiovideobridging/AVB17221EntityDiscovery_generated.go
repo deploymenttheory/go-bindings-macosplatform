@@ -5,154 +5,155 @@
 package audiovideobridging
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/audiovideobridging"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
+	"unsafe"
 )
 
-// AVB17221EntityDiscovery wraps [raw.AVB17221EntityDiscovery] with a fluent Go API.
+// AVB17221EntityDiscovery is an idiomatic wrapper over the Objective-C class AVB17221EntityDiscovery.
 type AVB17221EntityDiscovery struct {
-	inner *raw.AVB17221EntityDiscovery
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.AVB17221EntityDiscovery].
-func (x *AVB17221EntityDiscovery) Unwrap() *raw.AVB17221EntityDiscovery { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AVB17221EntityDiscovery) ID() objc.ID { return x.inner.Ptr() }
-
-// AVB17221EntityDiscoveryFromID adopts an existing object pointer as a AVB17221EntityDiscovery (nil for 0).
+// AVB17221EntityDiscoveryFromID adopts an existing Objective-C object as a AVB17221EntityDiscovery
+// (nil for 0), retaining it and registering a release finalizer.
 func AVB17221EntityDiscoveryFromID(id objc.ID) *AVB17221EntityDiscovery {
 	if id == 0 {
 		return nil
 	}
-	return &AVB17221EntityDiscovery{inner: raw.AVB17221EntityDiscoveryFromID(id)}
-}
-
-// @method		initWithInterfaceName: @abstract	Initializes the receiver with a particular interface name. @param		anInterfaceName	The BSD interface name for the interface to perform discovery on. @result		The initialized receiver.
-//
-// NewAVB17221EntityDiscoveryWithInterfaceName creates a new [AVB17221EntityDiscovery].
-func NewAVB17221EntityDiscoveryWithInterfaceName(anInterfaceName string) *AVB17221EntityDiscovery {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("AVB17221EntityDiscovery")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterfaceName:"), foundation.NSStringStringWithUTF8String(anInterfaceName).Ptr())
-	return &AVB17221EntityDiscovery{inner: raw.AVB17221EntityDiscoveryFromID(_id)}
-}
-
-// @property	interfaceName @abstract	The BSD interface name for the interface that discovery is being performed on.
-//
-// WithInterfaceName sets the interfaceName property and returns the receiver for chaining.
-func (x *AVB17221EntityDiscovery) WithInterfaceName(interfaceName string) *AVB17221EntityDiscovery {
-	x.inner.SetInterfaceName(foundation.NSStringStringWithUTF8String(interfaceName))
+	x := &AVB17221EntityDiscovery{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// @property	discoveryDelegate @abstract	The delegate, implementing the AVB17221EntityDiscoveryDelegate protocol, which will handle entities arriving, departing and changing properties.
-//
-// WithDiscoveryDelegate sets the discoveryDelegate property and returns the receiver for chaining.
-func (x *AVB17221EntityDiscovery) WithDiscoveryDelegate(discoveryDelegate raw.AVB17221EntityDiscoveryDelegate) *AVB17221EntityDiscovery {
-	x.inner.SetDiscoveryDelegate(discoveryDelegate)
-	return x
-}
-
-// @method		primeIterators @abstract	Prepares the IOIterators for receiving entity arrival, departure and property change notifications. @discussion	This method primes the iterators by iterating over any already available entities. This may be called once, at any time after object creation, but if the discoveryDelegate property has not been set, any already discovered entity notifications will be lost.
-//
-// PrimeIterators calls the underlying PrimeIterators.
-func (x *AVB17221EntityDiscovery) PrimeIterators() {
-	x.inner.PrimeIterators()
-}
-
-// @method		discoverEntities @abstract	Triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for all entities (an entity_id of 0). @result		A boolean indicating if the call succedded.
-//
-// DiscoverEntities calls the underlying DiscoverEntities.
-func (x *AVB17221EntityDiscovery) DiscoverEntities() bool {
-	return x.inner.DiscoverEntities()
-}
-
-// @method		discoverEntity: @abstract	Triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for a specified entity. @param		entityID	The entity_id of the entity to look for. @result		A boolean indicating if the call succedded.
-//
-// DiscoverEntity calls the underlying DiscoverEntity.
-func (x *AVB17221EntityDiscovery) DiscoverEntity(entityID uint64) bool {
-	return x.inner.DiscoverEntity(entityID)
-}
-
-// @method		addLocalEntity:error: @abstract	Publishes a entity as being available on the interface. The in kernel portion creates an IOAVB17221LocalEntity and maintains the ADP messaging. @param		anEntity	The entity to be published. @param		error		If the request couldn't be completed, on return it contains an instance of NSError that describes the reason why. @result		A boolean indicating if the entity was added.
-//
-// AddLocalEntityError calls the underlying AddLocalEntityError.
-func (x *AVB17221EntityDiscovery) AddLocalEntityError(anEntity *raw.AVB17221Entity) (bool, error) {
-	return x.inner.AddLocalEntityError(anEntity)
-}
-
-// @method		removeLocalEntity: @abstract	Removes a published local entity with the given GUID. @param		guid	The GUID of the local entity to remove. @param		error		If the request couldn't be completed, on return it contains an instance of NSError that describes the reason why. @result		A boolean indicating if the entity was removed.
-//
-// RemoveLocalEntityError calls the underlying RemoveLocalEntityError.
-func (x *AVB17221EntityDiscovery) RemoveLocalEntityError(guid uint64) (bool, error) {
-	return x.inner.RemoveLocalEntityError(guid)
-}
-
-// @method		changeEntityWithEntityID:toNewGPTPGrandmasterID: @abstract	Change the gptp_grandmaster_id value of the entity when the grandmaster changes. @param		entityID		The entity_id of the entity to change. @param		gPTPGrandmasterID	The new IEEE Std 802.1AS grandmaster ID. @param		error			If the request couldn't be completed, on return it contains an instance of NSError that describes the reason why. @result		A boolean indicating if the entity was updated.
-//
-// ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError calls the underlying ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError.
-func (x *AVB17221EntityDiscovery) ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError(entityID uint64, gPTPGrandmasterID uint64) (bool, error) {
-	return x.inner.ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError(entityID, gPTPGrandmasterID)
-}
-
-// @property	interfaceName @abstract	The BSD interface name for the interface that discovery is being performed on.
-//
-// InterfaceName calls the underlying InterfaceName.
-func (x *AVB17221EntityDiscovery) InterfaceName() string {
-	_r := x.inner.InterfaceName()
-	if _r == nil {
-		return ""
-	}
-	return purego.GoString(_r.Ptr())
-}
-
-// SetInterfaceName calls the underlying SetInterfaceName.
-func (x *AVB17221EntityDiscovery) SetInterfaceName(interfaceName string) {
-	x.inner.SetInterfaceName(foundation.NSStringStringWithUTF8String(interfaceName))
-}
-
-// @property	interface @abstract	The AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
-//
-// Interface calls the underlying Interface.
-func (x *AVB17221EntityDiscovery) Interface() *Interface {
-	_r := x.inner.Interface()
-	if _r == nil {
+// aVB17221EntityDiscoveryAdopt wraps an Objective-C object that this code just created as a
+// AVB17221EntityDiscovery (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func aVB17221EntityDiscoveryAdopt(id objc.ID) *AVB17221EntityDiscovery {
+	if id == 0 {
 		return nil
 	}
-	return &Interface{inner: _r}
+	x := &AVB17221EntityDiscovery{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// @property	discoveryDelegate @abstract	The delegate, implementing the AVB17221EntityDiscoveryDelegate protocol, which will handle entities arriving, departing and changing properties.
+// Description returns the object's -description text.
+func (x *AVB17221EntityDiscovery) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AVB17221EntityDiscovery) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AVB17221EntityDiscovery) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// Initializes the receiver with a particular interface name.
 //
-// DiscoveryDelegate calls the underlying DiscoveryDelegate.
-func (x *AVB17221EntityDiscovery) DiscoveryDelegate() raw.AVB17221EntityDiscoveryDelegate {
-	return x.inner.DiscoveryDelegate()
+// NewAVB17221EntityDiscoveryWithInterfaceName creates a new AVB17221EntityDiscovery.
+func NewAVB17221EntityDiscoveryWithInterfaceName(anInterfaceName string) *AVB17221EntityDiscovery {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("AVB17221EntityDiscovery")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithInterfaceName:"), purego.NSString(anInterfaceName))
+	return aVB17221EntityDiscoveryAdopt(_id)
 }
 
-// SetDiscoveryDelegate calls the underlying SetDiscoveryDelegate.
-func (x *AVB17221EntityDiscovery) SetDiscoveryDelegate(discoveryDelegate raw.AVB17221EntityDiscoveryDelegate) {
-	x.inner.SetDiscoveryDelegate(discoveryDelegate)
+// The BSD interface name for the interface that discovery is being performed on.
+//
+// WithInterfaceName sets interfaceName and returns the receiver so calls can be chained.
+func (x *AVB17221EntityDiscovery) WithInterfaceName(interfaceName string) *AVB17221EntityDiscovery {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceName:"), purego.NSString(interfaceName))
+	return x
+}
+
+// Prepares the IOIterators for receiving entity arrival, departure and property change notifications. This method primes the iterators by iterating over any already available entities. This may be called once, at any time after object creation, but if the discoveryDelegate property has not been set, any already discovered entity notifications will be lost.
+func (x *AVB17221EntityDiscovery) PrimeIterators() {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("primeIterators"))
+}
+
+// Triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for all entities (an entity_id of 0).
+func (x *AVB17221EntityDiscovery) DiscoverEntities() bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("discoverEntities"))
+	return _r
+}
+
+// Triggers the IEEE Std 1722.1™-2013 ADP service to perform an ENTITY_DISCOVER for a specified entity.
+func (x *AVB17221EntityDiscovery) DiscoverEntity(entityID uint64) bool {
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("discoverEntity:"), entityID)
+	return _r
+}
+
+// Publishes a entity as being available on the interface. The in kernel portion creates an IOAVB17221LocalEntity and maintains the ADP messaging.
+func (x *AVB17221EntityDiscovery) AddLocalEntity(anEntity *AVB17221Entity) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("addLocalEntity:error:"), objref.IDOf(anEntity), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// Removes a published local entity with the given GUID.
+func (x *AVB17221EntityDiscovery) RemoveLocalEntity(guid uint64) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("removeLocalEntity:error:"), guid, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// Change the gptp_grandmaster_id value of the entity when the grandmaster changes.
+func (x *AVB17221EntityDiscovery) ChangeEntityWithEntityIDToNewGPTPGrandmasterID(entityID uint64, gPTPGrandmasterID uint64) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("changeEntityWithEntityID:toNewGPTPGrandmasterID:error:"), entityID, gPTPGrandmasterID, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
+}
+
+// The BSD interface name for the interface that discovery is being performed on.
+func (x *AVB17221EntityDiscovery) InterfaceName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interfaceName"))
+	if _r == 0 {
+		return ""
+	}
+	return purego.GoString(_r)
+}
+
+func (x *AVB17221EntityDiscovery) SetInterfaceName(interfaceName string) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterfaceName:"), purego.NSString(interfaceName))
+}
+
+// The AVBInterface object which owns this object. This may be nil if it was not created by an instance of AVBInterface
+func (x *AVB17221EntityDiscovery) Interface() *Interface {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("interface"))
+	return InterfaceFromID(_r)
 }
 
 // AVB17221EntityDiscoveryable is the interface implemented by [AVB17221EntityDiscovery], for mocking and DI.
 type AVB17221EntityDiscoveryable interface {
-	Unwrap() *raw.AVB17221EntityDiscovery
+	obj.Object
 	WithInterfaceName(interfaceName string) *AVB17221EntityDiscovery
-	WithDiscoveryDelegate(discoveryDelegate raw.AVB17221EntityDiscoveryDelegate) *AVB17221EntityDiscovery
 	PrimeIterators()
 	DiscoverEntities() bool
 	DiscoverEntity(entityID uint64) bool
-	AddLocalEntityError(anEntity *raw.AVB17221Entity) (bool, error)
-	RemoveLocalEntityError(guid uint64) (bool, error)
-	ChangeEntityWithEntityIDToNewGPTPGrandmasterIDError(entityID uint64, gPTPGrandmasterID uint64) (bool, error)
+	AddLocalEntity(anEntity *AVB17221Entity) error
+	RemoveLocalEntity(guid uint64) error
+	ChangeEntityWithEntityIDToNewGPTPGrandmasterID(entityID uint64, gPTPGrandmasterID uint64) error
 	InterfaceName() string
 	SetInterfaceName(interfaceName string)
 	Interface() *Interface
-	DiscoveryDelegate() raw.AVB17221EntityDiscoveryDelegate
-	SetDiscoveryDelegate(discoveryDelegate raw.AVB17221EntityDiscoveryDelegate)
 }
 
 var _ AVB17221EntityDiscoveryable = (*AVB17221EntityDiscovery)(nil)

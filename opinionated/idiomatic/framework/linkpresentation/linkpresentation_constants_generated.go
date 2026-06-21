@@ -5,15 +5,10 @@
 package linkpresentation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/linkpresentation"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
 // The domain for Link Presentation errors.
-// LPErrorDomain returns the string constant LPErrorDomain as an objc.ID, for use as a dictionary key or selector argument.
-func LPErrorDomain() objc.ID {
-	if _r := raw.LPErrorDomain(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
-}
+// LPErrorDomain returns the string constant LPErrorDomain, for use as a dictionary key or argument.
+func LPErrorDomain() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("LPErrorDomain"))) }

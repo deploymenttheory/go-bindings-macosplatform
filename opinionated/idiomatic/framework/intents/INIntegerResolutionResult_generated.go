@@ -5,45 +5,68 @@
 package intents
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/intents"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A resolution result for an integer value associated with an intent.
 //
-// IntegerResolutionResult wraps [raw.INIntegerResolutionResult] with a fluent Go API.
+// IntegerResolutionResult is an idiomatic wrapper over the Objective-C class INIntegerResolutionResult.
 type IntegerResolutionResult struct {
-	inner *raw.INIntegerResolutionResult
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.INIntegerResolutionResult].
-func (x *IntegerResolutionResult) Unwrap() *raw.INIntegerResolutionResult { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *IntegerResolutionResult) ID() objc.ID { return x.inner.Ptr() }
-
-// IntegerResolutionResultFromID adopts an existing object pointer as a IntegerResolutionResult (nil for 0).
+// IntegerResolutionResultFromID adopts an existing Objective-C object as a IntegerResolutionResult
+// (nil for 0), retaining it and registering a release finalizer.
 func IntegerResolutionResultFromID(id objc.ID) *IntegerResolutionResult {
 	if id == 0 {
 		return nil
 	}
-	return &IntegerResolutionResult{inner: raw.INIntegerResolutionResultFromID(id)}
+	x := &IntegerResolutionResult{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewIntegerResolutionResult creates a new [IntegerResolutionResult].
+// integerResolutionResultAdopt wraps an Objective-C object that this code just created as a
+// IntegerResolutionResult (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func integerResolutionResultAdopt(id objc.ID) *IntegerResolutionResult {
+	if id == 0 {
+		return nil
+	}
+	x := &IntegerResolutionResult{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *IntegerResolutionResult) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *IntegerResolutionResult) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *IntegerResolutionResult) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewIntegerResolutionResult creates a new IntegerResolutionResult.
 func NewIntegerResolutionResult() *IntegerResolutionResult {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("INIntegerResolutionResult")), objc.RegisterName("new"))
-	return &IntegerResolutionResult{inner: raw.INIntegerResolutionResultFromID(_id)}
-}
-
-func (x *IntegerResolutionResult) asIntentResolutionResult() *raw.INIntentResolutionResult {
-	return &x.inner.INIntentResolutionResult
+	_id := objc.Send[objc.ID](objc.ID(_class("INIntegerResolutionResult")), objc.RegisterName("new"))
+	return integerResolutionResultAdopt(_id)
 }
 
 // IntegerResolutionResultable is the interface implemented by [IntegerResolutionResult], for mocking and DI.
 type IntegerResolutionResultable interface {
-	Unwrap() *raw.INIntegerResolutionResult
+	obj.Object
 }
 
 var _ IntegerResolutionResultable = (*IntegerResolutionResult)(nil)

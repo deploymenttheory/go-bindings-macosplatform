@@ -5,126 +5,124 @@
 package iobluetoothui
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetooth"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/iobluetoothui"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // An NSWindowController subclass that supports the creation of an IOBluetoothObjectPushUIController object.
 //
-// BluetoothObjectPushUIController wraps [raw.IOBluetoothObjectPushUIController] with a fluent Go API.
+// BluetoothObjectPushUIController is an idiomatic wrapper over the Objective-C class IOBluetoothObjectPushUIController.
 type BluetoothObjectPushUIController struct {
-	inner *raw.IOBluetoothObjectPushUIController
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.IOBluetoothObjectPushUIController].
-func (x *BluetoothObjectPushUIController) Unwrap() *raw.IOBluetoothObjectPushUIController {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *BluetoothObjectPushUIController) ID() objc.ID { return x.inner.Ptr() }
-
-// BluetoothObjectPushUIControllerFromID adopts an existing object pointer as a BluetoothObjectPushUIController (nil for 0).
+// BluetoothObjectPushUIControllerFromID adopts an existing Objective-C object as a BluetoothObjectPushUIController
+// (nil for 0), retaining it and registering a release finalizer.
 func BluetoothObjectPushUIControllerFromID(id objc.ID) *BluetoothObjectPushUIController {
 	if id == 0 {
 		return nil
 	}
-	return &BluetoothObjectPushUIController{inner: raw.IOBluetoothObjectPushUIControllerFromID(id)}
+	x := &BluetoothObjectPushUIController{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// bluetoothObjectPushUIControllerAdopt wraps an Objective-C object that this code just created as a
+// BluetoothObjectPushUIController (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func bluetoothObjectPushUIControllerAdopt(id objc.ID) *BluetoothObjectPushUIController {
+	if id == 0 {
+		return nil
+	}
+	x := &BluetoothObjectPushUIController{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *BluetoothObjectPushUIController) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *BluetoothObjectPushUIController) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *BluetoothObjectPushUIController) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates and returns a new IOBluetoothObjectPush object
 //
-// NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDelegate creates a new [BluetoothObjectPushUIController].
-func NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDelegate(inDevice *iobluetooth.IOBluetoothDevice, inFiles *foundation.NSArray[objc.ID], inDelegate objc.ID) *BluetoothObjectPushUIController {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("IOBluetoothObjectPushUIController")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initObjectPushWithBluetoothDevice:withFiles:delegate:"), inDevice.Ptr(), inFiles.Ptr(), inDelegate)
-	return &BluetoothObjectPushUIController{inner: raw.IOBluetoothObjectPushUIControllerFromID(_id)}
+// NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDelegate creates a new BluetoothObjectPushUIController.
+func NewBluetoothObjectPushUIControllerObjectPushWithBluetoothDeviceWithFilesDelegate(inDevice obj.Object, inFiles obj.Object, inDelegate obj.Object) *BluetoothObjectPushUIController {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("IOBluetoothObjectPushUIController")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initObjectPushWithBluetoothDevice:withFiles:delegate:"), objref.IDOf(inDevice), objref.IDOf(inFiles), objref.IDOf(inDelegate))
+	return bluetoothObjectPushUIControllerAdopt(_id)
 }
 
 // Runs the transfer UI panel in a modal session
-//
-// RunModal calls the underlying RunModal.
 func (x *BluetoothObjectPushUIController) RunModal() {
-	x.inner.RunModal()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runModal"))
 }
 
 // Runs the transfer UI as a panel with no modal session
-//
-// RunPanel calls the underlying RunPanel.
 func (x *BluetoothObjectPushUIController) RunPanel() {
-	x.inner.RunPanel()
-}
-
-// Runs the transfer UI as a sheet on the target window.
-//
-// BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo calls the underlying BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo.
-func (x *BluetoothObjectPushUIController) BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) int {
-	return x.inner.BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow, modalDelegate, didEndSelector, contextInfo)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("runPanel"))
 }
 
 // Stops the transfer UI
-//
-// Stop calls the underlying Stop.
 func (x *BluetoothObjectPushUIController) Stop() {
-	x.inner.Stop()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stop"))
 }
 
 // Sets the title of the panel when not run as a sheet.
-//
-// SetTitle calls the underlying SetTitle.
 func (x *BluetoothObjectPushUIController) SetTitle(windowTitle string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(windowTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(windowTitle))
 }
 
 // Returns the title of the transfer panel.
-//
-// GetTitle calls the underlying GetTitle.
 func (x *BluetoothObjectPushUIController) GetTitle() string {
-	_r := x.inner.GetTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
 // Manually sets the icon used in the panel.
-//
-// SetIconImage calls the underlying SetIconImage.
-func (x *BluetoothObjectPushUIController) SetIconImage(image *appkit.NSImage) {
-	x.inner.SetIconImage(image)
+func (x *BluetoothObjectPushUIController) SetIconImage(image obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setIconImage:"), objref.IDOf(image))
 }
 
 // Gets the object representing the remote target device in the transfer.
-//
-// GetDevice calls the underlying GetDevice.
-func (x *BluetoothObjectPushUIController) GetDevice() *iobluetooth.IOBluetoothDevice {
-	return x.inner.GetDevice()
+func (x *BluetoothObjectPushUIController) GetDevice() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("getDevice"))
+	return obj.Wrap(_r)
 }
 
 // Gets state of the transfer
-//
-// IsTransferInProgress calls the underlying IsTransferInProgress.
 func (x *BluetoothObjectPushUIController) IsTransferInProgress() bool {
-	return x.inner.IsTransferInProgress()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isTransferInProgress"))
+	return _r
 }
 
 // BluetoothObjectPushUIControllerable is the interface implemented by [BluetoothObjectPushUIController], for mocking and DI.
 type BluetoothObjectPushUIControllerable interface {
-	Unwrap() *raw.IOBluetoothObjectPushUIController
+	obj.Object
 	RunModal()
 	RunPanel()
-	BeginSheetModalForWindowModalDelegateDidEndSelectorContextInfo(sheetWindow *appkit.NSWindow, modalDelegate objc.ID, didEndSelector objc.SEL, contextInfo unsafe.Pointer) int
 	Stop()
 	SetTitle(windowTitle string)
 	GetTitle() string
-	SetIconImage(image *appkit.NSImage)
-	GetDevice() *iobluetooth.IOBluetoothDevice
+	SetIconImage(image obj.Object)
+	GetDevice() obj.Object
 	IsTransferInProgress() bool
 }
 

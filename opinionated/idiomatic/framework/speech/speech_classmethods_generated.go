@@ -6,23 +6,23 @@ package speech
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/speech"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion blocks until the operation completes or ctx is cancelled.
-func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion(ctx context.Context, asset string, clientIdentifier string, configuration *raw.SFSpeechLanguageModelConfiguration) error {
+func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion(ctx context.Context, asset string, clientIdentifier string, configuration *SpeechLanguageModelConfiguration) error {
 	_ch := make(chan error, 1)
-	raw.SFSpeechLanguageModelPrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(asset)), foundation.NSStringStringWithUTF8String(clientIdentifier), configuration, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFSpeechLanguageModel")), objc.RegisterName("prepareCustomLanguageModelForUrl:clientIdentifier:configuration:completion:"), rt.FileURL(asset), purego.NSString(clientIdentifier), objref.IDOf(configuration), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -32,15 +32,14 @@ func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationCompletion(ctx
 }
 
 // PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion blocks until the operation completes or ctx is cancelled.
-func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion(ctx context.Context, asset string, clientIdentifier string, configuration *raw.SFSpeechLanguageModelConfiguration, ignoresCache bool) error {
+func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion(ctx context.Context, asset string, clientIdentifier string, configuration *SpeechLanguageModelConfiguration, ignoresCache bool) error {
 	_ch := make(chan error, 1)
-	raw.SFSpeechLanguageModelPrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCompletion(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(asset)), foundation.NSStringStringWithUTF8String(clientIdentifier), configuration, ignoresCache, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFSpeechLanguageModel")), objc.RegisterName("prepareCustomLanguageModelForUrl:clientIdentifier:configuration:ignoresCache:completion:"), rt.FileURL(asset), purego.NSString(clientIdentifier), objref.IDOf(configuration), ignoresCache, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -49,16 +48,17 @@ func PrepareCustomLanguageModelForUrlClientIdentifierConfigurationIgnoresCacheCo
 	}
 }
 
+// Creates a language model from custom training data.
+//
 // PrepareCustomLanguageModelForUrlConfigurationCompletion blocks until the operation completes or ctx is cancelled.
-func PrepareCustomLanguageModelForUrlConfigurationCompletion(ctx context.Context, asset string, configuration *raw.SFSpeechLanguageModelConfiguration) error {
+func PrepareCustomLanguageModelForUrlConfigurationCompletion(ctx context.Context, asset string, configuration *SpeechLanguageModelConfiguration) error {
 	_ch := make(chan error, 1)
-	raw.SFSpeechLanguageModelPrepareCustomLanguageModelForUrlConfigurationCompletion(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(asset)), configuration, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFSpeechLanguageModel")), objc.RegisterName("prepareCustomLanguageModelForUrl:configuration:completion:"), rt.FileURL(asset), objref.IDOf(configuration), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -67,16 +67,17 @@ func PrepareCustomLanguageModelForUrlConfigurationCompletion(ctx context.Context
 	}
 }
 
+// Creates a language model from custom training data.
+//
 // PrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion blocks until the operation completes or ctx is cancelled.
-func PrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion(ctx context.Context, asset string, configuration *raw.SFSpeechLanguageModelConfiguration, ignoresCache bool) error {
+func PrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion(ctx context.Context, asset string, configuration *SpeechLanguageModelConfiguration, ignoresCache bool) error {
 	_ch := make(chan error, 1)
-	raw.SFSpeechLanguageModelPrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(asset)), configuration, ignoresCache, func(_p0 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID) {
 		var _err error
-		if uintptr(_p0) != 0 {
-			_err = purego.NSErrorToError(objc.ID(uintptr(_p0)))
-		}
+		_err = errkit.FromObjC(purego.NSErrorToError(_p0))
 		_ch <- _err
 	})
+	objc.Send[objc.ID](objc.ID(_class("SFSpeechLanguageModel")), objc.RegisterName("prepareCustomLanguageModelForUrl:configuration:ignoresCache:completion:"), rt.FileURL(asset), objref.IDOf(configuration), ignoresCache, _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -85,19 +86,14 @@ func PrepareCustomLanguageModelForUrlConfigurationIgnoresCacheCompletion(ctx con
 	}
 }
 
-// SupportedLocales calls the underlying SFSpeechRecognizerSupportedLocales.
-func SupportedLocales() *foundation.NSSet[*foundation.NSLocale] {
-	return raw.SFSpeechRecognizerSupportedLocales()
+// Returns the set of locales that are supported by the speech recognizer.
+func SupportedLocales() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("SFSpeechRecognizer")), objc.RegisterName("supportedLocales"))
+	return obj.Wrap(_r)
 }
 
-// AuthorizationStatusClass calls the underlying SFSpeechRecognizerAuthorizationStatusClass.
-func AuthorizationStatusClass() SFSpeechRecognizerAuthorizationStatus {
-	return SFSpeechRecognizerAuthorizationStatus(raw.SFSpeechRecognizerAuthorizationStatusClass())
-}
-
-// RequestAuthorization calls the underlying SFSpeechRecognizerRequestAuthorization.
-func RequestAuthorization(handler func(SFSpeechRecognizerAuthorizationStatus)) {
-	raw.SFSpeechRecognizerRequestAuthorization(func(_a0 raw.SFSpeechRecognizerAuthorizationStatus) {
-		handler(SFSpeechRecognizerAuthorizationStatus(_a0))
-	})
+// Returns your app’s current authorization to perform speech recognition.
+func AuthorizationStatusClass() SpeechRecognizerAuthorizationStatus {
+	_r := objc.Send[SpeechRecognizerAuthorizationStatus](objc.ID(_class("SFSpeechRecognizer")), objc.RegisterName("authorizationStatus"))
+	return _r
 }

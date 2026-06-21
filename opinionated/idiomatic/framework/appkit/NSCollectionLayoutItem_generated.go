@@ -5,110 +5,101 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The most basic component of a collection view’s layout.
 //
-// CollectionLayoutItem wraps [raw.NSCollectionLayoutItem] with a fluent Go API.
+// CollectionLayoutItem is an idiomatic wrapper over the Objective-C class NSCollectionLayoutItem.
 type CollectionLayoutItem struct {
-	inner *raw.NSCollectionLayoutItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSCollectionLayoutItem].
-func (x *CollectionLayoutItem) Unwrap() *raw.NSCollectionLayoutItem { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *CollectionLayoutItem) ID() objc.ID { return x.inner.Ptr() }
-
-// CollectionLayoutItemFromID adopts an existing object pointer as a CollectionLayoutItem (nil for 0).
+// CollectionLayoutItemFromID adopts an existing Objective-C object as a CollectionLayoutItem
+// (nil for 0), retaining it and registering a release finalizer.
 func CollectionLayoutItemFromID(id objc.ID) *CollectionLayoutItem {
 	if id == 0 {
 		return nil
 	}
-	return &CollectionLayoutItem{inner: raw.NSCollectionLayoutItemFromID(id)}
-}
-
-// NewCollectionLayoutItem creates a new [CollectionLayoutItem].
-func NewCollectionLayoutItem() *CollectionLayoutItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSCollectionLayoutItem")), objc.RegisterName("new"))
-	return &CollectionLayoutItem{inner: raw.NSCollectionLayoutItemFromID(_id)}
-}
-
-// The amount of space added around the content of the item to adjust its final size after its position is computed.
-//
-// WithContentInsets sets the contentInsets property and returns the receiver for chaining.
-func (x *CollectionLayoutItem) WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutItem {
-	x.inner.SetContentInsets(contentInsets)
+	x := &CollectionLayoutItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// collectionLayoutItemAdopt wraps an Objective-C object that this code just created as a
+// CollectionLayoutItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func collectionLayoutItemAdopt(id objc.ID) *CollectionLayoutItem {
+	if id == 0 {
+		return nil
+	}
+	x := &CollectionLayoutItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *CollectionLayoutItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *CollectionLayoutItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *CollectionLayoutItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewCollectionLayoutItem creates a new CollectionLayoutItem.
+func NewCollectionLayoutItem() *CollectionLayoutItem {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSCollectionLayoutItem")), objc.RegisterName("new"))
+	return collectionLayoutItemAdopt(_id)
 }
 
 // The amount of space added around the boundaries of the item between other items and this item’s container.
 //
-// WithEdgeSpacing sets the edgeSpacing property and returns the receiver for chaining.
+// WithEdgeSpacing sets edgeSpacing and returns the receiver so calls can be chained.
 func (x *CollectionLayoutItem) WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutItem {
-	x.inner.SetEdgeSpacing(edgeSpacing.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 	return x
 }
 
-// ContentInsets calls the underlying ContentInsets.
-func (x *CollectionLayoutItem) ContentInsets() raw.NSDirectionalEdgeInsets {
-	return x.inner.ContentInsets()
-}
-
-// SetContentInsets calls the underlying SetContentInsets.
-func (x *CollectionLayoutItem) SetContentInsets(contentInsets raw.NSDirectionalEdgeInsets) {
-	x.inner.SetContentInsets(contentInsets)
-}
-
-// EdgeSpacing calls the underlying EdgeSpacing.
 func (x *CollectionLayoutItem) EdgeSpacing() *CollectionLayoutEdgeSpacing {
-	_r := x.inner.EdgeSpacing()
-	if _r == nil {
-		return nil
-	}
-	return &CollectionLayoutEdgeSpacing{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("edgeSpacing"))
+	return CollectionLayoutEdgeSpacingFromID(_r)
 }
 
-// SetEdgeSpacing calls the underlying SetEdgeSpacing.
-func (x *CollectionLayoutItem) SetEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing) {
-	x.inner.SetEdgeSpacing(edgeSpacing)
+func (x *CollectionLayoutItem) SetEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEdgeSpacing:"), objref.IDOf(edgeSpacing))
 }
 
-// LayoutSize calls the underlying LayoutSize.
 func (x *CollectionLayoutItem) LayoutSize() *CollectionLayoutSize {
-	_r := x.inner.LayoutSize()
-	if _r == nil {
-		return nil
-	}
-	return &CollectionLayoutSize{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("layoutSize"))
+	return CollectionLayoutSizeFromID(_r)
 }
 
 // SupplementaryItems returns the collection as a Go slice.
 func (x *CollectionLayoutItem) SupplementaryItems() []*CollectionLayoutSupplementaryItem {
-	arr := x.inner.SupplementaryItems()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *CollectionLayoutSupplementaryItem {
-		return &CollectionLayoutSupplementaryItem{inner: raw.NSCollectionLayoutSupplementaryItemFromID(purego.Retain(_id))}
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("supplementaryItems"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *CollectionLayoutSupplementaryItem {
+		return CollectionLayoutSupplementaryItemFromID(_id)
 	})
 }
 
-func (x *CollectionLayoutItem) asCollectionLayoutItem() *raw.NSCollectionLayoutItem { return x.inner }
-
 // CollectionLayoutItemable is the interface implemented by [CollectionLayoutItem], for mocking and DI.
 type CollectionLayoutItemable interface {
-	Unwrap() *raw.NSCollectionLayoutItem
-	WithContentInsets(contentInsets raw.NSDirectionalEdgeInsets) *CollectionLayoutItem
+	obj.Object
 	WithEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing) *CollectionLayoutItem
-	ContentInsets() raw.NSDirectionalEdgeInsets
-	SetContentInsets(contentInsets raw.NSDirectionalEdgeInsets)
 	EdgeSpacing() *CollectionLayoutEdgeSpacing
-	SetEdgeSpacing(edgeSpacing *raw.NSCollectionLayoutEdgeSpacing)
+	SetEdgeSpacing(edgeSpacing *CollectionLayoutEdgeSpacing)
 	LayoutSize() *CollectionLayoutSize
 	SupplementaryItems() []*CollectionLayoutSupplementaryItem
 }

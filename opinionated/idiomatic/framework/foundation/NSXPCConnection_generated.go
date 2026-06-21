@@ -6,147 +6,150 @@ package foundation
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A bidirectional communication channel between two processes.
 //
-// XPCConnection wraps [raw.NSXPCConnection] with a fluent Go API.
+// XPCConnection is an idiomatic wrapper over the Objective-C class NSXPCConnection.
 type XPCConnection struct {
-	inner *raw.NSXPCConnection
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSXPCConnection].
-func (x *XPCConnection) Unwrap() *raw.NSXPCConnection { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *XPCConnection) ID() objc.ID { return x.inner.Ptr() }
-
-// XPCConnectionFromID adopts an existing object pointer as a XPCConnection (nil for 0).
+// XPCConnectionFromID adopts an existing Objective-C object as a XPCConnection
+// (nil for 0), retaining it and registering a release finalizer.
 func XPCConnectionFromID(id objc.ID) *XPCConnection {
 	if id == 0 {
 		return nil
 	}
-	return &XPCConnection{inner: raw.NSXPCConnectionFromID(id)}
+	x := &XPCConnection{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// xPCConnectionAdopt wraps an Objective-C object that this code just created as a
+// XPCConnection (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func xPCConnectionAdopt(id objc.ID) *XPCConnection {
+	if id == 0 {
+		return nil
+	}
+	x := &XPCConnection{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *XPCConnection) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *XPCConnection) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *XPCConnection) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes an NSXPCConnection object to connect to an NSXPCListener object in an XPC service, identified by a service name.
 //
-// NewXPCConnectionWithServiceName creates a new [XPCConnection].
+// NewXPCConnectionWithServiceName creates a new XPCConnection.
 func NewXPCConnectionWithServiceName(serviceName string) *XPCConnection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXPCConnection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceName:"), foundation.NSStringStringWithUTF8String(serviceName).Ptr())
-	return &XPCConnection{inner: raw.NSXPCConnectionFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXPCConnection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithServiceName:"), purego.NSString(serviceName))
+	return xPCConnectionAdopt(_id)
 }
 
 // Initializes an NSXPCConnection object to connect to a LaunchAgent or LaunchDaemon with a name advertised in a launchd.plist.
 //
-// NewXPCConnectionWithMachServiceNameOptions creates a new [XPCConnection].
-func NewXPCConnectionWithMachServiceNameOptions(name string, options NSXPCConnectionOptions) *XPCConnection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXPCConnection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachServiceName:options:"), foundation.NSStringStringWithUTF8String(name).Ptr(), raw.NSXPCConnectionOptions(options))
-	return &XPCConnection{inner: raw.NSXPCConnectionFromID(_id)}
+// NewXPCConnectionWithMachServiceNameOptions creates a new XPCConnection.
+func NewXPCConnectionWithMachServiceNameOptions(name string, options XPCConnectionOptions) *XPCConnection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXPCConnection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithMachServiceName:options:"), purego.NSString(name), options)
+	return xPCConnectionAdopt(_id)
 }
 
 // Initializes an NSXPCConnection object to connect to an NSXPCListener object in another process, identified by an NSXPCListenerEndpoint object.
 //
-// NewXPCConnectionWithListenerEndpoint creates a new [XPCConnection].
-func NewXPCConnectionWithListenerEndpoint(endpoint *raw.NSXPCListenerEndpoint) *XPCConnection {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSXPCConnection")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithListenerEndpoint:"), endpoint.Ptr())
-	return &XPCConnection{inner: raw.NSXPCConnectionFromID(_id)}
+// NewXPCConnectionWithListenerEndpoint creates a new XPCConnection.
+func NewXPCConnectionWithListenerEndpoint(endpoint *XPCListenerEndpoint) *XPCConnection {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("NSXPCConnection")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithListenerEndpoint:"), objref.IDOf(endpoint))
+	return xPCConnectionAdopt(_id)
 }
 
 // The NSXPCInterface object that describes the protocol for the exported object on this connection.
 //
-// WithExportedInterface sets the exportedInterface property and returns the receiver for chaining.
+// WithExportedInterface sets exportedInterface and returns the receiver so calls can be chained.
 func (x *XPCConnection) WithExportedInterface(exportedInterface *XPCInterface) *XPCConnection {
-	x.inner.SetExportedInterface(exportedInterface.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportedInterface:"), objref.IDOf(exportedInterface))
 	return x
 }
 
 // An exported object for the connection.
 //
-// WithExportedObject sets the exportedObject property and returns the receiver for chaining.
-func (x *XPCConnection) WithExportedObject(exportedObject objc.ID) *XPCConnection {
-	x.inner.SetExportedObject(exportedObject)
+// WithExportedObject sets exportedObject and returns the receiver so calls can be chained.
+func (x *XPCConnection) WithExportedObject(exportedObject obj.Object) *XPCConnection {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportedObject:"), objref.IDOf(exportedObject))
 	return x
 }
 
 // Defines the NSXPCInterface object that describes the protocol for the object represented by the remoteObjectProxy.
 //
-// WithRemoteObjectInterface sets the remoteObjectInterface property and returns the receiver for chaining.
+// WithRemoteObjectInterface sets remoteObjectInterface and returns the receiver so calls can be chained.
 func (x *XPCConnection) WithRemoteObjectInterface(remoteObjectInterface *XPCInterface) *XPCConnection {
-	x.inner.SetRemoteObjectInterface(remoteObjectInterface.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemoteObjectInterface:"), objref.IDOf(remoteObjectInterface))
 	return x
 }
 
 // An interruption handler that is called if the remote process exits or crashes.
 //
-// WithInterruptionHandler sets the interruptionHandler property and returns the receiver for chaining.
+// WithInterruptionHandler sets interruptionHandler and returns the receiver so calls can be chained.
 func (x *XPCConnection) WithInterruptionHandler(interruptionHandler func()) *XPCConnection {
-	x.inner.SetInterruptionHandler(interruptionHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterruptionHandler:"), objc.NewBlock(func(_ objc.Block) { interruptionHandler() }))
 	return x
 }
 
 // An invalidation handler that is called if the connection can not be formed or the connection has terminated and may not be re-established.
 //
-// WithInvalidationHandler sets the invalidationHandler property and returns the receiver for chaining.
+// WithInvalidationHandler sets invalidationHandler and returns the receiver so calls can be chained.
 func (x *XPCConnection) WithInvalidationHandler(invalidationHandler func()) *XPCConnection {
-	x.inner.SetInvalidationHandler(invalidationHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvalidationHandler:"), objc.NewBlock(func(_ objc.Block) { invalidationHandler() }))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *XPCConnection) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCConnection {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *XPCConnection) WithScriptingProperties(scriptingProperties obj.Object) *XPCConnection {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
-}
-
-// Returns a proxy for the remote object (that is, the object exported from the other side of this connection) with the specified error handler.
-//
-// RemoteObjectProxyWithErrorHandler calls the underlying RemoteObjectProxyWithErrorHandler.
-func (x *XPCConnection) RemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID {
-	return x.inner.RemoteObjectProxyWithErrorHandler(handler)
-}
-
-// Returns a proxy that makes a synchronous IPC call instead of the default async behavior.
-//
-// SynchronousRemoteObjectProxyWithErrorHandler calls the underlying SynchronousRemoteObjectProxyWithErrorHandler.
-func (x *XPCConnection) SynchronousRemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID {
-	return x.inner.SynchronousRemoteObjectProxyWithErrorHandler(handler)
 }
 
 // Starts or resumes handling of messages on a connection.
-//
-// Resume calls the underlying Resume.
 func (x *XPCConnection) Resume() {
-	x.inner.Resume()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("resume"))
 }
 
 // Suspends the connection.
-//
-// Suspend calls the underlying Suspend.
 func (x *XPCConnection) Suspend() {
-	x.inner.Suspend()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("suspend"))
 }
 
 // Activates the connection.
-//
-// Activate calls the underlying Activate.
 func (x *XPCConnection) Activate() {
-	x.inner.Activate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("activate"))
 }
 
 // Invalidates the connection.
-//
-// Invalidate calls the underlying Invalidate.
 func (x *XPCConnection) Invalidate() {
-	x.inner.Invalidate()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("invalidate"))
 }
 
 // Add a barrier block to execute on the connection.
@@ -154,9 +157,10 @@ func (x *XPCConnection) Invalidate() {
 // ScheduleSendBarrierBlock blocks until the operation completes or ctx is cancelled.
 func (x *XPCConnection) ScheduleSendBarrierBlock(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.ScheduleSendBarrierBlock(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("scheduleSendBarrierBlock:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -166,103 +170,77 @@ func (x *XPCConnection) ScheduleSendBarrierBlock(ctx context.Context) error {
 }
 
 // Sets the code signing requirement for this connection.
-//
-// SetCodeSigningRequirement calls the underlying SetCodeSigningRequirement.
 func (x *XPCConnection) SetCodeSigningRequirement(requirement string) {
-	x.inner.SetCodeSigningRequirement(foundation.NSStringStringWithUTF8String(requirement))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCodeSigningRequirement:"), purego.NSString(requirement))
 }
 
-// ServiceName calls the underlying ServiceName.
-func (x *XPCConnection) ServiceName() *String {
-	_r := x.inner.ServiceName()
-	if _r == nil {
-		return nil
+func (x *XPCConnection) ServiceName() string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("serviceName"))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// Endpoint calls the underlying Endpoint.
 func (x *XPCConnection) Endpoint() *XPCListenerEndpoint {
-	_r := x.inner.Endpoint()
-	if _r == nil {
-		return nil
-	}
-	return &XPCListenerEndpoint{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("endpoint"))
+	return XPCListenerEndpointFromID(_r)
 }
 
-// ExportedInterface calls the underlying ExportedInterface.
 func (x *XPCConnection) ExportedInterface() *XPCInterface {
-	_r := x.inner.ExportedInterface()
-	if _r == nil {
-		return nil
-	}
-	return &XPCInterface{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportedInterface"))
+	return XPCInterfaceFromID(_r)
 }
 
-// SetExportedInterface calls the underlying SetExportedInterface.
-func (x *XPCConnection) SetExportedInterface(exportedInterface *raw.NSXPCInterface) {
-	x.inner.SetExportedInterface(exportedInterface)
+func (x *XPCConnection) SetExportedInterface(exportedInterface *XPCInterface) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportedInterface:"), objref.IDOf(exportedInterface))
 }
 
-// ExportedObject calls the underlying ExportedObject.
-func (x *XPCConnection) ExportedObject() objc.ID {
-	return x.inner.ExportedObject()
+func (x *XPCConnection) ExportedObject() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("exportedObject"))
+	return obj.Wrap(_r)
 }
 
-// SetExportedObject calls the underlying SetExportedObject.
-func (x *XPCConnection) SetExportedObject(exportedObject objc.ID) {
-	x.inner.SetExportedObject(exportedObject)
+func (x *XPCConnection) SetExportedObject(exportedObject obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setExportedObject:"), objref.IDOf(exportedObject))
 }
 
-// RemoteObjectInterface calls the underlying RemoteObjectInterface.
 func (x *XPCConnection) RemoteObjectInterface() *XPCInterface {
-	_r := x.inner.RemoteObjectInterface()
-	if _r == nil {
-		return nil
-	}
-	return &XPCInterface{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteObjectInterface"))
+	return XPCInterfaceFromID(_r)
 }
 
-// SetRemoteObjectInterface calls the underlying SetRemoteObjectInterface.
-func (x *XPCConnection) SetRemoteObjectInterface(remoteObjectInterface *raw.NSXPCInterface) {
-	x.inner.SetRemoteObjectInterface(remoteObjectInterface)
+func (x *XPCConnection) SetRemoteObjectInterface(remoteObjectInterface *XPCInterface) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRemoteObjectInterface:"), objref.IDOf(remoteObjectInterface))
 }
 
-// RemoteObjectProxy calls the underlying RemoteObjectProxy.
-func (x *XPCConnection) RemoteObjectProxy() objc.ID {
-	return x.inner.RemoteObjectProxy()
-}
-
-// InterruptionHandler calls the underlying InterruptionHandler.
-func (x *XPCConnection) InterruptionHandler() objc.Block {
-	return x.inner.InterruptionHandler()
+func (x *XPCConnection) RemoteObjectProxy() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("remoteObjectProxy"))
+	return obj.Wrap(_r)
 }
 
 // SetInterruptionHandler blocks until the operation completes or ctx is cancelled.
 func (x *XPCConnection) SetInterruptionHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SetInterruptionHandler(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInterruptionHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
 	case <-ctx.Done():
 		return ctx.Err()
 	}
-}
-
-// InvalidationHandler calls the underlying InvalidationHandler.
-func (x *XPCConnection) InvalidationHandler() objc.Block {
-	return x.inner.InvalidationHandler()
 }
 
 // SetInvalidationHandler blocks until the operation completes or ctx is cancelled.
 func (x *XPCConnection) SetInvalidationHandler(ctx context.Context) error {
 	_ch := make(chan error, 1)
-	x.inner.SetInvalidationHandler(func() {
+	_block := objc.NewBlock(func(_ objc.Block) {
 		_ch <- nil
 	})
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setInvalidationHandler:"), _block)
 	select {
 	case err := <-_ch:
 		return err
@@ -271,62 +249,56 @@ func (x *XPCConnection) SetInvalidationHandler(ctx context.Context) error {
 	}
 }
 
-// AuditSessionIdentifier calls the underlying AuditSessionIdentifier.
 func (x *XPCConnection) AuditSessionIdentifier() int {
-	return x.inner.AuditSessionIdentifier()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("auditSessionIdentifier"))
+	return _r
 }
 
-// ProcessIdentifier calls the underlying ProcessIdentifier.
 func (x *XPCConnection) ProcessIdentifier() int {
-	return x.inner.ProcessIdentifier()
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("processIdentifier"))
+	return _r
 }
 
-// EffectiveUserIdentifier calls the underlying EffectiveUserIdentifier.
-func (x *XPCConnection) EffectiveUserIdentifier() uint {
-	return x.inner.EffectiveUserIdentifier()
+func (x *XPCConnection) EffectiveUserIdentifier() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("effectiveUserIdentifier"))
+	return _r
 }
 
-// EffectiveGroupIdentifier calls the underlying EffectiveGroupIdentifier.
-func (x *XPCConnection) EffectiveGroupIdentifier() uint {
-	return x.inner.EffectiveGroupIdentifier()
+func (x *XPCConnection) EffectiveGroupIdentifier() int {
+	_r := objc.Send[int](objref.IDOf(x), objc.RegisterName("effectiveGroupIdentifier"))
+	return _r
 }
-
-func (x *XPCConnection) asObject() *raw.NSObject { return &x.inner.NSObject }
 
 // XPCConnectionable is the interface implemented by [XPCConnection], for mocking and DI.
 type XPCConnectionable interface {
-	Unwrap() *raw.NSXPCConnection
+	obj.Object
 	WithExportedInterface(exportedInterface *XPCInterface) *XPCConnection
-	WithExportedObject(exportedObject objc.ID) *XPCConnection
+	WithExportedObject(exportedObject obj.Object) *XPCConnection
 	WithRemoteObjectInterface(remoteObjectInterface *XPCInterface) *XPCConnection
 	WithInterruptionHandler(interruptionHandler func()) *XPCConnection
 	WithInvalidationHandler(invalidationHandler func()) *XPCConnection
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *XPCConnection
-	RemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID
-	SynchronousRemoteObjectProxyWithErrorHandler(handler func(unsafe.Pointer)) objc.ID
+	WithScriptingProperties(scriptingProperties obj.Object) *XPCConnection
 	Resume()
 	Suspend()
 	Activate()
 	Invalidate()
 	ScheduleSendBarrierBlock(ctx context.Context) error
 	SetCodeSigningRequirement(requirement string)
-	ServiceName() *String
+	ServiceName() string
 	Endpoint() *XPCListenerEndpoint
 	ExportedInterface() *XPCInterface
-	SetExportedInterface(exportedInterface *raw.NSXPCInterface)
-	ExportedObject() objc.ID
-	SetExportedObject(exportedObject objc.ID)
+	SetExportedInterface(exportedInterface *XPCInterface)
+	ExportedObject() obj.Object
+	SetExportedObject(exportedObject obj.Object)
 	RemoteObjectInterface() *XPCInterface
-	SetRemoteObjectInterface(remoteObjectInterface *raw.NSXPCInterface)
-	RemoteObjectProxy() objc.ID
-	InterruptionHandler() objc.Block
+	SetRemoteObjectInterface(remoteObjectInterface *XPCInterface)
+	RemoteObjectProxy() obj.Object
 	SetInterruptionHandler(ctx context.Context) error
-	InvalidationHandler() objc.Block
 	SetInvalidationHandler(ctx context.Context) error
 	AuditSessionIdentifier() int
 	ProcessIdentifier() int
-	EffectiveUserIdentifier() uint
-	EffectiveGroupIdentifier() uint
+	EffectiveUserIdentifier() int
+	EffectiveGroupIdentifier() int
 }
 
 var _ XPCConnectionable = (*XPCConnection)(nil)

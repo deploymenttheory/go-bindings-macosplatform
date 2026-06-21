@@ -214,73 +214,73 @@ func (e MTL4ShaderReflection) String() string {
 }
 
 // Options for specifying different kinds of instance types.
-type MTLAccelerationStructureInstanceDescriptorType uint64
+type AccelerationStructureInstanceDescriptorType uint64
 
 const (
 	// An option specifying that the instance uses the default characteristics.
-	MTLAccelerationStructureInstanceDescriptorTypeDefault MTLAccelerationStructureInstanceDescriptorType = 0
+	AccelerationStructureInstanceDescriptorTypeDefault AccelerationStructureInstanceDescriptorType = 0
 	// An option specifying that the instance contains a user identifier.
-	MTLAccelerationStructureInstanceDescriptorTypeUserID MTLAccelerationStructureInstanceDescriptorType = 1
+	AccelerationStructureInstanceDescriptorTypeUserID AccelerationStructureInstanceDescriptorType = 1
 	// An option specifying that the instance contains motion data.
-	MTLAccelerationStructureInstanceDescriptorTypeMotion MTLAccelerationStructureInstanceDescriptorType = 2
+	AccelerationStructureInstanceDescriptorTypeMotion AccelerationStructureInstanceDescriptorType = 2
 	// An option that enables an instance descriptor memory layout the GPU can populate.
-	MTLAccelerationStructureInstanceDescriptorTypeIndirect MTLAccelerationStructureInstanceDescriptorType = 3
+	AccelerationStructureInstanceDescriptorTypeIndirect AccelerationStructureInstanceDescriptorType = 3
 	// An option specifying that the instance contains motion data, and enables using an instance descriptor memory layout that the GPU can populate.
-	MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion MTLAccelerationStructureInstanceDescriptorType = 4
+	AccelerationStructureInstanceDescriptorTypeIndirectMotion AccelerationStructureInstanceDescriptorType = 4
 )
 
-func (e MTLAccelerationStructureInstanceDescriptorType) String() string {
+func (e AccelerationStructureInstanceDescriptorType) String() string {
 	switch e {
-	case MTLAccelerationStructureInstanceDescriptorTypeDefault:
-		return "MTLAccelerationStructureInstanceDescriptorTypeDefault"
-	case MTLAccelerationStructureInstanceDescriptorTypeUserID:
-		return "MTLAccelerationStructureInstanceDescriptorTypeUserID"
-	case MTLAccelerationStructureInstanceDescriptorTypeMotion:
-		return "MTLAccelerationStructureInstanceDescriptorTypeMotion"
-	case MTLAccelerationStructureInstanceDescriptorTypeIndirect:
-		return "MTLAccelerationStructureInstanceDescriptorTypeIndirect"
-	case MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion:
-		return "MTLAccelerationStructureInstanceDescriptorTypeIndirectMotion"
+	case AccelerationStructureInstanceDescriptorTypeDefault:
+		return "AccelerationStructureInstanceDescriptorTypeDefault"
+	case AccelerationStructureInstanceDescriptorTypeUserID:
+		return "AccelerationStructureInstanceDescriptorTypeUserID"
+	case AccelerationStructureInstanceDescriptorTypeMotion:
+		return "AccelerationStructureInstanceDescriptorTypeMotion"
+	case AccelerationStructureInstanceDescriptorTypeIndirect:
+		return "AccelerationStructureInstanceDescriptorTypeIndirect"
+	case AccelerationStructureInstanceDescriptorTypeIndirectMotion:
+		return "AccelerationStructureInstanceDescriptorTypeIndirectMotion"
 	default:
-		return fmt.Sprintf("MTLAccelerationStructureInstanceDescriptorType(%d)", int64(e))
+		return fmt.Sprintf("AccelerationStructureInstanceDescriptorType(%d)", int64(e))
 	}
 }
 
 // Options that affect how Metal builds an acceleration structure and the behavior of that acceleration structure.
 // Bitmask — values may be combined with |.
-type MTLAccelerationStructureUsage uint64
+type AccelerationStructureUsage uint64
 
 const (
 	// A sentinel value the represents an empty set of options, which is the default behavior for building new acceleration structures.
-	MTLAccelerationStructureUsageNone MTLAccelerationStructureUsage = 0
+	AccelerationStructureUsageNone AccelerationStructureUsage = 0
 	// An option that lets you update an acceleration structure after creating it.
-	MTLAccelerationStructureUsageRefit MTLAccelerationStructureUsage = 1
+	AccelerationStructureUsageRefit AccelerationStructureUsage = 1
 	// An option that instructs Metal to build an acceleration structure quickly.
-	MTLAccelerationStructureUsagePreferFastBuild MTLAccelerationStructureUsage = 2
+	AccelerationStructureUsagePreferFastBuild AccelerationStructureUsage = 2
 	// An option that increases an acceleration structure’s storage capacity.
-	MTLAccelerationStructureUsageExtendedLimits MTLAccelerationStructureUsage = 4
+	AccelerationStructureUsageExtendedLimits AccelerationStructureUsage = 4
 	// An option that instructs Metal to prioritize building an acceleration structure with better intersection performance.
-	MTLAccelerationStructureUsagePreferFastIntersection MTLAccelerationStructureUsage = 16
+	AccelerationStructureUsagePreferFastIntersection AccelerationStructureUsage = 16
 	// An option that instructs Metal to prioritize building an acceleration structure that needs less memory.
-	MTLAccelerationStructureUsageMinimizeMemory MTLAccelerationStructureUsage = 32
+	AccelerationStructureUsageMinimizeMemory AccelerationStructureUsage = 32
 )
 
-func (e MTLAccelerationStructureUsage) String() string {
+func (e AccelerationStructureUsage) String() string {
 	var parts []string
-	if e&MTLAccelerationStructureUsageRefit != 0 {
-		parts = append(parts, "MTLAccelerationStructureUsageRefit")
+	if e&AccelerationStructureUsageRefit != 0 {
+		parts = append(parts, "AccelerationStructureUsageRefit")
 	}
-	if e&MTLAccelerationStructureUsagePreferFastBuild != 0 {
-		parts = append(parts, "MTLAccelerationStructureUsagePreferFastBuild")
+	if e&AccelerationStructureUsagePreferFastBuild != 0 {
+		parts = append(parts, "AccelerationStructureUsagePreferFastBuild")
 	}
-	if e&MTLAccelerationStructureUsageExtendedLimits != 0 {
-		parts = append(parts, "MTLAccelerationStructureUsageExtendedLimits")
+	if e&AccelerationStructureUsageExtendedLimits != 0 {
+		parts = append(parts, "AccelerationStructureUsageExtendedLimits")
 	}
-	if e&MTLAccelerationStructureUsagePreferFastIntersection != 0 {
-		parts = append(parts, "MTLAccelerationStructureUsagePreferFastIntersection")
+	if e&AccelerationStructureUsagePreferFastIntersection != 0 {
+		parts = append(parts, "AccelerationStructureUsagePreferFastIntersection")
 	}
-	if e&MTLAccelerationStructureUsageMinimizeMemory != 0 {
-		parts = append(parts, "MTLAccelerationStructureUsageMinimizeMemory")
+	if e&AccelerationStructureUsageMinimizeMemory != 0 {
+		parts = append(parts, "AccelerationStructureUsageMinimizeMemory")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -291,533 +291,533 @@ func (e MTLAccelerationStructureUsage) String() string {
 // The resource type for an argument of a function.
 //
 // Deprecated: since macOS 13.0.
-type MTLArgumentType uint64
+type ArgumentType uint64
 
 const (
 	// The argument is a buffer.
-	MTLArgumentTypeBuffer MTLArgumentType = 0
+	ArgumentTypeBuffer ArgumentType = 0
 	// The argument is a pointer to threadgroup memory.
-	MTLArgumentTypeThreadgroupMemory MTLArgumentType = 1
+	ArgumentTypeThreadgroupMemory ArgumentType = 1
 	// The argument is a texture.
-	MTLArgumentTypeTexture MTLArgumentType = 2
+	ArgumentTypeTexture ArgumentType = 2
 	// The argument is a texture sampler.
-	MTLArgumentTypeSampler MTLArgumentType = 3
+	ArgumentTypeSampler ArgumentType = 3
 	// The argument is imageblock data.
-	MTLArgumentTypeImageblockData MTLArgumentType = 16
+	ArgumentTypeImageblockData ArgumentType = 16
 	// The argument is an imageblock.
-	MTLArgumentTypeImageblock MTLArgumentType = 17
+	ArgumentTypeImageblock ArgumentType = 17
 	// The argument is a visible function table.
-	MTLArgumentTypeVisibleFunctionTable MTLArgumentType = 24
+	ArgumentTypeVisibleFunctionTable ArgumentType = 24
 	// The argument is a bottom-level ray tracing acceleraton structure for a set of primitives.
-	MTLArgumentTypePrimitiveAccelerationStructure MTLArgumentType = 25
+	ArgumentTypePrimitiveAccelerationStructure ArgumentType = 25
 	// The argument is a top-level ray tracing acceleration structure for a set of instances.
-	MTLArgumentTypeInstanceAccelerationStructure MTLArgumentType = 26
+	ArgumentTypeInstanceAccelerationStructure ArgumentType = 26
 	// The argument is an intersection function table.
-	MTLArgumentTypeIntersectionFunctionTable MTLArgumentType = 27
+	ArgumentTypeIntersectionFunctionTable ArgumentType = 27
 )
 
-func (e MTLArgumentType) String() string {
+func (e ArgumentType) String() string {
 	switch e {
-	case MTLArgumentTypeBuffer:
-		return "MTLArgumentTypeBuffer"
-	case MTLArgumentTypeThreadgroupMemory:
-		return "MTLArgumentTypeThreadgroupMemory"
-	case MTLArgumentTypeTexture:
-		return "MTLArgumentTypeTexture"
-	case MTLArgumentTypeSampler:
-		return "MTLArgumentTypeSampler"
-	case MTLArgumentTypeImageblockData:
-		return "MTLArgumentTypeImageblockData"
-	case MTLArgumentTypeImageblock:
-		return "MTLArgumentTypeImageblock"
-	case MTLArgumentTypeVisibleFunctionTable:
-		return "MTLArgumentTypeVisibleFunctionTable"
-	case MTLArgumentTypePrimitiveAccelerationStructure:
-		return "MTLArgumentTypePrimitiveAccelerationStructure"
-	case MTLArgumentTypeInstanceAccelerationStructure:
-		return "MTLArgumentTypeInstanceAccelerationStructure"
-	case MTLArgumentTypeIntersectionFunctionTable:
-		return "MTLArgumentTypeIntersectionFunctionTable"
+	case ArgumentTypeBuffer:
+		return "ArgumentTypeBuffer"
+	case ArgumentTypeThreadgroupMemory:
+		return "ArgumentTypeThreadgroupMemory"
+	case ArgumentTypeTexture:
+		return "ArgumentTypeTexture"
+	case ArgumentTypeSampler:
+		return "ArgumentTypeSampler"
+	case ArgumentTypeImageblockData:
+		return "ArgumentTypeImageblockData"
+	case ArgumentTypeImageblock:
+		return "ArgumentTypeImageblock"
+	case ArgumentTypeVisibleFunctionTable:
+		return "ArgumentTypeVisibleFunctionTable"
+	case ArgumentTypePrimitiveAccelerationStructure:
+		return "ArgumentTypePrimitiveAccelerationStructure"
+	case ArgumentTypeInstanceAccelerationStructure:
+		return "ArgumentTypeInstanceAccelerationStructure"
+	case ArgumentTypeIntersectionFunctionTable:
+		return "ArgumentTypeIntersectionFunctionTable"
 	default:
-		return fmt.Sprintf("MTLArgumentType(%d)", int64(e))
+		return fmt.Sprintf("ArgumentType(%d)", int64(e))
 	}
 }
 
 // The data format options for acceleration structures.
-type MTLAttributeFormat uint64
+type AttributeFormat uint64
 
 const (
 	// A sentinel value that represents an invalid attribute format.
-	MTLAttributeFormatInvalid MTLAttributeFormat = 0
+	AttributeFormatInvalid AttributeFormat = 0
 	// A two-component vector with 8-bit, unsigned integer values.
-	MTLAttributeFormatUChar2 MTLAttributeFormat = 1
+	AttributeFormatUChar2 AttributeFormat = 1
 	// A three-component vector with 8-bit, unsigned integer values.
-	MTLAttributeFormatUChar3 MTLAttributeFormat = 2
+	AttributeFormatUChar3 AttributeFormat = 2
 	// A four-component vector with 8-bit, unsigned integer values.
-	MTLAttributeFormatUChar4 MTLAttributeFormat = 3
+	AttributeFormatUChar4 AttributeFormat = 3
 	// A two-component vector with 8-bit, signed integer values.
-	MTLAttributeFormatChar2 MTLAttributeFormat = 4
+	AttributeFormatChar2 AttributeFormat = 4
 	// A three-component vector with 8-bit, signed integer values.
-	MTLAttributeFormatChar3 MTLAttributeFormat = 5
+	AttributeFormatChar3 AttributeFormat = 5
 	// A four-component vector with 8-bit, signed integer values.
-	MTLAttributeFormatChar4 MTLAttributeFormat = 6
+	AttributeFormatChar4 AttributeFormat = 6
 	// A two-component vector with 8-bit, normalized, unsigned integer values.
-	MTLAttributeFormatUChar2Normalized MTLAttributeFormat = 7
+	AttributeFormatUChar2Normalized AttributeFormat = 7
 	// A three-component vector with 8-bit, normalized, unsigned integer values.
-	MTLAttributeFormatUChar3Normalized MTLAttributeFormat = 8
+	AttributeFormatUChar3Normalized AttributeFormat = 8
 	// A four-component vector with 8-bit, normalized, unsigned integer values.
-	MTLAttributeFormatUChar4Normalized MTLAttributeFormat = 9
+	AttributeFormatUChar4Normalized AttributeFormat = 9
 	// A two-component vector with 8-bit, normalized, signed integer values.
-	MTLAttributeFormatChar2Normalized MTLAttributeFormat = 10
+	AttributeFormatChar2Normalized AttributeFormat = 10
 	// A three-component vector with 8-bit, normalized, signed integer values.
-	MTLAttributeFormatChar3Normalized MTLAttributeFormat = 11
+	AttributeFormatChar3Normalized AttributeFormat = 11
 	// A four-component vector with 8-bit, normalized, signed integer values.
-	MTLAttributeFormatChar4Normalized MTLAttributeFormat = 12
+	AttributeFormatChar4Normalized AttributeFormat = 12
 	// A two-component vector with 16-bit, unsigned integer values.
-	MTLAttributeFormatUShort2 MTLAttributeFormat = 13
+	AttributeFormatUShort2 AttributeFormat = 13
 	// A three-component vector with 16-bit, unsigned integer values.
-	MTLAttributeFormatUShort3 MTLAttributeFormat = 14
+	AttributeFormatUShort3 AttributeFormat = 14
 	// A four-component vector with 16-bit, unsigned integer values.
-	MTLAttributeFormatUShort4 MTLAttributeFormat = 15
+	AttributeFormatUShort4 AttributeFormat = 15
 	// A two-component vector with 16-bit, signed integer values.
-	MTLAttributeFormatShort2 MTLAttributeFormat = 16
+	AttributeFormatShort2 AttributeFormat = 16
 	// A three-component vector with 16-bit, signed integer values.
-	MTLAttributeFormatShort3 MTLAttributeFormat = 17
+	AttributeFormatShort3 AttributeFormat = 17
 	// A four-component vector with 16-bit, signed integer values.
-	MTLAttributeFormatShort4 MTLAttributeFormat = 18
+	AttributeFormatShort4 AttributeFormat = 18
 	// Two unsigned normalized 16-bit values
-	MTLAttributeFormatUShort2Normalized MTLAttributeFormat = 19
+	AttributeFormatUShort2Normalized AttributeFormat = 19
 	// A three-component vector with 16-bit, normalized, unsigned integer values.
-	MTLAttributeFormatUShort3Normalized MTLAttributeFormat = 20
+	AttributeFormatUShort3Normalized AttributeFormat = 20
 	// A four-component vector with 16-bit, normalized, unsigned integer values.
-	MTLAttributeFormatUShort4Normalized MTLAttributeFormat = 21
+	AttributeFormatUShort4Normalized AttributeFormat = 21
 	// A two-component vector with 16-bit, normalized, signed integer values.
-	MTLAttributeFormatShort2Normalized MTLAttributeFormat = 22
+	AttributeFormatShort2Normalized AttributeFormat = 22
 	// A three-component vector with 16-bit, normalized, signed integer values.
-	MTLAttributeFormatShort3Normalized MTLAttributeFormat = 23
+	AttributeFormatShort3Normalized AttributeFormat = 23
 	// A four-component vector with 16-bit, normalized, signed integer values.
-	MTLAttributeFormatShort4Normalized MTLAttributeFormat = 24
+	AttributeFormatShort4Normalized AttributeFormat = 24
 	// A two-component vector with 16-bit floating-point values.
-	MTLAttributeFormatHalf2 MTLAttributeFormat = 25
+	AttributeFormatHalf2 AttributeFormat = 25
 	// A three-component vector with 16-bit floating-point values.
-	MTLAttributeFormatHalf3 MTLAttributeFormat = 26
+	AttributeFormatHalf3 AttributeFormat = 26
 	// A four-component vector with 16-bit floating-point values.
-	MTLAttributeFormatHalf4 MTLAttributeFormat = 27
+	AttributeFormatHalf4 AttributeFormat = 27
 	// A 32-bit floating-point value.
-	MTLAttributeFormatFloat MTLAttributeFormat = 28
+	AttributeFormatFloat AttributeFormat = 28
 	// A two-component vector with 32-bit floating-point values.
-	MTLAttributeFormatFloat2 MTLAttributeFormat = 29
+	AttributeFormatFloat2 AttributeFormat = 29
 	// A three-component vector with 32-bit floating-point values.
-	MTLAttributeFormatFloat3 MTLAttributeFormat = 30
+	AttributeFormatFloat3 AttributeFormat = 30
 	// A four-component vector with 32-bit floating-point values.
-	MTLAttributeFormatFloat4 MTLAttributeFormat = 31
+	AttributeFormatFloat4 AttributeFormat = 31
 	// A 32-bit, signed integer value.
-	MTLAttributeFormatInt MTLAttributeFormat = 32
+	AttributeFormatInt AttributeFormat = 32
 	// A two-component vector with 32-bit, signed integer values.
-	MTLAttributeFormatInt2 MTLAttributeFormat = 33
+	AttributeFormatInt2 AttributeFormat = 33
 	// A three-component vector with 32-bit, signed integer values.
-	MTLAttributeFormatInt3 MTLAttributeFormat = 34
+	AttributeFormatInt3 AttributeFormat = 34
 	// A four-component vector with 32-bit, signed integer values.
-	MTLAttributeFormatInt4 MTLAttributeFormat = 35
+	AttributeFormatInt4 AttributeFormat = 35
 	// A 32-bit, unsigned integer value.
-	MTLAttributeFormatUInt MTLAttributeFormat = 36
+	AttributeFormatUInt AttributeFormat = 36
 	// A two-component vector with 32-bit, unsigned integer values.
-	MTLAttributeFormatUInt2 MTLAttributeFormat = 37
+	AttributeFormatUInt2 AttributeFormat = 37
 	// A three-component vector with 32-bit, unsigned integer values.
-	MTLAttributeFormatUInt3 MTLAttributeFormat = 38
+	AttributeFormatUInt3 AttributeFormat = 38
 	// A four-component vector with 32-bit, unsigned integer values.
-	MTLAttributeFormatUInt4 MTLAttributeFormat = 39
+	AttributeFormatUInt4 AttributeFormat = 39
 	// One packed 32-bit value with four normalized signed two’s complement integer values, arranged as 10 bits, 10 bits, 10 bits, and 2 bits.
-	MTLAttributeFormatInt1010102Normalized MTLAttributeFormat = 40
+	AttributeFormatInt1010102Normalized AttributeFormat = 40
 	// One packed 32-bit value with four normalized unsigned integer values, arranged as 10 bits, 10 bits, 10 bits, and 2 bits.
-	MTLAttributeFormatUInt1010102Normalized MTLAttributeFormat = 41
+	AttributeFormatUInt1010102Normalized AttributeFormat = 41
 	// Four unsigned normalized 8-bit values, arranged as blue, green, red, and alpha components.
-	MTLAttributeFormatUChar4Normalized_BGRA MTLAttributeFormat = 42
+	AttributeFormatUChar4Normalized_BGRA AttributeFormat = 42
 	// An 8-bit, unsigned integer value.
-	MTLAttributeFormatUChar MTLAttributeFormat = 45
+	AttributeFormatUChar AttributeFormat = 45
 	// An 8-bit, signed integer value.
-	MTLAttributeFormatChar MTLAttributeFormat = 46
+	AttributeFormatChar AttributeFormat = 46
 	// An 8-bit, normalized, unsigned integer value.
-	MTLAttributeFormatUCharNormalized MTLAttributeFormat = 47
+	AttributeFormatUCharNormalized AttributeFormat = 47
 	// An 8-bit, normalized, signed integer value.
-	MTLAttributeFormatCharNormalized MTLAttributeFormat = 48
+	AttributeFormatCharNormalized AttributeFormat = 48
 	// A 16-bit, unsigned integer value.
-	MTLAttributeFormatUShort MTLAttributeFormat = 49
+	AttributeFormatUShort AttributeFormat = 49
 	// A 16-bit, signed integer value.
-	MTLAttributeFormatShort MTLAttributeFormat = 50
+	AttributeFormatShort AttributeFormat = 50
 	// A 16-bit, normalized, unsigned integer value.
-	MTLAttributeFormatUShortNormalized MTLAttributeFormat = 51
+	AttributeFormatUShortNormalized AttributeFormat = 51
 	// A 16-bit, normalized, signed integer value.
-	MTLAttributeFormatShortNormalized MTLAttributeFormat = 52
+	AttributeFormatShortNormalized AttributeFormat = 52
 	// A 16-bit floating-point value.
-	MTLAttributeFormatHalf MTLAttributeFormat = 53
+	AttributeFormatHalf AttributeFormat = 53
 	// One packed 32-bit value representing pixel data containing 11-bit float red and green channels, and a 10-bit float blue channel.
-	MTLAttributeFormatFloatRG11B10 MTLAttributeFormat = 54
+	AttributeFormatFloatRG11B10 AttributeFormat = 54
 	// One packed 32-bit value representing pixel data containing 9-bit float red, green, and blue channels, and a 5-bit float shared exponent channel.
-	MTLAttributeFormatFloatRGB9E5 MTLAttributeFormat = 55
+	AttributeFormatFloatRGB9E5 AttributeFormat = 55
 )
 
-func (e MTLAttributeFormat) String() string {
+func (e AttributeFormat) String() string {
 	switch e {
-	case MTLAttributeFormatInvalid:
-		return "MTLAttributeFormatInvalid"
-	case MTLAttributeFormatUChar2:
-		return "MTLAttributeFormatUChar2"
-	case MTLAttributeFormatUChar3:
-		return "MTLAttributeFormatUChar3"
-	case MTLAttributeFormatUChar4:
-		return "MTLAttributeFormatUChar4"
-	case MTLAttributeFormatChar2:
-		return "MTLAttributeFormatChar2"
-	case MTLAttributeFormatChar3:
-		return "MTLAttributeFormatChar3"
-	case MTLAttributeFormatChar4:
-		return "MTLAttributeFormatChar4"
-	case MTLAttributeFormatUChar2Normalized:
-		return "MTLAttributeFormatUChar2Normalized"
-	case MTLAttributeFormatUChar3Normalized:
-		return "MTLAttributeFormatUChar3Normalized"
-	case MTLAttributeFormatUChar4Normalized:
-		return "MTLAttributeFormatUChar4Normalized"
-	case MTLAttributeFormatChar2Normalized:
-		return "MTLAttributeFormatChar2Normalized"
-	case MTLAttributeFormatChar3Normalized:
-		return "MTLAttributeFormatChar3Normalized"
-	case MTLAttributeFormatChar4Normalized:
-		return "MTLAttributeFormatChar4Normalized"
-	case MTLAttributeFormatUShort2:
-		return "MTLAttributeFormatUShort2"
-	case MTLAttributeFormatUShort3:
-		return "MTLAttributeFormatUShort3"
-	case MTLAttributeFormatUShort4:
-		return "MTLAttributeFormatUShort4"
-	case MTLAttributeFormatShort2:
-		return "MTLAttributeFormatShort2"
-	case MTLAttributeFormatShort3:
-		return "MTLAttributeFormatShort3"
-	case MTLAttributeFormatShort4:
-		return "MTLAttributeFormatShort4"
-	case MTLAttributeFormatUShort2Normalized:
-		return "MTLAttributeFormatUShort2Normalized"
-	case MTLAttributeFormatUShort3Normalized:
-		return "MTLAttributeFormatUShort3Normalized"
-	case MTLAttributeFormatUShort4Normalized:
-		return "MTLAttributeFormatUShort4Normalized"
-	case MTLAttributeFormatShort2Normalized:
-		return "MTLAttributeFormatShort2Normalized"
-	case MTLAttributeFormatShort3Normalized:
-		return "MTLAttributeFormatShort3Normalized"
-	case MTLAttributeFormatShort4Normalized:
-		return "MTLAttributeFormatShort4Normalized"
-	case MTLAttributeFormatHalf2:
-		return "MTLAttributeFormatHalf2"
-	case MTLAttributeFormatHalf3:
-		return "MTLAttributeFormatHalf3"
-	case MTLAttributeFormatHalf4:
-		return "MTLAttributeFormatHalf4"
-	case MTLAttributeFormatFloat:
-		return "MTLAttributeFormatFloat"
-	case MTLAttributeFormatFloat2:
-		return "MTLAttributeFormatFloat2"
-	case MTLAttributeFormatFloat3:
-		return "MTLAttributeFormatFloat3"
-	case MTLAttributeFormatFloat4:
-		return "MTLAttributeFormatFloat4"
-	case MTLAttributeFormatInt:
-		return "MTLAttributeFormatInt"
-	case MTLAttributeFormatInt2:
-		return "MTLAttributeFormatInt2"
-	case MTLAttributeFormatInt3:
-		return "MTLAttributeFormatInt3"
-	case MTLAttributeFormatInt4:
-		return "MTLAttributeFormatInt4"
-	case MTLAttributeFormatUInt:
-		return "MTLAttributeFormatUInt"
-	case MTLAttributeFormatUInt2:
-		return "MTLAttributeFormatUInt2"
-	case MTLAttributeFormatUInt3:
-		return "MTLAttributeFormatUInt3"
-	case MTLAttributeFormatUInt4:
-		return "MTLAttributeFormatUInt4"
-	case MTLAttributeFormatInt1010102Normalized:
-		return "MTLAttributeFormatInt1010102Normalized"
-	case MTLAttributeFormatUInt1010102Normalized:
-		return "MTLAttributeFormatUInt1010102Normalized"
-	case MTLAttributeFormatUChar4Normalized_BGRA:
-		return "MTLAttributeFormatUChar4Normalized_BGRA"
-	case MTLAttributeFormatUChar:
-		return "MTLAttributeFormatUChar"
-	case MTLAttributeFormatChar:
-		return "MTLAttributeFormatChar"
-	case MTLAttributeFormatUCharNormalized:
-		return "MTLAttributeFormatUCharNormalized"
-	case MTLAttributeFormatCharNormalized:
-		return "MTLAttributeFormatCharNormalized"
-	case MTLAttributeFormatUShort:
-		return "MTLAttributeFormatUShort"
-	case MTLAttributeFormatShort:
-		return "MTLAttributeFormatShort"
-	case MTLAttributeFormatUShortNormalized:
-		return "MTLAttributeFormatUShortNormalized"
-	case MTLAttributeFormatShortNormalized:
-		return "MTLAttributeFormatShortNormalized"
-	case MTLAttributeFormatHalf:
-		return "MTLAttributeFormatHalf"
-	case MTLAttributeFormatFloatRG11B10:
-		return "MTLAttributeFormatFloatRG11B10"
-	case MTLAttributeFormatFloatRGB9E5:
-		return "MTLAttributeFormatFloatRGB9E5"
+	case AttributeFormatInvalid:
+		return "AttributeFormatInvalid"
+	case AttributeFormatUChar2:
+		return "AttributeFormatUChar2"
+	case AttributeFormatUChar3:
+		return "AttributeFormatUChar3"
+	case AttributeFormatUChar4:
+		return "AttributeFormatUChar4"
+	case AttributeFormatChar2:
+		return "AttributeFormatChar2"
+	case AttributeFormatChar3:
+		return "AttributeFormatChar3"
+	case AttributeFormatChar4:
+		return "AttributeFormatChar4"
+	case AttributeFormatUChar2Normalized:
+		return "AttributeFormatUChar2Normalized"
+	case AttributeFormatUChar3Normalized:
+		return "AttributeFormatUChar3Normalized"
+	case AttributeFormatUChar4Normalized:
+		return "AttributeFormatUChar4Normalized"
+	case AttributeFormatChar2Normalized:
+		return "AttributeFormatChar2Normalized"
+	case AttributeFormatChar3Normalized:
+		return "AttributeFormatChar3Normalized"
+	case AttributeFormatChar4Normalized:
+		return "AttributeFormatChar4Normalized"
+	case AttributeFormatUShort2:
+		return "AttributeFormatUShort2"
+	case AttributeFormatUShort3:
+		return "AttributeFormatUShort3"
+	case AttributeFormatUShort4:
+		return "AttributeFormatUShort4"
+	case AttributeFormatShort2:
+		return "AttributeFormatShort2"
+	case AttributeFormatShort3:
+		return "AttributeFormatShort3"
+	case AttributeFormatShort4:
+		return "AttributeFormatShort4"
+	case AttributeFormatUShort2Normalized:
+		return "AttributeFormatUShort2Normalized"
+	case AttributeFormatUShort3Normalized:
+		return "AttributeFormatUShort3Normalized"
+	case AttributeFormatUShort4Normalized:
+		return "AttributeFormatUShort4Normalized"
+	case AttributeFormatShort2Normalized:
+		return "AttributeFormatShort2Normalized"
+	case AttributeFormatShort3Normalized:
+		return "AttributeFormatShort3Normalized"
+	case AttributeFormatShort4Normalized:
+		return "AttributeFormatShort4Normalized"
+	case AttributeFormatHalf2:
+		return "AttributeFormatHalf2"
+	case AttributeFormatHalf3:
+		return "AttributeFormatHalf3"
+	case AttributeFormatHalf4:
+		return "AttributeFormatHalf4"
+	case AttributeFormatFloat:
+		return "AttributeFormatFloat"
+	case AttributeFormatFloat2:
+		return "AttributeFormatFloat2"
+	case AttributeFormatFloat3:
+		return "AttributeFormatFloat3"
+	case AttributeFormatFloat4:
+		return "AttributeFormatFloat4"
+	case AttributeFormatInt:
+		return "AttributeFormatInt"
+	case AttributeFormatInt2:
+		return "AttributeFormatInt2"
+	case AttributeFormatInt3:
+		return "AttributeFormatInt3"
+	case AttributeFormatInt4:
+		return "AttributeFormatInt4"
+	case AttributeFormatUInt:
+		return "AttributeFormatUInt"
+	case AttributeFormatUInt2:
+		return "AttributeFormatUInt2"
+	case AttributeFormatUInt3:
+		return "AttributeFormatUInt3"
+	case AttributeFormatUInt4:
+		return "AttributeFormatUInt4"
+	case AttributeFormatInt1010102Normalized:
+		return "AttributeFormatInt1010102Normalized"
+	case AttributeFormatUInt1010102Normalized:
+		return "AttributeFormatUInt1010102Normalized"
+	case AttributeFormatUChar4Normalized_BGRA:
+		return "AttributeFormatUChar4Normalized_BGRA"
+	case AttributeFormatUChar:
+		return "AttributeFormatUChar"
+	case AttributeFormatChar:
+		return "AttributeFormatChar"
+	case AttributeFormatUCharNormalized:
+		return "AttributeFormatUCharNormalized"
+	case AttributeFormatCharNormalized:
+		return "AttributeFormatCharNormalized"
+	case AttributeFormatUShort:
+		return "AttributeFormatUShort"
+	case AttributeFormatShort:
+		return "AttributeFormatShort"
+	case AttributeFormatUShortNormalized:
+		return "AttributeFormatUShortNormalized"
+	case AttributeFormatShortNormalized:
+		return "AttributeFormatShortNormalized"
+	case AttributeFormatHalf:
+		return "AttributeFormatHalf"
+	case AttributeFormatFloatRG11B10:
+		return "AttributeFormatFloatRG11B10"
+	case AttributeFormatFloatRGB9E5:
+		return "AttributeFormatFloatRGB9E5"
 	default:
-		return fmt.Sprintf("MTLAttributeFormat(%d)", int64(e))
+		return fmt.Sprintf("AttributeFormat(%d)", int64(e))
 	}
 }
 
-type MTLBindingAccess uint64
+type BindingAccess uint64
 
 const (
 	// Deprecated: since macOS 13.0.
-	MTLBindingAccessReadOnly  MTLBindingAccess = 0
-	MTLBindingAccessReadWrite MTLBindingAccess = 1
-	MTLBindingAccessWriteOnly MTLBindingAccess = 2
+	BindingAccessReadOnly  BindingAccess = 0
+	BindingAccessReadWrite BindingAccess = 1
+	BindingAccessWriteOnly BindingAccess = 2
 	// The function can only read its argument data.
 	//
 	// Deprecated: since macOS 14.0.
-	MTLArgumentAccessReadOnly MTLBindingAccess = 0
+	ArgumentAccessReadOnly BindingAccess = 0
 	// The function can either read or write its argument data.
 	//
 	// Deprecated: since macOS 14.0.
-	MTLArgumentAccessReadWrite MTLBindingAccess = 1
+	ArgumentAccessReadWrite BindingAccess = 1
 	// The function can only write its argument data.
 	//
 	// Deprecated: since macOS 14.0.
-	MTLArgumentAccessWriteOnly MTLBindingAccess = 2
+	ArgumentAccessWriteOnly BindingAccess = 2
 )
 
-func (e MTLBindingAccess) String() string {
+func (e BindingAccess) String() string {
 	switch e {
-	case MTLBindingAccessReadOnly:
-		return "MTLBindingAccessReadOnly"
-	case MTLBindingAccessReadWrite:
-		return "MTLBindingAccessReadWrite"
-	case MTLBindingAccessWriteOnly:
-		return "MTLBindingAccessWriteOnly"
+	case BindingAccessReadOnly:
+		return "BindingAccessReadOnly"
+	case BindingAccessReadWrite:
+		return "BindingAccessReadWrite"
+	case BindingAccessWriteOnly:
+		return "BindingAccessWriteOnly"
 	default:
-		return fmt.Sprintf("MTLBindingAccess(%d)", int64(e))
+		return fmt.Sprintf("BindingAccess(%d)", int64(e))
 	}
 }
 
 // The source and destination blend factors are often needed to complete specification of a blend operation. In most cases, the blend factor for both RGB values (F(rgb)) and alpha values (F(a)) are similar to one another, but in some cases, such as MTLBlendFactorSourceAlphaSaturated, the blend factor is slightly different. Four blend factors (MTLBlendFactorBlendColor, MTLBlendFactorOneMinusBlendColor, MTLBlendFactorBlendAlpha, and MTLBlendFactorOneMinusBlendAlpha) refer to a constant blend color value that is set by the setBlendColorRed:green:blue:alpha: method of MTLRenderCommandEncoder.
-type MTLBlendFactor uint64
+type BlendFactor uint64
 
 const (
 	// Blend factor of zero.
-	MTLBlendFactorZero MTLBlendFactor = 0
+	BlendFactorZero BlendFactor = 0
 	// Blend factor of one.
-	MTLBlendFactorOne MTLBlendFactor = 1
+	BlendFactorOne BlendFactor = 1
 	// Blend factor of source values.
-	MTLBlendFactorSourceColor MTLBlendFactor = 2
+	BlendFactorSourceColor BlendFactor = 2
 	// Blend factor of one minus source values.
-	MTLBlendFactorOneMinusSourceColor MTLBlendFactor = 3
+	BlendFactorOneMinusSourceColor BlendFactor = 3
 	// Blend factor of source alpha.
-	MTLBlendFactorSourceAlpha MTLBlendFactor = 4
+	BlendFactorSourceAlpha BlendFactor = 4
 	// Blend factor of one minus source alpha.
-	MTLBlendFactorOneMinusSourceAlpha MTLBlendFactor = 5
+	BlendFactorOneMinusSourceAlpha BlendFactor = 5
 	// Blend factor of destination values.
-	MTLBlendFactorDestinationColor MTLBlendFactor = 6
+	BlendFactorDestinationColor BlendFactor = 6
 	// Blend factor of one minus destination values.
-	MTLBlendFactorOneMinusDestinationColor MTLBlendFactor = 7
+	BlendFactorOneMinusDestinationColor BlendFactor = 7
 	// Blend factor of destination alpha.
-	MTLBlendFactorDestinationAlpha MTLBlendFactor = 8
+	BlendFactorDestinationAlpha BlendFactor = 8
 	// Blend factor of one minus destination alpha.
-	MTLBlendFactorOneMinusDestinationAlpha MTLBlendFactor = 9
+	BlendFactorOneMinusDestinationAlpha BlendFactor = 9
 	// Blend factor of the minimum of either source alpha or one minus destination alpha.
-	MTLBlendFactorSourceAlphaSaturated MTLBlendFactor = 10
+	BlendFactorSourceAlphaSaturated BlendFactor = 10
 	// A blend factor that applies the blend color’s red, green, and blue components.
-	MTLBlendFactorBlendColor MTLBlendFactor = 11
+	BlendFactorBlendColor BlendFactor = 11
 	// A blend factor that applies one minus the blend color’s red, green, and blue components.
-	MTLBlendFactorOneMinusBlendColor MTLBlendFactor = 12
+	BlendFactorOneMinusBlendColor BlendFactor = 12
 	// Blend factor of alpha value.
-	MTLBlendFactorBlendAlpha MTLBlendFactor = 13
+	BlendFactorBlendAlpha BlendFactor = 13
 	// Blend factor of one minus alpha value.
-	MTLBlendFactorOneMinusBlendAlpha MTLBlendFactor = 14
+	BlendFactorOneMinusBlendAlpha BlendFactor = 14
 	// Blend factor of source values. This option supports dual-source blending and reads from the second color output of the fragment function.
-	MTLBlendFactorSource1Color MTLBlendFactor = 15
+	BlendFactorSource1Color BlendFactor = 15
 	// Blend factor of one minus source values. This option supports dual-source blending and reads from the second color output of the fragment function.
-	MTLBlendFactorOneMinusSource1Color MTLBlendFactor = 16
+	BlendFactorOneMinusSource1Color BlendFactor = 16
 	// Blend factor of source alpha. This option supports dual-source blending and reads from the second color output of the fragment function.
-	MTLBlendFactorSource1Alpha MTLBlendFactor = 17
+	BlendFactorSource1Alpha BlendFactor = 17
 	// Blend factor of one minus source alpha. This option supports dual-source blending and reads from the second color output of the fragment function.
-	MTLBlendFactorOneMinusSource1Alpha MTLBlendFactor = 18
+	BlendFactorOneMinusSource1Alpha BlendFactor = 18
 	// Defers assigning the blend factor.
-	MTLBlendFactorUnspecialized MTLBlendFactor = 19
+	BlendFactorUnspecialized BlendFactor = 19
 )
 
-func (e MTLBlendFactor) String() string {
+func (e BlendFactor) String() string {
 	switch e {
-	case MTLBlendFactorZero:
-		return "MTLBlendFactorZero"
-	case MTLBlendFactorOne:
-		return "MTLBlendFactorOne"
-	case MTLBlendFactorSourceColor:
-		return "MTLBlendFactorSourceColor"
-	case MTLBlendFactorOneMinusSourceColor:
-		return "MTLBlendFactorOneMinusSourceColor"
-	case MTLBlendFactorSourceAlpha:
-		return "MTLBlendFactorSourceAlpha"
-	case MTLBlendFactorOneMinusSourceAlpha:
-		return "MTLBlendFactorOneMinusSourceAlpha"
-	case MTLBlendFactorDestinationColor:
-		return "MTLBlendFactorDestinationColor"
-	case MTLBlendFactorOneMinusDestinationColor:
-		return "MTLBlendFactorOneMinusDestinationColor"
-	case MTLBlendFactorDestinationAlpha:
-		return "MTLBlendFactorDestinationAlpha"
-	case MTLBlendFactorOneMinusDestinationAlpha:
-		return "MTLBlendFactorOneMinusDestinationAlpha"
-	case MTLBlendFactorSourceAlphaSaturated:
-		return "MTLBlendFactorSourceAlphaSaturated"
-	case MTLBlendFactorBlendColor:
-		return "MTLBlendFactorBlendColor"
-	case MTLBlendFactorOneMinusBlendColor:
-		return "MTLBlendFactorOneMinusBlendColor"
-	case MTLBlendFactorBlendAlpha:
-		return "MTLBlendFactorBlendAlpha"
-	case MTLBlendFactorOneMinusBlendAlpha:
-		return "MTLBlendFactorOneMinusBlendAlpha"
-	case MTLBlendFactorSource1Color:
-		return "MTLBlendFactorSource1Color"
-	case MTLBlendFactorOneMinusSource1Color:
-		return "MTLBlendFactorOneMinusSource1Color"
-	case MTLBlendFactorSource1Alpha:
-		return "MTLBlendFactorSource1Alpha"
-	case MTLBlendFactorOneMinusSource1Alpha:
-		return "MTLBlendFactorOneMinusSource1Alpha"
-	case MTLBlendFactorUnspecialized:
-		return "MTLBlendFactorUnspecialized"
+	case BlendFactorZero:
+		return "BlendFactorZero"
+	case BlendFactorOne:
+		return "BlendFactorOne"
+	case BlendFactorSourceColor:
+		return "BlendFactorSourceColor"
+	case BlendFactorOneMinusSourceColor:
+		return "BlendFactorOneMinusSourceColor"
+	case BlendFactorSourceAlpha:
+		return "BlendFactorSourceAlpha"
+	case BlendFactorOneMinusSourceAlpha:
+		return "BlendFactorOneMinusSourceAlpha"
+	case BlendFactorDestinationColor:
+		return "BlendFactorDestinationColor"
+	case BlendFactorOneMinusDestinationColor:
+		return "BlendFactorOneMinusDestinationColor"
+	case BlendFactorDestinationAlpha:
+		return "BlendFactorDestinationAlpha"
+	case BlendFactorOneMinusDestinationAlpha:
+		return "BlendFactorOneMinusDestinationAlpha"
+	case BlendFactorSourceAlphaSaturated:
+		return "BlendFactorSourceAlphaSaturated"
+	case BlendFactorBlendColor:
+		return "BlendFactorBlendColor"
+	case BlendFactorOneMinusBlendColor:
+		return "BlendFactorOneMinusBlendColor"
+	case BlendFactorBlendAlpha:
+		return "BlendFactorBlendAlpha"
+	case BlendFactorOneMinusBlendAlpha:
+		return "BlendFactorOneMinusBlendAlpha"
+	case BlendFactorSource1Color:
+		return "BlendFactorSource1Color"
+	case BlendFactorOneMinusSource1Color:
+		return "BlendFactorOneMinusSource1Color"
+	case BlendFactorSource1Alpha:
+		return "BlendFactorSource1Alpha"
+	case BlendFactorOneMinusSource1Alpha:
+		return "BlendFactorOneMinusSource1Alpha"
+	case BlendFactorUnspecialized:
+		return "BlendFactorUnspecialized"
 	default:
-		return fmt.Sprintf("MTLBlendFactor(%d)", int64(e))
+		return fmt.Sprintf("BlendFactor(%d)", int64(e))
 	}
 }
 
 // For every pixel, MTLBlendOperation determines how to combine and weight the source fragment values with the destination values. Some blend operations multiply the source values by a source blend factor (SBF), multiply the destination values by a destination blend factor (DBF), and then combine the results using addition or subtraction. Other blend operations use either a minimum or maximum function to determine the result.
-type MTLBlendOperation uint64
+type BlendOperation uint64
 
 const (
 	// Add portions of both source and destination pixel values.
-	MTLBlendOperationAdd MTLBlendOperation = 0
+	BlendOperationAdd BlendOperation = 0
 	// Subtract a portion of the destination pixel values from a portion of the source.
-	MTLBlendOperationSubtract MTLBlendOperation = 1
+	BlendOperationSubtract BlendOperation = 1
 	// Subtract a portion of the source values from a portion of the destination pixel values.
-	MTLBlendOperationReverseSubtract MTLBlendOperation = 2
+	BlendOperationReverseSubtract BlendOperation = 2
 	// Minimum of the source and destination pixel values.
-	MTLBlendOperationMin MTLBlendOperation = 3
+	BlendOperationMin BlendOperation = 3
 	// Maximum of the source and destination pixel values.
-	MTLBlendOperationMax MTLBlendOperation = 4
+	BlendOperationMax BlendOperation = 4
 	// Defers assigning the blend operation.
-	MTLBlendOperationUnspecialized MTLBlendOperation = 5
+	BlendOperationUnspecialized BlendOperation = 5
 )
 
-func (e MTLBlendOperation) String() string {
+func (e BlendOperation) String() string {
 	switch e {
-	case MTLBlendOperationAdd:
-		return "MTLBlendOperationAdd"
-	case MTLBlendOperationSubtract:
-		return "MTLBlendOperationSubtract"
-	case MTLBlendOperationReverseSubtract:
-		return "MTLBlendOperationReverseSubtract"
-	case MTLBlendOperationMin:
-		return "MTLBlendOperationMin"
-	case MTLBlendOperationMax:
-		return "MTLBlendOperationMax"
-	case MTLBlendOperationUnspecialized:
-		return "MTLBlendOperationUnspecialized"
+	case BlendOperationAdd:
+		return "BlendOperationAdd"
+	case BlendOperationSubtract:
+		return "BlendOperationSubtract"
+	case BlendOperationReverseSubtract:
+		return "BlendOperationReverseSubtract"
+	case BlendOperationMin:
+		return "BlendOperationMin"
+	case BlendOperationMax:
+		return "BlendOperationMax"
+	case BlendOperationUnspecialized:
+		return "BlendOperationUnspecialized"
 	default:
-		return fmt.Sprintf("MTLBlendOperation(%d)", int64(e))
+		return fmt.Sprintf("BlendOperation(%d)", int64(e))
 	}
 }
 
 // Options for the CPU cache mode that define the CPU mapping of the resource.
-type MTLCPUCacheMode uint64
+type CPUCacheMode uint64
 
 const (
 	// The default CPU cache mode for the resource, which guarantees that read and write operations are executed in the expected order.
-	MTLCPUCacheModeDefaultCache MTLCPUCacheMode = 0
+	CPUCacheModeDefaultCache CPUCacheMode = 0
 	// A write-combined CPU cache mode that is optimized for resources that the CPU writes into, but never reads.
-	MTLCPUCacheModeWriteCombined MTLCPUCacheMode = 1
+	CPUCacheModeWriteCombined CPUCacheMode = 1
 )
 
-func (e MTLCPUCacheMode) String() string {
+func (e CPUCacheMode) String() string {
 	switch e {
-	case MTLCPUCacheModeDefaultCache:
-		return "MTLCPUCacheModeDefaultCache"
-	case MTLCPUCacheModeWriteCombined:
-		return "MTLCPUCacheModeWriteCombined"
+	case CPUCacheModeDefaultCache:
+		return "CPUCacheModeDefaultCache"
+	case CPUCacheModeWriteCombined:
+		return "CPUCacheModeWriteCombined"
 	default:
-		return fmt.Sprintf("MTLCPUCacheMode(%d)", int64(e))
+		return fmt.Sprintf("CPUCacheMode(%d)", int64(e))
 	}
 }
 
 // The kinds of destinations for captured command data.
-type MTLCaptureDestination int64
+type CaptureDestination int64
 
 const (
 	// An option specifying that data should be captured to Xcode and that execution should stop in Xcode after the data is captured.
-	MTLCaptureDestinationDeveloperTools MTLCaptureDestination = 1
+	CaptureDestinationDeveloperTools CaptureDestination = 1
 	// An option specifying that the captured command data should be saved to a GPU trace document.
-	MTLCaptureDestinationGPUTraceDocument MTLCaptureDestination = 2
+	CaptureDestinationGPUTraceDocument CaptureDestination = 2
 )
 
-func (e MTLCaptureDestination) String() string {
+func (e CaptureDestination) String() string {
 	switch e {
-	case MTLCaptureDestinationDeveloperTools:
-		return "MTLCaptureDestinationDeveloperTools"
-	case MTLCaptureDestinationGPUTraceDocument:
-		return "MTLCaptureDestinationGPUTraceDocument"
+	case CaptureDestinationDeveloperTools:
+		return "CaptureDestinationDeveloperTools"
+	case CaptureDestinationGPUTraceDocument:
+		return "CaptureDestinationGPUTraceDocument"
 	default:
-		return fmt.Sprintf("MTLCaptureDestination(%d)", int64(e))
+		return fmt.Sprintf("CaptureDestination(%d)", int64(e))
 	}
 }
 
 // Values used to specify a mask to permit or restrict writing to color channels of a color value.
 // Bitmask — values may be combined with |.
-type MTLColorWriteMask uint64
+type ColorWriteMask uint64
 
 const (
 	// All color channels are disabled.
-	MTLColorWriteMaskNone MTLColorWriteMask = 0
+	ColorWriteMaskNone ColorWriteMask = 0
 	// The red color channel is enabled.
-	MTLColorWriteMaskRed MTLColorWriteMask = 8
+	ColorWriteMaskRed ColorWriteMask = 8
 	// The green color channel is enabled.
-	MTLColorWriteMaskGreen MTLColorWriteMask = 4
+	ColorWriteMaskGreen ColorWriteMask = 4
 	// The blue color channel is enabled.
-	MTLColorWriteMaskBlue MTLColorWriteMask = 2
+	ColorWriteMaskBlue ColorWriteMask = 2
 	// The alpha color channel is enabled.
-	MTLColorWriteMaskAlpha MTLColorWriteMask = 1
+	ColorWriteMaskAlpha ColorWriteMask = 1
 	// All color channels are enabled.
-	MTLColorWriteMaskAll MTLColorWriteMask = 15
+	ColorWriteMaskAll ColorWriteMask = 15
 	// Defers assigning the color write mask.
-	MTLColorWriteMaskUnspecialized MTLColorWriteMask = 16
+	ColorWriteMaskUnspecialized ColorWriteMask = 16
 )
 
-func (e MTLColorWriteMask) String() string {
+func (e ColorWriteMask) String() string {
 	var parts []string
-	if e&MTLColorWriteMaskRed != 0 {
-		parts = append(parts, "MTLColorWriteMaskRed")
+	if e&ColorWriteMaskRed != 0 {
+		parts = append(parts, "ColorWriteMaskRed")
 	}
-	if e&MTLColorWriteMaskGreen != 0 {
-		parts = append(parts, "MTLColorWriteMaskGreen")
+	if e&ColorWriteMaskGreen != 0 {
+		parts = append(parts, "ColorWriteMaskGreen")
 	}
-	if e&MTLColorWriteMaskBlue != 0 {
-		parts = append(parts, "MTLColorWriteMaskBlue")
+	if e&ColorWriteMaskBlue != 0 {
+		parts = append(parts, "ColorWriteMaskBlue")
 	}
-	if e&MTLColorWriteMaskAlpha != 0 {
-		parts = append(parts, "MTLColorWriteMaskAlpha")
+	if e&ColorWriteMaskAlpha != 0 {
+		parts = append(parts, "ColorWriteMaskAlpha")
 	}
-	if e&MTLColorWriteMaskAll != 0 {
-		parts = append(parts, "MTLColorWriteMaskAll")
+	if e&ColorWriteMaskAll != 0 {
+		parts = append(parts, "ColorWriteMaskAll")
 	}
-	if e&MTLColorWriteMaskUnspecialized != 0 {
-		parts = append(parts, "MTLColorWriteMaskUnspecialized")
+	if e&ColorWriteMaskUnspecialized != 0 {
+		parts = append(parts, "ColorWriteMaskUnspecialized")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -827,19 +827,19 @@ func (e MTLColorWriteMask) String() string {
 
 // Options for reporting errors from a command buffer.
 // Bitmask — values may be combined with |.
-type MTLCommandBufferErrorOption uint64
+type CommandBufferErrorOption uint64
 
 const (
 	// An option that clears a command buffer’s error options.
-	MTLCommandBufferErrorOptionNone MTLCommandBufferErrorOption = 0
+	CommandBufferErrorOptionNone CommandBufferErrorOption = 0
 	// An option that instructs a command buffer to save additional details about a GPU runtime error.
-	MTLCommandBufferErrorOptionEncoderExecutionStatus MTLCommandBufferErrorOption = 1
+	CommandBufferErrorOptionEncoderExecutionStatus CommandBufferErrorOption = 1
 )
 
-func (e MTLCommandBufferErrorOption) String() string {
+func (e CommandBufferErrorOption) String() string {
 	var parts []string
-	if e&MTLCommandBufferErrorOptionEncoderExecutionStatus != 0 {
-		parts = append(parts, "MTLCommandBufferErrorOptionEncoderExecutionStatus")
+	if e&CommandBufferErrorOptionEncoderExecutionStatus != 0 {
+		parts = append(parts, "CommandBufferErrorOptionEncoderExecutionStatus")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -848,599 +848,599 @@ func (e MTLCommandBufferErrorOption) String() string {
 }
 
 // Options used to specify how a sample compare operation should be performed on a depth texture.
-type MTLCompareFunction uint64
+type CompareFunction uint64
 
 const (
 	// A new value never passes the comparison test.
-	MTLCompareFunctionNever MTLCompareFunction = 0
+	CompareFunctionNever CompareFunction = 0
 	// A new value passes the comparison test if it is less than the existing value.
-	MTLCompareFunctionLess MTLCompareFunction = 1
+	CompareFunctionLess CompareFunction = 1
 	// A new value passes the comparison test if it is equal to the existing value.
-	MTLCompareFunctionEqual MTLCompareFunction = 2
+	CompareFunctionEqual CompareFunction = 2
 	// A new value passes the comparison test if it is less than or equal to the existing value.
-	MTLCompareFunctionLessEqual MTLCompareFunction = 3
+	CompareFunctionLessEqual CompareFunction = 3
 	// A new value passes the comparison test if it is greater than the existing value.
-	MTLCompareFunctionGreater MTLCompareFunction = 4
+	CompareFunctionGreater CompareFunction = 4
 	// A new value passes the comparison test if it is not equal to the existing value.
-	MTLCompareFunctionNotEqual MTLCompareFunction = 5
+	CompareFunctionNotEqual CompareFunction = 5
 	// A new value passes the comparison test if it is greater than or equal to the existing value.
-	MTLCompareFunctionGreaterEqual MTLCompareFunction = 6
+	CompareFunctionGreaterEqual CompareFunction = 6
 	// A new value always passes the comparison test.
-	MTLCompareFunctionAlways MTLCompareFunction = 7
+	CompareFunctionAlways CompareFunction = 7
 )
 
-func (e MTLCompareFunction) String() string {
+func (e CompareFunction) String() string {
 	switch e {
-	case MTLCompareFunctionNever:
-		return "MTLCompareFunctionNever"
-	case MTLCompareFunctionLess:
-		return "MTLCompareFunctionLess"
-	case MTLCompareFunctionEqual:
-		return "MTLCompareFunctionEqual"
-	case MTLCompareFunctionLessEqual:
-		return "MTLCompareFunctionLessEqual"
-	case MTLCompareFunctionGreater:
-		return "MTLCompareFunctionGreater"
-	case MTLCompareFunctionNotEqual:
-		return "MTLCompareFunctionNotEqual"
-	case MTLCompareFunctionGreaterEqual:
-		return "MTLCompareFunctionGreaterEqual"
-	case MTLCompareFunctionAlways:
-		return "MTLCompareFunctionAlways"
+	case CompareFunctionNever:
+		return "CompareFunctionNever"
+	case CompareFunctionLess:
+		return "CompareFunctionLess"
+	case CompareFunctionEqual:
+		return "CompareFunctionEqual"
+	case CompareFunctionLessEqual:
+		return "CompareFunctionLessEqual"
+	case CompareFunctionGreater:
+		return "CompareFunctionGreater"
+	case CompareFunctionNotEqual:
+		return "CompareFunctionNotEqual"
+	case CompareFunctionGreaterEqual:
+		return "CompareFunctionGreaterEqual"
+	case CompareFunctionAlways:
+		return "CompareFunctionAlways"
 	default:
-		return fmt.Sprintf("MTLCompareFunction(%d)", int64(e))
+		return fmt.Sprintf("CompareFunction(%d)", int64(e))
 	}
 }
 
-type MTLCompileSymbolVisibility int64
+type CompileSymbolVisibility int64
 
 const (
-	MTLCompileSymbolVisibilityDefault MTLCompileSymbolVisibility = 0
-	MTLCompileSymbolVisibilityHidden  MTLCompileSymbolVisibility = 1
+	CompileSymbolVisibilityDefault CompileSymbolVisibility = 0
+	CompileSymbolVisibilityHidden  CompileSymbolVisibility = 1
 )
 
-func (e MTLCompileSymbolVisibility) String() string {
+func (e CompileSymbolVisibility) String() string {
 	switch e {
-	case MTLCompileSymbolVisibilityDefault:
-		return "MTLCompileSymbolVisibilityDefault"
-	case MTLCompileSymbolVisibilityHidden:
-		return "MTLCompileSymbolVisibilityHidden"
+	case CompileSymbolVisibilityDefault:
+		return "CompileSymbolVisibilityDefault"
+	case CompileSymbolVisibilityHidden:
+		return "CompileSymbolVisibilityHidden"
 	default:
-		return fmt.Sprintf("MTLCompileSymbolVisibility(%d)", int64(e))
+		return fmt.Sprintf("CompileSymbolVisibility(%d)", int64(e))
 	}
 }
 
-type MTLCurveBasis int64
+type CurveBasis int64
 
 const (
-	// @brief B-Spline basis. Each curve segment must have 3 or 4 control points. Curve segments join with C^(N - 2) continuity, where N is the number of control points. The curve does not necessarily pass through the control points without additional control points at the beginning and end of the curve. Each curve segment can overlap N-1 control points.
-	MTLCurveBasisBSpline MTLCurveBasis = 0
-	// @brief Catmull-Rom basis. Curves represented in this basis can also be easily converted to and from the Bézier basis. Each curve segment must have 4 control points. Each index in the control point index buffer points to the first of 4 consecutive control points in the control point buffer. The tangent at each control point is given by (P_(i+1) - P_(i-1)) / 2. Therefore, the curve does not pass through the first and last control point of each connected sequence of curve segments. Instead, the first and last control point are used to control the tangent vector at the beginning and end of the curve. Curve segments join with C^1 continuity and the curve passes through the control points. Each curve segment can overlap 3 control points.
-	MTLCurveBasisCatmullRom MTLCurveBasis = 1
-	// @brief Linear basis. The curve is made of a sequence of connected line segments each with 2 control points.
-	MTLCurveBasisLinear MTLCurveBasis = 2
-	// @brief Bezier basis
-	MTLCurveBasisBezier MTLCurveBasis = 3
+	// B-Spline basis. Each curve segment must have 3 or 4 control points. Curve segments join with C^(N - 2) continuity, where N is the number of control points. The curve does not necessarily pass through the control points without additional control points at the beginning and end of the curve. Each curve segment can overlap N-1 control points.
+	CurveBasisBSpline CurveBasis = 0
+	// Catmull-Rom basis. Curves represented in this basis can also be easily converted to and from the Bézier basis. Each curve segment must have 4 control points. Each index in the control point index buffer points to the first of 4 consecutive control points in the control point buffer. The tangent at each control point is given by (P_(i+1) - P_(i-1)) / 2. Therefore, the curve does not pass through the first and last control point of each connected sequence of curve segments. Instead, the first and last control point are used to control the tangent vector at the beginning and end of the curve. Curve segments join with C^1 continuity and the curve passes through the control points. Each curve segment can overlap 3 control points.
+	CurveBasisCatmullRom CurveBasis = 1
+	// Linear basis. The curve is made of a sequence of connected line segments each with 2 control points.
+	CurveBasisLinear CurveBasis = 2
+	// Bezier basis
+	CurveBasisBezier CurveBasis = 3
 )
 
-func (e MTLCurveBasis) String() string {
+func (e CurveBasis) String() string {
 	switch e {
-	case MTLCurveBasisBSpline:
-		return "MTLCurveBasisBSpline"
-	case MTLCurveBasisCatmullRom:
-		return "MTLCurveBasisCatmullRom"
-	case MTLCurveBasisLinear:
-		return "MTLCurveBasisLinear"
-	case MTLCurveBasisBezier:
-		return "MTLCurveBasisBezier"
+	case CurveBasisBSpline:
+		return "CurveBasisBSpline"
+	case CurveBasisCatmullRom:
+		return "CurveBasisCatmullRom"
+	case CurveBasisLinear:
+		return "CurveBasisLinear"
+	case CurveBasisBezier:
+		return "CurveBasisBezier"
 	default:
-		return fmt.Sprintf("MTLCurveBasis(%d)", int64(e))
+		return fmt.Sprintf("CurveBasis(%d)", int64(e))
 	}
 }
 
-type MTLCurveEndCaps int64
+type CurveEndCaps int64
 
 const (
-	// @brief No end caps
-	MTLCurveEndCapsNone MTLCurveEndCaps = 0
-	// @brief Disk end caps
-	MTLCurveEndCapsDisk MTLCurveEndCaps = 1
-	// @brief Spherical end caps
-	MTLCurveEndCapsSphere MTLCurveEndCaps = 2
+	// No end caps
+	CurveEndCapsNone CurveEndCaps = 0
+	// Disk end caps
+	CurveEndCapsDisk CurveEndCaps = 1
+	// Spherical end caps
+	CurveEndCapsSphere CurveEndCaps = 2
 )
 
-func (e MTLCurveEndCaps) String() string {
+func (e CurveEndCaps) String() string {
 	switch e {
-	case MTLCurveEndCapsNone:
-		return "MTLCurveEndCapsNone"
-	case MTLCurveEndCapsDisk:
-		return "MTLCurveEndCapsDisk"
-	case MTLCurveEndCapsSphere:
-		return "MTLCurveEndCapsSphere"
+	case CurveEndCapsNone:
+		return "CurveEndCapsNone"
+	case CurveEndCapsDisk:
+		return "CurveEndCapsDisk"
+	case CurveEndCapsSphere:
+		return "CurveEndCapsSphere"
 	default:
-		return fmt.Sprintf("MTLCurveEndCaps(%d)", int64(e))
+		return fmt.Sprintf("CurveEndCaps(%d)", int64(e))
 	}
 }
 
-type MTLCurveType int64
+type CurveType int64
 
 const (
-	// @brief Curve with a circular cross-section. These curves have the advantage of having a real 3D shape consistent across different ray directions, well-defined surface normals, etc. However, they may be slower to intersect. These curves are ideal for viewing close-up.
-	MTLCurveTypeRound MTLCurveType = 0
-	// @brief Curve with a flat cross-section aligned with the ray direction. These curves may be faster to intersect but do not have a consistent 3D structure across different rays. These curves are ideal for viewing at a distance or curves with a small radius such as hair and fur.
-	MTLCurveTypeFlat MTLCurveType = 1
+	// Curve with a circular cross-section. These curves have the advantage of having a real 3D shape consistent across different ray directions, well-defined surface normals, etc. However, they may be slower to intersect. These curves are ideal for viewing close-up.
+	CurveTypeRound CurveType = 0
+	// Curve with a flat cross-section aligned with the ray direction. These curves may be faster to intersect but do not have a consistent 3D structure across different rays. These curves are ideal for viewing at a distance or curves with a small radius such as hair and fur.
+	CurveTypeFlat CurveType = 1
 )
 
-func (e MTLCurveType) String() string {
+func (e CurveType) String() string {
 	switch e {
-	case MTLCurveTypeRound:
-		return "MTLCurveTypeRound"
-	case MTLCurveTypeFlat:
-		return "MTLCurveTypeFlat"
+	case CurveTypeRound:
+		return "CurveTypeRound"
+	case CurveTypeFlat:
+		return "CurveTypeFlat"
 	default:
-		return fmt.Sprintf("MTLCurveType(%d)", int64(e))
+		return fmt.Sprintf("CurveType(%d)", int64(e))
 	}
 }
 
 // The parameter type options for GPU functions, such as shaders and compute kernels.
-type MTLDataType uint64
+type DataType uint64
 
 const (
 	// A sentinel value that represents a GPU function parameter that doesn’t have a valid data type.
-	MTLDataTypeNone MTLDataType = 0
+	DataTypeNone DataType = 0
 	// A structure instance.
-	MTLDataTypeStruct MTLDataType = 1
+	DataTypeStruct DataType = 1
 	// An array instance.
-	MTLDataTypeArray MTLDataType = 2
+	DataTypeArray DataType = 2
 	// A 32-bit floating-point value.
-	MTLDataTypeFloat MTLDataType = 3
+	DataTypeFloat DataType = 3
 	// A two-component vector with 32-bit floating-point values.
-	MTLDataTypeFloat2 MTLDataType = 4
+	DataTypeFloat2 DataType = 4
 	// A three-component vector with 32-bit floating-point values.
-	MTLDataTypeFloat3 MTLDataType = 5
+	DataTypeFloat3 DataType = 5
 	// A four-component vector with 32-bit floating-point values.
-	MTLDataTypeFloat4 MTLDataType = 6
+	DataTypeFloat4 DataType = 6
 	// A 2x2 component matrix with 32-bit floating-point values.
-	MTLDataTypeFloat2x2 MTLDataType = 7
+	DataTypeFloat2x2 DataType = 7
 	// A 2x3 component matrix with 32-bit floating-point values.
-	MTLDataTypeFloat2x3 MTLDataType = 8
+	DataTypeFloat2x3 DataType = 8
 	// A 2x4 component matrix with 32-bit floating-point values.
-	MTLDataTypeFloat2x4 MTLDataType = 9
+	DataTypeFloat2x4 DataType = 9
 	// A 3x2 component matrix with 32-bit floating-point values.
-	MTLDataTypeFloat3x2 MTLDataType = 10
+	DataTypeFloat3x2 DataType = 10
 	// A 3x3 component matrix with 32-bit floating-point values.
-	MTLDataTypeFloat3x3 MTLDataType = 11
+	DataTypeFloat3x3 DataType = 11
 	// A 3x4 component matrix with 32-bit floating-point values.
-	MTLDataTypeFloat3x4 MTLDataType = 12
+	DataTypeFloat3x4 DataType = 12
 	// A 4x2 component matrix with 32-bit floating-point values.
-	MTLDataTypeFloat4x2 MTLDataType = 13
+	DataTypeFloat4x2 DataType = 13
 	// A 4x3 component matrix with 32-bit floating-point values.
-	MTLDataTypeFloat4x3 MTLDataType = 14
+	DataTypeFloat4x3 DataType = 14
 	// A 4x4 component matrix with 32-bit floating-point values.
-	MTLDataTypeFloat4x4 MTLDataType = 15
+	DataTypeFloat4x4 DataType = 15
 	// A 16-bit floating-point value.
-	MTLDataTypeHalf MTLDataType = 16
+	DataTypeHalf DataType = 16
 	// A two-component vector with 16-bit floating-point values.
-	MTLDataTypeHalf2 MTLDataType = 17
+	DataTypeHalf2 DataType = 17
 	// A three-component vector with 16-bit floating-point values.
-	MTLDataTypeHalf3 MTLDataType = 18
+	DataTypeHalf3 DataType = 18
 	// A four-component vector with 16-bit floating-point values.
-	MTLDataTypeHalf4 MTLDataType = 19
+	DataTypeHalf4 DataType = 19
 	// A 2x2 component matrix with 16-bit floating-point values.
-	MTLDataTypeHalf2x2 MTLDataType = 20
+	DataTypeHalf2x2 DataType = 20
 	// A 2x3 component matrix with 16-bit floating-point values.
-	MTLDataTypeHalf2x3 MTLDataType = 21
+	DataTypeHalf2x3 DataType = 21
 	// A 2x4 component matrix with 16-bit floating-point values.
-	MTLDataTypeHalf2x4 MTLDataType = 22
+	DataTypeHalf2x4 DataType = 22
 	// A 3x2 component matrix with 16-bit floating-point values.
-	MTLDataTypeHalf3x2 MTLDataType = 23
+	DataTypeHalf3x2 DataType = 23
 	// A 3x3 component matrix with 16-bit floating-point values.
-	MTLDataTypeHalf3x3 MTLDataType = 24
+	DataTypeHalf3x3 DataType = 24
 	// A 3x4 component matrix with 16-bit floating-point values.
-	MTLDataTypeHalf3x4 MTLDataType = 25
+	DataTypeHalf3x4 DataType = 25
 	// A 4x2 component matrix with 16-bit floating-point values.
-	MTLDataTypeHalf4x2 MTLDataType = 26
+	DataTypeHalf4x2 DataType = 26
 	// A 4x3 component matrix with 16-bit floating-point values.
-	MTLDataTypeHalf4x3 MTLDataType = 27
+	DataTypeHalf4x3 DataType = 27
 	// A 4x4 component matrix with 16-bit floating-point values.
-	MTLDataTypeHalf4x4 MTLDataType = 28
+	DataTypeHalf4x4 DataType = 28
 	// A 32-bit, signed integer value.
-	MTLDataTypeInt MTLDataType = 29
+	DataTypeInt DataType = 29
 	// A two-component vector with 32-bit, signed integer values.
-	MTLDataTypeInt2 MTLDataType = 30
+	DataTypeInt2 DataType = 30
 	// A three-component vector with 32-bit, signed integer values.
-	MTLDataTypeInt3 MTLDataType = 31
+	DataTypeInt3 DataType = 31
 	// A four-component vector with 32-bit, signed integer values.
-	MTLDataTypeInt4 MTLDataType = 32
+	DataTypeInt4 DataType = 32
 	// A 32-bit, unsigned integer value.
-	MTLDataTypeUInt MTLDataType = 33
+	DataTypeUInt DataType = 33
 	// A two-component vector with 32-bit, unsigned integer values.
-	MTLDataTypeUInt2 MTLDataType = 34
+	DataTypeUInt2 DataType = 34
 	// A three-component vector with 32-bit, unsigned integer values.
-	MTLDataTypeUInt3 MTLDataType = 35
+	DataTypeUInt3 DataType = 35
 	// A four-component vector with 32-bit, unsigned integer values.
-	MTLDataTypeUInt4 MTLDataType = 36
+	DataTypeUInt4 DataType = 36
 	// A 16-bit, signed integer value.
-	MTLDataTypeShort MTLDataType = 37
+	DataTypeShort DataType = 37
 	// A two-component vector with 16-bit, signed integer values.
-	MTLDataTypeShort2 MTLDataType = 38
+	DataTypeShort2 DataType = 38
 	// A three-component vector with 16-bit, signed integer values.
-	MTLDataTypeShort3 MTLDataType = 39
+	DataTypeShort3 DataType = 39
 	// A four-component vector with 16-bit, signed integer values.
-	MTLDataTypeShort4 MTLDataType = 40
+	DataTypeShort4 DataType = 40
 	// A 16-bit, unsigned integer value.
-	MTLDataTypeUShort MTLDataType = 41
+	DataTypeUShort DataType = 41
 	// A two-component vector with 16-bit, unsigned integer values.
-	MTLDataTypeUShort2 MTLDataType = 42
+	DataTypeUShort2 DataType = 42
 	// A three-component vector with 16-bit, unsigned integer values.
-	MTLDataTypeUShort3 MTLDataType = 43
+	DataTypeUShort3 DataType = 43
 	// A four-component vector with 16-bit, unsigned integer values.
-	MTLDataTypeUShort4 MTLDataType = 44
+	DataTypeUShort4 DataType = 44
 	// An 8-bit, signed integer value.
-	MTLDataTypeChar MTLDataType = 45
+	DataTypeChar DataType = 45
 	// A two-component vector with 8-bit, signed integer values.
-	MTLDataTypeChar2 MTLDataType = 46
+	DataTypeChar2 DataType = 46
 	// A three-component vector with 8-bit, signed integer values.
-	MTLDataTypeChar3 MTLDataType = 47
+	DataTypeChar3 DataType = 47
 	// A four-component vector with 8-bit, signed integer values.
-	MTLDataTypeChar4 MTLDataType = 48
+	DataTypeChar4 DataType = 48
 	// An 8-bit, unsigned integer value.
-	MTLDataTypeUChar MTLDataType = 49
+	DataTypeUChar DataType = 49
 	// A two-component vector with 8-bit, unsigned integer values.
-	MTLDataTypeUChar2 MTLDataType = 50
+	DataTypeUChar2 DataType = 50
 	// A three-component vector with 8-bit, unsigned integer values.
-	MTLDataTypeUChar3 MTLDataType = 51
+	DataTypeUChar3 DataType = 51
 	// A four-component vector with 8-bit, unsigned integer values.
-	MTLDataTypeUChar4 MTLDataType = 52
+	DataTypeUChar4 DataType = 52
 	// A Boolean value.
-	MTLDataTypeBool MTLDataType = 53
+	DataTypeBool DataType = 53
 	// A two-component Boolean vector.
-	MTLDataTypeBool2 MTLDataType = 54
+	DataTypeBool2 DataType = 54
 	// A three-component Boolean vector.
-	MTLDataTypeBool3 MTLDataType = 55
+	DataTypeBool3 DataType = 55
 	// A four-component Boolean vector.
-	MTLDataTypeBool4 MTLDataType = 56
+	DataTypeBool4 DataType = 56
 	// A Metal texture resource instance.
-	MTLDataTypeTexture MTLDataType = 58
+	DataTypeTexture DataType = 58
 	// A Metal texture sampler instance.
-	MTLDataTypeSampler MTLDataType = 59
+	DataTypeSampler DataType = 59
 	// A pointer.
-	MTLDataTypePointer MTLDataType = 60
+	DataTypePointer DataType = 60
 	// An ordinary pixel with one component that’s an 8-bit, normalized, unsigned integer value.
-	MTLDataTypeR8Unorm MTLDataType = 62
+	DataTypeR8Unorm DataType = 62
 	// An ordinary pixel with one component that’s an 8-bit, normalized, signed integer value.
-	MTLDataTypeR8Snorm MTLDataType = 63
+	DataTypeR8Snorm DataType = 63
 	// An ordinary pixel with one component that’s a 16-bit, normalized, unsigned integer value.
-	MTLDataTypeR16Unorm MTLDataType = 64
+	DataTypeR16Unorm DataType = 64
 	// An ordinary pixel with one component that’s a 16-bit, normalized, signed integer value.
-	MTLDataTypeR16Snorm MTLDataType = 65
+	DataTypeR16Snorm DataType = 65
 	// An ordinary pixel with two components, each of which is an 8-bit, normalized, unsigned integer value.
-	MTLDataTypeRG8Unorm MTLDataType = 66
+	DataTypeRG8Unorm DataType = 66
 	// An ordinary pixel with two components, each of which is an 8-bit, normalized, signed integer value.
-	MTLDataTypeRG8Snorm MTLDataType = 67
+	DataTypeRG8Snorm DataType = 67
 	// An ordinary pixel with two components, each of which is a 16-bit, normalized, unsigned integer value.
-	MTLDataTypeRG16Unorm MTLDataType = 68
+	DataTypeRG16Unorm DataType = 68
 	// An ordinary pixel with two components, each of which is a 16-bit, normalized, signed integer value.
-	MTLDataTypeRG16Snorm MTLDataType = 69
+	DataTypeRG16Snorm DataType = 69
 	// An ordinary pixel with four components, each of which is an 8-bit, normalized, unsigned integer value.
-	MTLDataTypeRGBA8Unorm MTLDataType = 70
+	DataTypeRGBA8Unorm DataType = 70
 	// An ordinary pixel with four components, each of which is an 8-bit, normalized, unsigned integer value in the sRGB color space.
-	MTLDataTypeRGBA8Unorm_sRGB MTLDataType = 71
+	DataTypeRGBA8Unorm_sRGB DataType = 71
 	// An ordinary pixel with four components, each of which is an 8-bit, normalized, signed integer value.
-	MTLDataTypeRGBA8Snorm MTLDataType = 72
+	DataTypeRGBA8Snorm DataType = 72
 	// An ordinary pixel with four components, each of which is a 16-bit, normalized, unsigned integer value.
-	MTLDataTypeRGBA16Unorm MTLDataType = 73
+	DataTypeRGBA16Unorm DataType = 73
 	// An ordinary pixel with four components, each of which is a 16-bit, normalized, signed integer value.
-	MTLDataTypeRGBA16Snorm MTLDataType = 74
+	DataTypeRGBA16Snorm DataType = 74
 	// A packed 32-bit format with three color components, each of which is a 10-bit, normalized, unsigned integer value.
-	MTLDataTypeRGB10A2Unorm MTLDataType = 75
+	DataTypeRGB10A2Unorm DataType = 75
 	// A packed 32-bit format with three floating-point color components, two of which are 11-bit values, and one is a 10-bit value.
-	MTLDataTypeRG11B10Float MTLDataType = 76
+	DataTypeRG11B10Float DataType = 76
 	// A packed 32-bit format with three color components, each of which is a 9-bit floating-point value.
-	MTLDataTypeRGB9E5Float MTLDataType = 77
+	DataTypeRGB9E5Float DataType = 77
 	// A Metal render pipeline instance.
-	MTLDataTypeRenderPipeline MTLDataType = 78
+	DataTypeRenderPipeline DataType = 78
 	// A Metal compute pipeline instance.
-	MTLDataTypeComputePipeline MTLDataType = 79
+	DataTypeComputePipeline DataType = 79
 	// An indirect command buffer resource instance.
-	MTLDataTypeIndirectCommandBuffer MTLDataType = 80
+	DataTypeIndirectCommandBuffer DataType = 80
 	// A 64-bit, signed integer value.
-	MTLDataTypeLong MTLDataType = 81
+	DataTypeLong DataType = 81
 	// A two-component vector with 64-bit, signed integer values.
-	MTLDataTypeLong2 MTLDataType = 82
+	DataTypeLong2 DataType = 82
 	// A three-component vector with 64-bit, signed integer values.
-	MTLDataTypeLong3 MTLDataType = 83
+	DataTypeLong3 DataType = 83
 	// A four-component vector with 64-bit, signed integer values.
-	MTLDataTypeLong4 MTLDataType = 84
+	DataTypeLong4 DataType = 84
 	// A 64-bit, unsigned integer value.
-	MTLDataTypeULong MTLDataType = 85
+	DataTypeULong DataType = 85
 	// A two-component vector with 64-bit, unsigned integer values.
-	MTLDataTypeULong2 MTLDataType = 86
+	DataTypeULong2 DataType = 86
 	// A three-component vector with 64-bit, unsigned integer values.
-	MTLDataTypeULong3 MTLDataType = 87
+	DataTypeULong3 DataType = 87
 	// A four-component vector with 64-bit, unsigned integer values.
-	MTLDataTypeULong4 MTLDataType = 88
+	DataTypeULong4 DataType = 88
 	// A table of visible functions that a render or compute pipeline can call.
-	MTLDataTypeVisibleFunctionTable MTLDataType = 115
+	DataTypeVisibleFunctionTable DataType = 115
 	// A table of intersection functions that a render or compute pipeline can call.
-	MTLDataTypeIntersectionFunctionTable MTLDataType = 116
+	DataTypeIntersectionFunctionTable DataType = 116
 	// A low-level ray-tracing acceleration structure for a set of primitives.
-	MTLDataTypePrimitiveAccelerationStructure MTLDataType = 117
+	DataTypePrimitiveAccelerationStructure DataType = 117
 	// A high-level, ray-tracing acceleration structure for a set of low-level primitive instances.
-	MTLDataTypeInstanceAccelerationStructure MTLDataType = 118
+	DataTypeInstanceAccelerationStructure DataType = 118
 	// A 16-bit, brain floating-point value.
-	MTLDataTypeBFloat MTLDataType = 121
+	DataTypeBFloat DataType = 121
 	// A two-component vector with 16-bit, brain floating-point values.
-	MTLDataTypeBFloat2 MTLDataType = 122
+	DataTypeBFloat2 DataType = 122
 	// A three-component vector with 16-bit, brain floating-point values.
-	MTLDataTypeBFloat3 MTLDataType = 123
+	DataTypeBFloat3 DataType = 123
 	// A four-component vector with 16-bit, brain floating-point values.
-	MTLDataTypeBFloat4 MTLDataType = 124
+	DataTypeBFloat4 DataType = 124
 	// Represents a data type corresponding to a depth-stencil state object.
-	MTLDataTypeDepthStencilState MTLDataType = 139
+	DataTypeDepthStencilState DataType = 139
 	// Represents a data type corresponding to a machine learning tensor.
-	MTLDataTypeTensor MTLDataType = 140
+	DataTypeTensor DataType = 140
 )
 
-func (e MTLDataType) String() string {
+func (e DataType) String() string {
 	switch e {
-	case MTLDataTypeNone:
-		return "MTLDataTypeNone"
-	case MTLDataTypeStruct:
-		return "MTLDataTypeStruct"
-	case MTLDataTypeArray:
-		return "MTLDataTypeArray"
-	case MTLDataTypeFloat:
-		return "MTLDataTypeFloat"
-	case MTLDataTypeFloat2:
-		return "MTLDataTypeFloat2"
-	case MTLDataTypeFloat3:
-		return "MTLDataTypeFloat3"
-	case MTLDataTypeFloat4:
-		return "MTLDataTypeFloat4"
-	case MTLDataTypeFloat2x2:
-		return "MTLDataTypeFloat2x2"
-	case MTLDataTypeFloat2x3:
-		return "MTLDataTypeFloat2x3"
-	case MTLDataTypeFloat2x4:
-		return "MTLDataTypeFloat2x4"
-	case MTLDataTypeFloat3x2:
-		return "MTLDataTypeFloat3x2"
-	case MTLDataTypeFloat3x3:
-		return "MTLDataTypeFloat3x3"
-	case MTLDataTypeFloat3x4:
-		return "MTLDataTypeFloat3x4"
-	case MTLDataTypeFloat4x2:
-		return "MTLDataTypeFloat4x2"
-	case MTLDataTypeFloat4x3:
-		return "MTLDataTypeFloat4x3"
-	case MTLDataTypeFloat4x4:
-		return "MTLDataTypeFloat4x4"
-	case MTLDataTypeHalf:
-		return "MTLDataTypeHalf"
-	case MTLDataTypeHalf2:
-		return "MTLDataTypeHalf2"
-	case MTLDataTypeHalf3:
-		return "MTLDataTypeHalf3"
-	case MTLDataTypeHalf4:
-		return "MTLDataTypeHalf4"
-	case MTLDataTypeHalf2x2:
-		return "MTLDataTypeHalf2x2"
-	case MTLDataTypeHalf2x3:
-		return "MTLDataTypeHalf2x3"
-	case MTLDataTypeHalf2x4:
-		return "MTLDataTypeHalf2x4"
-	case MTLDataTypeHalf3x2:
-		return "MTLDataTypeHalf3x2"
-	case MTLDataTypeHalf3x3:
-		return "MTLDataTypeHalf3x3"
-	case MTLDataTypeHalf3x4:
-		return "MTLDataTypeHalf3x4"
-	case MTLDataTypeHalf4x2:
-		return "MTLDataTypeHalf4x2"
-	case MTLDataTypeHalf4x3:
-		return "MTLDataTypeHalf4x3"
-	case MTLDataTypeHalf4x4:
-		return "MTLDataTypeHalf4x4"
-	case MTLDataTypeInt:
-		return "MTLDataTypeInt"
-	case MTLDataTypeInt2:
-		return "MTLDataTypeInt2"
-	case MTLDataTypeInt3:
-		return "MTLDataTypeInt3"
-	case MTLDataTypeInt4:
-		return "MTLDataTypeInt4"
-	case MTLDataTypeUInt:
-		return "MTLDataTypeUInt"
-	case MTLDataTypeUInt2:
-		return "MTLDataTypeUInt2"
-	case MTLDataTypeUInt3:
-		return "MTLDataTypeUInt3"
-	case MTLDataTypeUInt4:
-		return "MTLDataTypeUInt4"
-	case MTLDataTypeShort:
-		return "MTLDataTypeShort"
-	case MTLDataTypeShort2:
-		return "MTLDataTypeShort2"
-	case MTLDataTypeShort3:
-		return "MTLDataTypeShort3"
-	case MTLDataTypeShort4:
-		return "MTLDataTypeShort4"
-	case MTLDataTypeUShort:
-		return "MTLDataTypeUShort"
-	case MTLDataTypeUShort2:
-		return "MTLDataTypeUShort2"
-	case MTLDataTypeUShort3:
-		return "MTLDataTypeUShort3"
-	case MTLDataTypeUShort4:
-		return "MTLDataTypeUShort4"
-	case MTLDataTypeChar:
-		return "MTLDataTypeChar"
-	case MTLDataTypeChar2:
-		return "MTLDataTypeChar2"
-	case MTLDataTypeChar3:
-		return "MTLDataTypeChar3"
-	case MTLDataTypeChar4:
-		return "MTLDataTypeChar4"
-	case MTLDataTypeUChar:
-		return "MTLDataTypeUChar"
-	case MTLDataTypeUChar2:
-		return "MTLDataTypeUChar2"
-	case MTLDataTypeUChar3:
-		return "MTLDataTypeUChar3"
-	case MTLDataTypeUChar4:
-		return "MTLDataTypeUChar4"
-	case MTLDataTypeBool:
-		return "MTLDataTypeBool"
-	case MTLDataTypeBool2:
-		return "MTLDataTypeBool2"
-	case MTLDataTypeBool3:
-		return "MTLDataTypeBool3"
-	case MTLDataTypeBool4:
-		return "MTLDataTypeBool4"
-	case MTLDataTypeTexture:
-		return "MTLDataTypeTexture"
-	case MTLDataTypeSampler:
-		return "MTLDataTypeSampler"
-	case MTLDataTypePointer:
-		return "MTLDataTypePointer"
-	case MTLDataTypeR8Unorm:
-		return "MTLDataTypeR8Unorm"
-	case MTLDataTypeR8Snorm:
-		return "MTLDataTypeR8Snorm"
-	case MTLDataTypeR16Unorm:
-		return "MTLDataTypeR16Unorm"
-	case MTLDataTypeR16Snorm:
-		return "MTLDataTypeR16Snorm"
-	case MTLDataTypeRG8Unorm:
-		return "MTLDataTypeRG8Unorm"
-	case MTLDataTypeRG8Snorm:
-		return "MTLDataTypeRG8Snorm"
-	case MTLDataTypeRG16Unorm:
-		return "MTLDataTypeRG16Unorm"
-	case MTLDataTypeRG16Snorm:
-		return "MTLDataTypeRG16Snorm"
-	case MTLDataTypeRGBA8Unorm:
-		return "MTLDataTypeRGBA8Unorm"
-	case MTLDataTypeRGBA8Unorm_sRGB:
-		return "MTLDataTypeRGBA8Unorm_sRGB"
-	case MTLDataTypeRGBA8Snorm:
-		return "MTLDataTypeRGBA8Snorm"
-	case MTLDataTypeRGBA16Unorm:
-		return "MTLDataTypeRGBA16Unorm"
-	case MTLDataTypeRGBA16Snorm:
-		return "MTLDataTypeRGBA16Snorm"
-	case MTLDataTypeRGB10A2Unorm:
-		return "MTLDataTypeRGB10A2Unorm"
-	case MTLDataTypeRG11B10Float:
-		return "MTLDataTypeRG11B10Float"
-	case MTLDataTypeRGB9E5Float:
-		return "MTLDataTypeRGB9E5Float"
-	case MTLDataTypeRenderPipeline:
-		return "MTLDataTypeRenderPipeline"
-	case MTLDataTypeComputePipeline:
-		return "MTLDataTypeComputePipeline"
-	case MTLDataTypeIndirectCommandBuffer:
-		return "MTLDataTypeIndirectCommandBuffer"
-	case MTLDataTypeLong:
-		return "MTLDataTypeLong"
-	case MTLDataTypeLong2:
-		return "MTLDataTypeLong2"
-	case MTLDataTypeLong3:
-		return "MTLDataTypeLong3"
-	case MTLDataTypeLong4:
-		return "MTLDataTypeLong4"
-	case MTLDataTypeULong:
-		return "MTLDataTypeULong"
-	case MTLDataTypeULong2:
-		return "MTLDataTypeULong2"
-	case MTLDataTypeULong3:
-		return "MTLDataTypeULong3"
-	case MTLDataTypeULong4:
-		return "MTLDataTypeULong4"
-	case MTLDataTypeVisibleFunctionTable:
-		return "MTLDataTypeVisibleFunctionTable"
-	case MTLDataTypeIntersectionFunctionTable:
-		return "MTLDataTypeIntersectionFunctionTable"
-	case MTLDataTypePrimitiveAccelerationStructure:
-		return "MTLDataTypePrimitiveAccelerationStructure"
-	case MTLDataTypeInstanceAccelerationStructure:
-		return "MTLDataTypeInstanceAccelerationStructure"
-	case MTLDataTypeBFloat:
-		return "MTLDataTypeBFloat"
-	case MTLDataTypeBFloat2:
-		return "MTLDataTypeBFloat2"
-	case MTLDataTypeBFloat3:
-		return "MTLDataTypeBFloat3"
-	case MTLDataTypeBFloat4:
-		return "MTLDataTypeBFloat4"
-	case MTLDataTypeDepthStencilState:
-		return "MTLDataTypeDepthStencilState"
-	case MTLDataTypeTensor:
-		return "MTLDataTypeTensor"
+	case DataTypeNone:
+		return "DataTypeNone"
+	case DataTypeStruct:
+		return "DataTypeStruct"
+	case DataTypeArray:
+		return "DataTypeArray"
+	case DataTypeFloat:
+		return "DataTypeFloat"
+	case DataTypeFloat2:
+		return "DataTypeFloat2"
+	case DataTypeFloat3:
+		return "DataTypeFloat3"
+	case DataTypeFloat4:
+		return "DataTypeFloat4"
+	case DataTypeFloat2x2:
+		return "DataTypeFloat2x2"
+	case DataTypeFloat2x3:
+		return "DataTypeFloat2x3"
+	case DataTypeFloat2x4:
+		return "DataTypeFloat2x4"
+	case DataTypeFloat3x2:
+		return "DataTypeFloat3x2"
+	case DataTypeFloat3x3:
+		return "DataTypeFloat3x3"
+	case DataTypeFloat3x4:
+		return "DataTypeFloat3x4"
+	case DataTypeFloat4x2:
+		return "DataTypeFloat4x2"
+	case DataTypeFloat4x3:
+		return "DataTypeFloat4x3"
+	case DataTypeFloat4x4:
+		return "DataTypeFloat4x4"
+	case DataTypeHalf:
+		return "DataTypeHalf"
+	case DataTypeHalf2:
+		return "DataTypeHalf2"
+	case DataTypeHalf3:
+		return "DataTypeHalf3"
+	case DataTypeHalf4:
+		return "DataTypeHalf4"
+	case DataTypeHalf2x2:
+		return "DataTypeHalf2x2"
+	case DataTypeHalf2x3:
+		return "DataTypeHalf2x3"
+	case DataTypeHalf2x4:
+		return "DataTypeHalf2x4"
+	case DataTypeHalf3x2:
+		return "DataTypeHalf3x2"
+	case DataTypeHalf3x3:
+		return "DataTypeHalf3x3"
+	case DataTypeHalf3x4:
+		return "DataTypeHalf3x4"
+	case DataTypeHalf4x2:
+		return "DataTypeHalf4x2"
+	case DataTypeHalf4x3:
+		return "DataTypeHalf4x3"
+	case DataTypeHalf4x4:
+		return "DataTypeHalf4x4"
+	case DataTypeInt:
+		return "DataTypeInt"
+	case DataTypeInt2:
+		return "DataTypeInt2"
+	case DataTypeInt3:
+		return "DataTypeInt3"
+	case DataTypeInt4:
+		return "DataTypeInt4"
+	case DataTypeUInt:
+		return "DataTypeUInt"
+	case DataTypeUInt2:
+		return "DataTypeUInt2"
+	case DataTypeUInt3:
+		return "DataTypeUInt3"
+	case DataTypeUInt4:
+		return "DataTypeUInt4"
+	case DataTypeShort:
+		return "DataTypeShort"
+	case DataTypeShort2:
+		return "DataTypeShort2"
+	case DataTypeShort3:
+		return "DataTypeShort3"
+	case DataTypeShort4:
+		return "DataTypeShort4"
+	case DataTypeUShort:
+		return "DataTypeUShort"
+	case DataTypeUShort2:
+		return "DataTypeUShort2"
+	case DataTypeUShort3:
+		return "DataTypeUShort3"
+	case DataTypeUShort4:
+		return "DataTypeUShort4"
+	case DataTypeChar:
+		return "DataTypeChar"
+	case DataTypeChar2:
+		return "DataTypeChar2"
+	case DataTypeChar3:
+		return "DataTypeChar3"
+	case DataTypeChar4:
+		return "DataTypeChar4"
+	case DataTypeUChar:
+		return "DataTypeUChar"
+	case DataTypeUChar2:
+		return "DataTypeUChar2"
+	case DataTypeUChar3:
+		return "DataTypeUChar3"
+	case DataTypeUChar4:
+		return "DataTypeUChar4"
+	case DataTypeBool:
+		return "DataTypeBool"
+	case DataTypeBool2:
+		return "DataTypeBool2"
+	case DataTypeBool3:
+		return "DataTypeBool3"
+	case DataTypeBool4:
+		return "DataTypeBool4"
+	case DataTypeTexture:
+		return "DataTypeTexture"
+	case DataTypeSampler:
+		return "DataTypeSampler"
+	case DataTypePointer:
+		return "DataTypePointer"
+	case DataTypeR8Unorm:
+		return "DataTypeR8Unorm"
+	case DataTypeR8Snorm:
+		return "DataTypeR8Snorm"
+	case DataTypeR16Unorm:
+		return "DataTypeR16Unorm"
+	case DataTypeR16Snorm:
+		return "DataTypeR16Snorm"
+	case DataTypeRG8Unorm:
+		return "DataTypeRG8Unorm"
+	case DataTypeRG8Snorm:
+		return "DataTypeRG8Snorm"
+	case DataTypeRG16Unorm:
+		return "DataTypeRG16Unorm"
+	case DataTypeRG16Snorm:
+		return "DataTypeRG16Snorm"
+	case DataTypeRGBA8Unorm:
+		return "DataTypeRGBA8Unorm"
+	case DataTypeRGBA8Unorm_sRGB:
+		return "DataTypeRGBA8Unorm_sRGB"
+	case DataTypeRGBA8Snorm:
+		return "DataTypeRGBA8Snorm"
+	case DataTypeRGBA16Unorm:
+		return "DataTypeRGBA16Unorm"
+	case DataTypeRGBA16Snorm:
+		return "DataTypeRGBA16Snorm"
+	case DataTypeRGB10A2Unorm:
+		return "DataTypeRGB10A2Unorm"
+	case DataTypeRG11B10Float:
+		return "DataTypeRG11B10Float"
+	case DataTypeRGB9E5Float:
+		return "DataTypeRGB9E5Float"
+	case DataTypeRenderPipeline:
+		return "DataTypeRenderPipeline"
+	case DataTypeComputePipeline:
+		return "DataTypeComputePipeline"
+	case DataTypeIndirectCommandBuffer:
+		return "DataTypeIndirectCommandBuffer"
+	case DataTypeLong:
+		return "DataTypeLong"
+	case DataTypeLong2:
+		return "DataTypeLong2"
+	case DataTypeLong3:
+		return "DataTypeLong3"
+	case DataTypeLong4:
+		return "DataTypeLong4"
+	case DataTypeULong:
+		return "DataTypeULong"
+	case DataTypeULong2:
+		return "DataTypeULong2"
+	case DataTypeULong3:
+		return "DataTypeULong3"
+	case DataTypeULong4:
+		return "DataTypeULong4"
+	case DataTypeVisibleFunctionTable:
+		return "DataTypeVisibleFunctionTable"
+	case DataTypeIntersectionFunctionTable:
+		return "DataTypeIntersectionFunctionTable"
+	case DataTypePrimitiveAccelerationStructure:
+		return "DataTypePrimitiveAccelerationStructure"
+	case DataTypeInstanceAccelerationStructure:
+		return "DataTypeInstanceAccelerationStructure"
+	case DataTypeBFloat:
+		return "DataTypeBFloat"
+	case DataTypeBFloat2:
+		return "DataTypeBFloat2"
+	case DataTypeBFloat3:
+		return "DataTypeBFloat3"
+	case DataTypeBFloat4:
+		return "DataTypeBFloat4"
+	case DataTypeDepthStencilState:
+		return "DataTypeDepthStencilState"
+	case DataTypeTensor:
+		return "DataTypeTensor"
 	default:
-		return fmt.Sprintf("MTLDataType(%d)", int64(e))
+		return fmt.Sprintf("DataType(%d)", int64(e))
 	}
 }
 
 // The type of dispatch method to use when calling encoded functions.
-type MTLDispatchType uint64
+type DispatchType uint64
 
 const (
 	// Sets a command encoder to dispatch encoded commands serially during your pass.
-	MTLDispatchTypeSerial MTLDispatchType = 0
+	DispatchTypeSerial DispatchType = 0
 	// Sets a command encoder to dispatch encoded commands concurrently during your pass.
-	MTLDispatchTypeConcurrent MTLDispatchType = 1
+	DispatchTypeConcurrent DispatchType = 1
 )
 
-func (e MTLDispatchType) String() string {
+func (e DispatchType) String() string {
 	switch e {
-	case MTLDispatchTypeSerial:
-		return "MTLDispatchTypeSerial"
-	case MTLDispatchTypeConcurrent:
-		return "MTLDispatchTypeConcurrent"
+	case DispatchTypeSerial:
+		return "DispatchTypeSerial"
+	case DispatchTypeConcurrent:
+		return "DispatchTypeConcurrent"
 	default:
-		return fmt.Sprintf("MTLDispatchType(%d)", int64(e))
+		return fmt.Sprintf("DispatchType(%d)", int64(e))
 	}
 }
 
 // Options that define how Metal compiles a GPU function.
 // Bitmask — values may be combined with |.
-type MTLFunctionOptions uint64
+type FunctionOptions uint64
 
 const (
 	// A sentinel value that represents an empty set of options, which is the default behavior for creating functions.
-	MTLFunctionOptionNone MTLFunctionOptions = 0
+	FunctionOptionNone FunctionOptions = 0
 	// An option that instructs the compiler to generate a binary format for dynamic linking.
-	MTLFunctionOptionCompileToBinary MTLFunctionOptions = 1
+	FunctionOptionCompileToBinary FunctionOptions = 1
 	// An option that instructs the compiler to store function information for inspecting binary archives.
-	MTLFunctionOptionStoreFunctionInMetalPipelinesScript MTLFunctionOptions = 2
+	FunctionOptionStoreFunctionInMetalPipelinesScript FunctionOptions = 2
 	// An option that instructs the compiler to store function information for inspecting binary archives.
 	//
 	// Deprecated: since macOS 15.0.
-	MTLFunctionOptionStoreFunctionInMetalScript MTLFunctionOptions = 2
+	FunctionOptionStoreFunctionInMetalScript FunctionOptions = 2
 	// An option that instructs the compiler to return an error when a GPU function isn’t in a binary archive.
-	MTLFunctionOptionFailOnBinaryArchiveMiss MTLFunctionOptions = 4
+	FunctionOptionFailOnBinaryArchiveMiss FunctionOptions = 4
 	// An option that generates the same function handle across all pipeline states that link a function, which lets you share function tables across pipeline states.
-	MTLFunctionOptionPipelineIndependent MTLFunctionOptions = 8
+	FunctionOptionPipelineIndependent FunctionOptions = 8
 )
 
-func (e MTLFunctionOptions) String() string {
+func (e FunctionOptions) String() string {
 	var parts []string
-	if e&MTLFunctionOptionCompileToBinary != 0 {
-		parts = append(parts, "MTLFunctionOptionCompileToBinary")
+	if e&FunctionOptionCompileToBinary != 0 {
+		parts = append(parts, "FunctionOptionCompileToBinary")
 	}
-	if e&MTLFunctionOptionStoreFunctionInMetalPipelinesScript != 0 {
-		parts = append(parts, "MTLFunctionOptionStoreFunctionInMetalPipelinesScript")
+	if e&FunctionOptionStoreFunctionInMetalPipelinesScript != 0 {
+		parts = append(parts, "FunctionOptionStoreFunctionInMetalPipelinesScript")
 	}
-	if e&MTLFunctionOptionStoreFunctionInMetalScript != 0 {
-		parts = append(parts, "MTLFunctionOptionStoreFunctionInMetalScript")
+	if e&FunctionOptionStoreFunctionInMetalScript != 0 {
+		parts = append(parts, "FunctionOptionStoreFunctionInMetalScript")
 	}
-	if e&MTLFunctionOptionFailOnBinaryArchiveMiss != 0 {
-		parts = append(parts, "MTLFunctionOptionFailOnBinaryArchiveMiss")
+	if e&FunctionOptionFailOnBinaryArchiveMiss != 0 {
+		parts = append(parts, "FunctionOptionFailOnBinaryArchiveMiss")
 	}
-	if e&MTLFunctionOptionPipelineIndependent != 0 {
-		parts = append(parts, "MTLFunctionOptionPipelineIndependent")
+	if e&FunctionOptionPipelineIndependent != 0 {
+		parts = append(parts, "FunctionOptionPipelineIndependent")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1449,222 +1449,201 @@ func (e MTLFunctionOptions) String() string {
 }
 
 // Options that control whether Metal automatically tracks and prevents memory hazards for resources.
-type MTLHazardTrackingMode uint64
+type HazardTrackingMode uint64
 
 const (
 	// An option that applies the default tracking behavior in Metal based on the resource or heap type you’re creating.
-	MTLHazardTrackingModeDefault MTLHazardTrackingMode = 0
+	HazardTrackingModeDefault HazardTrackingMode = 0
 	// An option that disables automatic memory hazard tracking in Metal for a resource at runtime.
-	MTLHazardTrackingModeUntracked MTLHazardTrackingMode = 1
+	HazardTrackingModeUntracked HazardTrackingMode = 1
 	// An option that directs Metal to apply runtime safeguards that prevent memory hazards when commands access a resource.
-	MTLHazardTrackingModeTracked MTLHazardTrackingMode = 2
+	HazardTrackingModeTracked HazardTrackingMode = 2
 )
 
-func (e MTLHazardTrackingMode) String() string {
+func (e HazardTrackingMode) String() string {
 	switch e {
-	case MTLHazardTrackingModeDefault:
-		return "MTLHazardTrackingModeDefault"
-	case MTLHazardTrackingModeUntracked:
-		return "MTLHazardTrackingModeUntracked"
-	case MTLHazardTrackingModeTracked:
-		return "MTLHazardTrackingModeTracked"
+	case HazardTrackingModeDefault:
+		return "HazardTrackingModeDefault"
+	case HazardTrackingModeUntracked:
+		return "HazardTrackingModeUntracked"
+	case HazardTrackingModeTracked:
+		return "HazardTrackingModeTracked"
 	default:
-		return fmt.Sprintf("MTLHazardTrackingMode(%d)", int64(e))
+		return fmt.Sprintf("HazardTrackingMode(%d)", int64(e))
 	}
 }
 
 // The options you use to choose the heap type.
-type MTLHeapType int64
+type HeapType int64
 
 const (
 	// A heap that automatically places new resource allocations.
-	MTLHeapTypeAutomatic MTLHeapType = 0
+	HeapTypeAutomatic HeapType = 0
 	// The app controls placement of resources on the heap.
-	MTLHeapTypePlacement MTLHeapType = 1
+	HeapTypePlacement HeapType = 1
 	// The heap contains sparse texture tiles.
-	MTLHeapTypeSparse MTLHeapType = 2
+	HeapTypeSparse HeapType = 2
 )
 
-func (e MTLHeapType) String() string {
+func (e HeapType) String() string {
 	switch e {
-	case MTLHeapTypeAutomatic:
-		return "MTLHeapTypeAutomatic"
-	case MTLHeapTypePlacement:
-		return "MTLHeapTypePlacement"
-	case MTLHeapTypeSparse:
-		return "MTLHeapTypeSparse"
+	case HeapTypeAutomatic:
+		return "HeapTypeAutomatic"
+	case HeapTypePlacement:
+		return "HeapTypePlacement"
+	case HeapTypeSparse:
+		return "HeapTypeSparse"
 	default:
-		return fmt.Sprintf("MTLHeapType(%d)", int64(e))
+		return fmt.Sprintf("HeapType(%d)", int64(e))
 	}
 }
 
 // Designates the queue type for a new input/output command queue.
-type MTLIOCommandQueueType int64
+type IOCommandQueueType int64
 
 const (
 	// Sets a new input/output command queue’s type to a queue that runs commands concurrently.
-	MTLIOCommandQueueTypeConcurrent MTLIOCommandQueueType = 0
+	IOCommandQueueTypeConcurrent IOCommandQueueType = 0
 	// Sets a new input/output command queue’s type to a queue that runs commands serially.
-	MTLIOCommandQueueTypeSerial MTLIOCommandQueueType = 1
+	IOCommandQueueTypeSerial IOCommandQueueType = 1
 )
 
-func (e MTLIOCommandQueueType) String() string {
+func (e IOCommandQueueType) String() string {
 	switch e {
-	case MTLIOCommandQueueTypeConcurrent:
-		return "MTLIOCommandQueueTypeConcurrent"
-	case MTLIOCommandQueueTypeSerial:
-		return "MTLIOCommandQueueTypeSerial"
+	case IOCommandQueueTypeConcurrent:
+		return "IOCommandQueueTypeConcurrent"
+	case IOCommandQueueTypeSerial:
+		return "IOCommandQueueTypeSerial"
 	default:
-		return fmt.Sprintf("MTLIOCommandQueueType(%d)", int64(e))
+		return fmt.Sprintf("IOCommandQueueType(%d)", int64(e))
 	}
 }
 
 // The compression codecs that Metal supports for input/output handles.
-type MTLIOCompressionMethod int64
+type IOCompressionMethod int64
 
 const (
 	// Indicates that a file uses the zlib compression algorithm codec.
-	MTLIOCompressionMethodZlib MTLIOCompressionMethod = 0
+	IOCompressionMethodZlib IOCompressionMethod = 0
 	// Indicates that a file uses the LZFSE compression algorithm codec.
-	MTLIOCompressionMethodLZFSE MTLIOCompressionMethod = 1
+	IOCompressionMethodLZFSE IOCompressionMethod = 1
 	// Indicates that a file uses the LZ4 compression algorithm codec.
-	MTLIOCompressionMethodLZ4 MTLIOCompressionMethod = 2
+	IOCompressionMethodLZ4 IOCompressionMethod = 2
 	// Indicates that a file uses the LZMA compression algorithm codec.
-	MTLIOCompressionMethodLZMA MTLIOCompressionMethod = 3
+	IOCompressionMethodLZMA IOCompressionMethod = 3
 	// Indicates that a file uses the LZBitmap compression algorithm codec.
-	MTLIOCompressionMethodLZBitmap MTLIOCompressionMethod = 4
+	IOCompressionMethodLZBitmap IOCompressionMethod = 4
 )
 
-func (e MTLIOCompressionMethod) String() string {
+func (e IOCompressionMethod) String() string {
 	switch e {
-	case MTLIOCompressionMethodZlib:
-		return "MTLIOCompressionMethodZlib"
-	case MTLIOCompressionMethodLZFSE:
-		return "MTLIOCompressionMethodLZFSE"
-	case MTLIOCompressionMethodLZ4:
-		return "MTLIOCompressionMethodLZ4"
-	case MTLIOCompressionMethodLZMA:
-		return "MTLIOCompressionMethodLZMA"
-	case MTLIOCompressionMethodLZBitmap:
-		return "MTLIOCompressionMethodLZBitmap"
+	case IOCompressionMethodZlib:
+		return "IOCompressionMethodZlib"
+	case IOCompressionMethodLZFSE:
+		return "IOCompressionMethodLZFSE"
+	case IOCompressionMethodLZ4:
+		return "IOCompressionMethodLZ4"
+	case IOCompressionMethodLZMA:
+		return "IOCompressionMethodLZMA"
+	case IOCompressionMethodLZBitmap:
+		return "IOCompressionMethodLZBitmap"
 	default:
-		return fmt.Sprintf("MTLIOCompressionMethod(%d)", int64(e))
-	}
-}
-
-// Represents the final state of a compression context.
-type MTLIOCompressionStatus int64
-
-const (
-	// Indicates the compression API successfully flushed and destroyed a compression context.
-	MTLIOCompressionStatusComplete MTLIOCompressionStatus = 0
-	// Indicates the compression API had an error while flushing and destroying a compression context.
-	MTLIOCompressionStatusError MTLIOCompressionStatus = 1
-)
-
-func (e MTLIOCompressionStatus) String() string {
-	switch e {
-	case MTLIOCompressionStatusComplete:
-		return "MTLIOCompressionStatusComplete"
-	case MTLIOCompressionStatusError:
-		return "MTLIOCompressionStatusError"
-	default:
-		return fmt.Sprintf("MTLIOCompressionStatus(%d)", int64(e))
+		return fmt.Sprintf("IOCompressionMethod(%d)", int64(e))
 	}
 }
 
 // Designates the priority for a new input/output command queue.
-type MTLIOPriority int64
+type IOPriority int64
 
 const (
 	// Sets a new input/output command queue’s priority to a high priority.
-	MTLIOPriorityHigh MTLIOPriority = 0
+	IOPriorityHigh IOPriority = 0
 	// Designates the normal priority for a new input/output command queue.
-	MTLIOPriorityNormal MTLIOPriority = 1
+	IOPriorityNormal IOPriority = 1
 	// Designates the low priority for a new input/output command queue.
-	MTLIOPriorityLow MTLIOPriority = 2
+	IOPriorityLow IOPriority = 2
 )
 
-func (e MTLIOPriority) String() string {
+func (e IOPriority) String() string {
 	switch e {
-	case MTLIOPriorityHigh:
-		return "MTLIOPriorityHigh"
-	case MTLIOPriorityNormal:
-		return "MTLIOPriorityNormal"
-	case MTLIOPriorityLow:
-		return "MTLIOPriorityLow"
+	case IOPriorityHigh:
+		return "IOPriorityHigh"
+	case IOPriorityNormal:
+		return "IOPriorityNormal"
+	case IOPriorityLow:
+		return "IOPriorityLow"
 	default:
-		return fmt.Sprintf("MTLIOPriority(%d)", int64(e))
+		return fmt.Sprintf("IOPriority(%d)", int64(e))
 	}
 }
 
 // The index type for an index buffer that references vertices of geometric primitives.
-type MTLIndexType uint64
+type IndexType uint64
 
 const (
 	// A 16-bit unsigned integer used as a primitive index.
-	MTLIndexTypeUInt16 MTLIndexType = 0
+	IndexTypeUInt16 IndexType = 0
 	// A 32-bit unsigned integer used as a primitive index.
-	MTLIndexTypeUInt32 MTLIndexType = 1
+	IndexTypeUInt32 IndexType = 1
 )
 
-func (e MTLIndexType) String() string {
+func (e IndexType) String() string {
 	switch e {
-	case MTLIndexTypeUInt16:
-		return "MTLIndexTypeUInt16"
-	case MTLIndexTypeUInt32:
-		return "MTLIndexTypeUInt32"
+	case IndexTypeUInt16:
+		return "IndexTypeUInt16"
+	case IndexTypeUInt32:
+		return "IndexTypeUInt32"
 	default:
-		return fmt.Sprintf("MTLIndexType(%d)", int64(e))
+		return fmt.Sprintf("IndexType(%d)", int64(e))
 	}
 }
 
 // The types of commands that you can encode into the indirect command buffer.
 // Bitmask — values may be combined with |.
-type MTLIndirectCommandType uint64
+type IndirectCommandType uint64
 
 const (
 	// A draw call command.
-	MTLIndirectCommandTypeDraw MTLIndirectCommandType = 1
+	IndirectCommandTypeDraw IndirectCommandType = 1
 	// An indexed draw call command.
-	MTLIndirectCommandTypeDrawIndexed MTLIndirectCommandType = 2
+	IndirectCommandTypeDrawIndexed IndirectCommandType = 2
 	// A draw call command for tessellated patches.
-	MTLIndirectCommandTypeDrawPatches MTLIndirectCommandType = 4
+	IndirectCommandTypeDrawPatches IndirectCommandType = 4
 	// An indexed draw call command for tessellated patches.
-	MTLIndirectCommandTypeDrawIndexedPatches MTLIndirectCommandType = 8
+	IndirectCommandTypeDrawIndexedPatches IndirectCommandType = 8
 	// A compute command using a grid aligned to threadgroup boundaries.
-	MTLIndirectCommandTypeConcurrentDispatch MTLIndirectCommandType = 32
+	IndirectCommandTypeConcurrentDispatch IndirectCommandType = 32
 	// A compute command using an arbitrarily sized grid.
-	MTLIndirectCommandTypeConcurrentDispatchThreads MTLIndirectCommandType = 64
-	MTLIndirectCommandTypeDrawMeshThreadgroups      MTLIndirectCommandType = 128
-	MTLIndirectCommandTypeDrawMeshThreads           MTLIndirectCommandType = 256
+	IndirectCommandTypeConcurrentDispatchThreads IndirectCommandType = 64
+	IndirectCommandTypeDrawMeshThreadgroups      IndirectCommandType = 128
+	IndirectCommandTypeDrawMeshThreads           IndirectCommandType = 256
 )
 
-func (e MTLIndirectCommandType) String() string {
+func (e IndirectCommandType) String() string {
 	var parts []string
-	if e&MTLIndirectCommandTypeDraw != 0 {
-		parts = append(parts, "MTLIndirectCommandTypeDraw")
+	if e&IndirectCommandTypeDraw != 0 {
+		parts = append(parts, "IndirectCommandTypeDraw")
 	}
-	if e&MTLIndirectCommandTypeDrawIndexed != 0 {
-		parts = append(parts, "MTLIndirectCommandTypeDrawIndexed")
+	if e&IndirectCommandTypeDrawIndexed != 0 {
+		parts = append(parts, "IndirectCommandTypeDrawIndexed")
 	}
-	if e&MTLIndirectCommandTypeDrawPatches != 0 {
-		parts = append(parts, "MTLIndirectCommandTypeDrawPatches")
+	if e&IndirectCommandTypeDrawPatches != 0 {
+		parts = append(parts, "IndirectCommandTypeDrawPatches")
 	}
-	if e&MTLIndirectCommandTypeDrawIndexedPatches != 0 {
-		parts = append(parts, "MTLIndirectCommandTypeDrawIndexedPatches")
+	if e&IndirectCommandTypeDrawIndexedPatches != 0 {
+		parts = append(parts, "IndirectCommandTypeDrawIndexedPatches")
 	}
-	if e&MTLIndirectCommandTypeConcurrentDispatch != 0 {
-		parts = append(parts, "MTLIndirectCommandTypeConcurrentDispatch")
+	if e&IndirectCommandTypeConcurrentDispatch != 0 {
+		parts = append(parts, "IndirectCommandTypeConcurrentDispatch")
 	}
-	if e&MTLIndirectCommandTypeConcurrentDispatchThreads != 0 {
-		parts = append(parts, "MTLIndirectCommandTypeConcurrentDispatchThreads")
+	if e&IndirectCommandTypeConcurrentDispatchThreads != 0 {
+		parts = append(parts, "IndirectCommandTypeConcurrentDispatchThreads")
 	}
-	if e&MTLIndirectCommandTypeDrawMeshThreadgroups != 0 {
-		parts = append(parts, "MTLIndirectCommandTypeDrawMeshThreadgroups")
+	if e&IndirectCommandTypeDrawMeshThreadgroups != 0 {
+		parts = append(parts, "IndirectCommandTypeDrawMeshThreadgroups")
 	}
-	if e&MTLIndirectCommandTypeDrawMeshThreads != 0 {
-		parts = append(parts, "MTLIndirectCommandTypeDrawMeshThreads")
+	if e&IndirectCommandTypeDrawMeshThreads != 0 {
+		parts = append(parts, "IndirectCommandTypeDrawMeshThreads")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -1673,995 +1652,995 @@ func (e MTLIndirectCommandType) String() string {
 }
 
 // Metal shading language versions.
-type MTLLanguageVersion uint64
+type LanguageVersion uint64
 
 const (
 	// Version 1.1 of the Metal shading language.
-	MTLLanguageVersion1_1 MTLLanguageVersion = 65537
+	LanguageVersion1_1 LanguageVersion = 65537
 	// Version 1.2 of the Metal shading language.
-	MTLLanguageVersion1_2 MTLLanguageVersion = 65538
+	LanguageVersion1_2 LanguageVersion = 65538
 	// Version 2.0 of the Metal shading language.
-	MTLLanguageVersion2_0 MTLLanguageVersion = 131072
+	LanguageVersion2_0 LanguageVersion = 131072
 	// Version 2.1 of the Metal shading language.
-	MTLLanguageVersion2_1 MTLLanguageVersion = 131073
+	LanguageVersion2_1 LanguageVersion = 131073
 	// Version 2.2 of the Metal shading language.
-	MTLLanguageVersion2_2 MTLLanguageVersion = 131074
+	LanguageVersion2_2 LanguageVersion = 131074
 	// Version 2.3 of the Metal shading language.
-	MTLLanguageVersion2_3 MTLLanguageVersion = 131075
+	LanguageVersion2_3 LanguageVersion = 131075
 	// Version 2.4 of the Metal shading language.
-	MTLLanguageVersion2_4 MTLLanguageVersion = 131076
+	LanguageVersion2_4 LanguageVersion = 131076
 	// Version 3.0 of the Metal shading language.
-	MTLLanguageVersion3_0 MTLLanguageVersion = 196608
+	LanguageVersion3_0 LanguageVersion = 196608
 	// Version 3.1 of the Metal shading language.
-	MTLLanguageVersion3_1 MTLLanguageVersion = 196609
+	LanguageVersion3_1 LanguageVersion = 196609
 	// Version 3.2 of the Metal shading language.
-	MTLLanguageVersion3_2 MTLLanguageVersion = 196610
-	MTLLanguageVersion4_0 MTLLanguageVersion = 262144
+	LanguageVersion3_2 LanguageVersion = 196610
+	LanguageVersion4_0 LanguageVersion = 262144
 )
 
-func (e MTLLanguageVersion) String() string {
+func (e LanguageVersion) String() string {
 	switch e {
-	case MTLLanguageVersion1_1:
-		return "MTLLanguageVersion1_1"
-	case MTLLanguageVersion1_2:
-		return "MTLLanguageVersion1_2"
-	case MTLLanguageVersion2_0:
-		return "MTLLanguageVersion2_0"
-	case MTLLanguageVersion2_1:
-		return "MTLLanguageVersion2_1"
-	case MTLLanguageVersion2_2:
-		return "MTLLanguageVersion2_2"
-	case MTLLanguageVersion2_3:
-		return "MTLLanguageVersion2_3"
-	case MTLLanguageVersion2_4:
-		return "MTLLanguageVersion2_4"
-	case MTLLanguageVersion3_0:
-		return "MTLLanguageVersion3_0"
-	case MTLLanguageVersion3_1:
-		return "MTLLanguageVersion3_1"
-	case MTLLanguageVersion3_2:
-		return "MTLLanguageVersion3_2"
-	case MTLLanguageVersion4_0:
-		return "MTLLanguageVersion4_0"
+	case LanguageVersion1_1:
+		return "LanguageVersion1_1"
+	case LanguageVersion1_2:
+		return "LanguageVersion1_2"
+	case LanguageVersion2_0:
+		return "LanguageVersion2_0"
+	case LanguageVersion2_1:
+		return "LanguageVersion2_1"
+	case LanguageVersion2_2:
+		return "LanguageVersion2_2"
+	case LanguageVersion2_3:
+		return "LanguageVersion2_3"
+	case LanguageVersion2_4:
+		return "LanguageVersion2_4"
+	case LanguageVersion3_0:
+		return "LanguageVersion3_0"
+	case LanguageVersion3_1:
+		return "LanguageVersion3_1"
+	case LanguageVersion3_2:
+		return "LanguageVersion3_2"
+	case LanguageVersion4_0:
+		return "LanguageVersion4_0"
 	default:
-		return fmt.Sprintf("MTLLanguageVersion(%d)", int64(e))
+		return fmt.Sprintf("LanguageVersion(%d)", int64(e))
 	}
 }
 
 // The optimization options for the Metal compiler.
-type MTLLibraryOptimizationLevel int64
+type LibraryOptimizationLevel int64
 
 const (
 	// An optimization option for the Metal compiler that prioritizes runtime performance.
-	MTLLibraryOptimizationLevelDefault MTLLibraryOptimizationLevel = 0
+	LibraryOptimizationLevelDefault LibraryOptimizationLevel = 0
 	// An optimization option for the Metal compiler that prioritizes minimizing the size of its output binaries, which may also reduce compile time.
-	MTLLibraryOptimizationLevelSize MTLLibraryOptimizationLevel = 1
+	LibraryOptimizationLevelSize LibraryOptimizationLevel = 1
 )
 
-func (e MTLLibraryOptimizationLevel) String() string {
+func (e LibraryOptimizationLevel) String() string {
 	switch e {
-	case MTLLibraryOptimizationLevelDefault:
-		return "MTLLibraryOptimizationLevelDefault"
-	case MTLLibraryOptimizationLevelSize:
-		return "MTLLibraryOptimizationLevelSize"
+	case LibraryOptimizationLevelDefault:
+		return "LibraryOptimizationLevelDefault"
+	case LibraryOptimizationLevelSize:
+		return "LibraryOptimizationLevelSize"
 	default:
-		return fmt.Sprintf("MTLLibraryOptimizationLevel(%d)", int64(e))
+		return fmt.Sprintf("LibraryOptimizationLevel(%d)", int64(e))
 	}
 }
 
 // A set of options for Metal library types.
-type MTLLibraryType int64
+type LibraryType int64
 
 const (
 	// A library that can create pipeline state objects.
-	MTLLibraryTypeExecutable MTLLibraryType = 0
+	LibraryTypeExecutable LibraryType = 0
 	// A library that you can dynamically link to from other libraries.
-	MTLLibraryTypeDynamic MTLLibraryType = 1
+	LibraryTypeDynamic LibraryType = 1
 )
 
-func (e MTLLibraryType) String() string {
+func (e LibraryType) String() string {
 	switch e {
-	case MTLLibraryTypeExecutable:
-		return "MTLLibraryTypeExecutable"
-	case MTLLibraryTypeDynamic:
-		return "MTLLibraryTypeDynamic"
+	case LibraryTypeExecutable:
+		return "LibraryTypeExecutable"
+	case LibraryTypeDynamic:
+		return "LibraryTypeDynamic"
 	default:
-		return fmt.Sprintf("MTLLibraryType(%d)", int64(e))
+		return fmt.Sprintf("LibraryType(%d)", int64(e))
 	}
 }
 
 // Types of actions performed for an attachment at the start of a rendering pass.
-type MTLLoadAction uint64
+type LoadAction uint64
 
 const (
 	// The GPU has permission to discard the existing contents of the attachment at the start of the render pass, replacing them with arbitrary data.
-	MTLLoadActionDontCare MTLLoadAction = 0
+	LoadActionDontCare LoadAction = 0
 	// The GPU preserves the existing contents of the attachment at the start of the render pass.
-	MTLLoadActionLoad MTLLoadAction = 1
+	LoadActionLoad LoadAction = 1
 	// The GPU writes a value to every pixel in the attachment at the start of the render pass.
-	MTLLoadActionClear MTLLoadAction = 2
+	LoadActionClear LoadAction = 2
 )
 
-func (e MTLLoadAction) String() string {
+func (e LoadAction) String() string {
 	switch e {
-	case MTLLoadActionDontCare:
-		return "MTLLoadActionDontCare"
-	case MTLLoadActionLoad:
-		return "MTLLoadActionLoad"
-	case MTLLoadActionClear:
-		return "MTLLoadActionClear"
+	case LoadActionDontCare:
+		return "LoadActionDontCare"
+	case LoadActionLoad:
+		return "LoadActionLoad"
+	case LoadActionClear:
+		return "LoadActionClear"
 	default:
-		return fmt.Sprintf("MTLLoadAction(%d)", int64(e))
+		return fmt.Sprintf("LoadAction(%d)", int64(e))
 	}
 }
 
 // The supported log levels for shader logging.
-type MTLLogLevel int64
+type LogLevel int64
 
 const (
 	// The log level when the log level hasn’t been configured.
-	MTLLogLevelUndefined MTLLogLevel = 0
+	LogLevelUndefined LogLevel = 0
 	// The log level that captures diagnostic information.
-	MTLLogLevelDebug MTLLogLevel = 1
+	LogLevelDebug LogLevel = 1
 	// The log level that captures additional information.
-	MTLLogLevelInfo MTLLogLevel = 2
+	LogLevelInfo LogLevel = 2
 	// The log level that captures notifications.
-	MTLLogLevelNotice MTLLogLevel = 3
+	LogLevelNotice LogLevel = 3
 	// The log level that captures error information.
-	MTLLogLevelError MTLLogLevel = 4
+	LogLevelError LogLevel = 4
 	// The log level that captures fault information.
-	MTLLogLevelFault MTLLogLevel = 5
+	LogLevelFault LogLevel = 5
 )
 
-func (e MTLLogLevel) String() string {
+func (e LogLevel) String() string {
 	switch e {
-	case MTLLogLevelUndefined:
-		return "MTLLogLevelUndefined"
-	case MTLLogLevelDebug:
-		return "MTLLogLevelDebug"
-	case MTLLogLevelInfo:
-		return "MTLLogLevelInfo"
-	case MTLLogLevelNotice:
-		return "MTLLogLevelNotice"
-	case MTLLogLevelError:
-		return "MTLLogLevelError"
-	case MTLLogLevelFault:
-		return "MTLLogLevelFault"
+	case LogLevelUndefined:
+		return "LogLevelUndefined"
+	case LogLevelDebug:
+		return "LogLevelDebug"
+	case LogLevelInfo:
+		return "LogLevelInfo"
+	case LogLevelNotice:
+		return "LogLevelNotice"
+	case LogLevelError:
+		return "LogLevelError"
+	case LogLevelFault:
+		return "LogLevelFault"
 	default:
-		return fmt.Sprintf("MTLLogLevel(%d)", int64(e))
+		return fmt.Sprintf("LogLevel(%d)", int64(e))
 	}
 }
 
 // Indicates which FP32 math functions Metal uses.
-type MTLMathFloatingPointFunctions int64
+type MathFloatingPointFunctions int64
 
 const (
 	// An indication that Metal uses the fast version of the 32b floating-point math functions.
-	MTLMathFloatingPointFunctionsFast MTLMathFloatingPointFunctions = 0
+	MathFloatingPointFunctionsFast MathFloatingPointFunctions = 0
 	// An indication that Metal uses the precise version of the 32b floating-point math functions.
-	MTLMathFloatingPointFunctionsPrecise MTLMathFloatingPointFunctions = 1
+	MathFloatingPointFunctionsPrecise MathFloatingPointFunctions = 1
 )
 
-func (e MTLMathFloatingPointFunctions) String() string {
+func (e MathFloatingPointFunctions) String() string {
 	switch e {
-	case MTLMathFloatingPointFunctionsFast:
-		return "MTLMathFloatingPointFunctionsFast"
-	case MTLMathFloatingPointFunctionsPrecise:
-		return "MTLMathFloatingPointFunctionsPrecise"
+	case MathFloatingPointFunctionsFast:
+		return "MathFloatingPointFunctionsFast"
+	case MathFloatingPointFunctionsPrecise:
+		return "MathFloatingPointFunctionsPrecise"
 	default:
-		return fmt.Sprintf("MTLMathFloatingPointFunctions(%d)", int64(e))
+		return fmt.Sprintf("MathFloatingPointFunctions(%d)", int64(e))
 	}
 }
 
 // An indication of whether the compiler can perform optimizations for floating-point arithmetic that may violate the IEEE 754 standard.
-type MTLMathMode int64
+type MathMode int64
 
 const (
 	// An indicator of the mode the compiler uses to disable unsafe floating-point optimizations by preventing the compiler from making any transformations that could affect the results.
-	MTLMathModeSafe MTLMathMode = 0
+	MathModeSafe MathMode = 0
 	// An indicator of the mode the compiler uses to make aggressive, potentially lossy assumptions about floating-point math, while honoring Inf/NaN.
-	MTLMathModeRelaxed MTLMathMode = 1
+	MathModeRelaxed MathMode = 1
 	// An indicator of the mode the compiler uses to make aggressive, potentially lossy assumptions about floating-point math.
-	MTLMathModeFast MTLMathMode = 2
+	MathModeFast MathMode = 2
 )
 
-func (e MTLMathMode) String() string {
+func (e MathMode) String() string {
 	switch e {
-	case MTLMathModeSafe:
-		return "MTLMathModeSafe"
-	case MTLMathModeRelaxed:
-		return "MTLMathModeRelaxed"
-	case MTLMathModeFast:
-		return "MTLMathModeFast"
+	case MathModeSafe:
+		return "MathModeSafe"
+	case MathModeRelaxed:
+		return "MathModeRelaxed"
+	case MathModeFast:
+		return "MathModeFast"
 	default:
-		return fmt.Sprintf("MTLMathMode(%d)", int64(e))
+		return fmt.Sprintf("MathMode(%d)", int64(e))
 	}
 }
 
-type MTLMatrixLayout int64
+type MatrixLayout int64
 
 const (
-	// @brief Column-major order
-	MTLMatrixLayoutColumnMajor MTLMatrixLayout = 0
-	// @brief Row-major order
-	MTLMatrixLayoutRowMajor MTLMatrixLayout = 1
+	// Column-major order
+	MatrixLayoutColumnMajor MatrixLayout = 0
+	// Row-major order
+	MatrixLayoutRowMajor MatrixLayout = 1
 )
 
-func (e MTLMatrixLayout) String() string {
+func (e MatrixLayout) String() string {
 	switch e {
-	case MTLMatrixLayoutColumnMajor:
-		return "MTLMatrixLayoutColumnMajor"
-	case MTLMatrixLayoutRowMajor:
-		return "MTLMatrixLayoutRowMajor"
+	case MatrixLayoutColumnMajor:
+		return "MatrixLayoutColumnMajor"
+	case MatrixLayoutRowMajor:
+		return "MatrixLayoutRowMajor"
 	default:
-		return fmt.Sprintf("MTLMatrixLayout(%d)", int64(e))
+		return fmt.Sprintf("MatrixLayout(%d)", int64(e))
 	}
 }
 
 // Options for specifying how the acceleration structure handles timestamps that are outside the specified range.
-type MTLMotionBorderMode int64
+type MotionBorderMode int64
 
 const (
 	// A mode that specifies treating times outside the specified endpoint as if they were at the endpoint.
-	MTLMotionBorderModeClamp MTLMotionBorderMode = 0
+	MotionBorderModeClamp MotionBorderMode = 0
 	// A mode that specifies that times outside the specified endpoint need to prevent any ray-intersections with the primitive.
-	MTLMotionBorderModeVanish MTLMotionBorderMode = 1
+	MotionBorderModeVanish MotionBorderMode = 1
 )
 
-func (e MTLMotionBorderMode) String() string {
+func (e MotionBorderMode) String() string {
 	switch e {
-	case MTLMotionBorderModeClamp:
-		return "MTLMotionBorderModeClamp"
-	case MTLMotionBorderModeVanish:
-		return "MTLMotionBorderModeVanish"
+	case MotionBorderModeClamp:
+		return "MotionBorderModeClamp"
+	case MotionBorderModeVanish:
+		return "MotionBorderModeVanish"
 	default:
-		return fmt.Sprintf("MTLMotionBorderMode(%d)", int64(e))
+		return fmt.Sprintf("MotionBorderMode(%d)", int64(e))
 	}
 }
 
 // Filtering options for controlling an MSAA depth resolve operation.
-type MTLMultisampleDepthResolveFilter uint64
+type MultisampleDepthResolveFilter uint64
 
 const (
 	// No filter is applied.
-	MTLMultisampleDepthResolveFilterSample0 MTLMultisampleDepthResolveFilter = 0
+	MultisampleDepthResolveFilterSample0 MultisampleDepthResolveFilter = 0
 	// The GPU compares all depth samples in the pixel and selects the sample with the smallest value.
-	MTLMultisampleDepthResolveFilterMin MTLMultisampleDepthResolveFilter = 1
+	MultisampleDepthResolveFilterMin MultisampleDepthResolveFilter = 1
 	// The GPU compares all depth samples in the pixel and selects the sample with the largest value.
-	MTLMultisampleDepthResolveFilterMax MTLMultisampleDepthResolveFilter = 2
+	MultisampleDepthResolveFilterMax MultisampleDepthResolveFilter = 2
 )
 
-func (e MTLMultisampleDepthResolveFilter) String() string {
+func (e MultisampleDepthResolveFilter) String() string {
 	switch e {
-	case MTLMultisampleDepthResolveFilterSample0:
-		return "MTLMultisampleDepthResolveFilterSample0"
-	case MTLMultisampleDepthResolveFilterMin:
-		return "MTLMultisampleDepthResolveFilterMin"
-	case MTLMultisampleDepthResolveFilterMax:
-		return "MTLMultisampleDepthResolveFilterMax"
+	case MultisampleDepthResolveFilterSample0:
+		return "MultisampleDepthResolveFilterSample0"
+	case MultisampleDepthResolveFilterMin:
+		return "MultisampleDepthResolveFilterMin"
+	case MultisampleDepthResolveFilterMax:
+		return "MultisampleDepthResolveFilterMax"
 	default:
-		return fmt.Sprintf("MTLMultisampleDepthResolveFilter(%d)", int64(e))
+		return fmt.Sprintf("MultisampleDepthResolveFilter(%d)", int64(e))
 	}
 }
 
 // Constants used to control the multisample stencil resolve operation.
-type MTLMultisampleStencilResolveFilter uint64
+type MultisampleStencilResolveFilter uint64
 
 const (
 	// Chooses the first stencil sample in the pixel.
-	MTLMultisampleStencilResolveFilterSample0 MTLMultisampleStencilResolveFilter = 0
+	MultisampleStencilResolveFilterSample0 MultisampleStencilResolveFilter = 0
 	// Chooses the stencil sample corresponding to the depth sample selected by the depth resolve filter.
-	MTLMultisampleStencilResolveFilterDepthResolvedSample MTLMultisampleStencilResolveFilter = 1
+	MultisampleStencilResolveFilterDepthResolvedSample MultisampleStencilResolveFilter = 1
 )
 
-func (e MTLMultisampleStencilResolveFilter) String() string {
+func (e MultisampleStencilResolveFilter) String() string {
 	switch e {
-	case MTLMultisampleStencilResolveFilterSample0:
-		return "MTLMultisampleStencilResolveFilterSample0"
-	case MTLMultisampleStencilResolveFilterDepthResolvedSample:
-		return "MTLMultisampleStencilResolveFilterDepthResolvedSample"
+	case MultisampleStencilResolveFilterSample0:
+		return "MultisampleStencilResolveFilterSample0"
+	case MultisampleStencilResolveFilterDepthResolvedSample:
+		return "MultisampleStencilResolveFilterDepthResolvedSample"
 	default:
-		return fmt.Sprintf("MTLMultisampleStencilResolveFilter(%d)", int64(e))
+		return fmt.Sprintf("MultisampleStencilResolveFilter(%d)", int64(e))
 	}
 }
 
 // The options that determine the mutability of a buffer’s contents.
-type MTLMutability uint64
+type Mutability uint64
 
 const (
 	// The default behavior, based on the buffer’s type.
-	MTLMutabilityDefault MTLMutability = 0
+	MutabilityDefault Mutability = 0
 	// An option that states that you can modify the buffer’s contents.
-	MTLMutabilityMutable MTLMutability = 1
+	MutabilityMutable Mutability = 1
 	// An option that states that you can’t modify the buffer’s contents.
-	MTLMutabilityImmutable MTLMutability = 2
+	MutabilityImmutable Mutability = 2
 )
 
-func (e MTLMutability) String() string {
+func (e Mutability) String() string {
 	switch e {
-	case MTLMutabilityDefault:
-		return "MTLMutabilityDefault"
-	case MTLMutabilityMutable:
-		return "MTLMutabilityMutable"
-	case MTLMutabilityImmutable:
-		return "MTLMutabilityImmutable"
+	case MutabilityDefault:
+		return "MutabilityDefault"
+	case MutabilityMutable:
+		return "MutabilityMutable"
+	case MutabilityImmutable:
+		return "MutabilityImmutable"
 	default:
-		return fmt.Sprintf("MTLMutability(%d)", int64(e))
+		return fmt.Sprintf("Mutability(%d)", int64(e))
 	}
 }
 
 // The data formats that describe the organization and characteristics of individual pixels in a texture.
-type MTLPixelFormat uint64
+type PixelFormat uint64
 
 const (
 	// The default value of the pixel format for the MTLRenderPipelineState. You cannot create a texture with this value.
-	MTLPixelFormatInvalid MTLPixelFormat = 0
+	PixelFormatInvalid PixelFormat = 0
 	// Ordinary format with one 8-bit normalized unsigned integer component.
-	MTLPixelFormatA8Unorm MTLPixelFormat = 1
+	PixelFormatA8Unorm PixelFormat = 1
 	// Ordinary format with one 8-bit normalized unsigned integer component.
-	MTLPixelFormatR8Unorm MTLPixelFormat = 10
+	PixelFormatR8Unorm PixelFormat = 10
 	// Ordinary format with one 8-bit normalized unsigned integer component with conversion between sRGB and linear space.
-	MTLPixelFormatR8Unorm_sRGB MTLPixelFormat = 11
+	PixelFormatR8Unorm_sRGB PixelFormat = 11
 	// Ordinary format with one 8-bit normalized signed integer component.
-	MTLPixelFormatR8Snorm MTLPixelFormat = 12
+	PixelFormatR8Snorm PixelFormat = 12
 	// Ordinary format with one 8-bit unsigned integer component.
-	MTLPixelFormatR8Uint MTLPixelFormat = 13
+	PixelFormatR8Uint PixelFormat = 13
 	// Ordinary format with one 8-bit signed integer component.
-	MTLPixelFormatR8Sint MTLPixelFormat = 14
+	PixelFormatR8Sint PixelFormat = 14
 	// Ordinary format with one 16-bit normalized unsigned integer component.
-	MTLPixelFormatR16Unorm MTLPixelFormat = 20
+	PixelFormatR16Unorm PixelFormat = 20
 	// Ordinary format with one 16-bit normalized signed integer component.
-	MTLPixelFormatR16Snorm MTLPixelFormat = 22
+	PixelFormatR16Snorm PixelFormat = 22
 	// Ordinary format with one 16-bit unsigned integer component.
-	MTLPixelFormatR16Uint MTLPixelFormat = 23
+	PixelFormatR16Uint PixelFormat = 23
 	// Ordinary format with one 16-bit signed integer component.
-	MTLPixelFormatR16Sint MTLPixelFormat = 24
+	PixelFormatR16Sint PixelFormat = 24
 	// Ordinary format with one 16-bit floating-point component.
-	MTLPixelFormatR16Float MTLPixelFormat = 25
+	PixelFormatR16Float PixelFormat = 25
 	// Ordinary format with two 8-bit normalized unsigned integer components.
-	MTLPixelFormatRG8Unorm MTLPixelFormat = 30
+	PixelFormatRG8Unorm PixelFormat = 30
 	// Ordinary format with two 8-bit normalized unsigned integer components with conversion between sRGB and linear space.
-	MTLPixelFormatRG8Unorm_sRGB MTLPixelFormat = 31
+	PixelFormatRG8Unorm_sRGB PixelFormat = 31
 	// Ordinary format with two 8-bit normalized signed integer components.
-	MTLPixelFormatRG8Snorm MTLPixelFormat = 32
+	PixelFormatRG8Snorm PixelFormat = 32
 	// Ordinary format with two 8-bit unsigned integer components.
-	MTLPixelFormatRG8Uint MTLPixelFormat = 33
+	PixelFormatRG8Uint PixelFormat = 33
 	// Ordinary format with two 8-bit signed integer components.
-	MTLPixelFormatRG8Sint MTLPixelFormat = 34
+	PixelFormatRG8Sint PixelFormat = 34
 	// Packed 16-bit format with normalized unsigned integer color components: 5 bits for blue, 6 bits for green, 5 bits for red, packed into 16 bits.
-	MTLPixelFormatB5G6R5Unorm MTLPixelFormat = 40
+	PixelFormatB5G6R5Unorm PixelFormat = 40
 	// Packed 16-bit format with normalized unsigned integer color components: 5 bits each for BGR and 1 for alpha, packed into 16 bits.
-	MTLPixelFormatA1BGR5Unorm MTLPixelFormat = 41
+	PixelFormatA1BGR5Unorm PixelFormat = 41
 	// Packed 16-bit format with normalized unsigned integer color components: 4 bits each for ABGR, packed into 16 bits.
-	MTLPixelFormatABGR4Unorm MTLPixelFormat = 42
+	PixelFormatABGR4Unorm PixelFormat = 42
 	// Packed 16-bit format with normalized unsigned integer color components: 5 bits each for BGR and 1 for alpha, packed into 16 bits.
-	MTLPixelFormatBGR5A1Unorm MTLPixelFormat = 43
+	PixelFormatBGR5A1Unorm PixelFormat = 43
 	// Ordinary format with one 32-bit unsigned integer component.
-	MTLPixelFormatR32Uint MTLPixelFormat = 53
+	PixelFormatR32Uint PixelFormat = 53
 	// Ordinary format with one 32-bit signed integer component.
-	MTLPixelFormatR32Sint MTLPixelFormat = 54
+	PixelFormatR32Sint PixelFormat = 54
 	// Ordinary format with one 32-bit floating-point component.
-	MTLPixelFormatR32Float MTLPixelFormat = 55
+	PixelFormatR32Float PixelFormat = 55
 	// Ordinary format with two 16-bit normalized unsigned integer components.
-	MTLPixelFormatRG16Unorm MTLPixelFormat = 60
+	PixelFormatRG16Unorm PixelFormat = 60
 	// Ordinary format with two 16-bit normalized signed integer components.
-	MTLPixelFormatRG16Snorm MTLPixelFormat = 62
+	PixelFormatRG16Snorm PixelFormat = 62
 	// Ordinary format with two 16-bit unsigned integer components.
-	MTLPixelFormatRG16Uint MTLPixelFormat = 63
+	PixelFormatRG16Uint PixelFormat = 63
 	// Ordinary format with two 16-bit signed integer components.
-	MTLPixelFormatRG16Sint MTLPixelFormat = 64
+	PixelFormatRG16Sint PixelFormat = 64
 	// Ordinary format with two 16-bit floating-point components.
-	MTLPixelFormatRG16Float MTLPixelFormat = 65
+	PixelFormatRG16Float PixelFormat = 65
 	// Ordinary format with four 8-bit normalized unsigned integer components in RGBA order.
-	MTLPixelFormatRGBA8Unorm MTLPixelFormat = 70
+	PixelFormatRGBA8Unorm PixelFormat = 70
 	// Ordinary format with four 8-bit normalized unsigned integer components in RGBA order with conversion between sRGB and linear space.
-	MTLPixelFormatRGBA8Unorm_sRGB MTLPixelFormat = 71
+	PixelFormatRGBA8Unorm_sRGB PixelFormat = 71
 	// Ordinary format with four 8-bit normalized signed integer components in RGBA order.
-	MTLPixelFormatRGBA8Snorm MTLPixelFormat = 72
+	PixelFormatRGBA8Snorm PixelFormat = 72
 	// Ordinary format with four 8-bit unsigned integer components in RGBA order.
-	MTLPixelFormatRGBA8Uint MTLPixelFormat = 73
+	PixelFormatRGBA8Uint PixelFormat = 73
 	// Ordinary format with four 8-bit signed integer components in RGBA order.
-	MTLPixelFormatRGBA8Sint MTLPixelFormat = 74
+	PixelFormatRGBA8Sint PixelFormat = 74
 	// Ordinary format with four 8-bit normalized unsigned integer components in BGRA order.
-	MTLPixelFormatBGRA8Unorm MTLPixelFormat = 80
+	PixelFormatBGRA8Unorm PixelFormat = 80
 	// Ordinary format with four 8-bit normalized unsigned integer components in BGRA order with conversion between sRGB and linear space.
-	MTLPixelFormatBGRA8Unorm_sRGB MTLPixelFormat = 81
+	PixelFormatBGRA8Unorm_sRGB PixelFormat = 81
 	// A 32-bit packed pixel format with four normalized unsigned integer components: 10-bit red, 10-bit green, 10-bit blue, and 2-bit alpha.
-	MTLPixelFormatRGB10A2Unorm MTLPixelFormat = 90
+	PixelFormatRGB10A2Unorm PixelFormat = 90
 	// A 32-bit packed pixel format with four unsigned integer components: 10-bit red, 10-bit green, 10-bit blue, and 2-bit alpha.
-	MTLPixelFormatRGB10A2Uint MTLPixelFormat = 91
+	PixelFormatRGB10A2Uint PixelFormat = 91
 	// 32-bit format with floating-point color components, 11 bits each for red and green and 10 bits for blue.
-	MTLPixelFormatRG11B10Float MTLPixelFormat = 92
+	PixelFormatRG11B10Float PixelFormat = 92
 	// Packed 32-bit format with floating-point color components: 9 bits each for RGB and 5 bits for an exponent shared by RGB, packed into 32 bits.
-	MTLPixelFormatRGB9E5Float MTLPixelFormat = 93
+	PixelFormatRGB9E5Float PixelFormat = 93
 	// A 32-bit packed pixel format with four normalized unsigned integer components: 10-bit blue, 10-bit green, 10-bit red, and 2-bit alpha.
-	MTLPixelFormatBGR10A2Unorm MTLPixelFormat = 94
+	PixelFormatBGR10A2Unorm PixelFormat = 94
 	// A 32-bit extended-range pixel format with three fixed-point components of 10-bit blue, 10-bit green, and 10-bit red.
-	MTLPixelFormatBGR10_XR MTLPixelFormat = 554
+	PixelFormatBGR10_XR PixelFormat = 554
 	// A 32-bit extended-range pixel format with sRGB conversion and three fixed-point components of 10-bit blue, 10-bit green, and 10-bit red.
-	MTLPixelFormatBGR10_XR_sRGB MTLPixelFormat = 555
+	PixelFormatBGR10_XR_sRGB PixelFormat = 555
 	// Ordinary format with two 32-bit unsigned integer components.
-	MTLPixelFormatRG32Uint MTLPixelFormat = 103
+	PixelFormatRG32Uint PixelFormat = 103
 	// Ordinary format with two 32-bit signed integer components.
-	MTLPixelFormatRG32Sint MTLPixelFormat = 104
+	PixelFormatRG32Sint PixelFormat = 104
 	// Ordinary format with two 32-bit floating-point components.
-	MTLPixelFormatRG32Float MTLPixelFormat = 105
+	PixelFormatRG32Float PixelFormat = 105
 	// Ordinary format with four 16-bit normalized unsigned integer components in RGBA order.
-	MTLPixelFormatRGBA16Unorm MTLPixelFormat = 110
+	PixelFormatRGBA16Unorm PixelFormat = 110
 	// Ordinary format with four 16-bit normalized signed integer components in RGBA order.
-	MTLPixelFormatRGBA16Snorm MTLPixelFormat = 112
+	PixelFormatRGBA16Snorm PixelFormat = 112
 	// Ordinary format with four 16-bit unsigned integer components in RGBA order.
-	MTLPixelFormatRGBA16Uint MTLPixelFormat = 113
+	PixelFormatRGBA16Uint PixelFormat = 113
 	// Ordinary format with four 16-bit signed integer components in RGBA order.
-	MTLPixelFormatRGBA16Sint MTLPixelFormat = 114
+	PixelFormatRGBA16Sint PixelFormat = 114
 	// Ordinary format with four 16-bit floating-point components in RGBA order.
-	MTLPixelFormatRGBA16Float MTLPixelFormat = 115
+	PixelFormatRGBA16Float PixelFormat = 115
 	// A 64-bit extended-range pixel format with four fixed-point components of 10-bit blue, 10-bit green, 10-bit red, and 10-bit alpha.
-	MTLPixelFormatBGRA10_XR MTLPixelFormat = 552
+	PixelFormatBGRA10_XR PixelFormat = 552
 	// A 64-bit extended-range pixel format with sRGB conversion and four fixed-point components of 10-bit blue, 10-bit green, 10-bit red, and 10-bit alpha.
-	MTLPixelFormatBGRA10_XR_sRGB MTLPixelFormat = 553
+	PixelFormatBGRA10_XR_sRGB PixelFormat = 553
 	// Ordinary format with four 32-bit unsigned integer components in RGBA order.
-	MTLPixelFormatRGBA32Uint MTLPixelFormat = 123
+	PixelFormatRGBA32Uint PixelFormat = 123
 	// Ordinary format with four 32-bit signed integer components in RGBA order.
-	MTLPixelFormatRGBA32Sint MTLPixelFormat = 124
+	PixelFormatRGBA32Sint PixelFormat = 124
 	// Ordinary format with four 32-bit floating-point components in RGBA order.
-	MTLPixelFormatRGBA32Float MTLPixelFormat = 125
+	PixelFormatRGBA32Float PixelFormat = 125
 	// Compressed format with two 16-bit color components and one 32-bit descriptor component.
-	MTLPixelFormatBC1_RGBA MTLPixelFormat = 130
+	PixelFormatBC1_RGBA PixelFormat = 130
 	// Compressed format with two 16-bit color components and one 32-bit descriptor component, with conversion between sRGB and linear space.
-	MTLPixelFormatBC1_RGBA_sRGB MTLPixelFormat = 131
+	PixelFormatBC1_RGBA_sRGB PixelFormat = 131
 	// Compressed format with two 64-bit chunks. The first chunk contains two 8-bit alpha components and one 48-bit descriptor component. The second chunk contains two 16-bit color components and one 32-bit descriptor component.
-	MTLPixelFormatBC2_RGBA MTLPixelFormat = 132
+	PixelFormatBC2_RGBA PixelFormat = 132
 	// Compressed format with two 64-bit chunks, with conversion between sRGB and linear space. The first chunk contains two 8-bit alpha components and one 48-bit descriptor component. The second chunk contains two 16-bit color components and one 32-bit descriptor component.
-	MTLPixelFormatBC2_RGBA_sRGB MTLPixelFormat = 133
+	PixelFormatBC2_RGBA_sRGB PixelFormat = 133
 	// Compressed format with two 64-bit chunks. The first chunk contains two 8-bit alpha components and one 48-bit descriptor component. The second chunk contains two 16-bit color components and one 32-bit descriptor component.
-	MTLPixelFormatBC3_RGBA MTLPixelFormat = 134
+	PixelFormatBC3_RGBA PixelFormat = 134
 	// Compressed format with two 64-bit chunks, with conversion between sRGB and linear space. The first chunk contains two 8-bit alpha components and one 48-bit descriptor component. The second chunk contains two 16-bit color components and one 32-bit descriptor component.
-	MTLPixelFormatBC3_RGBA_sRGB MTLPixelFormat = 135
+	PixelFormatBC3_RGBA_sRGB PixelFormat = 135
 	// Compressed format with one normalized unsigned integer component.
-	MTLPixelFormatBC4_RUnorm MTLPixelFormat = 140
+	PixelFormatBC4_RUnorm PixelFormat = 140
 	// Compressed format with one normalized signed integer component.
-	MTLPixelFormatBC4_RSnorm MTLPixelFormat = 141
+	PixelFormatBC4_RSnorm PixelFormat = 141
 	// Compressed format with two normalized unsigned integer components.
-	MTLPixelFormatBC5_RGUnorm MTLPixelFormat = 142
+	PixelFormatBC5_RGUnorm PixelFormat = 142
 	// Compressed format with two normalized signed integer components.
-	MTLPixelFormatBC5_RGSnorm MTLPixelFormat = 143
+	PixelFormatBC5_RGSnorm PixelFormat = 143
 	// Compressed format with four floating-point components.
-	MTLPixelFormatBC6H_RGBFloat MTLPixelFormat = 150
+	PixelFormatBC6H_RGBFloat PixelFormat = 150
 	// Compressed format with four unsigned floating-point components.
-	MTLPixelFormatBC6H_RGBUfloat MTLPixelFormat = 151
+	PixelFormatBC6H_RGBUfloat PixelFormat = 151
 	// Compressed format with four normalized unsigned integer components.
-	MTLPixelFormatBC7_RGBAUnorm MTLPixelFormat = 152
+	PixelFormatBC7_RGBAUnorm PixelFormat = 152
 	// Compressed format with four normalized unsigned integer components, with conversion between sRGB and linear space.
-	MTLPixelFormatBC7_RGBAUnorm_sRGB MTLPixelFormat = 153
+	PixelFormatBC7_RGBAUnorm_sRGB PixelFormat = 153
 	// A compressed format that uses PVRTC compression and 2bpp for RGB components.
 	//
 	// Deprecated: Usage of ASTC/ETC2/BC formats is recommended instead.
-	MTLPixelFormatPVRTC_RGB_2BPP MTLPixelFormat = 160
+	PixelFormatPVRTC_RGB_2BPP PixelFormat = 160
 	// A compressed format that uses PVRTC compression and 2bpp for RGB components with a conversion between sRGB and linear space.
 	//
 	// Deprecated: Usage of ASTC/ETC2/BC formats is recommended instead.
-	MTLPixelFormatPVRTC_RGB_2BPP_sRGB MTLPixelFormat = 161
+	PixelFormatPVRTC_RGB_2BPP_sRGB PixelFormat = 161
 	// A compressed format that uses PVRTC compression and 4bpp for RGB components.
 	//
 	// Deprecated: Usage of ASTC/ETC2/BC formats is recommended instead.
-	MTLPixelFormatPVRTC_RGB_4BPP MTLPixelFormat = 162
+	PixelFormatPVRTC_RGB_4BPP PixelFormat = 162
 	// A compressed format that uses PVRTC compression and 4bpp for RGB components with a conversion between sRGB and linear space.
 	//
 	// Deprecated: Usage of ASTC/ETC2/BC formats is recommended instead.
-	MTLPixelFormatPVRTC_RGB_4BPP_sRGB MTLPixelFormat = 163
+	PixelFormatPVRTC_RGB_4BPP_sRGB PixelFormat = 163
 	// A compressed format that uses PVRTC compression and 2bpp for RGBA components.
 	//
 	// Deprecated: Usage of ASTC/ETC2/BC formats is recommended instead.
-	MTLPixelFormatPVRTC_RGBA_2BPP MTLPixelFormat = 164
+	PixelFormatPVRTC_RGBA_2BPP PixelFormat = 164
 	// A compressed format that uses PVRTC compression and 2bpp for RGBA components with a conversion between sRGB and linear space.
 	//
 	// Deprecated: Usage of ASTC/ETC2/BC formats is recommended instead.
-	MTLPixelFormatPVRTC_RGBA_2BPP_sRGB MTLPixelFormat = 165
+	PixelFormatPVRTC_RGBA_2BPP_sRGB PixelFormat = 165
 	// A compressed format that uses PVRTC compression and 4bpp for RGBA components.
 	//
 	// Deprecated: Usage of ASTC/ETC2/BC formats is recommended instead.
-	MTLPixelFormatPVRTC_RGBA_4BPP MTLPixelFormat = 166
+	PixelFormatPVRTC_RGBA_4BPP PixelFormat = 166
 	// A compressed format that uses PVRTC compression and 4bpp for RGBA components with a conversion between sRGB and linear space.
 	//
 	// Deprecated: Usage of ASTC/ETC2/BC formats is recommended instead.
-	MTLPixelFormatPVRTC_RGBA_4BPP_sRGB MTLPixelFormat = 167
+	PixelFormatPVRTC_RGBA_4BPP_sRGB PixelFormat = 167
 	// Compressed format using EAC compression with one normalized unsigned integer component.
-	MTLPixelFormatEAC_R11Unorm MTLPixelFormat = 170
+	PixelFormatEAC_R11Unorm PixelFormat = 170
 	// Compressed format using EAC compression with one normalized signed integer component.
-	MTLPixelFormatEAC_R11Snorm MTLPixelFormat = 172
+	PixelFormatEAC_R11Snorm PixelFormat = 172
 	// Compressed format using EAC compression with two normalized unsigned integer components.
-	MTLPixelFormatEAC_RG11Unorm MTLPixelFormat = 174
+	PixelFormatEAC_RG11Unorm PixelFormat = 174
 	// Compressed format using EAC compression with two normalized signed integer components.
-	MTLPixelFormatEAC_RG11Snorm MTLPixelFormat = 176
+	PixelFormatEAC_RG11Snorm PixelFormat = 176
 	// Compressed format using EAC compression with four 8-bit components.
-	MTLPixelFormatEAC_RGBA8 MTLPixelFormat = 178
+	PixelFormatEAC_RGBA8 PixelFormat = 178
 	// Compressed format using EAC compression with four 8-bit components with conversion between sRGB and linear space.
-	MTLPixelFormatEAC_RGBA8_sRGB MTLPixelFormat = 179
+	PixelFormatEAC_RGBA8_sRGB PixelFormat = 179
 	// Compressed format using ETC2 compression with three 8-bit components.
-	MTLPixelFormatETC2_RGB8 MTLPixelFormat = 180
+	PixelFormatETC2_RGB8 PixelFormat = 180
 	// Compressed format using ETC2 compression with three 8-bit components with conversion between sRGB and linear space.
-	MTLPixelFormatETC2_RGB8_sRGB MTLPixelFormat = 181
+	PixelFormatETC2_RGB8_sRGB PixelFormat = 181
 	// Compressed format using ETC2 compression with four 8-bit components.
-	MTLPixelFormatETC2_RGB8A1 MTLPixelFormat = 182
+	PixelFormatETC2_RGB8A1 PixelFormat = 182
 	// Compressed format using ETC2 compression with four 8-bit components with conversion between sRGB and linear space.
-	MTLPixelFormatETC2_RGB8A1_sRGB MTLPixelFormat = 183
+	PixelFormatETC2_RGB8A1_sRGB PixelFormat = 183
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 4, and a block height of 4.
-	MTLPixelFormatASTC_4x4_sRGB MTLPixelFormat = 186
+	PixelFormatASTC_4x4_sRGB PixelFormat = 186
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 5, and a block height of 4.
-	MTLPixelFormatASTC_5x4_sRGB MTLPixelFormat = 187
+	PixelFormatASTC_5x4_sRGB PixelFormat = 187
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 5, and a block height of 5.
-	MTLPixelFormatASTC_5x5_sRGB MTLPixelFormat = 188
+	PixelFormatASTC_5x5_sRGB PixelFormat = 188
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 6, and a block height of 5.
-	MTLPixelFormatASTC_6x5_sRGB MTLPixelFormat = 189
+	PixelFormatASTC_6x5_sRGB PixelFormat = 189
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 6, and a block height of 6.
-	MTLPixelFormatASTC_6x6_sRGB MTLPixelFormat = 190
+	PixelFormatASTC_6x6_sRGB PixelFormat = 190
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 8, and a block height of 5.
-	MTLPixelFormatASTC_8x5_sRGB MTLPixelFormat = 192
+	PixelFormatASTC_8x5_sRGB PixelFormat = 192
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 8, and a block height of 6.
-	MTLPixelFormatASTC_8x6_sRGB MTLPixelFormat = 193
+	PixelFormatASTC_8x6_sRGB PixelFormat = 193
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 8, and a block height of 8.
-	MTLPixelFormatASTC_8x8_sRGB MTLPixelFormat = 194
+	PixelFormatASTC_8x8_sRGB PixelFormat = 194
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 10, and a block height of 5.
-	MTLPixelFormatASTC_10x5_sRGB MTLPixelFormat = 195
+	PixelFormatASTC_10x5_sRGB PixelFormat = 195
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 10, and a block height of 6.
-	MTLPixelFormatASTC_10x6_sRGB MTLPixelFormat = 196
+	PixelFormatASTC_10x6_sRGB PixelFormat = 196
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 10, and a block height of 8.
-	MTLPixelFormatASTC_10x8_sRGB MTLPixelFormat = 197
+	PixelFormatASTC_10x8_sRGB PixelFormat = 197
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 10, and a block height of 10.
-	MTLPixelFormatASTC_10x10_sRGB MTLPixelFormat = 198
+	PixelFormatASTC_10x10_sRGB PixelFormat = 198
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 12, and a block height of 10.
-	MTLPixelFormatASTC_12x10_sRGB MTLPixelFormat = 199
+	PixelFormatASTC_12x10_sRGB PixelFormat = 199
 	// ASTC-compressed format with low-dynamic-range content, conversion between sRGB and linear space, a block width of 12, and a block height of 12.
-	MTLPixelFormatASTC_12x12_sRGB MTLPixelFormat = 200
+	PixelFormatASTC_12x12_sRGB PixelFormat = 200
 	// ASTC-compressed format with low-dynamic-range content, a block width of 4, and a block height of 4.
-	MTLPixelFormatASTC_4x4_LDR MTLPixelFormat = 204
+	PixelFormatASTC_4x4_LDR PixelFormat = 204
 	// ASTC-compressed format with low-dynamic-range content, a block width of 5, and a block height of 4.
-	MTLPixelFormatASTC_5x4_LDR MTLPixelFormat = 205
+	PixelFormatASTC_5x4_LDR PixelFormat = 205
 	// ASTC-compressed format with low-dynamic-range content, a block width of 5, and a block height of 5.
-	MTLPixelFormatASTC_5x5_LDR MTLPixelFormat = 206
+	PixelFormatASTC_5x5_LDR PixelFormat = 206
 	// ASTC-compressed format with low-dynamic-range content, a block width of 6, and a block height of 5.
-	MTLPixelFormatASTC_6x5_LDR MTLPixelFormat = 207
+	PixelFormatASTC_6x5_LDR PixelFormat = 207
 	// ASTC-compressed format with low-dynamic-range content, a block width of 6, and a block height of 6.
-	MTLPixelFormatASTC_6x6_LDR MTLPixelFormat = 208
+	PixelFormatASTC_6x6_LDR PixelFormat = 208
 	// ASTC-compressed format with low-dynamic-range content, a block width of 8, and a block height of 5.
-	MTLPixelFormatASTC_8x5_LDR MTLPixelFormat = 210
+	PixelFormatASTC_8x5_LDR PixelFormat = 210
 	// ASTC-compressed format with low-dynamic-range content, a block width of 8, and a block height of 6.
-	MTLPixelFormatASTC_8x6_LDR MTLPixelFormat = 211
+	PixelFormatASTC_8x6_LDR PixelFormat = 211
 	// ASTC-compressed format with low-dynamic-range content, a block width of 8, and a block height of 8.
-	MTLPixelFormatASTC_8x8_LDR MTLPixelFormat = 212
+	PixelFormatASTC_8x8_LDR PixelFormat = 212
 	// ASTC-compressed format with low-dynamic-range content, a block width of 10, and a block height of 5.
-	MTLPixelFormatASTC_10x5_LDR MTLPixelFormat = 213
+	PixelFormatASTC_10x5_LDR PixelFormat = 213
 	// ASTC-compressed format with low-dynamic-range content, a block width of 10, and a block height of 6.
-	MTLPixelFormatASTC_10x6_LDR MTLPixelFormat = 214
+	PixelFormatASTC_10x6_LDR PixelFormat = 214
 	// ASTC-compressed format with low-dynamic-range content, a block width of 10, and a block height of 8.
-	MTLPixelFormatASTC_10x8_LDR MTLPixelFormat = 215
+	PixelFormatASTC_10x8_LDR PixelFormat = 215
 	// ASTC-compressed format with low-dynamic-range content, a block width of 10, and a block height of 10.
-	MTLPixelFormatASTC_10x10_LDR MTLPixelFormat = 216
+	PixelFormatASTC_10x10_LDR PixelFormat = 216
 	// ASTC-compressed format with low-dynamic-range content, a block width of 12, and a block height of 10.
-	MTLPixelFormatASTC_12x10_LDR MTLPixelFormat = 217
+	PixelFormatASTC_12x10_LDR PixelFormat = 217
 	// ASTC-compressed format with low-dynamic-range content, a block width of 12, and a block height of 12.
-	MTLPixelFormatASTC_12x12_LDR MTLPixelFormat = 218
+	PixelFormatASTC_12x12_LDR PixelFormat = 218
 	// ASTC-compressed format with high-dynamic-range content, a block width of 4, and a block height of 4.
-	MTLPixelFormatASTC_4x4_HDR MTLPixelFormat = 222
+	PixelFormatASTC_4x4_HDR PixelFormat = 222
 	// ASTC-compressed format with high-dynamic range content, a block width of 5, and a block height of 4.
-	MTLPixelFormatASTC_5x4_HDR MTLPixelFormat = 223
+	PixelFormatASTC_5x4_HDR PixelFormat = 223
 	// ASTC-compressed format with high-dynamic range content, a block width of 5, and a block height of 5.
-	MTLPixelFormatASTC_5x5_HDR MTLPixelFormat = 224
+	PixelFormatASTC_5x5_HDR PixelFormat = 224
 	// ASTC-compressed format with high-dynamic range content, a block width of 6, and a block height of 5.
-	MTLPixelFormatASTC_6x5_HDR MTLPixelFormat = 225
+	PixelFormatASTC_6x5_HDR PixelFormat = 225
 	// ASTC-compressed format with high-dynamic range content, a block width of 6, and a block height of 6.
-	MTLPixelFormatASTC_6x6_HDR MTLPixelFormat = 226
+	PixelFormatASTC_6x6_HDR PixelFormat = 226
 	// ASTC-compressed format with high-dynamic range content, a block width of 8, and a block height of 5.
-	MTLPixelFormatASTC_8x5_HDR MTLPixelFormat = 228
+	PixelFormatASTC_8x5_HDR PixelFormat = 228
 	// ASTC-compressed format with high-dynamic range content, a block width of 8, and a block height of 6.
-	MTLPixelFormatASTC_8x6_HDR MTLPixelFormat = 229
+	PixelFormatASTC_8x6_HDR PixelFormat = 229
 	// ASTC-compressed format with high-dynamic range content, a block width of 8, and a block height of 8.
-	MTLPixelFormatASTC_8x8_HDR MTLPixelFormat = 230
+	PixelFormatASTC_8x8_HDR PixelFormat = 230
 	// ASTC-compressed format with high-dynamic range content, a block width of 10, and a block height of 5.
-	MTLPixelFormatASTC_10x5_HDR MTLPixelFormat = 231
+	PixelFormatASTC_10x5_HDR PixelFormat = 231
 	// ASTC-compressed format with high-dynamic range content, a block width of 10, and a block height of 6.
-	MTLPixelFormatASTC_10x6_HDR MTLPixelFormat = 232
+	PixelFormatASTC_10x6_HDR PixelFormat = 232
 	// ASTC-compressed format with high-dynamic range content, a block width of 10, and a block height of 8.
-	MTLPixelFormatASTC_10x8_HDR MTLPixelFormat = 233
+	PixelFormatASTC_10x8_HDR PixelFormat = 233
 	// ASTC-compressed format with high-dynamic range content, a block width of 10, and a block height of 10.
-	MTLPixelFormatASTC_10x10_HDR MTLPixelFormat = 234
+	PixelFormatASTC_10x10_HDR PixelFormat = 234
 	// ASTC-compressed format with high-dynamic range content, a block width of 12, and a block height of 10.
-	MTLPixelFormatASTC_12x10_HDR MTLPixelFormat = 235
+	PixelFormatASTC_12x10_HDR PixelFormat = 235
 	// ASTC-compressed format with high-dynamic range content, a block width of 12, and a block height of 12.
-	MTLPixelFormatASTC_12x12_HDR MTLPixelFormat = 236
+	PixelFormatASTC_12x12_HDR PixelFormat = 236
 	// A pixel format where the red and green components are subsampled horizontally.
-	MTLPixelFormatGBGR422 MTLPixelFormat = 240
+	PixelFormatGBGR422 PixelFormat = 240
 	// A pixel format where the red and green components are subsampled horizontally.
-	MTLPixelFormatBGRG422 MTLPixelFormat = 241
+	PixelFormatBGRG422 PixelFormat = 241
 	// A pixel format for a depth-render target that has a 16-bit normalized, unsigned-integer component.
-	MTLPixelFormatDepth16Unorm MTLPixelFormat = 250
+	PixelFormatDepth16Unorm PixelFormat = 250
 	// A pixel format with one 32-bit floating-point component, used for a depth render target.
-	MTLPixelFormatDepth32Float MTLPixelFormat = 252
+	PixelFormatDepth32Float PixelFormat = 252
 	// A pixel format with an 8-bit unsigned integer component, used for a stencil render target.
-	MTLPixelFormatStencil8 MTLPixelFormat = 253
+	PixelFormatStencil8 PixelFormat = 253
 	// A 32-bit combined depth and stencil pixel format with a 24-bit normalized unsigned integer for depth and an 8-bit unsigned integer for stencil.
-	MTLPixelFormatDepth24Unorm_Stencil8 MTLPixelFormat = 255
+	PixelFormatDepth24Unorm_Stencil8 PixelFormat = 255
 	// A 40-bit combined depth and stencil pixel format with a 32-bit floating-point value for depth and an 8-bit unsigned integer for stencil.
-	MTLPixelFormatDepth32Float_Stencil8 MTLPixelFormat = 260
+	PixelFormatDepth32Float_Stencil8 PixelFormat = 260
 	// A stencil pixel format used to read the stencil value from a texture with a combined 32-bit depth and 8-bit stencil value.
-	MTLPixelFormatX32_Stencil8 MTLPixelFormat = 261
+	PixelFormatX32_Stencil8 PixelFormat = 261
 	// A stencil pixel format used to read the stencil value from a texture with a combined 24-bit depth and 8-bit stencil value.
-	MTLPixelFormatX24_Stencil8  MTLPixelFormat = 262
-	MTLPixelFormatUnspecialized MTLPixelFormat = 263
+	PixelFormatX24_Stencil8  PixelFormat = 262
+	PixelFormatUnspecialized PixelFormat = 263
 )
 
-func (e MTLPixelFormat) String() string {
+func (e PixelFormat) String() string {
 	switch e {
-	case MTLPixelFormatInvalid:
-		return "MTLPixelFormatInvalid"
-	case MTLPixelFormatA8Unorm:
-		return "MTLPixelFormatA8Unorm"
-	case MTLPixelFormatR8Unorm:
-		return "MTLPixelFormatR8Unorm"
-	case MTLPixelFormatR8Unorm_sRGB:
-		return "MTLPixelFormatR8Unorm_sRGB"
-	case MTLPixelFormatR8Snorm:
-		return "MTLPixelFormatR8Snorm"
-	case MTLPixelFormatR8Uint:
-		return "MTLPixelFormatR8Uint"
-	case MTLPixelFormatR8Sint:
-		return "MTLPixelFormatR8Sint"
-	case MTLPixelFormatR16Unorm:
-		return "MTLPixelFormatR16Unorm"
-	case MTLPixelFormatR16Snorm:
-		return "MTLPixelFormatR16Snorm"
-	case MTLPixelFormatR16Uint:
-		return "MTLPixelFormatR16Uint"
-	case MTLPixelFormatR16Sint:
-		return "MTLPixelFormatR16Sint"
-	case MTLPixelFormatR16Float:
-		return "MTLPixelFormatR16Float"
-	case MTLPixelFormatRG8Unorm:
-		return "MTLPixelFormatRG8Unorm"
-	case MTLPixelFormatRG8Unorm_sRGB:
-		return "MTLPixelFormatRG8Unorm_sRGB"
-	case MTLPixelFormatRG8Snorm:
-		return "MTLPixelFormatRG8Snorm"
-	case MTLPixelFormatRG8Uint:
-		return "MTLPixelFormatRG8Uint"
-	case MTLPixelFormatRG8Sint:
-		return "MTLPixelFormatRG8Sint"
-	case MTLPixelFormatB5G6R5Unorm:
-		return "MTLPixelFormatB5G6R5Unorm"
-	case MTLPixelFormatA1BGR5Unorm:
-		return "MTLPixelFormatA1BGR5Unorm"
-	case MTLPixelFormatABGR4Unorm:
-		return "MTLPixelFormatABGR4Unorm"
-	case MTLPixelFormatBGR5A1Unorm:
-		return "MTLPixelFormatBGR5A1Unorm"
-	case MTLPixelFormatR32Uint:
-		return "MTLPixelFormatR32Uint"
-	case MTLPixelFormatR32Sint:
-		return "MTLPixelFormatR32Sint"
-	case MTLPixelFormatR32Float:
-		return "MTLPixelFormatR32Float"
-	case MTLPixelFormatRG16Unorm:
-		return "MTLPixelFormatRG16Unorm"
-	case MTLPixelFormatRG16Snorm:
-		return "MTLPixelFormatRG16Snorm"
-	case MTLPixelFormatRG16Uint:
-		return "MTLPixelFormatRG16Uint"
-	case MTLPixelFormatRG16Sint:
-		return "MTLPixelFormatRG16Sint"
-	case MTLPixelFormatRG16Float:
-		return "MTLPixelFormatRG16Float"
-	case MTLPixelFormatRGBA8Unorm:
-		return "MTLPixelFormatRGBA8Unorm"
-	case MTLPixelFormatRGBA8Unorm_sRGB:
-		return "MTLPixelFormatRGBA8Unorm_sRGB"
-	case MTLPixelFormatRGBA8Snorm:
-		return "MTLPixelFormatRGBA8Snorm"
-	case MTLPixelFormatRGBA8Uint:
-		return "MTLPixelFormatRGBA8Uint"
-	case MTLPixelFormatRGBA8Sint:
-		return "MTLPixelFormatRGBA8Sint"
-	case MTLPixelFormatBGRA8Unorm:
-		return "MTLPixelFormatBGRA8Unorm"
-	case MTLPixelFormatBGRA8Unorm_sRGB:
-		return "MTLPixelFormatBGRA8Unorm_sRGB"
-	case MTLPixelFormatRGB10A2Unorm:
-		return "MTLPixelFormatRGB10A2Unorm"
-	case MTLPixelFormatRGB10A2Uint:
-		return "MTLPixelFormatRGB10A2Uint"
-	case MTLPixelFormatRG11B10Float:
-		return "MTLPixelFormatRG11B10Float"
-	case MTLPixelFormatRGB9E5Float:
-		return "MTLPixelFormatRGB9E5Float"
-	case MTLPixelFormatBGR10A2Unorm:
-		return "MTLPixelFormatBGR10A2Unorm"
-	case MTLPixelFormatBGR10_XR:
-		return "MTLPixelFormatBGR10_XR"
-	case MTLPixelFormatBGR10_XR_sRGB:
-		return "MTLPixelFormatBGR10_XR_sRGB"
-	case MTLPixelFormatRG32Uint:
-		return "MTLPixelFormatRG32Uint"
-	case MTLPixelFormatRG32Sint:
-		return "MTLPixelFormatRG32Sint"
-	case MTLPixelFormatRG32Float:
-		return "MTLPixelFormatRG32Float"
-	case MTLPixelFormatRGBA16Unorm:
-		return "MTLPixelFormatRGBA16Unorm"
-	case MTLPixelFormatRGBA16Snorm:
-		return "MTLPixelFormatRGBA16Snorm"
-	case MTLPixelFormatRGBA16Uint:
-		return "MTLPixelFormatRGBA16Uint"
-	case MTLPixelFormatRGBA16Sint:
-		return "MTLPixelFormatRGBA16Sint"
-	case MTLPixelFormatRGBA16Float:
-		return "MTLPixelFormatRGBA16Float"
-	case MTLPixelFormatBGRA10_XR:
-		return "MTLPixelFormatBGRA10_XR"
-	case MTLPixelFormatBGRA10_XR_sRGB:
-		return "MTLPixelFormatBGRA10_XR_sRGB"
-	case MTLPixelFormatRGBA32Uint:
-		return "MTLPixelFormatRGBA32Uint"
-	case MTLPixelFormatRGBA32Sint:
-		return "MTLPixelFormatRGBA32Sint"
-	case MTLPixelFormatRGBA32Float:
-		return "MTLPixelFormatRGBA32Float"
-	case MTLPixelFormatBC1_RGBA:
-		return "MTLPixelFormatBC1_RGBA"
-	case MTLPixelFormatBC1_RGBA_sRGB:
-		return "MTLPixelFormatBC1_RGBA_sRGB"
-	case MTLPixelFormatBC2_RGBA:
-		return "MTLPixelFormatBC2_RGBA"
-	case MTLPixelFormatBC2_RGBA_sRGB:
-		return "MTLPixelFormatBC2_RGBA_sRGB"
-	case MTLPixelFormatBC3_RGBA:
-		return "MTLPixelFormatBC3_RGBA"
-	case MTLPixelFormatBC3_RGBA_sRGB:
-		return "MTLPixelFormatBC3_RGBA_sRGB"
-	case MTLPixelFormatBC4_RUnorm:
-		return "MTLPixelFormatBC4_RUnorm"
-	case MTLPixelFormatBC4_RSnorm:
-		return "MTLPixelFormatBC4_RSnorm"
-	case MTLPixelFormatBC5_RGUnorm:
-		return "MTLPixelFormatBC5_RGUnorm"
-	case MTLPixelFormatBC5_RGSnorm:
-		return "MTLPixelFormatBC5_RGSnorm"
-	case MTLPixelFormatBC6H_RGBFloat:
-		return "MTLPixelFormatBC6H_RGBFloat"
-	case MTLPixelFormatBC6H_RGBUfloat:
-		return "MTLPixelFormatBC6H_RGBUfloat"
-	case MTLPixelFormatBC7_RGBAUnorm:
-		return "MTLPixelFormatBC7_RGBAUnorm"
-	case MTLPixelFormatBC7_RGBAUnorm_sRGB:
-		return "MTLPixelFormatBC7_RGBAUnorm_sRGB"
-	case MTLPixelFormatPVRTC_RGB_2BPP:
-		return "MTLPixelFormatPVRTC_RGB_2BPP"
-	case MTLPixelFormatPVRTC_RGB_2BPP_sRGB:
-		return "MTLPixelFormatPVRTC_RGB_2BPP_sRGB"
-	case MTLPixelFormatPVRTC_RGB_4BPP:
-		return "MTLPixelFormatPVRTC_RGB_4BPP"
-	case MTLPixelFormatPVRTC_RGB_4BPP_sRGB:
-		return "MTLPixelFormatPVRTC_RGB_4BPP_sRGB"
-	case MTLPixelFormatPVRTC_RGBA_2BPP:
-		return "MTLPixelFormatPVRTC_RGBA_2BPP"
-	case MTLPixelFormatPVRTC_RGBA_2BPP_sRGB:
-		return "MTLPixelFormatPVRTC_RGBA_2BPP_sRGB"
-	case MTLPixelFormatPVRTC_RGBA_4BPP:
-		return "MTLPixelFormatPVRTC_RGBA_4BPP"
-	case MTLPixelFormatPVRTC_RGBA_4BPP_sRGB:
-		return "MTLPixelFormatPVRTC_RGBA_4BPP_sRGB"
-	case MTLPixelFormatEAC_R11Unorm:
-		return "MTLPixelFormatEAC_R11Unorm"
-	case MTLPixelFormatEAC_R11Snorm:
-		return "MTLPixelFormatEAC_R11Snorm"
-	case MTLPixelFormatEAC_RG11Unorm:
-		return "MTLPixelFormatEAC_RG11Unorm"
-	case MTLPixelFormatEAC_RG11Snorm:
-		return "MTLPixelFormatEAC_RG11Snorm"
-	case MTLPixelFormatEAC_RGBA8:
-		return "MTLPixelFormatEAC_RGBA8"
-	case MTLPixelFormatEAC_RGBA8_sRGB:
-		return "MTLPixelFormatEAC_RGBA8_sRGB"
-	case MTLPixelFormatETC2_RGB8:
-		return "MTLPixelFormatETC2_RGB8"
-	case MTLPixelFormatETC2_RGB8_sRGB:
-		return "MTLPixelFormatETC2_RGB8_sRGB"
-	case MTLPixelFormatETC2_RGB8A1:
-		return "MTLPixelFormatETC2_RGB8A1"
-	case MTLPixelFormatETC2_RGB8A1_sRGB:
-		return "MTLPixelFormatETC2_RGB8A1_sRGB"
-	case MTLPixelFormatASTC_4x4_sRGB:
-		return "MTLPixelFormatASTC_4x4_sRGB"
-	case MTLPixelFormatASTC_5x4_sRGB:
-		return "MTLPixelFormatASTC_5x4_sRGB"
-	case MTLPixelFormatASTC_5x5_sRGB:
-		return "MTLPixelFormatASTC_5x5_sRGB"
-	case MTLPixelFormatASTC_6x5_sRGB:
-		return "MTLPixelFormatASTC_6x5_sRGB"
-	case MTLPixelFormatASTC_6x6_sRGB:
-		return "MTLPixelFormatASTC_6x6_sRGB"
-	case MTLPixelFormatASTC_8x5_sRGB:
-		return "MTLPixelFormatASTC_8x5_sRGB"
-	case MTLPixelFormatASTC_8x6_sRGB:
-		return "MTLPixelFormatASTC_8x6_sRGB"
-	case MTLPixelFormatASTC_8x8_sRGB:
-		return "MTLPixelFormatASTC_8x8_sRGB"
-	case MTLPixelFormatASTC_10x5_sRGB:
-		return "MTLPixelFormatASTC_10x5_sRGB"
-	case MTLPixelFormatASTC_10x6_sRGB:
-		return "MTLPixelFormatASTC_10x6_sRGB"
-	case MTLPixelFormatASTC_10x8_sRGB:
-		return "MTLPixelFormatASTC_10x8_sRGB"
-	case MTLPixelFormatASTC_10x10_sRGB:
-		return "MTLPixelFormatASTC_10x10_sRGB"
-	case MTLPixelFormatASTC_12x10_sRGB:
-		return "MTLPixelFormatASTC_12x10_sRGB"
-	case MTLPixelFormatASTC_12x12_sRGB:
-		return "MTLPixelFormatASTC_12x12_sRGB"
-	case MTLPixelFormatASTC_4x4_LDR:
-		return "MTLPixelFormatASTC_4x4_LDR"
-	case MTLPixelFormatASTC_5x4_LDR:
-		return "MTLPixelFormatASTC_5x4_LDR"
-	case MTLPixelFormatASTC_5x5_LDR:
-		return "MTLPixelFormatASTC_5x5_LDR"
-	case MTLPixelFormatASTC_6x5_LDR:
-		return "MTLPixelFormatASTC_6x5_LDR"
-	case MTLPixelFormatASTC_6x6_LDR:
-		return "MTLPixelFormatASTC_6x6_LDR"
-	case MTLPixelFormatASTC_8x5_LDR:
-		return "MTLPixelFormatASTC_8x5_LDR"
-	case MTLPixelFormatASTC_8x6_LDR:
-		return "MTLPixelFormatASTC_8x6_LDR"
-	case MTLPixelFormatASTC_8x8_LDR:
-		return "MTLPixelFormatASTC_8x8_LDR"
-	case MTLPixelFormatASTC_10x5_LDR:
-		return "MTLPixelFormatASTC_10x5_LDR"
-	case MTLPixelFormatASTC_10x6_LDR:
-		return "MTLPixelFormatASTC_10x6_LDR"
-	case MTLPixelFormatASTC_10x8_LDR:
-		return "MTLPixelFormatASTC_10x8_LDR"
-	case MTLPixelFormatASTC_10x10_LDR:
-		return "MTLPixelFormatASTC_10x10_LDR"
-	case MTLPixelFormatASTC_12x10_LDR:
-		return "MTLPixelFormatASTC_12x10_LDR"
-	case MTLPixelFormatASTC_12x12_LDR:
-		return "MTLPixelFormatASTC_12x12_LDR"
-	case MTLPixelFormatASTC_4x4_HDR:
-		return "MTLPixelFormatASTC_4x4_HDR"
-	case MTLPixelFormatASTC_5x4_HDR:
-		return "MTLPixelFormatASTC_5x4_HDR"
-	case MTLPixelFormatASTC_5x5_HDR:
-		return "MTLPixelFormatASTC_5x5_HDR"
-	case MTLPixelFormatASTC_6x5_HDR:
-		return "MTLPixelFormatASTC_6x5_HDR"
-	case MTLPixelFormatASTC_6x6_HDR:
-		return "MTLPixelFormatASTC_6x6_HDR"
-	case MTLPixelFormatASTC_8x5_HDR:
-		return "MTLPixelFormatASTC_8x5_HDR"
-	case MTLPixelFormatASTC_8x6_HDR:
-		return "MTLPixelFormatASTC_8x6_HDR"
-	case MTLPixelFormatASTC_8x8_HDR:
-		return "MTLPixelFormatASTC_8x8_HDR"
-	case MTLPixelFormatASTC_10x5_HDR:
-		return "MTLPixelFormatASTC_10x5_HDR"
-	case MTLPixelFormatASTC_10x6_HDR:
-		return "MTLPixelFormatASTC_10x6_HDR"
-	case MTLPixelFormatASTC_10x8_HDR:
-		return "MTLPixelFormatASTC_10x8_HDR"
-	case MTLPixelFormatASTC_10x10_HDR:
-		return "MTLPixelFormatASTC_10x10_HDR"
-	case MTLPixelFormatASTC_12x10_HDR:
-		return "MTLPixelFormatASTC_12x10_HDR"
-	case MTLPixelFormatASTC_12x12_HDR:
-		return "MTLPixelFormatASTC_12x12_HDR"
-	case MTLPixelFormatGBGR422:
-		return "MTLPixelFormatGBGR422"
-	case MTLPixelFormatBGRG422:
-		return "MTLPixelFormatBGRG422"
-	case MTLPixelFormatDepth16Unorm:
-		return "MTLPixelFormatDepth16Unorm"
-	case MTLPixelFormatDepth32Float:
-		return "MTLPixelFormatDepth32Float"
-	case MTLPixelFormatStencil8:
-		return "MTLPixelFormatStencil8"
-	case MTLPixelFormatDepth24Unorm_Stencil8:
-		return "MTLPixelFormatDepth24Unorm_Stencil8"
-	case MTLPixelFormatDepth32Float_Stencil8:
-		return "MTLPixelFormatDepth32Float_Stencil8"
-	case MTLPixelFormatX32_Stencil8:
-		return "MTLPixelFormatX32_Stencil8"
-	case MTLPixelFormatX24_Stencil8:
-		return "MTLPixelFormatX24_Stencil8"
-	case MTLPixelFormatUnspecialized:
-		return "MTLPixelFormatUnspecialized"
+	case PixelFormatInvalid:
+		return "PixelFormatInvalid"
+	case PixelFormatA8Unorm:
+		return "PixelFormatA8Unorm"
+	case PixelFormatR8Unorm:
+		return "PixelFormatR8Unorm"
+	case PixelFormatR8Unorm_sRGB:
+		return "PixelFormatR8Unorm_sRGB"
+	case PixelFormatR8Snorm:
+		return "PixelFormatR8Snorm"
+	case PixelFormatR8Uint:
+		return "PixelFormatR8Uint"
+	case PixelFormatR8Sint:
+		return "PixelFormatR8Sint"
+	case PixelFormatR16Unorm:
+		return "PixelFormatR16Unorm"
+	case PixelFormatR16Snorm:
+		return "PixelFormatR16Snorm"
+	case PixelFormatR16Uint:
+		return "PixelFormatR16Uint"
+	case PixelFormatR16Sint:
+		return "PixelFormatR16Sint"
+	case PixelFormatR16Float:
+		return "PixelFormatR16Float"
+	case PixelFormatRG8Unorm:
+		return "PixelFormatRG8Unorm"
+	case PixelFormatRG8Unorm_sRGB:
+		return "PixelFormatRG8Unorm_sRGB"
+	case PixelFormatRG8Snorm:
+		return "PixelFormatRG8Snorm"
+	case PixelFormatRG8Uint:
+		return "PixelFormatRG8Uint"
+	case PixelFormatRG8Sint:
+		return "PixelFormatRG8Sint"
+	case PixelFormatB5G6R5Unorm:
+		return "PixelFormatB5G6R5Unorm"
+	case PixelFormatA1BGR5Unorm:
+		return "PixelFormatA1BGR5Unorm"
+	case PixelFormatABGR4Unorm:
+		return "PixelFormatABGR4Unorm"
+	case PixelFormatBGR5A1Unorm:
+		return "PixelFormatBGR5A1Unorm"
+	case PixelFormatR32Uint:
+		return "PixelFormatR32Uint"
+	case PixelFormatR32Sint:
+		return "PixelFormatR32Sint"
+	case PixelFormatR32Float:
+		return "PixelFormatR32Float"
+	case PixelFormatRG16Unorm:
+		return "PixelFormatRG16Unorm"
+	case PixelFormatRG16Snorm:
+		return "PixelFormatRG16Snorm"
+	case PixelFormatRG16Uint:
+		return "PixelFormatRG16Uint"
+	case PixelFormatRG16Sint:
+		return "PixelFormatRG16Sint"
+	case PixelFormatRG16Float:
+		return "PixelFormatRG16Float"
+	case PixelFormatRGBA8Unorm:
+		return "PixelFormatRGBA8Unorm"
+	case PixelFormatRGBA8Unorm_sRGB:
+		return "PixelFormatRGBA8Unorm_sRGB"
+	case PixelFormatRGBA8Snorm:
+		return "PixelFormatRGBA8Snorm"
+	case PixelFormatRGBA8Uint:
+		return "PixelFormatRGBA8Uint"
+	case PixelFormatRGBA8Sint:
+		return "PixelFormatRGBA8Sint"
+	case PixelFormatBGRA8Unorm:
+		return "PixelFormatBGRA8Unorm"
+	case PixelFormatBGRA8Unorm_sRGB:
+		return "PixelFormatBGRA8Unorm_sRGB"
+	case PixelFormatRGB10A2Unorm:
+		return "PixelFormatRGB10A2Unorm"
+	case PixelFormatRGB10A2Uint:
+		return "PixelFormatRGB10A2Uint"
+	case PixelFormatRG11B10Float:
+		return "PixelFormatRG11B10Float"
+	case PixelFormatRGB9E5Float:
+		return "PixelFormatRGB9E5Float"
+	case PixelFormatBGR10A2Unorm:
+		return "PixelFormatBGR10A2Unorm"
+	case PixelFormatBGR10_XR:
+		return "PixelFormatBGR10_XR"
+	case PixelFormatBGR10_XR_sRGB:
+		return "PixelFormatBGR10_XR_sRGB"
+	case PixelFormatRG32Uint:
+		return "PixelFormatRG32Uint"
+	case PixelFormatRG32Sint:
+		return "PixelFormatRG32Sint"
+	case PixelFormatRG32Float:
+		return "PixelFormatRG32Float"
+	case PixelFormatRGBA16Unorm:
+		return "PixelFormatRGBA16Unorm"
+	case PixelFormatRGBA16Snorm:
+		return "PixelFormatRGBA16Snorm"
+	case PixelFormatRGBA16Uint:
+		return "PixelFormatRGBA16Uint"
+	case PixelFormatRGBA16Sint:
+		return "PixelFormatRGBA16Sint"
+	case PixelFormatRGBA16Float:
+		return "PixelFormatRGBA16Float"
+	case PixelFormatBGRA10_XR:
+		return "PixelFormatBGRA10_XR"
+	case PixelFormatBGRA10_XR_sRGB:
+		return "PixelFormatBGRA10_XR_sRGB"
+	case PixelFormatRGBA32Uint:
+		return "PixelFormatRGBA32Uint"
+	case PixelFormatRGBA32Sint:
+		return "PixelFormatRGBA32Sint"
+	case PixelFormatRGBA32Float:
+		return "PixelFormatRGBA32Float"
+	case PixelFormatBC1_RGBA:
+		return "PixelFormatBC1_RGBA"
+	case PixelFormatBC1_RGBA_sRGB:
+		return "PixelFormatBC1_RGBA_sRGB"
+	case PixelFormatBC2_RGBA:
+		return "PixelFormatBC2_RGBA"
+	case PixelFormatBC2_RGBA_sRGB:
+		return "PixelFormatBC2_RGBA_sRGB"
+	case PixelFormatBC3_RGBA:
+		return "PixelFormatBC3_RGBA"
+	case PixelFormatBC3_RGBA_sRGB:
+		return "PixelFormatBC3_RGBA_sRGB"
+	case PixelFormatBC4_RUnorm:
+		return "PixelFormatBC4_RUnorm"
+	case PixelFormatBC4_RSnorm:
+		return "PixelFormatBC4_RSnorm"
+	case PixelFormatBC5_RGUnorm:
+		return "PixelFormatBC5_RGUnorm"
+	case PixelFormatBC5_RGSnorm:
+		return "PixelFormatBC5_RGSnorm"
+	case PixelFormatBC6H_RGBFloat:
+		return "PixelFormatBC6H_RGBFloat"
+	case PixelFormatBC6H_RGBUfloat:
+		return "PixelFormatBC6H_RGBUfloat"
+	case PixelFormatBC7_RGBAUnorm:
+		return "PixelFormatBC7_RGBAUnorm"
+	case PixelFormatBC7_RGBAUnorm_sRGB:
+		return "PixelFormatBC7_RGBAUnorm_sRGB"
+	case PixelFormatPVRTC_RGB_2BPP:
+		return "PixelFormatPVRTC_RGB_2BPP"
+	case PixelFormatPVRTC_RGB_2BPP_sRGB:
+		return "PixelFormatPVRTC_RGB_2BPP_sRGB"
+	case PixelFormatPVRTC_RGB_4BPP:
+		return "PixelFormatPVRTC_RGB_4BPP"
+	case PixelFormatPVRTC_RGB_4BPP_sRGB:
+		return "PixelFormatPVRTC_RGB_4BPP_sRGB"
+	case PixelFormatPVRTC_RGBA_2BPP:
+		return "PixelFormatPVRTC_RGBA_2BPP"
+	case PixelFormatPVRTC_RGBA_2BPP_sRGB:
+		return "PixelFormatPVRTC_RGBA_2BPP_sRGB"
+	case PixelFormatPVRTC_RGBA_4BPP:
+		return "PixelFormatPVRTC_RGBA_4BPP"
+	case PixelFormatPVRTC_RGBA_4BPP_sRGB:
+		return "PixelFormatPVRTC_RGBA_4BPP_sRGB"
+	case PixelFormatEAC_R11Unorm:
+		return "PixelFormatEAC_R11Unorm"
+	case PixelFormatEAC_R11Snorm:
+		return "PixelFormatEAC_R11Snorm"
+	case PixelFormatEAC_RG11Unorm:
+		return "PixelFormatEAC_RG11Unorm"
+	case PixelFormatEAC_RG11Snorm:
+		return "PixelFormatEAC_RG11Snorm"
+	case PixelFormatEAC_RGBA8:
+		return "PixelFormatEAC_RGBA8"
+	case PixelFormatEAC_RGBA8_sRGB:
+		return "PixelFormatEAC_RGBA8_sRGB"
+	case PixelFormatETC2_RGB8:
+		return "PixelFormatETC2_RGB8"
+	case PixelFormatETC2_RGB8_sRGB:
+		return "PixelFormatETC2_RGB8_sRGB"
+	case PixelFormatETC2_RGB8A1:
+		return "PixelFormatETC2_RGB8A1"
+	case PixelFormatETC2_RGB8A1_sRGB:
+		return "PixelFormatETC2_RGB8A1_sRGB"
+	case PixelFormatASTC_4x4_sRGB:
+		return "PixelFormatASTC_4x4_sRGB"
+	case PixelFormatASTC_5x4_sRGB:
+		return "PixelFormatASTC_5x4_sRGB"
+	case PixelFormatASTC_5x5_sRGB:
+		return "PixelFormatASTC_5x5_sRGB"
+	case PixelFormatASTC_6x5_sRGB:
+		return "PixelFormatASTC_6x5_sRGB"
+	case PixelFormatASTC_6x6_sRGB:
+		return "PixelFormatASTC_6x6_sRGB"
+	case PixelFormatASTC_8x5_sRGB:
+		return "PixelFormatASTC_8x5_sRGB"
+	case PixelFormatASTC_8x6_sRGB:
+		return "PixelFormatASTC_8x6_sRGB"
+	case PixelFormatASTC_8x8_sRGB:
+		return "PixelFormatASTC_8x8_sRGB"
+	case PixelFormatASTC_10x5_sRGB:
+		return "PixelFormatASTC_10x5_sRGB"
+	case PixelFormatASTC_10x6_sRGB:
+		return "PixelFormatASTC_10x6_sRGB"
+	case PixelFormatASTC_10x8_sRGB:
+		return "PixelFormatASTC_10x8_sRGB"
+	case PixelFormatASTC_10x10_sRGB:
+		return "PixelFormatASTC_10x10_sRGB"
+	case PixelFormatASTC_12x10_sRGB:
+		return "PixelFormatASTC_12x10_sRGB"
+	case PixelFormatASTC_12x12_sRGB:
+		return "PixelFormatASTC_12x12_sRGB"
+	case PixelFormatASTC_4x4_LDR:
+		return "PixelFormatASTC_4x4_LDR"
+	case PixelFormatASTC_5x4_LDR:
+		return "PixelFormatASTC_5x4_LDR"
+	case PixelFormatASTC_5x5_LDR:
+		return "PixelFormatASTC_5x5_LDR"
+	case PixelFormatASTC_6x5_LDR:
+		return "PixelFormatASTC_6x5_LDR"
+	case PixelFormatASTC_6x6_LDR:
+		return "PixelFormatASTC_6x6_LDR"
+	case PixelFormatASTC_8x5_LDR:
+		return "PixelFormatASTC_8x5_LDR"
+	case PixelFormatASTC_8x6_LDR:
+		return "PixelFormatASTC_8x6_LDR"
+	case PixelFormatASTC_8x8_LDR:
+		return "PixelFormatASTC_8x8_LDR"
+	case PixelFormatASTC_10x5_LDR:
+		return "PixelFormatASTC_10x5_LDR"
+	case PixelFormatASTC_10x6_LDR:
+		return "PixelFormatASTC_10x6_LDR"
+	case PixelFormatASTC_10x8_LDR:
+		return "PixelFormatASTC_10x8_LDR"
+	case PixelFormatASTC_10x10_LDR:
+		return "PixelFormatASTC_10x10_LDR"
+	case PixelFormatASTC_12x10_LDR:
+		return "PixelFormatASTC_12x10_LDR"
+	case PixelFormatASTC_12x12_LDR:
+		return "PixelFormatASTC_12x12_LDR"
+	case PixelFormatASTC_4x4_HDR:
+		return "PixelFormatASTC_4x4_HDR"
+	case PixelFormatASTC_5x4_HDR:
+		return "PixelFormatASTC_5x4_HDR"
+	case PixelFormatASTC_5x5_HDR:
+		return "PixelFormatASTC_5x5_HDR"
+	case PixelFormatASTC_6x5_HDR:
+		return "PixelFormatASTC_6x5_HDR"
+	case PixelFormatASTC_6x6_HDR:
+		return "PixelFormatASTC_6x6_HDR"
+	case PixelFormatASTC_8x5_HDR:
+		return "PixelFormatASTC_8x5_HDR"
+	case PixelFormatASTC_8x6_HDR:
+		return "PixelFormatASTC_8x6_HDR"
+	case PixelFormatASTC_8x8_HDR:
+		return "PixelFormatASTC_8x8_HDR"
+	case PixelFormatASTC_10x5_HDR:
+		return "PixelFormatASTC_10x5_HDR"
+	case PixelFormatASTC_10x6_HDR:
+		return "PixelFormatASTC_10x6_HDR"
+	case PixelFormatASTC_10x8_HDR:
+		return "PixelFormatASTC_10x8_HDR"
+	case PixelFormatASTC_10x10_HDR:
+		return "PixelFormatASTC_10x10_HDR"
+	case PixelFormatASTC_12x10_HDR:
+		return "PixelFormatASTC_12x10_HDR"
+	case PixelFormatASTC_12x12_HDR:
+		return "PixelFormatASTC_12x12_HDR"
+	case PixelFormatGBGR422:
+		return "PixelFormatGBGR422"
+	case PixelFormatBGRG422:
+		return "PixelFormatBGRG422"
+	case PixelFormatDepth16Unorm:
+		return "PixelFormatDepth16Unorm"
+	case PixelFormatDepth32Float:
+		return "PixelFormatDepth32Float"
+	case PixelFormatStencil8:
+		return "PixelFormatStencil8"
+	case PixelFormatDepth24Unorm_Stencil8:
+		return "PixelFormatDepth24Unorm_Stencil8"
+	case PixelFormatDepth32Float_Stencil8:
+		return "PixelFormatDepth32Float_Stencil8"
+	case PixelFormatX32_Stencil8:
+		return "PixelFormatX32_Stencil8"
+	case PixelFormatX24_Stencil8:
+		return "PixelFormatX24_Stencil8"
+	case PixelFormatUnspecialized:
+		return "PixelFormatUnspecialized"
 	default:
-		return fmt.Sprintf("MTLPixelFormat(%d)", int64(e))
+		return fmt.Sprintf("PixelFormat(%d)", int64(e))
 	}
 }
 
 // The primitive topologies available for rendering.
-type MTLPrimitiveTopologyClass uint64
+type PrimitiveTopologyClass uint64
 
 const (
 	// An unspecified primitive.
-	MTLPrimitiveTopologyClassUnspecified MTLPrimitiveTopologyClass = 0
+	PrimitiveTopologyClassUnspecified PrimitiveTopologyClass = 0
 	// A point primitive.
-	MTLPrimitiveTopologyClassPoint MTLPrimitiveTopologyClass = 1
+	PrimitiveTopologyClassPoint PrimitiveTopologyClass = 1
 	// A line primitive.
-	MTLPrimitiveTopologyClassLine MTLPrimitiveTopologyClass = 2
+	PrimitiveTopologyClassLine PrimitiveTopologyClass = 2
 	// A triangle primitive.
-	MTLPrimitiveTopologyClassTriangle MTLPrimitiveTopologyClass = 3
+	PrimitiveTopologyClassTriangle PrimitiveTopologyClass = 3
 )
 
-func (e MTLPrimitiveTopologyClass) String() string {
+func (e PrimitiveTopologyClass) String() string {
 	switch e {
-	case MTLPrimitiveTopologyClassUnspecified:
-		return "MTLPrimitiveTopologyClassUnspecified"
-	case MTLPrimitiveTopologyClassPoint:
-		return "MTLPrimitiveTopologyClassPoint"
-	case MTLPrimitiveTopologyClassLine:
-		return "MTLPrimitiveTopologyClassLine"
-	case MTLPrimitiveTopologyClassTriangle:
-		return "MTLPrimitiveTopologyClassTriangle"
+	case PrimitiveTopologyClassUnspecified:
+		return "PrimitiveTopologyClassUnspecified"
+	case PrimitiveTopologyClassPoint:
+		return "PrimitiveTopologyClassPoint"
+	case PrimitiveTopologyClassLine:
+		return "PrimitiveTopologyClassLine"
+	case PrimitiveTopologyClassTriangle:
+		return "PrimitiveTopologyClassTriangle"
 	default:
-		return fmt.Sprintf("MTLPrimitiveTopologyClass(%d)", int64(e))
+		return fmt.Sprintf("PrimitiveTopologyClass(%d)", int64(e))
 	}
 }
 
 // Optional arguments used to set the behavior of a resource.
 // Bitmask — values may be combined with |.
-type MTLResourceOptions uint64
+type ResourceOptions uint64
 
 const (
 	// The default CPU cache mode for the resource, which guarantees that read and write operations are executed in the expected order.
-	MTLResourceCPUCacheModeDefaultCache MTLResourceOptions = 0
+	ResourceCPUCacheModeDefaultCache ResourceOptions = 0
 	// A write-combined CPU cache mode that is optimized for resources that the CPU writes into, but never reads.
-	MTLResourceCPUCacheModeWriteCombined MTLResourceOptions = 1
+	ResourceCPUCacheModeWriteCombined ResourceOptions = 1
 	// The CPU and GPU share access to the resource, allocated in system memory.
-	MTLResourceStorageModeShared MTLResourceOptions = 0
+	ResourceStorageModeShared ResourceOptions = 0
 	// The CPU and GPU may maintain separate copies of the resource, and any changes need to be explicitly synchronized.
-	MTLResourceStorageModeManaged MTLResourceOptions = 16
+	ResourceStorageModeManaged ResourceOptions = 16
 	// The resource is only available to the GPU.
-	MTLResourceStorageModePrivate MTLResourceOptions = 32
+	ResourceStorageModePrivate ResourceOptions = 32
 	// The resource’s contents are only available to the GPU, and only exist temporarily during a render pass.
-	MTLResourceStorageModeMemoryless MTLResourceOptions = 48
+	ResourceStorageModeMemoryless ResourceOptions = 48
 	// An option specifying that the default tracking mode should be used.
-	MTLResourceHazardTrackingModeDefault MTLResourceOptions = 0
+	ResourceHazardTrackingModeDefault ResourceOptions = 0
 	// A resource option that instructs Metal to ignore memory hazards for a resource at runtime.
-	MTLResourceHazardTrackingModeUntracked MTLResourceOptions = 256
+	ResourceHazardTrackingModeUntracked ResourceOptions = 256
 	// An option that instructs Metal to apply safeguards for a resource at runtime to avoid memory hazards for the applicable commands.
-	MTLResourceHazardTrackingModeTracked MTLResourceOptions = 512
+	ResourceHazardTrackingModeTracked ResourceOptions = 512
 	// This constant was deprecated in iOS 9.0 and macOS 10.11.
 	//
 	// Deprecated: since macOS 13.0.
-	MTLResourceOptionCPUCacheModeDefault MTLResourceOptions = 0
+	ResourceOptionCPUCacheModeDefault ResourceOptions = 0
 	// This constant was deprecated in iOS 9.0 and macOS 10.11.
 	//
 	// Deprecated: since macOS 13.0.
-	MTLResourceOptionCPUCacheModeWriteCombined MTLResourceOptions = 1
+	ResourceOptionCPUCacheModeWriteCombined ResourceOptions = 1
 )
 
-func (e MTLResourceOptions) String() string {
+func (e ResourceOptions) String() string {
 	var parts []string
-	if e&MTLResourceCPUCacheModeWriteCombined != 0 {
-		parts = append(parts, "MTLResourceCPUCacheModeWriteCombined")
+	if e&ResourceCPUCacheModeWriteCombined != 0 {
+		parts = append(parts, "ResourceCPUCacheModeWriteCombined")
 	}
-	if e&MTLResourceStorageModeManaged != 0 {
-		parts = append(parts, "MTLResourceStorageModeManaged")
+	if e&ResourceStorageModeManaged != 0 {
+		parts = append(parts, "ResourceStorageModeManaged")
 	}
-	if e&MTLResourceStorageModePrivate != 0 {
-		parts = append(parts, "MTLResourceStorageModePrivate")
+	if e&ResourceStorageModePrivate != 0 {
+		parts = append(parts, "ResourceStorageModePrivate")
 	}
-	if e&MTLResourceStorageModeMemoryless != 0 {
-		parts = append(parts, "MTLResourceStorageModeMemoryless")
+	if e&ResourceStorageModeMemoryless != 0 {
+		parts = append(parts, "ResourceStorageModeMemoryless")
 	}
-	if e&MTLResourceHazardTrackingModeUntracked != 0 {
-		parts = append(parts, "MTLResourceHazardTrackingModeUntracked")
+	if e&ResourceHazardTrackingModeUntracked != 0 {
+		parts = append(parts, "ResourceHazardTrackingModeUntracked")
 	}
-	if e&MTLResourceHazardTrackingModeTracked != 0 {
-		parts = append(parts, "MTLResourceHazardTrackingModeTracked")
+	if e&ResourceHazardTrackingModeTracked != 0 {
+		parts = append(parts, "ResourceHazardTrackingModeTracked")
 	}
-	if e&MTLResourceOptionCPUCacheModeWriteCombined != 0 {
-		parts = append(parts, "MTLResourceOptionCPUCacheModeWriteCombined")
+	if e&ResourceOptionCPUCacheModeWriteCombined != 0 {
+		parts = append(parts, "ResourceOptionCPUCacheModeWriteCombined")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2670,300 +2649,300 @@ func (e MTLResourceOptions) String() string {
 }
 
 // Modes that determine the texture coordinate at each pixel when a fetch falls outside the bounds of a texture.
-type MTLSamplerAddressMode uint64
+type SamplerAddressMode uint64
 
 const (
 	// Texture coordinates are clamped between 0.0 and 1.0, inclusive.
-	MTLSamplerAddressModeClampToEdge MTLSamplerAddressMode = 0
+	SamplerAddressModeClampToEdge SamplerAddressMode = 0
 	// Between -1.0 and 1.0, the texture coordinates are mirrored across the axis; outside -1.0 and 1.0, texture coordinates are clamped.
-	MTLSamplerAddressModeMirrorClampToEdge MTLSamplerAddressMode = 1
+	SamplerAddressModeMirrorClampToEdge SamplerAddressMode = 1
 	// Texture coordinates wrap to the other side of the texture, effectively keeping only the fractional part of the texture coordinate.
-	MTLSamplerAddressModeRepeat MTLSamplerAddressMode = 2
+	SamplerAddressModeRepeat SamplerAddressMode = 2
 	// Between -1.0 and 1.0, the texture coordinates are mirrored across the axis; outside -1.0 and 1.0, the image is repeated.
-	MTLSamplerAddressModeMirrorRepeat MTLSamplerAddressMode = 3
+	SamplerAddressModeMirrorRepeat SamplerAddressMode = 3
 	// Out-of-range texture coordinates return transparent zero (0,0,0,0) for images with an alpha channel and return opaque zero (0,0,0,1) for images without an alpha channel.
-	MTLSamplerAddressModeClampToZero MTLSamplerAddressMode = 4
+	SamplerAddressModeClampToZero SamplerAddressMode = 4
 	// An address mode that returns the sampler’s border color.
-	MTLSamplerAddressModeClampToBorderColor MTLSamplerAddressMode = 5
+	SamplerAddressModeClampToBorderColor SamplerAddressMode = 5
 )
 
-func (e MTLSamplerAddressMode) String() string {
+func (e SamplerAddressMode) String() string {
 	switch e {
-	case MTLSamplerAddressModeClampToEdge:
-		return "MTLSamplerAddressModeClampToEdge"
-	case MTLSamplerAddressModeMirrorClampToEdge:
-		return "MTLSamplerAddressModeMirrorClampToEdge"
-	case MTLSamplerAddressModeRepeat:
-		return "MTLSamplerAddressModeRepeat"
-	case MTLSamplerAddressModeMirrorRepeat:
-		return "MTLSamplerAddressModeMirrorRepeat"
-	case MTLSamplerAddressModeClampToZero:
-		return "MTLSamplerAddressModeClampToZero"
-	case MTLSamplerAddressModeClampToBorderColor:
-		return "MTLSamplerAddressModeClampToBorderColor"
+	case SamplerAddressModeClampToEdge:
+		return "SamplerAddressModeClampToEdge"
+	case SamplerAddressModeMirrorClampToEdge:
+		return "SamplerAddressModeMirrorClampToEdge"
+	case SamplerAddressModeRepeat:
+		return "SamplerAddressModeRepeat"
+	case SamplerAddressModeMirrorRepeat:
+		return "SamplerAddressModeMirrorRepeat"
+	case SamplerAddressModeClampToZero:
+		return "SamplerAddressModeClampToZero"
+	case SamplerAddressModeClampToBorderColor:
+		return "SamplerAddressModeClampToBorderColor"
 	default:
-		return fmt.Sprintf("MTLSamplerAddressMode(%d)", int64(e))
+		return fmt.Sprintf("SamplerAddressMode(%d)", int64(e))
 	}
 }
 
 // Values that determine the border color for clamped texture values when the sampler address mode is MTLSamplerAddressModeClampToBorderColor.
-type MTLSamplerBorderColor uint64
+type SamplerBorderColor uint64
 
 const (
 	// A transparent black color (0,0,0,0) for texture values outside the border.
-	MTLSamplerBorderColorTransparentBlack MTLSamplerBorderColor = 0
+	SamplerBorderColorTransparentBlack SamplerBorderColor = 0
 	// An opaque black color (0,0,0,1) for texture values outside the border
-	MTLSamplerBorderColorOpaqueBlack MTLSamplerBorderColor = 1
+	SamplerBorderColorOpaqueBlack SamplerBorderColor = 1
 	// An opaque white color (1,1,1,1) for texture values outside the border.
-	MTLSamplerBorderColorOpaqueWhite MTLSamplerBorderColor = 2
+	SamplerBorderColorOpaqueWhite SamplerBorderColor = 2
 )
 
-func (e MTLSamplerBorderColor) String() string {
+func (e SamplerBorderColor) String() string {
 	switch e {
-	case MTLSamplerBorderColorTransparentBlack:
-		return "MTLSamplerBorderColorTransparentBlack"
-	case MTLSamplerBorderColorOpaqueBlack:
-		return "MTLSamplerBorderColorOpaqueBlack"
-	case MTLSamplerBorderColorOpaqueWhite:
-		return "MTLSamplerBorderColorOpaqueWhite"
+	case SamplerBorderColorTransparentBlack:
+		return "SamplerBorderColorTransparentBlack"
+	case SamplerBorderColorOpaqueBlack:
+		return "SamplerBorderColorOpaqueBlack"
+	case SamplerBorderColorOpaqueWhite:
+		return "SamplerBorderColorOpaqueWhite"
 	default:
-		return fmt.Sprintf("MTLSamplerBorderColor(%d)", int64(e))
+		return fmt.Sprintf("SamplerBorderColor(%d)", int64(e))
 	}
 }
 
 // Filtering options for determining which pixel value is returned within a mipmap level.
-type MTLSamplerMinMagFilter uint64
+type SamplerMinMagFilter uint64
 
 const (
 	// Select the single pixel nearest to the sample point.
-	MTLSamplerMinMagFilterNearest MTLSamplerMinMagFilter = 0
+	SamplerMinMagFilterNearest SamplerMinMagFilter = 0
 	// Select two pixels in each dimension and interpolate linearly between them.
-	MTLSamplerMinMagFilterLinear MTLSamplerMinMagFilter = 1
+	SamplerMinMagFilterLinear SamplerMinMagFilter = 1
 )
 
-func (e MTLSamplerMinMagFilter) String() string {
+func (e SamplerMinMagFilter) String() string {
 	switch e {
-	case MTLSamplerMinMagFilterNearest:
-		return "MTLSamplerMinMagFilterNearest"
-	case MTLSamplerMinMagFilterLinear:
-		return "MTLSamplerMinMagFilterLinear"
+	case SamplerMinMagFilterNearest:
+		return "SamplerMinMagFilterNearest"
+	case SamplerMinMagFilterLinear:
+		return "SamplerMinMagFilterLinear"
 	default:
-		return fmt.Sprintf("MTLSamplerMinMagFilter(%d)", int64(e))
+		return fmt.Sprintf("SamplerMinMagFilter(%d)", int64(e))
 	}
 }
 
 // Filtering options for determining what pixel value is returned with multiple mipmap levels.
-type MTLSamplerMipFilter uint64
+type SamplerMipFilter uint64
 
 const (
 	// The texture is sampled from mipmap level 0, and other mipmap levels are ignored.
-	MTLSamplerMipFilterNotMipmapped MTLSamplerMipFilter = 0
+	SamplerMipFilterNotMipmapped SamplerMipFilter = 0
 	// The nearest mipmap level is selected.
-	MTLSamplerMipFilterNearest MTLSamplerMipFilter = 1
+	SamplerMipFilterNearest SamplerMipFilter = 1
 	// If the filter falls between mipmap levels, both levels are sampled and the results are determined by linear interpolation between levels.
-	MTLSamplerMipFilterLinear MTLSamplerMipFilter = 2
+	SamplerMipFilterLinear SamplerMipFilter = 2
 )
 
-func (e MTLSamplerMipFilter) String() string {
+func (e SamplerMipFilter) String() string {
 	switch e {
-	case MTLSamplerMipFilterNotMipmapped:
-		return "MTLSamplerMipFilterNotMipmapped"
-	case MTLSamplerMipFilterNearest:
-		return "MTLSamplerMipFilterNearest"
-	case MTLSamplerMipFilterLinear:
-		return "MTLSamplerMipFilterLinear"
+	case SamplerMipFilterNotMipmapped:
+		return "SamplerMipFilterNotMipmapped"
+	case SamplerMipFilterNearest:
+		return "SamplerMipFilterNearest"
+	case SamplerMipFilterLinear:
+		return "SamplerMipFilterLinear"
 	default:
-		return fmt.Sprintf("MTLSamplerMipFilter(%d)", int64(e))
+		return fmt.Sprintf("SamplerMipFilter(%d)", int64(e))
 	}
 }
 
 // Configures how the sampler aggregates contributing samples to a final value.
-type MTLSamplerReductionMode uint64
+type SamplerReductionMode uint64
 
 const (
 	// A reduction mode that adds together the product of each contributing sample value by its weight.
-	MTLSamplerReductionModeWeightedAverage MTLSamplerReductionMode = 0
+	SamplerReductionModeWeightedAverage SamplerReductionMode = 0
 	// A reduction mode that finds the minimum contributing sample value by separately evaluating each channel.
-	MTLSamplerReductionModeMinimum MTLSamplerReductionMode = 1
+	SamplerReductionModeMinimum SamplerReductionMode = 1
 	// A reduction mode that finds the maximum contributing sample value by separately evaluating each channel.
-	MTLSamplerReductionModeMaximum MTLSamplerReductionMode = 2
+	SamplerReductionModeMaximum SamplerReductionMode = 2
 )
 
-func (e MTLSamplerReductionMode) String() string {
+func (e SamplerReductionMode) String() string {
 	switch e {
-	case MTLSamplerReductionModeWeightedAverage:
-		return "MTLSamplerReductionModeWeightedAverage"
-	case MTLSamplerReductionModeMinimum:
-		return "MTLSamplerReductionModeMinimum"
-	case MTLSamplerReductionModeMaximum:
-		return "MTLSamplerReductionModeMaximum"
+	case SamplerReductionModeWeightedAverage:
+		return "SamplerReductionModeWeightedAverage"
+	case SamplerReductionModeMinimum:
+		return "SamplerReductionModeMinimum"
+	case SamplerReductionModeMaximum:
+		return "SamplerReductionModeMaximum"
 	default:
-		return fmt.Sprintf("MTLSamplerReductionMode(%d)", int64(e))
+		return fmt.Sprintf("SamplerReductionMode(%d)", int64(e))
 	}
 }
 
 // Indicates whether shader validation in an enabled or disabled state, or neither state.
-type MTLShaderValidation int64
+type ShaderValidation int64
 
 const (
 	// The default value when the property isn’t set.
-	MTLShaderValidationDefault MTLShaderValidation = 0
+	ShaderValidationDefault ShaderValidation = 0
 	// Enables shader validation.
-	MTLShaderValidationEnabled MTLShaderValidation = 1
+	ShaderValidationEnabled ShaderValidation = 1
 	// Disables shader validation.
-	MTLShaderValidationDisabled MTLShaderValidation = 2
+	ShaderValidationDisabled ShaderValidation = 2
 )
 
-func (e MTLShaderValidation) String() string {
+func (e ShaderValidation) String() string {
 	switch e {
-	case MTLShaderValidationDefault:
-		return "MTLShaderValidationDefault"
-	case MTLShaderValidationEnabled:
-		return "MTLShaderValidationEnabled"
-	case MTLShaderValidationDisabled:
-		return "MTLShaderValidationDisabled"
+	case ShaderValidationDefault:
+		return "ShaderValidationDefault"
+	case ShaderValidationEnabled:
+		return "ShaderValidationEnabled"
+	case ShaderValidationDisabled:
+		return "ShaderValidationDisabled"
 	default:
-		return fmt.Sprintf("MTLShaderValidation(%d)", int64(e))
+		return fmt.Sprintf("ShaderValidation(%d)", int64(e))
 	}
 }
 
 // The page size options, in kilobytes, for sparse textures.
-type MTLSparsePageSize int64
+type SparsePageSize int64
 
 const (
 	// Represents a sparse texture’s page size of 16 kilobytes.
-	MTLSparsePageSize16 MTLSparsePageSize = 101
+	SparsePageSize16 SparsePageSize = 101
 	// Represents a sparse texture’s page size of 64 kilobytes.
-	MTLSparsePageSize64 MTLSparsePageSize = 102
+	SparsePageSize64 SparsePageSize = 102
 	// Represents a sparse texture’s page size of 256 kilobytes.
-	MTLSparsePageSize256 MTLSparsePageSize = 103
+	SparsePageSize256 SparsePageSize = 103
 )
 
-func (e MTLSparsePageSize) String() string {
+func (e SparsePageSize) String() string {
 	switch e {
-	case MTLSparsePageSize16:
-		return "MTLSparsePageSize16"
-	case MTLSparsePageSize64:
-		return "MTLSparsePageSize64"
-	case MTLSparsePageSize256:
-		return "MTLSparsePageSize256"
+	case SparsePageSize16:
+		return "SparsePageSize16"
+	case SparsePageSize64:
+		return "SparsePageSize64"
+	case SparsePageSize256:
+		return "SparsePageSize256"
 	default:
-		return fmt.Sprintf("MTLSparsePageSize(%d)", int64(e))
+		return fmt.Sprintf("SparsePageSize(%d)", int64(e))
 	}
 }
 
 // The operation performed on a currently stored stencil value when a comparison test passes or fails.
-type MTLStencilOperation uint64
+type StencilOperation uint64
 
 const (
 	// A stencil operation that doesn’t modify a stencil value.
-	MTLStencilOperationKeep MTLStencilOperation = 0
+	StencilOperationKeep StencilOperation = 0
 	// A stencil operation that sets a stencil value to zero.
-	MTLStencilOperationZero MTLStencilOperation = 1
+	StencilOperationZero StencilOperation = 1
 	// A stencil operation that replaces a stencil value with a reference value.
-	MTLStencilOperationReplace MTLStencilOperation = 2
+	StencilOperationReplace StencilOperation = 2
 	// A stencil operation that increases a stencil value by one, but only when the current value isn’t the maximum representable value.
-	MTLStencilOperationIncrementClamp MTLStencilOperation = 3
+	StencilOperationIncrementClamp StencilOperation = 3
 	// A stencil operation that decreases a nonzero stencil value by one.
-	MTLStencilOperationDecrementClamp MTLStencilOperation = 4
+	StencilOperationDecrementClamp StencilOperation = 4
 	// A stencil operation that applies a logical bitwise NOT to a stencil value.
-	MTLStencilOperationInvert MTLStencilOperation = 5
+	StencilOperationInvert StencilOperation = 5
 	// A stencil operation that decreases a nonzero stencil value by one, or when it’s the maximum representable value, resets it to zero.
-	MTLStencilOperationIncrementWrap MTLStencilOperation = 6
+	StencilOperationIncrementWrap StencilOperation = 6
 	// A stencil operation that decreases a nonzero stencil value by one, or when it’s zero, resets it to the maximum representable value.
-	MTLStencilOperationDecrementWrap MTLStencilOperation = 7
+	StencilOperationDecrementWrap StencilOperation = 7
 )
 
-func (e MTLStencilOperation) String() string {
+func (e StencilOperation) String() string {
 	switch e {
-	case MTLStencilOperationKeep:
-		return "MTLStencilOperationKeep"
-	case MTLStencilOperationZero:
-		return "MTLStencilOperationZero"
-	case MTLStencilOperationReplace:
-		return "MTLStencilOperationReplace"
-	case MTLStencilOperationIncrementClamp:
-		return "MTLStencilOperationIncrementClamp"
-	case MTLStencilOperationDecrementClamp:
-		return "MTLStencilOperationDecrementClamp"
-	case MTLStencilOperationInvert:
-		return "MTLStencilOperationInvert"
-	case MTLStencilOperationIncrementWrap:
-		return "MTLStencilOperationIncrementWrap"
-	case MTLStencilOperationDecrementWrap:
-		return "MTLStencilOperationDecrementWrap"
+	case StencilOperationKeep:
+		return "StencilOperationKeep"
+	case StencilOperationZero:
+		return "StencilOperationZero"
+	case StencilOperationReplace:
+		return "StencilOperationReplace"
+	case StencilOperationIncrementClamp:
+		return "StencilOperationIncrementClamp"
+	case StencilOperationDecrementClamp:
+		return "StencilOperationDecrementClamp"
+	case StencilOperationInvert:
+		return "StencilOperationInvert"
+	case StencilOperationIncrementWrap:
+		return "StencilOperationIncrementWrap"
+	case StencilOperationDecrementWrap:
+		return "StencilOperationDecrementWrap"
 	default:
-		return fmt.Sprintf("MTLStencilOperation(%d)", int64(e))
+		return fmt.Sprintf("StencilOperation(%d)", int64(e))
 	}
 }
 
 // The frequency and locations at which a function fetches attribute data.
-type MTLStepFunction uint64
+type StepFunction uint64
 
 const (
 	// The function fetches attribute data once.
-	MTLStepFunctionConstant MTLStepFunction = 0
+	StepFunctionConstant StepFunction = 0
 	// The vertex function fetches data for every vertex.
-	MTLStepFunctionPerVertex MTLStepFunction = 1
+	StepFunctionPerVertex StepFunction = 1
 	// The function fetches data based on the instance index.
-	MTLStepFunctionPerInstance MTLStepFunction = 2
+	StepFunctionPerInstance StepFunction = 2
 	// The post-tessellation function fetches data based on the patch index of the patch.
-	MTLStepFunctionPerPatch MTLStepFunction = 3
+	StepFunctionPerPatch StepFunction = 3
 	// The post-tessellation function fetches data based on the control-point indices associated with the patch.
-	MTLStepFunctionPerPatchControlPoint MTLStepFunction = 4
+	StepFunctionPerPatchControlPoint StepFunction = 4
 	// The compute function fetches data based on the thread’s x coordinate.
-	MTLStepFunctionThreadPositionInGridX MTLStepFunction = 5
+	StepFunctionThreadPositionInGridX StepFunction = 5
 	// The compute function fetches data based on the thread’s y coordinate.
-	MTLStepFunctionThreadPositionInGridY MTLStepFunction = 6
+	StepFunctionThreadPositionInGridY StepFunction = 6
 	// The compute function fetches data by using the thread’s x coordinate to look up a value in the index buffer.
-	MTLStepFunctionThreadPositionInGridXIndexed MTLStepFunction = 7
+	StepFunctionThreadPositionInGridXIndexed StepFunction = 7
 	// The compute function fetches data by using the thread’s y coordinate to look up a value in the index buffer.
-	MTLStepFunctionThreadPositionInGridYIndexed MTLStepFunction = 8
+	StepFunctionThreadPositionInGridYIndexed StepFunction = 8
 )
 
-func (e MTLStepFunction) String() string {
+func (e StepFunction) String() string {
 	switch e {
-	case MTLStepFunctionConstant:
-		return "MTLStepFunctionConstant"
-	case MTLStepFunctionPerVertex:
-		return "MTLStepFunctionPerVertex"
-	case MTLStepFunctionPerInstance:
-		return "MTLStepFunctionPerInstance"
-	case MTLStepFunctionPerPatch:
-		return "MTLStepFunctionPerPatch"
-	case MTLStepFunctionPerPatchControlPoint:
-		return "MTLStepFunctionPerPatchControlPoint"
-	case MTLStepFunctionThreadPositionInGridX:
-		return "MTLStepFunctionThreadPositionInGridX"
-	case MTLStepFunctionThreadPositionInGridY:
-		return "MTLStepFunctionThreadPositionInGridY"
-	case MTLStepFunctionThreadPositionInGridXIndexed:
-		return "MTLStepFunctionThreadPositionInGridXIndexed"
-	case MTLStepFunctionThreadPositionInGridYIndexed:
-		return "MTLStepFunctionThreadPositionInGridYIndexed"
+	case StepFunctionConstant:
+		return "StepFunctionConstant"
+	case StepFunctionPerVertex:
+		return "StepFunctionPerVertex"
+	case StepFunctionPerInstance:
+		return "StepFunctionPerInstance"
+	case StepFunctionPerPatch:
+		return "StepFunctionPerPatch"
+	case StepFunctionPerPatchControlPoint:
+		return "StepFunctionPerPatchControlPoint"
+	case StepFunctionThreadPositionInGridX:
+		return "StepFunctionThreadPositionInGridX"
+	case StepFunctionThreadPositionInGridY:
+		return "StepFunctionThreadPositionInGridY"
+	case StepFunctionThreadPositionInGridXIndexed:
+		return "StepFunctionThreadPositionInGridXIndexed"
+	case StepFunctionThreadPositionInGridYIndexed:
+		return "StepFunctionThreadPositionInGridYIndexed"
 	default:
-		return fmt.Sprintf("MTLStepFunction(%d)", int64(e))
+		return fmt.Sprintf("StepFunction(%d)", int64(e))
 	}
 }
 
 // Bitmask — values may be combined with |.
-type MTLStitchedLibraryOptions uint64
+type StitchedLibraryOptions uint64
 
 const (
-	MTLStitchedLibraryOptionNone MTLStitchedLibraryOptions = 0
+	StitchedLibraryOptionNone StitchedLibraryOptions = 0
 	// An option that instructs the compiler to return an error when a GPU function for a stitched library isn’t in a binary archive.
-	MTLStitchedLibraryOptionFailOnBinaryArchiveMiss MTLStitchedLibraryOptions = 1
-	// @brief stores and tracks this library in a Metal Pipelines Script This flag is optional and only supported in the context of binary archives. @discussion This flag is required for inspecting and consuming binary archives with stitched libraries via the metal-source tool. It is not required for recompilation, nor for storing stitched libraries in binary archives. Set this flag only if you intend to use metal-source on a serialized binary archive.
-	MTLStitchedLibraryOptionStoreLibraryInMetalPipelinesScript MTLStitchedLibraryOptions = 2
+	StitchedLibraryOptionFailOnBinaryArchiveMiss StitchedLibraryOptions = 1
+	// stores and tracks this library in a Metal Pipelines Script This flag is optional and only supported in the context of binary archives. This flag is required for inspecting and consuming binary archives with stitched libraries via the metal-source tool. It is not required for recompilation, nor for storing stitched libraries in binary archives. Set this flag only if you intend to use metal-source on a serialized binary archive.
+	StitchedLibraryOptionStoreLibraryInMetalPipelinesScript StitchedLibraryOptions = 2
 )
 
-func (e MTLStitchedLibraryOptions) String() string {
+func (e StitchedLibraryOptions) String() string {
 	var parts []string
-	if e&MTLStitchedLibraryOptionFailOnBinaryArchiveMiss != 0 {
-		parts = append(parts, "MTLStitchedLibraryOptionFailOnBinaryArchiveMiss")
+	if e&StitchedLibraryOptionFailOnBinaryArchiveMiss != 0 {
+		parts = append(parts, "StitchedLibraryOptionFailOnBinaryArchiveMiss")
 	}
-	if e&MTLStitchedLibraryOptionStoreLibraryInMetalPipelinesScript != 0 {
-		parts = append(parts, "MTLStitchedLibraryOptionStoreLibraryInMetalPipelinesScript")
+	if e&StitchedLibraryOptionStoreLibraryInMetalPipelinesScript != 0 {
+		parts = append(parts, "StitchedLibraryOptionStoreLibraryInMetalPipelinesScript")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -2972,86 +2951,86 @@ func (e MTLStitchedLibraryOptions) String() string {
 }
 
 // Options for the memory location and access permissions for a resource.
-type MTLStorageMode uint64
+type StorageMode uint64
 
 const (
 	// The CPU and GPU share access to the resource, allocated in system memory.
-	MTLStorageModeShared MTLStorageMode = 0
+	StorageModeShared StorageMode = 0
 	// The CPU and GPU may maintain separate copies of the resource, and any changes need to be explicitly synchronized.
-	MTLStorageModeManaged MTLStorageMode = 1
+	StorageModeManaged StorageMode = 1
 	// The resource is only available to the GPU.
-	MTLStorageModePrivate MTLStorageMode = 2
+	StorageModePrivate StorageMode = 2
 	// The resource’s contents are only available to the GPU, and only exist temporarily during a render pass.
-	MTLStorageModeMemoryless MTLStorageMode = 3
+	StorageModeMemoryless StorageMode = 3
 )
 
-func (e MTLStorageMode) String() string {
+func (e StorageMode) String() string {
 	switch e {
-	case MTLStorageModeShared:
-		return "MTLStorageModeShared"
-	case MTLStorageModeManaged:
-		return "MTLStorageModeManaged"
-	case MTLStorageModePrivate:
-		return "MTLStorageModePrivate"
-	case MTLStorageModeMemoryless:
-		return "MTLStorageModeMemoryless"
+	case StorageModeShared:
+		return "StorageModeShared"
+	case StorageModeManaged:
+		return "StorageModeManaged"
+	case StorageModePrivate:
+		return "StorageModePrivate"
+	case StorageModeMemoryless:
+		return "StorageModeMemoryless"
 	default:
-		return fmt.Sprintf("MTLStorageMode(%d)", int64(e))
+		return fmt.Sprintf("StorageMode(%d)", int64(e))
 	}
 }
 
 // Types of actions performed for an attachment at the end of a rendering pass.
-type MTLStoreAction uint64
+type StoreAction uint64
 
 const (
 	// The GPU has permission to discard the rendered contents of the attachment at the end of the render pass, replacing them with arbitrary data.
-	MTLStoreActionDontCare MTLStoreAction = 0
+	StoreActionDontCare StoreAction = 0
 	// The GPU stores the rendered contents to the texture.
-	MTLStoreActionStore MTLStoreAction = 1
+	StoreActionStore StoreAction = 1
 	// The GPU resolves the multisampled data to one sample per pixel and stores the data to the resolve texture, discarding the multisample data afterwards.
-	MTLStoreActionMultisampleResolve MTLStoreAction = 2
+	StoreActionMultisampleResolve StoreAction = 2
 	// The GPU stores the multisample data to the multisample texture, resolves the data to a sample per pixel, and stores the data to the resolve texture.
-	MTLStoreActionStoreAndMultisampleResolve MTLStoreAction = 3
+	StoreActionStoreAndMultisampleResolve StoreAction = 3
 	// The system selects a store action when it encodes the render pass.
-	MTLStoreActionUnknown MTLStoreAction = 4
+	StoreActionUnknown StoreAction = 4
 	// The GPU stores depth data in a sample-position–agnostic representation.
-	MTLStoreActionCustomSampleDepthStore MTLStoreAction = 5
+	StoreActionCustomSampleDepthStore StoreAction = 5
 )
 
-func (e MTLStoreAction) String() string {
+func (e StoreAction) String() string {
 	switch e {
-	case MTLStoreActionDontCare:
-		return "MTLStoreActionDontCare"
-	case MTLStoreActionStore:
-		return "MTLStoreActionStore"
-	case MTLStoreActionMultisampleResolve:
-		return "MTLStoreActionMultisampleResolve"
-	case MTLStoreActionStoreAndMultisampleResolve:
-		return "MTLStoreActionStoreAndMultisampleResolve"
-	case MTLStoreActionUnknown:
-		return "MTLStoreActionUnknown"
-	case MTLStoreActionCustomSampleDepthStore:
-		return "MTLStoreActionCustomSampleDepthStore"
+	case StoreActionDontCare:
+		return "StoreActionDontCare"
+	case StoreActionStore:
+		return "StoreActionStore"
+	case StoreActionMultisampleResolve:
+		return "StoreActionMultisampleResolve"
+	case StoreActionStoreAndMultisampleResolve:
+		return "StoreActionStoreAndMultisampleResolve"
+	case StoreActionUnknown:
+		return "StoreActionUnknown"
+	case StoreActionCustomSampleDepthStore:
+		return "StoreActionCustomSampleDepthStore"
 	default:
-		return fmt.Sprintf("MTLStoreAction(%d)", int64(e))
+		return fmt.Sprintf("StoreAction(%d)", int64(e))
 	}
 }
 
 // Options that modify a store action.
 // Bitmask — values may be combined with |.
-type MTLStoreActionOptions uint64
+type StoreActionOptions uint64
 
 const (
 	// An option that doesn’t modify the intended behavior of a store action.
-	MTLStoreActionOptionNone MTLStoreActionOptions = 0
+	StoreActionOptionNone StoreActionOptions = 0
 	// An option that stores data in a sample-position–agnostic representation.
-	MTLStoreActionOptionCustomSamplePositions MTLStoreActionOptions = 1
+	StoreActionOptionCustomSamplePositions StoreActionOptions = 1
 )
 
-func (e MTLStoreActionOptions) String() string {
+func (e StoreActionOptions) String() string {
 	var parts []string
-	if e&MTLStoreActionOptionCustomSamplePositions != 0 {
-		parts = append(parts, "MTLStoreActionOptionCustomSamplePositions")
+	if e&StoreActionOptionCustomSamplePositions != 0 {
+		parts = append(parts, "StoreActionOptionCustomSamplePositions")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3060,89 +3039,89 @@ func (e MTLStoreActionOptions) String() string {
 }
 
 // The possible data types for the elements of a tensor.
-type MTLTensorDataType int64
+type TensorDataType int64
 
 const (
 	// An invalid data type.
-	MTLTensorDataTypeNone MTLTensorDataType = 0
+	TensorDataTypeNone TensorDataType = 0
 	// A single-precision floating point data type.
-	MTLTensorDataTypeFloat32 MTLTensorDataType = 3
+	TensorDataTypeFloat32 TensorDataType = 3
 	// A half-precision floating point data type.
-	MTLTensorDataTypeFloat16 MTLTensorDataType = 16
+	TensorDataTypeFloat16 TensorDataType = 16
 	// A 16-bit floating point data type with 8 exponent bits, 7 mantissa bits and 1 sign bit.
-	MTLTensorDataTypeBFloat16 MTLTensorDataType = 121
+	TensorDataTypeBFloat16 TensorDataType = 121
 	// An 8-bit signed integer data type.
-	MTLTensorDataTypeInt8 MTLTensorDataType = 45
+	TensorDataTypeInt8 TensorDataType = 45
 	// An 8-bit unsigned integer data type.
-	MTLTensorDataTypeUInt8 MTLTensorDataType = 49
+	TensorDataTypeUInt8 TensorDataType = 49
 	// A 16-bit signed integer data type.
-	MTLTensorDataTypeInt16 MTLTensorDataType = 37
+	TensorDataTypeInt16 TensorDataType = 37
 	// A 16-bit unsigned integer data type.
-	MTLTensorDataTypeUInt16 MTLTensorDataType = 41
+	TensorDataTypeUInt16 TensorDataType = 41
 	// A 32-bit integer data type.
-	MTLTensorDataTypeInt32 MTLTensorDataType = 29
+	TensorDataTypeInt32 TensorDataType = 29
 	// A 32-bit unsigned integer data type.
-	MTLTensorDataTypeUInt32 MTLTensorDataType = 33
+	TensorDataTypeUInt32 TensorDataType = 33
 	// A 4-bit signed integer format data type.
-	MTLTensorDataTypeInt4 MTLTensorDataType = 143
+	TensorDataTypeInt4 TensorDataType = 143
 	// A 4-bit unsigned integer format data type.
-	MTLTensorDataTypeUInt4 MTLTensorDataType = 144
+	TensorDataTypeUInt4 TensorDataType = 144
 )
 
-func (e MTLTensorDataType) String() string {
+func (e TensorDataType) String() string {
 	switch e {
-	case MTLTensorDataTypeNone:
-		return "MTLTensorDataTypeNone"
-	case MTLTensorDataTypeFloat32:
-		return "MTLTensorDataTypeFloat32"
-	case MTLTensorDataTypeFloat16:
-		return "MTLTensorDataTypeFloat16"
-	case MTLTensorDataTypeBFloat16:
-		return "MTLTensorDataTypeBFloat16"
-	case MTLTensorDataTypeInt8:
-		return "MTLTensorDataTypeInt8"
-	case MTLTensorDataTypeUInt8:
-		return "MTLTensorDataTypeUInt8"
-	case MTLTensorDataTypeInt16:
-		return "MTLTensorDataTypeInt16"
-	case MTLTensorDataTypeUInt16:
-		return "MTLTensorDataTypeUInt16"
-	case MTLTensorDataTypeInt32:
-		return "MTLTensorDataTypeInt32"
-	case MTLTensorDataTypeUInt32:
-		return "MTLTensorDataTypeUInt32"
-	case MTLTensorDataTypeInt4:
-		return "MTLTensorDataTypeInt4"
-	case MTLTensorDataTypeUInt4:
-		return "MTLTensorDataTypeUInt4"
+	case TensorDataTypeNone:
+		return "TensorDataTypeNone"
+	case TensorDataTypeFloat32:
+		return "TensorDataTypeFloat32"
+	case TensorDataTypeFloat16:
+		return "TensorDataTypeFloat16"
+	case TensorDataTypeBFloat16:
+		return "TensorDataTypeBFloat16"
+	case TensorDataTypeInt8:
+		return "TensorDataTypeInt8"
+	case TensorDataTypeUInt8:
+		return "TensorDataTypeUInt8"
+	case TensorDataTypeInt16:
+		return "TensorDataTypeInt16"
+	case TensorDataTypeUInt16:
+		return "TensorDataTypeUInt16"
+	case TensorDataTypeInt32:
+		return "TensorDataTypeInt32"
+	case TensorDataTypeUInt32:
+		return "TensorDataTypeUInt32"
+	case TensorDataTypeInt4:
+		return "TensorDataTypeInt4"
+	case TensorDataTypeUInt4:
+		return "TensorDataTypeUInt4"
 	default:
-		return fmt.Sprintf("MTLTensorDataType(%d)", int64(e))
+		return fmt.Sprintf("TensorDataType(%d)", int64(e))
 	}
 }
 
 // The type that represents the different contexts for a tensor.
 // Bitmask — values may be combined with |.
-type MTLTensorUsage uint64
+type TensorUsage uint64
 
 const (
 	// A tensor context that applies to compute encoders.
-	MTLTensorUsageCompute MTLTensorUsage = 1
+	TensorUsageCompute TensorUsage = 1
 	// A tensor context that applies to render encoders.
-	MTLTensorUsageRender MTLTensorUsage = 2
+	TensorUsageRender TensorUsage = 2
 	// A tensor context that applies to machine learning encoders.
-	MTLTensorUsageMachineLearning MTLTensorUsage = 4
+	TensorUsageMachineLearning TensorUsage = 4
 )
 
-func (e MTLTensorUsage) String() string {
+func (e TensorUsage) String() string {
 	var parts []string
-	if e&MTLTensorUsageCompute != 0 {
-		parts = append(parts, "MTLTensorUsageCompute")
+	if e&TensorUsageCompute != 0 {
+		parts = append(parts, "TensorUsageCompute")
 	}
-	if e&MTLTensorUsageRender != 0 {
-		parts = append(parts, "MTLTensorUsageRender")
+	if e&TensorUsageRender != 0 {
+		parts = append(parts, "TensorUsageRender")
 	}
-	if e&MTLTensorUsageMachineLearning != 0 {
-		parts = append(parts, "MTLTensorUsageMachineLearning")
+	if e&TensorUsageMachineLearning != 0 {
+		parts = append(parts, "TensorUsageMachineLearning")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3151,248 +3130,248 @@ func (e MTLTensorUsage) String() string {
 }
 
 // Options for specifying the size of the control point indices in a control point index buffer.
-type MTLTessellationControlPointIndexType uint64
+type TessellationControlPointIndexType uint64
 
 const (
 	// No size. This value should only be used when drawing patches without a control point index buffer.
-	MTLTessellationControlPointIndexTypeNone MTLTessellationControlPointIndexType = 0
+	TessellationControlPointIndexTypeNone TessellationControlPointIndexType = 0
 	// The size of a 16-bit unsigned integer.
-	MTLTessellationControlPointIndexTypeUInt16 MTLTessellationControlPointIndexType = 1
+	TessellationControlPointIndexTypeUInt16 TessellationControlPointIndexType = 1
 	// The size of a 32-bit unsigned integer.
-	MTLTessellationControlPointIndexTypeUInt32 MTLTessellationControlPointIndexType = 2
+	TessellationControlPointIndexTypeUInt32 TessellationControlPointIndexType = 2
 )
 
-func (e MTLTessellationControlPointIndexType) String() string {
+func (e TessellationControlPointIndexType) String() string {
 	switch e {
-	case MTLTessellationControlPointIndexTypeNone:
-		return "MTLTessellationControlPointIndexTypeNone"
-	case MTLTessellationControlPointIndexTypeUInt16:
-		return "MTLTessellationControlPointIndexTypeUInt16"
-	case MTLTessellationControlPointIndexTypeUInt32:
-		return "MTLTessellationControlPointIndexTypeUInt32"
+	case TessellationControlPointIndexTypeNone:
+		return "TessellationControlPointIndexTypeNone"
+	case TessellationControlPointIndexTypeUInt16:
+		return "TessellationControlPointIndexTypeUInt16"
+	case TessellationControlPointIndexTypeUInt32:
+		return "TessellationControlPointIndexTypeUInt32"
 	default:
-		return fmt.Sprintf("MTLTessellationControlPointIndexType(%d)", int64(e))
+		return fmt.Sprintf("TessellationControlPointIndexType(%d)", int64(e))
 	}
 }
 
 // Options for specifying the format of the tessellation factors in a tessellation factor buffer.
-type MTLTessellationFactorFormat uint64
+type TessellationFactorFormat uint64
 
 const (
 	// A 16-bit floating-point format.
-	MTLTessellationFactorFormatHalf MTLTessellationFactorFormat = 0
+	TessellationFactorFormatHalf TessellationFactorFormat = 0
 )
 
-func (e MTLTessellationFactorFormat) String() string {
+func (e TessellationFactorFormat) String() string {
 	switch e {
-	case MTLTessellationFactorFormatHalf:
-		return "MTLTessellationFactorFormatHalf"
+	case TessellationFactorFormatHalf:
+		return "TessellationFactorFormatHalf"
 	default:
-		return fmt.Sprintf("MTLTessellationFactorFormat(%d)", int64(e))
+		return fmt.Sprintf("TessellationFactorFormat(%d)", int64(e))
 	}
 }
 
 // Options for specifying the step function that determines the tessellation factors for a patch from the tessellation factor buffer.
-type MTLTessellationFactorStepFunction uint64
+type TessellationFactorStepFunction uint64
 
 const (
 	// A constant step function. For all instances, the tessellation factor for all patches in a patch draw call is at the offset location in the tessellation factor buffer.
-	MTLTessellationFactorStepFunctionConstant MTLTessellationFactorStepFunction = 0
+	TessellationFactorStepFunctionConstant TessellationFactorStepFunction = 0
 	// A per-patch step function. For all instances, the tessellation factor for all patches in a patch draw call is at the offset + (drawPatchIndex * tessellationFactorStride) location in the tessellation factor buffer.
-	MTLTessellationFactorStepFunctionPerPatch MTLTessellationFactorStepFunction = 1
+	TessellationFactorStepFunctionPerPatch TessellationFactorStepFunction = 1
 	// A per-instance step function. For a given instance ID, the tessellation factor for a patch in a patch draw call is at the offset + (instanceID * instanceStride) location in the tessellation factor buffer.
-	MTLTessellationFactorStepFunctionPerInstance MTLTessellationFactorStepFunction = 2
+	TessellationFactorStepFunctionPerInstance TessellationFactorStepFunction = 2
 	// A per-patch and per-instance step function. For a given instance ID, the tessellation factor for a patch in a patch draw call is at the offset + (drawPatchIndex * tessellationFactorStride + instanceID * instanceStride) location in the tessellation factor buffer.
-	MTLTessellationFactorStepFunctionPerPatchAndPerInstance MTLTessellationFactorStepFunction = 3
+	TessellationFactorStepFunctionPerPatchAndPerInstance TessellationFactorStepFunction = 3
 )
 
-func (e MTLTessellationFactorStepFunction) String() string {
+func (e TessellationFactorStepFunction) String() string {
 	switch e {
-	case MTLTessellationFactorStepFunctionConstant:
-		return "MTLTessellationFactorStepFunctionConstant"
-	case MTLTessellationFactorStepFunctionPerPatch:
-		return "MTLTessellationFactorStepFunctionPerPatch"
-	case MTLTessellationFactorStepFunctionPerInstance:
-		return "MTLTessellationFactorStepFunctionPerInstance"
-	case MTLTessellationFactorStepFunctionPerPatchAndPerInstance:
-		return "MTLTessellationFactorStepFunctionPerPatchAndPerInstance"
+	case TessellationFactorStepFunctionConstant:
+		return "TessellationFactorStepFunctionConstant"
+	case TessellationFactorStepFunctionPerPatch:
+		return "TessellationFactorStepFunctionPerPatch"
+	case TessellationFactorStepFunctionPerInstance:
+		return "TessellationFactorStepFunctionPerInstance"
+	case TessellationFactorStepFunctionPerPatchAndPerInstance:
+		return "TessellationFactorStepFunctionPerPatchAndPerInstance"
 	default:
-		return fmt.Sprintf("MTLTessellationFactorStepFunction(%d)", int64(e))
+		return fmt.Sprintf("TessellationFactorStepFunction(%d)", int64(e))
 	}
 }
 
 // Options for choosing the partition mode that the tessellator applies when deriving the number and spacing of segments for subdividing a corresponding edge.
-type MTLTessellationPartitionMode uint64
+type TessellationPartitionMode uint64
 
 const (
 	// A power of two partitioning mode.
-	MTLTessellationPartitionModePow2 MTLTessellationPartitionMode = 0
+	TessellationPartitionModePow2 TessellationPartitionMode = 0
 	// An integer partitioning mode.
-	MTLTessellationPartitionModeInteger MTLTessellationPartitionMode = 1
+	TessellationPartitionModeInteger TessellationPartitionMode = 1
 	// A fractional odd partitioning mode.
-	MTLTessellationPartitionModeFractionalOdd MTLTessellationPartitionMode = 2
+	TessellationPartitionModeFractionalOdd TessellationPartitionMode = 2
 	// A fractional even partitioning mode.
-	MTLTessellationPartitionModeFractionalEven MTLTessellationPartitionMode = 3
+	TessellationPartitionModeFractionalEven TessellationPartitionMode = 3
 )
 
-func (e MTLTessellationPartitionMode) String() string {
+func (e TessellationPartitionMode) String() string {
 	switch e {
-	case MTLTessellationPartitionModePow2:
-		return "MTLTessellationPartitionModePow2"
-	case MTLTessellationPartitionModeInteger:
-		return "MTLTessellationPartitionModeInteger"
-	case MTLTessellationPartitionModeFractionalOdd:
-		return "MTLTessellationPartitionModeFractionalOdd"
-	case MTLTessellationPartitionModeFractionalEven:
-		return "MTLTessellationPartitionModeFractionalEven"
+	case TessellationPartitionModePow2:
+		return "TessellationPartitionModePow2"
+	case TessellationPartitionModeInteger:
+		return "TessellationPartitionModeInteger"
+	case TessellationPartitionModeFractionalOdd:
+		return "TessellationPartitionModeFractionalOdd"
+	case TessellationPartitionModeFractionalEven:
+		return "TessellationPartitionModeFractionalEven"
 	default:
-		return fmt.Sprintf("MTLTessellationPartitionMode(%d)", int64(e))
+		return fmt.Sprintf("TessellationPartitionMode(%d)", int64(e))
 	}
 }
 
-type MTLTextureCompressionType int64
+type TextureCompressionType int64
 
 const (
-	MTLTextureCompressionTypeLossless MTLTextureCompressionType = 0
-	MTLTextureCompressionTypeLossy    MTLTextureCompressionType = 1
+	TextureCompressionTypeLossless TextureCompressionType = 0
+	TextureCompressionTypeLossy    TextureCompressionType = 1
 )
 
-func (e MTLTextureCompressionType) String() string {
+func (e TextureCompressionType) String() string {
 	switch e {
-	case MTLTextureCompressionTypeLossless:
-		return "MTLTextureCompressionTypeLossless"
-	case MTLTextureCompressionTypeLossy:
-		return "MTLTextureCompressionTypeLossy"
+	case TextureCompressionTypeLossless:
+		return "TextureCompressionTypeLossless"
+	case TextureCompressionTypeLossy:
+		return "TextureCompressionTypeLossy"
 	default:
-		return fmt.Sprintf("MTLTextureCompressionType(%d)", int64(e))
+		return fmt.Sprintf("TextureCompressionType(%d)", int64(e))
 	}
 }
 
 // A set of options to choose from when creating a texture swizzle pattern.
-type MTLTextureSwizzle int64
+type TextureSwizzle int64
 
 const (
 	// A value of 0.0 is copied to the destination channel.
-	MTLTextureSwizzleZero MTLTextureSwizzle = 0
+	TextureSwizzleZero TextureSwizzle = 0
 	// A value of 1.0 is copied to the destination channel.
-	MTLTextureSwizzleOne MTLTextureSwizzle = 1
+	TextureSwizzleOne TextureSwizzle = 1
 	// The red channel of the source pixel is copied to the destination channel.
-	MTLTextureSwizzleRed MTLTextureSwizzle = 2
+	TextureSwizzleRed TextureSwizzle = 2
 	// The green channel of the source pixel is copied to the destination channel.
-	MTLTextureSwizzleGreen MTLTextureSwizzle = 3
+	TextureSwizzleGreen TextureSwizzle = 3
 	// The blue channel of the source pixel is copied to the destination channel.
-	MTLTextureSwizzleBlue MTLTextureSwizzle = 4
+	TextureSwizzleBlue TextureSwizzle = 4
 	// The alpha channel of the source pixel is copied to the destination channel.
-	MTLTextureSwizzleAlpha MTLTextureSwizzle = 5
+	TextureSwizzleAlpha TextureSwizzle = 5
 )
 
-func (e MTLTextureSwizzle) String() string {
+func (e TextureSwizzle) String() string {
 	switch e {
-	case MTLTextureSwizzleZero:
-		return "MTLTextureSwizzleZero"
-	case MTLTextureSwizzleOne:
-		return "MTLTextureSwizzleOne"
-	case MTLTextureSwizzleRed:
-		return "MTLTextureSwizzleRed"
-	case MTLTextureSwizzleGreen:
-		return "MTLTextureSwizzleGreen"
-	case MTLTextureSwizzleBlue:
-		return "MTLTextureSwizzleBlue"
-	case MTLTextureSwizzleAlpha:
-		return "MTLTextureSwizzleAlpha"
+	case TextureSwizzleZero:
+		return "TextureSwizzleZero"
+	case TextureSwizzleOne:
+		return "TextureSwizzleOne"
+	case TextureSwizzleRed:
+		return "TextureSwizzleRed"
+	case TextureSwizzleGreen:
+		return "TextureSwizzleGreen"
+	case TextureSwizzleBlue:
+		return "TextureSwizzleBlue"
+	case TextureSwizzleAlpha:
+		return "TextureSwizzleAlpha"
 	default:
-		return fmt.Sprintf("MTLTextureSwizzle(%d)", int64(e))
+		return fmt.Sprintf("TextureSwizzle(%d)", int64(e))
 	}
 }
 
 // The dimension of each image, including whether multiple images are arranged into an array or a cube.
-type MTLTextureType uint64
+type TextureType uint64
 
 const (
 	// A one-dimensional texture image.
-	MTLTextureType1D MTLTextureType = 0
+	TextureType1D TextureType = 0
 	// An array of one-dimensional texture images.
-	MTLTextureType1DArray MTLTextureType = 1
+	TextureType1DArray TextureType = 1
 	// A two-dimensional texture image.
-	MTLTextureType2D MTLTextureType = 2
+	TextureType2D TextureType = 2
 	// An array of two-dimensional texture images.
-	MTLTextureType2DArray MTLTextureType = 3
+	TextureType2DArray TextureType = 3
 	// A two-dimensional texture image that uses more than one sample for each pixel.
-	MTLTextureType2DMultisample MTLTextureType = 4
+	TextureType2DMultisample TextureType = 4
 	// A cube texture with six two-dimensional images.
-	MTLTextureTypeCube MTLTextureType = 5
+	TextureTypeCube TextureType = 5
 	// An array of cube textures, each with six two-dimensional images.
-	MTLTextureTypeCubeArray MTLTextureType = 6
+	TextureTypeCubeArray TextureType = 6
 	// A three-dimensional texture image.
-	MTLTextureType3D MTLTextureType = 7
+	TextureType3D TextureType = 7
 	// An array of two-dimensional texture images that use more than one sample for each pixel.
-	MTLTextureType2DMultisampleArray MTLTextureType = 8
+	TextureType2DMultisampleArray TextureType = 8
 	// A texture buffer.
-	MTLTextureTypeTextureBuffer MTLTextureType = 9
+	TextureTypeTextureBuffer TextureType = 9
 )
 
-func (e MTLTextureType) String() string {
+func (e TextureType) String() string {
 	switch e {
-	case MTLTextureType1D:
-		return "MTLTextureType1D"
-	case MTLTextureType1DArray:
-		return "MTLTextureType1DArray"
-	case MTLTextureType2D:
-		return "MTLTextureType2D"
-	case MTLTextureType2DArray:
-		return "MTLTextureType2DArray"
-	case MTLTextureType2DMultisample:
-		return "MTLTextureType2DMultisample"
-	case MTLTextureTypeCube:
-		return "MTLTextureTypeCube"
-	case MTLTextureTypeCubeArray:
-		return "MTLTextureTypeCubeArray"
-	case MTLTextureType3D:
-		return "MTLTextureType3D"
-	case MTLTextureType2DMultisampleArray:
-		return "MTLTextureType2DMultisampleArray"
-	case MTLTextureTypeTextureBuffer:
-		return "MTLTextureTypeTextureBuffer"
+	case TextureType1D:
+		return "TextureType1D"
+	case TextureType1DArray:
+		return "TextureType1DArray"
+	case TextureType2D:
+		return "TextureType2D"
+	case TextureType2DArray:
+		return "TextureType2DArray"
+	case TextureType2DMultisample:
+		return "TextureType2DMultisample"
+	case TextureTypeCube:
+		return "TextureTypeCube"
+	case TextureTypeCubeArray:
+		return "TextureTypeCubeArray"
+	case TextureType3D:
+		return "TextureType3D"
+	case TextureType2DMultisampleArray:
+		return "TextureType2DMultisampleArray"
+	case TextureTypeTextureBuffer:
+		return "TextureTypeTextureBuffer"
 	default:
-		return fmt.Sprintf("MTLTextureType(%d)", int64(e))
+		return fmt.Sprintf("TextureType(%d)", int64(e))
 	}
 }
 
 // An enumeration for the various options that determine how you can use a texture.
 // Bitmask — values may be combined with |.
-type MTLTextureUsage uint64
+type TextureUsage uint64
 
 const (
 	// An option for a texture whose usage is unknown.
-	MTLTextureUsageUnknown MTLTextureUsage = 0
+	TextureUsageUnknown TextureUsage = 0
 	// An option for reading or sampling from the texture in a shader.
-	MTLTextureUsageShaderRead MTLTextureUsage = 1
+	TextureUsageShaderRead TextureUsage = 1
 	// An option for writing to the texture in a shader.
-	MTLTextureUsageShaderWrite MTLTextureUsage = 2
+	TextureUsageShaderWrite TextureUsage = 2
 	// An option for rendering to the texture in a render pass.
-	MTLTextureUsageRenderTarget MTLTextureUsage = 4
+	TextureUsageRenderTarget TextureUsage = 4
 	// An option to create texture views with a different component layout.
-	MTLTextureUsagePixelFormatView MTLTextureUsage = 16
+	TextureUsagePixelFormatView TextureUsage = 16
 	// An option that enables atomic memory operations on texture elements in shader code.
-	MTLTextureUsageShaderAtomic MTLTextureUsage = 32
+	TextureUsageShaderAtomic TextureUsage = 32
 )
 
-func (e MTLTextureUsage) String() string {
+func (e TextureUsage) String() string {
 	var parts []string
-	if e&MTLTextureUsageShaderRead != 0 {
-		parts = append(parts, "MTLTextureUsageShaderRead")
+	if e&TextureUsageShaderRead != 0 {
+		parts = append(parts, "TextureUsageShaderRead")
 	}
-	if e&MTLTextureUsageShaderWrite != 0 {
-		parts = append(parts, "MTLTextureUsageShaderWrite")
+	if e&TextureUsageShaderWrite != 0 {
+		parts = append(parts, "TextureUsageShaderWrite")
 	}
-	if e&MTLTextureUsageRenderTarget != 0 {
-		parts = append(parts, "MTLTextureUsageRenderTarget")
+	if e&TextureUsageRenderTarget != 0 {
+		parts = append(parts, "TextureUsageRenderTarget")
 	}
-	if e&MTLTextureUsagePixelFormatView != 0 {
-		parts = append(parts, "MTLTextureUsagePixelFormatView")
+	if e&TextureUsagePixelFormatView != 0 {
+		parts = append(parts, "TextureUsagePixelFormatView")
 	}
-	if e&MTLTextureUsageShaderAtomic != 0 {
-		parts = append(parts, "MTLTextureUsageShaderAtomic")
+	if e&TextureUsageShaderAtomic != 0 {
+		parts = append(parts, "TextureUsageShaderAtomic")
 	}
 	if len(parts) == 0 {
 		return "0"
@@ -3400,326 +3379,326 @@ func (e MTLTextureUsage) String() string {
 	return strings.Join(parts, "|")
 }
 
-type MTLTransformType int64
+type TransformType int64
 
 const (
-	// @brief A tightly packed matrix with 4 columns and 3 rows. The full transform is assumed to be a 4x4 matrix with the last row being (0, 0, 0, 1).
-	MTLTransformTypePackedFloat4x3 MTLTransformType = 0
-	// @brief A transformation represented by individual components such as translation and rotation. The rotation is represented by a quaternion, allowing for correct motion interpolation.
-	MTLTransformTypeComponent MTLTransformType = 1
+	// A tightly packed matrix with 4 columns and 3 rows. The full transform is assumed to be a 4x4 matrix with the last row being (0, 0, 0, 1).
+	TransformTypePackedFloat4x3 TransformType = 0
+	// A transformation represented by individual components such as translation and rotation. The rotation is represented by a quaternion, allowing for correct motion interpolation.
+	TransformTypeComponent TransformType = 1
 )
 
-func (e MTLTransformType) String() string {
+func (e TransformType) String() string {
 	switch e {
-	case MTLTransformTypePackedFloat4x3:
-		return "MTLTransformTypePackedFloat4x3"
-	case MTLTransformTypeComponent:
-		return "MTLTransformTypeComponent"
+	case TransformTypePackedFloat4x3:
+		return "TransformTypePackedFloat4x3"
+	case TransformTypeComponent:
+		return "TransformTypeComponent"
 	default:
-		return fmt.Sprintf("MTLTransformType(%d)", int64(e))
+		return fmt.Sprintf("TransformType(%d)", int64(e))
 	}
 }
 
 // The vertex data format options for render pipelines.
-type MTLVertexFormat uint64
+type VertexFormat uint64
 
 const (
 	// A sentinel value that represents an empty set of vertex format options.
-	MTLVertexFormatInvalid MTLVertexFormat = 0
+	VertexFormatInvalid VertexFormat = 0
 	// A two-component vector with 8-bit, unsigned integer values.
-	MTLVertexFormatUChar2 MTLVertexFormat = 1
+	VertexFormatUChar2 VertexFormat = 1
 	// A three-component vector with 8-bit, unsigned integer values.
-	MTLVertexFormatUChar3 MTLVertexFormat = 2
+	VertexFormatUChar3 VertexFormat = 2
 	// A four-component vector with 8-bit, unsigned integer values.
-	MTLVertexFormatUChar4 MTLVertexFormat = 3
+	VertexFormatUChar4 VertexFormat = 3
 	// A two-component vector with 8-bit, signed integer values.
-	MTLVertexFormatChar2 MTLVertexFormat = 4
+	VertexFormatChar2 VertexFormat = 4
 	// A three-component vector with 8-bit, signed integer values.
-	MTLVertexFormatChar3 MTLVertexFormat = 5
+	VertexFormatChar3 VertexFormat = 5
 	// A four-component vector with 8-bit, signed integer values.
-	MTLVertexFormatChar4 MTLVertexFormat = 6
+	VertexFormatChar4 VertexFormat = 6
 	// A two-component vector with 8-bit, normalized, unsigned integer values.
-	MTLVertexFormatUChar2Normalized MTLVertexFormat = 7
+	VertexFormatUChar2Normalized VertexFormat = 7
 	// A three-component vector with 8-bit, normalized, unsigned integer values.
-	MTLVertexFormatUChar3Normalized MTLVertexFormat = 8
+	VertexFormatUChar3Normalized VertexFormat = 8
 	// A four-component vector with 8-bit, normalized, unsigned integer values.
-	MTLVertexFormatUChar4Normalized MTLVertexFormat = 9
+	VertexFormatUChar4Normalized VertexFormat = 9
 	// A two-component vector with 8-bit, normalized, signed integer values.
-	MTLVertexFormatChar2Normalized MTLVertexFormat = 10
+	VertexFormatChar2Normalized VertexFormat = 10
 	// A three-component vector with 8-bit, normalized, signed integer values.
-	MTLVertexFormatChar3Normalized MTLVertexFormat = 11
+	VertexFormatChar3Normalized VertexFormat = 11
 	// A four-component vector with 8-bit, normalized, signed integer values.
-	MTLVertexFormatChar4Normalized MTLVertexFormat = 12
+	VertexFormatChar4Normalized VertexFormat = 12
 	// A two-component vector with 16-bit, unsigned integer values.
-	MTLVertexFormatUShort2 MTLVertexFormat = 13
+	VertexFormatUShort2 VertexFormat = 13
 	// A three-component vector with 16-bit, unsigned integer values.
-	MTLVertexFormatUShort3 MTLVertexFormat = 14
+	VertexFormatUShort3 VertexFormat = 14
 	// A four-component vector with 16-bit, unsigned integer values.
-	MTLVertexFormatUShort4 MTLVertexFormat = 15
+	VertexFormatUShort4 VertexFormat = 15
 	// A two-component vector with 16-bit, signed integer values.
-	MTLVertexFormatShort2 MTLVertexFormat = 16
+	VertexFormatShort2 VertexFormat = 16
 	// A three-component vector with 16-bit, signed integer values.
-	MTLVertexFormatShort3 MTLVertexFormat = 17
+	VertexFormatShort3 VertexFormat = 17
 	// A four-component vector with 16-bit, signed integer values.
-	MTLVertexFormatShort4 MTLVertexFormat = 18
+	VertexFormatShort4 VertexFormat = 18
 	// A two-component vector with 16-bit, normalized, unsigned integer values.
-	MTLVertexFormatUShort2Normalized MTLVertexFormat = 19
+	VertexFormatUShort2Normalized VertexFormat = 19
 	// A three-component vector with 16-bit, normalized, unsigned integer values.
-	MTLVertexFormatUShort3Normalized MTLVertexFormat = 20
+	VertexFormatUShort3Normalized VertexFormat = 20
 	// A four-component vector with 16-bit, normalized, unsigned integer values.
-	MTLVertexFormatUShort4Normalized MTLVertexFormat = 21
+	VertexFormatUShort4Normalized VertexFormat = 21
 	// A two-component vector with 16-bit, normalized, signed integer values.
-	MTLVertexFormatShort2Normalized MTLVertexFormat = 22
+	VertexFormatShort2Normalized VertexFormat = 22
 	// A three-component vector with 16-bit, normalized, signed integer values.
-	MTLVertexFormatShort3Normalized MTLVertexFormat = 23
+	VertexFormatShort3Normalized VertexFormat = 23
 	// A four-component vector with 16-bit, normalized, signed integer values.
-	MTLVertexFormatShort4Normalized MTLVertexFormat = 24
+	VertexFormatShort4Normalized VertexFormat = 24
 	// A two-component vector with 16-bit floating-point values.
-	MTLVertexFormatHalf2 MTLVertexFormat = 25
+	VertexFormatHalf2 VertexFormat = 25
 	// A three-component vector with 16-bit floating-point values.
-	MTLVertexFormatHalf3 MTLVertexFormat = 26
+	VertexFormatHalf3 VertexFormat = 26
 	// A four-component vector with 16-bit floating-point values.
-	MTLVertexFormatHalf4 MTLVertexFormat = 27
+	VertexFormatHalf4 VertexFormat = 27
 	// A 32-bit floating-point value.
-	MTLVertexFormatFloat MTLVertexFormat = 28
+	VertexFormatFloat VertexFormat = 28
 	// A two-component vector with 32-bit floating-point values.
-	MTLVertexFormatFloat2 MTLVertexFormat = 29
+	VertexFormatFloat2 VertexFormat = 29
 	// A three-component vector with 32-bit floating-point values.
-	MTLVertexFormatFloat3 MTLVertexFormat = 30
+	VertexFormatFloat3 VertexFormat = 30
 	// A four-component vector with 32-bit floating-point values.
-	MTLVertexFormatFloat4 MTLVertexFormat = 31
+	VertexFormatFloat4 VertexFormat = 31
 	// A 32-bit, signed integer value.
-	MTLVertexFormatInt MTLVertexFormat = 32
+	VertexFormatInt VertexFormat = 32
 	// A two-component vector with 32-bit, signed integer values.
-	MTLVertexFormatInt2 MTLVertexFormat = 33
+	VertexFormatInt2 VertexFormat = 33
 	// A three-component vector with 32-bit, signed integer values.
-	MTLVertexFormatInt3 MTLVertexFormat = 34
+	VertexFormatInt3 VertexFormat = 34
 	// A four-component vector with 32-bit, signed integer values.
-	MTLVertexFormatInt4 MTLVertexFormat = 35
+	VertexFormatInt4 VertexFormat = 35
 	// A 32-bit, unsigned integer value.
-	MTLVertexFormatUInt MTLVertexFormat = 36
+	VertexFormatUInt VertexFormat = 36
 	// A two-component vector with 32-bit, unsigned integer values.
-	MTLVertexFormatUInt2 MTLVertexFormat = 37
+	VertexFormatUInt2 VertexFormat = 37
 	// A three-component vector with 32-bit, unsigned integer values.
-	MTLVertexFormatUInt3 MTLVertexFormat = 38
+	VertexFormatUInt3 VertexFormat = 38
 	// A four-component vector with 32-bit, unsigned integer values.
-	MTLVertexFormatUInt4 MTLVertexFormat = 39
+	VertexFormatUInt4 VertexFormat = 39
 	// A four-component vector with 10-bit, normalized, signed integer values for red, green, and blue, and a 2-bit value for alpha.
-	MTLVertexFormatInt1010102Normalized MTLVertexFormat = 40
+	VertexFormatInt1010102Normalized VertexFormat = 40
 	// A four-component vector with 10-bit, normalized, unsigned integer values for red, green, and blue, and a 2-bit value for alpha.
-	MTLVertexFormatUInt1010102Normalized MTLVertexFormat = 41
+	VertexFormatUInt1010102Normalized VertexFormat = 41
 	// A four-component vector with 8-bit, normalized, unsigned integer values for blue, green, red, and alpha.
-	MTLVertexFormatUChar4Normalized_BGRA MTLVertexFormat = 42
+	VertexFormatUChar4Normalized_BGRA VertexFormat = 42
 	// An 8-bit, unsigned integer value.
-	MTLVertexFormatUChar MTLVertexFormat = 45
+	VertexFormatUChar VertexFormat = 45
 	// An 8-bit, signed integer value.
-	MTLVertexFormatChar MTLVertexFormat = 46
+	VertexFormatChar VertexFormat = 46
 	// An 8-bit, normalized, unsigned integer value.
-	MTLVertexFormatUCharNormalized MTLVertexFormat = 47
+	VertexFormatUCharNormalized VertexFormat = 47
 	// An 8-bit, normalized, signed integer value.
-	MTLVertexFormatCharNormalized MTLVertexFormat = 48
+	VertexFormatCharNormalized VertexFormat = 48
 	// A 16-bit, unsigned integer value.
-	MTLVertexFormatUShort MTLVertexFormat = 49
+	VertexFormatUShort VertexFormat = 49
 	// A 16-bit, signed integer value.
-	MTLVertexFormatShort MTLVertexFormat = 50
+	VertexFormatShort VertexFormat = 50
 	// A 16-bit, normalized, unsigned integer value.
-	MTLVertexFormatUShortNormalized MTLVertexFormat = 51
+	VertexFormatUShortNormalized VertexFormat = 51
 	// A 16-bit, normalized, signed integer value.
-	MTLVertexFormatShortNormalized MTLVertexFormat = 52
+	VertexFormatShortNormalized VertexFormat = 52
 	// A 16-bit floating-point value.
-	MTLVertexFormatHalf MTLVertexFormat = 53
+	VertexFormatHalf VertexFormat = 53
 	// A three-component vector with 11-bit floating-point values for red and green, and a 10-bit value for blue.
-	MTLVertexFormatFloatRG11B10 MTLVertexFormat = 54
+	VertexFormatFloatRG11B10 VertexFormat = 54
 	// A three-component vector with 9-bit floating-point values for red, green, and blue, and a 5-bit shared exponent.
-	MTLVertexFormatFloatRGB9E5 MTLVertexFormat = 55
+	VertexFormatFloatRGB9E5 VertexFormat = 55
 )
 
-func (e MTLVertexFormat) String() string {
+func (e VertexFormat) String() string {
 	switch e {
-	case MTLVertexFormatInvalid:
-		return "MTLVertexFormatInvalid"
-	case MTLVertexFormatUChar2:
-		return "MTLVertexFormatUChar2"
-	case MTLVertexFormatUChar3:
-		return "MTLVertexFormatUChar3"
-	case MTLVertexFormatUChar4:
-		return "MTLVertexFormatUChar4"
-	case MTLVertexFormatChar2:
-		return "MTLVertexFormatChar2"
-	case MTLVertexFormatChar3:
-		return "MTLVertexFormatChar3"
-	case MTLVertexFormatChar4:
-		return "MTLVertexFormatChar4"
-	case MTLVertexFormatUChar2Normalized:
-		return "MTLVertexFormatUChar2Normalized"
-	case MTLVertexFormatUChar3Normalized:
-		return "MTLVertexFormatUChar3Normalized"
-	case MTLVertexFormatUChar4Normalized:
-		return "MTLVertexFormatUChar4Normalized"
-	case MTLVertexFormatChar2Normalized:
-		return "MTLVertexFormatChar2Normalized"
-	case MTLVertexFormatChar3Normalized:
-		return "MTLVertexFormatChar3Normalized"
-	case MTLVertexFormatChar4Normalized:
-		return "MTLVertexFormatChar4Normalized"
-	case MTLVertexFormatUShort2:
-		return "MTLVertexFormatUShort2"
-	case MTLVertexFormatUShort3:
-		return "MTLVertexFormatUShort3"
-	case MTLVertexFormatUShort4:
-		return "MTLVertexFormatUShort4"
-	case MTLVertexFormatShort2:
-		return "MTLVertexFormatShort2"
-	case MTLVertexFormatShort3:
-		return "MTLVertexFormatShort3"
-	case MTLVertexFormatShort4:
-		return "MTLVertexFormatShort4"
-	case MTLVertexFormatUShort2Normalized:
-		return "MTLVertexFormatUShort2Normalized"
-	case MTLVertexFormatUShort3Normalized:
-		return "MTLVertexFormatUShort3Normalized"
-	case MTLVertexFormatUShort4Normalized:
-		return "MTLVertexFormatUShort4Normalized"
-	case MTLVertexFormatShort2Normalized:
-		return "MTLVertexFormatShort2Normalized"
-	case MTLVertexFormatShort3Normalized:
-		return "MTLVertexFormatShort3Normalized"
-	case MTLVertexFormatShort4Normalized:
-		return "MTLVertexFormatShort4Normalized"
-	case MTLVertexFormatHalf2:
-		return "MTLVertexFormatHalf2"
-	case MTLVertexFormatHalf3:
-		return "MTLVertexFormatHalf3"
-	case MTLVertexFormatHalf4:
-		return "MTLVertexFormatHalf4"
-	case MTLVertexFormatFloat:
-		return "MTLVertexFormatFloat"
-	case MTLVertexFormatFloat2:
-		return "MTLVertexFormatFloat2"
-	case MTLVertexFormatFloat3:
-		return "MTLVertexFormatFloat3"
-	case MTLVertexFormatFloat4:
-		return "MTLVertexFormatFloat4"
-	case MTLVertexFormatInt:
-		return "MTLVertexFormatInt"
-	case MTLVertexFormatInt2:
-		return "MTLVertexFormatInt2"
-	case MTLVertexFormatInt3:
-		return "MTLVertexFormatInt3"
-	case MTLVertexFormatInt4:
-		return "MTLVertexFormatInt4"
-	case MTLVertexFormatUInt:
-		return "MTLVertexFormatUInt"
-	case MTLVertexFormatUInt2:
-		return "MTLVertexFormatUInt2"
-	case MTLVertexFormatUInt3:
-		return "MTLVertexFormatUInt3"
-	case MTLVertexFormatUInt4:
-		return "MTLVertexFormatUInt4"
-	case MTLVertexFormatInt1010102Normalized:
-		return "MTLVertexFormatInt1010102Normalized"
-	case MTLVertexFormatUInt1010102Normalized:
-		return "MTLVertexFormatUInt1010102Normalized"
-	case MTLVertexFormatUChar4Normalized_BGRA:
-		return "MTLVertexFormatUChar4Normalized_BGRA"
-	case MTLVertexFormatUChar:
-		return "MTLVertexFormatUChar"
-	case MTLVertexFormatChar:
-		return "MTLVertexFormatChar"
-	case MTLVertexFormatUCharNormalized:
-		return "MTLVertexFormatUCharNormalized"
-	case MTLVertexFormatCharNormalized:
-		return "MTLVertexFormatCharNormalized"
-	case MTLVertexFormatUShort:
-		return "MTLVertexFormatUShort"
-	case MTLVertexFormatShort:
-		return "MTLVertexFormatShort"
-	case MTLVertexFormatUShortNormalized:
-		return "MTLVertexFormatUShortNormalized"
-	case MTLVertexFormatShortNormalized:
-		return "MTLVertexFormatShortNormalized"
-	case MTLVertexFormatHalf:
-		return "MTLVertexFormatHalf"
-	case MTLVertexFormatFloatRG11B10:
-		return "MTLVertexFormatFloatRG11B10"
-	case MTLVertexFormatFloatRGB9E5:
-		return "MTLVertexFormatFloatRGB9E5"
+	case VertexFormatInvalid:
+		return "VertexFormatInvalid"
+	case VertexFormatUChar2:
+		return "VertexFormatUChar2"
+	case VertexFormatUChar3:
+		return "VertexFormatUChar3"
+	case VertexFormatUChar4:
+		return "VertexFormatUChar4"
+	case VertexFormatChar2:
+		return "VertexFormatChar2"
+	case VertexFormatChar3:
+		return "VertexFormatChar3"
+	case VertexFormatChar4:
+		return "VertexFormatChar4"
+	case VertexFormatUChar2Normalized:
+		return "VertexFormatUChar2Normalized"
+	case VertexFormatUChar3Normalized:
+		return "VertexFormatUChar3Normalized"
+	case VertexFormatUChar4Normalized:
+		return "VertexFormatUChar4Normalized"
+	case VertexFormatChar2Normalized:
+		return "VertexFormatChar2Normalized"
+	case VertexFormatChar3Normalized:
+		return "VertexFormatChar3Normalized"
+	case VertexFormatChar4Normalized:
+		return "VertexFormatChar4Normalized"
+	case VertexFormatUShort2:
+		return "VertexFormatUShort2"
+	case VertexFormatUShort3:
+		return "VertexFormatUShort3"
+	case VertexFormatUShort4:
+		return "VertexFormatUShort4"
+	case VertexFormatShort2:
+		return "VertexFormatShort2"
+	case VertexFormatShort3:
+		return "VertexFormatShort3"
+	case VertexFormatShort4:
+		return "VertexFormatShort4"
+	case VertexFormatUShort2Normalized:
+		return "VertexFormatUShort2Normalized"
+	case VertexFormatUShort3Normalized:
+		return "VertexFormatUShort3Normalized"
+	case VertexFormatUShort4Normalized:
+		return "VertexFormatUShort4Normalized"
+	case VertexFormatShort2Normalized:
+		return "VertexFormatShort2Normalized"
+	case VertexFormatShort3Normalized:
+		return "VertexFormatShort3Normalized"
+	case VertexFormatShort4Normalized:
+		return "VertexFormatShort4Normalized"
+	case VertexFormatHalf2:
+		return "VertexFormatHalf2"
+	case VertexFormatHalf3:
+		return "VertexFormatHalf3"
+	case VertexFormatHalf4:
+		return "VertexFormatHalf4"
+	case VertexFormatFloat:
+		return "VertexFormatFloat"
+	case VertexFormatFloat2:
+		return "VertexFormatFloat2"
+	case VertexFormatFloat3:
+		return "VertexFormatFloat3"
+	case VertexFormatFloat4:
+		return "VertexFormatFloat4"
+	case VertexFormatInt:
+		return "VertexFormatInt"
+	case VertexFormatInt2:
+		return "VertexFormatInt2"
+	case VertexFormatInt3:
+		return "VertexFormatInt3"
+	case VertexFormatInt4:
+		return "VertexFormatInt4"
+	case VertexFormatUInt:
+		return "VertexFormatUInt"
+	case VertexFormatUInt2:
+		return "VertexFormatUInt2"
+	case VertexFormatUInt3:
+		return "VertexFormatUInt3"
+	case VertexFormatUInt4:
+		return "VertexFormatUInt4"
+	case VertexFormatInt1010102Normalized:
+		return "VertexFormatInt1010102Normalized"
+	case VertexFormatUInt1010102Normalized:
+		return "VertexFormatUInt1010102Normalized"
+	case VertexFormatUChar4Normalized_BGRA:
+		return "VertexFormatUChar4Normalized_BGRA"
+	case VertexFormatUChar:
+		return "VertexFormatUChar"
+	case VertexFormatChar:
+		return "VertexFormatChar"
+	case VertexFormatUCharNormalized:
+		return "VertexFormatUCharNormalized"
+	case VertexFormatCharNormalized:
+		return "VertexFormatCharNormalized"
+	case VertexFormatUShort:
+		return "VertexFormatUShort"
+	case VertexFormatShort:
+		return "VertexFormatShort"
+	case VertexFormatUShortNormalized:
+		return "VertexFormatUShortNormalized"
+	case VertexFormatShortNormalized:
+		return "VertexFormatShortNormalized"
+	case VertexFormatHalf:
+		return "VertexFormatHalf"
+	case VertexFormatFloatRG11B10:
+		return "VertexFormatFloatRG11B10"
+	case VertexFormatFloatRGB9E5:
+		return "VertexFormatFloatRGB9E5"
 	default:
-		return fmt.Sprintf("MTLVertexFormat(%d)", int64(e))
+		return fmt.Sprintf("VertexFormat(%d)", int64(e))
 	}
 }
 
 // The frequency with which the vertex function or post-tessellation vertex function fetches attribute data.
-type MTLVertexStepFunction uint64
+type VertexStepFunction uint64
 
 const (
 	// The vertex function fetches attribute data once and uses that data for every vertex.
-	MTLVertexStepFunctionConstant MTLVertexStepFunction = 0
+	VertexStepFunctionConstant VertexStepFunction = 0
 	// The vertex function fetches and uses new attribute data for every vertex.
-	MTLVertexStepFunctionPerVertex MTLVertexStepFunction = 1
+	VertexStepFunctionPerVertex VertexStepFunction = 1
 	// The vertex function regularly fetches new attribute data for a number of instances that is determined by stepRate.
-	MTLVertexStepFunctionPerInstance MTLVertexStepFunction = 2
+	VertexStepFunctionPerInstance VertexStepFunction = 2
 	// The post-tessellation vertex function fetches data based on the patch index of the patch.
-	MTLVertexStepFunctionPerPatch MTLVertexStepFunction = 3
+	VertexStepFunctionPerPatch VertexStepFunction = 3
 	// The post-tessellation vertex function fetches data based on the control-point indices associated with the patch.
-	MTLVertexStepFunctionPerPatchControlPoint MTLVertexStepFunction = 4
+	VertexStepFunctionPerPatchControlPoint VertexStepFunction = 4
 )
 
-func (e MTLVertexStepFunction) String() string {
+func (e VertexStepFunction) String() string {
 	switch e {
-	case MTLVertexStepFunctionConstant:
-		return "MTLVertexStepFunctionConstant"
-	case MTLVertexStepFunctionPerVertex:
-		return "MTLVertexStepFunctionPerVertex"
-	case MTLVertexStepFunctionPerInstance:
-		return "MTLVertexStepFunctionPerInstance"
-	case MTLVertexStepFunctionPerPatch:
-		return "MTLVertexStepFunctionPerPatch"
-	case MTLVertexStepFunctionPerPatchControlPoint:
-		return "MTLVertexStepFunctionPerPatchControlPoint"
+	case VertexStepFunctionConstant:
+		return "VertexStepFunctionConstant"
+	case VertexStepFunctionPerVertex:
+		return "VertexStepFunctionPerVertex"
+	case VertexStepFunctionPerInstance:
+		return "VertexStepFunctionPerInstance"
+	case VertexStepFunctionPerPatch:
+		return "VertexStepFunctionPerPatch"
+	case VertexStepFunctionPerPatchControlPoint:
+		return "VertexStepFunctionPerPatchControlPoint"
 	default:
-		return fmt.Sprintf("MTLVertexStepFunction(%d)", int64(e))
+		return fmt.Sprintf("VertexStepFunction(%d)", int64(e))
 	}
 }
 
 // This enumeration controls if Metal accumulates visibility results between render encoders or resets them.
-type MTLVisibilityResultType int64
+type VisibilityResultType int64
 
 const (
 	// Reset visibility result data when you create a render command encoder.
-	MTLVisibilityResultTypeReset MTLVisibilityResultType = 0
+	VisibilityResultTypeReset VisibilityResultType = 0
 	// Accumulate visibility results data across multiple render passes.
-	MTLVisibilityResultTypeAccumulate MTLVisibilityResultType = 1
+	VisibilityResultTypeAccumulate VisibilityResultType = 1
 )
 
-func (e MTLVisibilityResultType) String() string {
+func (e VisibilityResultType) String() string {
 	switch e {
-	case MTLVisibilityResultTypeReset:
-		return "MTLVisibilityResultTypeReset"
-	case MTLVisibilityResultTypeAccumulate:
-		return "MTLVisibilityResultTypeAccumulate"
+	case VisibilityResultTypeReset:
+		return "VisibilityResultTypeReset"
+	case VisibilityResultTypeAccumulate:
+		return "VisibilityResultTypeAccumulate"
 	default:
-		return fmt.Sprintf("MTLVisibilityResultType(%d)", int64(e))
+		return fmt.Sprintf("VisibilityResultType(%d)", int64(e))
 	}
 }
 
 // The vertex winding rule that determines a front-facing primitive.
-type MTLWinding uint64
+type Winding uint64
 
 const (
 	// Primitives whose vertices are specified in clockwise order are front-facing.
-	MTLWindingClockwise MTLWinding = 0
+	WindingClockwise Winding = 0
 	// Primitives whose vertices are specified in counter-clockwise order are front-facing.
-	MTLWindingCounterClockwise MTLWinding = 1
+	WindingCounterClockwise Winding = 1
 )
 
-func (e MTLWinding) String() string {
+func (e Winding) String() string {
 	switch e {
-	case MTLWindingClockwise:
-		return "MTLWindingClockwise"
-	case MTLWindingCounterClockwise:
-		return "MTLWindingCounterClockwise"
+	case WindingClockwise:
+		return "WindingClockwise"
+	case WindingCounterClockwise:
+		return "WindingCounterClockwise"
 	default:
-		return fmt.Sprintf("MTLWinding(%d)", int64(e))
+		return fmt.Sprintf("Winding(%d)", int64(e))
 	}
 }

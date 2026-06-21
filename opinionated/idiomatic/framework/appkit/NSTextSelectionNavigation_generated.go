@@ -5,158 +5,131 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An interface you use to expose methods for obtaining results from actions performed on text selections.
 //
-// TextSelectionNavigation wraps [raw.NSTextSelectionNavigation] with a fluent Go API.
+// TextSelectionNavigation is an idiomatic wrapper over the Objective-C class NSTextSelectionNavigation.
 type TextSelectionNavigation struct {
-	inner *raw.NSTextSelectionNavigation
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSTextSelectionNavigation].
-func (x *TextSelectionNavigation) Unwrap() *raw.NSTextSelectionNavigation { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TextSelectionNavigation) ID() objc.ID { return x.inner.Ptr() }
-
-// TextSelectionNavigationFromID adopts an existing object pointer as a TextSelectionNavigation (nil for 0).
+// TextSelectionNavigationFromID adopts an existing Objective-C object as a TextSelectionNavigation
+// (nil for 0), retaining it and registering a release finalizer.
 func TextSelectionNavigationFromID(id objc.ID) *TextSelectionNavigation {
 	if id == 0 {
 		return nil
 	}
-	return &TextSelectionNavigation{inner: raw.NSTextSelectionNavigationFromID(id)}
+	x := &TextSelectionNavigation{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// Creates a new object using the text selection data source you provide.
-//
-// NewTextSelectionNavigationWithDataSource creates a new [TextSelectionNavigation].
-func NewTextSelectionNavigationWithDataSource(dataSource raw.NSTextSelectionDataSource) *TextSelectionNavigation {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("NSTextSelectionNavigation")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithDataSource:"), dataSource)
-	return &TextSelectionNavigation{inner: raw.NSTextSelectionNavigationFromID(_id)}
+// textSelectionNavigationAdopt wraps an Objective-C object that this code just created as a
+// TextSelectionNavigation (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func textSelectionNavigationAdopt(id objc.ID) *TextSelectionNavigation {
+	if id == 0 {
+		return nil
+	}
+	x := &TextSelectionNavigation{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TextSelectionNavigation) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TextSelectionNavigation) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TextSelectionNavigation) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTextSelectionNavigation creates a new TextSelectionNavigation.
+func NewTextSelectionNavigation() *TextSelectionNavigation {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSTextSelectionNavigation")), objc.RegisterName("new"))
+	return textSelectionNavigationAdopt(_id)
 }
 
 // Determines if the instance could produce selections with multiple noncontiguous selections.
 //
-// WithAllowsNonContiguousRanges sets the allowsNonContiguousRanges property and returns the receiver for chaining.
+// WithAllowsNonContiguousRanges sets allowsNonContiguousRanges and returns the receiver so calls can be chained.
 func (x *TextSelectionNavigation) WithAllowsNonContiguousRanges(allowsNonContiguousRanges bool) *TextSelectionNavigation {
-	x.inner.SetAllowsNonContiguousRanges(allowsNonContiguousRanges)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNonContiguousRanges:"), allowsNonContiguousRanges)
 	return x
 }
 
 // Determines if the framework rotates the coordinate system to match the layout orientation.
 //
-// WithRotatesCoordinateSystemForLayoutOrientation sets the rotatesCoordinateSystemForLayoutOrientation property and returns the receiver for chaining.
+// WithRotatesCoordinateSystemForLayoutOrientation sets rotatesCoordinateSystemForLayoutOrientation and returns the receiver so calls can be chained.
 func (x *TextSelectionNavigation) WithRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool) *TextSelectionNavigation {
-	x.inner.SetRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotatesCoordinateSystemForLayoutOrientation:"), rotatesCoordinateSystemForLayoutOrientation)
 	return x
 }
 
 // Flushes cached layout information.
-//
-// FlushLayoutCache calls the underlying FlushLayoutCache.
 func (x *TextSelectionNavigation) FlushLayoutCache() {
-	x.inner.FlushLayoutCache()
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("flushLayoutCache"))
 }
 
 // Returns a new selection that results from applying the navigation operations you specify to the text selection you provide.
-//
-// DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined calls the underlying DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined.
-func (x *TextSelectionNavigation) DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *raw.NSTextSelection, direction NSTextSelectionNavigationDirection, destination NSTextSelectionNavigationDestination, extending bool, confined bool) *TextSelection {
-	_r := x.inner.DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection, raw.NSTextSelectionNavigationDirection(direction), raw.NSTextSelectionNavigationDestination(destination), extending, confined)
-	if _r == nil {
-		return nil
-	}
-	return &TextSelection{inner: _r}
-}
-
-// Returns an array of text selections produced by a tap or click at the point you specify.
-//
-// TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds calls the underlying TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds.
-func (x *TextSelectionNavigation) TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds(point corefoundation.CGPoint, containerLocation raw.NSTextLocation, anchors *foundation.NSArray[*raw.NSTextSelection], modifiers NSTextSelectionNavigationModifier, selecting bool, bounds corefoundation.CGRect) *foundation.NSArray[*raw.NSTextSelection] {
-	return x.inner.TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds(point, containerLocation, anchors, raw.NSTextSelectionNavigationModifier(modifiers), selecting, bounds)
+func (x *TextSelectionNavigation) DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *TextSelection, direction TextSelectionNavigationDirection, destination TextSelectionNavigationDestination, extending bool, confined bool) *TextSelection {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("destinationSelectionForTextSelection:direction:destination:extending:confined:"), objref.IDOf(textSelection), direction, destination, extending, confined)
+	return TextSelectionFromID(_r)
 }
 
 // Returns a text selection expanded to the nearest boundaries for the selection granularity and enclosing text selection text ranges you specify.
-//
-// TextSelectionForSelectionGranularityEnclosingTextSelection calls the underlying TextSelectionForSelectionGranularityEnclosingTextSelection.
-func (x *TextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity NSTextSelectionGranularity, textSelection *raw.NSTextSelection) *TextSelection {
-	_r := x.inner.TextSelectionForSelectionGranularityEnclosingTextSelection(raw.NSTextSelectionGranularity(selectionGranularity), textSelection)
-	if _r == nil {
-		return nil
-	}
-	return &TextSelection{inner: _r}
-}
-
-// Returns a text selection that expands to the nearest boundaries for selection granularity and an enclosing point you specify.
-//
-// TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation calls the underlying TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation.
-func (x *TextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation(selectionGranularity NSTextSelectionGranularity, point corefoundation.CGPoint, location raw.NSTextLocation) *TextSelection {
-	_r := x.inner.TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation(raw.NSTextSelectionGranularity(selectionGranularity), point, location)
-	if _r == nil {
-		return nil
-	}
-	return &TextSelection{inner: _r}
-}
-
-// Returns the location for inserting the next input depending on the state of the current and secondary selections.
-//
-// ResolvedInsertionLocationForTextSelectionWritingDirection calls the underlying ResolvedInsertionLocationForTextSelectionWritingDirection.
-func (x *TextSelectionNavigation) ResolvedInsertionLocationForTextSelectionWritingDirection(textSelection *raw.NSTextSelection, writingDirection NSTextSelectionNavigationWritingDirection) raw.NSTextLocation {
-	return x.inner.ResolvedInsertionLocationForTextSelectionWritingDirection(textSelection, raw.NSTextSelectionNavigationWritingDirection(writingDirection))
+func (x *TextSelectionNavigation) TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity TextSelectionGranularity, textSelection *TextSelection) *TextSelection {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("textSelectionForSelectionGranularity:enclosingTextSelection:"), selectionGranularity, objref.IDOf(textSelection))
+	return TextSelectionFromID(_r)
 }
 
 // Returns the ranges for deleting the text based on the current selection and movement arguments.
-//
-// DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition calls the underlying DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition.
-func (x *TextSelectionNavigation) DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *raw.NSTextSelection, direction NSTextSelectionNavigationDirection, destination NSTextSelectionNavigationDestination, allowsDecomposition bool) *foundation.NSArray[*raw.NSTextRange] {
-	return x.inner.DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection, raw.NSTextSelectionNavigationDirection(direction), raw.NSTextSelectionNavigationDestination(destination), allowsDecomposition)
+func (x *TextSelectionNavigation) DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *TextSelection, direction TextSelectionNavigationDirection, destination TextSelectionNavigationDestination, allowsDecomposition bool) []*TextRange {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("deletionRangesForTextSelection:direction:destination:allowsDecomposition:"), objref.IDOf(textSelection), direction, destination, allowsDecomposition)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *TextRange { return TextRangeFromID(_id) })
 }
 
-// TextSelectionDataSource calls the underlying TextSelectionDataSource.
-func (x *TextSelectionNavigation) TextSelectionDataSource() raw.NSTextSelectionDataSource {
-	return x.inner.TextSelectionDataSource()
-}
-
-// AllowsNonContiguousRanges calls the underlying AllowsNonContiguousRanges.
 func (x *TextSelectionNavigation) AllowsNonContiguousRanges() bool {
-	return x.inner.AllowsNonContiguousRanges()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("allowsNonContiguousRanges"))
+	return _r
 }
 
-// SetAllowsNonContiguousRanges calls the underlying SetAllowsNonContiguousRanges.
 func (x *TextSelectionNavigation) SetAllowsNonContiguousRanges(allowsNonContiguousRanges bool) {
-	x.inner.SetAllowsNonContiguousRanges(allowsNonContiguousRanges)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setAllowsNonContiguousRanges:"), allowsNonContiguousRanges)
 }
 
-// RotatesCoordinateSystemForLayoutOrientation calls the underlying RotatesCoordinateSystemForLayoutOrientation.
 func (x *TextSelectionNavigation) RotatesCoordinateSystemForLayoutOrientation() bool {
-	return x.inner.RotatesCoordinateSystemForLayoutOrientation()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("rotatesCoordinateSystemForLayoutOrientation"))
+	return _r
 }
 
-// SetRotatesCoordinateSystemForLayoutOrientation calls the underlying SetRotatesCoordinateSystemForLayoutOrientation.
 func (x *TextSelectionNavigation) SetRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool) {
-	x.inner.SetRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setRotatesCoordinateSystemForLayoutOrientation:"), rotatesCoordinateSystemForLayoutOrientation)
 }
 
 // TextSelectionNavigationable is the interface implemented by [TextSelectionNavigation], for mocking and DI.
 type TextSelectionNavigationable interface {
-	Unwrap() *raw.NSTextSelectionNavigation
+	obj.Object
 	WithAllowsNonContiguousRanges(allowsNonContiguousRanges bool) *TextSelectionNavigation
 	WithRotatesCoordinateSystemForLayoutOrientation(rotatesCoordinateSystemForLayoutOrientation bool) *TextSelectionNavigation
 	FlushLayoutCache()
-	DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *raw.NSTextSelection, direction NSTextSelectionNavigationDirection, destination NSTextSelectionNavigationDestination, extending bool, confined bool) *TextSelection
-	TextSelectionsInteractingAtPointInContainerAtLocationAnchorsModifiersSelectingBounds(point corefoundation.CGPoint, containerLocation raw.NSTextLocation, anchors *foundation.NSArray[*raw.NSTextSelection], modifiers NSTextSelectionNavigationModifier, selecting bool, bounds corefoundation.CGRect) *foundation.NSArray[*raw.NSTextSelection]
-	TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity NSTextSelectionGranularity, textSelection *raw.NSTextSelection) *TextSelection
-	TextSelectionForSelectionGranularityEnclosingPointInContainerAtLocation(selectionGranularity NSTextSelectionGranularity, point corefoundation.CGPoint, location raw.NSTextLocation) *TextSelection
-	ResolvedInsertionLocationForTextSelectionWritingDirection(textSelection *raw.NSTextSelection, writingDirection NSTextSelectionNavigationWritingDirection) raw.NSTextLocation
-	DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *raw.NSTextSelection, direction NSTextSelectionNavigationDirection, destination NSTextSelectionNavigationDestination, allowsDecomposition bool) *foundation.NSArray[*raw.NSTextRange]
-	TextSelectionDataSource() raw.NSTextSelectionDataSource
+	DestinationSelectionForTextSelectionDirectionDestinationExtendingConfined(textSelection *TextSelection, direction TextSelectionNavigationDirection, destination TextSelectionNavigationDestination, extending bool, confined bool) *TextSelection
+	TextSelectionForSelectionGranularityEnclosingTextSelection(selectionGranularity TextSelectionGranularity, textSelection *TextSelection) *TextSelection
+	DeletionRangesForTextSelectionDirectionDestinationAllowsDecomposition(textSelection *TextSelection, direction TextSelectionNavigationDirection, destination TextSelectionNavigationDestination, allowsDecomposition bool) []*TextRange
 	AllowsNonContiguousRanges() bool
 	SetAllowsNonContiguousRanges(allowsNonContiguousRanges bool)
 	RotatesCoordinateSystemForLayoutOrientation() bool

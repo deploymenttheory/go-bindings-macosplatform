@@ -5,126 +5,135 @@
 package ituneslibrary
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/ituneslibrary"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // This class describes a playlist in the iTunes library.
 //
-// LibPlaylist wraps [raw.ITLibPlaylist] with a fluent Go API.
+// LibPlaylist is an idiomatic wrapper over the Objective-C class ITLibPlaylist.
 type LibPlaylist struct {
-	inner *raw.ITLibPlaylist
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.ITLibPlaylist].
-func (x *LibPlaylist) Unwrap() *raw.ITLibPlaylist { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *LibPlaylist) ID() objc.ID { return x.inner.Ptr() }
-
-// LibPlaylistFromID adopts an existing object pointer as a LibPlaylist (nil for 0).
+// LibPlaylistFromID adopts an existing Objective-C object as a LibPlaylist
+// (nil for 0), retaining it and registering a release finalizer.
 func LibPlaylistFromID(id objc.ID) *LibPlaylist {
 	if id == 0 {
 		return nil
 	}
-	return &LibPlaylist{inner: raw.ITLibPlaylistFromID(id)}
+	x := &LibPlaylist{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewLibPlaylist creates a new [LibPlaylist].
+// libPlaylistAdopt wraps an Objective-C object that this code just created as a
+// LibPlaylist (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func libPlaylistAdopt(id objc.ID) *LibPlaylist {
+	if id == 0 {
+		return nil
+	}
+	x := &LibPlaylist{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *LibPlaylist) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *LibPlaylist) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *LibPlaylist) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewLibPlaylist creates a new LibPlaylist.
 func NewLibPlaylist() *LibPlaylist {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("ITLibPlaylist")), objc.RegisterName("new"))
-	return &LibPlaylist{inner: raw.ITLibPlaylistFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("ITLibPlaylist")), objc.RegisterName("new"))
+	return libPlaylistAdopt(_id)
 }
 
-// @abstract The name or title of this playlist.
-//
-// Name calls the underlying Name.
+// The name or title of this playlist.
 func (x *LibPlaylist) Name() string {
-	_r := x.inner.Name()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("name"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract Whether this playlist is the primary playlist.
-//
-// IsPrimary calls the underlying IsPrimary.
+// Whether this playlist is the primary playlist.
 func (x *LibPlaylist) IsPrimary() bool {
-	return x.inner.IsPrimary()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPrimary"))
+	return _r
 }
 
-// @abstract The unique identifier of this playlist' parent.
-//
-// ParentID calls the underlying ParentID.
-func (x *LibPlaylist) ParentID() *foundation.NSNumber {
-	return x.inner.ParentID()
+// The unique identifier of this playlist' parent.
+func (x *LibPlaylist) ParentID() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("parentID"))
+	return obj.Wrap(_r)
 }
 
-// @abstract Whether this playlist is visible.
-//
-// IsVisible calls the underlying IsVisible.
+// Whether this playlist is visible.
 func (x *LibPlaylist) IsVisible() bool {
-	return x.inner.IsVisible()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isVisible"))
+	return _r
 }
 
-// @abstract Whether or not every item in this playlist is exposed via this API.  Generally true but not that useful.
-//
-// IsAllItemsPlaylist calls the underlying IsAllItemsPlaylist.
+// Whether or not every item in this playlist is exposed via this API.  Generally true but not that useful.
 func (x *LibPlaylist) IsAllItemsPlaylist() bool {
-	return x.inner.IsAllItemsPlaylist()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAllItemsPlaylist"))
+	return _r
 }
 
-// @abstract The media items contained within this playlist.
+// The media items contained within this playlist.
 //
 // Items returns the collection as a Go slice.
 func (x *LibPlaylist) Items() []*LibMediaItem {
-	arr := x.inner.Items()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *LibMediaItem {
-		return &LibMediaItem{inner: raw.ITLibMediaItemFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("items"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *LibMediaItem { return LibMediaItemFromID(_id) })
 }
 
-// @abstract The distinguished kind of this playlist.
-//
-// DistinguishedKind calls the underlying DistinguishedKind.
-func (x *LibPlaylist) DistinguishedKind() ITLibDistinguishedPlaylistKind {
-	return ITLibDistinguishedPlaylistKind(x.inner.DistinguishedKind())
+// The distinguished kind of this playlist.
+func (x *LibPlaylist) DistinguishedKind() LibDistinguishedPlaylistKind {
+	_r := objc.Send[LibDistinguishedPlaylistKind](objref.IDOf(x), objc.RegisterName("distinguishedKind"))
+	return _r
 }
 
-// @abstract The kind of this playlist.
-//
-// Kind calls the underlying Kind.
-func (x *LibPlaylist) Kind() ITLibPlaylistKind {
-	return ITLibPlaylistKind(x.inner.Kind())
+// The kind of this playlist.
+func (x *LibPlaylist) Kind() LibPlaylistKind {
+	_r := objc.Send[LibPlaylistKind](objref.IDOf(x), objc.RegisterName("kind"))
+	return _r
 }
 
-// @abstract Whether this playlist is the primary playlist.
-//
-// IsMaster calls the underlying IsMaster.
+// Whether this playlist is the primary playlist.
 func (x *LibPlaylist) IsMaster() bool {
-	return x.inner.IsMaster()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isMaster"))
+	return _r
 }
-
-func (x *LibPlaylist) asLibMediaEntity() *raw.ITLibMediaEntity { return &x.inner.ITLibMediaEntity }
 
 // LibPlaylistable is the interface implemented by [LibPlaylist], for mocking and DI.
 type LibPlaylistable interface {
-	Unwrap() *raw.ITLibPlaylist
+	obj.Object
 	Name() string
 	IsPrimary() bool
-	ParentID() *foundation.NSNumber
+	ParentID() obj.Object
 	IsVisible() bool
 	IsAllItemsPlaylist() bool
 	Items() []*LibMediaItem
-	DistinguishedKind() ITLibDistinguishedPlaylistKind
-	Kind() ITLibPlaylistKind
+	DistinguishedKind() LibDistinguishedPlaylistKind
+	Kind() LibPlaylistKind
 	IsMaster() bool
 }
 

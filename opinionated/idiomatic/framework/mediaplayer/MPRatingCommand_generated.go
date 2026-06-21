@@ -5,91 +5,112 @@
 package mediaplayer
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mediaplayer"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that provides a detailed rating for the playing item.
 //
-// RatingCommand wraps [raw.MPRatingCommand] with a fluent Go API.
+// RatingCommand is an idiomatic wrapper over the Objective-C class MPRatingCommand.
 type RatingCommand struct {
-	inner *raw.MPRatingCommand
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPRatingCommand].
-func (x *RatingCommand) Unwrap() *raw.MPRatingCommand { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RatingCommand) ID() objc.ID { return x.inner.Ptr() }
-
-// RatingCommandFromID adopts an existing object pointer as a RatingCommand (nil for 0).
+// RatingCommandFromID adopts an existing Objective-C object as a RatingCommand
+// (nil for 0), retaining it and registering a release finalizer.
 func RatingCommandFromID(id objc.ID) *RatingCommand {
 	if id == 0 {
 		return nil
 	}
-	return &RatingCommand{inner: raw.MPRatingCommandFromID(id)}
+	x := &RatingCommand{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRatingCommand creates a new [RatingCommand].
+// ratingCommandAdopt wraps an Objective-C object that this code just created as a
+// RatingCommand (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func ratingCommandAdopt(id objc.ID) *RatingCommand {
+	if id == 0 {
+		return nil
+	}
+	x := &RatingCommand{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RatingCommand) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RatingCommand) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RatingCommand) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRatingCommand creates a new RatingCommand.
 func NewRatingCommand() *RatingCommand {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPRatingCommand")), objc.RegisterName("new"))
-	return &RatingCommand{inner: raw.MPRatingCommandFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPRatingCommand")), objc.RegisterName("new"))
+	return ratingCommandAdopt(_id)
 }
 
 // The minimum rating for a command.
 //
-// WithMinimumRating sets the minimumRating property and returns the receiver for chaining.
+// WithMinimumRating sets minimumRating and returns the receiver so calls can be chained.
 func (x *RatingCommand) WithMinimumRating(minimumRating float32) *RatingCommand {
-	x.inner.SetMinimumRating(minimumRating)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumRating:"), minimumRating)
 	return x
 }
 
 // The maximum rating for a command.
 //
-// WithMaximumRating sets the maximumRating property and returns the receiver for chaining.
+// WithMaximumRating sets maximumRating and returns the receiver so calls can be chained.
 func (x *RatingCommand) WithMaximumRating(maximumRating float32) *RatingCommand {
-	x.inner.SetMaximumRating(maximumRating)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumRating:"), maximumRating)
 	return x
 }
 
 // A Boolean value that indicates whether a user can interact with the displayed element.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *RatingCommand) WithEnabled(enabled bool) *RatingCommand {
-	x.inner.MPRemoteCommand.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // Minimum rating for the command.
-//
-// MinimumRating calls the underlying MinimumRating.
 func (x *RatingCommand) MinimumRating() float32 {
-	return x.inner.MinimumRating()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("minimumRating"))
+	return _r
 }
 
-// SetMinimumRating calls the underlying SetMinimumRating.
 func (x *RatingCommand) SetMinimumRating(minimumRating float32) {
-	x.inner.SetMinimumRating(minimumRating)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMinimumRating:"), minimumRating)
 }
 
 // Maximum rating for the command.
-//
-// MaximumRating calls the underlying MaximumRating.
 func (x *RatingCommand) MaximumRating() float32 {
-	return x.inner.MaximumRating()
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("maximumRating"))
+	return _r
 }
 
-// SetMaximumRating calls the underlying SetMaximumRating.
 func (x *RatingCommand) SetMaximumRating(maximumRating float32) {
-	x.inner.SetMaximumRating(maximumRating)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setMaximumRating:"), maximumRating)
 }
-
-func (x *RatingCommand) asRemoteCommand() *raw.MPRemoteCommand { return &x.inner.MPRemoteCommand }
 
 // RatingCommandable is the interface implemented by [RatingCommand], for mocking and DI.
 type RatingCommandable interface {
-	Unwrap() *raw.MPRatingCommand
+	obj.Object
 	WithMinimumRating(minimumRating float32) *RatingCommand
 	WithMaximumRating(maximumRating float32) *RatingCommand
 	WithEnabled(enabled bool) *RatingCommand

@@ -5,150 +5,140 @@
 package appkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/appkit"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A bar item that, along with its delegate, provides a list of objects eligible for sharing.
 //
-// SharingServicePickerTouchBarItem wraps [raw.NSSharingServicePickerTouchBarItem] with a fluent Go API.
+// SharingServicePickerTouchBarItem is an idiomatic wrapper over the Objective-C class NSSharingServicePickerTouchBarItem.
 type SharingServicePickerTouchBarItem struct {
-	inner *raw.NSSharingServicePickerTouchBarItem
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSSharingServicePickerTouchBarItem].
-func (x *SharingServicePickerTouchBarItem) Unwrap() *raw.NSSharingServicePickerTouchBarItem {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SharingServicePickerTouchBarItem) ID() objc.ID { return x.inner.Ptr() }
-
-// SharingServicePickerTouchBarItemFromID adopts an existing object pointer as a SharingServicePickerTouchBarItem (nil for 0).
+// SharingServicePickerTouchBarItemFromID adopts an existing Objective-C object as a SharingServicePickerTouchBarItem
+// (nil for 0), retaining it and registering a release finalizer.
 func SharingServicePickerTouchBarItemFromID(id objc.ID) *SharingServicePickerTouchBarItem {
 	if id == 0 {
 		return nil
 	}
-	return &SharingServicePickerTouchBarItem{inner: raw.NSSharingServicePickerTouchBarItemFromID(id)}
-}
-
-// NewSharingServicePickerTouchBarItem creates a new [SharingServicePickerTouchBarItem].
-func NewSharingServicePickerTouchBarItem() *SharingServicePickerTouchBarItem {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSSharingServicePickerTouchBarItem")), objc.RegisterName("new"))
-	return &SharingServicePickerTouchBarItem{inner: raw.NSSharingServicePickerTouchBarItemFromID(_id)}
-}
-
-// The object that acts as the delegate of the sharing service picker bar item.
-//
-// WithDelegate sets the delegate property and returns the receiver for chaining.
-func (x *SharingServicePickerTouchBarItem) WithDelegate(delegate raw.NSSharingServicePickerTouchBarItemDelegate) *SharingServicePickerTouchBarItem {
-	x.inner.SetDelegate(delegate)
+	x := &SharingServicePickerTouchBarItem{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// sharingServicePickerTouchBarItemAdopt wraps an Objective-C object that this code just created as a
+// SharingServicePickerTouchBarItem (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func sharingServicePickerTouchBarItemAdopt(id objc.ID) *SharingServicePickerTouchBarItem {
+	if id == 0 {
+		return nil
+	}
+	x := &SharingServicePickerTouchBarItem{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SharingServicePickerTouchBarItem) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SharingServicePickerTouchBarItem) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SharingServicePickerTouchBarItem) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSharingServicePickerTouchBarItem creates a new SharingServicePickerTouchBarItem.
+func NewSharingServicePickerTouchBarItem() *SharingServicePickerTouchBarItem {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSSharingServicePickerTouchBarItem")), objc.RegisterName("new"))
+	return sharingServicePickerTouchBarItemAdopt(_id)
 }
 
 // A Boolean value that specifies whether the sharing service picker item is enabled.
 //
-// WithEnabled sets the enabled property and returns the receiver for chaining.
+// WithEnabled sets enabled and returns the receiver so calls can be chained.
 func (x *SharingServicePickerTouchBarItem) WithEnabled(enabled bool) *SharingServicePickerTouchBarItem {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 	return x
 }
 
 // The text displayed in the sharing service picker item button.
 //
-// WithButtonTitle sets the buttonTitle property and returns the receiver for chaining.
+// WithButtonTitle sets buttonTitle and returns the receiver so calls can be chained.
 func (x *SharingServicePickerTouchBarItem) WithButtonTitle(buttonTitle string) *SharingServicePickerTouchBarItem {
-	x.inner.SetButtonTitle(foundation.NSStringStringWithUTF8String(buttonTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonTitle:"), purego.NSString(buttonTitle))
 	return x
 }
 
 // The image displayed in the sharing service picker item button.
 //
-// WithButtonImage sets the buttonImage property and returns the receiver for chaining.
+// WithButtonImage sets buttonImage and returns the receiver so calls can be chained.
 func (x *SharingServicePickerTouchBarItem) WithButtonImage(buttonImage *Image) *SharingServicePickerTouchBarItem {
-	x.inner.SetButtonImage(buttonImage.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonImage:"), objref.IDOf(buttonImage))
 	return x
 }
 
 // Determines which items are shown in a bar when space is limited.
 //
-// WithVisibilityPriority sets the visibilityPriority property and returns the receiver for chaining.
+// WithVisibilityPriority sets visibilityPriority and returns the receiver so calls can be chained.
 func (x *SharingServicePickerTouchBarItem) WithVisibilityPriority(visibilityPriority float32) *SharingServicePickerTouchBarItem {
-	x.inner.NSTouchBarItem.SetVisibilityPriority(visibilityPriority)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setVisibilityPriority:"), visibilityPriority)
 	return x
 }
 
-// Delegate calls the underlying Delegate.
-func (x *SharingServicePickerTouchBarItem) Delegate() raw.NSSharingServicePickerTouchBarItemDelegate {
-	return x.inner.Delegate()
-}
-
-// SetDelegate calls the underlying SetDelegate.
-func (x *SharingServicePickerTouchBarItem) SetDelegate(delegate raw.NSSharingServicePickerTouchBarItemDelegate) {
-	x.inner.SetDelegate(delegate)
-}
-
-// IsEnabled calls the underlying IsEnabled.
 func (x *SharingServicePickerTouchBarItem) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// SetEnabled calls the underlying SetEnabled.
 func (x *SharingServicePickerTouchBarItem) SetEnabled(enabled bool) {
-	x.inner.SetEnabled(enabled)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setEnabled:"), enabled)
 }
 
-// ButtonTitle calls the underlying ButtonTitle.
 func (x *SharingServicePickerTouchBarItem) ButtonTitle() string {
-	_r := x.inner.ButtonTitle()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonTitle"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetButtonTitle calls the underlying SetButtonTitle.
 func (x *SharingServicePickerTouchBarItem) SetButtonTitle(buttonTitle string) {
-	x.inner.SetButtonTitle(foundation.NSStringStringWithUTF8String(buttonTitle))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonTitle:"), purego.NSString(buttonTitle))
 }
 
-// ButtonImage calls the underlying ButtonImage.
 func (x *SharingServicePickerTouchBarItem) ButtonImage() *Image {
-	_r := x.inner.ButtonImage()
-	if _r == nil {
-		return nil
-	}
-	return &Image{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("buttonImage"))
+	return ImageFromID(_r)
 }
 
-// SetButtonImage calls the underlying SetButtonImage.
-func (x *SharingServicePickerTouchBarItem) SetButtonImage(buttonImage *raw.NSImage) {
-	x.inner.SetButtonImage(buttonImage)
-}
-
-func (x *SharingServicePickerTouchBarItem) asTouchBarItem() *raw.NSTouchBarItem {
-	return &x.inner.NSTouchBarItem
+func (x *SharingServicePickerTouchBarItem) SetButtonImage(buttonImage *Image) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setButtonImage:"), objref.IDOf(buttonImage))
 }
 
 // SharingServicePickerTouchBarItemable is the interface implemented by [SharingServicePickerTouchBarItem], for mocking and DI.
 type SharingServicePickerTouchBarItemable interface {
-	Unwrap() *raw.NSSharingServicePickerTouchBarItem
-	WithDelegate(delegate raw.NSSharingServicePickerTouchBarItemDelegate) *SharingServicePickerTouchBarItem
+	obj.Object
 	WithEnabled(enabled bool) *SharingServicePickerTouchBarItem
 	WithButtonTitle(buttonTitle string) *SharingServicePickerTouchBarItem
 	WithButtonImage(buttonImage *Image) *SharingServicePickerTouchBarItem
 	WithVisibilityPriority(visibilityPriority float32) *SharingServicePickerTouchBarItem
-	Delegate() raw.NSSharingServicePickerTouchBarItemDelegate
-	SetDelegate(delegate raw.NSSharingServicePickerTouchBarItemDelegate)
 	IsEnabled() bool
 	SetEnabled(enabled bool)
 	ButtonTitle() string
 	SetButtonTitle(buttonTitle string)
 	ButtonImage() *Image
-	SetButtonImage(buttonImage *raw.NSImage)
+	SetButtonImage(buttonImage *Image)
 }
 
 var _ SharingServicePickerTouchBarItemable = (*SharingServicePickerTouchBarItem)(nil)

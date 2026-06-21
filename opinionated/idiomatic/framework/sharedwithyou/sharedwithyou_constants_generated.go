@@ -5,20 +5,16 @@
 package sharedwithyou
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/sharedwithyou"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// SWCollaborationMetadataTypeIdentifier returns the string constant SWCollaborationMetadataTypeIdentifier as an objc.ID, for use as a dictionary key or selector argument.
-func SWCollaborationMetadataTypeIdentifier() objc.ID {
-	return purego.CFConstant(raw.SWCollaborationMetadataTypeIdentifier())
+// SWCollaborationMetadataTypeIdentifier returns the string constant SWCollaborationMetadataTypeIdentifier, for use as a dictionary key or argument.
+func SWCollaborationMetadataTypeIdentifier() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("SWCollaborationMetadataTypeIdentifier")))
 }
 
-// NSPasteboardTypeCollaborationMetadata returns the string constant NSPasteboardTypeCollaborationMetadata as an objc.ID, for use as a dictionary key or selector argument.
-func NSPasteboardTypeCollaborationMetadata() objc.ID {
-	if _r := raw.NSPasteboardTypeCollaborationMetadata(); _r != nil {
-		return _r.Ptr()
-	}
-	return 0
+// NSPasteboardTypeCollaborationMetadata returns the string constant NSPasteboardTypeCollaborationMetadata, for use as a dictionary key or argument.
+func NSPasteboardTypeCollaborationMetadata() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("NSPasteboardTypeCollaborationMetadata")))
 }

@@ -5,66 +5,75 @@
 package foundation
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A mechanism for converting one kind of scripting data to another.
 //
-// ScriptCoercionHandler wraps [raw.NSScriptCoercionHandler] with a fluent Go API.
+// ScriptCoercionHandler is an idiomatic wrapper over the Objective-C class NSScriptCoercionHandler.
 type ScriptCoercionHandler struct {
-	inner *raw.NSScriptCoercionHandler
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSScriptCoercionHandler].
-func (x *ScriptCoercionHandler) Unwrap() *raw.NSScriptCoercionHandler { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ScriptCoercionHandler) ID() objc.ID { return x.inner.Ptr() }
-
-// ScriptCoercionHandlerFromID adopts an existing object pointer as a ScriptCoercionHandler (nil for 0).
+// ScriptCoercionHandlerFromID adopts an existing Objective-C object as a ScriptCoercionHandler
+// (nil for 0), retaining it and registering a release finalizer.
 func ScriptCoercionHandlerFromID(id objc.ID) *ScriptCoercionHandler {
 	if id == 0 {
 		return nil
 	}
-	return &ScriptCoercionHandler{inner: raw.NSScriptCoercionHandlerFromID(id)}
-}
-
-// NewScriptCoercionHandler creates a new [ScriptCoercionHandler].
-func NewScriptCoercionHandler() *ScriptCoercionHandler {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSScriptCoercionHandler")), objc.RegisterName("new"))
-	return &ScriptCoercionHandler{inner: raw.NSScriptCoercionHandlerFromID(_id)}
-}
-
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *ScriptCoercionHandler) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptCoercionHandler {
-	x.inner.NSObject.SetScriptingProperties(scriptingProperties)
+	x := &ScriptCoercionHandler{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// Returns an object of a given class representing a given value.
-//
-// CoerceValueToClass calls the underlying CoerceValueToClass.
-func (x *ScriptCoercionHandler) CoerceValueToClass(value objc.ID, toClass objc.Class) objc.ID {
-	return x.inner.CoerceValueToClass(value, toClass)
+// scriptCoercionHandlerAdopt wraps an Objective-C object that this code just created as a
+// ScriptCoercionHandler (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func scriptCoercionHandlerAdopt(id objc.ID) *ScriptCoercionHandler {
+	if id == 0 {
+		return nil
+	}
+	x := &ScriptCoercionHandler{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// Registers a given object (typically a class) to handle coercions (conversions) from one given class to another.
-//
-// RegisterCoercerSelectorToConvertFromClassToClass calls the underlying RegisterCoercerSelectorToConvertFromClassToClass.
-func (x *ScriptCoercionHandler) RegisterCoercerSelectorToConvertFromClassToClass(coercer objc.ID, selector objc.SEL, fromClass objc.Class, toClass objc.Class) {
-	x.inner.RegisterCoercerSelectorToConvertFromClassToClass(coercer, selector, fromClass, toClass)
+// Description returns the object's -description text.
+func (x *ScriptCoercionHandler) Description() string {
+	return rt.Description(objref.IDOf(x))
 }
 
-func (x *ScriptCoercionHandler) asObject() *raw.NSObject { return &x.inner.NSObject }
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ScriptCoercionHandler) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ScriptCoercionHandler) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewScriptCoercionHandler creates a new ScriptCoercionHandler.
+func NewScriptCoercionHandler() *ScriptCoercionHandler {
+	_id := objc.Send[objc.ID](objc.ID(_class("NSScriptCoercionHandler")), objc.RegisterName("new"))
+	return scriptCoercionHandlerAdopt(_id)
+}
+
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *ScriptCoercionHandler) WithScriptingProperties(scriptingProperties obj.Object) *ScriptCoercionHandler {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
+	return x
+}
 
 // ScriptCoercionHandlerable is the interface implemented by [ScriptCoercionHandler], for mocking and DI.
 type ScriptCoercionHandlerable interface {
-	Unwrap() *raw.NSScriptCoercionHandler
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *ScriptCoercionHandler
-	CoerceValueToClass(value objc.ID, toClass objc.Class) objc.ID
-	RegisterCoercerSelectorToConvertFromClassToClass(coercer objc.ID, selector objc.SEL, fromClass objc.Class, toClass objc.Class)
+	obj.Object
+	WithScriptingProperties(scriptingProperties obj.Object) *ScriptCoercionHandler
 }
 
 var _ ScriptCoercionHandlerable = (*ScriptCoercionHandler)(nil)

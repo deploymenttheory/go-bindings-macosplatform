@@ -5,146 +5,150 @@
 package foundation
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A formatter that provides localized representations of the components of a person’s name.
 //
-// PersonNameComponentsFormatter wraps [raw.NSPersonNameComponentsFormatter] with a fluent Go API.
+// PersonNameComponentsFormatter is an idiomatic wrapper over the Objective-C class NSPersonNameComponentsFormatter.
 type PersonNameComponentsFormatter struct {
-	inner *raw.NSPersonNameComponentsFormatter
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.NSPersonNameComponentsFormatter].
-func (x *PersonNameComponentsFormatter) Unwrap() *raw.NSPersonNameComponentsFormatter { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PersonNameComponentsFormatter) ID() objc.ID { return x.inner.Ptr() }
-
-// PersonNameComponentsFormatterFromID adopts an existing object pointer as a PersonNameComponentsFormatter (nil for 0).
+// PersonNameComponentsFormatterFromID adopts an existing Objective-C object as a PersonNameComponentsFormatter
+// (nil for 0), retaining it and registering a release finalizer.
 func PersonNameComponentsFormatterFromID(id objc.ID) *PersonNameComponentsFormatter {
 	if id == 0 {
 		return nil
 	}
-	return &PersonNameComponentsFormatter{inner: raw.NSPersonNameComponentsFormatterFromID(id)}
+	x := &PersonNameComponentsFormatter{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewPersonNameComponentsFormatter creates a new [PersonNameComponentsFormatter].
+// personNameComponentsFormatterAdopt wraps an Objective-C object that this code just created as a
+// PersonNameComponentsFormatter (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func personNameComponentsFormatterAdopt(id objc.ID) *PersonNameComponentsFormatter {
+	if id == 0 {
+		return nil
+	}
+	x := &PersonNameComponentsFormatter{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PersonNameComponentsFormatter) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PersonNameComponentsFormatter) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PersonNameComponentsFormatter) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewPersonNameComponentsFormatter creates a new PersonNameComponentsFormatter.
 func NewPersonNameComponentsFormatter() *PersonNameComponentsFormatter {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("NSPersonNameComponentsFormatter")), objc.RegisterName("new"))
-	return &PersonNameComponentsFormatter{inner: raw.NSPersonNameComponentsFormatterFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("NSPersonNameComponentsFormatter")), objc.RegisterName("new"))
+	return personNameComponentsFormatterAdopt(_id)
 }
 
-// WithStyle sets the style property and returns the receiver for chaining.
-func (x *PersonNameComponentsFormatter) WithStyle(style NSPersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter {
-	x.inner.SetStyle(raw.NSPersonNameComponentsFormatterStyle(style))
+// WithStyle sets style and returns the receiver so calls can be chained.
+func (x *PersonNameComponentsFormatter) WithStyle(style PersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 	return x
 }
 
-// WithPhonetic sets the phonetic property and returns the receiver for chaining.
+// WithPhonetic sets phonetic and returns the receiver so calls can be chained.
 func (x *PersonNameComponentsFormatter) WithPhonetic(phonetic bool) *PersonNameComponentsFormatter {
-	x.inner.SetPhonetic(phonetic)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhonetic:"), phonetic)
 	return x
 }
 
-// WithLocale sets the locale property and returns the receiver for chaining.
+// WithLocale sets locale and returns the receiver so calls can be chained.
 func (x *PersonNameComponentsFormatter) WithLocale(locale *Locale) *PersonNameComponentsFormatter {
-	x.inner.SetLocale(locale.Unwrap())
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 	return x
 }
 
-// WithScriptingProperties sets the scriptingProperties property and returns the receiver for chaining.
-func (x *PersonNameComponentsFormatter) WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PersonNameComponentsFormatter {
-	x.inner.NSFormatter.NSObject.SetScriptingProperties(scriptingProperties)
+// WithScriptingProperties sets scriptingProperties and returns the receiver so calls can be chained.
+func (x *PersonNameComponentsFormatter) WithScriptingProperties(scriptingProperties obj.Object) *PersonNameComponentsFormatter {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setScriptingProperties:"), objref.IDOf(scriptingProperties))
 	return x
 }
 
-// StringFromPersonNameComponents calls the underlying StringFromPersonNameComponents.
-func (x *PersonNameComponentsFormatter) StringFromPersonNameComponents(components *raw.NSPersonNameComponents) *String {
-	_r := x.inner.StringFromPersonNameComponents(components)
-	if _r == nil {
-		return nil
+func (x *PersonNameComponentsFormatter) StringFromPersonNameComponents(components *PersonNameComponents) string {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stringFromPersonNameComponents:"), objref.IDOf(components))
+	if _r == 0 {
+		return ""
 	}
-	return &String{inner: _r}
+	return purego.GoString(_r)
 }
 
-// AnnotatedStringFromPersonNameComponents calls the underlying AnnotatedStringFromPersonNameComponents.
-func (x *PersonNameComponentsFormatter) AnnotatedStringFromPersonNameComponents(components *raw.NSPersonNameComponents) *AttributedString {
-	_r := x.inner.AnnotatedStringFromPersonNameComponents(components)
-	if _r == nil {
-		return nil
-	}
-	return &AttributedString{inner: _r}
+func (x *PersonNameComponentsFormatter) AnnotatedStringFromPersonNameComponents(components *PersonNameComponents) *AttributedString {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("annotatedStringFromPersonNameComponents:"), objref.IDOf(components))
+	return AttributedStringFromID(_r)
 }
 
-// PersonNameComponentsFromString calls the underlying PersonNameComponentsFromString.
 func (x *PersonNameComponentsFormatter) PersonNameComponentsFromString(string_ string) *PersonNameComponents {
-	_r := x.inner.PersonNameComponentsFromString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return nil
-	}
-	return &PersonNameComponents{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("personNameComponentsFromString:"), purego.NSString(string_))
+	return PersonNameComponentsFromID(_r)
 }
 
-// Style calls the underlying Style.
-func (x *PersonNameComponentsFormatter) Style() NSPersonNameComponentsFormatterStyle {
-	return NSPersonNameComponentsFormatterStyle(x.inner.Style())
+func (x *PersonNameComponentsFormatter) Style() PersonNameComponentsFormatterStyle {
+	_r := objc.Send[PersonNameComponentsFormatterStyle](objref.IDOf(x), objc.RegisterName("style"))
+	return _r
 }
 
-// SetStyle calls the underlying SetStyle.
-func (x *PersonNameComponentsFormatter) SetStyle(style NSPersonNameComponentsFormatterStyle) {
-	x.inner.SetStyle(raw.NSPersonNameComponentsFormatterStyle(style))
+func (x *PersonNameComponentsFormatter) SetStyle(style PersonNameComponentsFormatterStyle) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStyle:"), style)
 }
 
-// IsPhonetic calls the underlying IsPhonetic.
 func (x *PersonNameComponentsFormatter) IsPhonetic() bool {
-	return x.inner.IsPhonetic()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isPhonetic"))
+	return _r
 }
 
-// SetPhonetic calls the underlying SetPhonetic.
 func (x *PersonNameComponentsFormatter) SetPhonetic(phonetic bool) {
-	x.inner.SetPhonetic(phonetic)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPhonetic:"), phonetic)
 }
 
-// Locale calls the underlying Locale.
 func (x *PersonNameComponentsFormatter) Locale() *Locale {
-	_r := x.inner.Locale()
-	if _r == nil {
-		return nil
-	}
-	return &Locale{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("locale"))
+	return LocaleFromID(_r)
 }
 
-// SetLocale calls the underlying SetLocale.
-func (x *PersonNameComponentsFormatter) SetLocale(locale *raw.NSLocale) {
-	x.inner.SetLocale(locale)
-}
-
-func (x *PersonNameComponentsFormatter) asFormatter() *raw.NSFormatter { return &x.inner.NSFormatter }
-
-func (x *PersonNameComponentsFormatter) asObject() *raw.NSObject {
-	return &x.inner.NSFormatter.NSObject
+func (x *PersonNameComponentsFormatter) SetLocale(locale *Locale) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocale:"), objref.IDOf(locale))
 }
 
 // PersonNameComponentsFormatterable is the interface implemented by [PersonNameComponentsFormatter], for mocking and DI.
 type PersonNameComponentsFormatterable interface {
-	Unwrap() *raw.NSPersonNameComponentsFormatter
-	WithStyle(style NSPersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter
+	obj.Object
+	WithStyle(style PersonNameComponentsFormatterStyle) *PersonNameComponentsFormatter
 	WithPhonetic(phonetic bool) *PersonNameComponentsFormatter
 	WithLocale(locale *Locale) *PersonNameComponentsFormatter
-	WithScriptingProperties(scriptingProperties *raw.NSDictionary[*raw.NSString, objc.ID]) *PersonNameComponentsFormatter
-	StringFromPersonNameComponents(components *raw.NSPersonNameComponents) *String
-	AnnotatedStringFromPersonNameComponents(components *raw.NSPersonNameComponents) *AttributedString
+	WithScriptingProperties(scriptingProperties obj.Object) *PersonNameComponentsFormatter
+	StringFromPersonNameComponents(components *PersonNameComponents) string
+	AnnotatedStringFromPersonNameComponents(components *PersonNameComponents) *AttributedString
 	PersonNameComponentsFromString(string_ string) *PersonNameComponents
-	Style() NSPersonNameComponentsFormatterStyle
-	SetStyle(style NSPersonNameComponentsFormatterStyle)
+	Style() PersonNameComponentsFormatterStyle
+	SetStyle(style PersonNameComponentsFormatterStyle)
 	IsPhonetic() bool
 	SetPhonetic(phonetic bool)
 	Locale() *Locale
-	SetLocale(locale *raw.NSLocale)
+	SetLocale(locale *Locale)
 }
 
 var _ PersonNameComponentsFormatterable = (*PersonNameComponentsFormatter)(nil)

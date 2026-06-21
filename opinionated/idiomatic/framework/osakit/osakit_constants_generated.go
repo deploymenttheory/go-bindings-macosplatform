@@ -5,102 +5,101 @@
 package osakit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/osakit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// OSAScriptErrorMessageKey returns the string constant OSAScriptErrorMessageKey as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorMessageKey() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorMessageKey())
+// OSAScriptErrorMessageKey returns the string constant OSAScriptErrorMessageKey, for use as a dictionary key or argument.
+func OSAScriptErrorMessageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorMessageKey")))
 }
 
-// OSAScriptErrorBriefMessageKey returns the string constant OSAScriptErrorBriefMessageKey as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorBriefMessageKey() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorBriefMessageKey())
+// OSAScriptErrorBriefMessageKey returns the string constant OSAScriptErrorBriefMessageKey, for use as a dictionary key or argument.
+func OSAScriptErrorBriefMessageKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorBriefMessageKey")))
 }
 
-// OSAScriptErrorNumberKey returns the string constant OSAScriptErrorNumberKey as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorNumberKey() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorNumberKey())
+// OSAScriptErrorNumberKey returns the string constant OSAScriptErrorNumberKey, for use as a dictionary key or argument.
+func OSAScriptErrorNumberKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorNumberKey")))
 }
 
-// OSAScriptErrorPartialResultKey returns the string constant OSAScriptErrorPartialResultKey as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorPartialResultKey() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorPartialResultKey())
+// OSAScriptErrorPartialResultKey returns the string constant OSAScriptErrorPartialResultKey, for use as a dictionary key or argument.
+func OSAScriptErrorPartialResultKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorPartialResultKey")))
 }
 
-// OSAScriptErrorOffendingObjectKey returns the string constant OSAScriptErrorOffendingObjectKey as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorOffendingObjectKey() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorOffendingObjectKey())
+// OSAScriptErrorOffendingObjectKey returns the string constant OSAScriptErrorOffendingObjectKey, for use as a dictionary key or argument.
+func OSAScriptErrorOffendingObjectKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorOffendingObjectKey")))
 }
 
-// OSAScriptErrorExpectedTypeKey returns the string constant OSAScriptErrorExpectedTypeKey as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorExpectedTypeKey() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorExpectedTypeKey())
+// OSAScriptErrorExpectedTypeKey returns the string constant OSAScriptErrorExpectedTypeKey, for use as a dictionary key or argument.
+func OSAScriptErrorExpectedTypeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorExpectedTypeKey")))
 }
 
-// OSAScriptErrorAppAddressKey returns the string constant OSAScriptErrorAppAddressKey as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorAppAddressKey() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorAppAddressKey())
+// OSAScriptErrorAppAddressKey returns the string constant OSAScriptErrorAppAddressKey, for use as a dictionary key or argument.
+func OSAScriptErrorAppAddressKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorAppAddressKey")))
 }
 
-// OSAScriptErrorAppNameKey returns the string constant OSAScriptErrorAppNameKey as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorAppNameKey() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorAppNameKey())
+// OSAScriptErrorAppNameKey returns the string constant OSAScriptErrorAppNameKey, for use as a dictionary key or argument.
+func OSAScriptErrorAppNameKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorAppNameKey")))
 }
 
-// OSAScriptErrorRangeKey returns the string constant OSAScriptErrorRangeKey as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorRangeKey() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorRangeKey())
+// OSAScriptErrorRangeKey returns the string constant OSAScriptErrorRangeKey, for use as a dictionary key or argument.
+func OSAScriptErrorRangeKey() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorRangeKey")))
 }
 
-// OSAScriptErrorMessage returns the string constant OSAScriptErrorMessage as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorMessage() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorMessage())
+// OSAScriptErrorMessage returns the string constant OSAScriptErrorMessage, for use as a dictionary key or argument.
+func OSAScriptErrorMessage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorMessage")))
 }
 
-// OSAScriptErrorNumber returns the string constant OSAScriptErrorNumber as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorNumber() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorNumber())
+// OSAScriptErrorNumber returns the string constant OSAScriptErrorNumber, for use as a dictionary key or argument.
+func OSAScriptErrorNumber() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorNumber")))
 }
 
-// OSAScriptErrorAppName returns the string constant OSAScriptErrorAppName as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorAppName() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorAppName())
+// OSAScriptErrorAppName returns the string constant OSAScriptErrorAppName, for use as a dictionary key or argument.
+func OSAScriptErrorAppName() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorAppName")))
 }
 
-// OSAScriptErrorBriefMessage returns the string constant OSAScriptErrorBriefMessage as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorBriefMessage() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorBriefMessage())
+// OSAScriptErrorBriefMessage returns the string constant OSAScriptErrorBriefMessage, for use as a dictionary key or argument.
+func OSAScriptErrorBriefMessage() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorBriefMessage")))
 }
 
-// OSAScriptErrorRange returns the string constant OSAScriptErrorRange as an objc.ID, for use as a dictionary key or selector argument.
-func OSAScriptErrorRange() objc.ID {
-	return purego.CFConstant(raw.OSAScriptErrorRange())
+// OSAScriptErrorRange returns the string constant OSAScriptErrorRange, for use as a dictionary key or argument.
+func OSAScriptErrorRange() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAScriptErrorRange")))
 }
 
-// OSAStorageScriptType returns the string constant OSAStorageScriptType as an objc.ID, for use as a dictionary key or selector argument.
-func OSAStorageScriptType() objc.ID {
-	return purego.CFConstant(raw.OSAStorageScriptType())
+// OSAStorageScriptType returns the string constant OSAStorageScriptType, for use as a dictionary key or argument.
+func OSAStorageScriptType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAStorageScriptType")))
 }
 
-// OSAStorageScriptBundleType returns the string constant OSAStorageScriptBundleType as an objc.ID, for use as a dictionary key or selector argument.
-func OSAStorageScriptBundleType() objc.ID {
-	return purego.CFConstant(raw.OSAStorageScriptBundleType())
+// OSAStorageScriptBundleType returns the string constant OSAStorageScriptBundleType, for use as a dictionary key or argument.
+func OSAStorageScriptBundleType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAStorageScriptBundleType")))
 }
 
-// OSAStorageApplicationType returns the string constant OSAStorageApplicationType as an objc.ID, for use as a dictionary key or selector argument.
-func OSAStorageApplicationType() objc.ID {
-	return purego.CFConstant(raw.OSAStorageApplicationType())
+// OSAStorageApplicationType returns the string constant OSAStorageApplicationType, for use as a dictionary key or argument.
+func OSAStorageApplicationType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAStorageApplicationType")))
 }
 
-// OSAStorageApplicationBundleType returns the string constant OSAStorageApplicationBundleType as an objc.ID, for use as a dictionary key or selector argument.
-func OSAStorageApplicationBundleType() objc.ID {
-	return purego.CFConstant(raw.OSAStorageApplicationBundleType())
+// OSAStorageApplicationBundleType returns the string constant OSAStorageApplicationBundleType, for use as a dictionary key or argument.
+func OSAStorageApplicationBundleType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAStorageApplicationBundleType")))
 }
 
-// OSAStorageTextType returns the string constant OSAStorageTextType as an objc.ID, for use as a dictionary key or selector argument.
-func OSAStorageTextType() objc.ID {
-	return purego.CFConstant(raw.OSAStorageTextType())
+// OSAStorageTextType returns the string constant OSAStorageTextType, for use as a dictionary key or argument.
+func OSAStorageTextType() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("OSAStorageTextType")))
 }

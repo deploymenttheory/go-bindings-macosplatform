@@ -5,81 +5,92 @@
 package screencapturekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/screencapturekit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An instance that represents a set of displays, apps, and windows that your app can capture.
 //
-// ShareableContent wraps [raw.SCShareableContent] with a fluent Go API.
+// ShareableContent is an idiomatic wrapper over the Objective-C class SCShareableContent.
 type ShareableContent struct {
-	inner *raw.SCShareableContent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCShareableContent].
-func (x *ShareableContent) Unwrap() *raw.SCShareableContent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ShareableContent) ID() objc.ID { return x.inner.Ptr() }
-
-// ShareableContentFromID adopts an existing object pointer as a ShareableContent (nil for 0).
+// ShareableContentFromID adopts an existing Objective-C object as a ShareableContent
+// (nil for 0), retaining it and registering a release finalizer.
 func ShareableContentFromID(id objc.ID) *ShareableContent {
 	if id == 0 {
 		return nil
 	}
-	return &ShareableContent{inner: raw.SCShareableContentFromID(id)}
+	x := &ShareableContent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewShareableContent creates a new [ShareableContent].
+// shareableContentAdopt wraps an Objective-C object that this code just created as a
+// ShareableContent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func shareableContentAdopt(id objc.ID) *ShareableContent {
+	if id == 0 {
+		return nil
+	}
+	x := &ShareableContent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ShareableContent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ShareableContent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ShareableContent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewShareableContent creates a new ShareableContent.
 func NewShareableContent() *ShareableContent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCShareableContent")), objc.RegisterName("new"))
-	return &ShareableContent{inner: raw.SCShareableContentFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCShareableContent")), objc.RegisterName("new"))
+	return shareableContentAdopt(_id)
 }
 
-// @abstract windows SCShareableContent property that contains all the sharable SCWindows
+// windows SCShareableContent property that contains all the sharable SCWindows
 //
 // Windows returns the collection as a Go slice.
 func (x *ShareableContent) Windows() []*Window {
-	arr := x.inner.Windows()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Window {
-		return &Window{inner: raw.SCWindowFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("windows"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Window { return WindowFromID(_id) })
 }
 
-// @abstract displays SCShareableContent property that contains all the sharable SCDisplays
+// displays SCShareableContent property that contains all the sharable SCDisplays
 //
 // Displays returns the collection as a Go slice.
 func (x *ShareableContent) Displays() []*Display {
-	arr := x.inner.Displays()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *Display {
-		return &Display{inner: raw.SCDisplayFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("displays"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *Display { return DisplayFromID(_id) })
 }
 
-// @abstract applications SCShareableContent property that contains all the sharable SCRunningApplications
+// applications SCShareableContent property that contains all the sharable SCRunningApplications
 //
 // Applications returns the collection as a Go slice.
 func (x *ShareableContent) Applications() []*RunningApplication {
-	arr := x.inner.Applications()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *RunningApplication {
-		return &RunningApplication{inner: raw.SCRunningApplicationFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("applications"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *RunningApplication { return RunningApplicationFromID(_id) })
 }
 
 // ShareableContentable is the interface implemented by [ShareableContent], for mocking and DI.
 type ShareableContentable interface {
-	Unwrap() *raw.SCShareableContent
+	obj.Object
 	Windows() []*Window
 	Displays() []*Display
 	Applications() []*RunningApplication

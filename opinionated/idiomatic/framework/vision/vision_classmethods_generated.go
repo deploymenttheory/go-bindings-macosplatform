@@ -5,291 +5,208 @@
 package vision
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/corefoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/vision"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// ZeroCircle calls the underlying VNCircleZeroCircle.
+// Returns a VNCircle object with center at the Origin [0.0; 0.0] and zero radius.
 func ZeroCircle() *Circle {
-	_r := raw.VNCircleZeroCircle()
-	if _r == nil {
-		return nil
-	}
-	return &Circle{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("VNCircle")), objc.RegisterName("zeroCircle"))
+	return CircleFromID(_r)
 }
 
-// KnownClassificationsForRevisionError calls the underlying VNClassifyImageRequestKnownClassificationsForRevisionError.
-func KnownClassificationsForRevisionError(requestRevision uint) (*foundation.NSArray[*raw.VNClassificationObservation], error) {
-	return raw.VNClassifyImageRequestKnownClassificationsForRevisionError(requestRevision)
+// Requests the collection of classifications that the Vision framework recognizes.
+func KnownClassificationsForRevisionError(requestRevision int) ([]*ClassificationObservation, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("VNClassifyImageRequest")), objc.RegisterName("knownClassificationsForRevision:error:"), requestRevision, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ClassificationObservation { return ClassificationObservationFromID(_id) }), nil
 }
 
-// ModelForMLModelError calls the underlying VNCoreMLModelModelForMLModelError.
-func ModelForMLModelError(model *coreml.MLModel) (*CoreMLModel, error) {
-	_r, _err := raw.VNCoreMLModelModelForMLModelError(model)
-	if _err != nil {
-		return nil, _err
+// Creates a model container to use with a Core ML request.
+func ModelForMLModelError(model obj.Object) (*CoreMLModel, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("VNCoreMLModel")), objc.RegisterName("modelForMLModel:error:"), objref.IDOf(model), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &CoreMLModel{inner: _r}, nil
+	return CoreMLModelFromID(_r), nil
 }
 
+// Obtain the collection of barcode symbologies currently recognized by the Vision framework. Calling this method could be a potentially expensive operation.
+//
 // SupportedSymbologies returns the collection as a Go slice.
-func SupportedSymbologies() []*foundation.NSString {
-	arr := raw.VNDetectBarcodesRequestSupportedSymbologies()
-	if arr == nil {
-		return nil
+func SupportedSymbologies() []obj.Object {
+	_arr := objc.Send[objc.ID](objc.ID(_class("VNDetectBarcodesRequest")), objc.RegisterName("supportedSymbologies"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
+}
+
+// Returns a Boolean value that indicates whether a revision supports a constellation.
+func RevisionSupportsConstellation(requestRevision int, constellation RequestFaceLandmarksConstellation) bool {
+	_r := objc.Send[bool](objc.ID(_class("VNDetectFaceLandmarksRequest")), objc.RegisterName("revision:supportsConstellation:"), requestRevision, constellation)
+	return _r
+}
+
+// Retrieves the supported joint names for a revision.
+func SupportedJointNamesForRevisionError(revision int) ([]obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("VNDetectHumanBodyPoseRequest")), objc.RegisterName("supportedJointNamesForRevision:error:"), revision, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *foundation.NSString {
-		return foundation.NSStringFromID(purego.Retain(_id))
-	})
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// RevisionSupportsConstellation calls the underlying VNDetectFaceLandmarksRequestRevisionSupportsConstellation.
-func RevisionSupportsConstellation(requestRevision uint, constellation VNRequestFaceLandmarksConstellation) bool {
-	return raw.VNDetectFaceLandmarksRequestRevisionSupportsConstellation(requestRevision, raw.VNRequestFaceLandmarksConstellation(constellation))
-}
-
-// SupportedJointNamesForRevisionError calls the underlying VNDetectHumanBodyPoseRequestSupportedJointNamesForRevisionError.
-func SupportedJointNamesForRevisionError(revision uint) (*foundation.NSArray[*foundation.NSString], error) {
-	return raw.VNDetectHumanBodyPoseRequestSupportedJointNamesForRevisionError(revision)
-}
-
-// SupportedJointsGroupNamesForRevisionError calls the underlying VNDetectHumanBodyPoseRequestSupportedJointsGroupNamesForRevisionError.
-func SupportedJointsGroupNamesForRevisionError(revision uint) (*foundation.NSArray[*foundation.NSString], error) {
-	return raw.VNDetectHumanBodyPoseRequestSupportedJointsGroupNamesForRevisionError(revision)
-}
-
-// VNDetectHumanHandPoseRequestSupportedJointNamesForRevisionError calls the underlying VNDetectHumanHandPoseRequestSupportedJointNamesForRevisionError.
-func VNDetectHumanHandPoseRequestSupportedJointNamesForRevisionError(revision uint) (*foundation.NSArray[*foundation.NSString], error) {
-	return raw.VNDetectHumanHandPoseRequestSupportedJointNamesForRevisionError(revision)
-}
-
-// VNDetectHumanHandPoseRequestSupportedJointsGroupNamesForRevisionError calls the underlying VNDetectHumanHandPoseRequestSupportedJointsGroupNamesForRevisionError.
-func VNDetectHumanHandPoseRequestSupportedJointsGroupNamesForRevisionError(revision uint) (*foundation.NSArray[*foundation.NSString], error) {
-	return raw.VNDetectHumanHandPoseRequestSupportedJointsGroupNamesForRevisionError(revision)
-}
-
-// ObservationWithBoundingBox calls the underlying VNDetectedObjectObservationObservationWithBoundingBox.
-func ObservationWithBoundingBox(boundingBox corefoundation.CGRect) *DetectedObjectObservation {
-	_r := raw.VNDetectedObjectObservationObservationWithBoundingBox(boundingBox)
-	if _r == nil {
-		return nil
+// Retrieves the supported joint group names for a revision.
+func SupportedJointsGroupNamesForRevisionError(revision int) ([]obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("VNDetectHumanBodyPoseRequest")), objc.RegisterName("supportedJointsGroupNamesForRevision:error:"), revision, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &DetectedObjectObservation{inner: _r}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// ObservationWithRequestRevisionBoundingBox calls the underlying VNDetectedObjectObservationObservationWithRequestRevisionBoundingBox.
-func ObservationWithRequestRevisionBoundingBox(requestRevision uint, boundingBox corefoundation.CGRect) *DetectedObjectObservation {
-	_r := raw.VNDetectedObjectObservationObservationWithRequestRevisionBoundingBox(requestRevision, boundingBox)
-	if _r == nil {
-		return nil
+// Retrieves the supported joint names for a revision.
+func VNDetectHumanHandPoseRequestSupportedJointNamesForRevisionError(revision int) ([]obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("VNDetectHumanHandPoseRequest")), objc.RegisterName("supportedJointNamesForRevision:error:"), revision, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &DetectedObjectObservation{inner: _r}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// FaceObservationWithRequestRevisionBoundingBoxRollYaw calls the underlying VNFaceObservationFaceObservationWithRequestRevisionBoundingBoxRollYaw.
-func FaceObservationWithRequestRevisionBoundingBoxRollYaw(requestRevision uint, boundingBox corefoundation.CGRect, roll *foundation.NSNumber, yaw *foundation.NSNumber) *FaceObservation {
-	_r := raw.VNFaceObservationFaceObservationWithRequestRevisionBoundingBoxRollYaw(requestRevision, boundingBox, roll, yaw)
-	if _r == nil {
-		return nil
+// Retrieves the supported joint group names for a revision.
+func VNDetectHumanHandPoseRequestSupportedJointsGroupNamesForRevisionError(revision int) ([]obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("VNDetectHumanHandPoseRequest")), objc.RegisterName("supportedJointsGroupNamesForRevision:error:"), revision, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &FaceObservation{inner: _r}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// FaceObservationWithRequestRevisionBoundingBoxRollYawPitch calls the underlying VNFaceObservationFaceObservationWithRequestRevisionBoundingBoxRollYawPitch.
-func FaceObservationWithRequestRevisionBoundingBoxRollYawPitch(requestRevision uint, boundingBox corefoundation.CGRect, roll *foundation.NSNumber, yaw *foundation.NSNumber, pitch *foundation.NSNumber) *FaceObservation {
-	_r := raw.VNFaceObservationFaceObservationWithRequestRevisionBoundingBoxRollYawPitch(requestRevision, boundingBox, roll, yaw, pitch)
-	if _r == nil {
-		return nil
-	}
-	return &FaceObservation{inner: _r}
-}
-
-// New calls the underlying VNGeneratePersonSegmentationRequestNew.
+// Returns a new generate person segmentation request.
 func New() *GeneratePersonSegmentationRequest {
-	_r := raw.VNGeneratePersonSegmentationRequestNew()
-	if _r == nil {
-		return nil
-	}
-	return &GeneratePersonSegmentationRequest{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("VNGeneratePersonSegmentationRequest")), objc.RegisterName("new"))
+	return GeneratePersonSegmentationRequestFromID(_r)
 }
 
-// BoundingCircleForContourError calls the underlying VNGeometryUtilsBoundingCircleForContourError.
-func BoundingCircleForContourError(contour *raw.VNContour) (*Circle, error) {
-	_r, _err := raw.VNGeometryUtilsBoundingCircleForContourError(contour)
-	if _err != nil {
-		return nil, _err
+// Calculates a bounding circle for the specified contour object.
+func BoundingCircleForContourError(contour *Contour) (*Circle, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("VNGeometryUtils")), objc.RegisterName("boundingCircleForContour:error:"), objref.IDOf(contour), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Circle{inner: _r}, nil
+	return CircleFromID(_r), nil
 }
 
-// BoundingCircleForPointsError calls the underlying VNGeometryUtilsBoundingCircleForPointsError.
-func BoundingCircleForPointsError(points ...PointProvider) (*Circle, error) {
-	_ptrs := make([]objc.ID, len(points))
-	for _i, _v := range points {
-		_ptrs[_i] = _v.asPoint().Ptr()
+// Calculates a bounding circle for the specified array of points.
+func BoundingCircleForPointsError(points []*Point) (*Circle, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("VNGeometryUtils")), objc.RegisterName("boundingCircleForPoints:error:"), purego.SliceToNSArray(points, func(_v *Point) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	var _arg0 *foundation.NSArray[*raw.VNPoint]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.VNPoint](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.VNPoint](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r, _err := raw.VNGeometryUtilsBoundingCircleForPointsError(_arg0)
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Circle{inner: _r}, nil
+	return CircleFromID(_r), nil
 }
 
-// BoundingCircleForSIMDPointsPointCountError calls the underlying VNGeometryUtilsBoundingCircleForSIMDPointsPointCountError.
-func BoundingCircleForSIMDPointsPointCountError(points unsafe.Pointer, pointCount int) (*Circle, error) {
-	_r, _err := raw.VNGeometryUtilsBoundingCircleForSIMDPointsPointCountError(points, pointCount)
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Circle{inner: _r}, nil
+// Creates a point object that’s shifted by the X and Y offsets of the specified vector.
+func PointByApplyingVectorToPoint(vector *Vector, point *Point) *Point {
+	_r := objc.Send[objc.ID](objc.ID(_class("VNPoint")), objc.RegisterName("pointByApplyingVector:toPoint:"), objref.IDOf(vector), objref.IDOf(point))
+	return PointFromID(_r)
 }
 
-// CalculateAreaForContourOrientedAreaError calls the underlying VNGeometryUtilsCalculateAreaForContourOrientedAreaError.
-func CalculateAreaForContourOrientedAreaError(area *float64, contour *raw.VNContour, orientedArea bool) (bool, error) {
-	return raw.VNGeometryUtilsCalculateAreaForContourOrientedAreaError(area, contour, orientedArea)
+// Calculates the distance between two points.
+func DistanceBetweenPointPoint(point1 *Point, point2 *Point) float64 {
+	_r := objc.Send[float64](objc.ID(_class("VNPoint")), objc.RegisterName("distanceBetweenPoint:point:"), objref.IDOf(point1), objref.IDOf(point2))
+	return _r
 }
 
-// CalculatePerimeterForContourError calls the underlying VNGeometryUtilsCalculatePerimeterForContourError.
-func CalculatePerimeterForContourError(perimeter *float64, contour *raw.VNContour) (bool, error) {
-	return raw.VNGeometryUtilsCalculatePerimeterForContourError(perimeter, contour)
-}
-
-// PointByApplyingVectorToPoint calls the underlying VNPointPointByApplyingVectorToPoint.
-func PointByApplyingVectorToPoint(vector *raw.VNVector, point *raw.VNPoint) *Point {
-	_r := raw.VNPointPointByApplyingVectorToPoint(vector, point)
-	if _r == nil {
-		return nil
-	}
-	return &Point{inner: _r}
-}
-
-// DistanceBetweenPointPoint calls the underlying VNPointDistanceBetweenPointPoint.
-func DistanceBetweenPointPoint(point1 *raw.VNPoint, point2 *raw.VNPoint) float64 {
-	return raw.VNPointDistanceBetweenPointPoint(point1, point2)
-}
-
-// ZeroPoint calls the underlying VNPointZeroPoint.
+// Returns a VNPoint object that represents the location of (0.0, 0.0).
 func ZeroPoint() *Point {
-	_r := raw.VNPointZeroPoint()
-	if _r == nil {
-		return nil
+	_r := objc.Send[objc.ID](objc.ID(_class("VNPoint")), objc.RegisterName("zeroPoint"))
+	return PointFromID(_r)
+}
+
+// Returns a list of animal identifiers the recognition algorithm supports for the specified revision.
+func KnownAnimalIdentifiersForRevisionError(requestRevision int) ([]obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("VNRecognizeAnimalsRequest")), objc.RegisterName("knownAnimalIdentifiersForRevision:error:"), requestRevision, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Point{inner: _r}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) }), nil
 }
 
-// KnownAnimalIdentifiersForRevisionError calls the underlying VNRecognizeAnimalsRequestKnownAnimalIdentifiersForRevisionError.
-func KnownAnimalIdentifiersForRevisionError(requestRevision uint) (*foundation.NSArray[*foundation.NSString], error) {
-	return raw.VNRecognizeAnimalsRequestKnownAnimalIdentifiersForRevisionError(requestRevision)
-}
-
-// SupportedRecognitionLanguagesForTextRecognitionLevelRevisionError calls the underlying VNRecognizeTextRequestSupportedRecognitionLanguagesForTextRecognitionLevelRevisionError.
-func SupportedRecognitionLanguagesForTextRecognitionLevelRevisionError(recognitionLevel VNRequestTextRecognitionLevel, requestRevision uint) (*foundation.NSArray[*foundation.NSString], error) {
-	return raw.VNRecognizeTextRequestSupportedRecognitionLanguagesForTextRecognitionLevelRevisionError(raw.VNRequestTextRecognitionLevel(recognitionLevel), requestRevision)
-}
-
-// RectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight calls the underlying VNRectangleObservationRectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight.
-func RectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight(requestRevision uint, topLeft corefoundation.CGPoint, bottomLeft corefoundation.CGPoint, bottomRight corefoundation.CGPoint, topRight corefoundation.CGPoint) *RectangleObservation {
-	_r := raw.VNRectangleObservationRectangleObservationWithRequestRevisionTopLeftBottomLeftBottomRightTopRight(requestRevision, topLeft, bottomLeft, bottomRight, topRight)
-	if _r == nil {
-		return nil
+// Requests a list of languages that the specified revision recognizes.
+func SupportedRecognitionLanguagesForTextRecognitionLevelRevisionError(recognitionLevel RequestTextRecognitionLevel, requestRevision int) ([]string, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("VNRecognizeTextRequest")), objc.RegisterName("supportedRecognitionLanguagesForTextRecognitionLevel:revision:error:"), recognitionLevel, requestRevision, unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &RectangleObservation{inner: _r}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) string { return purego.GoString(_id) }), nil
 }
 
-// RectangleObservationWithRequestRevisionTopLeftTopRightBottomRightBottomLeft calls the underlying VNRectangleObservationRectangleObservationWithRequestRevisionTopLeftTopRightBottomRightBottomLeft.
-func RectangleObservationWithRequestRevisionTopLeftTopRightBottomRightBottomLeft(requestRevision uint, topLeft corefoundation.CGPoint, topRight corefoundation.CGPoint, bottomRight corefoundation.CGPoint, bottomLeft corefoundation.CGPoint) *RectangleObservation {
-	_r := raw.VNRectangleObservationRectangleObservationWithRequestRevisionTopLeftTopRightBottomRightBottomLeft(requestRevision, topLeft, topRight, bottomRight, bottomLeft)
-	if _r == nil {
-		return nil
-	}
-	return &RectangleObservation{inner: _r}
+// Provides the collection of currently-supported algorithm or implementation versions for the class of request. This method allows clients to introspect at runtime what capabilities are available for each class of VNRequest in the Vision framework.
+func SupportedRevisions() obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("VNRequest")), objc.RegisterName("supportedRevisions"))
+	return obj.Wrap(_r)
 }
 
-// SupportedRevisions calls the underlying VNRequestSupportedRevisions.
-func SupportedRevisions() *foundation.NSIndexSet {
-	return raw.VNRequestSupportedRevisions()
+// Provides the revision of the request that was latest for the particular SDK that was linked with the client application.
+func DefaultRevision() int {
+	_r := objc.Send[int](objc.ID(_class("VNRequest")), objc.RegisterName("defaultRevision"))
+	return _r
 }
 
-// DefaultRevision calls the underlying VNRequestDefaultRevision.
-func DefaultRevision() uint {
-	return raw.VNRequestDefaultRevision()
+// Provides the current revision supported by the request.
+func CurrentRevision() int {
+	_r := objc.Send[int](objc.ID(_class("VNRequest")), objc.RegisterName("currentRevision"))
+	return _r
 }
 
-// CurrentRevision calls the underlying VNRequestCurrentRevision.
-func CurrentRevision() uint {
-	return raw.VNRequestCurrentRevision()
+// Calculates a vector that’s normalized by preserving its direction, so that the vector length equals 1.0.
+func UnitVectorForVector(vector *Vector) *Vector {
+	_r := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("unitVectorForVector:"), objref.IDOf(vector))
+	return VectorFromID(_r)
 }
 
-// UnitVectorForVector calls the underlying VNVectorUnitVectorForVector.
-func UnitVectorForVector(vector *raw.VNVector) *Vector {
-	_r := raw.VNVectorUnitVectorForVector(vector)
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+// Creates a new vector by multiplying the specified vector’s x-axis and y-axis projections by the scalar value.
+func VectorByMultiplyingVectorByScalar(vector *Vector, scalar float64) *Vector {
+	_r := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("vectorByMultiplyingVector:byScalar:"), objref.IDOf(vector), scalar)
+	return VectorFromID(_r)
 }
 
-// VectorByMultiplyingVectorByScalar calls the underlying VNVectorVectorByMultiplyingVectorByScalar.
-func VectorByMultiplyingVectorByScalar(vector *raw.VNVector, scalar float64) *Vector {
-	_r := raw.VNVectorVectorByMultiplyingVectorByScalar(vector, scalar)
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+// Creates a new vector by adding the specified vectors.
+func VectorByAddingVectorToVector(v1 *Vector, v2 *Vector) *Vector {
+	_r := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("vectorByAddingVector:toVector:"), objref.IDOf(v1), objref.IDOf(v2))
+	return VectorFromID(_r)
 }
 
-// VectorByAddingVectorToVector calls the underlying VNVectorVectorByAddingVectorToVector.
-func VectorByAddingVectorToVector(v1 *raw.VNVector, v2 *raw.VNVector) *Vector {
-	_r := raw.VNVectorVectorByAddingVectorToVector(v1, v2)
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+// Creates a new vector by subtracting the first vector from the second vector.
+func VectorBySubtractingVectorFromVector(v1 *Vector, v2 *Vector) *Vector {
+	_r := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("vectorBySubtractingVector:fromVector:"), objref.IDOf(v1), objref.IDOf(v2))
+	return VectorFromID(_r)
 }
 
-// VectorBySubtractingVectorFromVector calls the underlying VNVectorVectorBySubtractingVectorFromVector.
-func VectorBySubtractingVectorFromVector(v1 *raw.VNVector, v2 *raw.VNVector) *Vector {
-	_r := raw.VNVectorVectorBySubtractingVectorFromVector(v1, v2)
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+// Caclulates the dot product of two vectors.
+func DotProductOfVectorVector(v1 *Vector, v2 *Vector) float64 {
+	_r := objc.Send[float64](objc.ID(_class("VNVector")), objc.RegisterName("dotProductOfVector:vector:"), objref.IDOf(v1), objref.IDOf(v2))
+	return _r
 }
 
-// DotProductOfVectorVector calls the underlying VNVectorDotProductOfVectorVector.
-func DotProductOfVectorVector(v1 *raw.VNVector, v2 *raw.VNVector) float64 {
-	return raw.VNVectorDotProductOfVectorVector(v1, v2)
-}
-
-// ZeroVector calls the underlying VNVectorZeroVector.
+// Returns a VNVector object with zero length. The theta for zeroVector is not defined (NaN).
 func ZeroVector() *Vector {
-	_r := raw.VNVectorZeroVector()
-	if _r == nil {
-		return nil
-	}
-	return &Vector{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("VNVector")), objc.RegisterName("zeroVector"))
+	return VectorFromID(_r)
 }

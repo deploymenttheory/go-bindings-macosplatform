@@ -5,116 +5,135 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRChannelClusterChangeChannelResponseParams wraps [raw.MTRChannelClusterChangeChannelResponseParams] with a fluent Go API.
+// MTRChannelClusterChangeChannelResponseParams is an idiomatic wrapper over the Objective-C class MTRChannelClusterChangeChannelResponseParams.
 type MTRChannelClusterChangeChannelResponseParams struct {
-	inner *raw.MTRChannelClusterChangeChannelResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRChannelClusterChangeChannelResponseParams].
-func (x *MTRChannelClusterChangeChannelResponseParams) Unwrap() *raw.MTRChannelClusterChangeChannelResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRChannelClusterChangeChannelResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRChannelClusterChangeChannelResponseParamsFromID adopts an existing object pointer as a MTRChannelClusterChangeChannelResponseParams (nil for 0).
+// MTRChannelClusterChangeChannelResponseParamsFromID adopts an existing Objective-C object as a MTRChannelClusterChangeChannelResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRChannelClusterChangeChannelResponseParamsFromID(id objc.ID) *MTRChannelClusterChangeChannelResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRChannelClusterChangeChannelResponseParams{inner: raw.MTRChannelClusterChangeChannelResponseParamsFromID(id)}
+	x := &MTRChannelClusterChangeChannelResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRChannelClusterChangeChannelResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRChannelClusterChangeChannelResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRChannelClusterChangeChannelResponseParamsAdopt(id objc.ID) *MTRChannelClusterChangeChannelResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRChannelClusterChangeChannelResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRChannelClusterChangeChannelResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRChannelClusterChangeChannelResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRChannelClusterChangeChannelResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize an MTRChannelClusterChangeChannelResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
-// NewMTRChannelClusterChangeChannelResponseParamsWithResponseValueError creates a new [MTRChannelClusterChangeChannelResponseParams].
-func NewMTRChannelClusterChangeChannelResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRChannelClusterChangeChannelResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRChannelClusterChangeChannelResponseParams")), objc.RegisterName("alloc"))
+// NewMTRChannelClusterChangeChannelResponseParamsWithResponseValueError creates a new MTRChannelClusterChangeChannelResponseParams.
+func NewMTRChannelClusterChangeChannelResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRChannelClusterChangeChannelResponseParams, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRChannelClusterChangeChannelResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &MTRChannelClusterChangeChannelResponseParams{inner: raw.MTRChannelClusterChangeChannelResponseParamsFromID(_id)}, nil
+	return mTRChannelClusterChangeChannelResponseParamsAdopt(_id), nil
 }
 
-// WithStatus sets the status property and returns the receiver for chaining.
-func (x *MTRChannelClusterChangeChannelResponseParams) WithStatus(status *foundation.NSNumber) *MTRChannelClusterChangeChannelResponseParams {
-	x.inner.SetStatus(status)
+// WithStatus sets status and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterChangeChannelResponseParams) WithStatus(status obj.Object) *MTRChannelClusterChangeChannelResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 	return x
 }
 
-// WithData sets the data property and returns the receiver for chaining.
+// WithData sets data and returns the receiver so calls can be chained.
 func (x *MTRChannelClusterChangeChannelResponseParams) WithData(data string) *MTRChannelClusterChangeChannelResponseParams {
-	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRChannelClusterChangeChannelResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterChangeChannelResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRChannelClusterChangeChannelResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterChangeChannelResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Status calls the underlying Status.
-func (x *MTRChannelClusterChangeChannelResponseParams) Status() *foundation.NSNumber {
-	return x.inner.Status()
+func (x *MTRChannelClusterChangeChannelResponseParams) Status() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("status"))
+	return obj.Wrap(_r)
 }
 
-// SetStatus calls the underlying SetStatus.
-func (x *MTRChannelClusterChangeChannelResponseParams) SetStatus(status *foundation.NSNumber) {
-	x.inner.SetStatus(status)
+func (x *MTRChannelClusterChangeChannelResponseParams) SetStatus(status obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setStatus:"), objref.IDOf(status))
 }
 
-// Data calls the underlying Data.
 func (x *MTRChannelClusterChangeChannelResponseParams) Data() string {
-	_r := x.inner.Data()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("data"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetData calls the underlying SetData.
 func (x *MTRChannelClusterChangeChannelResponseParams) SetData(data string) {
-	x.inner.SetData(foundation.NSStringStringWithUTF8String(data))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setData:"), purego.NSString(data))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRChannelClusterChangeChannelResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRChannelClusterChangeChannelResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRChannelClusterChangeChannelResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRChannelClusterChangeChannelResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTRChannelClusterChangeChannelResponseParamsable is the interface implemented by [MTRChannelClusterChangeChannelResponseParams], for mocking and DI.
 type MTRChannelClusterChangeChannelResponseParamsable interface {
-	Unwrap() *raw.MTRChannelClusterChangeChannelResponseParams
-	WithStatus(status *foundation.NSNumber) *MTRChannelClusterChangeChannelResponseParams
+	obj.Object
+	WithStatus(status obj.Object) *MTRChannelClusterChangeChannelResponseParams
 	WithData(data string) *MTRChannelClusterChangeChannelResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRChannelClusterChangeChannelResponseParams
-	Status() *foundation.NSNumber
-	SetStatus(status *foundation.NSNumber)
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRChannelClusterChangeChannelResponseParams
+	Status() obj.Object
+	SetStatus(status obj.Object)
 	Data() string
 	SetData(data string)
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTRChannelClusterChangeChannelResponseParamsable = (*MTRChannelClusterChangeChannelResponseParams)(nil)

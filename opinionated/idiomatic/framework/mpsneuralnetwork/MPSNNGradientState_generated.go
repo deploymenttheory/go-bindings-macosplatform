@@ -5,41 +5,66 @@
 package mpsneuralnetwork
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mpsneuralnetwork"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// NNGradientState wraps [raw.MPSNNGradientState] with a fluent Go API.
+// NNGradientState is an idiomatic wrapper over the Objective-C class MPSNNGradientState.
 type NNGradientState struct {
-	inner *raw.MPSNNGradientState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MPSNNGradientState].
-func (x *NNGradientState) Unwrap() *raw.MPSNNGradientState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *NNGradientState) ID() objc.ID { return x.inner.Ptr() }
-
-// NNGradientStateFromID adopts an existing object pointer as a NNGradientState (nil for 0).
+// NNGradientStateFromID adopts an existing Objective-C object as a NNGradientState
+// (nil for 0), retaining it and registering a release finalizer.
 func NNGradientStateFromID(id objc.ID) *NNGradientState {
 	if id == 0 {
 		return nil
 	}
-	return &NNGradientState{inner: raw.MPSNNGradientStateFromID(id)}
+	x := &NNGradientState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewNNGradientState creates a new [NNGradientState].
+// nNGradientStateAdopt wraps an Objective-C object that this code just created as a
+// NNGradientState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func nNGradientStateAdopt(id objc.ID) *NNGradientState {
+	if id == 0 {
+		return nil
+	}
+	x := &NNGradientState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *NNGradientState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *NNGradientState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *NNGradientState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewNNGradientState creates a new NNGradientState.
 func NewNNGradientState() *NNGradientState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MPSNNGradientState")), objc.RegisterName("new"))
-	return &NNGradientState{inner: raw.MPSNNGradientStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("MPSNNGradientState")), objc.RegisterName("new"))
+	return nNGradientStateAdopt(_id)
 }
-
-func (x *NNGradientState) asNNGradientState() *raw.MPSNNGradientState { return x.inner }
 
 // NNGradientStateable is the interface implemented by [NNGradientState], for mocking and DI.
 type NNGradientStateable interface {
-	Unwrap() *raw.MPSNNGradientState
+	obj.Object
 }
 
 var _ NNGradientStateable = (*NNGradientState)(nil)

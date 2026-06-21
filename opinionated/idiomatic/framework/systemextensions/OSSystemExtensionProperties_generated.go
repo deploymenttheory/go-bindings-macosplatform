@@ -5,105 +5,120 @@
 package systemextensions
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/systemextensions"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // Properties that identify a specific version of a system extension.
 //
-// SystemExtensionProperties wraps [raw.OSSystemExtensionProperties] with a fluent Go API.
+// SystemExtensionProperties is an idiomatic wrapper over the Objective-C class OSSystemExtensionProperties.
 type SystemExtensionProperties struct {
-	inner *raw.OSSystemExtensionProperties
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.OSSystemExtensionProperties].
-func (x *SystemExtensionProperties) Unwrap() *raw.OSSystemExtensionProperties { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SystemExtensionProperties) ID() objc.ID { return x.inner.Ptr() }
-
-// SystemExtensionPropertiesFromID adopts an existing object pointer as a SystemExtensionProperties (nil for 0).
+// SystemExtensionPropertiesFromID adopts an existing Objective-C object as a SystemExtensionProperties
+// (nil for 0), retaining it and registering a release finalizer.
 func SystemExtensionPropertiesFromID(id objc.ID) *SystemExtensionProperties {
 	if id == 0 {
 		return nil
 	}
-	return &SystemExtensionProperties{inner: raw.OSSystemExtensionPropertiesFromID(id)}
+	x := &SystemExtensionProperties{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSystemExtensionProperties creates a new [SystemExtensionProperties].
+// systemExtensionPropertiesAdopt wraps an Objective-C object that this code just created as a
+// SystemExtensionProperties (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func systemExtensionPropertiesAdopt(id objc.ID) *SystemExtensionProperties {
+	if id == 0 {
+		return nil
+	}
+	x := &SystemExtensionProperties{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SystemExtensionProperties) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SystemExtensionProperties) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SystemExtensionProperties) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSystemExtensionProperties creates a new SystemExtensionProperties.
 func NewSystemExtensionProperties() *SystemExtensionProperties {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("OSSystemExtensionProperties")), objc.RegisterName("new"))
-	return &SystemExtensionProperties{inner: raw.OSSystemExtensionPropertiesFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("OSSystemExtensionProperties")), objc.RegisterName("new"))
+	return systemExtensionPropertiesAdopt(_id)
 }
 
-// @brief The file URL locating an indicating the extension bundle these properties were retreived from.
-//
-// URL calls the underlying URL.
-func (x *SystemExtensionProperties) URL() *foundation.NSURL {
-	return x.inner.URL()
+// The file URL locating an indicating the extension bundle these properties were retreived from.
+func (x *SystemExtensionProperties) URL() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("URL"))
+	return obj.Wrap(_r)
 }
 
-// @brief The bundle identifier of the extension (CFBundleIdentifier)
-//
-// BundleIdentifier calls the underlying BundleIdentifier.
+// The bundle identifier of the extension (CFBundleIdentifier)
 func (x *SystemExtensionProperties) BundleIdentifier() string {
-	_r := x.inner.BundleIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @brief The bundle version of the extension (CFBundleVersion)
-//
-// BundleVersion calls the underlying BundleVersion.
+// The bundle version of the extension (CFBundleVersion)
 func (x *SystemExtensionProperties) BundleVersion() string {
-	_r := x.inner.BundleVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @brief The bundle short version string of the extension (CFBundleShortVersionString)
-//
-// BundleShortVersion calls the underlying BundleShortVersion.
+// The bundle short version string of the extension (CFBundleShortVersionString)
 func (x *SystemExtensionProperties) BundleShortVersion() string {
-	_r := x.inner.BundleShortVersion()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("bundleShortVersion"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @brief Returns the enabled state of the extension
-//
-// IsEnabled calls the underlying IsEnabled.
+// Returns the enabled state of the extension
 func (x *SystemExtensionProperties) IsEnabled() bool {
-	return x.inner.IsEnabled()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isEnabled"))
+	return _r
 }
 
-// @brief Returns whether an extension is waiting for user approval
-//
-// IsAwaitingUserApproval calls the underlying IsAwaitingUserApproval.
+// Returns whether an extension is waiting for user approval
 func (x *SystemExtensionProperties) IsAwaitingUserApproval() bool {
-	return x.inner.IsAwaitingUserApproval()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isAwaitingUserApproval"))
+	return _r
 }
 
-// @brief Returns if an extension is being uninstalled
-//
-// IsUninstalling calls the underlying IsUninstalling.
+// Returns if an extension is being uninstalled
 func (x *SystemExtensionProperties) IsUninstalling() bool {
-	return x.inner.IsUninstalling()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isUninstalling"))
+	return _r
 }
 
 // SystemExtensionPropertiesable is the interface implemented by [SystemExtensionProperties], for mocking and DI.
 type SystemExtensionPropertiesable interface {
-	Unwrap() *raw.OSSystemExtensionProperties
-	URL() *foundation.NSURL
+	obj.Object
+	URL() obj.Object
 	BundleIdentifier() string
 	BundleVersion() string
 	BundleShortVersion() string

@@ -5,60 +5,83 @@
 package fskit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/fskit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A resource that represents a path in the system file space.
 //
-// PathURLResource wraps [raw.FSPathURLResource] with a fluent Go API.
+// PathURLResource is an idiomatic wrapper over the Objective-C class FSPathURLResource.
 type PathURLResource struct {
-	inner *raw.FSPathURLResource
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.FSPathURLResource].
-func (x *PathURLResource) Unwrap() *raw.FSPathURLResource { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *PathURLResource) ID() objc.ID { return x.inner.Ptr() }
-
-// PathURLResourceFromID adopts an existing object pointer as a PathURLResource (nil for 0).
+// PathURLResourceFromID adopts an existing Objective-C object as a PathURLResource
+// (nil for 0), retaining it and registering a release finalizer.
 func PathURLResourceFromID(id objc.ID) *PathURLResource {
 	if id == 0 {
 		return nil
 	}
-	return &PathURLResource{inner: raw.FSPathURLResourceFromID(id)}
+	x := &PathURLResource{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// pathURLResourceAdopt wraps an Objective-C object that this code just created as a
+// PathURLResource (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func pathURLResourceAdopt(id objc.ID) *PathURLResource {
+	if id == 0 {
+		return nil
+	}
+	x := &PathURLResource{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *PathURLResource) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *PathURLResource) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *PathURLResource) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a path URL resource.
 //
-// NewPathURLResourceWithURLWritable creates a new [PathURLResource].
+// NewPathURLResourceWithURLWritable creates a new PathURLResource.
 func NewPathURLResourceWithURLWritable(uRL string, writable bool) *PathURLResource {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("FSPathURLResource")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:writable:"), foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(uRL)).Ptr(), writable)
-	return &PathURLResource{inner: raw.FSPathURLResourceFromID(_id)}
+	_alloc := objc.Send[objc.ID](objc.ID(_class("FSPathURLResource")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithURL:writable:"), rt.FileURL(uRL), writable)
+	return pathURLResourceAdopt(_id)
 }
 
 // The URL represented by the resource.
-//
-// Url calls the underlying Url.
-func (x *PathURLResource) Url() *foundation.NSURL {
-	return x.inner.Url()
+func (x *PathURLResource) Url() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("url"))
+	return obj.Wrap(_r)
 }
 
-// IsWritable calls the underlying IsWritable.
 func (x *PathURLResource) IsWritable() bool {
-	return x.inner.IsWritable()
+	_r := objc.Send[bool](objref.IDOf(x), objc.RegisterName("isWritable"))
+	return _r
 }
-
-func (x *PathURLResource) asResource() *raw.FSResource { return &x.inner.FSResource }
 
 // PathURLResourceable is the interface implemented by [PathURLResource], for mocking and DI.
 type PathURLResourceable interface {
-	Unwrap() *raw.FSPathURLResource
-	Url() *foundation.NSURL
+	obj.Object
+	Url() obj.Object
 	IsWritable() bool
 }
 

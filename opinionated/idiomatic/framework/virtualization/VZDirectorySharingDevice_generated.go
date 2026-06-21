@@ -5,45 +5,68 @@
 package virtualization
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/virtualization"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The base class that represents a directory sharing device in a VM.
 //
-// DirectorySharingDevice wraps [raw.VZDirectorySharingDevice] with a fluent Go API.
+// DirectorySharingDevice is an idiomatic wrapper over the Objective-C class VZDirectorySharingDevice.
 type DirectorySharingDevice struct {
-	inner *raw.VZDirectorySharingDevice
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.VZDirectorySharingDevice].
-func (x *DirectorySharingDevice) Unwrap() *raw.VZDirectorySharingDevice { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *DirectorySharingDevice) ID() objc.ID { return x.inner.Ptr() }
-
-// DirectorySharingDeviceFromID adopts an existing object pointer as a DirectorySharingDevice (nil for 0).
+// DirectorySharingDeviceFromID adopts an existing Objective-C object as a DirectorySharingDevice
+// (nil for 0), retaining it and registering a release finalizer.
 func DirectorySharingDeviceFromID(id objc.ID) *DirectorySharingDevice {
 	if id == 0 {
 		return nil
 	}
-	return &DirectorySharingDevice{inner: raw.VZDirectorySharingDeviceFromID(id)}
+	x := &DirectorySharingDevice{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewDirectorySharingDevice creates a new [DirectorySharingDevice].
+// directorySharingDeviceAdopt wraps an Objective-C object that this code just created as a
+// DirectorySharingDevice (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func directorySharingDeviceAdopt(id objc.ID) *DirectorySharingDevice {
+	if id == 0 {
+		return nil
+	}
+	x := &DirectorySharingDevice{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *DirectorySharingDevice) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *DirectorySharingDevice) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *DirectorySharingDevice) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewDirectorySharingDevice creates a new DirectorySharingDevice.
 func NewDirectorySharingDevice() *DirectorySharingDevice {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("VZDirectorySharingDevice")), objc.RegisterName("new"))
-	return &DirectorySharingDevice{inner: raw.VZDirectorySharingDeviceFromID(_id)}
-}
-
-func (x *DirectorySharingDevice) asDirectorySharingDevice() *raw.VZDirectorySharingDevice {
-	return x.inner
+	_id := objc.Send[objc.ID](objc.ID(_class("VZDirectorySharingDevice")), objc.RegisterName("new"))
+	return directorySharingDeviceAdopt(_id)
 }
 
 // DirectorySharingDeviceable is the interface implemented by [DirectorySharingDevice], for mocking and DI.
 type DirectorySharingDeviceable interface {
-	Unwrap() *raw.VZDirectorySharingDevice
+	obj.Object
 }
 
 var _ DirectorySharingDeviceable = (*DirectorySharingDevice)(nil)

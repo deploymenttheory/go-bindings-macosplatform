@@ -5,191 +5,175 @@
 package contacts
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/contacts"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
 // The object that fetches and saves contacts, groups, and containers from the user’s Contacts database.
 //
-// ContactStore wraps [raw.CNContactStore] with a fluent Go API.
+// ContactStore is an idiomatic wrapper over the Objective-C class CNContactStore.
 type ContactStore struct {
-	inner *raw.CNContactStore
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CNContactStore].
-func (x *ContactStore) Unwrap() *raw.CNContactStore { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ContactStore) ID() objc.ID { return x.inner.Ptr() }
-
-// ContactStoreFromID adopts an existing object pointer as a ContactStore (nil for 0).
+// ContactStoreFromID adopts an existing Objective-C object as a ContactStore
+// (nil for 0), retaining it and registering a release finalizer.
 func ContactStoreFromID(id objc.ID) *ContactStore {
 	if id == 0 {
 		return nil
 	}
-	return &ContactStore{inner: raw.CNContactStoreFromID(id)}
+	x := &ContactStore{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewContactStore creates a new [ContactStore].
+// contactStoreAdopt wraps an Objective-C object that this code just created as a
+// ContactStore (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func contactStoreAdopt(id objc.ID) *ContactStore {
+	if id == 0 {
+		return nil
+	}
+	x := &ContactStore{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ContactStore) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ContactStore) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ContactStore) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewContactStore creates a new ContactStore.
 func NewContactStore() *ContactStore {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CNContactStore")), objc.RegisterName("new"))
-	return &ContactStore{inner: raw.CNContactStoreFromID(_id)}
-}
-
-// Requests access to the user’s contacts.
-//
-// RequestAccessForEntityTypeCompletionHandler calls the underlying RequestAccessForEntityTypeCompletionHandler.
-func (x *ContactStore) RequestAccessForEntityTypeCompletionHandler(entityType CNEntityType, completionHandler func(bool, unsafe.Pointer)) {
-	x.inner.RequestAccessForEntityTypeCompletionHandler(raw.CNEntityType(entityType), completionHandler)
+	_id := objc.Send[objc.ID](objc.ID(_class("CNContactStore")), objc.RegisterName("new"))
+	return contactStoreAdopt(_id)
 }
 
 // Fetches all unified contacts matching the specified predicate.
-//
-// UnifiedContactsMatchingPredicateKeysToFetchError calls the underlying UnifiedContactsMatchingPredicateKeysToFetchError.
-func (x *ContactStore) UnifiedContactsMatchingPredicateKeysToFetchError(predicate *foundation.NSPredicate, keys ...purego.IDer) (*foundation.NSArray[*raw.CNContact], error) {
-	_ptrs := make([]objc.ID, len(keys))
-	for _i, _v := range keys {
-		_ptrs[_i] = _v.ID()
+func (x *ContactStore) UnifiedContactsMatchingPredicateKeysToFetchError(predicate obj.Object, keys []obj.Object) ([]*Contact, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unifiedContactsMatchingPredicate:keysToFetch:error:"), objref.IDOf(predicate), purego.SliceToNSArray(keys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	var _arg1 *foundation.NSArray[raw.CNKeyDescriptor]
-	if len(_ptrs) > 0 {
-		_arg1 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg1 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	return x.inner.UnifiedContactsMatchingPredicateKeysToFetchError(predicate, _arg1)
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Contact { return ContactFromID(_id) }), nil
 }
 
 // Fetches a unified contact for the specified contact identifier.
-//
-// UnifiedContactWithIdentifierKeysToFetchError calls the underlying UnifiedContactWithIdentifierKeysToFetchError.
-func (x *ContactStore) UnifiedContactWithIdentifierKeysToFetchError(identifier string, keys ...purego.IDer) (*Contact, error) {
-	_ptrs := make([]objc.ID, len(keys))
-	for _i, _v := range keys {
-		_ptrs[_i] = _v.ID()
+func (x *ContactStore) UnifiedContactWithIdentifierKeysToFetchError(identifier string, keys []obj.Object) (*Contact, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unifiedContactWithIdentifier:keysToFetch:error:"), purego.NSString(identifier), purego.SliceToNSArray(keys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	var _arg1 *foundation.NSArray[raw.CNKeyDescriptor]
-	if len(_ptrs) > 0 {
-		_arg1 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg1 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r, _err := x.inner.UnifiedContactWithIdentifierKeysToFetchError(foundation.NSStringStringWithUTF8String(identifier), _arg1)
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Contact{inner: _r}, nil
+	return ContactFromID(_r), nil
 }
 
 // Fetches the unified contact that’s the me card.
-//
-// UnifiedMeContactWithKeysToFetchError calls the underlying UnifiedMeContactWithKeysToFetchError.
-func (x *ContactStore) UnifiedMeContactWithKeysToFetchError(keys ...purego.IDer) (*Contact, error) {
-	_ptrs := make([]objc.ID, len(keys))
-	for _i, _v := range keys {
-		_ptrs[_i] = _v.ID()
+func (x *ContactStore) UnifiedMeContactWithKeysToFetchError(keys []obj.Object) (*Contact, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("unifiedMeContactWithKeysToFetch:error:"), purego.SliceToNSArray(keys, func(_v obj.Object) objc.ID { return objref.IDOf(_v) }), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	var _arg0 *foundation.NSArray[raw.CNKeyDescriptor]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[raw.CNKeyDescriptor](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_r, _err := x.inner.UnifiedMeContactWithKeysToFetchError(_arg0)
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Contact{inner: _r}, nil
+	return ContactFromID(_r), nil
 }
 
 // Enumerates a contact fetch request.
-//
-// EnumeratorForContactFetchRequestError calls the underlying EnumeratorForContactFetchRequestError.
-func (x *ContactStore) EnumeratorForContactFetchRequestError(request *raw.CNContactFetchRequest) (*raw.CNFetchResult[objc.ID], error) {
-	return x.inner.EnumeratorForContactFetchRequestError(request)
+func (x *ContactStore) EnumeratorForContactFetchRequestError(request *ContactFetchRequest) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratorForContactFetchRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Enumerates a change history fetch request.
-//
-// EnumeratorForChangeHistoryFetchRequestError calls the underlying EnumeratorForChangeHistoryFetchRequestError.
-func (x *ContactStore) EnumeratorForChangeHistoryFetchRequestError(request *raw.CNChangeHistoryFetchRequest) (*raw.CNFetchResult[objc.ID], error) {
-	return x.inner.EnumeratorForChangeHistoryFetchRequestError(request)
-}
-
-// Returns a Boolean value that indicates whether the enumeration of all contacts matching a contact fetch request executes successfully.
-//
-// EnumerateContactsWithFetchRequestErrorUsing calls the underlying EnumerateContactsWithFetchRequestErrorUsing.
-func (x *ContactStore) EnumerateContactsWithFetchRequestErrorUsing(fetchRequest *raw.CNContactFetchRequest, error_ unsafe.Pointer, block func(*raw.CNContact, *bool)) bool {
-	return x.inner.EnumerateContactsWithFetchRequestErrorUsing(fetchRequest, error_, block)
+func (x *ContactStore) EnumeratorForChangeHistoryFetchRequestError(request *ChangeHistoryFetchRequest) (obj.Object, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("enumeratorForChangeHistoryFetchRequest:error:"), objref.IDOf(request), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return obj.Wrap(_r), nil
 }
 
 // Fetches all groups matching the specified predicate.
-//
-// GroupsMatchingPredicateError calls the underlying GroupsMatchingPredicateError.
-func (x *ContactStore) GroupsMatchingPredicateError(predicate *foundation.NSPredicate) (*foundation.NSArray[*raw.CNGroup], error) {
-	return x.inner.GroupsMatchingPredicateError(predicate)
+func (x *ContactStore) GroupsMatchingPredicateError(predicate obj.Object) ([]*Group, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupsMatchingPredicate:error:"), objref.IDOf(predicate), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Group { return GroupFromID(_id) }), nil
 }
 
 // Fetches all containers matching the specified predicate.
-//
-// ContainersMatchingPredicateError calls the underlying ContainersMatchingPredicateError.
-func (x *ContactStore) ContainersMatchingPredicateError(predicate *foundation.NSPredicate) (*foundation.NSArray[*raw.CNContainer], error) {
-	return x.inner.ContainersMatchingPredicateError(predicate)
+func (x *ContactStore) ContainersMatchingPredicateError(predicate obj.Object) ([]*Container, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("containersMatchingPredicate:error:"), objref.IDOf(predicate), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *Container { return ContainerFromID(_id) }), nil
 }
 
 // Executes a save request and returns success or failure.
-//
-// ExecuteSaveRequestError calls the underlying ExecuteSaveRequestError.
-func (x *ContactStore) ExecuteSaveRequestError(saveRequest *raw.CNSaveRequest) (bool, error) {
-	return x.inner.ExecuteSaveRequestError(saveRequest)
+func (x *ContactStore) ExecuteSaveRequest(saveRequest *SaveRequest) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objref.IDOf(x), objc.RegisterName("executeSaveRequest:error:"), objref.IDOf(saveRequest), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
+	}
+	return nil
 }
 
 // Returns the identifier of the default container.
-//
-// DefaultContainerIdentifier calls the underlying DefaultContainerIdentifier.
 func (x *ContactStore) DefaultContainerIdentifier() string {
-	_r := x.inner.DefaultContainerIdentifier()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("defaultContainerIdentifier"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @abstract The current history token. @discussion Retrieve the current history token. If you are fetching contacts or change history events, you should use the token on the @c CNFetchResult instead.
-//
-// CurrentHistoryToken calls the underlying CurrentHistoryToken.
-func (x *ContactStore) CurrentHistoryToken() *foundation.NSData {
-	return x.inner.CurrentHistoryToken()
+// The current history token. Retrieve the current history token. If you are fetching contacts or change history events, you should use the token on the
+func (x *ContactStore) CurrentHistoryToken() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("currentHistoryToken"))
+	return obj.Wrap(_r)
 }
 
 // ContactStoreable is the interface implemented by [ContactStore], for mocking and DI.
 type ContactStoreable interface {
-	Unwrap() *raw.CNContactStore
-	RequestAccessForEntityTypeCompletionHandler(entityType CNEntityType, completionHandler func(bool, unsafe.Pointer))
-	UnifiedContactsMatchingPredicateKeysToFetchError(predicate *foundation.NSPredicate, keys ...purego.IDer) (*foundation.NSArray[*raw.CNContact], error)
-	UnifiedContactWithIdentifierKeysToFetchError(identifier string, keys ...purego.IDer) (*Contact, error)
-	UnifiedMeContactWithKeysToFetchError(keys ...purego.IDer) (*Contact, error)
-	EnumeratorForContactFetchRequestError(request *raw.CNContactFetchRequest) (*raw.CNFetchResult[objc.ID], error)
-	EnumeratorForChangeHistoryFetchRequestError(request *raw.CNChangeHistoryFetchRequest) (*raw.CNFetchResult[objc.ID], error)
-	EnumerateContactsWithFetchRequestErrorUsing(fetchRequest *raw.CNContactFetchRequest, error_ unsafe.Pointer, block func(*raw.CNContact, *bool)) bool
-	GroupsMatchingPredicateError(predicate *foundation.NSPredicate) (*foundation.NSArray[*raw.CNGroup], error)
-	ContainersMatchingPredicateError(predicate *foundation.NSPredicate) (*foundation.NSArray[*raw.CNContainer], error)
-	ExecuteSaveRequestError(saveRequest *raw.CNSaveRequest) (bool, error)
+	obj.Object
+	UnifiedContactsMatchingPredicateKeysToFetchError(predicate obj.Object, keys []obj.Object) ([]*Contact, error)
+	UnifiedContactWithIdentifierKeysToFetchError(identifier string, keys []obj.Object) (*Contact, error)
+	UnifiedMeContactWithKeysToFetchError(keys []obj.Object) (*Contact, error)
+	EnumeratorForContactFetchRequestError(request *ContactFetchRequest) (obj.Object, error)
+	EnumeratorForChangeHistoryFetchRequestError(request *ChangeHistoryFetchRequest) (obj.Object, error)
+	GroupsMatchingPredicateError(predicate obj.Object) ([]*Group, error)
+	ContainersMatchingPredicateError(predicate obj.Object) ([]*Container, error)
+	ExecuteSaveRequest(saveRequest *SaveRequest) error
 	DefaultContainerIdentifier() string
-	CurrentHistoryToken() *foundation.NSData
+	CurrentHistoryToken() obj.Object
 }
 
 var _ ContactStoreable = (*ContactStore)(nil)

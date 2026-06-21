@@ -5,183 +5,147 @@
 package cloudkit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/cloudkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An event that occurs during a sync operation.
 //
-// SyncEngineEvent wraps [raw.CKSyncEngineEvent] with a fluent Go API.
+// SyncEngineEvent is an idiomatic wrapper over the Objective-C class CKSyncEngineEvent.
 type SyncEngineEvent struct {
-	inner *raw.CKSyncEngineEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.CKSyncEngineEvent].
-func (x *SyncEngineEvent) Unwrap() *raw.CKSyncEngineEvent { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *SyncEngineEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// SyncEngineEventFromID adopts an existing object pointer as a SyncEngineEvent (nil for 0).
+// SyncEngineEventFromID adopts an existing Objective-C object as a SyncEngineEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func SyncEngineEventFromID(id objc.ID) *SyncEngineEvent {
 	if id == 0 {
 		return nil
 	}
-	return &SyncEngineEvent{inner: raw.CKSyncEngineEventFromID(id)}
+	x := &SyncEngineEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewSyncEngineEvent creates a new [SyncEngineEvent].
+// syncEngineEventAdopt wraps an Objective-C object that this code just created as a
+// SyncEngineEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func syncEngineEventAdopt(id objc.ID) *SyncEngineEvent {
+	if id == 0 {
+		return nil
+	}
+	x := &SyncEngineEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *SyncEngineEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *SyncEngineEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *SyncEngineEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewSyncEngineEvent creates a new SyncEngineEvent.
 func NewSyncEngineEvent() *SyncEngineEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("CKSyncEngineEvent")), objc.RegisterName("new"))
-	return &SyncEngineEvent{inner: raw.CKSyncEngineEventFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("CKSyncEngineEvent")), objc.RegisterName("new"))
+	return syncEngineEventAdopt(_id)
 }
 
 // The type of event.
-//
-// Type calls the underlying Type.
-func (x *SyncEngineEvent) Type() CKSyncEngineEventType {
-	return CKSyncEngineEventType(x.inner.Type())
+func (x *SyncEngineEvent) Type() SyncEngineEventType {
+	_r := objc.Send[SyncEngineEventType](objref.IDOf(x), objc.RegisterName("type"))
+	return _r
 }
 
 // The event downcast to the subclass that represents an update to the sync engine's state.
-//
-// StateUpdateEvent calls the underlying StateUpdateEvent.
 func (x *SyncEngineEvent) StateUpdateEvent() *SyncEngineStateUpdateEvent {
-	_r := x.inner.StateUpdateEvent()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineStateUpdateEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("stateUpdateEvent"))
+	return SyncEngineStateUpdateEventFromID(_r)
 }
 
 // The event downcast to the subclass that represents a change to the device's iCloud account.
-//
-// AccountChangeEvent calls the underlying AccountChangeEvent.
 func (x *SyncEngineEvent) AccountChangeEvent() *SyncEngineAccountChangeEvent {
-	_r := x.inner.AccountChangeEvent()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineAccountChangeEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("accountChangeEvent"))
+	return SyncEngineAccountChangeEventFromID(_r)
 }
 
 // The event downcast to the subclass that represents an imminent database fetch.
-//
-// WillFetchChangesEvent calls the underlying WillFetchChangesEvent.
 func (x *SyncEngineEvent) WillFetchChangesEvent() *SyncEngineWillFetchChangesEvent {
-	_r := x.inner.WillFetchChangesEvent()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineWillFetchChangesEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willFetchChangesEvent"))
+	return SyncEngineWillFetchChangesEventFromID(_r)
 }
 
 // The event downcast to the subclass that represents a set of fetched database changes to process.
-//
-// FetchedDatabaseChangesEvent calls the underlying FetchedDatabaseChangesEvent.
 func (x *SyncEngineEvent) FetchedDatabaseChangesEvent() *SyncEngineFetchedDatabaseChangesEvent {
-	_r := x.inner.FetchedDatabaseChangesEvent()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineFetchedDatabaseChangesEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchedDatabaseChangesEvent"))
+	return SyncEngineFetchedDatabaseChangesEventFromID(_r)
 }
 
 // The event downcast to the subclass that represents a completed database fetch.
-//
-// DidFetchChangesEvent calls the underlying DidFetchChangesEvent.
 func (x *SyncEngineEvent) DidFetchChangesEvent() *SyncEngineDidFetchChangesEvent {
-	_r := x.inner.DidFetchChangesEvent()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineDidFetchChangesEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didFetchChangesEvent"))
+	return SyncEngineDidFetchChangesEventFromID(_r)
 }
 
 // The event downcast to the subclass that represents an imminent fetch of record zone changes.
-//
-// WillFetchRecordZoneChangesEvent calls the underlying WillFetchRecordZoneChangesEvent.
 func (x *SyncEngineEvent) WillFetchRecordZoneChangesEvent() *SyncEngineWillFetchRecordZoneChangesEvent {
-	_r := x.inner.WillFetchRecordZoneChangesEvent()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineWillFetchRecordZoneChangesEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willFetchRecordZoneChangesEvent"))
+	return SyncEngineWillFetchRecordZoneChangesEventFromID(_r)
 }
 
 // The event downcast to the subclass that represents a set of fetched record zone changes to process.
-//
-// FetchedRecordZoneChangesEvent calls the underlying FetchedRecordZoneChangesEvent.
 func (x *SyncEngineEvent) FetchedRecordZoneChangesEvent() *SyncEngineFetchedRecordZoneChangesEvent {
-	_r := x.inner.FetchedRecordZoneChangesEvent()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineFetchedRecordZoneChangesEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("fetchedRecordZoneChangesEvent"))
+	return SyncEngineFetchedRecordZoneChangesEventFromID(_r)
 }
 
 // The event downcast to the subclass that represents a completed record zone fetch.
-//
-// DidFetchRecordZoneChangesEvent calls the underlying DidFetchRecordZoneChangesEvent.
 func (x *SyncEngineEvent) DidFetchRecordZoneChangesEvent() *SyncEngineDidFetchRecordZoneChangesEvent {
-	_r := x.inner.DidFetchRecordZoneChangesEvent()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineDidFetchRecordZoneChangesEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didFetchRecordZoneChangesEvent"))
+	return SyncEngineDidFetchRecordZoneChangesEventFromID(_r)
 }
 
 // The event downcast to the subclass that represents an imminent send operation.
-//
-// WillSendChangesEvent calls the underlying WillSendChangesEvent.
 func (x *SyncEngineEvent) WillSendChangesEvent() *SyncEngineWillSendChangesEvent {
-	_r := x.inner.WillSendChangesEvent()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineWillSendChangesEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("willSendChangesEvent"))
+	return SyncEngineWillSendChangesEventFromID(_r)
 }
 
 // The event downcast to the subclass that represents a sent batch of database changes.
-//
-// SentDatabaseChangesEvent calls the underlying SentDatabaseChangesEvent.
 func (x *SyncEngineEvent) SentDatabaseChangesEvent() *SyncEngineSentDatabaseChangesEvent {
-	_r := x.inner.SentDatabaseChangesEvent()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineSentDatabaseChangesEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sentDatabaseChangesEvent"))
+	return SyncEngineSentDatabaseChangesEventFromID(_r)
 }
 
 // The event downcast to the subclass that represents a sent batch of record zone changes.
-//
-// SentRecordZoneChangesEvent calls the underlying SentRecordZoneChangesEvent.
 func (x *SyncEngineEvent) SentRecordZoneChangesEvent() *SyncEngineSentRecordZoneChangesEvent {
-	_r := x.inner.SentRecordZoneChangesEvent()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineSentRecordZoneChangesEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("sentRecordZoneChangesEvent"))
+	return SyncEngineSentRecordZoneChangesEventFromID(_r)
 }
 
 // The event downcast to the subclass that represents a completed send operation.
-//
-// DidSendChangesEvent calls the underlying DidSendChangesEvent.
 func (x *SyncEngineEvent) DidSendChangesEvent() *SyncEngineDidSendChangesEvent {
-	_r := x.inner.DidSendChangesEvent()
-	if _r == nil {
-		return nil
-	}
-	return &SyncEngineDidSendChangesEvent{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("didSendChangesEvent"))
+	return SyncEngineDidSendChangesEventFromID(_r)
 }
-
-func (x *SyncEngineEvent) asSyncEngineEvent() *raw.CKSyncEngineEvent { return x.inner }
 
 // SyncEngineEventable is the interface implemented by [SyncEngineEvent], for mocking and DI.
 type SyncEngineEventable interface {
-	Unwrap() *raw.CKSyncEngineEvent
-	Type() CKSyncEngineEventType
+	obj.Object
+	Type() SyncEngineEventType
 	StateUpdateEvent() *SyncEngineStateUpdateEvent
 	AccountChangeEvent() *SyncEngineAccountChangeEvent
 	WillFetchChangesEvent() *SyncEngineWillFetchChangesEvent

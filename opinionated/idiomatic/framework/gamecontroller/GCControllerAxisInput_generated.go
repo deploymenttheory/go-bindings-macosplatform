@@ -5,136 +5,134 @@
 package gamecontroller
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A control element that tracks movement along an axis.
 //
-// ControllerAxisInput wraps [raw.GCControllerAxisInput] with a fluent Go API.
+// ControllerAxisInput is an idiomatic wrapper over the Objective-C class GCControllerAxisInput.
 type ControllerAxisInput struct {
-	inner *raw.GCControllerAxisInput
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCControllerAxisInput].
-func (x *ControllerAxisInput) Unwrap() *raw.GCControllerAxisInput { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *ControllerAxisInput) ID() objc.ID { return x.inner.Ptr() }
-
-// ControllerAxisInputFromID adopts an existing object pointer as a ControllerAxisInput (nil for 0).
+// ControllerAxisInputFromID adopts an existing Objective-C object as a ControllerAxisInput
+// (nil for 0), retaining it and registering a release finalizer.
 func ControllerAxisInputFromID(id objc.ID) *ControllerAxisInput {
 	if id == 0 {
 		return nil
 	}
-	return &ControllerAxisInput{inner: raw.GCControllerAxisInputFromID(id)}
-}
-
-// NewControllerAxisInput creates a new [ControllerAxisInput].
-func NewControllerAxisInput() *ControllerAxisInput {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCControllerAxisInput")), objc.RegisterName("new"))
-	return &ControllerAxisInput{inner: raw.GCControllerAxisInputFromID(_id)}
-}
-
-// The block that the element calls when the user changes the axis value.
-//
-// WithValueChangedHandler sets the valueChangedHandler property and returns the receiver for chaining.
-func (x *ControllerAxisInput) WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerAxisInput, float32)) *ControllerAxisInput {
-	x.inner.SetValueChangedHandler(valueChangedHandler)
+	x := &ControllerAxisInput{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
+}
+
+// controllerAxisInputAdopt wraps an Objective-C object that this code just created as a
+// ControllerAxisInput (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func controllerAxisInputAdopt(id objc.ID) *ControllerAxisInput {
+	if id == 0 {
+		return nil
+	}
+	x := &ControllerAxisInput{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *ControllerAxisInput) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *ControllerAxisInput) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *ControllerAxisInput) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewControllerAxisInput creates a new ControllerAxisInput.
+func NewControllerAxisInput() *ControllerAxisInput {
+	_id := objc.Send[objc.ID](objc.ID(_class("GCControllerAxisInput")), objc.RegisterName("new"))
+	return controllerAxisInputAdopt(_id)
 }
 
 // The current value of the axis.
 //
-// WithValue sets the value property and returns the receiver for chaining.
+// WithValue sets value and returns the receiver so calls can be chained.
 func (x *ControllerAxisInput) WithValue(value float32) *ControllerAxisInput {
-	x.inner.SetValue(value)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 	return x
 }
 
 // The preferred state for handling input when the user binds the element to a system gesture.
 //
-// WithPreferredSystemGestureState sets the preferredSystemGestureState property and returns the receiver for chaining.
-func (x *ControllerAxisInput) WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerAxisInput {
-	x.inner.GCControllerElement.SetPreferredSystemGestureState(raw.GCSystemGestureState(preferredSystemGestureState))
+// WithPreferredSystemGestureState sets preferredSystemGestureState and returns the receiver so calls can be chained.
+func (x *ControllerAxisInput) WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerAxisInput {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setPreferredSystemGestureState:"), preferredSystemGestureState)
 	return x
 }
 
 // A system symbol for the element or the remapped element.
 //
-// WithSfSymbolsName sets the sfSymbolsName property and returns the receiver for chaining.
+// WithSfSymbolsName sets sfSymbolsName and returns the receiver so calls can be chained.
 func (x *ControllerAxisInput) WithSfSymbolsName(sfSymbolsName string) *ControllerAxisInput {
-	x.inner.GCControllerElement.SetSfSymbolsName(foundation.NSStringStringWithUTF8String(sfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setSfSymbolsName:"), purego.NSString(sfSymbolsName))
 	return x
 }
 
 // The localized name for the element or the remapped element.
 //
-// WithLocalizedName sets the localizedName property and returns the receiver for chaining.
+// WithLocalizedName sets localizedName and returns the receiver so calls can be chained.
 func (x *ControllerAxisInput) WithLocalizedName(localizedName string) *ControllerAxisInput {
-	x.inner.GCControllerElement.SetLocalizedName(foundation.NSStringStringWithUTF8String(localizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLocalizedName:"), purego.NSString(localizedName))
 	return x
 }
 
 // The element’s system symbol, not the remapped symbol.
 //
-// WithUnmappedSfSymbolsName sets the unmappedSfSymbolsName property and returns the receiver for chaining.
+// WithUnmappedSfSymbolsName sets unmappedSfSymbolsName and returns the receiver so calls can be chained.
 func (x *ControllerAxisInput) WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerAxisInput {
-	x.inner.GCControllerElement.SetUnmappedSfSymbolsName(foundation.NSStringStringWithUTF8String(unmappedSfSymbolsName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedSfSymbolsName:"), purego.NSString(unmappedSfSymbolsName))
 	return x
 }
 
 // The element’s localized name, not the remapped name.
 //
-// WithUnmappedLocalizedName sets the unmappedLocalizedName property and returns the receiver for chaining.
+// WithUnmappedLocalizedName sets unmappedLocalizedName and returns the receiver so calls can be chained.
 func (x *ControllerAxisInput) WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerAxisInput {
-	x.inner.GCControllerElement.SetUnmappedLocalizedName(foundation.NSStringStringWithUTF8String(unmappedLocalizedName))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUnmappedLocalizedName:"), purego.NSString(unmappedLocalizedName))
 	return x
 }
 
 // Sets the normalized value of the axis.
-//
-// SetValue calls the underlying SetValue.
 func (x *ControllerAxisInput) SetValue(value float32) {
-	x.inner.SetValue(value)
-}
-
-// ValueChangedHandler calls the underlying ValueChangedHandler.
-func (x *ControllerAxisInput) ValueChangedHandler() objc.Block {
-	return x.inner.ValueChangedHandler()
-}
-
-// SetValueChangedHandler calls the underlying SetValueChangedHandler.
-func (x *ControllerAxisInput) SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerAxisInput, float32)) {
-	x.inner.SetValueChangedHandler(valueChangedHandler)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setValue:"), value)
 }
 
 // A normalized value for the input, between -1 and 1 for axis inputs. The values are deadzoned and saturated before they are returned so there is no value ouside the range. Deadzoning does not remove values from the range, the full 0 to 1 magnitude of values are possible from the input. As an axis is often used in a digital sense, you can rely on a value of 0 meaning the axis is inside the deadzone. Any value greater than or less than zero is not in the deadzone.
-//
-// Value calls the underlying Value.
 func (x *ControllerAxisInput) Value() float32 {
-	return x.inner.Value()
-}
-
-func (x *ControllerAxisInput) asControllerElement() *raw.GCControllerElement {
-	return &x.inner.GCControllerElement
+	_r := objc.Send[float32](objref.IDOf(x), objc.RegisterName("value"))
+	return _r
 }
 
 // ControllerAxisInputable is the interface implemented by [ControllerAxisInput], for mocking and DI.
 type ControllerAxisInputable interface {
-	Unwrap() *raw.GCControllerAxisInput
-	WithValueChangedHandler(valueChangedHandler func(*raw.GCControllerAxisInput, float32)) *ControllerAxisInput
+	obj.Object
 	WithValue(value float32) *ControllerAxisInput
-	WithPreferredSystemGestureState(preferredSystemGestureState GCSystemGestureState) *ControllerAxisInput
+	WithPreferredSystemGestureState(preferredSystemGestureState SystemGestureState) *ControllerAxisInput
 	WithSfSymbolsName(sfSymbolsName string) *ControllerAxisInput
 	WithLocalizedName(localizedName string) *ControllerAxisInput
 	WithUnmappedSfSymbolsName(unmappedSfSymbolsName string) *ControllerAxisInput
 	WithUnmappedLocalizedName(unmappedLocalizedName string) *ControllerAxisInput
 	SetValue(value float32)
-	ValueChangedHandler() objc.Block
-	SetValueChangedHandler(valueChangedHandler func(*raw.GCControllerAxisInput, float32))
 	Value() float32
 }
 

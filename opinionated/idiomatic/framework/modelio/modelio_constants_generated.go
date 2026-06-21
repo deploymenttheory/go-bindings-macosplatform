@@ -5,127 +5,120 @@
 package modelio
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/modelio"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
-	"github.com/ebitengine/purego/objc"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 )
 
-// KUTTypeAlembic returns the string constant kUTTypeAlembic as an objc.ID, for use as a dictionary key or selector argument.
-func KUTTypeAlembic() objc.ID {
-	return purego.CFConstant(raw.KUTTypeAlembic())
+// KUTTypeAlembic returns the string constant kUTTypeAlembic, for use as a dictionary key or argument.
+func KUTTypeAlembic() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypeAlembic"))) }
+
+// KUTType3dObject returns the string constant kUTType3dObject, for use as a dictionary key or argument.
+func KUTType3dObject() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTType3dObject"))) }
+
+// KUTTypePolygon returns the string constant kUTTypePolygon, for use as a dictionary key or argument.
+func KUTTypePolygon() obj.Object { return obj.Wrap(purego.CFConstant(_symbol("kUTTypePolygon"))) }
+
+// KUTTypeStereolithography returns the string constant kUTTypeStereolithography, for use as a dictionary key or argument.
+func KUTTypeStereolithography() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeStereolithography")))
 }
 
-// KUTType3dObject returns the string constant kUTType3dObject as an objc.ID, for use as a dictionary key or selector argument.
-func KUTType3dObject() objc.ID {
-	return purego.CFConstant(raw.KUTType3dObject())
+// KUTTypeUniversalSceneDescription returns the string constant kUTTypeUniversalSceneDescription, for use as a dictionary key or argument.
+func KUTTypeUniversalSceneDescription() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeUniversalSceneDescription")))
 }
 
-// KUTTypePolygon returns the string constant kUTTypePolygon as an objc.ID, for use as a dictionary key or selector argument.
-func KUTTypePolygon() objc.ID {
-	return purego.CFConstant(raw.KUTTypePolygon())
-}
-
-// KUTTypeStereolithography returns the string constant kUTTypeStereolithography as an objc.ID, for use as a dictionary key or selector argument.
-func KUTTypeStereolithography() objc.ID {
-	return purego.CFConstant(raw.KUTTypeStereolithography())
-}
-
-// KUTTypeUniversalSceneDescription returns the string constant kUTTypeUniversalSceneDescription as an objc.ID, for use as a dictionary key or selector argument.
-func KUTTypeUniversalSceneDescription() objc.ID {
-	return purego.CFConstant(raw.KUTTypeUniversalSceneDescription())
-}
-
-// KUTTypeUniversalSceneDescriptionMobile returns the string constant kUTTypeUniversalSceneDescriptionMobile as an objc.ID, for use as a dictionary key or selector argument.
-func KUTTypeUniversalSceneDescriptionMobile() objc.ID {
-	return purego.CFConstant(raw.KUTTypeUniversalSceneDescriptionMobile())
+// KUTTypeUniversalSceneDescriptionMobile returns the string constant kUTTypeUniversalSceneDescriptionMobile, for use as a dictionary key or argument.
+func KUTTypeUniversalSceneDescriptionMobile() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("kUTTypeUniversalSceneDescriptionMobile")))
 }
 
 // The attribute data describes the degree to which a surface’s appearance changes in appearance when rotated about its normal vector.
-// MDLVertexAttributeAnisotropy returns the string constant MDLVertexAttributeAnisotropy as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeAnisotropy() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeAnisotropy())
+// MDLVertexAttributeAnisotropy returns the string constant MDLVertexAttributeAnisotropy, for use as a dictionary key or argument.
+func MDLVertexAttributeAnisotropy() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeAnisotropy")))
 }
 
 // The normal to a curve at a vertex position
-// MDLVertexAttributeBinormal returns the string constant MDLVertexAttributeBinormal as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeBinormal() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeBinormal())
+// MDLVertexAttributeBinormal returns the string constant MDLVertexAttributeBinormal, for use as a dictionary key or argument.
+func MDLVertexAttributeBinormal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeBinormal")))
 }
 
 // The vector completing a tangent basis at a vertex
-// MDLVertexAttributeBitangent returns the string constant MDLVertexAttributeBitangent as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeBitangent() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeBitangent())
+// MDLVertexAttributeBitangent returns the string constant MDLVertexAttributeBitangent, for use as a dictionary key or argument.
+func MDLVertexAttributeBitangent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeBitangent")))
 }
 
 // Color of a vertex
-// MDLVertexAttributeColor returns the string constant MDLVertexAttributeColor as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeColor() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeColor())
+// MDLVertexAttributeColor returns the string constant MDLVertexAttributeColor, for use as a dictionary key or argument.
+func MDLVertexAttributeColor() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeColor")))
 }
 
 // A crease value along an edge to be applied during subdivision. A zero value indicates an edge is smooth, one is sharply creased.
-// MDLVertexAttributeEdgeCrease returns the string constant MDLVertexAttributeEdgeCrease as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeEdgeCrease() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeEdgeCrease())
+// MDLVertexAttributeEdgeCrease returns the string constant MDLVertexAttributeEdgeCrease, for use as a dictionary key or argument.
+func MDLVertexAttributeEdgeCrease() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeEdgeCrease")))
 }
 
 // Indices of joints in an animation rig corresponding to weighting information
-// MDLVertexAttributeJointIndices returns the string constant MDLVertexAttributeJointIndices as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeJointIndices() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeJointIndices())
+// MDLVertexAttributeJointIndices returns the string constant MDLVertexAttributeJointIndices, for use as a dictionary key or argument.
+func MDLVertexAttributeJointIndices() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeJointIndices")))
 }
 
 // Weights corresponding to joints for the purpose of blending animation
-// MDLVertexAttributeJointWeights returns the string constant MDLVertexAttributeJointWeights as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeJointWeights() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeJointWeights())
+// MDLVertexAttributeJointWeights returns the string constant MDLVertexAttributeJointWeights, for use as a dictionary key or argument.
+func MDLVertexAttributeJointWeights() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeJointWeights")))
 }
 
 // The direction of a normal at a vertex
-// MDLVertexAttributeNormal returns the string constant MDLVertexAttributeNormal as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeNormal() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeNormal())
+// MDLVertexAttributeNormal returns the string constant MDLVertexAttributeNormal, for use as a dictionary key or argument.
+func MDLVertexAttributeNormal() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeNormal")))
 }
 
 // A value indicating the degree to which a vertex is occluded by surrounding geometry
-// MDLVertexAttributeOcclusionValue returns the string constant MDLVertexAttributeOcclusionValue as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeOcclusionValue() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeOcclusionValue())
+// MDLVertexAttributeOcclusionValue returns the string constant MDLVertexAttributeOcclusionValue, for use as a dictionary key or argument.
+func MDLVertexAttributeOcclusionValue() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeOcclusionValue")))
 }
 
 // The position of a vertex
-// MDLVertexAttributePosition returns the string constant MDLVertexAttributePosition as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributePosition() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributePosition())
+// MDLVertexAttributePosition returns the string constant MDLVertexAttributePosition, for use as a dictionary key or argument.
+func MDLVertexAttributePosition() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributePosition")))
 }
 
 // The u direction of a shading basis at a vertex
-// MDLVertexAttributeShadingBasisU returns the string constant MDLVertexAttributeShadingBasisU as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeShadingBasisU() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeShadingBasisU())
+// MDLVertexAttributeShadingBasisU returns the string constant MDLVertexAttributeShadingBasisU, for use as a dictionary key or argument.
+func MDLVertexAttributeShadingBasisU() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeShadingBasisU")))
 }
 
 // The v direction of a shading basis at a vertex
-// MDLVertexAttributeShadingBasisV returns the string constant MDLVertexAttributeShadingBasisV as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeShadingBasisV() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeShadingBasisV())
+// MDLVertexAttributeShadingBasisV returns the string constant MDLVertexAttributeShadingBasisV, for use as a dictionary key or argument.
+func MDLVertexAttributeShadingBasisV() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeShadingBasisV")))
 }
 
 // Stencil values for subdivision at a vertex
-// MDLVertexAttributeSubdivisionStencil returns the string constant MDLVertexAttributeSubdivisionStencil as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeSubdivisionStencil() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeSubdivisionStencil())
+// MDLVertexAttributeSubdivisionStencil returns the string constant MDLVertexAttributeSubdivisionStencil, for use as a dictionary key or argument.
+func MDLVertexAttributeSubdivisionStencil() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeSubdivisionStencil")))
 }
 
 // A vector tangent to a vertex
-// MDLVertexAttributeTangent returns the string constant MDLVertexAttributeTangent as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeTangent() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeTangent())
+// MDLVertexAttributeTangent returns the string constant MDLVertexAttributeTangent, for use as a dictionary key or argument.
+func MDLVertexAttributeTangent() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeTangent")))
 }
 
 // Texture coordinate mapping at a vertex
-// MDLVertexAttributeTextureCoordinate returns the string constant MDLVertexAttributeTextureCoordinate as an objc.ID, for use as a dictionary key or selector argument.
-func MDLVertexAttributeTextureCoordinate() objc.ID {
-	return purego.CFConstant(raw.MDLVertexAttributeTextureCoordinate())
+// MDLVertexAttributeTextureCoordinate returns the string constant MDLVertexAttributeTextureCoordinate, for use as a dictionary key or argument.
+func MDLVertexAttributeTextureCoordinate() obj.Object {
+	return obj.Wrap(purego.CFConstant(_symbol("MDLVertexAttributeTextureCoordinate")))
 }

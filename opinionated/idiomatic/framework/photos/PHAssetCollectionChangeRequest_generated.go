@@ -5,127 +5,106 @@
 package photos
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/photos"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A request to create, delete, or modify a Photos asset collection, for use in a photo library change block.
 //
-// AssetCollectionChangeRequest wraps [raw.PHAssetCollectionChangeRequest] with a fluent Go API.
+// AssetCollectionChangeRequest is an idiomatic wrapper over the Objective-C class PHAssetCollectionChangeRequest.
 type AssetCollectionChangeRequest struct {
-	inner *raw.PHAssetCollectionChangeRequest
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.PHAssetCollectionChangeRequest].
-func (x *AssetCollectionChangeRequest) Unwrap() *raw.PHAssetCollectionChangeRequest { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *AssetCollectionChangeRequest) ID() objc.ID { return x.inner.Ptr() }
-
-// AssetCollectionChangeRequestFromID adopts an existing object pointer as a AssetCollectionChangeRequest (nil for 0).
+// AssetCollectionChangeRequestFromID adopts an existing Objective-C object as a AssetCollectionChangeRequest
+// (nil for 0), retaining it and registering a release finalizer.
 func AssetCollectionChangeRequestFromID(id objc.ID) *AssetCollectionChangeRequest {
 	if id == 0 {
 		return nil
 	}
-	return &AssetCollectionChangeRequest{inner: raw.PHAssetCollectionChangeRequestFromID(id)}
+	x := &AssetCollectionChangeRequest{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewAssetCollectionChangeRequest creates a new [AssetCollectionChangeRequest].
+// assetCollectionChangeRequestAdopt wraps an Objective-C object that this code just created as a
+// AssetCollectionChangeRequest (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func assetCollectionChangeRequestAdopt(id objc.ID) *AssetCollectionChangeRequest {
+	if id == 0 {
+		return nil
+	}
+	x := &AssetCollectionChangeRequest{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *AssetCollectionChangeRequest) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *AssetCollectionChangeRequest) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *AssetCollectionChangeRequest) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewAssetCollectionChangeRequest creates a new AssetCollectionChangeRequest.
 func NewAssetCollectionChangeRequest() *AssetCollectionChangeRequest {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("PHAssetCollectionChangeRequest")), objc.RegisterName("new"))
-	return &AssetCollectionChangeRequest{inner: raw.PHAssetCollectionChangeRequestFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("PHAssetCollectionChangeRequest")), objc.RegisterName("new"))
+	return assetCollectionChangeRequestAdopt(_id)
 }
 
 // The displayed name of the asset collection.
 //
-// WithTitle sets the title property and returns the receiver for chaining.
+// WithTitle sets title and returns the receiver so calls can be chained.
 func (x *AssetCollectionChangeRequest) WithTitle(title string) *AssetCollectionChangeRequest {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 	return x
 }
 
-// Adds the specified assets to the asset collection.
-//
-// AddAssets calls the underlying AddAssets.
-func (x *AssetCollectionChangeRequest) AddAssets(assets foundation.NSFastEnumeration) {
-	x.inner.AddAssets(assets)
-}
-
-// Inserts the specified assets into the collection at the specified indexes.
-//
-// InsertAssetsAtIndexes calls the underlying InsertAssetsAtIndexes.
-func (x *AssetCollectionChangeRequest) InsertAssetsAtIndexes(assets foundation.NSFastEnumeration, indexes *foundation.NSIndexSet) {
-	x.inner.InsertAssetsAtIndexes(assets, indexes)
-}
-
-// Removes the specified assets from the asset collection.
-//
-// RemoveAssets calls the underlying RemoveAssets.
-func (x *AssetCollectionChangeRequest) RemoveAssets(assets foundation.NSFastEnumeration) {
-	x.inner.RemoveAssets(assets)
-}
-
 // Removes the assets at the specified indexes from the asset collection.
-//
-// RemoveAssetsAtIndexes calls the underlying RemoveAssetsAtIndexes.
-func (x *AssetCollectionChangeRequest) RemoveAssetsAtIndexes(indexes *foundation.NSIndexSet) {
-	x.inner.RemoveAssetsAtIndexes(indexes)
-}
-
-// Replaces the assets at the specified indexes in the asset collection with the specified assets.
-//
-// ReplaceAssetsAtIndexesWithAssets calls the underlying ReplaceAssetsAtIndexesWithAssets.
-func (x *AssetCollectionChangeRequest) ReplaceAssetsAtIndexesWithAssets(indexes *foundation.NSIndexSet, assets foundation.NSFastEnumeration) {
-	x.inner.ReplaceAssetsAtIndexesWithAssets(indexes, assets)
+func (x *AssetCollectionChangeRequest) RemoveAssetsAtIndexes(indexes obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeAssetsAtIndexes:"), objref.IDOf(indexes))
 }
 
 // Moves the assets at the specified indexes in the asset collection to a new index.
-//
-// MoveAssetsAtIndexesToIndex calls the underlying MoveAssetsAtIndexesToIndex.
-func (x *AssetCollectionChangeRequest) MoveAssetsAtIndexesToIndex(fromIndexes *foundation.NSIndexSet, toIndex uint) {
-	x.inner.MoveAssetsAtIndexesToIndex(fromIndexes, toIndex)
+func (x *AssetCollectionChangeRequest) MoveAssetsAtIndexesToIndex(fromIndexes obj.Object, toIndex int) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("moveAssetsAtIndexes:toIndex:"), objref.IDOf(fromIndexes), toIndex)
 }
 
-// PlaceholderForCreatedAssetCollection calls the underlying PlaceholderForCreatedAssetCollection.
 func (x *AssetCollectionChangeRequest) PlaceholderForCreatedAssetCollection() *ObjectPlaceholder {
-	_r := x.inner.PlaceholderForCreatedAssetCollection()
-	if _r == nil {
-		return nil
-	}
-	return &ObjectPlaceholder{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("placeholderForCreatedAssetCollection"))
+	return ObjectPlaceholderFromID(_r)
 }
 
-// Title calls the underlying Title.
 func (x *AssetCollectionChangeRequest) Title() string {
-	_r := x.inner.Title()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("title"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// SetTitle calls the underlying SetTitle.
 func (x *AssetCollectionChangeRequest) SetTitle(title string) {
-	x.inner.SetTitle(foundation.NSStringStringWithUTF8String(title))
-}
-
-func (x *AssetCollectionChangeRequest) asChangeRequest() *raw.PHChangeRequest {
-	return &x.inner.PHChangeRequest
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTitle:"), purego.NSString(title))
 }
 
 // AssetCollectionChangeRequestable is the interface implemented by [AssetCollectionChangeRequest], for mocking and DI.
 type AssetCollectionChangeRequestable interface {
-	Unwrap() *raw.PHAssetCollectionChangeRequest
+	obj.Object
 	WithTitle(title string) *AssetCollectionChangeRequest
-	AddAssets(assets foundation.NSFastEnumeration)
-	InsertAssetsAtIndexes(assets foundation.NSFastEnumeration, indexes *foundation.NSIndexSet)
-	RemoveAssets(assets foundation.NSFastEnumeration)
-	RemoveAssetsAtIndexes(indexes *foundation.NSIndexSet)
-	ReplaceAssetsAtIndexesWithAssets(indexes *foundation.NSIndexSet, assets foundation.NSFastEnumeration)
-	MoveAssetsAtIndexesToIndex(fromIndexes *foundation.NSIndexSet, toIndex uint)
+	RemoveAssetsAtIndexes(indexes obj.Object)
+	MoveAssetsAtIndexesToIndex(fromIndexes obj.Object, toIndex int)
 	PlaceholderForCreatedAssetCollection() *ObjectPlaceholder
 	Title() string
 	SetTitle(title string)

@@ -5,105 +5,125 @@
 package matter
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// MTRGroupsClusterGetGroupMembershipResponseParams wraps [raw.MTRGroupsClusterGetGroupMembershipResponseParams] with a fluent Go API.
+// MTRGroupsClusterGetGroupMembershipResponseParams is an idiomatic wrapper over the Objective-C class MTRGroupsClusterGetGroupMembershipResponseParams.
 type MTRGroupsClusterGetGroupMembershipResponseParams struct {
-	inner *raw.MTRGroupsClusterGetGroupMembershipResponseParams
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTRGroupsClusterGetGroupMembershipResponseParams].
-func (x *MTRGroupsClusterGetGroupMembershipResponseParams) Unwrap() *raw.MTRGroupsClusterGetGroupMembershipResponseParams {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTRGroupsClusterGetGroupMembershipResponseParams) ID() objc.ID { return x.inner.Ptr() }
-
-// MTRGroupsClusterGetGroupMembershipResponseParamsFromID adopts an existing object pointer as a MTRGroupsClusterGetGroupMembershipResponseParams (nil for 0).
+// MTRGroupsClusterGetGroupMembershipResponseParamsFromID adopts an existing Objective-C object as a MTRGroupsClusterGetGroupMembershipResponseParams
+// (nil for 0), retaining it and registering a release finalizer.
 func MTRGroupsClusterGetGroupMembershipResponseParamsFromID(id objc.ID) *MTRGroupsClusterGetGroupMembershipResponseParams {
 	if id == 0 {
 		return nil
 	}
-	return &MTRGroupsClusterGetGroupMembershipResponseParams{inner: raw.MTRGroupsClusterGetGroupMembershipResponseParamsFromID(id)}
+	x := &MTRGroupsClusterGetGroupMembershipResponseParams{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// mTRGroupsClusterGetGroupMembershipResponseParamsAdopt wraps an Objective-C object that this code just created as a
+// MTRGroupsClusterGetGroupMembershipResponseParams (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTRGroupsClusterGetGroupMembershipResponseParamsAdopt(id objc.ID) *MTRGroupsClusterGetGroupMembershipResponseParams {
+	if id == 0 {
+		return nil
+	}
+	x := &MTRGroupsClusterGetGroupMembershipResponseParams{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initialize an MTRGroupsClusterGetGroupMembershipResponseParams with a response-value dictionary of the sort that MTRDeviceResponseHandler would receive. Will return nil and hand out an error if the response-value dictionary is not a command data response or is not the right command response. Will return nil and hand out an error if the data response does not match the known schema for this command.
 //
-// NewMTRGroupsClusterGetGroupMembershipResponseParamsWithResponseValueError creates a new [MTRGroupsClusterGetGroupMembershipResponseParams].
-func NewMTRGroupsClusterGetGroupMembershipResponseParamsWithResponseValueError(responseValue purego.IDer) (*MTRGroupsClusterGetGroupMembershipResponseParams, error) {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MTRGroupsClusterGetGroupMembershipResponseParams")), objc.RegisterName("alloc"))
+// NewMTRGroupsClusterGetGroupMembershipResponseParamsWithResponseValueError creates a new MTRGroupsClusterGetGroupMembershipResponseParams.
+func NewMTRGroupsClusterGetGroupMembershipResponseParamsWithResponseValueError(responseValue obj.Object) (*MTRGroupsClusterGetGroupMembershipResponseParams, error) {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MTRGroupsClusterGetGroupMembershipResponseParams")), objc.RegisterName("alloc"))
 	var _nsErr uintptr
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), responseValue.ID(), unsafe.Pointer(&_nsErr))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithResponseValue:error:"), objref.IDOf(responseValue), unsafe.Pointer(&_nsErr))
 	if _nsErr != 0 {
-		return nil, purego.NSErrorToError(objc.ID(_nsErr))
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &MTRGroupsClusterGetGroupMembershipResponseParams{inner: raw.MTRGroupsClusterGetGroupMembershipResponseParamsFromID(_id)}, nil
+	return mTRGroupsClusterGetGroupMembershipResponseParamsAdopt(_id), nil
 }
 
-// WithCapacity sets the capacity property and returns the receiver for chaining.
-func (x *MTRGroupsClusterGetGroupMembershipResponseParams) WithCapacity(capacity *foundation.NSNumber) *MTRGroupsClusterGetGroupMembershipResponseParams {
-	x.inner.SetCapacity(capacity)
+// WithCapacity sets capacity and returns the receiver so calls can be chained.
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) WithCapacity(capacity obj.Object) *MTRGroupsClusterGetGroupMembershipResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapacity:"), objref.IDOf(capacity))
 	return x
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
 //
-// WithTimedInvokeTimeoutMs sets the timedInvokeTimeoutMs property and returns the receiver for chaining.
-func (x *MTRGroupsClusterGetGroupMembershipResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterGetGroupMembershipResponseParams {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+// WithTimedInvokeTimeoutMs sets timedInvokeTimeoutMs and returns the receiver so calls can be chained.
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupsClusterGetGroupMembershipResponseParams {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 	return x
 }
 
-// Capacity calls the underlying Capacity.
-func (x *MTRGroupsClusterGetGroupMembershipResponseParams) Capacity() *foundation.NSNumber {
-	return x.inner.Capacity()
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) Capacity() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("capacity"))
+	return obj.Wrap(_r)
 }
 
-// SetCapacity calls the underlying SetCapacity.
-func (x *MTRGroupsClusterGetGroupMembershipResponseParams) SetCapacity(capacity *foundation.NSNumber) {
-	x.inner.SetCapacity(capacity)
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) SetCapacity(capacity obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setCapacity:"), objref.IDOf(capacity))
 }
 
-// GroupList calls the underlying GroupList.
-func (x *MTRGroupsClusterGetGroupMembershipResponseParams) GroupList() *foundation.NSArray[objc.ID] {
-	return x.inner.GroupList()
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) GroupList() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("groupList"))
+	return obj.Wrap(_r)
 }
 
-// SetGroupList calls the underlying SetGroupList.
-func (x *MTRGroupsClusterGetGroupMembershipResponseParams) SetGroupList(groupList *foundation.NSArray[objc.ID]) {
-	x.inner.SetGroupList(groupList)
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) SetGroupList(groupList obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setGroupList:"), objref.IDOf(groupList))
 }
 
 // Controls whether the command is a timed command (using Timed Invoke). If nil (the default value), a regular invoke is done for commands that do not require a timed invoke and a timed invoke with some default timed request timeout is done for commands that require a timed invoke. If not nil, a timed invoke is done, with the provided value used as the timed request timeout.  The value should be chosen small enough to provide the desired security properties but large enough that it will allow a round-trip from the sever to the client (for the status response and actual invoke request) within the timeout window.
-//
-// TimedInvokeTimeoutMs calls the underlying TimedInvokeTimeoutMs.
-func (x *MTRGroupsClusterGetGroupMembershipResponseParams) TimedInvokeTimeoutMs() *foundation.NSNumber {
-	return x.inner.TimedInvokeTimeoutMs()
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) TimedInvokeTimeoutMs() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("timedInvokeTimeoutMs"))
+	return obj.Wrap(_r)
 }
 
-// SetTimedInvokeTimeoutMs calls the underlying SetTimedInvokeTimeoutMs.
-func (x *MTRGroupsClusterGetGroupMembershipResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) {
-	x.inner.SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs)
+func (x *MTRGroupsClusterGetGroupMembershipResponseParams) SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setTimedInvokeTimeoutMs:"), objref.IDOf(timedInvokeTimeoutMs))
 }
 
 // MTRGroupsClusterGetGroupMembershipResponseParamsable is the interface implemented by [MTRGroupsClusterGetGroupMembershipResponseParams], for mocking and DI.
 type MTRGroupsClusterGetGroupMembershipResponseParamsable interface {
-	Unwrap() *raw.MTRGroupsClusterGetGroupMembershipResponseParams
-	WithCapacity(capacity *foundation.NSNumber) *MTRGroupsClusterGetGroupMembershipResponseParams
-	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber) *MTRGroupsClusterGetGroupMembershipResponseParams
-	Capacity() *foundation.NSNumber
-	SetCapacity(capacity *foundation.NSNumber)
-	GroupList() *foundation.NSArray[objc.ID]
-	SetGroupList(groupList *foundation.NSArray[objc.ID])
-	TimedInvokeTimeoutMs() *foundation.NSNumber
-	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs *foundation.NSNumber)
+	obj.Object
+	WithCapacity(capacity obj.Object) *MTRGroupsClusterGetGroupMembershipResponseParams
+	WithTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object) *MTRGroupsClusterGetGroupMembershipResponseParams
+	Capacity() obj.Object
+	SetCapacity(capacity obj.Object)
+	GroupList() obj.Object
+	SetGroupList(groupList obj.Object)
+	TimedInvokeTimeoutMs() obj.Object
+	SetTimedInvokeTimeoutMs(timedInvokeTimeoutMs obj.Object)
 }
 
 var _ MTRGroupsClusterGetGroupMembershipResponseParamsable = (*MTRGroupsClusterGetGroupMembershipResponseParams)(nil)

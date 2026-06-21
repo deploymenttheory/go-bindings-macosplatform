@@ -5,80 +5,97 @@
 package mailkit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/mailkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // An object that contains details about the person who signed a message.
 //
-// MessageSigner wraps [raw.MEMessageSigner] with a fluent Go API.
+// MessageSigner is an idiomatic wrapper over the Objective-C class MEMessageSigner.
 type MessageSigner struct {
-	inner *raw.MEMessageSigner
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MEMessageSigner].
-func (x *MessageSigner) Unwrap() *raw.MEMessageSigner { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MessageSigner) ID() objc.ID { return x.inner.Ptr() }
-
-// MessageSignerFromID adopts an existing object pointer as a MessageSigner (nil for 0).
+// MessageSignerFromID adopts an existing Objective-C object as a MessageSigner
+// (nil for 0), retaining it and registering a release finalizer.
 func MessageSignerFromID(id objc.ID) *MessageSigner {
 	if id == 0 {
 		return nil
 	}
-	return &MessageSigner{inner: raw.MEMessageSignerFromID(id)}
+	x := &MessageSigner{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// messageSignerAdopt wraps an Objective-C object that this code just created as a
+// MessageSigner (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func messageSignerAdopt(id objc.ID) *MessageSigner {
+	if id == 0 {
+		return nil
+	}
+	x := &MessageSigner{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *MessageSigner) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MessageSigner) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MessageSigner) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Creates a new message signer object that contains the email addresses of the signers, a label, and context data.
 //
-// NewMessageSignerWithEmailAddressesSignatureLabelContext creates a new [MessageSigner].
-func NewMessageSignerWithEmailAddressesSignatureLabelContext(emailAddresses *foundation.NSArray[*raw.MEEmailAddress], label string, context_ *foundation.NSData) *MessageSigner {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("MEMessageSigner")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEmailAddresses:signatureLabel:context:"), emailAddresses.Ptr(), foundation.NSStringStringWithUTF8String(label).Ptr(), context_.Ptr())
-	return &MessageSigner{inner: raw.MEMessageSignerFromID(_id)}
+// NewMessageSignerWithEmailAddressesSignatureLabelContext creates a new MessageSigner.
+func NewMessageSignerWithEmailAddressesSignatureLabelContext(emailAddresses []*EmailAddress, label string, context_ obj.Object) *MessageSigner {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("MEMessageSigner")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithEmailAddresses:signatureLabel:context:"), purego.SliceToNSArray(emailAddresses, func(_v *EmailAddress) objc.ID { return objref.IDOf(_v) }), purego.NSString(label), objref.IDOf(context_))
+	return messageSignerAdopt(_id)
 }
 
-// @brief Email addresses associated with the signature.
+// Email addresses associated with the signature.
 //
 // EmailAddresses returns the collection as a Go slice.
 func (x *MessageSigner) EmailAddresses() []*EmailAddress {
-	arr := x.inner.EmailAddresses()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *EmailAddress {
-		return &EmailAddress{inner: raw.MEEmailAddressFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("emailAddresses"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *EmailAddress { return EmailAddressFromID(_id) })
 }
 
-// @brief The message signers label. Shown in the message header view. For instance, "John Smith".
-//
-// Label calls the underlying Label.
+// The message signers label. Shown in the message header view. For instance, "John Smith".
 func (x *MessageSigner) Label() string {
-	_r := x.inner.Label()
-	if _r == nil {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("label"))
+	if _r == 0 {
 		return ""
 	}
-	return purego.GoString(_r.Ptr())
+	return purego.GoString(_r)
 }
 
-// @brief The context for the message signature. This might include the signing certificate. This will be passed back to the extension for either verifying the signature or if the user wishes to view signature information.
-//
-// Context calls the underlying Context.
-func (x *MessageSigner) Context() *foundation.NSData {
-	return x.inner.Context()
+// The context for the message signature. This might include the signing certificate. This will be passed back to the extension for either verifying the signature or if the user wishes to view signature information.
+func (x *MessageSigner) Context() obj.Object {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("context"))
+	return obj.Wrap(_r)
 }
 
 // MessageSignerable is the interface implemented by [MessageSigner], for mocking and DI.
 type MessageSignerable interface {
-	Unwrap() *raw.MEMessageSigner
+	obj.Object
 	EmailAddresses() []*EmailAddress
 	Label() string
-	Context() *foundation.NSData
+	Context() obj.Object
 }
 
 var _ MessageSignerable = (*MessageSigner)(nil)

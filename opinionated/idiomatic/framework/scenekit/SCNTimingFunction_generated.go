@@ -5,39 +5,66 @@
 package scenekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/scenekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// TimingFunction wraps [raw.SCNTimingFunction] with a fluent Go API.
+// TimingFunction is an idiomatic wrapper over the Objective-C class SCNTimingFunction.
 type TimingFunction struct {
-	inner *raw.SCNTimingFunction
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SCNTimingFunction].
-func (x *TimingFunction) Unwrap() *raw.SCNTimingFunction { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *TimingFunction) ID() objc.ID { return x.inner.Ptr() }
-
-// TimingFunctionFromID adopts an existing object pointer as a TimingFunction (nil for 0).
+// TimingFunctionFromID adopts an existing Objective-C object as a TimingFunction
+// (nil for 0), retaining it and registering a release finalizer.
 func TimingFunctionFromID(id objc.ID) *TimingFunction {
 	if id == 0 {
 		return nil
 	}
-	return &TimingFunction{inner: raw.SCNTimingFunctionFromID(id)}
+	x := &TimingFunction{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewTimingFunction creates a new [TimingFunction].
+// timingFunctionAdopt wraps an Objective-C object that this code just created as a
+// TimingFunction (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func timingFunctionAdopt(id objc.ID) *TimingFunction {
+	if id == 0 {
+		return nil
+	}
+	x := &TimingFunction{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *TimingFunction) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *TimingFunction) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *TimingFunction) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewTimingFunction creates a new TimingFunction.
 func NewTimingFunction() *TimingFunction {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("SCNTimingFunction")), objc.RegisterName("new"))
-	return &TimingFunction{inner: raw.SCNTimingFunctionFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("SCNTimingFunction")), objc.RegisterName("new"))
+	return timingFunctionAdopt(_id)
 }
 
 // TimingFunctionable is the interface implemented by [TimingFunction], for mocking and DI.
 type TimingFunctionable interface {
-	Unwrap() *raw.SCNTimingFunction
+	obj.Object
 }
 
 var _ TimingFunctionable = (*TimingFunction)(nil)

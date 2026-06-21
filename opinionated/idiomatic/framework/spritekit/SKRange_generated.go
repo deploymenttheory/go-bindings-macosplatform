@@ -5,80 +5,105 @@
 package spritekit
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/spritekit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // A definition of a range of floating-point values.
 //
-// Range wraps [raw.SKRange] with a fluent Go API.
+// Range is an idiomatic wrapper over the Objective-C class SKRange.
 type Range struct {
-	inner *raw.SKRange
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.SKRange].
-func (x *Range) Unwrap() *raw.SKRange { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Range) ID() objc.ID { return x.inner.Ptr() }
-
-// RangeFromID adopts an existing object pointer as a Range (nil for 0).
+// RangeFromID adopts an existing Objective-C object as a Range
+// (nil for 0), retaining it and registering a release finalizer.
 func RangeFromID(id objc.ID) *Range {
 	if id == 0 {
 		return nil
 	}
-	return &Range{inner: raw.SKRangeFromID(id)}
+	x := &Range{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// rangeAdopt wraps an Objective-C object that this code just created as a
+// Range (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func rangeAdopt(id objc.ID) *Range {
+	if id == 0 {
+		return nil
+	}
+	x := &Range{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Range) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Range) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Range) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a new range object.
 //
-// NewRangeWithLowerLimitUpperLimit creates a new [Range].
+// NewRangeWithLowerLimitUpperLimit creates a new Range.
 func NewRangeWithLowerLimitUpperLimit(lower float64, upper float64) *Range {
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("SKRange")), objc.RegisterName("alloc"))
+	_alloc := objc.Send[objc.ID](objc.ID(_class("SKRange")), objc.RegisterName("alloc"))
 	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithLowerLimit:upperLimit:"), lower, upper)
-	return &Range{inner: raw.SKRangeFromID(_id)}
+	return rangeAdopt(_id)
 }
 
 // The minimum possible value.
 //
-// WithLowerLimit sets the lowerLimit property and returns the receiver for chaining.
+// WithLowerLimit sets lowerLimit and returns the receiver so calls can be chained.
 func (x *Range) WithLowerLimit(lowerLimit float64) *Range {
-	x.inner.SetLowerLimit(lowerLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerLimit:"), lowerLimit)
 	return x
 }
 
 // The maximum possible value.
 //
-// WithUpperLimit sets the upperLimit property and returns the receiver for chaining.
+// WithUpperLimit sets upperLimit and returns the receiver so calls can be chained.
 func (x *Range) WithUpperLimit(upperLimit float64) *Range {
-	x.inner.SetUpperLimit(upperLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperLimit:"), upperLimit)
 	return x
 }
 
-// LowerLimit calls the underlying LowerLimit.
 func (x *Range) LowerLimit() float64 {
-	return x.inner.LowerLimit()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("lowerLimit"))
+	return _r
 }
 
-// SetLowerLimit calls the underlying SetLowerLimit.
 func (x *Range) SetLowerLimit(lowerLimit float64) {
-	x.inner.SetLowerLimit(lowerLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setLowerLimit:"), lowerLimit)
 }
 
-// UpperLimit calls the underlying UpperLimit.
 func (x *Range) UpperLimit() float64 {
-	return x.inner.UpperLimit()
+	_r := objc.Send[float64](objref.IDOf(x), objc.RegisterName("upperLimit"))
+	return _r
 }
 
-// SetUpperLimit calls the underlying SetUpperLimit.
 func (x *Range) SetUpperLimit(upperLimit float64) {
-	x.inner.SetUpperLimit(upperLimit)
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setUpperLimit:"), upperLimit)
 }
 
 // Rangeable is the interface implemented by [Range], for mocking and DI.
 type Rangeable interface {
-	Unwrap() *raw.SKRange
+	obj.Object
 	WithLowerLimit(lowerLimit float64) *Range
 	WithUpperLimit(upperLimit float64) *Range
 	LowerLimit() float64

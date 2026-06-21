@@ -5,187 +5,167 @@
 package naturallanguage
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/coreml"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/naturallanguage"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// ContextualEmbeddingWithModelIdentifier calls the underlying NLContextualEmbeddingContextualEmbeddingWithModelIdentifier.
+// Creates a contextual embedding from a model identifier.
 func ContextualEmbeddingWithModelIdentifier(modelIdentifier string) *ContextualEmbedding {
-	_r := raw.NLContextualEmbeddingContextualEmbeddingWithModelIdentifier(foundation.NSStringStringWithUTF8String(modelIdentifier))
-	if _r == nil {
-		return nil
-	}
-	return &ContextualEmbedding{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("NLContextualEmbedding")), objc.RegisterName("contextualEmbeddingWithModelIdentifier:"), purego.NSString(modelIdentifier))
+	return ContextualEmbeddingFromID(_r)
 }
 
-// ContextualEmbeddingsForValues calls the underlying NLContextualEmbeddingContextualEmbeddingsForValues.
-func ContextualEmbeddingsForValues(valuesDictionary *foundation.NSDictionary[*foundation.NSString, objc.ID]) *foundation.NSArray[*raw.NLContextualEmbedding] {
-	return raw.NLContextualEmbeddingContextualEmbeddingsForValues(valuesDictionary)
+// Returns contextual embedding models that match the specified language, script, or revision criteria.
+func ContextualEmbeddingsForValues(valuesDictionary obj.Object) []*ContextualEmbedding {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLContextualEmbedding")), objc.RegisterName("contextualEmbeddingsForValues:"), objref.IDOf(valuesDictionary))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *ContextualEmbedding { return ContextualEmbeddingFromID(_id) })
 }
 
-// ContextualEmbeddingWithLanguage calls the underlying NLContextualEmbeddingContextualEmbeddingWithLanguage.
-func ContextualEmbeddingWithLanguage(language *foundation.NSString) *ContextualEmbedding {
-	_r := raw.NLContextualEmbeddingContextualEmbeddingWithLanguage(language)
-	if _r == nil {
-		return nil
-	}
-	return &ContextualEmbedding{inner: _r}
+// Creates a contextual embedding from a language.
+func ContextualEmbeddingWithLanguage(language obj.Object) *ContextualEmbedding {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLContextualEmbedding")), objc.RegisterName("contextualEmbeddingWithLanguage:"), objref.IDOf(language))
+	return ContextualEmbeddingFromID(_r)
 }
 
-// ContextualEmbeddingWithScript calls the underlying NLContextualEmbeddingContextualEmbeddingWithScript.
-func ContextualEmbeddingWithScript(script *foundation.NSString) *ContextualEmbedding {
-	_r := raw.NLContextualEmbeddingContextualEmbeddingWithScript(script)
-	if _r == nil {
-		return nil
-	}
-	return &ContextualEmbedding{inner: _r}
+// Creates a contextual embedding from a script.
+func ContextualEmbeddingWithScript(script obj.Object) *ContextualEmbedding {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLContextualEmbedding")), objc.RegisterName("contextualEmbeddingWithScript:"), objref.IDOf(script))
+	return ContextualEmbeddingFromID(_r)
 }
 
-// WordEmbeddingForLanguage calls the underlying NLEmbeddingWordEmbeddingForLanguage.
-func WordEmbeddingForLanguage(language *foundation.NSString) *Embedding {
-	_r := raw.NLEmbeddingWordEmbeddingForLanguage(language)
-	if _r == nil {
-		return nil
-	}
-	return &Embedding{inner: _r}
+// Retrieves a word embedding for a given language.
+func WordEmbeddingForLanguage(language obj.Object) *Embedding {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("wordEmbeddingForLanguage:"), objref.IDOf(language))
+	return EmbeddingFromID(_r)
 }
 
-// WordEmbeddingForLanguageRevision calls the underlying NLEmbeddingWordEmbeddingForLanguageRevision.
-func WordEmbeddingForLanguageRevision(language *foundation.NSString, revision uint) *Embedding {
-	_r := raw.NLEmbeddingWordEmbeddingForLanguageRevision(language, revision)
-	if _r == nil {
-		return nil
-	}
-	return &Embedding{inner: _r}
+// Retrieves a word embedding for a given language and revision.
+func WordEmbeddingForLanguageRevision(language obj.Object, revision int) *Embedding {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("wordEmbeddingForLanguage:revision:"), objref.IDOf(language), revision)
+	return EmbeddingFromID(_r)
 }
 
-// SentenceEmbeddingForLanguage calls the underlying NLEmbeddingSentenceEmbeddingForLanguage.
-func SentenceEmbeddingForLanguage(language *foundation.NSString) *Embedding {
-	_r := raw.NLEmbeddingSentenceEmbeddingForLanguage(language)
-	if _r == nil {
-		return nil
-	}
-	return &Embedding{inner: _r}
+// Retrieves a sentence embedding for a given language.
+func SentenceEmbeddingForLanguage(language obj.Object) *Embedding {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("sentenceEmbeddingForLanguage:"), objref.IDOf(language))
+	return EmbeddingFromID(_r)
 }
 
-// SentenceEmbeddingForLanguageRevision calls the underlying NLEmbeddingSentenceEmbeddingForLanguageRevision.
-func SentenceEmbeddingForLanguageRevision(language *foundation.NSString, revision uint) *Embedding {
-	_r := raw.NLEmbeddingSentenceEmbeddingForLanguageRevision(language, revision)
-	if _r == nil {
-		return nil
-	}
-	return &Embedding{inner: _r}
+// Retrieves a sentence embedding for a given language and revision.
+func SentenceEmbeddingForLanguageRevision(language obj.Object, revision int) *Embedding {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("sentenceEmbeddingForLanguage:revision:"), objref.IDOf(language), revision)
+	return EmbeddingFromID(_r)
 }
 
-// EmbeddingWithContentsOfURLError calls the underlying NLEmbeddingEmbeddingWithContentsOfURLError.
+// Creates a word embedding from a model file.
 func EmbeddingWithContentsOfURLError(url string) (*Embedding, error) {
-	_r, _err := raw.NLEmbeddingEmbeddingWithContentsOfURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("embeddingWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
+	return EmbeddingFromID(_r), nil
+}
+
+// Retrieves all version numbers of a word embedding for the given language.
+func SupportedRevisionsForLanguage(language obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("supportedRevisionsForLanguage:"), objref.IDOf(language))
+	return obj.Wrap(_r)
+}
+
+// Retrieves the current version of a word embedding for the given language.
+func CurrentRevisionForLanguage(language obj.Object) int {
+	_r := objc.Send[int](objc.ID(_class("NLEmbedding")), objc.RegisterName("currentRevisionForLanguage:"), objref.IDOf(language))
+	return _r
+}
+
+// Retrieves all version numbers of a sentence embedding for the given language.
+func SupportedSentenceEmbeddingRevisionsForLanguage(language obj.Object) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLEmbedding")), objc.RegisterName("supportedSentenceEmbeddingRevisionsForLanguage:"), objref.IDOf(language))
+	return obj.Wrap(_r)
+}
+
+// Retrieves the current version of a sentence embedding for the given language.
+func CurrentSentenceEmbeddingRevisionForLanguage(language obj.Object) int {
+	_r := objc.Send[int](objc.ID(_class("NLEmbedding")), objc.RegisterName("currentSentenceEmbeddingRevisionForLanguage:"), objref.IDOf(language))
+	return _r
+}
+
+// Exports the word embedding contained within a Core ML model file at the given URL.
+func WriteEmbeddingForDictionaryLanguageRevisionToURL(dictionary obj.Object, language obj.Object, revision int, url string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objc.ID(_class("NLEmbedding")), objc.RegisterName("writeEmbeddingForDictionary:language:revision:toURL:error:"), objref.IDOf(dictionary), objref.IDOf(language), revision, rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Embedding{inner: _r}, nil
+	return nil
 }
 
-// SupportedRevisionsForLanguage calls the underlying NLEmbeddingSupportedRevisionsForLanguage.
-func SupportedRevisionsForLanguage(language *foundation.NSString) *foundation.NSIndexSet {
-	return raw.NLEmbeddingSupportedRevisionsForLanguage(language)
-}
-
-// CurrentRevisionForLanguage calls the underlying NLEmbeddingCurrentRevisionForLanguage.
-func CurrentRevisionForLanguage(language *foundation.NSString) uint {
-	return raw.NLEmbeddingCurrentRevisionForLanguage(language)
-}
-
-// SupportedSentenceEmbeddingRevisionsForLanguage calls the underlying NLEmbeddingSupportedSentenceEmbeddingRevisionsForLanguage.
-func SupportedSentenceEmbeddingRevisionsForLanguage(language *foundation.NSString) *foundation.NSIndexSet {
-	return raw.NLEmbeddingSupportedSentenceEmbeddingRevisionsForLanguage(language)
-}
-
-// CurrentSentenceEmbeddingRevisionForLanguage calls the underlying NLEmbeddingCurrentSentenceEmbeddingRevisionForLanguage.
-func CurrentSentenceEmbeddingRevisionForLanguage(language *foundation.NSString) uint {
-	return raw.NLEmbeddingCurrentSentenceEmbeddingRevisionForLanguage(language)
-}
-
-// WriteEmbeddingForDictionaryLanguageRevisionToURLError calls the underlying NLEmbeddingWriteEmbeddingForDictionaryLanguageRevisionToURLError.
-func WriteEmbeddingForDictionaryLanguageRevisionToURLError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], language *foundation.NSString, revision uint, url string) (bool, error) {
-	return raw.NLEmbeddingWriteEmbeddingForDictionaryLanguageRevisionToURLError(dictionary, language, revision, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-}
-
-// GazetteerWithContentsOfURLError calls the underlying NLGazetteerGazetteerWithContentsOfURLError.
+// Creates a Natural Language gazetteer from a model created with the Create ML framework.
 func GazetteerWithContentsOfURLError(url string) (*Gazetteer, error) {
-	_r, _err := raw.NLGazetteerGazetteerWithContentsOfURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NLGazetteer")), objc.RegisterName("gazetteerWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Gazetteer{inner: _r}, nil
+	return GazetteerFromID(_r), nil
 }
 
-// WriteGazetteerForDictionaryLanguageToURLError calls the underlying NLGazetteerWriteGazetteerForDictionaryLanguageToURLError.
-func WriteGazetteerForDictionaryLanguageToURLError(dictionary *foundation.NSDictionary[*foundation.NSString, objc.ID], language *foundation.NSString, url string) (bool, error) {
-	return raw.NLGazetteerWriteGazetteerForDictionaryLanguageToURLError(dictionary, language, foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-}
-
-// DominantLanguageForString calls the underlying NLLanguageRecognizerDominantLanguageForString.
-func DominantLanguageForString(string_ string) string {
-	_r := raw.NLLanguageRecognizerDominantLanguageForString(foundation.NSStringStringWithUTF8String(string_))
-	if _r == nil {
-		return ""
+// Creates a gazetteer from a set of labels for terms represented by a dictionary and saves the gazetteer to a file.
+func WriteGazetteerForDictionaryLanguageToURL(dictionary obj.Object, language obj.Object, url string) error {
+	var _nsErr uintptr
+	_ = objc.Send[bool](objc.ID(_class("NLGazetteer")), objc.RegisterName("writeGazetteerForDictionary:language:toURL:error:"), objref.IDOf(dictionary), objref.IDOf(language), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return purego.GoString(_r.Ptr())
+	return nil
 }
 
-// ModelWithContentsOfURLError calls the underlying NLModelModelWithContentsOfURLError.
+// Finds the most likely language of a piece of text.
+func DominantLanguageForString(string_ string) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLLanguageRecognizer")), objc.RegisterName("dominantLanguageForString:"), purego.NSString(string_))
+	return obj.Wrap(_r)
+}
+
+// Creates a new natural language model based on a compiled Core ML model at the given URL.
 func ModelWithContentsOfURLError(url string) (*Model, error) {
-	_r, _err := raw.NLModelModelWithContentsOfURLError(foundation.NSURLFileURLWithPath(foundation.NSStringStringWithUTF8String(url)))
-	if _err != nil {
-		return nil, _err
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NLModel")), objc.RegisterName("modelWithContentsOfURL:error:"), rt.FileURL(url), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
+	return ModelFromID(_r), nil
+}
+
+// Creates a new natural language model based on the given Core ML model instance.
+func ModelWithMLModelError(mlModel obj.Object) (*Model, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("NLModel")), objc.RegisterName("modelWithMLModel:error:"), objref.IDOf(mlModel), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	return &Model{inner: _r}, nil
+	return ModelFromID(_r), nil
 }
 
-// ModelWithMLModelError calls the underlying NLModelModelWithMLModelError.
-func ModelWithMLModelError(mlModel *coreml.MLModel) (*Model, error) {
-	_r, _err := raw.NLModelModelWithMLModelError(mlModel)
-	if _err != nil {
-		return nil, _err
-	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Model{inner: _r}, nil
+// Returns the versions of the Natural Language framework the OS supports.
+func SupportedRevisionsForType(type_ ModelType) obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLModelConfiguration")), objc.RegisterName("supportedRevisionsForType:"), type_)
+	return obj.Wrap(_r)
 }
 
-// SupportedRevisionsForType calls the underlying NLModelConfigurationSupportedRevisionsForType.
-func SupportedRevisionsForType(type_ NLModelType) *foundation.NSIndexSet {
-	return raw.NLModelConfigurationSupportedRevisionsForType(raw.NLModelType(type_))
+// Returns the current Natural Language framework version in the OS.
+func CurrentRevisionForType(type_ ModelType) int {
+	_r := objc.Send[int](objc.ID(_class("NLModelConfiguration")), objc.RegisterName("currentRevisionForType:"), type_)
+	return _r
 }
 
-// CurrentRevisionForType calls the underlying NLModelConfigurationCurrentRevisionForType.
-func CurrentRevisionForType(type_ NLModelType) uint {
-	return raw.NLModelConfigurationCurrentRevisionForType(raw.NLModelType(type_))
-}
-
-// AvailableTagSchemesForUnitLanguage calls the underlying NLTaggerAvailableTagSchemesForUnitLanguage.
-func AvailableTagSchemesForUnitLanguage(unit NLTokenUnit, language *foundation.NSString) *foundation.NSArray[*foundation.NSString] {
-	return raw.NLTaggerAvailableTagSchemesForUnitLanguage(raw.NLTokenUnit(unit), language)
-}
-
-// RequestAssetsForLanguageTagSchemeCompletionHandler calls the underlying NLTaggerRequestAssetsForLanguageTagSchemeCompletionHandler.
-func RequestAssetsForLanguageTagSchemeCompletionHandler(language *foundation.NSString, tagScheme *foundation.NSString, completionHandler func(NLTaggerAssetsResult, unsafe.Pointer)) {
-	raw.NLTaggerRequestAssetsForLanguageTagSchemeCompletionHandler(language, tagScheme, func(_a0 raw.NLTaggerAssetsResult, _a1 unsafe.Pointer) {
-		completionHandler(NLTaggerAssetsResult(_a0), _a1)
-	})
+// Retrieves the tag schemes available for a particular unit (like word or sentence) and language on the current device.
+func AvailableTagSchemesForUnitLanguage(unit TokenUnit, language obj.Object) []obj.Object {
+	_r := objc.Send[objc.ID](objc.ID(_class("NLTagger")), objc.RegisterName("availableTagSchemesForUnit:language:"), unit, objref.IDOf(language))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) obj.Object { return obj.Wrap(_id) })
 }

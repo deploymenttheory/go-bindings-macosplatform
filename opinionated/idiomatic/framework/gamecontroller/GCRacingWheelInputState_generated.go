@@ -5,86 +5,81 @@
 package gamecontroller
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gamecontroller"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
 // The input for the wheel of a racing wheel controller.
 //
-// RacingWheelInputState wraps [raw.GCRacingWheelInputState] with a fluent Go API.
+// RacingWheelInputState is an idiomatic wrapper over the Objective-C class GCRacingWheelInputState.
 type RacingWheelInputState struct {
-	inner *raw.GCRacingWheelInputState
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GCRacingWheelInputState].
-func (x *RacingWheelInputState) Unwrap() *raw.GCRacingWheelInputState { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *RacingWheelInputState) ID() objc.ID { return x.inner.Ptr() }
-
-// RacingWheelInputStateFromID adopts an existing object pointer as a RacingWheelInputState (nil for 0).
+// RacingWheelInputStateFromID adopts an existing Objective-C object as a RacingWheelInputState
+// (nil for 0), retaining it and registering a release finalizer.
 func RacingWheelInputStateFromID(id objc.ID) *RacingWheelInputState {
 	if id == 0 {
 		return nil
 	}
-	return &RacingWheelInputState{inner: raw.GCRacingWheelInputStateFromID(id)}
+	x := &RacingWheelInputState{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewRacingWheelInputState creates a new [RacingWheelInputState].
+// racingWheelInputStateAdopt wraps an Objective-C object that this code just created as a
+// RacingWheelInputState (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func racingWheelInputStateAdopt(id objc.ID) *RacingWheelInputState {
+	if id == 0 {
+		return nil
+	}
+	x := &RacingWheelInputState{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *RacingWheelInputState) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *RacingWheelInputState) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *RacingWheelInputState) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewRacingWheelInputState creates a new RacingWheelInputState.
 func NewRacingWheelInputState() *RacingWheelInputState {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("GCRacingWheelInputState")), objc.RegisterName("new"))
-	return &RacingWheelInputState{inner: raw.GCRacingWheelInputStateFromID(_id)}
+	_id := objc.Send[objc.ID](objc.ID(_class("GCRacingWheelInputState")), objc.RegisterName("new"))
+	return racingWheelInputStateAdopt(_id)
 }
 
 // The steering wheel element.
-//
-// Wheel calls the underlying Wheel.
 func (x *RacingWheelInputState) Wheel() *SteeringWheelElement {
-	_r := x.inner.Wheel()
-	if _r == nil {
-		return nil
-	}
-	return &SteeringWheelElement{inner: _r}
-}
-
-// AcceleratorPedal calls the underlying AcceleratorPedal.
-func (x *RacingWheelInputState) AcceleratorPedal() raw.GCButtonElement {
-	return x.inner.AcceleratorPedal()
-}
-
-// BrakePedal calls the underlying BrakePedal.
-func (x *RacingWheelInputState) BrakePedal() raw.GCButtonElement {
-	return x.inner.BrakePedal()
-}
-
-// ClutchPedal calls the underlying ClutchPedal.
-func (x *RacingWheelInputState) ClutchPedal() raw.GCButtonElement {
-	return x.inner.ClutchPedal()
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("wheel"))
+	return SteeringWheelElementFromID(_r)
 }
 
 // The element representing an attached gear shifter accessory. Note that this element only represents an external gear shifter accessory. Many racing wheels have a pair of built in paddle buttons that can be used for sequential gear shifting.  Those buttons are can be looked up with the \c GCInputLeftPaddle and \c GCInputRightPaddle input names.
-//
-// Shifter calls the underlying Shifter.
 func (x *RacingWheelInputState) Shifter() *GearShifterElement {
-	_r := x.inner.Shifter()
-	if _r == nil {
-		return nil
-	}
-	return &GearShifterElement{inner: _r}
-}
-
-func (x *RacingWheelInputState) asRacingWheelInputState() *raw.GCRacingWheelInputState {
-	return x.inner
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("shifter"))
+	return GearShifterElementFromID(_r)
 }
 
 // RacingWheelInputStateable is the interface implemented by [RacingWheelInputState], for mocking and DI.
 type RacingWheelInputStateable interface {
-	Unwrap() *raw.GCRacingWheelInputState
+	obj.Object
 	Wheel() *SteeringWheelElement
-	AcceleratorPedal() raw.GCButtonElement
-	BrakePedal() raw.GCButtonElement
-	ClutchPedal() raw.GCButtonElement
 	Shifter() *GearShifterElement
 }
 

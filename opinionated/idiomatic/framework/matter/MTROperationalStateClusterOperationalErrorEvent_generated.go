@@ -5,64 +5,84 @@
 package matter
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/matter"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// MTROperationalStateClusterOperationalErrorEvent wraps [raw.MTROperationalStateClusterOperationalErrorEvent] with a fluent Go API.
+// MTROperationalStateClusterOperationalErrorEvent is an idiomatic wrapper over the Objective-C class MTROperationalStateClusterOperationalErrorEvent.
 type MTROperationalStateClusterOperationalErrorEvent struct {
-	inner *raw.MTROperationalStateClusterOperationalErrorEvent
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.MTROperationalStateClusterOperationalErrorEvent].
-func (x *MTROperationalStateClusterOperationalErrorEvent) Unwrap() *raw.MTROperationalStateClusterOperationalErrorEvent {
-	return x.inner
-}
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *MTROperationalStateClusterOperationalErrorEvent) ID() objc.ID { return x.inner.Ptr() }
-
-// MTROperationalStateClusterOperationalErrorEventFromID adopts an existing object pointer as a MTROperationalStateClusterOperationalErrorEvent (nil for 0).
+// MTROperationalStateClusterOperationalErrorEventFromID adopts an existing Objective-C object as a MTROperationalStateClusterOperationalErrorEvent
+// (nil for 0), retaining it and registering a release finalizer.
 func MTROperationalStateClusterOperationalErrorEventFromID(id objc.ID) *MTROperationalStateClusterOperationalErrorEvent {
 	if id == 0 {
 		return nil
 	}
-	return &MTROperationalStateClusterOperationalErrorEvent{inner: raw.MTROperationalStateClusterOperationalErrorEventFromID(id)}
-}
-
-// NewMTROperationalStateClusterOperationalErrorEvent creates a new [MTROperationalStateClusterOperationalErrorEvent].
-func NewMTROperationalStateClusterOperationalErrorEvent() *MTROperationalStateClusterOperationalErrorEvent {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("MTROperationalStateClusterOperationalErrorEvent")), objc.RegisterName("new"))
-	return &MTROperationalStateClusterOperationalErrorEvent{inner: raw.MTROperationalStateClusterOperationalErrorEventFromID(_id)}
-}
-
-// WithErrorState sets the errorState property and returns the receiver for chaining.
-func (x *MTROperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalErrorEvent {
-	x.inner.SetErrorState(errorState.Unwrap())
+	x := &MTROperationalStateClusterOperationalErrorEvent{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
 	return x
 }
 
-// ErrorState calls the underlying ErrorState.
-func (x *MTROperationalStateClusterOperationalErrorEvent) ErrorState() *MTROperationalStateClusterErrorStateStruct {
-	_r := x.inner.ErrorState()
-	if _r == nil {
+// mTROperationalStateClusterOperationalErrorEventAdopt wraps an Objective-C object that this code just created as a
+// MTROperationalStateClusterOperationalErrorEvent (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func mTROperationalStateClusterOperationalErrorEventAdopt(id objc.ID) *MTROperationalStateClusterOperationalErrorEvent {
+	if id == 0 {
 		return nil
 	}
-	return &MTROperationalStateClusterErrorStateStruct{inner: _r}
+	x := &MTROperationalStateClusterOperationalErrorEvent{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
 }
 
-// SetErrorState calls the underlying SetErrorState.
-func (x *MTROperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *raw.MTROperationalStateClusterErrorStateStruct) {
-	x.inner.SetErrorState(errorState)
+// Description returns the object's -description text.
+func (x *MTROperationalStateClusterOperationalErrorEvent) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *MTROperationalStateClusterOperationalErrorEvent) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *MTROperationalStateClusterOperationalErrorEvent) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewMTROperationalStateClusterOperationalErrorEvent creates a new MTROperationalStateClusterOperationalErrorEvent.
+func NewMTROperationalStateClusterOperationalErrorEvent() *MTROperationalStateClusterOperationalErrorEvent {
+	_id := objc.Send[objc.ID](objc.ID(_class("MTROperationalStateClusterOperationalErrorEvent")), objc.RegisterName("new"))
+	return mTROperationalStateClusterOperationalErrorEventAdopt(_id)
+}
+
+// WithErrorState sets errorState and returns the receiver so calls can be chained.
+func (x *MTROperationalStateClusterOperationalErrorEvent) WithErrorState(errorState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalErrorEvent {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
+	return x
+}
+
+func (x *MTROperationalStateClusterOperationalErrorEvent) ErrorState() *MTROperationalStateClusterErrorStateStruct {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("errorState"))
+	return MTROperationalStateClusterErrorStateStructFromID(_r)
+}
+
+func (x *MTROperationalStateClusterOperationalErrorEvent) SetErrorState(errorState *MTROperationalStateClusterErrorStateStruct) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("setErrorState:"), objref.IDOf(errorState))
 }
 
 // MTROperationalStateClusterOperationalErrorEventable is the interface implemented by [MTROperationalStateClusterOperationalErrorEvent], for mocking and DI.
 type MTROperationalStateClusterOperationalErrorEventable interface {
-	Unwrap() *raw.MTROperationalStateClusterOperationalErrorEvent
+	obj.Object
 	WithErrorState(errorState *MTROperationalStateClusterErrorStateStruct) *MTROperationalStateClusterOperationalErrorEvent
 	ErrorState() *MTROperationalStateClusterErrorStateStruct
-	SetErrorState(errorState *raw.MTROperationalStateClusterErrorStateStruct)
+	SetErrorState(errorState *MTROperationalStateClusterErrorStateStruct)
 }
 
 var _ MTROperationalStateClusterOperationalErrorEventable = (*MTROperationalStateClusterOperationalErrorEvent)(nil)

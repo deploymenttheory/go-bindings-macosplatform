@@ -6,32 +6,28 @@ package shazamkit
 
 import (
 	"context"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/avfoundation"
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/shazamkit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/errkit"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
 	"github.com/ebitengine/purego/objc"
 	"unsafe"
 )
 
-// New calls the underlying SHCustomCatalogNew.
+// Creates a new custom catalog object for storing reference audio signatures and their associated metadata.
 func New() *CustomCatalog {
-	_r := raw.SHCustomCatalogNew()
-	if _r == nil {
-		return nil
-	}
-	return &CustomCatalog{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SHCustomCatalog")), objc.RegisterName("new"))
+	return CustomCatalogFromID(_r)
 }
 
-// MediaItemWithProperties calls the underlying SHMediaItemMediaItemWithProperties.
-func MediaItemWithProperties(properties *foundation.NSDictionary[*foundation.NSString, objc.ID]) *MediaItem {
-	_r := raw.SHMediaItemMediaItemWithProperties(properties)
-	if _r == nil {
-		return nil
-	}
-	return &MediaItem{inner: _r}
+// Creates a media item object with a dictionary of properties and their associated values.
+func MediaItemWithProperties(properties obj.Object) *MediaItem {
+	_r := objc.Send[objc.ID](objc.ID(_class("SHMediaItem")), objc.RegisterName("mediaItemWithProperties:"), objref.IDOf(properties))
+	return MediaItemFromID(_r)
 }
 
+// Requests the media item for the song with the specified Shazam ID.
+//
 // FetchMediaItemWithShazamID blocks until the operation completes or ctx is cancelled.
 func FetchMediaItemWithShazamID(ctx context.Context, shazamID string) (*MediaItem, error) {
 	type _result struct {
@@ -39,16 +35,13 @@ func FetchMediaItemWithShazamID(ctx context.Context, shazamID string) (*MediaIte
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SHMediaItemFetchMediaItemWithShazamIDCompletionHandler(foundation.NSStringStringWithUTF8String(shazamID), func(_p0 *raw.SHMediaItem, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &MediaItem{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = MediaItemFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SHMediaItem")), objc.RegisterName("fetchMediaItemWithShazamID:completionHandler:"), purego.NSString(shazamID), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err
@@ -58,53 +51,44 @@ func FetchMediaItemWithShazamID(ctx context.Context, shazamID string) (*MediaIte
 	}
 }
 
-// DefaultLibrary calls the underlying SHMediaLibraryDefaultLibrary.
+// An instance of the user's default Shazam library.
 func DefaultLibrary() *MediaLibrary {
-	_r := raw.SHMediaLibraryDefaultLibrary()
-	if _r == nil {
-		return nil
-	}
-	return &MediaLibrary{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SHMediaLibrary")), objc.RegisterName("defaultLibrary"))
+	return MediaLibraryFromID(_r)
 }
 
-// RangeWithLowerBoundUpperBound calls the underlying SHRangeRangeWithLowerBoundUpperBound.
+// Creates a range with the bounds you specify.
 func RangeWithLowerBoundUpperBound(lowerBound float64, upperBound float64) *Range {
-	_r := raw.SHRangeRangeWithLowerBoundUpperBound(lowerBound, upperBound)
-	if _r == nil {
-		return nil
-	}
-	return &Range{inner: _r}
+	_r := objc.Send[objc.ID](objc.ID(_class("SHRange")), objc.RegisterName("rangeWithLowerBound:upperBound:"), lowerBound, upperBound)
+	return RangeFromID(_r)
 }
 
-// SignatureWithDataRepresentationError calls the underlying SHSignatureSignatureWithDataRepresentationError.
-func SignatureWithDataRepresentationError(dataRepresentation *foundation.NSData) (*Signature, error) {
-	_r, _err := raw.SHSignatureSignatureWithDataRepresentationError(dataRepresentation)
-	if _err != nil {
-		return nil, _err
+// Creates a signature object from raw data.
+func SignatureWithDataRepresentationError(dataRepresentation obj.Object) (*Signature, error) {
+	var _nsErr uintptr
+	_r := objc.Send[objc.ID](objc.ID(_class("SHSignature")), objc.RegisterName("signatureWithDataRepresentation:error:"), objref.IDOf(dataRepresentation), unsafe.Pointer(&_nsErr))
+	if _nsErr != 0 {
+		return nil, errkit.FromObjC(purego.NSErrorToError(objc.ID(_nsErr)))
 	}
-	if _r == nil {
-		return nil, nil
-	}
-	return &Signature{inner: _r}, nil
+	return SignatureFromID(_r), nil
 }
 
+// Creates a signature with the asset you specify.
+//
 // GenerateSignatureFromAsset blocks until the operation completes or ctx is cancelled.
-func GenerateSignatureFromAsset(ctx context.Context, asset *avfoundation.AVAsset) (*Signature, error) {
+func GenerateSignatureFromAsset(ctx context.Context, asset obj.Object) (*Signature, error) {
 	type _result struct {
 		val *Signature
 		err error
 	}
 	_ch := make(chan _result, 1)
-	raw.SHSignatureGeneratorGenerateSignatureFromAssetCompletionHandler(asset, func(_p0 *raw.SHSignature, _p1 unsafe.Pointer) {
+	_block := objc.NewBlock(func(_ objc.Block, _p0 objc.ID, _p1 objc.ID) {
 		var _o _result
-		if uintptr(_p1) != 0 {
-			_o.err = purego.NSErrorToError(objc.ID(uintptr(_p1)))
-		}
-		if _p0 != nil {
-			_o.val = &Signature{inner: _p0}
-		}
+		_o.err = errkit.FromObjC(purego.NSErrorToError(_p1))
+		_o.val = SignatureFromID(_p0)
 		_ch <- _o
 	})
+	objc.Send[objc.ID](objc.ID(_class("SHSignatureGenerator")), objc.RegisterName("generateSignatureFromAsset:completionHandler:"), objref.IDOf(asset), _block)
 	select {
 	case _o := <-_ch:
 		return _o.val, _o.err

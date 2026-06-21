@@ -5,66 +5,72 @@
 package localauthentication
 
 import (
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/localauthentication"
+	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
 )
 
-// Environment wraps [raw.LAEnvironment] with a fluent Go API.
+// Environment is an idiomatic wrapper over the Objective-C class LAEnvironment.
 type Environment struct {
-	inner *raw.LAEnvironment
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.LAEnvironment].
-func (x *Environment) Unwrap() *raw.LAEnvironment { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Environment) ID() objc.ID { return x.inner.Ptr() }
-
-// EnvironmentFromID adopts an existing object pointer as a Environment (nil for 0).
+// EnvironmentFromID adopts an existing Objective-C object as a Environment
+// (nil for 0), retaining it and registering a release finalizer.
 func EnvironmentFromID(id objc.ID) *Environment {
 	if id == 0 {
 		return nil
 	}
-	return &Environment{inner: raw.LAEnvironmentFromID(id)}
+	x := &Environment{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
 }
 
-// NewEnvironment creates a new [Environment].
+// environmentAdopt wraps an Objective-C object that this code just created as a
+// Environment (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func environmentAdopt(id objc.ID) *Environment {
+	if id == 0 {
+		return nil
+	}
+	x := &Environment{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Environment) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Environment) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Environment) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
+}
+
+// NewEnvironment creates a new Environment.
 func NewEnvironment() *Environment {
-	_id := objc.Send[objc.ID](objc.ID(objc.GetClass("LAEnvironment")), objc.RegisterName("new"))
-	return &Environment{inner: raw.LAEnvironmentFromID(_id)}
-}
-
-// @brief Adds observer to monitor changes of the environment. @discussion The observer will be held weakly so its instance should be kept alive by the caller.
-//
-// AddObserver calls the underlying AddObserver.
-func (x *Environment) AddObserver(observer raw.LAEnvironmentObserver) {
-	x.inner.AddObserver(observer)
-}
-
-// @brief Removes the previously registered observer. @discussion If the observer is deallocated, it will be removed automatically.
-//
-// RemoveObserver calls the underlying RemoveObserver.
-func (x *Environment) RemoveObserver(observer raw.LAEnvironmentObserver) {
-	x.inner.RemoveObserver(observer)
+	_id := objc.Send[objc.ID](objc.ID(_class("LAEnvironment")), objc.RegisterName("new"))
+	return environmentAdopt(_id)
 }
 
 // The environment state information.
-//
-// State calls the underlying State.
 func (x *Environment) State() *EnvironmentState {
-	_r := x.inner.State()
-	if _r == nil {
-		return nil
-	}
-	return &EnvironmentState{inner: _r}
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("state"))
+	return EnvironmentStateFromID(_r)
 }
 
 // Environmentable is the interface implemented by [Environment], for mocking and DI.
 type Environmentable interface {
-	Unwrap() *raw.LAEnvironment
-	AddObserver(observer raw.LAEnvironmentObserver)
-	RemoveObserver(observer raw.LAEnvironmentObserver)
+	obj.Object
 	State() *EnvironmentState
 }
 

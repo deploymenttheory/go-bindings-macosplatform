@@ -6,7 +6,7 @@
 */}}
 {{define "mock_interface"}}// {{.IfaceName}} is the interface implemented by [{{.TypeName}}], for mocking and DI.
 type {{.IfaceName}} interface {
-Unwrap() *{{.RawType}}
+obj.Object
 {{range .Lines}}{{.}}
 {{end}}}
 

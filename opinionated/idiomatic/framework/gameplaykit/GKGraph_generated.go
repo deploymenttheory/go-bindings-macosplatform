@@ -5,127 +5,104 @@
 package gameplaykit
 
 import (
-	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/foundation"
-	raw "github.com/deploymenttheory/go-bindings-macosplatform/bindings/frameworks/gameplaykit"
 	"github.com/deploymenttheory/go-bindings-macosplatform/bindings/runtime/purego"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/internal/objref"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/obj"
+	"github.com/deploymenttheory/go-bindings-macosplatform/opinionated/idiomatic/rt"
 	"github.com/ebitengine/purego/objc"
-	"unsafe"
 )
 
 // A collection of nodes that describes the navigability of a game world and provides pathfinding methods to search for routes through that space.
 //
-// Graph wraps [raw.GKGraph] with a fluent Go API.
+// Graph is an idiomatic wrapper over the Objective-C class GKGraph.
 type Graph struct {
-	inner *raw.GKGraph
+	objref.Handle
 }
 
-// Unwrap returns the underlying [raw.GKGraph].
-func (x *Graph) Unwrap() *raw.GKGraph { return x.inner }
-
-// ID returns the underlying Objective-C object pointer (objc.ID), for
-// passing to C APIs that take an object or CFTypeRef pointer.
-func (x *Graph) ID() objc.ID { return x.inner.Ptr() }
-
-// GraphFromID adopts an existing object pointer as a Graph (nil for 0).
+// GraphFromID adopts an existing Objective-C object as a Graph
+// (nil for 0), retaining it and registering a release finalizer.
 func GraphFromID(id objc.ID) *Graph {
 	if id == 0 {
 		return nil
 	}
-	return &Graph{inner: raw.GKGraphFromID(id)}
+	x := &Graph{Handle: objref.Wrap(purego.Retain(id))}
+	objref.Track(x)
+	return x
+}
+
+// graphAdopt wraps an Objective-C object that this code just created as a
+// Graph (nil for 0). The caller already owns the object's reference,
+// so this does not add another; it only arranges for the object to be released
+// once Go stops using it. Constructors use it.
+func graphAdopt(id objc.ID) *Graph {
+	if id == 0 {
+		return nil
+	}
+	x := &Graph{Handle: objref.Wrap(id)}
+	objref.Track(x)
+	return x
+}
+
+// Description returns the object's -description text.
+func (x *Graph) Description() string {
+	return rt.Description(objref.IDOf(x))
+}
+
+// IsEqual reports Objective-C equality (isEqual:) with another object.
+func (x *Graph) IsEqual(other obj.Object) bool {
+	return rt.IsEqual(objref.IDOf(x), objref.IDOf(other))
+}
+
+// IsKind reports whether the object is an instance of the named class or a subclass.
+func (x *Graph) IsKind(className string) bool {
+	return rt.IsKind(objref.IDOf(x), className)
 }
 
 // Initializes a graph with the specified list of nodes.
 //
-// NewGraphWithNodes creates a new [Graph].
-func NewGraphWithNodes(nodes ...GraphNodeProvider) *Graph {
-	_ptrs := make([]objc.ID, len(nodes))
-	for _i, _v := range nodes {
-		_ptrs[_i] = _v.asGraphNode().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.GKGraphNode]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	_alloc := objc.Send[objc.ID](objc.ID(objc.GetClass("GKGraph")), objc.RegisterName("alloc"))
-	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNodes:"), _arg0.Ptr())
-	return &Graph{inner: raw.GKGraphFromID(_id)}
+// NewGraphWithNodes creates a new Graph.
+func NewGraphWithNodes(nodes []*GraphNode) *Graph {
+	_alloc := objc.Send[objc.ID](objc.ID(_class("GKGraph")), objc.RegisterName("alloc"))
+	_id := objc.Send[objc.ID](_alloc, objc.RegisterName("initWithNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
+	return graphAdopt(_id)
 }
 
 // Adds a node to the graph, connecting it to the node already in the graph for which the connection has the lowest cost.
-//
-// ConnectNodeToLowestCostNodeBidirectional calls the underlying ConnectNodeToLowestCostNodeBidirectional.
-func (x *Graph) ConnectNodeToLowestCostNodeBidirectional(node *raw.GKGraphNode, bidirectional bool) {
-	x.inner.ConnectNodeToLowestCostNodeBidirectional(node, bidirectional)
+func (x *Graph) ConnectNodeToLowestCostNodeBidirectional(node *GraphNode, bidirectional bool) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("connectNodeToLowestCostNode:bidirectional:"), objref.IDOf(node), bidirectional)
 }
 
 // Removes the specified nodes from the graph.
-//
-// RemoveNodes calls the underlying RemoveNodes.
-func (x *Graph) RemoveNodes(nodes ...GraphNodeProvider) {
-	_ptrs := make([]objc.ID, len(nodes))
-	for _i, _v := range nodes {
-		_ptrs[_i] = _v.asGraphNode().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.GKGraphNode]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.RemoveNodes(_arg0)
+func (x *Graph) RemoveNodes(nodes []*GraphNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("removeNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Adds the specified nodes to the graph.
-//
-// AddNodes calls the underlying AddNodes.
-func (x *Graph) AddNodes(nodes ...GraphNodeProvider) {
-	_ptrs := make([]objc.ID, len(nodes))
-	for _i, _v := range nodes {
-		_ptrs[_i] = _v.asGraphNode().Ptr()
-	}
-	var _arg0 *foundation.NSArray[*raw.GKGraphNode]
-	if len(_ptrs) > 0 {
-		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("arrayWithObjects:count:"), unsafe.Pointer(&_ptrs[0]), uint(len(_ptrs))))
-	} else {
-		_arg0 = foundation.NSArrayFromID[*raw.GKGraphNode](objc.Send[objc.ID](objc.ID(objc.GetClass("NSArray")), objc.RegisterName("array")))
-	}
-
-	x.inner.AddNodes(_arg0)
+func (x *Graph) AddNodes(nodes []*GraphNode) {
+	objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("addNodes:"), purego.SliceToNSArray(nodes, func(_v *GraphNode) objc.ID { return objref.IDOf(_v) }))
 }
 
 // Computes and returns a sequence of nodes that represents the shortest traversal of the graph between the specified nodes.
-//
-// FindPathFromNodeToNode calls the underlying FindPathFromNodeToNode.
-func (x *Graph) FindPathFromNodeToNode(startNode *raw.GKGraphNode, endNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode] {
-	return x.inner.FindPathFromNodeToNode(startNode, endNode)
+func (x *Graph) FindPathFromNodeToNode(startNode *GraphNode, endNode *GraphNode) []*GraphNode {
+	_r := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("findPathFromNode:toNode:"), objref.IDOf(startNode), objref.IDOf(endNode))
+	return purego.NSArrayToSlice(_r, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }
 
 // The list of nodes in this graph
 //
 // Nodes returns the collection as a Go slice.
 func (x *Graph) Nodes() []*GraphNode {
-	arr := x.inner.Nodes()
-	if arr == nil {
-		return nil
-	}
-	return purego.NSArrayToSlice(arr.Ptr(), func(_id objc.ID) *GraphNode {
-		return &GraphNode{inner: raw.GKGraphNodeFromID(purego.Retain(_id))}
-	})
+	_arr := objc.Send[objc.ID](objref.IDOf(x), objc.RegisterName("nodes"))
+	return purego.NSArrayToSlice(_arr, func(_id objc.ID) *GraphNode { return GraphNodeFromID(_id) })
 }
-
-func (x *Graph) asGraph() *raw.GKGraph { return x.inner }
 
 // Graphable is the interface implemented by [Graph], for mocking and DI.
 type Graphable interface {
-	Unwrap() *raw.GKGraph
-	ConnectNodeToLowestCostNodeBidirectional(node *raw.GKGraphNode, bidirectional bool)
-	RemoveNodes(nodes ...GraphNodeProvider)
-	AddNodes(nodes ...GraphNodeProvider)
-	FindPathFromNodeToNode(startNode *raw.GKGraphNode, endNode *raw.GKGraphNode) *foundation.NSArray[*raw.GKGraphNode]
+	obj.Object
+	ConnectNodeToLowestCostNodeBidirectional(node *GraphNode, bidirectional bool)
+	RemoveNodes(nodes []*GraphNode)
+	AddNodes(nodes []*GraphNode)
+	FindPathFromNodeToNode(startNode *GraphNode, endNode *GraphNode) []*GraphNode
 	Nodes() []*GraphNode
 }
 
